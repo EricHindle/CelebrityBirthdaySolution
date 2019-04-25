@@ -32,9 +32,7 @@ Partial Class FrmTwitterImage
         Me.BtnSaveImage = New System.Windows.Forms.Button()
         Me.LblImageCount = New System.Windows.Forms.Label()
         Me.NudPic1Horizontal = New System.Windows.Forms.NumericUpDown()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.LblPic1Height = New System.Windows.Forms.Label()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.RbSplitImages = New System.Windows.Forms.RadioButton()
@@ -49,18 +47,20 @@ Partial Class FrmTwitterImage
         Me.LblPic2Height = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.NudPic2Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -86,9 +86,9 @@ Partial Class FrmTwitterImage
         'PictureBox1
         '
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
+        Me.PictureBox1.Location = New System.Drawing.Point(3, 6)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(426, 250)
+        Me.PictureBox1.Size = New System.Drawing.Size(240, 240)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
@@ -149,7 +149,8 @@ Partial Class FrmTwitterImage
         '
         'NudPic1Horizontal
         '
-        Me.NudPic1Horizontal.Location = New System.Drawing.Point(52, 28)
+        Me.NudPic1Horizontal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.NudPic1Horizontal.Location = New System.Drawing.Point(51, 336)
         Me.NudPic1Horizontal.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudPic1Horizontal.Name = "NudPic1Horizontal"
         Me.NudPic1Horizontal.Size = New System.Drawing.Size(53, 22)
@@ -157,35 +158,15 @@ Partial Class FrmTwitterImage
         Me.NudPic1Horizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.NudPic1Horizontal.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(112, 30)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(18, 19)
-        Me.Label1.TabIndex = 9
-        Me.Label1.Text = "X"
-        '
         'Label2
         '
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 30)
+        Me.Label2.Location = New System.Drawing.Point(5, 338)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 14)
         Me.Label2.TabIndex = 10
         Me.Label2.Text = "Width"
-        '
-        'LblPic1Height
-        '
-        Me.LblPic1Height.AutoSize = True
-        Me.LblPic1Height.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LblPic1Height.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblPic1Height.Location = New System.Drawing.Point(141, 29)
-        Me.LblPic1Height.Name = "LblPic1Height"
-        Me.LblPic1Height.Size = New System.Drawing.Size(20, 21)
-        Me.LblPic1Height.TabIndex = 11
-        Me.LblPic1Height.Text = "1"
         '
         'btnClose
         '
@@ -213,26 +194,26 @@ Partial Class FrmTwitterImage
         'RbSplitImages
         '
         Me.RbSplitImages.AutoSize = True
+        Me.RbSplitImages.Checked = True
         Me.RbSplitImages.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbSplitImages.ForeColor = System.Drawing.Color.RoyalBlue
         Me.RbSplitImages.Location = New System.Drawing.Point(23, 49)
         Me.RbSplitImages.Name = "RbSplitImages"
         Me.RbSplitImages.Size = New System.Drawing.Size(100, 22)
         Me.RbSplitImages.TabIndex = 1
+        Me.RbSplitImages.TabStop = True
         Me.RbSplitImages.Text = "Twitter Images"
         Me.RbSplitImages.UseVisualStyleBackColor = True
         '
         'RbSingleImage
         '
         Me.RbSingleImage.AutoSize = True
-        Me.RbSingleImage.Checked = True
         Me.RbSingleImage.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbSingleImage.ForeColor = System.Drawing.Color.RoyalBlue
         Me.RbSingleImage.Location = New System.Drawing.Point(23, 21)
         Me.RbSingleImage.Name = "RbSingleImage"
         Me.RbSingleImage.Size = New System.Drawing.Size(92, 22)
         Me.RbSingleImage.TabIndex = 0
-        Me.RbSingleImage.TabStop = True
         Me.RbSingleImage.Text = "Single Image"
         Me.RbSingleImage.UseVisualStyleBackColor = True
         '
@@ -242,18 +223,14 @@ Partial Class FrmTwitterImage
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.SplitContainer1.Location = New System.Drawing.Point(14, 46)
+        Me.SplitContainer1.Location = New System.Drawing.Point(467, 82)
         Me.SplitContainer1.Name = "SplitContainer1"
-        '
-        'SplitContainer1.Panel1
-        '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.PictureBox1)
         '
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.PictureBox2)
-        Me.SplitContainer1.Size = New System.Drawing.Size(912, 391)
-        Me.SplitContainer1.SplitterDistance = 459
+        Me.SplitContainer1.Size = New System.Drawing.Size(477, 310)
+        Me.SplitContainer1.SplitterDistance = 240
         Me.SplitContainer1.TabIndex = 14
         '
         'PictureBox2
@@ -269,11 +246,7 @@ Partial Class FrmTwitterImage
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.NudPic1Horizontal)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.LblPic1Height)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 479)
+        Me.GroupBox2.Location = New System.Drawing.Point(14, 466)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(234, 63)
         Me.GroupBox2.TabIndex = 15
@@ -354,16 +327,39 @@ Partial Class FrmTwitterImage
         Me.Label6.TabIndex = 18
         Me.Label6.Text = "Anniversaries"
         '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Location = New System.Drawing.Point(14, 46)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(409, 391)
+        Me.TabControl1.TabIndex = 19
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.NudPic1Horizontal)
+        Me.TabPage1.Controls.Add(Me.PictureBox1)
+        Me.TabPage1.Controls.Add(Me.Label2)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 23)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(401, 364)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
         'FrmTwitterImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1112, 567)
+        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnClose)
@@ -383,18 +379,17 @@ Partial Class FrmTwitterImage
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.SplitContainer1.Panel1.ResumeLayout(False)
-        Me.SplitContainer1.Panel1.PerformLayout()
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         Me.SplitContainer1.Panel2.PerformLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.NudPic2Horizontal, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -408,9 +403,7 @@ Partial Class FrmTwitterImage
     Friend WithEvents BtnSaveImage As Button
     Friend WithEvents LblImageCount As Label
     Friend WithEvents NudPic1Horizontal As NumericUpDown
-    Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents LblPic1Height As Label
     Friend WithEvents LblStatus As ToolStripStatusLabel
     Friend WithEvents btnClose As Button
     Friend WithEvents GroupBox1 As GroupBox
@@ -426,4 +419,6 @@ Partial Class FrmTwitterImage
     Friend WithEvents LblPic2Height As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
 End Class

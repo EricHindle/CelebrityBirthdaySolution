@@ -5,6 +5,7 @@ Imports System.IO
 Imports System.Drawing.Drawing2D
 
 Module modCbday
+    Public Const TWEET_SIZE As Integer = 279
     Private Declare Function SendMessageLong Lib "user32" Alias _
         "SendMessageA" (ByVal hWnd As IntPtr, ByVal wMsg As _
         Int32, ByVal wParam As Int32, ByVal lParam As Int32) As _
@@ -188,5 +189,43 @@ Module modCbday
     Public Function GetTwitterSearchString(oText As String) As String
         Return My.Settings.TwitterSearchUrl & oText.Replace(" ", "+")
     End Function
+
+    Public Function SplitIntoTweets(oPersonlist As List(Of Person)) As List(Of List(Of Person))
+        Dim ListOfLists As New List(Of List(Of Person))
+        Dim _totalLength As Integer = 0
+        For Each _person As Person In oPersonlist
+            Dim _tweetLineLength As Integer = _person.Name.Length + _person.Social.TwitterHandle.Length + 3
+            _totalLength += _tweetLineLength
+        Next
+        Dim _numberOfTweets As Integer = Math.Ceiling(_totalLength / TWEET_SIZE)
+        Dim _numberOfNamesPerTweet As Integer = Math.Ceiling(oPersonlist.Count / _numberOfTweets)
+        Dim _ct As Integer = 0
+        Do Until _ct = oPersonlist.Count
+            Dim _tweetList As New List(Of Person)
+            Dim _tweetCt As Integer = 0
+            Do Until _ct = oPersonlist.Count OrElse _tweetCt = _numberOfNamesPerTweet
+                _tweetList.Add(oPersonlist(_ct))
+                _tweetCt += 1
+                _ct += 1
+            Loop
+            ListOfLists.Add(_tweetList)
+        Loop
+        Return ListOfLists
+    End Function
+
+    Public Function GetTabNumber(_tabPage As TabPage) As String
+        Dim _tabNumber As String = ""
+        Dim tabNamePart As String() = Split(_tabPage.Name, "_")
+        Try
+            If tabNamePart.Count = 2 Then
+                _tabNumber = tabNamePart(1)
+            End If
+        Catch ex As Exception
+            _tabNumber = ""
+        End Try
+        Return _tabNumber
+    End Function
+
+
 
 End Module

@@ -69,6 +69,23 @@ Public Class FrmTwitterImage
         Return _imageTable
     End Function
 
+    Private Function BuildImageLists(_people As List(Of List(Of Person))) As List(Of List(Of Image))
+        Dim _imageTables As New List(Of List(Of Image))
+        For Each _personList As List(Of Person) In _people
+            Dim _imageTable As New List(Of Image)
+            If _people.Count > 0 Then
+                For Each oPerson As Person In _personList
+                    Dim _imageFilename As String = Path.Combine(My.Settings.ImgFolder, oPerson.Image.ImageFileName & oPerson.Image.ImageFileType)
+                    If My.Computer.FileSystem.FileExists(_imageFilename) Then
+                        Dim _image As Image = Image.FromFile(_imageFilename)
+                        _imageTable.Add(_image)
+                    End If
+                Next
+            End If
+            _imageTables.Add(_imageTable)
+        Next
+        Return _imageTables
+    End Function
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
@@ -76,14 +93,74 @@ Public Class FrmTwitterImage
     Private Sub BtnGenImage_Click(sender As Object, e As EventArgs) Handles BtnGenImage.Click
         LblStatus.Text = ""
         If RbSingleImage.Checked Then
-            GeneratePicture(PictureBox1, BuildImageList(personTable), NudPic1Horizontal, LblPic1Height)
+            GeneratePicture(PictureBox1, BuildImageList(personTable), NudPic1Horizontal)
         Else
-            GeneratePicture(PictureBox1, BuildImageList(oBirthdayList), NudPic1Horizontal, LblPic1Height)
-            GeneratePicture(PictureBox2, BuildImageList(oAnniversaryList), NudPic2Horizontal, LblPic2Height)
+            GeneratePictures(PictureBox1, BuildImageLists(SplitIntoTweets(oBirthdayList)), NudPic1Horizontal)
+            GeneratePictures(PictureBox2, BuildImageLists(SplitIntoTweets(oAnniversaryList)), NudPic2Horizontal)
         End If
 
     End Sub
-    Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Image), _nud As NumericUpDown, _lbl As Label)
+
+    Private Sub GeneratePictures(_pictureBox As PictureBox, _imageLists As List(Of List(Of Image)), _nud As NumericUpDown)
+        Dim imageCount As Integer = 0
+        For Each _imageList As List(Of Image) In _imageLists
+            TabControl1.TabPages.Add(CreateNewTabPage("", imageCount))
+            GeneratePicture(_pictureBox, _imageList, _nud)
+            imageCount += 1
+        Next
+    End Sub
+    Private Function CreateNewTabPage(_text As String, _index As Integer) As TabPage
+        Dim newTabpage As New TabPage
+        With newTabpage
+            .Text = _text
+            .TabIndex = _index
+            .Location = New System.Drawing.Point(4, 22)
+            .Name = "TabPage_" & CStr(_index)
+            .Padding = New System.Windows.Forms.Padding(3)
+            .Size = New System.Drawing.Size(412, 426)
+            .Controls.Add(NewPictureBox(GetTabNumber(newTabpage)))
+            .Controls.Add(NewLabel(GetTabNumber(newTabpage)))
+            .Controls.Add(NewNumericUpDown(GetTabNumber(newTabpage)))
+        End With
+        Return newTabpage
+    End Function
+    Private Function NewLabel(_index As String) As Label
+        Dim _label As New Label
+        With _label
+            .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            .AutoSize = True
+            .Location = New System.Drawing.Point(5, 338)
+            .Name = "Label" & _index
+            .Size = New System.Drawing.Size(40, 14)
+            .Text = "Width"
+        End With
+        Return _label
+    End Function
+    Private Function NewPictureBox(_index As String) As PictureBox
+        Dim _picBox As New PictureBox
+        With _picBox
+            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            .Location = New System.Drawing.Point(3, 6)
+            .Name = "PictureBox" & _index
+            .Size = New System.Drawing.Size(240, 240)
+            .SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        End With
+        Return _picBox
+    End Function
+    Private Function NewNumericUpDown(_index As String) As NumericUpDown
+        Dim _nud As New NumericUpDown
+        With _nud
+            .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            .Location = New System.Drawing.Point(51, 336)
+            .Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+            .Name = "NudPic1Horizontal" & _index
+            .Size = New System.Drawing.Size(53, 22)
+            .TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            .Value = New Decimal(New Integer() {1, 0, 0, 0})
+        End With
+        Return _nud
+    End Function
+    Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Image), _nud As NumericUpDown)
 
         If _imageTable.Count > 0 Then
             Dim _width As Integer = CInt(Math.Sqrt(CDbl(_imageTable.Count)))
@@ -91,7 +168,6 @@ Public Class FrmTwitterImage
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
             IsNoGenerate = True
             _nud.Value = _width
-            _lbl.Text = CStr(_height)
             IsNoGenerate = False
             GenerateImage(_pictureBox, _imageTable, _width, _height)
         Else
@@ -129,7 +205,6 @@ Public Class FrmTwitterImage
             Dim _width As Integer = NudPic1Horizontal.Value
             Dim _height As Integer = Math.Ceiling(_imageList.Count / _width)
             IsNoGenerate = True
-            LblPic1Height.Text = CStr(_height)
             IsNoGenerate = False
             GenerateImage(PictureBox1, _imageList, _width, _height)
         Else

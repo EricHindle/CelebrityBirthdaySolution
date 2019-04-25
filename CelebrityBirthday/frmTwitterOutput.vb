@@ -7,7 +7,7 @@ Public Class frmTwitterOutput
 #Region "constants"
     Private Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Private Const BIRTHDAY_HDR As String = "Happy birthday today to"
-    Private Const TWEET_SIZE As Integer = 279
+
     Private Const RTB_CONTROL_NAME As String = "RtbFile"
     Private Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
 #End Region
@@ -356,18 +356,7 @@ Public Class frmTwitterOutput
         End If
         Return _rtb
     End Function
-    Private Function GetTabNumber(_tabPage As TabPage) As String
-        Dim _tabNumber As String = ""
-        Dim tabNamePart As String() = Split(_tabPage.Name, "_")
-        Try
-            If tabNamePart.Count = 2 Then
-                _tabNumber = tabNamePart(1)
-            End If
-        Catch ex As Exception
-            DisplayMessage("Invalid Tab Name " & _tabPage.Name)
-        End Try
-        Return _tabNumber
-    End Function
+
 
 #End Region
 #Region "general subroutines"
