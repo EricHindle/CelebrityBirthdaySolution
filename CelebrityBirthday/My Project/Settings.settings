@@ -1,0 +1,56 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="mainformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="findformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="callUpgrade" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="imgbrowsepos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="imgselectpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ImgFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F:\CelebrityBirthday\Images</Value>
+    </Setting>
+    <Setting Name="newimagepath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F:\CelebrityBirthday\Images\new</Value>
+    </Setting>
+    <Setting Name="CelebrityBirthdayConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=NETWYRKS_6-PC\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Security Info=True;User ID=sa;Password=dkk.sql&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=NETWYRKS_6-PC\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Security Info=True;User ID=sa;Password=dkk.sql</Value>
+    </Setting>
+    <Setting Name="TwitterFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F:\CelebrityBirthday\Twitter</Value>
+    </Setting>
+    <Setting Name="updformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="imgformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="googleImageSearch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.google.com/search?tbm=isch&amp;q=</Value>
+    </Setting>
+    <Setting Name="WordPressUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://celebritybirthday.files.wordpress.com/</Value>
+    </Setting>
+    <Setting Name="wikiSearchUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://en.wikipedia.org/w/index.php?search=</Value>
+    </Setting>
+    <Setting Name="TwitterSearchUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://twitter.com/search?f=users&amp;src=typd&amp;q=</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
