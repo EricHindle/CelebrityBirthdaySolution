@@ -84,40 +84,40 @@
         Return oPersonTable
     End Function
     Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer) As List(Of Person)
-        Dim oPersonTable As New List(Of Person)
-        oPersonTa.FillByMonthDay(modDatabase.oPersonTable, oMonth, oDay)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In modDatabase.oPersonTable.Rows
+        Dim oPersonList As New List(Of Person)
+        oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
+        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
             Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            oPersonTable.Add(oPerson)
+            oPersonList.Add(oPerson)
         Next
-        Return oPersonTable
+        Return oPersonList
     End Function
     Public Function GetPeopleByName(oForename As String, oSurname As String) As ArrayList
-        Dim oPersonTable As New ArrayList
-        oPersonTa.FillByName(modDatabase.oPersonTable, oForename, oSurname)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In modDatabase.oPersonTable.Rows
+        Dim oPersonList As New ArrayList
+        oPersonTa.FillByName(oPersonTable, oForename, oSurname)
+        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
             Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            oPersonTable.Add(oPerson)
+            oPersonList.Add(oPerson)
         Next
-        Return oPersonTable
+        Return oPersonList
     End Function
     Public Function GetPeopleLikeName(oForename As String, oSurname As String) As ArrayList
-        Dim oPersonTable As New ArrayList
-        oPersonTa.FillByPersonLikeName(modDatabase.oPersonTable, oForename, oSurname)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In modDatabase.oPersonTable.Rows
+        Dim oPersonList As New ArrayList
+        oPersonTa.FillByPersonLikeName(oPersonTable, oForename, oSurname)
+        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
             Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            oPersonTable.Add(oPerson)
+            oPersonList.Add(oPerson)
         Next
-        Return oPersonTable
+        Return oPersonList
     End Function
     Public Function FindPeopleLikeName(oForename As String, oSurname As String) As List(Of Person)
-        Dim oPersonTable As New List(Of Person)
-        oPersonTa.FillByPersonLikeName(modDatabase.oPersonTable, oForename, oSurname)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In modDatabase.oPersonTable.Rows
+        Dim oPersonList As New List(Of Person)
+        oPersonTa.FillByPersonLikeName(oPersonTable, oForename, oSurname)
+        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
             Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            oPersonTable.Add(oPerson)
+            oPersonList.Add(oPerson)
         Next
-        Return oPersonTable
+        Return oPersonList
     End Function
     Public Function FindBirthdays(oDay As Integer, oMonth As Integer)
         oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)

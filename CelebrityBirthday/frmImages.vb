@@ -208,7 +208,7 @@ Public Class FrmImages
     End Sub
 
     Private Sub BtnFileImgGen_Click(sender As Object, e As EventArgs) Handles BtnFileImgGen.Click
-        TxtImageFilename.Text = Path.Combine(My.Settings.ImgFolder, txtImgName.Text & cbImgType.SelectedItem)
+        TxtImageFilename.Text = Path.Combine(My.Settings.ImgFolder, MakeImageName(TxtForename.Text, TxtSurname.Text) & cbImgType.SelectedItem)
     End Sub
 
     Private Sub BtnWpImgGen_Click(sender As Object, e As EventArgs) Handles BtnWpImgGen.Click
