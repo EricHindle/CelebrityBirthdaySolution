@@ -26,6 +26,7 @@
     Public Sub FindinWiki()
         Dim searchstring As String = My.Settings.wikiSearchUrl
         _url = searchstring & _searchName
+        TxtSearchName.Text = _searchName
         lblNav.Text = "Finding " & _searchName
         WebBrowser1.Navigate(_url)
     End Sub
@@ -38,6 +39,7 @@
     End Sub
     Public Sub FindImages()
         _url = GetGoogleSearchString(_searchName)
+        TxtSearchName.Text = _searchName
         lblNav.Text = "Finding " & _searchName
         WebBrowser1.Navigate(_url)
     End Sub
@@ -65,13 +67,13 @@
     Private Sub BtnFindTwitter_Click(sender As Object, e As EventArgs) Handles BtnFindTwitter.Click
         If Not String.IsNullOrEmpty(TxtSearchName.Text) Then
             _searchName = TxtSearchName.Text
-
             FindInTwitter()
         End If
     End Sub
 
     Public Sub FindInTwitter()
         lblNav.Text = "Finding " & _searchName
+        TxtSearchName.Text = _searchName
         _url = GetTwitterSearchString(_searchName)
         lblNav.Text = "Finding " & _searchName
         WebBrowser1.Navigate(_url)
@@ -81,4 +83,5 @@
         WebBrowser1.Stop()
         Me.Dispose()
     End Sub
+
 End Class

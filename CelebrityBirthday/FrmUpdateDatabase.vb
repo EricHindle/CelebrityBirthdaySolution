@@ -6,7 +6,7 @@ Public Class FrmUpdateDatabase
 #Region "variables"
     Private personTable As List(Of Person)
     Private bLoadingPerson As Boolean = False
-    Private _search As frmSearchDb = Nothing
+    Private _search As FrmBrowser = Nothing
     Private _twitter As frmTwitterOutput = Nothing
     Private _browser As FrmBrowser
     Private findPersonInList As Integer = -1
@@ -543,7 +543,7 @@ Public Class FrmUpdateDatabase
                 Exit Sub
             End If
             If _search Is Nothing OrElse _search.IsDisposed Then
-                _search = New frmSearchDb
+                _search = New FrmBrowser
             End If
             _search.Show()
             _search.searchName = oPerson.ForeName.Trim & " " & oPerson.Surname.Trim
@@ -746,6 +746,10 @@ Public Class FrmUpdateDatabase
         '    GetAlternateImageDate(oPerson.Id)
         If oPerson.Image IsNot Nothing Then
             PictureBox1.ImageLocation = Path.Combine(My.Settings.ImgFolder, oPerson.Image.ImageFileName & oPerson.Image.ImageFileType)
+        End If
+        If oPerson.Social IsNot Nothing Then
+            txtTwitter.Text = If(oPerson.Social.TwitterHandle, "")
+            cbNoTweet.Checked = oPerson.Social.IsNoTweet
         End If
         bLoadingPerson = False
     End Sub
