@@ -365,6 +365,5 @@ Public Class frmTwitterOutput
         StatusStrip1.Refresh()
     End Sub
 
-
 #End Region
 End Class
