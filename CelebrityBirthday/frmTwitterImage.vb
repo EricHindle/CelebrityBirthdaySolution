@@ -11,6 +11,11 @@ Public Class FrmTwitterImage
     Private oAnniversaryLists As New List(Of List(Of Image))
 
     Private IsNoGenerate As Boolean
+
+    Private Const DEFAULT_WIDTH As Integer = 6
+    Private Const NUD_BASENAME As String = "NudHorizontal"
+    Private Const PICBOX_BASENAME As String = "pictureBox"
+
     Private Sub CboDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged,
                                                                                     cboMonth.SelectedIndexChanged
         DisplayStatus("")
@@ -117,12 +122,15 @@ Public Class FrmTwitterImage
             Dim _imageList As List(Of Image) = _imageLists(_imageIndex)
             DisplayStatus(">" & CStr(imageCount), True)
             Dim newTabPage As TabPage = CreateNewTabPage(imageCount, _tabTitle)
-            Dim _controls As Control() = newTabPage.Controls.Find("pictureBox" & CStr(imageCount), False)
-            Dim pbControl As New PictureBox
-            If _controls.Count > 0 Then
-                pbControl = TryCast(_controls(0), PictureBox)
-            End If
+            Dim pbControl As PictureBox = GetPictureBoxFromPage(newTabPage)
+            IsNoGenerate = True
+            GetNudFromPage(newTabPage).Value = DEFAULT_WIDTH
+
+            IsNoGenerate = False
             TabControl1.TabPages.Add(newTabPage)
+
+
+
             GeneratePicture(pbControl, _imageList)
             imageCount += 1
         Next
@@ -146,12 +154,10 @@ Public Class FrmTwitterImage
     End Function
 
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Image))
-        Dim _width As Integer = 6
+        Dim _width As Integer = DEFAULT_WIDTH
         If _imageTable.Count > 0 Then
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
-            IsNoGenerate = True
-            '     _nud.Value = _width
-            IsNoGenerate = False
+
             GenerateImage(_pictureBox, _imageTable, _width, _height)
         Else
             _pictureBox.Image = Nothing
@@ -204,7 +210,7 @@ Public Class FrmTwitterImage
             .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
             .Location = New System.Drawing.Point(51, 364)
             .Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-            .Name = "NudPic1Horizontal" & _index
+            .Name = NUD_BASENAME & _index
             .Size = New System.Drawing.Size(53, 22)
             .TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             .Value = New Decimal(New Integer() {1, 0, 0, 0})
@@ -213,16 +219,19 @@ Public Class FrmTwitterImage
         Return _nud
     End Function
     Private Sub NudPic1Horizontal_ValueChanged(sender As Object, e As System.EventArgs)
-        Dim _nud As NumericUpDown = TryCast(sender, NumericUpDown)
-        Dim _tabpage As TabPage = TryCast(_nud.Parent, TabPage)
-        Dim _index As String = GetTabNumber(_tabpage)
-        Dim pbControl As PictureBox = GetPictureBoxFromPage(_tabpage)
+        If Not IsNoGenerate Then
+
+
+            Dim _nud As NumericUpDown = TryCast(sender, NumericUpDown)
+            Dim _tabpage As TabPage = TryCast(_nud.Parent, TabPage)
+            Dim _index As String = GetTabNumber(_tabpage)
+            Dim pbControl As PictureBox = GetPictureBoxFromPage(_tabpage)
 
 
 
 
-        '     GenerateImage(pbControl, _imageTable As List(Of Image), _width As Integer, _height As Integer)
-
+            '     GenerateImage(pbControl, _imageTable As List(Of Image), _width As Integer, _height As Integer)
+        End If
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         DisplayStatus("Saving Files")
@@ -233,7 +242,7 @@ Public Class FrmTwitterImage
 
         For Each _page As TabPage In TabControl1.TabPages
             Dim _add As String = _page.Text
-            Dim _fileName As String = _add & "_" & cboDay.SelectedItem & "_" & cboMonth.SelectedItem & "_mosaic_" & ".jpg"
+            Dim _fileName As String = _add.Replace("_", "_" & cboDay.SelectedItem & "_" & cboMonth.SelectedItem) & "_mosaic_" & ".jpg"
             Dim _pictureBox As PictureBox = GetPictureBoxFromPage(_page)
             ImageUtil.saveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, Path.Combine(_path, _fileName))
         Next
@@ -253,11 +262,23 @@ Public Class FrmTwitterImage
 
     Private Function GetPictureBoxFromPage(_tabpage As TabPage) As PictureBox
         Dim _index As String = GetTabNumber(_tabpage)
-        Dim _controls As Control() = _tabpage.Controls.Find("pictureBox" & _index, False)
+        Dim _controls As Control() = _tabpage.Controls.Find(PICBOX_BASENAME & _index, False)
         Dim pbControl As New PictureBox
         If _controls.Count > 0 Then
             pbControl = TryCast(_controls(0), PictureBox)
         End If
         Return pbControl
     End Function
+
+    Private Function GetNudFromPage(_tabpage As TabPage) As NumericUpDown
+        Dim _index As String = GetTabNumber(_tabpage)
+        Dim _controls As Control() = _tabpage.Controls.Find(NUD_BASENAME & CStr(_index), False)
+        Dim _control As New NumericUpDown
+        If _controls.Count > 0 Then
+            _control = TryCast(_controls(0), NumericUpDown)
+        End If
+        Return _control
+    End Function
+
+
 End Class

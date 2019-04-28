@@ -79,7 +79,7 @@ Public Class frmTwitterOutput
             Dim _mth As Integer = testDate.Month
             oBirthdayList = FindBirthdays(_day, _mth)
             oAnniversaryList = FindAnniversaries(_day, _mth)
-            Dim newDateNode As TreeNode = tvBirthday.Nodes.Add(Format(testDate, "MMMM dd"))
+            Dim newDateNode As TreeNode = tvBirthday.Nodes.Add(Format(testDate, "MMMM d"))
             newDateNode.Checked = True
             AddTypeNode(oAnniversaryList, testDate, newDateNode, "Anniversary")
             AddTypeNode(oBirthdayList, testDate, newDateNode, "Birthday")
