@@ -57,23 +57,26 @@ Public Class FrmTwitterImage
     End Sub
     Private Sub BtnGenImage_Click(sender As Object, e As EventArgs) Handles BtnGenImage.Click
         DisplayStatus("Generating images")
-        TabControl1.TabPages.Clear()
-        Dim tabTitle As String
+        If cboDay.SelectedIndex > -1 AndAlso cboMonth.SelectedIndex > -1 Then
+            TabControl1.TabPages.Clear()
+            Dim tabTitle As String
         Dim _imageStart As Integer = 0
+        Dim _dateLength As Integer = cboDay.SelectedItem.length + cboMonth.SelectedItem.length + 4
         oImageLists = New List(Of List(Of Image))
         If RbSingleImage.Checked Then
             oImageLists.Add(BuildImageList(personTable))
             tabTitle = "Full_"
             GeneratePictures(oImageLists, tabTitle, _imageStart)
         Else
-            oImageLists.AddRange(BuildImageLists(SplitIntoTweets(oBirthdayList)))
+            oImageLists.AddRange(BuildImageLists(SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length)))
             tabTitle = "Birthdays_"
             _imageStart = GeneratePictures(oImageLists, tabTitle, _imageStart)
-            oImageLists.AddRange(BuildImageLists(SplitIntoTweets(oAnniversaryList)))
+            oImageLists.AddRange(BuildImageLists(SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length)))
             tabTitle = "Anniv_"
             GeneratePictures(oImageLists, tabTitle, _imageStart)
         End If
-        DisplayStatus("Images Complete")
+            DisplayStatus("Images Complete")
+        End If
     End Sub
     Private Sub Horizontal_ValueChanged(sender As Object, e As System.EventArgs)
         If Not IsNoGenerate Then

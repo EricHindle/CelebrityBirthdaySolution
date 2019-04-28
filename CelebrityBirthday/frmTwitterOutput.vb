@@ -5,8 +5,7 @@ Public Class frmTwitterOutput
     ReadOnly _search As frmSearchDb = Nothing
 #End Region
 #Region "constants"
-    Private Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
-    Private Const BIRTHDAY_HDR As String = "Happy birthday today to"
+
     Private Const RTB_CONTROL_NAME As String = "RtbFile"
     Private Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
     Private Const TABPAGE_BASENAME As String = "TabPage_"
@@ -31,6 +30,11 @@ Public Class frmTwitterOutput
     Private Sub DtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged, dtpTo.ValueChanged
         tvBirthday.Nodes.Clear()
         tvBirthday.Nodes.Clear()
+
+        If dtpFrom.Value > dtpTo.Value Then
+            dtpTo.Value = dtpFrom.Value
+        End If
+
     End Sub
     Private Sub FrmTwitterOutput_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -70,8 +74,7 @@ Public Class frmTwitterOutput
     Private Sub BtnCopyselected_Click(sender As Object, e As EventArgs) Handles BtnCopyselected.Click
         Dim _rtb As RichTextBox = GetTextBoxFromPage(TcFileTabs.SelectedTab)
         My.Computer.Clipboard.Clear()
-
-        If _rtb IsNot Nothing Then
+        If _rtb IsNot Nothing AndAlso Not String.IsNullOrEmpty(_rtb.SelectedText) Then
             My.Computer.Clipboard.SetText(_rtb.SelectedText)
         End If
     End Sub
@@ -201,17 +204,17 @@ Public Class frmTwitterOutput
 
         Dim _header As String = GetHeading(_typeNode)
         Dim _nextLine As String
-        Dim tweetCount As Integer = TWEET_SIZE - _header.Length
+        Dim _tweetCount As Integer = TWEET_SIZE - _header.Length
         Dim _tweetNodes As New List(Of TreeNode)
         Dim _numberOfLists As Integer = 1
         For Each _personNode As TreeNode In _typeNode.Nodes
             If _personNode.Checked Then
                 _tweetNodes.Add(_personNode)
                 _nextLine = MakeTweetLine(_personNode)
-                tweetCount -= _nextLine.Length + 1
-                If tweetCount < 0 Then
+                _tweetCount -= _nextLine.Length + 1
+                If _tweetCount < 0 Then
                     _numberOfLists += 1
-                    tweetCount = TWEET_SIZE - 1 - _header.Length - _nextLine.Length
+                    _tweetCount = TWEET_SIZE - 1 - _header.Length - _nextLine.Length
                 End If
             End If
         Next

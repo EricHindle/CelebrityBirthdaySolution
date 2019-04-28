@@ -28,7 +28,6 @@ Public Class FrmImages
     End Sub
     Private Sub BirthDate_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         lblStatus.Text = ""
-        Dim resp As MsgBoxResult = MsgBoxResult.No
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
             lblStatus.Text = "Loading Table From Database"
             Me.Refresh()

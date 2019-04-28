@@ -90,7 +90,7 @@ Partial Class frmTwitterOutput
         Me.btnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnWrite.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnWrite.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnWrite.Location = New System.Drawing.Point(820, 412)
+        Me.btnWrite.Location = New System.Drawing.Point(820, 341)
         Me.btnWrite.Name = "btnWrite"
         Me.btnWrite.Size = New System.Drawing.Size(139, 33)
         Me.btnWrite.TabIndex = 7
@@ -308,7 +308,7 @@ Partial Class frmTwitterOutput
         Me.BtnCopyselected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnCopyselected.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyselected.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnCopyselected.Location = New System.Drawing.Point(820, 341)
+        Me.BtnCopyselected.Location = New System.Drawing.Point(820, 417)
         Me.BtnCopyselected.Name = "BtnCopyselected"
         Me.BtnCopyselected.Size = New System.Drawing.Size(139, 33)
         Me.BtnCopyselected.TabIndex = 16
