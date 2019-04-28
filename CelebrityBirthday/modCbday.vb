@@ -142,7 +142,7 @@ Module modCbday
         ' If required by the server, set the credentials.
         request.Credentials = CredentialCache.DefaultCredentials
         ' Get the response.
-        Dim response As WebResponse = Nothing
+        Dim response As WebResponse
         Try
             response = request.GetResponse()
             ' Get the stream containing content returned by the server.
@@ -213,18 +213,18 @@ Module modCbday
         Return ListOfLists
     End Function
 
-    Public Function GetTabNumber(_tabPage As TabPage) As String
-        Dim _tabNumber As String = ""
-        Dim tabNamePart As String() = Split(_tabPage.Name, "_")
-        Try
-            If tabNamePart.Count = 2 Then
-                _tabNumber = tabNamePart(1)
-            End If
-        Catch ex As Exception
-            _tabNumber = ""
-        End Try
-        Return _tabNumber
-    End Function
+    'Public Function GetTabNumber(_tabPage As TabPage) As String
+    '    Dim _tabNumber As String = ""
+    '    Dim tabNamePart As String() = Split(_tabPage.Name, "_")
+    '    Try
+    '        If tabNamePart.Count = 2 Then
+    '            _tabNumber = tabNamePart(1)
+    '        End If
+    '    Catch ex As Exception
+    '        _tabNumber = ""
+    '    End Try
+    '    Return _tabNumber
+    'End Function
 
 
 

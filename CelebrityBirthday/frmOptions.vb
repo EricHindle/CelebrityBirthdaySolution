@@ -42,5 +42,8 @@
         My.Settings.imgselectpos = "5~5~699~1038"
         My.Settings.updformpos = "5~5~843~1287"
         My.Settings.imgformpos = "5~5~687~1003"
+        My.Settings.twitterfilespos = "5~5~600~600"
+        My.Settings.twitterimagepos = "5~5~600~600"
+        My.Settings.Save()
     End Sub
 End Class

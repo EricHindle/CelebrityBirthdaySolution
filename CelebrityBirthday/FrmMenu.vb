@@ -85,4 +85,11 @@
         End Using
     End Sub
 
+    Private Sub FrmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If My.Settings.callUpgrade = 0 Then
+            My.Settings.Upgrade()
+            My.Settings.callUpgrade = 1
+            My.Settings.Save()
+        End If
+    End Sub
 End Class

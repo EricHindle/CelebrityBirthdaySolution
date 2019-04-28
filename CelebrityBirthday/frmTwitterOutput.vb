@@ -2,14 +2,14 @@
 
 Public Class frmTwitterOutput
 #Region "variables"
-    Dim _search As frmSearchDb = Nothing
+    ReadOnly _search As frmSearchDb = Nothing
 #End Region
 #Region "constants"
     Private Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Private Const BIRTHDAY_HDR As String = "Happy birthday today to"
-
     Private Const RTB_CONTROL_NAME As String = "RtbFile"
     Private Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
+    Private Const TABPAGE_BASENAME As String = "TabPage_"
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -25,12 +25,16 @@ Public Class frmTwitterOutput
         If _search IsNot Nothing AndAlso Not _search.IsDisposed Then
             _search.Close()
         End If
+        My.Settings.twitterfilespos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
     Private Sub DtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged, dtpTo.ValueChanged
         tvBirthday.Nodes.Clear()
         tvBirthday.Nodes.Clear()
     End Sub
     Private Sub FrmTwitterOutput_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        GetFormPos(Me, My.Settings.twitterfilespos)
         dtpFrom.Value = DateAdd(DateInterval.Day, 1, Today.Date)
         dtpTo.Value = DateAdd(DateInterval.Day, -1, New Date(Today.Year, DateAdd(DateInterval.Month, 1, Today.Date).Month, 1))
     End Sub
@@ -46,9 +50,9 @@ Public Class frmTwitterOutput
     Private Sub BtnRewrite_Click(sender As Object, e As System.EventArgs)
         Dim _button As Button = TryCast(sender, Button)
         Dim _tabpage As TabPage = TryCast(_button.Parent, TabPage)
-        Dim _index As String = GetTabNumber(_tabpage)
+        Dim _index As Integer = _tabpage.TabIndex
         Dim _filename As String = _tabpage.Text
-        Dim _rtb As RichTextBox = TryCast(_tabpage.Controls.Find(RTB_CONTROL_NAME & _index, False)(0), RichTextBox)
+        Dim _rtb As RichTextBox = TryCast(_tabpage.Controls.Find(RTB_CONTROL_NAME & CStr(_index), False)(0), RichTextBox)
         Using _output As New StreamWriter(Path.Combine(My.Settings.TwitterFilePath, _filename))
             For Each _line As String In _rtb.Lines
                 _output.WriteLine(_line)
@@ -56,7 +60,15 @@ Public Class frmTwitterOutput
         End Using
     End Sub
     Private Sub CopyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyToolStripMenuItem.Click
-        Dim _rtb As RichTextBox = GetTextBox(TcFileTabs.SelectedTab)
+        Dim _rtb As RichTextBox = GetTextBoxFromPage(TcFileTabs.SelectedTab)
+        My.Computer.Clipboard.Clear()
+
+        If _rtb IsNot Nothing Then
+            My.Computer.Clipboard.SetText(_rtb.SelectedText)
+        End If
+    End Sub
+    Private Sub BtnCopyselected_Click(sender As Object, e As EventArgs) Handles BtnCopyselected.Click
+        Dim _rtb As RichTextBox = GetTextBoxFromPage(TcFileTabs.SelectedTab)
         My.Computer.Clipboard.Clear()
 
         If _rtb IsNot Nothing Then
@@ -68,8 +80,8 @@ Public Class frmTwitterOutput
 #Region "tree subroutines"
     Private Sub BuildTrees()
         DisplayMessage("Selecting...")
-        Dim oBirthdayList As New List(Of Person)
-        Dim oAnniversaryList As New List(Of Person)
+        Dim oBirthdayList As List(Of Person)
+        Dim oAnniversaryList As List(Of Person)
         tvBirthday.Nodes.Clear()
         Dim startDate As Date = dtpFrom.Value
         Dim endDate As Date = dtpTo.Value
@@ -140,13 +152,12 @@ Public Class frmTwitterOutput
     Private Sub WriteDates(TwitterFilenameA As String, TwitterFilenameB As String, ByRef TwitterFilename As String, ByRef currentDate As String)
         Dim fileCount As Integer = 0
         TcFileTabs.TabPages.Clear()
-
         For Each _datenode As TreeNode In tvBirthday.Nodes
             If _datenode.Text <> currentDate Then
                 currentDate = _datenode.Text
                 If _datenode.Checked Then
                     TwitterFilename = SetTwitterFilename(TwitterFilenameA, TwitterFilenameB, currentDate)
-                    Dim newTabPage As TabPage = CreateNewTabPage(TwitterFilename, fileCount)
+                    Dim newTabPage As TabPage = Me.NewTabPage(TwitterFilename, fileCount)
                     Dim _controls As Control() = newTabPage.Controls.Find(RTB_CONTROL_NAME & fileCount, False)
                     Dim rtbControl As New RichTextBox
                     If _controls.Count > 0 Then
@@ -169,49 +180,6 @@ Public Class frmTwitterOutput
             _rtbControl.Text = _input.ReadToEnd
         End Using
     End Sub
-    Private Function CreateNewTabPage(_text As String, _index As Integer) As TabPage
-        Dim newTabpage As New TabPage
-        With newTabpage
-            .Text = _text
-            .TabIndex = _index
-            .Location = New System.Drawing.Point(4, 22)
-            .Name = "TabPage_" & CStr(_index)
-            .Padding = New System.Windows.Forms.Padding(3)
-            .Size = New System.Drawing.Size(412, 426)
-            .Controls.Add(newButton(GetTabNumber(newTabpage)))
-            .Controls.Add(newRichTextBox(GetTabNumber(newTabpage)))
-        End With
-        Return newTabpage
-    End Function
-    Private Function newButton(_index As String) As Button
-        Dim _newButton As New System.Windows.Forms.Button()
-        With _newButton
-            .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            .Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            .ForeColor = System.Drawing.Color.RoyalBlue
-            .Location = New System.Drawing.Point(287, 397)
-            .Name = BUTTON_CONTROL_NAME & _index
-            .Size = New System.Drawing.Size(119, 23)
-            .Text = "Rewrite File"
-        End With
-        AddHandler _newButton.Click, AddressOf BtnRewrite_Click
-        Return _newButton
-    End Function
-    Private Function newRichTextBox(_index As String) As RichTextBox
-        Dim _newRtb As New System.Windows.Forms.RichTextBox()
-        With _newRtb
-            .Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-           Or System.Windows.Forms.AnchorStyles.Left) _
-           Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            .Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            .Location = New System.Drawing.Point(6, 3)
-            .Name = RTB_CONTROL_NAME & _index
-            .Size = New System.Drawing.Size(400, 388)
-            .Text = ""
-            .ContextMenuStrip = ContextMenuStrip1
-        End With
-        Return _newRtb
-    End Function
     Private Sub WriteTypes(_datenode As TreeNode, _outfile As StreamWriter)
         For Each _typeNode As TreeNode In _datenode.Nodes
             If _typeNode.Checked AndAlso ((rbAnnivOnly.Checked And _typeNode.Text.StartsWith("A")) Or (rbBirthdaysOnly.Checked And _typeNode.Text.StartsWith("B")) Or rbBoth.Checked) Then
@@ -232,9 +200,7 @@ Public Class frmTwitterOutput
     Private Sub WritePersons(_outfile As StreamWriter, _date As String, _typeNode As TreeNode)
 
         Dim _header As String = GetHeading(_typeNode)
-        Dim _index As Integer = 0
-        Dim _nextLine As String = ""
-
+        Dim _nextLine As String
         Dim tweetCount As Integer = TWEET_SIZE - _header.Length
         Dim _tweetNodes As New List(Of TreeNode)
         Dim _numberOfLists As Integer = 1
@@ -326,7 +292,6 @@ Public Class frmTwitterOutput
     End Sub
     Private Function SetTwitterFilename(TwitterFilenameA As String, TwitterFilenameB As String, currentDate As String) As String
         Dim TwitterFilename As String
-
         If rbSingleFile.Checked Then
             If rbAnnivOnly.Checked Then
                 TwitterFilename = TwitterFilenameA
@@ -344,12 +309,54 @@ Public Class frmTwitterOutput
             Catch ex As Exception
             End Try
         End If
-
         Return TwitterFilename
     End Function
-    Private Function GetTextBox(_tabPage As TabPage) As RichTextBox
+    Private Function NewTabPage(_text As String, _index As Integer) As TabPage
+        Dim _newTabpage As New TabPage
+        With _newTabpage
+            .Text = _text
+            .TabIndex = _index
+            .Location = New System.Drawing.Point(4, 22)
+            .Name = TABPAGE_BASENAME & CStr(_index)
+            .Padding = New System.Windows.Forms.Padding(3)
+            .Size = New System.Drawing.Size(412, 426)
+            .Controls.Add(NewButton(_index))
+            .Controls.Add(NewRichTextBox(_index))
+        End With
+        Return _newTabpage
+    End Function
+    Private Function NewButton(_index As String) As Button
+        Dim _newButton As New System.Windows.Forms.Button()
+        With _newButton
+            .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            .Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .ForeColor = System.Drawing.Color.RoyalBlue
+            .Location = New System.Drawing.Point(287, 397)
+            .Name = BUTTON_CONTROL_NAME & _index
+            .Size = New System.Drawing.Size(119, 23)
+            .Text = "Rewrite File"
+        End With
+        AddHandler _newButton.Click, AddressOf BtnRewrite_Click
+        Return _newButton
+    End Function
+    Private Function NewRichTextBox(_index As String) As RichTextBox
+        Dim _newRtb As New System.Windows.Forms.RichTextBox()
+        With _newRtb
+            .Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+           Or System.Windows.Forms.AnchorStyles.Left) _
+           Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            .Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .Location = New System.Drawing.Point(6, 3)
+            .Name = RTB_CONTROL_NAME & _index
+            .Size = New System.Drawing.Size(400, 388)
+            .Text = ""
+            .ContextMenuStrip = ContextMenuStrip1
+        End With
+        Return _newRtb
+    End Function
+    Private Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
         Dim _rtb As New RichTextBox
-        Dim _tabName As String = RTB_CONTROL_NAME & GetTabNumber(_tabPage)
+        Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
         If _controls.Count > 0 Then
             _rtb = TryCast(_controls(0), RichTextBox)
@@ -357,13 +364,11 @@ Public Class frmTwitterOutput
         Return _rtb
     End Function
 
-
 #End Region
 #Region "general subroutines"
     Private Sub DisplayMessage(_text As String)
         lblStatus.Text = _text
         StatusStrip1.Refresh()
     End Sub
-
 #End Region
 End Class

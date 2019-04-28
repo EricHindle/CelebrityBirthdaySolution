@@ -365,7 +365,7 @@ Public Class frmMain
     End Sub
 
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
-        Dim oPerson As Person = Nothing
+        Dim oPerson As Person
         If lbPeople.SelectedIndex >= 0 Then
             oPerson = personTable(lbPeople.SelectedIndex)
             If oPerson.Id > 0 Then
@@ -379,7 +379,7 @@ Public Class frmMain
     End Sub
 
     Private Sub BtnUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUp.Click
-        Dim ix As Integer = -1
+        Dim ix As Integer
         If lbPeople.SelectedIndex > 0 Then
             ix = lbPeople.SelectedIndex
             Dim prevPerson As New Person(personTable(ix - 1))
@@ -400,7 +400,7 @@ Public Class frmMain
     End Sub
 
     Private Sub BtnDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDown.Click
-        Dim ix As Integer = -1
+        Dim ix As Integer
         If lbPeople.SelectedIndex >= 0 And lbPeople.SelectedIndex < lbPeople.Items.Count - 1 Then
             ix = lbPeople.SelectedIndex
             Dim nextPerson As New Person(personTable(ix + 1))
@@ -556,8 +556,6 @@ Public Class frmMain
         End If
         oTable.Dispose()
         oTa.Dispose()
-        oTable = Nothing
-        oTa = Nothing
         lblStatus.Text += " - Complete"
 
     End Sub
@@ -615,13 +613,8 @@ Public Class frmMain
 
             oDta.Dispose()
             oDtable.Dispose()
-            oDta = Nothing
-            oDtable = Nothing
-
             oTable.Dispose()
             oTa.Dispose()
-            oTable = Nothing
-            oTa = Nothing
             lblStatus.Text += " - Complete"
         End If
     End Sub
@@ -644,8 +637,6 @@ Public Class frmMain
                     End If
                     oTable.Dispose()
                     oTa.Dispose()
-                    oTable = Nothing
-                    oTa = Nothing
                 End If
             End If
         End If
@@ -756,8 +747,6 @@ Public Class frmMain
             oPerson.UnsavedChanges = False
             oTable.Dispose()
             oTa.Dispose()
-            oTable = Nothing
-            oTa = Nothing
             lblStatus.Text += " - Complete"
         End If
     End Sub
@@ -847,11 +836,7 @@ Public Class frmMain
     End Sub
 
     Private Sub FrmAddCbdy_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If My.Settings.callUpgrade = 0 Then
-            My.Settings.Upgrade()
-            My.Settings.callUpgrade = 1
-            My.Settings.Save()
-        End If
+
         Label11.Text = "Version: " & My.Application.Info.Version.ToString
         GetFormPos(Me, My.Settings.mainformpos)
         txtLoadYr.Text = ""

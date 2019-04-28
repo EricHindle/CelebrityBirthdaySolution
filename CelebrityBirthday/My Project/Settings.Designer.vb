@@ -232,6 +232,30 @@ Namespace My
                 Me("TwitterSearchUrl") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property twitterfilespos() As String
+            Get
+                Return CType(Me("twitterfilespos"),String)
+            End Get
+            Set
+                Me("twitterfilespos") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property twitterimagepos() As String
+            Get
+                Return CType(Me("twitterimagepos"),String)
+            End Get
+            Set
+                Me("twitterimagepos") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -47,6 +47,7 @@ Partial Class frmTwitterOutput
         Me.TcFileTabs = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.BtnRewrite = New System.Windows.Forms.Button()
+        Me.BtnCopyselected = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -134,22 +135,22 @@ Partial Class frmTwitterOutput
         'rbDailyFile
         '
         Me.rbDailyFile.AutoSize = True
+        Me.rbDailyFile.Checked = True
         Me.rbDailyFile.Location = New System.Drawing.Point(17, 51)
         Me.rbDailyFile.Name = "rbDailyFile"
         Me.rbDailyFile.Size = New System.Drawing.Size(88, 22)
         Me.rbDailyFile.TabIndex = 1
+        Me.rbDailyFile.TabStop = True
         Me.rbDailyFile.Text = "Daily Files"
         Me.rbDailyFile.UseVisualStyleBackColor = True
         '
         'rbSingleFile
         '
         Me.rbSingleFile.AutoSize = True
-        Me.rbSingleFile.Checked = True
         Me.rbSingleFile.Location = New System.Drawing.Point(17, 23)
         Me.rbSingleFile.Name = "rbSingleFile"
         Me.rbSingleFile.Size = New System.Drawing.Size(87, 22)
         Me.rbSingleFile.TabIndex = 0
-        Me.rbSingleFile.TabStop = True
         Me.rbSingleFile.Text = "Single File"
         Me.rbSingleFile.UseVisualStyleBackColor = True
         '
@@ -302,12 +303,25 @@ Partial Class frmTwitterOutput
         Me.BtnRewrite.Text = "Rewrite File"
         Me.BtnRewrite.UseVisualStyleBackColor = True
         '
+        'BtnCopyselected
+        '
+        Me.BtnCopyselected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnCopyselected.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCopyselected.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnCopyselected.Location = New System.Drawing.Point(820, 341)
+        Me.BtnCopyselected.Name = "BtnCopyselected"
+        Me.BtnCopyselected.Size = New System.Drawing.Size(139, 33)
+        Me.BtnCopyselected.TabIndex = 16
+        Me.BtnCopyselected.Text = "Copy Selected"
+        Me.BtnCopyselected.UseVisualStyleBackColor = True
+        '
         'frmTwitterOutput
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(977, 562)
+        Me.Controls.Add(Me.BtnCopyselected)
         Me.Controls.Add(Me.TcFileTabs)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.dtpTo)
@@ -363,4 +377,5 @@ Partial Class frmTwitterOutput
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents CopyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblStatus As ToolStripStatusLabel
+    Friend WithEvents BtnCopyselected As Button
 End Class
