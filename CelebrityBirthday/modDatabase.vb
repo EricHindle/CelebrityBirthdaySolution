@@ -83,15 +83,7 @@
         Next
         Return oPersonTable
     End Function
-    Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer) As List(Of Person)
-        Dim oPersonList As New List(Of Person)
-        oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-            Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            oPersonList.Add(oPerson)
-        Next
-        Return oPersonList
-    End Function
+
     Public Function GetPeopleByName(oForename As String, oSurname As String) As ArrayList
         Dim oPersonList As New ArrayList
         oPersonTa.FillByName(oPersonTable, oForename, oSurname)
@@ -119,6 +111,15 @@
         Next
         Return oPersonList
     End Function
+    Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer) As List(Of Person)
+        Dim oPersonList As New List(Of Person)
+        oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
+        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
+            Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+            oPersonList.Add(oPerson)
+        Next
+        Return oPersonList
+    End Function
     Public Function FindBirthdays(oDay As Integer, oMonth As Integer)
         oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
         Dim _List As New List(Of Person)
@@ -139,7 +140,6 @@
 #Region "image"
     Public Function GetImageById(ByVal _id As Integer) As ImageIdentity
         Dim ict As Integer = oImgTa.FillById(oImgTable, _id)
-        Dim oIRow As CelebrityBirthdayDataSet.ImageRow = Nothing
         Dim oImage As ImageIdentity = New ImageIdentity()
         If ict = 1 Then
             oImage = New ImageIdentity(oImgTable.Rows(0))
@@ -177,7 +177,6 @@
 #End Region
 #Region "social media"
     Public Function GetSocialMedia(ByVal _id As Integer) As SocialMedia
-        Dim oTwRow As CelebrityBirthdayDataSet.SocialMediaRow = Nothing
         Dim tCt As Integer = oTwta.FillById(oTwtable, _id)
         Dim oSocial As SocialMedia = New SocialMedia
         If tCt = 1 Then
@@ -199,7 +198,7 @@
     Public Function GetWordPressLoadDate(oDay As Integer, oMonth As Integer) As Date?
         Dim loadDate As Date?
         Dim iCt As Integer = oDatesTa.FillByDate(oDatesTable, oDay, oMonth)
-        Dim oDateRow As CelebrityBirthdayDataSet.DatesRow = Nothing
+        Dim oDateRow As CelebrityBirthdayDataSet.DatesRow
         If iCt = 1 Then
             oDateRow = oDatesTable.Rows(0)
             loadDate = New Date(CInt(oDateRow.uploadyear), CInt(oDateRow.uploadmonth), CInt(oDateRow.uploadday))

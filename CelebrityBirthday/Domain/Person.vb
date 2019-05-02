@@ -275,7 +275,7 @@
             Try
                 iYr = Integer.Parse(_birthYear.ToLower.Replace("bc", "").Trim)
                 If isBC Then
-                    iYr = iYr * -1
+                    iYr *= -1
                 End If
             Catch ex As Exception
             End Try

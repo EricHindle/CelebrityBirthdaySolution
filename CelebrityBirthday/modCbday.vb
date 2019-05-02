@@ -8,6 +8,11 @@ Module modCbday
     Public Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Public Const TWEET_SIZE As Integer = 279
+
+    Public Const RTB_CONTROL_NAME As String = "RtbFile"
+    Public Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
+    Public Const TABPAGE_BASENAME As String = "TabPage_"
+
     Private Declare Function SendMessageLong Lib "user32" Alias _
         "SendMessageA" (ByVal hWnd As IntPtr, ByVal wMsg As _
         Int32, ByVal wParam As Int32, ByVal lParam As Int32) As _
@@ -195,14 +200,14 @@ Module modCbday
     Public Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer) As List(Of List(Of Person))
         Dim ListOfLists As New List(Of List(Of Person))
         Dim _totalLength As Integer = _headerLength
-        '    Debug.Print(_totalLength)
+        Debug.Print(_totalLength)
         For Each _person As Person In oPersonlist
-            Dim _tweetLineLength As Integer = _person.Name.Length + _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 3, 0)
+            Dim _tweetLineLength As Integer = _person.Name.Length + _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 3, 1)
             _totalLength += _tweetLineLength
-            '       Debug.Print(CStr(_person.Name & " " & (_person.Social.TwitterHandle) & CStr(_totalLength)))
+            Debug.Print(CStr(_person.Name & " " & (_person.Social.TwitterHandle) & CStr(_totalLength)))
         Next
         Dim _numberOfTweets As Integer = Math.Ceiling(_totalLength / TWEET_SIZE)
-        '   Debug.Print("Number of tweets " & CStr(_numberOfTweets))
+        Debug.Print("Number of tweets " & CStr(_numberOfTweets))
         Dim _numberOfNamesPerTweet As Integer = Math.Ceiling(oPersonlist.Count / _numberOfTweets)
         Dim _ct As Integer = 0
         Do Until _ct = oPersonlist.Count
@@ -217,6 +222,16 @@ Module modCbday
         Loop
         Return ListOfLists
     End Function
+    Public Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
+        Dim _rtb As New RichTextBox
+        Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)
+        Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
+        If _controls.Count > 0 Then
+            _rtb = TryCast(_controls(0), RichTextBox)
+        End If
+        Return _rtb
+    End Function
+
 
 
 End Module
