@@ -197,31 +197,7 @@ Module modCbday
         Return My.Settings.TwitterSearchUrl & oText.Replace(" ", "+")
     End Function
 
-    Public Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer) As List(Of List(Of Person))
-        Dim ListOfLists As New List(Of List(Of Person))
-        Dim _totalLength As Integer = _headerLength
-        Debug.Print(_totalLength)
-        For Each _person As Person In oPersonlist
-            Dim _tweetLineLength As Integer = _person.Name.Length + _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 3, 1)
-            _totalLength += _tweetLineLength
-            Debug.Print(CStr(_person.Name & " " & (_person.Social.TwitterHandle) & CStr(_totalLength)))
-        Next
-        Dim _numberOfTweets As Integer = Math.Ceiling(_totalLength / TWEET_SIZE)
-        Debug.Print("Number of tweets " & CStr(_numberOfTweets))
-        Dim _numberOfNamesPerTweet As Integer = Math.Ceiling(oPersonlist.Count / _numberOfTweets)
-        Dim _ct As Integer = 0
-        Do Until _ct = oPersonlist.Count
-            Dim _tweetList As New List(Of Person)
-            Dim _tweetCt As Integer = 0
-            Do Until _ct = oPersonlist.Count OrElse _tweetCt = _numberOfNamesPerTweet
-                _tweetList.Add(oPersonlist(_ct))
-                _tweetCt += 1
-                _ct += 1
-            Loop
-            ListOfLists.Add(_tweetList)
-        Loop
-        Return ListOfLists
-    End Function
+
     Public Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
         Dim _rtb As New RichTextBox
         Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)

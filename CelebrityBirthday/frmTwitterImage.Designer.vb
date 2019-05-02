@@ -40,11 +40,17 @@ Partial Class FrmTwitterImage
         Me.RbSingleImage = New System.Windows.Forms.RadioButton()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.rtbFile1 = New System.Windows.Forms.RichTextBox()
         Me.BtnCopyselected = New System.Windows.Forms.Button()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopyAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BtnCopyAll = New System.Windows.Forms.Button()
+        Me.NudPersonsPerTweet = New System.Windows.Forms.NumericUpDown()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblError = New System.Windows.Forms.Label()
+        Me.TxtStats = New System.Windows.Forms.TextBox()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,6 +62,7 @@ Partial Class FrmTwitterImage
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
+        CType(Me.NudPersonsPerTweet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -134,9 +141,8 @@ Partial Class FrmTwitterImage
         '
         'LblImageCount
         '
-        Me.LblImageCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblImageCount.AutoSize = True
-        Me.LblImageCount.Location = New System.Drawing.Point(782, 20)
+        Me.LblImageCount.Location = New System.Drawing.Point(408, 20)
         Me.LblImageCount.Name = "LblImageCount"
         Me.LblImageCount.Size = New System.Drawing.Size(57, 14)
         Me.LblImageCount.TabIndex = 6
@@ -145,7 +151,7 @@ Partial Class FrmTwitterImage
         'NudPic1Horizontal
         '
         Me.NudPic1Horizontal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.NudPic1Horizontal.Location = New System.Drawing.Point(49, 439)
+        Me.NudPic1Horizontal.Location = New System.Drawing.Point(58, 438)
         Me.NudPic1Horizontal.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudPic1Horizontal.Name = "NudPic1Horizontal"
         Me.NudPic1Horizontal.Size = New System.Drawing.Size(53, 22)
@@ -157,7 +163,7 @@ Partial Class FrmTwitterImage
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(3, 441)
+        Me.Label2.Location = New System.Drawing.Point(12, 442)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 14)
         Me.Label2.TabIndex = 10
@@ -235,6 +241,28 @@ Partial Class FrmTwitterImage
         Me.TabPage1.Text = "Born On This Day"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'SplitContainer1
+        '
+        Me.SplitContainer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.SplitContainer1.Location = New System.Drawing.Point(9, 6)
+        Me.SplitContainer1.Name = "SplitContainer1"
+        '
+        'SplitContainer1.Panel1
+        '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.NudPic1Horizontal)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.Label2)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.PictureBox1)
+        '
+        'SplitContainer1.Panel2
+        '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.rtbFile1)
+        Me.SplitContainer1.Size = New System.Drawing.Size(817, 471)
+        Me.SplitContainer1.SplitterDistance = 393
+        Me.SplitContainer1.TabIndex = 23
+        '
         'rtbFile1
         '
         Me.rtbFile1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -259,39 +287,77 @@ Partial Class FrmTwitterImage
         Me.BtnCopyselected.Text = "Copy Selected"
         Me.BtnCopyselected.UseVisualStyleBackColor = True
         '
-        'SplitContainer1
-        '
-        Me.SplitContainer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.SplitContainer1.Location = New System.Drawing.Point(9, 6)
-        Me.SplitContainer1.Name = "SplitContainer1"
-        '
-        'SplitContainer1.Panel1
-        '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.NudPic1Horizontal)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.Label2)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.PictureBox1)
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.rtbFile1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(817, 471)
-        Me.SplitContainer1.SplitterDistance = 393
-        Me.SplitContainer1.TabIndex = 23
-        '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem, Me.CopyAllToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(103, 26)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(150, 48)
         '
         'CopyToolStripMenuItem
         '
         Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
-        Me.CopyToolStripMenuItem.Text = "Copy"
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.CopyToolStripMenuItem.Text = "Copy Selected"
+        '
+        'CopyAllToolStripMenuItem
+        '
+        Me.CopyAllToolStripMenuItem.Name = "CopyAllToolStripMenuItem"
+        Me.CopyAllToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.CopyAllToolStripMenuItem.Text = "Copy All"
+        '
+        'BtnCopyAll
+        '
+        Me.BtnCopyAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnCopyAll.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCopyAll.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnCopyAll.Location = New System.Drawing.Point(874, 266)
+        Me.BtnCopyAll.Name = "BtnCopyAll"
+        Me.BtnCopyAll.Size = New System.Drawing.Size(139, 33)
+        Me.BtnCopyAll.TabIndex = 22
+        Me.BtnCopyAll.Text = "Copy All"
+        Me.BtnCopyAll.UseVisualStyleBackColor = True
+        '
+        'NudPersonsPerTweet
+        '
+        Me.NudPersonsPerTweet.Location = New System.Drawing.Point(584, 18)
+        Me.NudPersonsPerTweet.Name = "NudPersonsPerTweet"
+        Me.NudPersonsPerTweet.Size = New System.Drawing.Size(50, 22)
+        Me.NudPersonsPerTweet.TabIndex = 23
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(640, 20)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(66, 14)
+        Me.Label1.TabIndex = 24
+        Me.Label1.Text = "per Tweet"
+        '
+        'lblError
+        '
+        Me.lblError.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblError.AutoSize = True
+        Me.lblError.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lblError.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblError.ForeColor = System.Drawing.Color.White
+        Me.lblError.Location = New System.Drawing.Point(768, 16)
+        Me.lblError.Name = "lblError"
+        Me.lblError.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.lblError.Size = New System.Drawing.Size(106, 19)
+        Me.lblError.TabIndex = 25
+        Me.lblError.Text = "** Error **"
+        Me.lblError.Visible = False
+        '
+        'TxtStats
+        '
+        Me.TxtStats.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtStats.Location = New System.Drawing.Point(897, 13)
+        Me.TxtStats.Multiline = True
+        Me.TxtStats.Name = "TxtStats"
+        Me.TxtStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TxtStats.Size = New System.Drawing.Size(100, 83)
+        Me.TxtStats.TabIndex = 26
+        Me.TxtStats.Visible = False
         '
         'FrmTwitterImage
         '
@@ -299,6 +365,11 @@ Partial Class FrmTwitterImage
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1025, 581)
+        Me.Controls.Add(Me.TxtStats)
+        Me.Controls.Add(Me.lblError)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.NudPersonsPerTweet)
+        Me.Controls.Add(Me.BtnCopyAll)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.BtnCopyselected)
         Me.Controls.Add(Me.GroupBox1)
@@ -327,6 +398,7 @@ Partial Class FrmTwitterImage
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.ContextMenuStrip1.ResumeLayout(False)
+        CType(Me.NudPersonsPerTweet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -353,4 +425,10 @@ Partial Class FrmTwitterImage
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents CopyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BtnCopyAll As Button
+    Friend WithEvents CopyAllToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NudPersonsPerTweet As NumericUpDown
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblError As Label
+    Friend WithEvents TxtStats As TextBox
 End Class

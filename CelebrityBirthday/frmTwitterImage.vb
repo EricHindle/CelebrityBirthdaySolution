@@ -20,7 +20,7 @@ Public Class FrmTwitterImage
     Private Sub CboDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged,
                                                                                     cboMonth.SelectedIndexChanged
         DisplayStatus("")
-        PictureBox1.Image = Nothing
+        NudPersonsPerTweet.Value = 0
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
             DisplayStatus("Loading People From Database")
             Me.Refresh()
@@ -59,6 +59,9 @@ Public Class FrmTwitterImage
     End Sub
     Private Sub BtnGenImage_Click(sender As Object, e As EventArgs) Handles BtnGenImage.Click
         DisplayStatus("Generating images")
+        lblError.Visible = False
+        TxtStats.Text = ""
+        TxtStats.Visible = False
         If cboDay.SelectedIndex > -1 AndAlso cboMonth.SelectedIndex > -1 Then
             TabControl1.TabPages.Clear()
             Dim tabTitle As String
@@ -169,7 +172,7 @@ Public Class FrmTwitterImage
 
     Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person), _type As String, _index As Integer, _numberOfLists As Integer)
         Dim _outString As New StringBuilder
-        _outString.Append(cboDay.SelectedItem).Append(" ").Append(cboMonth.SelectedItem).Append(vbCrLf).Append(vbCrLf)
+        _outString.Append(cboMonth.SelectedItem).Append(" ").Append(cboDay.SelectedItem).Append(vbCrLf).Append(vbCrLf)
         _outString.Append(GetHeading(_type)).Append(vbCrLf)
 
         Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
@@ -342,6 +345,70 @@ Public Class FrmTwitterImage
         End If
         Return _sc
     End Function
+
+    Private Sub BtnCopyAll_Click(sender As Object, e As EventArgs) Handles BtnCopyAll.Click
+        Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
+        My.Computer.Clipboard.Clear()
+        If _rtb IsNot Nothing Then
+            My.Computer.Clipboard.SetText(_rtb.Text)
+        End If
+    End Sub
+
+    Private Sub CopyAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyAllToolStripMenuItem.Click
+        Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
+        My.Computer.Clipboard.Clear()
+        If _rtb IsNot Nothing Then
+            My.Computer.Clipboard.SetText(_rtb.Text)
+        End If
+    End Sub
+    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer) As List(Of List(Of Person))
+        Dim _totalLength As Integer = 0
+        Dim availableLength As Integer = TWEET_SIZE - _headerLength
+        Debug.Print(availableLength)
+        For Each _person As Person In oPersonlist
+            Dim _tweetLineLength As Integer = GetTweetLineLength(_person)
+            _totalLength += _tweetLineLength
+            Debug.Print(CStr(_person.Name & " " & (_person.Social.TwitterHandle) & CStr(_totalLength)))
+        Next
+        Dim _numberOfTweets As Integer = Math.Ceiling(_totalLength / availableLength)
+        Debug.Print("Number of tweets " & CStr(_numberOfTweets))
+        Dim _numberOfNamesPerTweet As Integer = If(NudPersonsPerTweet.Value > 0, NudPersonsPerTweet.Value, Math.Ceiling(oPersonlist.Count / _numberOfTweets))
+        Dim ListOfLists As List(Of List(Of Person)) = BuildLists(oPersonlist, availableLength, _numberOfNamesPerTweet)
+        Return ListOfLists
+    End Function
+
+    Private Function GetTweetLineLength(_person As Person) As Integer
+        Return _person.Name.Length + _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 3, 1)
+    End Function
+
+    Private Function BuildLists(oPersonlist As List(Of Person), availableLength As Integer, _numberOfNamesPerTweet As Integer) As List(Of List(Of Person))
+        Dim ListOfLists As New List(Of List(Of Person))
+        Dim _ct As Integer = 0
+        Dim _tweetSize As Integer = 0
+        Debug.Print("-------------------------------")
+        Do Until _ct = oPersonlist.Count
+            Dim _tweetList As New List(Of Person)
+            Dim _tweetCt As Integer = 0
+            Do Until _ct = oPersonlist.Count OrElse _tweetCt = _numberOfNamesPerTweet
+                Dim _person As Person = oPersonlist(_ct)
+                _tweetSize += GetTweetLineLength(_person)
+                _tweetList.Add(_person)
+                Debug.Print(_person.Name & " " & CStr(_tweetSize))
+                _tweetCt += 1
+                _ct += 1
+            Loop
+            ListOfLists.Add(_tweetList)
+            TxtStats.Text &= CStr(_tweetSize) & vbCrLf
+            If _tweetSize > availableLength Then
+                lblError.Visible = True
+                TxtStats.Visible = True
+            End If
+            Debug.Print("-------------------------------" & CStr(_tweetSize))
+            _tweetSize = 0
+        Loop
+        Return ListOfLists
+    End Function
+
 #End Region
 
 End Class
