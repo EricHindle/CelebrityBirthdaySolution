@@ -178,7 +178,7 @@ Public Class FrmTwitterImage
         Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
 
         For Each _person As Person In _imageTable
-            _outString.Append(_person.ForeName).Append(" ").Append(_person.Surname)
+            _outString.Append(_person.Name)
             If _person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle) Then
                 _outString.Append(" @").Append(_person.Social.TwitterHandle)
             End If
