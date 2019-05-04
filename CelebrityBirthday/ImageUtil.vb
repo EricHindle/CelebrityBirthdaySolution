@@ -39,7 +39,11 @@ Public Class ImageUtil
         Dim targetBitmap As System.Drawing.Bitmap = resizeImageToBitmap(oPicture.Image, oPicture.Width, oPicture.Height)
 
         If Not String.IsNullOrEmpty(targetFile) Then
-            targetBitmap.Save(targetFile, getCodecInfo(imgType), getEncoderParameters)
+            Try
+                targetBitmap.Save(targetFile, getCodecInfo(imgType), getEncoderParameters)
+            Catch ex As Exception
+                MsgBox(targetFile & ":" & ex.Message, MsgBoxStyle.Exclamation, "Error")
+            End Try
         End If
         targetBitmap.Dispose()
         Return targetFile
@@ -49,7 +53,12 @@ Public Class ImageUtil
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
         Dim oBitMap As Bitmap = New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
         Dim oGraphics As Graphics = initialiseGraphics(targetBitmap)
-        oGraphics.DrawImage(oBitMap, targetRectangle, 0, 0, sourceImage.Width, sourceImage.Height, GraphicsUnit.Pixel)
+        Try
+            oGraphics.DrawImage(oBitMap, targetRectangle, 0, 0, sourceImage.Width, sourceImage.Height, GraphicsUnit.Pixel)
+        Catch ex As Exception
+            MsgBox("resizeImageToBitmap:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
+        End Try
+
         Return targetBitmap
     End Function
     Public Shared Function extractCroppedAreaFromImage(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
@@ -57,7 +66,12 @@ Public Class ImageUtil
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
         Dim oBitMap As Bitmap = New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
         Dim oGraphics As Graphics = initialiseGraphics(targetBitmap)
-        oGraphics.DrawImage(oBitMap, 0, 0, targetRectangle, GraphicsUnit.Pixel)
+        Try
+            oGraphics.DrawImage(oBitMap, 0, 0, targetRectangle, GraphicsUnit.Pixel)
+        Catch ex As Exception
+            MsgBox("extractCroppedAreaFromImage:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
+        End Try
+
         Return targetBitmap
     End Function
     Private Shared Function initialiseGraphics(ByVal oImage As Image) As Graphics

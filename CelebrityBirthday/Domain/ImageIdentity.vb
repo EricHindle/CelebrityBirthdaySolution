@@ -62,7 +62,6 @@ Public Class ImageIdentity
         _imageLoadMonth = ""
         _imageLoadYear = ""
         _imagePhoto = New Bitmap(60, 60)
-        _imagePhoto = Nothing
     End Sub
     Public Sub New()
         InitialiseImage()
@@ -75,18 +74,6 @@ Public Class ImageIdentity
         _imageLoadYear = pLoadYear
         _imagePhoto = GetPhotoFromFile()
     End Sub
-
-    Private Function GetPhotoFromFile() As Image
-        Dim _imageFromFile As Image
-        Dim _Filename As String = Path.Combine(My.Settings.ImgFolder, _imageFileName & _imageFileType)
-        If My.Computer.FileSystem.FileExists(_Filename) Then
-            _imageFromFile = Image.FromFile(_Filename)
-        Else
-            _imageFromFile = New Bitmap(60, 60)
-            _imagePhoto = Nothing
-        End If
-        Return _imageFromFile
-    End Function
 
     Public Sub New(pImage As ImageIdentity)
         If pImage IsNot Nothing Then
@@ -114,5 +101,19 @@ Public Class ImageIdentity
     End Sub
     Public Function FullFileName() As String
         Return _imageFileName.Trim & _imageFileType.Trim
+    End Function
+    Private Function GetPhotoFromFile() As Image
+        Dim _imageFromFile As Image = New Bitmap(60, 60)
+        If Not String.IsNullOrEmpty(_imageFileName) Then
+            Dim _Filename As String = Path.Combine(My.Settings.ImgFolder, _imageFileName & _imageFileType)
+            If My.Computer.FileSystem.FileExists(_Filename) Then
+                Try
+                    _imageFromFile = Image.FromFile(_Filename)
+                Catch ex As Exception
+                    MsgBox(_Filename & " " & ex.Message, MsgBoxStyle.Exclamation, "Exception")
+                End Try
+            End If
+        End If
+        Return _imageFromFile
     End Function
 End Class

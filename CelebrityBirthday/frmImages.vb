@@ -172,7 +172,7 @@ Public Class FrmImages
                 PictureBox2.ImageLocation = ""
                 PictureBox1.ImageLocation = My.Settings.WordPressUrl & sYear & "/" & sMth & "/" & oPerson.Image.FullFileName
                 TxtImageUrl.Text = PictureBox1.ImageLocation
-                If Not My.Computer.FileSystem.FileExists(storedImageName) Then
+                If Not String.IsNullOrEmpty(oPerson.Image.ImageFileName.Trim) AndAlso Not My.Computer.FileSystem.FileExists(storedImageName) Then
                     SaveImage(PictureBox1.ImageLocation, storedImageName)
                 End If
                 PictureBox2.ImageLocation = storedImageName
@@ -207,7 +207,7 @@ Public Class FrmImages
     End Sub
 
     Private Sub BtnFileImgGen_Click(sender As Object, e As EventArgs) Handles BtnFileImgGen.Click
-        TxtImageFilename.Text = Path.Combine(My.Settings.ImgFolder, MakeImageName(TxtForename.Text, TxtSurname.Text) & cbImgType.SelectedItem)
+        TxtImageFilename.Text = Path.Combine(My.Settings.ImgFolder, txtImgName.Text & cbImgType.SelectedItem)
     End Sub
 
     Private Sub BtnWpImgGen_Click(sender As Object, e As EventArgs) Handles BtnWpImgGen.Click
