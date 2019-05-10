@@ -53,7 +53,8 @@ Partial Class frmImageStore
         'btnSavepic
         '
         Me.btnSavepic.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSavepic.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSavepic.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSavepic.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnSavepic.Location = New System.Drawing.Point(920, 271)
         Me.btnSavepic.Name = "btnSavepic"
         Me.btnSavepic.Size = New System.Drawing.Size(87, 59)
@@ -64,23 +65,25 @@ Partial Class frmImageStore
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnClose.Location = New System.Drawing.Point(923, 569)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(87, 51)
         Me.btnClose.TabIndex = 68
-        Me.btnClose.Text = "close"
+        Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'btnSelFolder
         '
         Me.btnSelFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSelFolder.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSelFolder.Location = New System.Drawing.Point(920, 120)
+        Me.btnSelFolder.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSelFolder.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnSelFolder.Location = New System.Drawing.Point(920, 151)
         Me.btnSelFolder.Name = "btnSelFolder"
-        Me.btnSelFolder.Size = New System.Drawing.Size(87, 103)
+        Me.btnSelFolder.Size = New System.Drawing.Size(87, 64)
         Me.btnSelFolder.TabIndex = 69
-        Me.btnSelFolder.Text = "Set default image folder"
+        Me.btnSelFolder.Text = "Set image folder"
         Me.btnSelFolder.UseVisualStyleBackColor = True
         '
         'LblImagePath
@@ -106,7 +109,8 @@ Partial Class frmImageStore
         'btnGetImage
         '
         Me.btnGetImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGetImage.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGetImage.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGetImage.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnGetImage.Location = New System.Drawing.Point(920, 33)
         Me.btnGetImage.Name = "btnGetImage"
         Me.btnGetImage.Size = New System.Drawing.Size(87, 57)

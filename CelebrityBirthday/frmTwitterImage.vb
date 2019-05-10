@@ -117,6 +117,35 @@ Public Class FrmTwitterImage
         Next
         DisplayStatus("Files saved")
     End Sub
+    Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetFormPos(Me, My.Settings.twitterimagepos)
+    End Sub
+    Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        My.Settings.twitterimagepos = SetFormPos(Me)
+        My.Settings.Save()
+    End Sub
+    Private Sub BtnCopyselected_Click(sender As Object, e As EventArgs) Handles BtnCopyselected.Click, CopyToolStripMenuItem.Click
+        Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
+        My.Computer.Clipboard.Clear()
+        If _rtb IsNot Nothing AndAlso Not String.IsNullOrEmpty(_rtb.SelectedText) Then
+            My.Computer.Clipboard.SetText(_rtb.SelectedText)
+        End If
+    End Sub
+    Private Sub BtnCopyAll_Click(sender As Object, e As EventArgs) Handles BtnCopyAll.Click
+        Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
+        My.Computer.Clipboard.Clear()
+        If _rtb IsNot Nothing Then
+            My.Computer.Clipboard.SetText(_rtb.Text)
+        End If
+    End Sub
+    Private Sub CopyAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyAllToolStripMenuItem.Click
+        Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
+        My.Computer.Clipboard.Clear()
+        If _rtb IsNot Nothing Then
+            My.Computer.Clipboard.SetText(_rtb.Text)
+        End If
+    End Sub
+
 #End Region
 #Region "subroutines"
     Private Sub GeneratePictures(_tweetLists As List(Of List(Of Person)), _tabTitle As String, _imageStart As Integer)
@@ -135,41 +164,6 @@ Public Class FrmTwitterImage
             IsNoGenerate = False
         Next
     End Sub
-    Private Function CreateNewImageTabPage(_index As Integer, _tabTitle As String) As TabPage
-        Dim newTabpage As New TabPage
-        Dim tabTitle As String = _tabTitle & CStr(_index)
-        With newTabpage
-            .Text = tabTitle
-            .TabIndex = _index
-            '   .Location = New System.Drawing.Point(4, 22)
-            .Name = "ImageTabPage_" & CStr(_index)
-            .Padding = New System.Windows.Forms.Padding(3)
-            .Size = New System.Drawing.Size(412, 426)
-            .Controls.Add(newSplitContainer(newTabpage.TabIndex))
-
-        End With
-        Return newTabpage
-    End Function
-
-    Private Function NewSplitContainer(_index As Integer) As SplitContainer
-        Dim _splitContainer As New SplitContainer With {
-        .Location = New System.Drawing.Point(9, 6),
-            .Size = New System.Drawing.Size(817, 471),
-            .SplitterDistance = 384
-        }
-        _splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        _splitContainer.Location = New System.Drawing.Point(9, 6)
-        _splitContainer.Name = "SplitContainer" & CStr(_index)
-
-        _splitContainer.Panel1.Controls.Add(NewNumericUpDown(_index))
-        _splitContainer.Panel1.Controls.Add(NewLabel(_index, 3, 430, "Width", "Label1"))
-        _splitContainer.Panel1.Controls.Add(NewPictureBox(_index))
-
-        _splitContainer.Panel2.Controls.Add(NewRichTextBox(_index))
-        Return _splitContainer
-    End Function
-
-
     Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person), _type As String, _index As Integer, _numberOfLists As Integer)
         Dim _outString As New StringBuilder
         _outString.Append(cboMonth.SelectedItem).Append(" ").Append(cboDay.SelectedItem).Append(vbCrLf).Append(vbCrLf)
@@ -189,16 +183,6 @@ Public Class FrmTwitterImage
         End If
         _textBox.Text = _outString.ToString
     End Sub
-    Private Function GetHeading(_typeNode As String) As String
-        Dim _header As String = ""
-        If _typeNode.StartsWith("A") Then
-            _header = ANNIV_HDR
-        End If
-        If _typeNode.StartsWith("B") Then
-            _header = BIRTHDAY_HDR
-        End If
-        Return _header
-    End Function
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
 
         If _imageTable.Count > 0 Then
@@ -227,6 +211,97 @@ Public Class FrmTwitterImage
         _pictureBox.Image = _mosaic
         DisplayStatus("Image complete", True)
     End Sub
+    Private Sub DisplayStatus(_text As String, Optional _isAppend As Boolean = False)
+        If _isAppend Then
+            LblStatus.Text &= _text
+        Else
+            LblStatus.Text = _text
+        End If
+        StatusStrip1.Refresh()
+    End Sub
+#End Region
+#Region "functions"
+    Private Function BuildLists(oPersonlist As List(Of Person), availableLength As Integer, _numberOfNamesPerTweet As Integer) As List(Of List(Of Person))
+        Dim ListOfLists As New List(Of List(Of Person))
+        Dim _ct As Integer = 0
+        Dim _tweetSize As Integer = 0
+        Do Until _ct = oPersonlist.Count
+            Dim _tweetList As New List(Of Person)
+            Dim _tweetCt As Integer = 0
+            Do Until _ct = oPersonlist.Count OrElse _tweetCt = _numberOfNamesPerTweet
+                Dim _person As Person = oPersonlist(_ct)
+                _tweetSize += GetTweetLineLength(_person)
+                _tweetList.Add(_person)
+                _tweetCt += 1
+                _ct += 1
+            Loop
+            ListOfLists.Add(_tweetList)
+            TxtStats.Text &= CStr(_tweetSize) & vbCrLf
+            If _tweetSize > availableLength Then
+                lblError.Visible = True
+                TxtStats.Visible = True
+            End If
+            _tweetSize = 0
+        Loop
+        Return ListOfLists
+    End Function
+    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer) As List(Of List(Of Person))
+        Dim _totalLength As Integer = 0
+        Dim availableLength As Integer = TWEET_SIZE - _headerLength
+        For Each _person As Person In oPersonlist
+            Dim _tweetLineLength As Integer = GetTweetLineLength(_person)
+            _totalLength += _tweetLineLength
+        Next
+        Dim _numberOfTweets As Integer = Math.Ceiling(_totalLength / availableLength)
+        Dim _numberOfNamesPerTweet As Integer = If(NudPersonsPerTweet.Value > 0, NudPersonsPerTweet.Value, Math.Ceiling(oPersonlist.Count / _numberOfTweets))
+        Dim ListOfLists As List(Of List(Of Person)) = BuildLists(oPersonlist, availableLength, _numberOfNamesPerTweet)
+        Return ListOfLists
+    End Function
+    Private Function GetTweetLineLength(_person As Person) As Integer
+        Return _person.Name.Length + _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 3, 1)
+    End Function
+    Private Function GetHeading(_typeNode As String) As String
+        Dim _header As String = ""
+        If _typeNode.StartsWith("A") Then
+            _header = ANNIV_HDR
+        End If
+        If _typeNode.StartsWith("B") Then
+            _header = BIRTHDAY_HDR
+        End If
+        Return _header
+    End Function
+    Private Function CreateNewImageTabPage(_index As Integer, _tabTitle As String) As TabPage
+        Dim newTabpage As New TabPage
+        Dim tabTitle As String = _tabTitle & CStr(_index)
+        With newTabpage
+            .Text = tabTitle
+            .TabIndex = _index
+            '   .Location = New System.Drawing.Point(4, 22)
+            .Name = "ImageTabPage_" & CStr(_index)
+            .Padding = New System.Windows.Forms.Padding(3)
+            .Size = New System.Drawing.Size(412, 426)
+            .Controls.Add(NewSplitContainer(newTabpage.TabIndex))
+
+        End With
+        Return newTabpage
+    End Function
+    Private Function NewSplitContainer(_index As Integer) As SplitContainer
+        Dim _splitContainer As New SplitContainer With {
+        .Location = New System.Drawing.Point(9, 6),
+            .Size = New System.Drawing.Size(817, 471),
+            .SplitterDistance = 384
+        }
+        _splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        _splitContainer.Location = New System.Drawing.Point(9, 6)
+        _splitContainer.Name = "SplitContainer" & CStr(_index)
+
+        _splitContainer.Panel1.Controls.Add(NewNumericUpDown(_index))
+        _splitContainer.Panel1.Controls.Add(NewLabel(_index, 3, 430, "Width", "Label1"))
+        _splitContainer.Panel1.Controls.Add(NewPictureBox(_index))
+
+        _splitContainer.Panel2.Controls.Add(NewRichTextBox(_index))
+        Return _splitContainer
+    End Function
     Private Function NewLabel(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _labelNameBase As String) As Label
         Dim _label1 As New Label
         With _label1
@@ -264,6 +339,21 @@ Public Class FrmTwitterImage
         AddHandler _nud.ValueChanged, AddressOf Horizontal_ValueChanged
         Return _nud
     End Function
+    Private Function NewRichTextBox(_index As String) As RichTextBox
+        Dim _newRtb As New System.Windows.Forms.RichTextBox()
+        With _newRtb
+            .Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+           Or System.Windows.Forms.AnchorStyles.Left) _
+           Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            .Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .Location = New System.Drawing.Point(3, 3)
+            .Name = RTB_CONTROL_NAME & _index
+            .Size = New System.Drawing.Size(415, 447)
+            .Text = ""
+            .ContextMenuStrip = ContextMenuStrip1
+        End With
+        Return _newRtb
+    End Function
     Private Function GetPictureBoxFromPage(_tabpage As TabPage) As PictureBox
         Dim _index As Integer = _tabpage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
@@ -284,48 +374,7 @@ Public Class FrmTwitterImage
         End If
         Return _control
     End Function
-    Private Sub DisplayStatus(_text As String, Optional _isAppend As Boolean = False)
-        If _isAppend Then
-            LblStatus.Text &= _text
-        Else
-            LblStatus.Text = _text
-        End If
-        StatusStrip1.Refresh()
-    End Sub
-
-    Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        GetFormPos(Me, My.Settings.twitterimagepos)
-    End Sub
-
-    Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        My.Settings.twitterimagepos = SetFormPos(Me)
-        My.Settings.Save()
-    End Sub
-    Private Sub BtnCopyselected_Click(sender As Object, e As EventArgs) Handles BtnCopyselected.Click, CopyToolStripMenuItem.Click
-        Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
-        My.Computer.Clipboard.Clear()
-        If _rtb IsNot Nothing AndAlso Not String.IsNullOrEmpty(_rtb.SelectedText) Then
-            My.Computer.Clipboard.SetText(_rtb.SelectedText)
-        End If
-    End Sub
-
-    Private Function NewRichTextBox(_index As String) As RichTextBox
-        Dim _newRtb As New System.Windows.Forms.RichTextBox()
-        With _newRtb
-            .Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-           Or System.Windows.Forms.AnchorStyles.Left) _
-           Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            .Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            .Location = New System.Drawing.Point(3, 3)
-            .Name = RTB_CONTROL_NAME & _index
-            .Size = New System.Drawing.Size(415, 447)
-            .Text = ""
-            .ContextMenuStrip = ContextMenuStrip1
-        End With
-        Return _newRtb
-    End Function
-
-    Public Function GetRichTextBoxFromPage(_tabPage As TabPage) As RichTextBox
+    Private Function GetRichTextBoxFromPage(_tabPage As TabPage) As RichTextBox
         Dim _rtb As New RichTextBox
         Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabPage)
@@ -335,8 +384,7 @@ Public Class FrmTwitterImage
         End If
         Return _rtb
     End Function
-
-    Public Function GetSplitContainerFromPage(_tabPage As TabPage) As SplitContainer
+    Private Function GetSplitContainerFromPage(_tabPage As TabPage) As SplitContainer
         Dim _sc As New SplitContainer
         Dim _tabName As String = SC_BASENAME & CStr(_tabPage.TabIndex)
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
@@ -346,69 +394,5 @@ Public Class FrmTwitterImage
         Return _sc
     End Function
 
-    Private Sub BtnCopyAll_Click(sender As Object, e As EventArgs) Handles BtnCopyAll.Click
-        Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
-        My.Computer.Clipboard.Clear()
-        If _rtb IsNot Nothing Then
-            My.Computer.Clipboard.SetText(_rtb.Text)
-        End If
-    End Sub
-
-    Private Sub CopyAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyAllToolStripMenuItem.Click
-        Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
-        My.Computer.Clipboard.Clear()
-        If _rtb IsNot Nothing Then
-            My.Computer.Clipboard.SetText(_rtb.Text)
-        End If
-    End Sub
-    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer) As List(Of List(Of Person))
-        Dim _totalLength As Integer = 0
-        Dim availableLength As Integer = TWEET_SIZE - _headerLength
-        Debug.Print(availableLength)
-        For Each _person As Person In oPersonlist
-            Dim _tweetLineLength As Integer = GetTweetLineLength(_person)
-            _totalLength += _tweetLineLength
-            Debug.Print(CStr(_person.Name & " " & (_person.Social.TwitterHandle) & CStr(_totalLength)))
-        Next
-        Dim _numberOfTweets As Integer = Math.Ceiling(_totalLength / availableLength)
-        Debug.Print("Number of tweets " & CStr(_numberOfTweets))
-        Dim _numberOfNamesPerTweet As Integer = If(NudPersonsPerTweet.Value > 0, NudPersonsPerTweet.Value, Math.Ceiling(oPersonlist.Count / _numberOfTweets))
-        Dim ListOfLists As List(Of List(Of Person)) = BuildLists(oPersonlist, availableLength, _numberOfNamesPerTweet)
-        Return ListOfLists
-    End Function
-
-    Private Function GetTweetLineLength(_person As Person) As Integer
-        Return _person.Name.Length + _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 3, 1)
-    End Function
-
-    Private Function BuildLists(oPersonlist As List(Of Person), availableLength As Integer, _numberOfNamesPerTweet As Integer) As List(Of List(Of Person))
-        Dim ListOfLists As New List(Of List(Of Person))
-        Dim _ct As Integer = 0
-        Dim _tweetSize As Integer = 0
-        Debug.Print("-------------------------------")
-        Do Until _ct = oPersonlist.Count
-            Dim _tweetList As New List(Of Person)
-            Dim _tweetCt As Integer = 0
-            Do Until _ct = oPersonlist.Count OrElse _tweetCt = _numberOfNamesPerTweet
-                Dim _person As Person = oPersonlist(_ct)
-                _tweetSize += GetTweetLineLength(_person)
-                _tweetList.Add(_person)
-                Debug.Print(_person.Name & " " & CStr(_tweetSize))
-                _tweetCt += 1
-                _ct += 1
-            Loop
-            ListOfLists.Add(_tweetList)
-            TxtStats.Text &= CStr(_tweetSize) & vbCrLf
-            If _tweetSize > availableLength Then
-                lblError.Visible = True
-                TxtStats.Visible = True
-            End If
-            Debug.Print("-------------------------------" & CStr(_tweetSize))
-            _tweetSize = 0
-        Loop
-        Return ListOfLists
-    End Function
-
 #End Region
-
 End Class

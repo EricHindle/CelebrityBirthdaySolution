@@ -48,6 +48,8 @@ Partial Class frmTwitterOutput
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.BtnRewrite = New System.Windows.Forms.Button()
         Me.BtnCopyselected = New System.Windows.Forms.Button()
+        Me.cboDay = New System.Windows.Forms.ComboBox()
+        Me.cboMonth = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -59,7 +61,7 @@ Partial Class frmTwitterOutput
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(32, 32)
+        Me.Label1.Location = New System.Drawing.Point(394, 18)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(42, 18)
@@ -69,7 +71,7 @@ Partial Class frmTwitterOutput
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(249, 32)
+        Me.Label2.Location = New System.Drawing.Point(611, 18)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(26, 18)
         Me.Label2.TabIndex = 10
@@ -202,7 +204,7 @@ Partial Class frmTwitterOutput
         '
         Me.dtpFrom.CustomFormat = "dd MMMM"
         Me.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFrom.Location = New System.Drawing.Point(96, 26)
+        Me.dtpFrom.Location = New System.Drawing.Point(458, 12)
         Me.dtpFrom.MaxDate = New Date(2099, 12, 31, 0, 0, 0, 0)
         Me.dtpFrom.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtpFrom.Name = "dtpFrom"
@@ -214,7 +216,7 @@ Partial Class frmTwitterOutput
         '
         Me.dtpTo.CustomFormat = "dd MMMM"
         Me.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpTo.Location = New System.Drawing.Point(291, 26)
+        Me.dtpTo.Location = New System.Drawing.Point(653, 12)
         Me.dtpTo.MaxDate = New Date(2099, 12, 31, 0, 0, 0, 0)
         Me.dtpTo.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.dtpTo.Name = "dtpTo"
@@ -315,12 +317,34 @@ Partial Class frmTwitterOutput
         Me.BtnCopyselected.Text = "Copy Selected"
         Me.BtnCopyselected.UseVisualStyleBackColor = True
         '
+        'cboDay
+        '
+        Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboDay.FormattingEnabled = True
+        Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
+        Me.cboDay.Location = New System.Drawing.Point(40, 12)
+        Me.cboDay.Name = "cboDay"
+        Me.cboDay.Size = New System.Drawing.Size(95, 27)
+        Me.cboDay.TabIndex = 17
+        '
+        'cboMonth
+        '
+        Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboMonth.FormattingEnabled = True
+        Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
+        Me.cboMonth.Location = New System.Drawing.Point(143, 12)
+        Me.cboMonth.Name = "cboMonth"
+        Me.cboMonth.Size = New System.Drawing.Size(240, 27)
+        Me.cboMonth.TabIndex = 18
+        '
         'frmTwitterOutput
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(977, 562)
+        Me.Controls.Add(Me.cboDay)
+        Me.Controls.Add(Me.cboMonth)
         Me.Controls.Add(Me.BtnCopyselected)
         Me.Controls.Add(Me.TcFileTabs)
         Me.Controls.Add(Me.StatusStrip1)
@@ -378,4 +402,6 @@ Partial Class frmTwitterOutput
     Friend WithEvents CopyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblStatus As ToolStripStatusLabel
     Friend WithEvents BtnCopyselected As Button
+    Friend WithEvents cboDay As ComboBox
+    Friend WithEvents cboMonth As ComboBox
 End Class

@@ -173,7 +173,9 @@
     Public Function UpdateImage(oId As Integer, imgFileName As String, imgFileType As String, loadMonth As String, loadYear As String) As Integer
         Return oImgTa.UpdateImage(imgFileName, imgFileType, loadYear, loadMonth, oId)
     End Function
-
+    Public Function DeleteImage(oId As Integer) As Integer
+        Return oImgTa.DeleteImage(oId)
+    End Function
 #End Region
 #Region "social media"
     Public Function GetSocialMedia(ByVal _id As Integer) As SocialMedia
@@ -205,5 +207,16 @@
         End If
         Return loadDate
     End Function
+    Public Function GetDatesRow(oDay As Integer, oMonth As Integer) As CelebrityBirthday.CelebrityBirthdayDataSet.DatesRow
+        Dim iCt As Integer = oDatesTa.FillByDate(oDatesTable, oDay, oMonth)
+        Dim oDrow As CelebrityBirthdayDataSet.DatesRow = Nothing
+        If iCt = 1 Then
+            oDrow = oDatesTable.Rows(0)
+        End If
+        Return oDrow
+    End Function
+
+
+
 #End Region
 End Module

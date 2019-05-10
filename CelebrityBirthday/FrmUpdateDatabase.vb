@@ -7,7 +7,6 @@ Public Class FrmUpdateDatabase
     Private personTable As List(Of Person)
     Private bLoadingPerson As Boolean = False
     Private _search As FrmBrowser = Nothing
-    Private _twitter As frmTwitterOutput = Nothing
     Private _browser As FrmBrowser
     Private findPersonInList As Integer = -1
 #End Region
@@ -30,22 +29,21 @@ Public Class FrmUpdateDatabase
 
     End Sub
 
-    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles txtDesc.DragDrop,
-                                                                                                                           txtDied.DragDrop,
-                                                                                                                           txtName.DragDrop,
-                                                                                                                           txtYear.DragDrop,
-                                                                                                                           txtForename.DragDrop,
-                                                                                                                           txtSurname.DragDrop,
-                                                                                                                           txtBirthName.DragDrop,
-                                                                                                                           txtBirthPlace.DragDrop,
-                                                                                                                           txtShortDesc.DragDrop,
-                                                                                                                          txtTwitter.DragDrop
+    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles txtDesc.DragDrop,
+                                                                                            txtDied.DragDrop,
+                                                                                            txtName.DragDrop,
+                                                                                            txtYear.DragDrop,
+                                                                                            txtForename.DragDrop,
+                                                                                            txtSurname.DragDrop,
+                                                                                            txtBirthName.DragDrop,
+                                                                                            txtBirthPlace.DragDrop,
+                                                                                            txtShortDesc.DragDrop,
+                                                                                            txtTwitter.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             Dim item As String = e.Data.GetData(DataFormats.StringFormat)
             Dim textlen As Integer = oBox.TextLength
             Dim startpos As Integer = oBox.SelectionStart
-
             If textlen = 0 Then
                 oBox.Text = item.Trim
             Else
@@ -59,13 +57,7 @@ Public Class FrmUpdateDatabase
                     End If
                 End If
             End If
-
-
-
-
-
         End If
-
     End Sub
     Private Sub TextBox_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles txtDesc.DragOver,
                                                                                                                             txtDied.DragOver,
@@ -81,7 +73,6 @@ Public Class FrmUpdateDatabase
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             oBox.Select(TextBoxCursorPos(oBox, e.X, e.Y), 0)
-
         End If
     End Sub
     Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles txtDesc.DragEnter,
@@ -143,7 +134,6 @@ Public Class FrmUpdateDatabase
                         Exit For
                     End If
                 Next
-
                 If Not bInserted Then
                     p = personTable.Count
                     personTable.Add(newPerson)
@@ -154,26 +144,25 @@ Public Class FrmUpdateDatabase
                 MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
                 lblStatus.Text = ex.Message
             End Try
-
         Else
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
         End If
     End Sub
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
-        Dim oPerson As Person = Nothing
+        Dim oPerson As Person
         If lbPeople.SelectedIndex >= 0 Then
             oPerson = personTable(lbPeople.SelectedIndex)
             If oPerson.Id > 0 Then
                 DeleteTwitterHandle(oPerson.Id)
+                DeleteImage(oPerson.Id)
                 DeletePerson(oPerson.Id)
             End If
-
             personTable.RemoveAt(lbPeople.SelectedIndex)
         End If
         DisplayPersonList()
     End Sub
     Private Sub BtnUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUp.Click
-        Dim ix As Integer = -1
+        Dim ix As Integer
         If lbPeople.SelectedIndex > 0 Then
             ix = lbPeople.SelectedIndex
             Dim prevPerson As New Person(personTable(ix - 1))
@@ -189,11 +178,10 @@ Public Class FrmUpdateDatabase
                 DisplayPersonList()
                 lbPeople.SelectedIndex = ix - 1
             End If
-
         End If
     End Sub
     Private Sub BtnDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDown.Click
-        Dim ix As Integer = -1
+        Dim ix As Integer
         If lbPeople.SelectedIndex >= 0 And lbPeople.SelectedIndex < lbPeople.Items.Count - 1 Then
             ix = lbPeople.SelectedIndex
             Dim nextPerson As New Person(personTable(ix + 1))
@@ -209,7 +197,6 @@ Public Class FrmUpdateDatabase
                 DisplayPersonList()
                 lbPeople.SelectedIndex = ix + 1
             End If
-
         End If
     End Sub
     Private Sub BtnUpdateAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateAll.Click
@@ -217,70 +204,33 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub BtnLoadTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoadTable.Click, cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         lblStatus.Text = ""
-        Dim resp As MsgBoxResult = MsgBoxResult.No
         If CheckForChanges(personTable) Then
             If MsgBox("Save unsaved changes now?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Unsaved Changes") = MsgBoxResult.Yes Then
                 UpdateAll()
             End If
         End If
-
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
             lblStatus.Text = "Loading Table From Database"
-            Me.Refresh()
+            StatusStrip1.Refresh()
             personTable = New List(Of Person)
             lbPeople.Items.Clear()
-            Dim sYear As String = ""
-            Dim sMonth As String = ""
-            Dim sDay As String = ""
-
-            Dim oDta As New CelebrityBirthdayDataSetTableAdapters.DatesTableAdapter
-            Dim oDtable As New CelebrityBirthdayDataSet.DatesDataTable
-
-            Dim iCt As Integer = oDta.FillByDate(oDtable, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-
-            Dim bAmended As Boolean = False
-            If iCt = 1 Then
-                Dim oDrow As CelebrityBirthdayDataSet.DatesRow = oDtable.Rows(0)
-                If oDrow.IsuploadyearNull = False Then
-                    sYear = oDrow.uploadyear
-                End If
-                If oDrow.IsuploadmonthNull = False Then
-                    sMonth = oDrow.uploadmonth
-                End If
-                If oDrow.IsuploaddayNull = False Then
-                    sDay = oDrow.uploadday
-                End If
-                bAmended = oDrow.amended
+            Dim oDrow As CelebrityBirthdayDataSet.DatesRow = GetDatesRow(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            If oDrow IsNot Nothing Then
+                cbDateAmend.Checked = True
+                txtLoadYr.Text = If(oDrow.IsuploadyearNull, "", oDrow.uploadyear)
+                txtLoadMth.Text = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
+                txtLoadDay.Text = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
             End If
-
-            txtLoadMth.Text = sMonth
-            txtLoadYr.Text = sYear
-            txtLoadDay.Text = sDay
-            cbDateAmend.Checked = bAmended
-            Dim oTa As New CelebrityBirthdayDataSetTableAdapters.PersonTableAdapter
-            Dim oTable As New CelebrityBirthdayDataSet.PersonDataTable
             Dim selectedIndex As Integer = -1
-            oTa.FillByMonthDay(oTable, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
-            For Each oRow As CelebrityBirthdayDataSet.PersonRow In oTable.Rows
-                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-
-                personTable.Add(oPerson)
-                If findPersonInList > -1 AndAlso findPersonInList = oPerson.Id Then
-                    selectedIndex = personTable.Count - 1
+            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            For Each operson As Person In personTable
+                lbPeople.Items.Add(operson.BirthYear & " " & operson.Name)
+                If findPersonInList > -1 AndAlso findPersonInList = operson.Id Then
+                    selectedIndex = lbPeople.Items.Count - 1
                 End If
-                lbPeople.Items.Add(oPerson.BirthYear & " " & oPerson.Name)
             Next
-            lbPeople.SelectedIndex = selectedindex
+            lbPeople.SelectedIndex = selectedIndex
             findPersonInList = -1
-            oDta.Dispose()
-            oDtable.Dispose()
-            oDta = Nothing
-            oDtable = Nothing
-
-            oTable.Dispose()
-            oTa.Dispose()
-            oTable = Nothing
-            oTa = Nothing
             lblStatus.Text += " - Complete"
         End If
     End Sub
@@ -317,7 +267,7 @@ Public Class FrmUpdateDatabase
         lblStatus.Text = ""
         If lbPeople.SelectedIndex >= 0 Then
             lblStatus.Text = "Updating Database"
-            Me.Refresh()
+            StatusStrip1.Refresh()
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             If oPerson.Id < 0 Then
                 Dim newId As Integer = InsertPerson(oPerson)
@@ -365,9 +315,6 @@ Public Class FrmUpdateDatabase
         If _search IsNot Nothing AndAlso Not _search.IsDisposed Then
             _search.Close()
         End If
-        If _twitter IsNot Nothing AndAlso Not _twitter.IsDisposed Then
-            _twitter.Close()
-        End If
         If _browser IsNot Nothing AndAlso Not _browser.IsDisposed Then
             _browser.Close()
         End If
@@ -397,16 +344,14 @@ Public Class FrmUpdateDatabase
         txtForename.Text = txtName.Text.Replace(txtSurname.Text, "").Trim
     End Sub
     Private Sub BtnCreateFullName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateFullName.Click
-        txtName.Text = If(String.IsNullOrEmpty(txtForename.Text), "", txtForename.Text.Trim & " ") & txtSurname.Text.Trim
+        txtName.Text = MakeFullName(txtForename.Text, txtSurname.Text)
     End Sub
     Private Sub BtnClearList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearList.Click
-        Dim resp As MsgBoxResult = MsgBoxResult.No
         If CheckForChanges(personTable) Then
             If MsgBox("Save unsaved changes now?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Unsaved Changes") = MsgBoxResult.Yes Then
                 UpdateAll()
             End If
         End If
-
         personTable = New List(Of Person)
         lbPeople.Items.Clear()
         cboDay.SelectedIndex = -1
@@ -592,23 +537,16 @@ Public Class FrmUpdateDatabase
         Next
     End Sub
     Private Sub Splitname(ByVal sName As String, ByRef sForename As String, ByRef sSurname As String)
-        Dim sWords As String() = Split(sName, " ")
-        If sWords.Length > 0 Then
-            If sWords.Length = 1 Then
-                sSurname = sWords(0)
-                sForename = ""
-            Else
-                sSurname = sWords(sWords.Length - 1)
-                ReDim Preserve sWords(sWords.Length - 2)
-                sForename = Join(sWords, " ")
-            End If
+        Dim sWords As List(Of String) = Split(sName, " ").ToList
+        If sWords.Count > 0 Then
+            sSurname = sWords(sWords.Count - 1)
+            sWords.RemoveAt(sWords.Count - 1)
+            sForename = String.Join(" ", sWords)
         End If
     End Sub
     Private Sub UpdateAll()
         lblStatus.Text = "Updating Database"
-        Me.Refresh()
-        Dim oTa As New CelebrityBirthdayDataSetTableAdapters.PersonTableAdapter
-        Dim oTable As New CelebrityBirthdayDataSet.PersonDataTable
+        StatusStrip1.Refresh()
         Dim lastYear As String = ""
         Dim iSeq As Integer = 0
         For Each oPerson As Person In personTable
@@ -619,26 +557,16 @@ Public Class FrmUpdateDatabase
                 lastYear = oPerson.BirthYear
             End If
             If oPerson.Id < 0 Then
-                Dim newId As Integer = oTa.InsertPerson(oPerson.ForeName, oPerson.Surname, CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay, oPerson.DeathYear,
-                oPerson.ShortDesc, oPerson.Description, iSeq, Today.Date, oPerson.BirthPlace, oPerson.BirthName, oPerson.DeathMonth, oPerson.DeathDay)
+                Dim newId As Integer = InsertPerson(oPerson)
                 oPerson.Id = newId
-                UpdateSocialMedia(oPerson)
             Else
-                oTa.UpdatePerson(oPerson.ForeName, oPerson.Surname, CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay, oPerson.DeathYear,
-                 oPerson.ShortDesc, oPerson.Description, iSeq, oPerson.BirthPlace, oPerson.BirthName, oPerson.DeathMonth, oPerson.DeathDay, oPerson.Id)
-                If cbNoTweet.Checked Then
-                    UpdateSocialMedia(oPerson)
-                End If
+                UpdatePerson(oPerson)
             End If
             oPerson.UnsavedChanges = False
         Next
         If cbDateAmend.Checked Then
             UpdateDate(txtLoadYr.Text, txtLoadMth.Text, cbDateAmend.Checked, txtLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
         End If
-        oTable.Dispose()
-        oTa.Dispose()
-        oTable = Nothing
-        oTa = Nothing
         lblStatus.Text += " - Complete"
     End Sub
     Private Sub TidyAndFix()
@@ -728,22 +656,20 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub LoadScreenFromPerson(oPerson As Person)
         bLoadingPerson = True
-
         lblID.Text = oPerson.Id
         txtForename.Text = oPerson.ForeName
         txtSurname.Text = oPerson.Surname
         txtDesc.Text = oPerson.Description
-            txtShortDesc.Text = oPerson.ShortDesc
-            txtYear.Text = CStr(oPerson.BirthYear)
-            txtDied.Text = CStr(oPerson.DeathYear)
-            txtDthDay.Text = oPerson.DeathDay
-            txtDthMth.Text = oPerson.DeathMonth
+        txtShortDesc.Text = oPerson.ShortDesc
+        txtYear.Text = CStr(oPerson.BirthYear)
+        txtDied.Text = CStr(oPerson.DeathYear)
+        txtDthDay.Text = CStr(oPerson.DeathDay)
+        txtDthMth.Text = CStr(oPerson.DeathMonth)
         txtBirthName.Text = oPerson.BirthName
         txtBirthPlace.Text = oPerson.BirthPlace
-        txtName.Text = Trim(oPerson.ForeName & " " & oPerson.Surname)
+        txtName.Text = MakeFullName(oPerson.ForeName, oPerson.Surname)
         Dim sYear As String = txtLoadYr.Text
             Dim sMth As String = txtLoadMth.Text
-        '    GetAlternateImageDate(oPerson.Id)
         If oPerson.Image IsNot Nothing Then
             PictureBox1.ImageLocation = Path.Combine(My.Settings.ImgFolder, oPerson.Image.ImageFileName & oPerson.Image.ImageFileType)
         End If
@@ -755,6 +681,9 @@ Public Class FrmUpdateDatabase
     End Sub
 #End Region
 #Region "functions"
+    Private Function MakeFullName(pForename As String, pSurname As String) As String
+        Return If(String.IsNullOrEmpty(pForename), "", pForename.Trim & " ") & pSurname.Trim
+    End Function
     Private Function GetNickname(ByRef sName As String) As String
         Dim names As String() = Split(sName, """")
         Dim sNickName As String = ""
@@ -773,11 +702,11 @@ Public Class FrmUpdateDatabase
         Loop
         Return newText
     End Function
-    Private Function ParseStringWithBrackets(ByRef _string As String, Optional ByRef _start As Integer = 0, Optional ByVal _openChar As Char = "("c, Optional ByVal _endChar As Char = ")"c) As List(Of String)
+    Private Function ParseStringWithBrackets(ByRef _string As String, Optional ByRef _start As Integer = 0, Optional ByVal _openChar As Char = "("c) As List(Of String)
         Dim _return As New List(Of String)
         Dim _pre As String = _string
-        Dim _inner As String = ""
-        Dim _post As String = ""
+        Dim _inner As String
+        Dim _post As String
         Dim x As Integer = 0
         Dim _firstOpen As Integer = _string.IndexOf(_openChar, _start)
         If _firstOpen < 0 Then
@@ -789,7 +718,7 @@ Public Class FrmUpdateDatabase
         Loop
         Dim _closefound As Boolean = False
         Dim _nextclose As Integer = -1
-        Dim _nextopen As Integer = -1
+        Dim _nextopen As Integer
 
         Do Until x >= _string.Length Or _closefound
             _nextclose = _string.IndexOf(")"c, x + 1)
@@ -835,7 +764,7 @@ Public Class FrmUpdateDatabase
         Dim isextracted As Boolean = False
         Dim isNamePart As Boolean = False
         Dim isPlacePart As Boolean = False
-        Dim isDatePart As Boolean = False
+        Dim isDatePart As Boolean
         Dim _date As String = ""
         Dim _name As String = ""
         Dim _place As String = ""

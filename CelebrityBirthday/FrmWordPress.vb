@@ -1,9 +1,7 @@
 ﻿Imports System.Text
 
 Public Class FrmWordPress
-    Dim personTable As List(Of Person)
-    Private urlYear As String = "2013"
-    Private urlMonth As String = "03"
+#Region "constants"
     Private Const A_TAG_START As String = "<a href=""http://celebritybirthday.files.wordpress.com/"
     Private Const A_TAG_END As String = """>"
     Private Const IMG_TAG_START As String = "<img title="""
@@ -15,13 +13,44 @@ Public Class FrmWordPress
     Private Const EXCERPT_DIV As String = "<div style=""width:200px;float:left;font-family:arial;font-size:12px;"">"
     Private Const EXCERPT_DIV_END As String = "</div>"
     Private Const BREAK As String = "<br>"
+#End Region
+#Region "variables"
+    Dim personTable As List(Of Person)
+    Private urlYear As String = "2013"
+    Private urlMonth As String = "03"
+#End Region
+#Region "form control handlers"
+    Private Sub BtnCopyFull_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyFull.Click
+        My.Computer.Clipboard.SetText(txtCurrentText.Text)
+    End Sub
+    Private Sub BtnCopyExcerpt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyExcerpt.Click
+        My.Computer.Clipboard.SetText(txtCurrentExcerpt.Text)
+    End Sub
+    Private Sub BtnLoadTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
+        If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
+            Dim _wpDate As Date? = GetWordPressLoadDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            txtLoadMth.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "MM"))
+            txtLoadYr.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
+            personTable = New List(Of Person)
+            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            GenFullText()
+            GenExcerpt()
+            WebBrowser1.DocumentText = TextToHtml(txtCurrentText.Text)
+        End If
+    End Sub
+    Private Sub FrmWordPress_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ClearForm()
+    End Sub
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
+        Me.Close()
+    End Sub
+#End Region
+#Region "subroutines"
     Private Sub GenFullText()
         Dim lastYear As String = ""
         Dim newText As New StringBuilder()
         For Each oPerson As Person In personTable
-            SetImageDate(oPerson.Id)
-
-
+            setImageDate(oPerson.Id)
             If oPerson.BirthYear <> lastYear Then
                 newText.Append("<h3>").Append(oPerson.BirthYear).Append("</h3>").Append(vbCrLf)
                 lastYear = oPerson.BirthYear
@@ -86,19 +115,6 @@ Public Class FrmWordPress
         Dim listSize As Integer
         Dim pList As New List(Of Person)
         pList.AddRange(personTable)
-        'If lbPeople.Items.Count = 0 Then
-        '    bOK = False
-        'Else
-        '    listRem = lbPeople.Items.Count Mod 3
-        '    listSize = Int(lbPeople.Items.Count / 3)
-        '    If listRem > 0 Then
-        '        If listRem = 1 Then
-        '            pList.Insert((listSize * 2) + 1, New Person)
-        '        End If
-        '        pList.Add(New Person)
-        '        listSize += 1
-        '    End If
-        'End If
         If bOK Then
             Dim newText As New StringBuilder(EXCERPT_START)
             newText.Append(vbCrLf)
@@ -121,34 +137,6 @@ Public Class FrmWordPress
             txtCurrentExcerpt.Text = newText.ToString
         End If
     End Sub
-
-    Private Sub BtnCopyFull_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyFull.Click
-        My.Computer.Clipboard.SetText(txtCurrentText.Text)
-
-    End Sub
-
-    Private Sub BtnCopyExcerpt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyExcerpt.Click
-        My.Computer.Clipboard.SetText(txtCurrentExcerpt.Text)
-
-    End Sub
-
-
-    Private Sub BtnLoadTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
-        If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
-            Dim _wpDate As Date? = GetWordPressLoadDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-            txtLoadMth.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "MM"))
-            txtLoadYr.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
-            personTable = New List(Of Person)
-            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-            GenFullText()
-            GenExcerpt()
-            WebBrowser1.DocumentText = txtCurrentText.Text
-        End If
-    End Sub
-
-    Private Sub FrmWordPress_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ClearForm
-    End Sub
     Private Sub ClearForm()
         txtCurrentExcerpt.Text = ""
         txtCurrentText.Text = ""
@@ -156,9 +144,17 @@ Public Class FrmWordPress
         cboMonth.SelectedIndex = -1
         personTable = New List(Of Person)
     End Sub
-    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
-    End Sub
-
-
+    Private Function TextToHtml(pText As String) As String
+        Dim HtmlString As New StringBuilder
+        Dim _html As String = HtmlString.Append("<html>") _
+            .Append("<font ") _
+            .Append("Size = '2' ") _
+            .Append("face='Verdana' ") _
+            .Append(">") _
+            .Append(pText) _
+            .Append("</font>") _
+            .Append("</html>").ToString
+        Return _html
+    End Function
+#End Region
 End Class

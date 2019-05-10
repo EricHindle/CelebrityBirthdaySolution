@@ -57,44 +57,45 @@ Partial Class SplashScreen1
         '
         'DetailsLayoutPanel
         '
-        Me.DetailsLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DetailsLayoutPanel.BackColor = System.Drawing.Color.Transparent
         Me.DetailsLayoutPanel.ColumnCount = 1
         Me.DetailsLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 247.0!))
         Me.DetailsLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142.0!))
-        Me.DetailsLayoutPanel.Controls.Add(Me.Version, 0, 0)
         Me.DetailsLayoutPanel.Controls.Add(Me.Copyright, 0, 1)
-        Me.DetailsLayoutPanel.Font = New System.Drawing.Font("Papyrus", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DetailsLayoutPanel.Location = New System.Drawing.Point(263, 221)
+        Me.DetailsLayoutPanel.Controls.Add(Me.Version, 0, 0)
+        Me.DetailsLayoutPanel.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DetailsLayoutPanel.Location = New System.Drawing.Point(246, 221)
         Me.DetailsLayoutPanel.Name = "DetailsLayoutPanel"
         Me.DetailsLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.0!))
         Me.DetailsLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.0!))
-        Me.DetailsLayoutPanel.Size = New System.Drawing.Size(230, 79)
+        Me.DetailsLayoutPanel.Size = New System.Drawing.Size(241, 79)
         Me.DetailsLayoutPanel.TabIndex = 1
         '
         'Version
         '
-        Me.Version.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Version.BackColor = System.Drawing.Color.Transparent
-        Me.Version.Font = New System.Drawing.Font("Papyrus", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Version.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Version.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Version.Location = New System.Drawing.Point(16, 5)
+        Me.Version.Location = New System.Drawing.Point(3, 0)
         Me.Version.Name = "Version"
-        Me.Version.Size = New System.Drawing.Size(214, 28)
+        Me.Version.Size = New System.Drawing.Size(241, 39)
         Me.Version.TabIndex = 1
         Me.Version.Text = "Version {0}.{1}.{2}.{3}"
+        Me.Version.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Copyright
         '
-        Me.Copyright.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Copyright.BackColor = System.Drawing.Color.Transparent
-        Me.Copyright.Font = New System.Drawing.Font("Papyrus", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Copyright.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Copyright.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Copyright.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Copyright.Location = New System.Drawing.Point(18, 42)
+        Me.Copyright.Location = New System.Drawing.Point(3, 39)
         Me.Copyright.Name = "Copyright"
-        Me.Copyright.Size = New System.Drawing.Size(210, 34)
+        Me.Copyright.Size = New System.Drawing.Size(241, 40)
         Me.Copyright.TabIndex = 2
         Me.Copyright.Text = "Copyright"
+        Me.Copyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'ApplicationTitle
         '

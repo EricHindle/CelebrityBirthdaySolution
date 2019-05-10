@@ -197,6 +197,10 @@ Module modCbday
         Return My.Settings.TwitterSearchUrl & oText.Replace(" ", "+")
     End Function
 
+    Public Function GetWikiSearchString(oText As String) As String
+        Return My.Settings.wikiSearchUrl & oText.Replace(" ", "+")
+    End Function
+
 
     Public Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
         Dim _rtb As New RichTextBox

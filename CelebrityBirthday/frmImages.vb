@@ -2,6 +2,13 @@
 Imports System.Text
 
 Public Class FrmImages
+#Region "constants"
+    Private Const NO_LOAD_DATE As String = "No load date available"
+    Private Const ID_NOT_FOUND As String = "Id not found"
+    Private Const SEP As String = "/"
+#End Region
+
+
 #Region "variables"
     Private bLoadingPerson As Boolean = False
     Private personTable As ArrayList
@@ -14,8 +21,8 @@ Public Class FrmImages
     Private Sub FrmImages_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.imgformpos)
         ClearDetails()
-        txtLoadYr.Text = ""
-        txtLoadMth.Text = ""
+        txtLoadYr.Text = String.Empty
+        txtLoadMth.Text = String.Empty
         cbImgType.SelectedIndex = 0
         bLoadingPerson = False
     End Sub
@@ -27,7 +34,7 @@ Public Class FrmImages
         End Using
     End Sub
     Private Sub BirthDate_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
-        lblStatus.Text = ""
+        lblStatus.Text = String.Empty
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
             lblStatus.Text = "Loading Table From Database"
             Me.Refresh()
@@ -41,11 +48,11 @@ Public Class FrmImages
             If loadDate IsNot Nothing Then
                 TxtWpLoadMth.Text = Format(loadDate.Value, "MM")
                 TxtWpLoadYear.Text = Format(loadDate.Value, "yyyy")
-                lblWpDateMsg.Text = ""
+                lblWpDateMsg.Text = String.Empty
             Else
-                TxtWpLoadMth.Text = ""
-                TxtWpLoadYear.Text = ""
-                lblWpDateMsg.Text = "No load date available"
+                TxtWpLoadMth.Text = String.Empty
+                TxtWpLoadYear.Text = String.Empty
+                lblWpDateMsg.Text = NO_LOAD_DATE
             End If
             lblStatus.Text += " - Complete"
         End If
@@ -77,7 +84,7 @@ Public Class FrmImages
         bLoadingPeople = False
     End Sub
     Private Sub LbPeople_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBoxPeople.SelectedIndexChanged
-        lblStatus.Text = ""
+        lblStatus.Text = String.Empty
         bLoadingPerson = True
         If ListBoxPeople.SelectedIndex >= 0 Then
             Dim oPerson As Person = personTable(ListBoxPeople.SelectedIndex)
@@ -116,24 +123,45 @@ Public Class FrmImages
         End If
         LoadScreenFromPerson(currentPerson)
     End Sub
+    Private Sub BtnUrlCopy_Click(sender As Object, e As EventArgs) Handles BtnUrlCopy.Click
+        Clipboard.SetText(TxtImageUrl.Text)
+    End Sub
+    Private Sub BtnFilenameCopy_Click(sender As Object, e As EventArgs) Handles BtnFilenameCopy.Click
+        Clipboard.SetText(TxtImageFilename.Text)
+    End Sub
+    Private Sub BtnWpImageRefresh_Click(sender As Object, e As EventArgs) Handles BtnWpImageRefresh.Click
+        PictureBox1.ImageLocation = TxtImageUrl.Text
+    End Sub
+    Private Sub BtnFileImageRefresh_Click(sender As Object, e As EventArgs) Handles BtnFileImageRefresh.Click
+        PictureBox2.ImageLocation = TxtImageFilename.Text
+    End Sub
+    Private Sub BtnFileImgGen_Click(sender As Object, e As EventArgs) Handles BtnFileImgGen.Click
+        TxtImageFilename.Text = Path.Combine(My.Settings.ImgFolder, txtImgName.Text & cbImgType.SelectedItem)
+    End Sub
+    Private Sub BtnWpImgGen_Click(sender As Object, e As EventArgs) Handles BtnWpImgGen.Click
+        TxtImageUrl.Text = My.Settings.WordPressUrl & txtLoadYr.Text & SEP & txtLoadMth.Text & SEP & txtImgName.Text & cbImgType.SelectedItem
+    End Sub
+    Private Sub BtnCopyLoadDate_Click(sender As Object, e As EventArgs) Handles BtnCopyLoadDate.Click
+        txtLoadMth.Text = TxtWpLoadMth.Text
+        txtLoadYr.Text = TxtWpLoadYear.Text
+    End Sub
 #End Region
 #Region "subroutines"
     Private Sub CloseForm()
         Me.Close()
     End Sub
     Private Sub ClearDetails()
-        txtId.Text = ""
-        TxtForename.Text = ""
-        TxtSurname.Text = ""
-        txtImgName.Text = ""
-        txtLoadMth.Text = ""
-        txtLoadYr.Text = ""
-        PictureBox1.ImageLocation = ""
-        PictureBox2.ImageLocation = ""
+        txtId.Text = String.Empty
+        TxtForename.Text = String.Empty
+        TxtSurname.Text = String.Empty
+        txtImgName.Text = String.Empty
+        txtLoadMth.Text = String.Empty
+        txtLoadYr.Text = String.Empty
+        PictureBox1.ImageLocation = String.Empty
+        PictureBox2.ImageLocation = String.Empty
         cbImgType.SelectedIndex = -1
-        lblImgDateMsg.Text = ""
+        lblImgDateMsg.Text = String.Empty
     End Sub
-
     Private Function LoadScreenFromId(ByVal oId As Integer) As Person
         Dim oPerson As Person = Nothing
         Try
@@ -144,7 +172,7 @@ Public Class FrmImages
                 cboDay.SelectedIndex = CStr(_dob.Day) - 1
                 cboMonth.SelectedIndex = cboMonth.FindString(Format(_dob, "MMMM"))
             Else
-                lblStatus.Text = "Id not found"
+                lblStatus.Text = ID_NOT_FOUND
             End If
         Catch ex As Exception
             lblStatus.Text = "Unable to load Person" & vbCrLf & ex.Message
@@ -168,9 +196,9 @@ Public Class FrmImages
                 Dim generatedImageName As String = Path.Combine(My.Settings.ImgFolder, sSimplename & cbImgType.SelectedItem)
                 Dim storedImageName As String = Path.Combine(My.Settings.ImgFolder, oPerson.Image.ImageFileName.Trim & cbImgType.SelectedItem)
                 TxtImageFilename.Text = storedImageName
-                PictureBox1.ImageLocation = ""
-                PictureBox2.ImageLocation = ""
-                PictureBox1.ImageLocation = My.Settings.WordPressUrl & sYear & "/" & sMth & "/" & oPerson.Image.FullFileName
+                PictureBox1.ImageLocation = String.Empty
+                PictureBox2.ImageLocation = String.Empty
+                PictureBox1.ImageLocation = My.Settings.WordPressUrl & sYear & SEP & sMth & SEP & oPerson.Image.FullFileName
                 TxtImageUrl.Text = PictureBox1.ImageLocation
                 If Not String.IsNullOrEmpty(oPerson.Image.ImageFileName.Trim) AndAlso Not My.Computer.FileSystem.FileExists(storedImageName) Then
                     SaveImage(PictureBox1.ImageLocation, storedImageName)
@@ -191,32 +219,6 @@ Public Class FrmImages
         Next
         Return thisPerson
     End Function
-    Private Sub BtnUrlCopy_Click(sender As Object, e As EventArgs) Handles BtnUrlCopy.Click
-        Clipboard.SetText(TxtImageUrl.Text)
-    End Sub
-    Private Sub BtnFilenameCopy_Click(sender As Object, e As EventArgs) Handles BtnFilenameCopy.Click
-        Clipboard.SetText(TxtImageFilename.Text)
-    End Sub
 
-    Private Sub BtnWpImageRefresh_Click(sender As Object, e As EventArgs) Handles BtnWpImageRefresh.Click
-        PictureBox1.ImageLocation = TxtImageUrl.Text
-    End Sub
-
-    Private Sub BtnFileImageRefresh_Click(sender As Object, e As EventArgs) Handles BtnFileImageRefresh.Click
-        PictureBox2.ImageLocation = TxtImageFilename.Text
-    End Sub
-
-    Private Sub BtnFileImgGen_Click(sender As Object, e As EventArgs) Handles BtnFileImgGen.Click
-        TxtImageFilename.Text = Path.Combine(My.Settings.ImgFolder, txtImgName.Text & cbImgType.SelectedItem)
-    End Sub
-
-    Private Sub BtnWpImgGen_Click(sender As Object, e As EventArgs) Handles BtnWpImgGen.Click
-        TxtImageUrl.Text = My.Settings.WordPressUrl & txtLoadYr.Text & "/" & txtLoadMth.Text & "/" & txtImgName.Text & cbImgType.SelectedItem
-    End Sub
-
-    Private Sub BtnCopyLoadDate_Click(sender As Object, e As EventArgs) Handles BtnCopyLoadDate.Click
-        txtLoadMth.Text = TxtWpLoadMth.Text
-        txtLoadYr.Text = TxtWpLoadYear.Text
-    End Sub
 #End Region
 End Class

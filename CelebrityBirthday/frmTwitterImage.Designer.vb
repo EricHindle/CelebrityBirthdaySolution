@@ -120,7 +120,7 @@ Partial Class FrmTwitterImage
         Me.BtnGenImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnGenImage.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGenImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGenImage.Location = New System.Drawing.Point(874, 102)
+        Me.BtnGenImage.Location = New System.Drawing.Point(874, 124)
         Me.BtnGenImage.Name = "BtnGenImage"
         Me.BtnGenImage.Size = New System.Drawing.Size(139, 33)
         Me.BtnGenImage.TabIndex = 4
@@ -132,7 +132,7 @@ Partial Class FrmTwitterImage
         Me.BtnSaveImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSaveImage.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSaveImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSaveImage.Location = New System.Drawing.Point(874, 159)
+        Me.BtnSaveImage.Location = New System.Drawing.Point(874, 179)
         Me.BtnSaveImage.Name = "BtnSaveImage"
         Me.BtnSaveImage.Size = New System.Drawing.Size(139, 33)
         Me.BtnSaveImage.TabIndex = 5
@@ -142,7 +142,7 @@ Partial Class FrmTwitterImage
         'LblImageCount
         '
         Me.LblImageCount.AutoSize = True
-        Me.LblImageCount.Location = New System.Drawing.Point(408, 20)
+        Me.LblImageCount.Location = New System.Drawing.Point(485, 20)
         Me.LblImageCount.Name = "LblImageCount"
         Me.LblImageCount.Size = New System.Drawing.Size(57, 14)
         Me.LblImageCount.TabIndex = 6
@@ -319,7 +319,7 @@ Partial Class FrmTwitterImage
         '
         'NudPersonsPerTweet
         '
-        Me.NudPersonsPerTweet.Location = New System.Drawing.Point(584, 18)
+        Me.NudPersonsPerTweet.Location = New System.Drawing.Point(645, 19)
         Me.NudPersonsPerTweet.Name = "NudPersonsPerTweet"
         Me.NudPersonsPerTweet.Size = New System.Drawing.Size(50, 22)
         Me.NudPersonsPerTweet.TabIndex = 23
@@ -327,7 +327,7 @@ Partial Class FrmTwitterImage
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(640, 20)
+        Me.Label1.Location = New System.Drawing.Point(701, 21)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(66, 14)
         Me.Label1.TabIndex = 24
@@ -340,7 +340,7 @@ Partial Class FrmTwitterImage
         Me.lblError.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lblError.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblError.ForeColor = System.Drawing.Color.White
-        Me.lblError.Location = New System.Drawing.Point(768, 16)
+        Me.lblError.Location = New System.Drawing.Point(363, 16)
         Me.lblError.Name = "lblError"
         Me.lblError.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.lblError.Size = New System.Drawing.Size(106, 19)
@@ -351,7 +351,7 @@ Partial Class FrmTwitterImage
         'TxtStats
         '
         Me.TxtStats.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtStats.Location = New System.Drawing.Point(897, 13)
+        Me.TxtStats.Location = New System.Drawing.Point(889, 13)
         Me.TxtStats.Multiline = True
         Me.TxtStats.Name = "TxtStats"
         Me.TxtStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical

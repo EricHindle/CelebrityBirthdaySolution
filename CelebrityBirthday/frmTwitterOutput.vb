@@ -75,6 +75,12 @@ Public Class frmTwitterOutput
             My.Computer.Clipboard.SetText(_rtb.SelectedText)
         End If
     End Sub
+    Private Sub CboDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
+        If cboDay.SelectedIndex > -1 AndAlso cboMonth.SelectedIndex > -1 Then
+            dtpFrom.Value = New Date(dtpFrom.Value.Year, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
+            dtpTo.Value = dtpFrom.Value
+        End If
+    End Sub
 
 #End Region
 #Region "tree subroutines"
@@ -246,14 +252,14 @@ Public Class frmTwitterOutput
         Next
         WriteFooter(_outfile, _footer, _length)
     End Sub
-    Private Shared Function WriteHeader(_outfile As StreamWriter, _date As String, _header As String) As Integer
+    Private Function WriteHeader(_outfile As StreamWriter, _date As String, _header As String) As Integer
         _outfile.WriteLine("")
         _outfile.WriteLine(_date)
         _outfile.WriteLine("")
         _outfile.WriteLine(_header)
         Return _date.Length + _header.Length + 3
     End Function
-    Private Shared Sub WriteFooter(_outfile As StreamWriter, _footer As String, _length As Integer)
+    Private Sub WriteFooter(_outfile As StreamWriter, _footer As String, _length As Integer)
         _outfile.WriteLine("")
         If Not String.IsNullOrEmpty(_footer) Then
             _outfile.WriteLine(_footer)
@@ -314,6 +320,8 @@ Public Class frmTwitterOutput
         End If
         Return TwitterFilename
     End Function
+#End Region
+#Region "tab functions"
     Private Function NewTabPage(_text As String, _index As Integer) As TabPage
         Dim _newTabpage As New TabPage
         With _newTabpage
@@ -357,13 +365,12 @@ Public Class frmTwitterOutput
         End With
         Return _newRtb
     End Function
-
-
 #End Region
 #Region "general subroutines"
     Private Sub DisplayMessage(_text As String)
         lblStatus.Text = _text
         StatusStrip1.Refresh()
     End Sub
+
 #End Region
 End Class

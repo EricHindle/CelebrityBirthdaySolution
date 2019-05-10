@@ -29,6 +29,13 @@ Partial Class FrmSearch
         Me.txtId = New System.Windows.Forms.TextBox()
         Me.TxtSurname = New System.Windows.Forms.TextBox()
         Me.DgvPeople = New System.Windows.Forms.DataGridView()
+        Me.SelPersonId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.selPersonDay = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.selPersonMonth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SelPersonYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SelPersonForename = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SelPersonSurname = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.selDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.BtnSearchByName = New System.Windows.Forms.Button()
         Me.BtnSearchById = New System.Windows.Forms.Button()
@@ -39,13 +46,6 @@ Partial Class FrmSearch
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.BtnClear = New System.Windows.Forms.Button()
-        Me.SelPersonId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.selPersonDay = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.selPersonMonth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SelPersonYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SelPersonForename = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SelPersonSurname = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.selDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -117,6 +117,61 @@ Partial Class FrmSearch
         Me.DgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvPeople.Size = New System.Drawing.Size(923, 406)
         Me.DgvPeople.TabIndex = 19
+        '
+        'SelPersonId
+        '
+        Me.SelPersonId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.SelPersonId.HeaderText = "Id"
+        Me.SelPersonId.Name = "SelPersonId"
+        Me.SelPersonId.ReadOnly = True
+        Me.SelPersonId.Width = 50
+        '
+        'selPersonDay
+        '
+        Me.selPersonDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.selPersonDay.HeaderText = "Day"
+        Me.selPersonDay.Name = "selPersonDay"
+        Me.selPersonDay.ReadOnly = True
+        Me.selPersonDay.Width = 50
+        '
+        'selPersonMonth
+        '
+        Me.selPersonMonth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.selPersonMonth.HeaderText = "Month"
+        Me.selPersonMonth.Name = "selPersonMonth"
+        Me.selPersonMonth.ReadOnly = True
+        Me.selPersonMonth.Width = 50
+        '
+        'SelPersonYear
+        '
+        Me.SelPersonYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.SelPersonYear.HeaderText = "Year"
+        Me.SelPersonYear.Name = "SelPersonYear"
+        Me.SelPersonYear.ReadOnly = True
+        Me.SelPersonYear.Width = 50
+        '
+        'SelPersonForename
+        '
+        Me.SelPersonForename.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.SelPersonForename.HeaderText = "Forename"
+        Me.SelPersonForename.Name = "SelPersonForename"
+        Me.SelPersonForename.ReadOnly = True
+        Me.SelPersonForename.Width = 200
+        '
+        'SelPersonSurname
+        '
+        Me.SelPersonSurname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.SelPersonSurname.HeaderText = "Surname"
+        Me.SelPersonSurname.Name = "SelPersonSurname"
+        Me.SelPersonSurname.ReadOnly = True
+        Me.SelPersonSurname.Width = 200
+        '
+        'selDesc
+        '
+        Me.selDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.selDesc.HeaderText = "Description"
+        Me.selDesc.Name = "selDesc"
+        Me.selDesc.ReadOnly = True
         '
         'BtnClose
         '
@@ -226,61 +281,6 @@ Partial Class FrmSearch
         Me.BtnClear.TabIndex = 17
         Me.BtnClear.Text = "Clear"
         Me.BtnClear.UseVisualStyleBackColor = True
-        '
-        'SelPersonId
-        '
-        Me.SelPersonId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.SelPersonId.HeaderText = "Id"
-        Me.SelPersonId.Name = "SelPersonId"
-        Me.SelPersonId.ReadOnly = True
-        Me.SelPersonId.Width = 50
-        '
-        'selPersonDay
-        '
-        Me.selPersonDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.selPersonDay.HeaderText = "Day"
-        Me.selPersonDay.Name = "selPersonDay"
-        Me.selPersonDay.ReadOnly = True
-        Me.selPersonDay.Width = 50
-        '
-        'selPersonMonth
-        '
-        Me.selPersonMonth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.selPersonMonth.HeaderText = "Month"
-        Me.selPersonMonth.Name = "selPersonMonth"
-        Me.selPersonMonth.ReadOnly = True
-        Me.selPersonMonth.Width = 50
-        '
-        'SelPersonYear
-        '
-        Me.SelPersonYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.SelPersonYear.HeaderText = "Year"
-        Me.SelPersonYear.Name = "SelPersonYear"
-        Me.SelPersonYear.ReadOnly = True
-        Me.SelPersonYear.Width = 50
-        '
-        'SelPersonForename
-        '
-        Me.SelPersonForename.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.SelPersonForename.HeaderText = "Forename"
-        Me.SelPersonForename.Name = "SelPersonForename"
-        Me.SelPersonForename.ReadOnly = True
-        Me.SelPersonForename.Width = 200
-        '
-        'SelPersonSurname
-        '
-        Me.SelPersonSurname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.SelPersonSurname.HeaderText = "Surname"
-        Me.SelPersonSurname.Name = "SelPersonSurname"
-        Me.SelPersonSurname.ReadOnly = True
-        Me.SelPersonSurname.Width = 200
-        '
-        'selDesc
-        '
-        Me.selDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.selDesc.HeaderText = "Description"
-        Me.selDesc.Name = "selDesc"
-        Me.selDesc.ReadOnly = True
         '
         'FrmSearch
         '

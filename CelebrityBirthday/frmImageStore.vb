@@ -5,14 +5,9 @@ Imports System.Reflection
 
 Public Class frmImageStore
 #Region "variables"
-    Dim iProtocol As Short
     Dim b() As Byte '   Store picture bytes
     Dim sImagePath As String
     Dim sApplicationPath As String
-    Private myPicArray As New ArrayList
-    Private mypicno As Integer
-    '   Dim inet1 As Inet
-    Dim extensions As String = ".jpg.gif.png.bmp.jpeg"
     Dim bLoadingPicture As Boolean = False
     Dim isSaved As Boolean = True
 #End Region
@@ -51,17 +46,6 @@ Public Class frmImageStore
         End If
         isSaved = True
     End Sub
-
-    Private Sub OpenImageSearch()
-        Dim _name As String = If(String.IsNullOrEmpty(TxtForename.Text.Trim), "", TxtForename.Text.Trim & " ") & TxtSurname.Text.Trim
-
-        If Not String.IsNullOrEmpty(_name) Then
-            Dim sUrl As String = GetGoogleSearchString(_name)
-            Process.Start(sUrl)
-            lblSearchUrl.Text = sUrl
-        End If
-    End Sub
-
     Private Sub BtnSavepic_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSavepic.Click
         sImagePath = My.Settings.newimagepath.Replace("<applicationpath>", sApplicationPath)
         If bLoadingPicture Then
@@ -96,9 +80,8 @@ Public Class frmImageStore
             If DisplayException(ex) = MsgBoxResult.No Then Exit Sub
         End Try
         ' Get the response.
-        Dim response As WebResponse = Nothing
         Try
-            response = request.GetResponse()
+            Dim response As WebResponse = request.GetResponse()
 
             ' Display the status.
             PicStatus.Text = CType(response, HttpWebResponse).StatusDescription
@@ -190,7 +173,15 @@ Public Class frmImageStore
         isSaved = False
     End Sub
 #End Region
-#Region "subroutines"
+#Region "functions"
+    Private Sub OpenImageSearch()
+        Dim _name As String = If(String.IsNullOrEmpty(TxtForename.Text.Trim), "", TxtForename.Text.Trim & " ") & TxtSurname.Text.Trim
+        If Not String.IsNullOrEmpty(_name) Then
+            Dim sUrl As String = GetGoogleSearchString(_name)
+            Process.Start(sUrl)
+            lblSearchUrl.Text = sUrl
+        End If
+    End Sub
     Private Function GetUniqueFname(ByVal filename As String) As String
         Dim newfilename As String = filename
         Try

@@ -54,17 +54,21 @@ Partial Class FrmBrowser
         'btnWikiFind
         '
         Me.btnWikiFind.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnWikiFind.Location = New System.Drawing.Point(1067, 255)
+        Me.btnWikiFind.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnWikiFind.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnWikiFind.Location = New System.Drawing.Point(1067, 234)
         Me.btnWikiFind.Name = "btnWikiFind"
-        Me.btnWikiFind.Size = New System.Drawing.Size(87, 65)
+        Me.btnWikiFind.Size = New System.Drawing.Size(87, 68)
         Me.btnWikiFind.TabIndex = 14
-        Me.btnWikiFind.Text = "Find Selected in wiki"
+        Me.btnWikiFind.Text = "Find in Wiki"
         Me.btnWikiFind.UseVisualStyleBackColor = True
         '
         'btnFwd
         '
         Me.btnFwd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnFwd.Location = New System.Drawing.Point(1067, 82)
+        Me.btnFwd.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFwd.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnFwd.Location = New System.Drawing.Point(1067, 80)
         Me.btnFwd.Name = "btnFwd"
         Me.btnFwd.Size = New System.Drawing.Size(87, 32)
         Me.btnFwd.TabIndex = 18
@@ -74,7 +78,9 @@ Partial Class FrmBrowser
         'btnBack
         '
         Me.btnBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBack.Location = New System.Drawing.Point(1067, 26)
+        Me.btnBack.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBack.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnBack.Location = New System.Drawing.Point(1067, 31)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(87, 33)
         Me.btnBack.TabIndex = 17
@@ -84,17 +90,21 @@ Partial Class FrmBrowser
         'btnImageFind
         '
         Me.btnImageFind.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnImageFind.Location = New System.Drawing.Point(1067, 160)
+        Me.btnImageFind.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImageFind.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnImageFind.Location = New System.Drawing.Point(1067, 137)
         Me.btnImageFind.Name = "btnImageFind"
-        Me.btnImageFind.Size = New System.Drawing.Size(87, 65)
+        Me.btnImageFind.Size = New System.Drawing.Size(87, 68)
         Me.btnImageFind.TabIndex = 19
-        Me.btnImageFind.Text = "Find Selected in Images"
+        Me.btnImageFind.Text = "Find in Images"
         Me.btnImageFind.UseVisualStyleBackColor = True
         '
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClose.Location = New System.Drawing.Point(1062, 618)
+        Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnClose.Location = New System.Drawing.Point(1067, 612)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(87, 44)
         Me.BtnClose.TabIndex = 20
@@ -119,9 +129,11 @@ Partial Class FrmBrowser
         'btnGo
         '
         Me.btnGo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGo.Location = New System.Drawing.Point(923, 636)
+        Me.btnGo.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGo.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnGo.Location = New System.Drawing.Point(932, 638)
         Me.btnGo.Name = "btnGo"
-        Me.btnGo.Size = New System.Drawing.Size(35, 26)
+        Me.btnGo.Size = New System.Drawing.Size(45, 26)
         Me.btnGo.TabIndex = 23
         Me.btnGo.Text = "Go"
         Me.btnGo.UseVisualStyleBackColor = True
@@ -167,11 +179,13 @@ Partial Class FrmBrowser
         'BtnFindTwitter
         '
         Me.BtnFindTwitter.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnFindTwitter.Location = New System.Drawing.Point(1067, 344)
+        Me.BtnFindTwitter.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnFindTwitter.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnFindTwitter.Location = New System.Drawing.Point(1067, 338)
         Me.BtnFindTwitter.Name = "BtnFindTwitter"
-        Me.BtnFindTwitter.Size = New System.Drawing.Size(87, 65)
+        Me.BtnFindTwitter.Size = New System.Drawing.Size(87, 68)
         Me.BtnFindTwitter.TabIndex = 28
-        Me.BtnFindTwitter.Text = "Find Selected in Twitter"
+        Me.BtnFindTwitter.Text = "Find in Twitter"
         Me.BtnFindTwitter.UseVisualStyleBackColor = True
         '
         'FrmBrowser
@@ -194,6 +208,7 @@ Partial Class FrmBrowser
         Me.Controls.Add(Me.WebBrowser1)
         Me.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MinimumSize = New System.Drawing.Size(619, 520)
         Me.Name = "FrmBrowser"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Web Browser"
