@@ -35,6 +35,7 @@ Partial Class FrmMenu
         Me.BtnWordPress = New System.Windows.Forms.Button()
         Me.BtnMosaic = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.BtnBrownBread = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -101,7 +102,7 @@ Partial Class FrmMenu
         'BtnClose
         '
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(202, 487)
+        Me.BtnClose.Location = New System.Drawing.Point(202, 563)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(151, 49)
         Me.BtnClose.TabIndex = 9
@@ -163,13 +164,24 @@ Partial Class FrmMenu
         Me.PictureBox1.TabIndex = 11
         Me.PictureBox1.TabStop = False
         '
+        'BtnBrownBread
+        '
+        Me.BtnBrownBread.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnBrownBread.Location = New System.Drawing.Point(202, 487)
+        Me.BtnBrownBread.Name = "BtnBrownBread"
+        Me.BtnBrownBread.Size = New System.Drawing.Size(151, 49)
+        Me.BtnBrownBread.TabIndex = 12
+        Me.BtnBrownBread.Text = "Brown Bread"
+        Me.BtnBrownBread.UseVisualStyleBackColor = True
+        '
         'FrmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(377, 580)
+        Me.ClientSize = New System.Drawing.Size(377, 624)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnBrownBread)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.BtnWordPress)
         Me.Controls.Add(Me.BtnBrowser)
@@ -205,4 +217,5 @@ Partial Class FrmMenu
     Friend WithEvents BtnWordPress As Button
     Friend WithEvents BtnMosaic As Button
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents BtnBrownBread As Button
 End Class

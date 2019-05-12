@@ -79,4 +79,12 @@
             My.Settings.Save()
         End If
     End Sub
+
+    Private Sub BtnBrownBread_Click(sender As Object, e As EventArgs) Handles BtnBrownBread.Click
+        Me.Hide()
+        Using _warning As New FrmDeathCheck
+            _warning.ShowDialog()
+        End Using
+        Me.Show()
+    End Sub
 End Class

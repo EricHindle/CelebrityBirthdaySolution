@@ -120,6 +120,16 @@
         Next
         Return oPersonList
     End Function
+    Public Function FindLivingPeople() As List(Of Person)
+        oFullPersonTa.Fill(oFullPersonTable)
+        Dim _List As New List(Of Person)
+        For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
+            If oRow.deathyear = 0 Then
+                _List.Add(New Person(oRow))
+            End If
+        Next
+        Return _List
+    End Function
     Public Function FindBirthdays(oDay As Integer, oMonth As Integer)
         oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
         Dim _List As New List(Of Person)

@@ -94,6 +94,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core">
@@ -134,6 +135,12 @@
       <DependentUpon>FrmBrowser.vb</DependentUpon>
     </Compile>
     <Compile Include="FrmBrowser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDeathCheck.Designer.vb">
+      <DependentUpon>FrmDeathCheck.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDeathCheck.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmImages.Designer.vb">
@@ -233,6 +240,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FrmBrowser.resx">
       <DependentUpon>FrmBrowser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDeathCheck.resx">
+      <DependentUpon>FrmDeathCheck.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImages.resx">
       <DependentUpon>frmImages.vb</DependentUpon>

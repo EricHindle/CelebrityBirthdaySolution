@@ -200,7 +200,9 @@ Module modCbday
     Public Function GetWikiSearchString(oText As String) As String
         Return My.Settings.wikiSearchUrl & oText.Replace(" ", "+")
     End Function
-
+    Public Function GetWikiExtractString(oText As String) As String
+        Return My.Settings.wikiExtractSearch & oText.Replace(" ", "+")
+    End Function
 
     Public Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
         Dim _rtb As New RichTextBox

@@ -288,4 +288,31 @@
             Return If(String.IsNullOrEmpty(_forename), _surname, _forename & " " & _surname)
         End Get
     End Property
+
+    Public ReadOnly Property DateOfBirth As Date?
+        Get
+            Dim _dob As Date? = Nothing
+            Try
+                _dob = New Date(_birthYear, _birthMonth, _birthDay)
+            Catch ex As Exception
+                Debug.Print(Name & "Invalid date of birth")
+            End Try
+            Return _dob
+        End Get
+    End Property
+
+    Public ReadOnly Property DateOfDeath As Date?
+        Get
+            Dim _dod As Date? = Nothing
+            If _deathYear <> 0 Then
+                Try
+                    _dod = New Date(_birthYear, _birthMonth, _birthDay)
+                Catch ex As Exception
+                    Debug.Print("Invalid date of birth")
+                End Try
+            End If
+            Return _dod
+        End Get
+    End Property
+
 End Class

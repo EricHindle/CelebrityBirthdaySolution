@@ -42,11 +42,13 @@ Public Class frmTwitterOutput
     Private Sub TvBirthday_DoubleClick(sender As Object, e As EventArgs) Handles tvBirthday.DoubleClick
         Dim _thisView As TreeView = TryCast(sender, TreeView)
         Dim _thisNode As TreeNode = _thisView.SelectedNode
-        Using _browser As New FrmBrowser
-            _browser.SearchName = _thisNode.Text
-            _browser.FindinWiki()
-            _browser.ShowDialog()
-        End Using
+        If _thisNode IsNot Nothing AndAlso Not String.IsNullOrEmpty(_thisNode.Text) Then
+            Using _browser As New FrmBrowser
+                _browser.SearchName = _thisNode.Text
+                _browser.FindinWiki()
+                _browser.ShowDialog()
+            End Using
+        End If
     End Sub
     Private Sub BtnRewrite_Click(sender As Object, e As System.EventArgs)
         Dim _button As Button = TryCast(sender, Button)
@@ -127,7 +129,22 @@ Public Class frmTwitterOutput
         newNameNode.Nodes.Add("id", oPerson.Id)
         newNameNode.Nodes.Add("desc", oPerson.ShortDesc)
         newNameNode.Nodes.Add("length", oPerson.Name.Length)
+        newNameNode.Nodes.Add("year", oPerson.BirthYear)
+        Dim _age As Integer = CalculateAgeNextBirthday(oPerson)
+        Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
+        _ageNode.Checked = True
     End Sub
+    Private Function CalculateAgeNextBirthday(oPerson As Person) As Integer
+        Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
+        Dim _thisMonth As Integer = Today.Month
+        Dim _thisDay As Integer = Today.Day
+        Dim _years As Integer = DateDiff(DateInterval.Year, _dob, Today)
+        If _thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay) Then
+            _years += 1
+        End If
+        Return _years
+    End Function
+
     Private Sub TvAnniv_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck
         If e.Action <> TreeViewAction.Unknown Then
             If e.Node.Nodes.Count > 0 Then
@@ -276,15 +293,24 @@ Public Class frmTwitterOutput
     End Function
     Private Function MakeTweetLine(_personNode As TreeNode) As String
         Dim personName As String = _personNode.Text.Trim
-        Dim twitterHandle As Char() = ""
+        Dim _additionalText As Char() = ""
         For Each _node As TreeNode In _personNode.Nodes
-            If _node.Name = "twitter" Then
-                If _node.Checked Then
-                    twitterHandle = " @" & RemoveBadCharacters(_node.Text, {8207, 32})
+            If rbTwitter.Checked Then
+                If _node.Name = "twitter" Then
+                    If _node.Checked Then
+                        _additionalText = " @" & RemoveBadCharacters(_node.Text, {8207, 32})
+                    End If
                 End If
+            ElseIf rbAge.Checked Then
+                If _node.Name = "age" Then
+                    If _node.Checked Then
+                        _additionalText = " (" & _node.Text & ")"
+                    End If
+                End If
+
             End If
         Next
-        Return personName & twitterHandle
+        Return personName & _additionalText
     End Function
     Private Sub DeleteExistingFile(TwitterFilenameA As String, TwitterFilenameB As String)
         Try
@@ -370,6 +396,11 @@ Public Class frmTwitterOutput
     Private Sub DisplayMessage(_text As String)
         lblStatus.Text = _text
         StatusStrip1.Refresh()
+    End Sub
+
+    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        TcFileTabs.TabPages.Clear()
+        tvBirthday.Nodes.Clear()
     End Sub
 
 #End Region
