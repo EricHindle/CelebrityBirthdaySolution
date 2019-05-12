@@ -38,6 +38,7 @@ Partial Class FrmDeathCheck
         Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.BtnStart = New System.Windows.Forms.Button()
+        Me.BtnWrite = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -204,12 +205,25 @@ Partial Class FrmDeathCheck
         Me.BtnStart.Text = "Start Check"
         Me.BtnStart.UseVisualStyleBackColor = True
         '
+        'BtnWrite
+        '
+        Me.BtnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnWrite.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWrite.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWrite.Location = New System.Drawing.Point(221, 500)
+        Me.BtnWrite.Name = "BtnWrite"
+        Me.BtnWrite.Size = New System.Drawing.Size(139, 33)
+        Me.BtnWrite.TabIndex = 12
+        Me.BtnWrite.Text = "Write File"
+        Me.BtnWrite.UseVisualStyleBackColor = True
+        '
         'FrmDeathCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(874, 558)
+        Me.Controls.Add(Me.BtnWrite)
         Me.Controls.Add(Me.BtnStart)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.btnClose)
@@ -246,4 +260,5 @@ Partial Class FrmDeathCheck
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblStatus As ToolStripStatusLabel
     Friend WithEvents BtnStart As Button
+    Friend WithEvents BtnWrite As Button
 End Class

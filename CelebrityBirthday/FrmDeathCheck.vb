@@ -1,4 +1,5 @@
-﻿Imports System.Net
+﻿Imports System.IO
+Imports System.Net
 Imports System.Web.Script.Serialization
 Public Class FrmDeathCheck
     Private personTable As List(Of Person)
@@ -18,20 +19,43 @@ Public Class FrmDeathCheck
         personTable = FindLivingPeople()
         DisplayMessage("Found " & CStr(personTable.Count) & " people")
         For Each _person In personTable
+            '         If _person.Id = 1567 Then
             DisplayMessage(CStr(_person.Id) & " " & _person.Name)
-            AddAllRow(_person)
-            GetWikiDeathDate(_person.Name)
-
+                AddAllRow(_person)
+                Dim _dateOfDeath As String = GetWikiDeathDate(_person.Name)
+                If _dateOfDeath IsNot Nothing Then
+                    AddXRow(_person, _dateOfDeath, "")
+                End If
+            '       End If
 
         Next
     End Sub
 
-    Private Sub GetWikiDeathDate(_searchName As String)
+    Private Function GetWikiDeathDate(_searchName As String) As String
+        Dim _deathDate As Date? = Nothing
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName))
         Dim extract As String = GetExtractFromResponse(_response)
-
-
-    End Sub
+        Dim _desc As String = RemoveSquareBrackets(FixQuotes(extract))
+        Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
+        If _parts.Count = 3 Then
+            Debug.Print(_parts(1))
+            Dim datePart As String = _parts(1)
+            Dim _dates As String() = Split(datePart, " - ")
+            If _dates.Count = 2 Then
+                Try
+                    Debug.Print(_dates(1))
+                    If IsDate(_dates(1)) Then
+                        _deathDate = CDate(_dates(1))
+                    Else
+                        Debug.Print(_searchName & " Not a date " & _dates(1))
+                    End If
+                Catch ex As Exception
+                    Debug.Print(_searchName & " Not a date " & _dates(1))
+                End Try
+            End If
+        End If
+        Return If(_deathDate Is Nothing, Nothing, Format(_deathDate, "dd MMM yyyy"))
+    End Function
 
     Public Function NavigateToUrl(pSearchString As String) As WebResponse
         Dim request As WebRequest = Nothing
@@ -44,9 +68,10 @@ Public Class FrmDeathCheck
 
     Public Function GetExtractFromResponse(pResponse As WebResponse) As String
         Dim _extract As String = ""
+        Dim wikipage As String = ""
         Try
             Dim sr As System.IO.StreamReader = New System.IO.StreamReader(pResponse.GetResponseStream())
-            Dim wikipage As String = sr.ReadToEnd
+            wikipage = sr.ReadToEnd
             Dim jss As New JavaScriptSerializer()
             Dim extractDictionary As Dictionary(Of String, Object) = jss.Deserialize(Of Dictionary(Of String, Object))(wikipage)
             Dim queryDictionary As Dictionary(Of String, Object) = extractDictionary("query")
@@ -56,6 +81,8 @@ Public Class FrmDeathCheck
                 _extract = TryCast(pageDictionary("extract"), String)
             End If
         Catch ex As Exception
+            Debug.Print(ex.Message)
+            Debug.Print(wikipage)
         End Try
         Return _extract
     End Function
@@ -73,15 +100,23 @@ Public Class FrmDeathCheck
         Return _newRow
     End Function
 
-    Private Function AddXRow(oPerson As Person, oDateOfDeath As Date?, oDesc As String) As DataGridViewRow
+    Private Function AddXRow(oPerson As Person, oDateOfDeath As String, oDesc As String) As DataGridViewRow
         Dim _newRow As DataGridViewRow = dgvWarnings.Rows(dgvWarnings.Rows.Add())
         _newRow.Cells(xId.Name).Value = oPerson.Id
         _newRow.Cells(xName.Name).Value = oPerson.Name
         _newRow.Cells(xBirth.Name).Value = If(oPerson.DateOfBirth Is Nothing, "", Format(oPerson.DateOfBirth, "dd MMM yyyy"))
-        _newRow.Cells(xDeath.Name).Value = If(oDateOfDeath Is Nothing, "", Format(oDateOfDeath, "dd MMM yyyy"))
-        _newRow.Cells(xDeath.Name).Value = If(String.IsNullOrEmpty(oDesc), "", oDesc)
-        dgvAllPersons.Refresh()
+        _newRow.Cells(xDeath.Name).Value = oDateOfDeath
+        _newRow.Cells(xDesc.Name).Value = If(String.IsNullOrEmpty(oDesc), "", oDesc)
+        dgvWarnings.Refresh()
         Return _newRow
     End Function
 
+    Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
+        Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "deadpeople.csv")
+        Using _outfile As New StreamWriter(_filename, True)
+            For Each _row As DataGridViewRow In dgvWarnings.Rows
+                _outfile.WriteLine(_row.Cells(xId.Name).Value & "," & _row.Cells(xName.Name).Value & "," & _row.Cells(xBirth.Name).Value & "," & _row.Cells(xDeath.Name).Value)
+            Next
+        End Using
+    End Sub
 End Class

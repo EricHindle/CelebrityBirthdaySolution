@@ -693,59 +693,8 @@ Public Class FrmUpdateDatabase
         End If
         Return sNickName & " "
     End Function
-    Private Function RemoveSquareBrackets(ByVal _text As String) As String
-        Dim newText As String = _text.Trim(vbCrLf)
-        Do While newText.Contains("[") And newText.Contains("]")
-            Dim parts1 As String() = Split(newText, "[", 2)
-            Dim parts2 As String() = Split(parts1(1), "]", 2)
-            newText = parts1(0) & parts2(1)
-        Loop
-        Return newText
-    End Function
-    Private Function ParseStringWithBrackets(ByRef _string As String, Optional ByRef _start As Integer = 0, Optional ByVal _openChar As Char = "("c) As List(Of String)
-        Dim _return As New List(Of String)
-        Dim _pre As String = _string
-        Dim _inner As String
-        Dim _post As String
-        Dim x As Integer = 0
-        Dim _firstOpen As Integer = _string.IndexOf(_openChar, _start)
-        If _firstOpen < 0 Then
-            Return _return
-        End If
-        Do Until x = _firstOpen
-            _pre &= _string(x)
-            x += 1
-        Loop
-        Dim _closefound As Boolean = False
-        Dim _nextclose As Integer = -1
-        Dim _nextopen As Integer
 
-        Do Until x >= _string.Length Or _closefound
-            _nextclose = _string.IndexOf(")"c, x + 1)
-            If _nextclose < 0 Then
-                Exit Do
-            End If
-            _nextopen = _string.IndexOf("("c, x + 1)
-            If _nextopen < 0 Then
-                _closefound = True
-                Exit Do
-            End If
-            If _nextopen > _nextclose Then
-                _closefound = True
-                Exit Do
-            End If
-            x = _nextclose + 1
-        Loop
-        If _closefound Then
-            _pre = _string.Substring(0, _firstOpen)
-            _inner = _string.Substring(_firstOpen + 1, _nextclose - _firstOpen - 1)
-            _post = _string.Substring(_nextclose + 1)
-        Else
-            Return _return
-        End If
 
-        Return MakeList(_pre, _inner, _post)
-    End Function
     Private Function RemovePhrases(ByVal _innerText As String) As String
         Dim _dateString As String = ""
         Dim _phrases As String() = Split(_innerText, ";")
