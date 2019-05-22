@@ -36,6 +36,7 @@ Partial Class FrmMenu
         Me.BtnMosaic = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.BtnBrownBread = New System.Windows.Forms.Button()
+        Me.BtnTest = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -174,6 +175,16 @@ Partial Class FrmMenu
         Me.BtnBrownBread.Text = "Brown Bread"
         Me.BtnBrownBread.UseVisualStyleBackColor = True
         '
+        'BtnTest
+        '
+        Me.BtnTest.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnTest.Location = New System.Drawing.Point(21, 563)
+        Me.BtnTest.Name = "BtnTest"
+        Me.BtnTest.Size = New System.Drawing.Size(151, 49)
+        Me.BtnTest.TabIndex = 13
+        Me.BtnTest.Text = "Test"
+        Me.BtnTest.UseVisualStyleBackColor = True
+        '
         'FrmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
@@ -181,6 +192,7 @@ Partial Class FrmMenu
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(377, 624)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnTest)
         Me.Controls.Add(Me.BtnBrownBread)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.BtnWordPress)
@@ -218,4 +230,5 @@ Partial Class FrmMenu
     Friend WithEvents BtnMosaic As Button
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents BtnBrownBread As Button
+    Friend WithEvents BtnTest As Button
 End Class

@@ -87,4 +87,11 @@
         End Using
         Me.Show()
     End Sub
+
+    Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
+        Using _sendTwitter As New FrmSendTwitter
+            _sendTwitter.ShowDialog()
+
+        End Using
+    End Sub
 End Class
