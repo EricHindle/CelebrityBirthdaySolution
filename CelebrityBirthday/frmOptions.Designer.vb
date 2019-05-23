@@ -43,6 +43,7 @@ Partial Class FrmOptions
         Me.txtTwitterSearch = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.BtnGlobalSettings = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -238,12 +239,24 @@ Partial Class FrmOptions
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "URLs"
         '
+        'BtnGlobalSettings
+        '
+        Me.BtnGlobalSettings.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnGlobalSettings.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 352)
+        Me.BtnGlobalSettings.Name = "BtnGlobalSettings"
+        Me.BtnGlobalSettings.Size = New System.Drawing.Size(86, 73)
+        Me.BtnGlobalSettings.TabIndex = 20
+        Me.BtnGlobalSettings.Text = "Global Settings"
+        Me.BtnGlobalSettings.UseVisualStyleBackColor = True
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(549, 485)
+        Me.Controls.Add(Me.BtnGlobalSettings)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.BtnResetForms)
@@ -281,4 +294,5 @@ Partial Class FrmOptions
     Friend WithEvents txtTwitterSearch As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents BtnGlobalSettings As Button
 End Class

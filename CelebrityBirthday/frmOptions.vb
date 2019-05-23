@@ -46,4 +46,13 @@
         My.Settings.twitterimagepos = "5~5~600~600"
         My.Settings.Save()
     End Sub
+
+    Private Sub BtnGlobalSettings_Click(sender As Object, e As EventArgs) Handles BtnGlobalSettings.Click
+        Me.Hide()
+
+        Using _settings As New FrmGlobalSettings
+            _settings.ShowDialog()
+        End Using
+        Me.Show()
+    End Sub
 End Class

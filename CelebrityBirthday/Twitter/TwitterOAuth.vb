@@ -19,8 +19,8 @@ Public Class TwitterOAuth
     Public Const AUTHENTICATE As String = "https://api.twitter.com/oauth/authenticate"
     Public Const XACCESS_TOKEN As String = "https://api.twitter.com/oauth/access_token"
 
-    Public ConsumerKey As String = ""
-    Public ConsumerSecret As String = ""
+    Public ConsumerKey As String
+    Public ConsumerSecret As String
 
     Public Token As String = String.Empty
     Public TokenSecret As String = String.Empty

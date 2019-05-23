@@ -150,6 +150,12 @@
     <Compile Include="FrmDeathCheck.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmGlobalSettings.designer.vb">
+      <DependentUpon>frmGlobalSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGlobalSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmImages.Designer.vb">
       <DependentUpon>frmImages.vb</DependentUpon>
     </Compile>
@@ -187,6 +193,7 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GlobalSettings.vb" />
     <Compile Include="Twitter\FrmSendTwitter.Designer.vb">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>
     </Compile>
@@ -274,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDeathCheck.resx">
       <DependentUpon>FrmDeathCheck.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGlobalSettings.resx">
+      <DependentUpon>frmGlobalSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImages.resx">
       <DependentUpon>frmImages.vb</DependentUpon>

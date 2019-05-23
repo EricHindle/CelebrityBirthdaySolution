@@ -196,5 +196,7 @@ Public Class FrmSendTwitter
 
     Private Sub FrmSendTwitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         WebBrowser1.Navigate("about:blank")
+        tw.ConsumerKey = GlobalSettings.GetSetting("TwKey")
+        tw.ConsumerSecret = GlobalSettings.GetSetting("TwSecret")
     End Sub
 End Class
