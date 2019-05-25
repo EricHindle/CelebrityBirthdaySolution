@@ -28,8 +28,10 @@ Partial Class FrmSendTwitter
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.rtbTweet = New System.Windows.Forms.RichTextBox()
-        Me.BtnSend = New System.Windows.Forms.Button()
+        Me.BtnAuthenticate = New System.Windows.Forms.Button()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
+        Me.rtbTweetText = New System.Windows.Forms.RichTextBox()
+        Me.BtnSend = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cboDay
@@ -54,10 +56,10 @@ Partial Class FrmSendTwitter
         '
         'btnClose
         '
-        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(754, 457)
+        Me.btnClose.Location = New System.Drawing.Point(764, 574)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(139, 33)
         Me.btnClose.TabIndex = 22
@@ -78,40 +80,67 @@ Partial Class FrmSendTwitter
         '
         'rtbTweet
         '
+        Me.rtbTweet.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rtbTweet.Location = New System.Drawing.Point(12, 45)
         Me.rtbTweet.Name = "rtbTweet"
         Me.rtbTweet.Size = New System.Drawing.Size(343, 254)
         Me.rtbTweet.TabIndex = 23
         Me.rtbTweet.Text = ""
         '
-        'BtnSend
+        'BtnAuthenticate
         '
-        Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(216, 316)
-        Me.BtnSend.Name = "BtnSend"
-        Me.BtnSend.Size = New System.Drawing.Size(139, 33)
-        Me.BtnSend.TabIndex = 24
-        Me.BtnSend.Text = "Send"
-        Me.BtnSend.UseVisualStyleBackColor = True
+        Me.BtnAuthenticate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnAuthenticate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAuthenticate.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnAuthenticate.Location = New System.Drawing.Point(216, 316)
+        Me.BtnAuthenticate.Name = "BtnAuthenticate"
+        Me.BtnAuthenticate.Size = New System.Drawing.Size(139, 33)
+        Me.BtnAuthenticate.TabIndex = 24
+        Me.BtnAuthenticate.Text = "Authenticate"
+        Me.BtnAuthenticate.UseVisualStyleBackColor = True
         '
         'WebBrowser1
         '
-        Me.WebBrowser1.Location = New System.Drawing.Point(390, 60)
+        Me.WebBrowser1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.WebBrowser1.Location = New System.Drawing.Point(501, 60)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(503, 379)
+        Me.WebBrowser1.Size = New System.Drawing.Size(392, 326)
         Me.WebBrowser1.TabIndex = 25
+        '
+        'rtbTweetText
+        '
+        Me.rtbTweetText.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.rtbTweetText.Location = New System.Drawing.Point(23, 376)
+        Me.rtbTweetText.Name = "rtbTweetText"
+        Me.rtbTweetText.Size = New System.Drawing.Size(331, 231)
+        Me.rtbTweetText.TabIndex = 26
+        Me.rtbTweetText.Text = ""
+        '
+        'BtnSend
+        '
+        Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSend.Location = New System.Drawing.Point(413, 574)
+        Me.BtnSend.Name = "BtnSend"
+        Me.BtnSend.Size = New System.Drawing.Size(139, 33)
+        Me.BtnSend.TabIndex = 27
+        Me.BtnSend.Text = "Send"
+        Me.BtnSend.UseVisualStyleBackColor = True
         '
         'FrmSendTwitter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(944, 519)
-        Me.Controls.Add(Me.WebBrowser1)
+        Me.ClientSize = New System.Drawing.Size(944, 620)
         Me.Controls.Add(Me.BtnSend)
+        Me.Controls.Add(Me.rtbTweetText)
+        Me.Controls.Add(Me.WebBrowser1)
+        Me.Controls.Add(Me.BtnAuthenticate)
         Me.Controls.Add(Me.rtbTweet)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnSelect)
@@ -129,6 +158,8 @@ Partial Class FrmSendTwitter
     Friend WithEvents btnClose As Button
     Friend WithEvents btnSelect As Button
     Friend WithEvents rtbTweet As RichTextBox
-    Friend WithEvents BtnSend As Button
+    Friend WithEvents BtnAuthenticate As Button
     Friend WithEvents WebBrowser1 As WebBrowser
+    Friend WithEvents rtbTweetText As RichTextBox
+    Friend WithEvents BtnSend As Button
 End Class
