@@ -111,10 +111,10 @@ Public Class frmTwitterOutput
         Dim newBirthdayNode As TreeNode = newDateNode.Nodes.Add(Format(testDate, "MMMM dd") & _type, _type)
         newBirthdayNode.Checked = True
         For Each oPerson As Person In oBirthdayTable
-            AddNameNode(newBirthdayNode, oPerson)
+            AddNameNode(newBirthdayNode, oPerson, _type)
         Next
     End Sub
-    Private Sub AddNameNode(newBirthdayNode As TreeNode, oPerson As Person)
+    Private Sub AddNameNode(newBirthdayNode As TreeNode, oPerson As Person, _type As String)
         Dim newNameNode As TreeNode = newBirthdayNode.Nodes.Add(oPerson.Name)
         If oPerson.Social IsNot Nothing Then
             If Not String.IsNullOrEmpty(oPerson.Social.TwitterHandle) Then
@@ -132,7 +132,7 @@ Public Class frmTwitterOutput
         newNameNode.Nodes.Add("year", oPerson.BirthYear)
         Dim _age As Integer = CalculateAgeNextBirthday(oPerson)
         Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
-        _ageNode.Checked = True
+        _ageNode.Checked = (_type = "Birthday")
     End Sub
     Private Function CalculateAgeNextBirthday(oPerson As Person) As Integer
         Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
