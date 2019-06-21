@@ -17,6 +17,8 @@
         My.Settings.WordPressUrl = TxtWordPress.Text
         My.Settings.wikiSearchUrl = TxtWikiSearch.Text
         My.Settings.googleImageSearch = TxtImageSearch.Text
+        My.Settings.wikiExtractSearch = TxtWikiExtract.Text
+        My.Settings.wikiSentences = NudSentences.Value
         My.Settings.Save()
     End Sub
 
@@ -33,6 +35,8 @@
         TxtWordPress.Text = My.Settings.WordPressUrl
         TxtWikiSearch.Text = My.Settings.wikiSearchUrl
         TxtImageSearch.Text = My.Settings.googleImageSearch
+        TxtWikiExtract.Text = My.Settings.wikiExtractSearch
+        NudSentences.Value = My.Settings.wikiSentences
     End Sub
 
     Private Sub BtnResetForms_Click(sender As Object, e As EventArgs) Handles BtnResetForms.Click

@@ -23,7 +23,7 @@ Partial Class FrmGlobalSettings
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmGlobalSettings))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmGlobalSettings))
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.btnClose = New System.Windows.Forms.Button()
@@ -37,6 +37,8 @@ Partial Class FrmGlobalSettings
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbType = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.TxtGroup = New System.Windows.Forms.TextBox()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -46,7 +48,7 @@ Partial Class FrmGlobalSettings
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 319)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 370)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(534, 24)
         Me.StatusStrip1.TabIndex = 0
@@ -67,7 +69,7 @@ Partial Class FrmGlobalSettings
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.btnClose.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.Location = New System.Drawing.Point(447, 273)
+        Me.btnClose.Location = New System.Drawing.Point(447, 324)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 34)
         Me.btnClose.TabIndex = 1
@@ -90,7 +92,7 @@ Partial Class FrmGlobalSettings
         Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnUpdate.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.btnUpdate.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.Location = New System.Drawing.Point(110, 273)
+        Me.btnUpdate.Location = New System.Drawing.Point(110, 324)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 34)
         Me.btnUpdate.TabIndex = 6
@@ -168,12 +170,30 @@ Partial Class FrmGlobalSettings
         Me.Label3.TabIndex = 28
         Me.Label3.Text = "Type"
         '
-        'frmGlobalSettings
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(44, 274)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(42, 16)
+        Me.Label4.TabIndex = 29
+        Me.Label4.Text = "Group"
+        '
+        'TxtGroup
+        '
+        Me.TxtGroup.Location = New System.Drawing.Point(110, 271)
+        Me.TxtGroup.Name = "TxtGroup"
+        Me.TxtGroup.Size = New System.Drawing.Size(313, 23)
+        Me.TxtGroup.TabIndex = 30
+        '
+        'FrmGlobalSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(534, 343)
+        Me.ClientSize = New System.Drawing.Size(534, 394)
+        Me.Controls.Add(Me.TxtGroup)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.cbType)
         Me.Controls.Add(Me.txtValue)
@@ -190,7 +210,7 @@ Partial Class FrmGlobalSettings
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Name = "frmGlobalSettings"
+        Me.Name = "FrmGlobalSettings"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
@@ -212,4 +232,6 @@ Partial Class FrmGlobalSettings
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents cbType As System.Windows.Forms.ComboBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents TxtGroup As TextBox
 End Class

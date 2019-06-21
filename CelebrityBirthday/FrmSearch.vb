@@ -20,7 +20,7 @@ Public Class FrmSearch
         CloseForm()
     End Sub
     Private Sub BtnSearchByName_Click(sender As Object, e As EventArgs) Handles BtnSearchByName.Click
-        LblStatus.Text = "Searching for " & TxtForename.Text & " " & TxtSurname.Text
+        ShowStatus("Searching for " & TxtForename.Text & " " & TxtSurname.Text)
         bLoadingPeople = True
         DgvPeople.Rows.Clear()
         Dim selectedPersons As List(Of Person) = FindPeopleLikeName(TxtForename.Text, TxtSurname.Text)
@@ -29,14 +29,15 @@ Public Class FrmSearch
         Next
         DgvPeople.ClearSelection()
         bLoadingPeople = False
-        LblStatus.Text = "Search complete"
+        ShowStatus("Search complete - found " & CStr(selectedPersons.Count) & " records")
     End Sub
     Private Sub BtnSearchById_Click(sender As Object, e As EventArgs) Handles BtnSearchById.Click
-        LblStatus.Text = "Searching for " & txtId.Text
+        ShowStatus("Searching for " & txtId.Text)
         LoadScreenFromId(CInt(txtId.Text))
-        LblStatus.Text = "Search complete"
+        ShowStatus("Search complete")
     End Sub
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnUpdate.Click
+        ShowStatus("Updating")
         If DgvPeople.SelectedRows.Count = 1 Then
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
             Using _update As New FrmUpdateDatabase
@@ -44,14 +45,16 @@ Public Class FrmSearch
                 _update.ShowDialog()
             End Using
         End If
-        LblStatus.Text = ""
+        ShowStatus("")
     End Sub
     Private Sub BtnFindInWiki_Click(sender As Object, e As EventArgs) Handles BtnFindInWiki.Click
+        ShowStatus("Finding in wiki")
         Using _browser As New FrmBrowser
             _browser.SearchName = TxtForename.Text & " " & TxtSurname.Text
             _browser.FindinWiki()
             _browser.ShowDialog()
         End Using
+        ShowStatus("")
     End Sub
     Private Sub FrmSearch_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If _browser IsNot Nothing AndAlso Not _browser.IsDisposed Then
@@ -81,10 +84,10 @@ Public Class FrmSearch
                 LoadScreenFromPerson(oPerson)
                 Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
             Else
-                LblStatus.Text = "Id not found"
+                ShowStatus("Id not found")
             End If
         Catch ex As Exception
-            LblStatus.Text = "Unable to load Person" & vbCrLf & ex.Message
+            ShowStatus("Unable to load Person" & vbCrLf & ex.Message)
         End Try
         Return oPerson
     End Function
@@ -103,6 +106,10 @@ Public Class FrmSearch
         tRow.Cells(selPersonMonth.Name).Value = oPerson.BirthMonth
         tRow.Cells(SelPersonYear.Name).Value = oPerson.BirthYear
         tRow.Cells(selDesc.Name).Value = oPerson.ShortDesc
+    End Sub
+    Private Sub ShowStatus(pText As String)
+        LblStatus.Text = pText
+        StatusStrip1.Refresh()
     End Sub
 #End Region
 End Class

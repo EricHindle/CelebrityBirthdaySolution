@@ -111,10 +111,23 @@ Public Class FrmWordPress
     End Sub
     Private Sub GenExcerpt()
         Dim bOK As Boolean = True
-        'Dim listRem As Integer
+        Dim listRem As Integer
         Dim listSize As Integer
         Dim pList As New List(Of Person)
         pList.AddRange(personTable)
+        If pList.Count = 0 Then
+            bOK = False
+        Else
+            listRem = pList.Count Mod 3
+            listSize = Int(pList.Count / 3)
+            If listRem > 0 Then
+                If listRem = 1 Then
+                    pList.Insert((listSize * 2) + 1, New Person)
+                End If
+                pList.Add(New Person)
+                listSize += 1
+            End If
+        End If
         If bOK Then
             Dim newText As New StringBuilder(EXCERPT_START)
             newText.Append(vbCrLf)

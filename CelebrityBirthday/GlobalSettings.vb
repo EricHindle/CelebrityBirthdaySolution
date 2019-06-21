@@ -39,7 +39,7 @@ Public Class GlobalSettings
 
                 End Try
             Else
-                oTa.InsertSetting(settingName, "", "string")
+                oTa.InsertSetting(settingName, "", "string", "")
                 rtnValue = ""
             End If
         Catch ex As Exception
@@ -48,10 +48,20 @@ Public Class GlobalSettings
         Return rtnValue
     End Function
 
-    Public Shared Function SetSetting(ByVal settingName As String, ByVal settingType As String, ByVal settingValue As String) As Boolean
+    Public Shared Function SetSetting(ByVal settingName As String, ByVal settingType As String, ByVal settingValue As String, ByVal Optional settingGroup As String = "") As Boolean
         Dim rtnVal As Boolean = True
         Try
-            oTa.UpdateSetting(settingValue, settingType, settingName)
+            oTa.UpdateSetting(settingValue, settingType, settingGroup, settingName)
+        Catch ex As Exception
+            rtnVal = False
+        End Try
+        Return rtnVal
+    End Function
+
+    Public Shared Function NewSetting(ByVal settingName As String, ByVal settingType As String, ByVal settingValue As String, ByVal Optional settingGroup As String = "") As Boolean
+        Dim rtnVal As Boolean = True
+        Try
+            oTa.InsertSetting(settingName, settingValue, settingType, settingGroup)
         Catch ex As Exception
             rtnVal = False
         End Try
@@ -59,8 +69,15 @@ Public Class GlobalSettings
     End Function
 
     Public Shared Sub LoadGlobalSettings()
-
         My.Settings.Save()
     End Sub
+
+    Public Shared Function GetSettingGroupRows(pGroup As String) As DataRowCollection
+        Dim oRows As DataRowCollection = Nothing
+        If oTa.FillByGroup(oTable, pGroup) > 0 Then
+            oRows = oTable.Rows
+        End If
+        Return oRows
+    End Function
 
 End Class

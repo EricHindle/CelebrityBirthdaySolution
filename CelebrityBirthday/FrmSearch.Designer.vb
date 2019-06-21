@@ -44,7 +44,7 @@ Partial Class FrmSearch
         Me.BtnFindInWiki = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.BtnUpdate = New System.Windows.Forms.Button()
         Me.BtnClear = New System.Windows.Forms.Button()
         CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -257,19 +257,20 @@ Partial Class FrmSearch
         Me.LblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.LblStatus.Name = "LblStatus"
-        Me.LblStatus.Size = New System.Drawing.Size(0, 17)
+        Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.LblStatus.Size = New System.Drawing.Size(3, 17)
         '
-        'Button2
+        'BtnUpdate
         '
-        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Button2.Location = New System.Drawing.Point(974, 347)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(117, 64)
-        Me.Button2.TabIndex = 25
-        Me.Button2.Text = "Update selected person"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.BtnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnUpdate.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdate.Location = New System.Drawing.Point(974, 347)
+        Me.BtnUpdate.Name = "BtnUpdate"
+        Me.BtnUpdate.Size = New System.Drawing.Size(117, 64)
+        Me.BtnUpdate.TabIndex = 25
+        Me.BtnUpdate.Text = "Update selected person"
+        Me.BtnUpdate.UseVisualStyleBackColor = True
         '
         'BtnClear
         '
@@ -289,7 +290,7 @@ Partial Class FrmSearch
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1106, 538)
         Me.Controls.Add(Me.BtnClear)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.BtnUpdate)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -327,7 +328,7 @@ Partial Class FrmSearch
     Friend WithEvents BtnFindInWiki As Button
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents LblStatus As ToolStripStatusLabel
-    Friend WithEvents Button2 As Button
+    Friend WithEvents BtnUpdate As Button
     Friend WithEvents BtnClear As Button
     Friend WithEvents SelPersonId As DataGridViewTextBoxColumn
     Friend WithEvents selPersonDay As DataGridViewTextBoxColumn

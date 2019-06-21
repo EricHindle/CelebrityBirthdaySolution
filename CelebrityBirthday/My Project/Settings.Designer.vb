@@ -260,13 +260,25 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=&exsentence"& _ 
-            "s=2&explaintext=&redirects=&formatversion=2&format=json&titles=")>  _
+            "s=#&explaintext=&redirects=&formatversion=2&format=json&titles=")>  _
         Public Property wikiExtractSearch() As String
             Get
                 Return CType(Me("wikiExtractSearch"),String)
             End Get
             Set
                 Me("wikiExtractSearch") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("4")>  _
+        Public Property wikiSentences() As Integer
+            Get
+                Return CType(Me("wikiSentences"),Integer)
+            End Get
+            Set
+                Me("wikiSentences") = value
             End Set
         End Property
     End Class

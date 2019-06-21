@@ -3,7 +3,7 @@ Imports System.Globalization
 Imports System.Net
 Imports System.IO
 Imports System.Drawing.Drawing2D
-
+Imports System.Web.Script.Serialization
 Module modCbday
     Public Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
@@ -200,8 +200,8 @@ Module modCbday
     Public Function GetWikiSearchString(oText As String) As String
         Return My.Settings.wikiSearchUrl & oText.Replace(" ", "+")
     End Function
-    Public Function GetWikiExtractString(oText As String) As String
-        Return My.Settings.wikiExtractSearch & oText.Replace(" ", "+")
+    Public Function GetWikiExtractString(oText As String, Optional sentences As Integer = 2) As String
+        Return My.Settings.wikiExtractSearch.Replace("#", CStr(sentences)) & oText.Replace(" ", "+")
     End Function
 
     Public Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
@@ -266,5 +266,37 @@ Module modCbday
         End If
 
         Return MakeList(_pre, _inner, _post)
+    End Function
+
+    Public Function NavigateToUrl(pSearchString As String) As WebResponse
+        Dim request As WebRequest = Nothing
+        ' Create a request for the URL. 
+        request = WebRequest.Create(pSearchString)
+        ' If required by the server, set the credentials.
+        request.Credentials = CredentialCache.DefaultCredentials
+        Return request.GetResponse()
+    End Function
+    Public Function GetExtractFromResponse(pResponse As WebResponse) As String
+        Dim _extract As String = ""
+        Dim wikipage As String = ""
+        Try
+            Dim sr As System.IO.StreamReader = New System.IO.StreamReader(pResponse.GetResponseStream())
+            wikipage = sr.ReadToEnd
+            Debug.Print(wikipage)
+            Dim jss As New JavaScriptSerializer()
+            Dim extractDictionary As Dictionary(Of String, Object) = jss.Deserialize(Of Dictionary(Of String, Object))(wikipage)
+            Dim queryDictionary As Dictionary(Of String, Object) = extractDictionary("query")
+            Dim _pagesList As ArrayList = TryCast(queryDictionary("pages"), ArrayList)
+            If _pagesList IsNot Nothing Then
+                Dim pageDictionary As Dictionary(Of String, Object) = _pagesList(0)
+                _extract = TryCast(pageDictionary("extract"), String)
+                _extract = _extract.Replace(vbLf, " ").Replace(".", ". ").Replace("  ", " ")
+
+            End If
+        Catch ex As Exception
+            Debug.Print(ex.Message)
+            Debug.Print(wikipage)
+        End Try
+        Return _extract
     End Function
 End Module

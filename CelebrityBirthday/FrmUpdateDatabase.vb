@@ -322,6 +322,7 @@ Public Class FrmUpdateDatabase
         My.Settings.Save()
     End Sub
     Private Sub Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        NudSentences.Value = My.Settings.wikiSentences
         Label11.Text = "Version: " & My.Application.Info.Version.ToString
         GetFormPos(Me, My.Settings.updformpos)
         txtLoadYr.Text = ""
@@ -760,5 +761,12 @@ Public Class FrmUpdateDatabase
         End If
         Return isextracted
     End Function
+
+    Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
+        Dim _searchName As String = MakeFullName(txtForename.Text, txtSurname.Text)
+        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, NudSentences.Value))
+        Dim extract As String = GetExtractFromResponse(_response)
+        txtDesc.Text = extract
+    End Sub
 #End Region
 End Class

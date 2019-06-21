@@ -49,7 +49,7 @@ Partial Class FrmWordPress
         '
         Me.btnCopyExcerpt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCopyExcerpt.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCopyExcerpt.Location = New System.Drawing.Point(441, 122)
+        Me.btnCopyExcerpt.Location = New System.Drawing.Point(462, 142)
         Me.btnCopyExcerpt.Name = "btnCopyExcerpt"
         Me.btnCopyExcerpt.Size = New System.Drawing.Size(61, 26)
         Me.btnCopyExcerpt.TabIndex = 65
@@ -60,7 +60,7 @@ Partial Class FrmWordPress
         '
         Me.btnCopyFull.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCopyFull.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCopyFull.Location = New System.Drawing.Point(441, 247)
+        Me.btnCopyFull.Location = New System.Drawing.Point(462, 280)
         Me.btnCopyFull.Name = "btnCopyFull"
         Me.btnCopyFull.Size = New System.Drawing.Size(61, 26)
         Me.btnCopyFull.TabIndex = 62
@@ -78,7 +78,7 @@ Partial Class FrmWordPress
         Me.txtCurrentExcerpt.Multiline = True
         Me.txtCurrentExcerpt.Name = "txtCurrentExcerpt"
         Me.txtCurrentExcerpt.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCurrentExcerpt.Size = New System.Drawing.Size(437, 165)
+        Me.txtCurrentExcerpt.Size = New System.Drawing.Size(458, 185)
         Me.txtCurrentExcerpt.TabIndex = 58
         Me.txtCurrentExcerpt.WordWrap = False
         '
@@ -93,7 +93,7 @@ Partial Class FrmWordPress
         Me.txtCurrentText.Multiline = True
         Me.txtCurrentText.Name = "txtCurrentText"
         Me.txtCurrentText.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCurrentText.Size = New System.Drawing.Size(432, 290)
+        Me.txtCurrentText.Size = New System.Drawing.Size(453, 323)
         Me.txtCurrentText.TabIndex = 57
         Me.txtCurrentText.WordWrap = False
         '
@@ -114,14 +114,14 @@ Partial Class FrmWordPress
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.txtCurrentExcerpt)
         Me.SplitContainer1.Panel2.Controls.Add(Me.btnCopyExcerpt)
-        Me.SplitContainer1.Size = New System.Drawing.Size(520, 482)
-        Me.SplitContainer1.SplitterDistance = 303
+        Me.SplitContainer1.Size = New System.Drawing.Size(541, 535)
+        Me.SplitContainer1.SplitterDistance = 336
         Me.SplitContainer1.TabIndex = 68
         '
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClose.Location = New System.Drawing.Point(908, 511)
+        Me.BtnClose.Location = New System.Drawing.Point(948, 564)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 33)
         Me.BtnClose.TabIndex = 69
@@ -134,7 +134,7 @@ Partial Class FrmWordPress
         Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
-        Me.cboMonth.Location = New System.Drawing.Point(88, 517)
+        Me.cboMonth.Location = New System.Drawing.Point(88, 570)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(207, 27)
         Me.cboMonth.TabIndex = 84
@@ -145,7 +145,7 @@ Partial Class FrmWordPress
         Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(11, 517)
+        Me.cboDay.Location = New System.Drawing.Point(11, 570)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(71, 27)
         Me.cboDay.TabIndex = 83
@@ -154,7 +154,7 @@ Partial Class FrmWordPress
         '
         Me.txtLoadMth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLoadMth.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadMth.Location = New System.Drawing.Point(391, 522)
+        Me.txtLoadMth.Location = New System.Drawing.Point(431, 575)
         Me.txtLoadMth.Name = "txtLoadMth"
         Me.txtLoadMth.Size = New System.Drawing.Size(48, 22)
         Me.txtLoadMth.TabIndex = 85
@@ -163,7 +163,7 @@ Partial Class FrmWordPress
         '
         Me.txtLoadYr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLoadYr.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadYr.Location = New System.Drawing.Point(445, 522)
+        Me.txtLoadYr.Location = New System.Drawing.Point(485, 575)
         Me.txtLoadYr.Name = "txtLoadYr"
         Me.txtLoadYr.Size = New System.Drawing.Size(71, 22)
         Me.txtLoadYr.TabIndex = 86
@@ -184,8 +184,8 @@ Partial Class FrmWordPress
         'SplitContainer2.Panel2
         '
         Me.SplitContainer2.Panel2.Controls.Add(Me.WebBrowser1)
-        Me.SplitContainer2.Size = New System.Drawing.Size(971, 482)
-        Me.SplitContainer2.SplitterDistance = 520
+        Me.SplitContainer2.Size = New System.Drawing.Size(1011, 535)
+        Me.SplitContainer2.SplitterDistance = 541
         Me.SplitContainer2.TabIndex = 87
         '
         'WebBrowser1
@@ -194,7 +194,7 @@ Partial Class FrmWordPress
         Me.WebBrowser1.Location = New System.Drawing.Point(0, 0)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(443, 478)
+        Me.WebBrowser1.Size = New System.Drawing.Size(462, 531)
         Me.WebBrowser1.TabIndex = 0
         '
         'FrmWordPress
@@ -202,7 +202,7 @@ Partial Class FrmWordPress
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(995, 556)
+        Me.ClientSize = New System.Drawing.Size(1035, 609)
         Me.Controls.Add(Me.SplitContainer2)
         Me.Controls.Add(Me.txtLoadMth)
         Me.Controls.Add(Me.txtLoadYr)

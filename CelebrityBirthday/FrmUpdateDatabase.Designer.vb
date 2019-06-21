@@ -96,10 +96,13 @@ Partial Class FrmUpdateDatabase
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.BtnGetWikiText = New System.Windows.Forms.Button()
+        Me.NudSentences = New System.Windows.Forms.NumericUpDown()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'cbNoTweet
@@ -224,7 +227,7 @@ Partial Class FrmUpdateDatabase
         'btnWiki
         '
         Me.btnWiki.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnWiki.Location = New System.Drawing.Point(38, 171)
+        Me.btnWiki.Location = New System.Drawing.Point(35, 170)
         Me.btnWiki.Name = "btnWiki"
         Me.btnWiki.Size = New System.Drawing.Size(69, 42)
         Me.btnWiki.TabIndex = 110
@@ -255,7 +258,7 @@ Partial Class FrmUpdateDatabase
         Me.Label15.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(34, 513)
+        Me.Label15.Location = New System.Drawing.Point(35, 513)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(67, 14)
         Me.Label15.TabIndex = 109
@@ -277,7 +280,7 @@ Partial Class FrmUpdateDatabase
         Me.Label14.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(34, 470)
+        Me.Label14.Location = New System.Drawing.Point(35, 470)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(60, 14)
         Me.Label14.TabIndex = 108
@@ -316,7 +319,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.lblID.AutoSize = True
         Me.lblID.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblID.Location = New System.Drawing.Point(34, 58)
+        Me.lblID.Location = New System.Drawing.Point(35, 58)
         Me.lblID.Name = "lblID"
         Me.lblID.Size = New System.Drawing.Size(0, 18)
         Me.lblID.TabIndex = 104
@@ -375,7 +378,7 @@ Partial Class FrmUpdateDatabase
         Me.Label10.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(34, 426)
+        Me.Label10.Location = New System.Drawing.Point(35, 426)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(66, 14)
         Me.Label10.TabIndex = 103
@@ -467,7 +470,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(34, 100)
+        Me.Label2.Location = New System.Drawing.Point(35, 100)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 14)
         Me.Label2.TabIndex = 93
@@ -488,7 +491,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(34, 22)
+        Me.Label1.Location = New System.Drawing.Point(35, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 14)
         Me.Label1.TabIndex = 90
@@ -510,7 +513,7 @@ Partial Class FrmUpdateDatabase
         'PictureBox1
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox1.Location = New System.Drawing.Point(37, 251)
+        Me.PictureBox1.Location = New System.Drawing.Point(35, 282)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(70, 65)
         Me.PictureBox1.TabIndex = 130
@@ -786,12 +789,34 @@ Partial Class FrmUpdateDatabase
         Me.StatusStrip1.TabIndex = 143
         Me.StatusStrip1.Text = "StatusStrip1"
         '
+        'BtnGetWikiText
+        '
+        Me.BtnGetWikiText.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnGetWikiText.Location = New System.Drawing.Point(35, 219)
+        Me.BtnGetWikiText.Name = "BtnGetWikiText"
+        Me.BtnGetWikiText.Size = New System.Drawing.Size(69, 42)
+        Me.BtnGetWikiText.TabIndex = 144
+        Me.BtnGetWikiText.Text = "Get Wiki Text"
+        Me.BtnGetWikiText.UseVisualStyleBackColor = True
+        '
+        'NudSentences
+        '
+        Me.NudSentences.Location = New System.Drawing.Point(109, 231)
+        Me.NudSentences.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NudSentences.Name = "NudSentences"
+        Me.NudSentences.Size = New System.Drawing.Size(46, 22)
+        Me.NudSentences.TabIndex = 145
+        Me.NudSentences.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1271, 805)
+        Me.Controls.Add(Me.NudSentences)
+        Me.Controls.Add(Me.BtnGetWikiText)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtLoadDay)
@@ -856,6 +881,7 @@ Partial Class FrmUpdateDatabase
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -933,4 +959,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblStatus As ToolStripStatusLabel
     Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents BtnGetWikiText As Button
+    Friend WithEvents NudSentences As NumericUpDown
 End Class

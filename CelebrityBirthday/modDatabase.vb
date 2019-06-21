@@ -10,6 +10,8 @@
     Private ReadOnly oImgTable As New CelebrityBirthdayDataSet.ImageDataTable
     Private ReadOnly oFullPersonTa As New CelebrityBirthdayDataSetTableAdapters.FullPersonTableAdapter
     Private ReadOnly oFullPersonTable As New CelebrityBirthdayDataSet.FullPersonDataTable
+    Private ReadOnly oTwitterAuthTa As New CelebrityBirthdayDataSetTableAdapters.TwitterAuthTableAdapter
+    Private ReadOnly oTwitterAuthTable As New CelebrityBirthdayDataSet.TwitterAuthDataTable
 #End Region
 #Region "person"
     Public Function DeletePerson(ByVal _id As Integer)
@@ -225,8 +227,33 @@
         End If
         Return oDrow
     End Function
-
-
-
+    Public Function GetAuthById(pId As String) As TwitterOAuth
+        Dim oTwAuth As TwitterOAuth = Nothing
+        If oTwitterAuthTa.FillById(oTwitterAuthTable, pId) = 1 Then
+            Dim oRow As CelebrityBirthdayDataSet.TwitterAuthRow = oTwitterAuthTable.Rows(0)
+            oTwAuth = New TwitterOAuth
+            oTwAuth.Token = If(oRow.IsTokenNull, "", oRow.Token)
+            oTwAuth.TokenSecret = If(oRow.IsSecretNull, "", oRow.Secret)
+            oTwAuth.Verifier = If(oRow.IsVerifierNull, "", oRow.Verifier)
+        End If
+        Return oTwAuth
+    End Function
+    Public Function UpdateAuth(pId, pToken, pSecret, pVerifier) As Boolean
+        Dim isOK As Boolean
+        If GetAuthById(pId) Is Nothing Then
+            isOK = oTwitterAuthTa.InsertAuth(pId, pVerifier, pToken, pSecret) = 1
+        Else
+            isOK = oTwitterAuthTa.UpdateAuth(pVerifier, pToken, pSecret, pId) = 1
+        End If
+        Return isOK
+    End Function
+    Public Function GetTwitterUsers() As List(Of String)
+        Dim _list As New List(Of String)
+        oTwitterAuthTa.Fill(oTwitterAuthTable)
+        For Each oRow As CelebrityBirthdayDataSet.TwitterAuthRow In oTwitterAuthTable.Rows
+            _list.Add(oRow.Id)
+        Next
+        Return _list
+    End Function
 #End Region
 End Module

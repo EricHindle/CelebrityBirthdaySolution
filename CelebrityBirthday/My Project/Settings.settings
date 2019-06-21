@@ -59,7 +59,10 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="wikiExtractSearch" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://en.wikipedia.org/w/api.php?action=query&amp;prop=extracts&amp;exintro=&amp;exsentences=2&amp;explaintext=&amp;redirects=&amp;formatversion=2&amp;format=json&amp;titles=</Value>
+      <Value Profile="(Default)">https://en.wikipedia.org/w/api.php?action=query&amp;prop=extracts&amp;exintro=&amp;exsentences=#&amp;explaintext=&amp;redirects=&amp;formatversion=2&amp;format=json&amp;titles=</Value>
+    </Setting>
+    <Setting Name="wikiSentences" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
     </Setting>
   </Settings>
 </SettingsFile>

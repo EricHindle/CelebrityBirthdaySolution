@@ -43,9 +43,14 @@ Partial Class FrmOptions
         Me.txtTwitterSearch = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TxtWikiExtract = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.BtnGlobalSettings = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.NudSentences = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnCancel
@@ -53,7 +58,7 @@ Partial Class FrmOptions
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnCancel.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCancel.Location = New System.Drawing.Point(392, 431)
+        Me.btnCancel.Location = New System.Drawing.Point(392, 505)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(87, 41)
         Me.btnCancel.TabIndex = 0
@@ -65,7 +70,7 @@ Partial Class FrmOptions
         Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnSave.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnSave.Location = New System.Drawing.Point(272, 431)
+        Me.btnSave.Location = New System.Drawing.Point(272, 505)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(87, 41)
         Me.btnSave.TabIndex = 1
@@ -126,7 +131,7 @@ Partial Class FrmOptions
         Me.Version.BackColor = System.Drawing.Color.Transparent
         Me.Version.Font = New System.Drawing.Font("Papyrus", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Version.Location = New System.Drawing.Point(12, 448)
+        Me.Version.Location = New System.Drawing.Point(12, 522)
         Me.Version.Name = "Version"
         Me.Version.Size = New System.Drawing.Size(214, 28)
         Me.Version.TabIndex = 8
@@ -136,7 +141,7 @@ Partial Class FrmOptions
         '
         Me.BtnResetForms.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnResetForms.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnResetForms.Location = New System.Drawing.Point(16, 352)
+        Me.BtnResetForms.Location = New System.Drawing.Point(16, 425)
         Me.BtnResetForms.Name = "BtnResetForms"
         Me.BtnResetForms.Size = New System.Drawing.Size(86, 73)
         Me.BtnResetForms.TabIndex = 9
@@ -181,6 +186,8 @@ Partial Class FrmOptions
         '
         'TxtImageSearch
         '
+        Me.TxtImageSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtImageSearch.Location = New System.Drawing.Point(172, 29)
         Me.TxtImageSearch.Name = "TxtImageSearch"
         Me.TxtImageSearch.Size = New System.Drawing.Size(333, 22)
@@ -188,6 +195,8 @@ Partial Class FrmOptions
         '
         'TxtWordPress
         '
+        Me.TxtWordPress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWordPress.Location = New System.Drawing.Point(172, 68)
         Me.TxtWordPress.Name = "TxtWordPress"
         Me.TxtWordPress.Size = New System.Drawing.Size(333, 22)
@@ -195,6 +204,8 @@ Partial Class FrmOptions
         '
         'TxtWikiSearch
         '
+        Me.TxtWikiSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWikiSearch.Location = New System.Drawing.Point(172, 107)
         Me.TxtWikiSearch.Name = "TxtWikiSearch"
         Me.TxtWikiSearch.Size = New System.Drawing.Size(333, 22)
@@ -202,6 +213,8 @@ Partial Class FrmOptions
         '
         'txtTwitterSearch
         '
+        Me.txtTwitterSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTwitterSearch.Location = New System.Drawing.Point(172, 146)
         Me.txtTwitterSearch.Name = "txtTwitterSearch"
         Me.txtTwitterSearch.Size = New System.Drawing.Size(333, 22)
@@ -224,6 +237,10 @@ Partial Class FrmOptions
         '
         'GroupBox2
         '
+        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.TxtWikiExtract)
+        Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.txtTwitterSearch)
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.Label5)
@@ -234,28 +251,68 @@ Partial Class FrmOptions
         Me.GroupBox2.Controls.Add(Me.TxtImageSearch)
         Me.GroupBox2.Location = New System.Drawing.Point(16, 146)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(521, 189)
+        Me.GroupBox2.Size = New System.Drawing.Size(521, 264)
         Me.GroupBox2.TabIndex = 19
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "URLs"
+        '
+        'TxtWikiExtract
+        '
+        Me.TxtWikiExtract.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtWikiExtract.Location = New System.Drawing.Point(172, 185)
+        Me.TxtWikiExtract.Multiline = True
+        Me.TxtWikiExtract.Name = "TxtWikiExtract"
+        Me.TxtWikiExtract.Size = New System.Drawing.Size(333, 61)
+        Me.TxtWikiExtract.TabIndex = 19
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(13, 188)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(97, 14)
+        Me.Label8.TabIndex = 18
+        Me.Label8.Text = "Wiki Extract URL"
         '
         'BtnGlobalSettings
         '
         Me.BtnGlobalSettings.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGlobalSettings.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 352)
+        Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 425)
         Me.BtnGlobalSettings.Name = "BtnGlobalSettings"
         Me.BtnGlobalSettings.Size = New System.Drawing.Size(86, 73)
         Me.BtnGlobalSettings.TabIndex = 20
         Me.BtnGlobalSettings.Text = "Global Settings"
         Me.BtnGlobalSettings.UseVisualStyleBackColor = True
         '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(225, 425)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(89, 14)
+        Me.Label9.TabIndex = 21
+        Me.Label9.Text = "Wiki sentences"
+        '
+        'NudSentences
+        '
+        Me.NudSentences.Location = New System.Drawing.Point(329, 423)
+        Me.NudSentences.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NudSentences.Name = "NudSentences"
+        Me.NudSentences.Size = New System.Drawing.Size(60, 22)
+        Me.NudSentences.TabIndex = 22
+        Me.NudSentences.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(549, 485)
+        Me.ClientSize = New System.Drawing.Size(549, 559)
+        Me.Controls.Add(Me.NudSentences)
+        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.BtnGlobalSettings)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -271,7 +328,9 @@ Partial Class FrmOptions
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnCancel As System.Windows.Forms.Button
@@ -295,4 +354,8 @@ Partial Class FrmOptions
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents BtnGlobalSettings As Button
+    Friend WithEvents TxtWikiExtract As TextBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents NudSentences As NumericUpDown
 End Class

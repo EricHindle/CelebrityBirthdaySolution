@@ -18,12 +18,15 @@ Public Class FrmGlobalSettings
     End Sub
 
     Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        oTa.Fill(oTable)
+        Try
+            oTa.Fill(oTable)
+        Catch ex As Exception
+        End Try
         cbSelect.DataSource = oTable
         cbSelect.DisplayMember = "pKey"
         cbSelect.ValueMember = "pKey"
         lblFormName.Text = FORM_NAME
-        clearForm()
+        ClearForm()
     End Sub
 
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -34,6 +37,7 @@ Public Class FrmGlobalSettings
         cbSelect.SelectedIndex = -1
         cbType.SelectedValue = 0
         txtValue.Text = ""
+        TxtGroup.Text = ""
     End Sub
 
     Private Sub FillForm(ByVal _name As String)
@@ -43,6 +47,7 @@ Public Class FrmGlobalSettings
             Dim oRow As CelebrityBirthdayDataSet.SettingsRow = _table.Rows(0)
             txtValue.Text = oRow.pValue
             cbType.SelectedIndex = cbType.FindString(oRow.pType)
+            TxtGroup.Text = oRow.pGroup
         Else
             lblStatus.Text = "Cannot identify a single record"
         End If
@@ -65,7 +70,7 @@ Public Class FrmGlobalSettings
         If cbSelect.SelectedIndex > -1 Then
             Dim recordId As String = cbSelect.SelectedValue
 
-            If GlobalSettings.setSetting(recordId, cbType.SelectedItem, txtValue.Text) Then
+            If GlobalSettings.SetSetting(recordId, cbType.SelectedItem, txtValue.Text, TxtGroup.Text) Then
                 LogStatus(recordId & " updated")
             Else
                 LogStatus(recordId & " NOT updated")

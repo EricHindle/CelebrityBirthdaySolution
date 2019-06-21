@@ -394,5 +394,10 @@ Public Class FrmTwitterImage
         Return _sc
     End Function
 
+    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
+        cboDay.SelectedIndex = Today.Day - 1
+        cboMonth.SelectedIndex = Today.Month - 1
+    End Sub
+
 #End Region
 End Class
