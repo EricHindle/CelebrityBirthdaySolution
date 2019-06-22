@@ -1,8 +1,9 @@
 ﻿Imports System.Drawing
 Imports System.IO
 Imports System.Text
+Imports TweetSharp
 
-Public Class FrmTwitterImage
+Public Class FrmTweet
 #Region "constants"
     Private Const DEFAULT_WIDTH As Integer = 6
     Private Const NUD_BASENAME As String = "NudHorizontal"
@@ -15,49 +16,14 @@ Public Class FrmTwitterImage
     Private oAnniversaryList As New List(Of Person)
     Private oTweetLists As New List(Of List(Of Person))
     Private IsNoGenerate As Boolean
+    Private ReadOnly tw As New TwitterOAuth
 #End Region
 #Region "form control handlers"
-    Private Sub CboDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged,
-                                                                                    cboMonth.SelectedIndexChanged
-        DisplayStatus("")
-        NudPersonsPerTweet.Value = 0
-        If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
-            DisplayStatus("Loading People From Database")
-            Me.Refresh()
-            personTable.Clear()
-            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-            oBirthdayList = FindBirthdays(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-            oAnniversaryList = FindAnniversaries(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-            For iCt As Integer = personTable.Count - 1 To 0 Step -1
-                Dim _person As Person = personTable(iCt)
-                If _person.Social.IsNoTweet Then
-                    personTable.Remove(_person)
-                End If
-            Next
-            For iCt As Integer = oBirthdayList.Count - 1 To 0 Step -1
-                Dim _person As Person = oBirthdayList(iCt)
-                If _person.Social.IsNoTweet Then
-                    oBirthdayList.Remove(_person)
-                End If
-            Next
-            For iCt As Integer = oAnniversaryList.Count - 1 To 0 Step -1
-                Dim _person As Person = oAnniversaryList(iCt)
-                If _person.Social.IsNoTweet Then
-                    oAnniversaryList.Remove(_person)
-                End If
-            Next
-            LblImageCount.Text = CStr(personTable.Count) + " people selected"
-            If personTable.Count > 0 Then
-                DisplayStatus(" - Complete", True)
-            Else
-                DisplayStatus("- No Images", True)
-            End If
-        End If
-    End Sub
+
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-    Private Sub BtnGenImage_Click(sender As Object, e As EventArgs) Handles BtnGenImage.Click
+    Private Sub GenerateImages()
         DisplayStatus("Generating images")
         lblError.Visible = False
         TxtStats.Text = ""
@@ -73,17 +39,19 @@ Public Class FrmTwitterImage
                 tabTitle = "Full_"
                 GeneratePictures(oTweetLists, tabTitle, _imageStart)
             Else
-                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length)
+                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length, "B")
                 oTweetLists.AddRange(_birthdayImageTweets)
                 tabTitle = "Birthdays_"
                 GeneratePictures(oTweetLists, tabTitle, _imageStart)
                 _imageStart = oTweetLists.Count
-                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length)
+                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length, "A")
                 oTweetLists.AddRange(_annivImageTweets)
                 tabTitle = "Anniv_"
                 GeneratePictures(oTweetLists, tabTitle, _imageStart)
             End If
             DisplayStatus("Images Complete")
+        Else
+            MsgBox("Select some people", MsgBoxStyle.Exclamation, "Error")
         End If
     End Sub
     Private Sub Horizontal_ValueChanged(sender As Object, e As System.EventArgs)
@@ -119,6 +87,8 @@ Public Class FrmTwitterImage
     End Sub
     Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.twitterimagepos)
+        GetAuthData()
+        FillTwitterUserList()
     End Sub
     Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.twitterimagepos = SetFormPos(Me)
@@ -173,8 +143,13 @@ Public Class FrmTwitterImage
 
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
-            If _person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle) Then
-                _outString.Append(" @").Append(_person.Social.TwitterHandle)
+            If rbAges.Checked AndAlso _type.StartsWith("B") Then
+                _outString.Append(" (" & CStr(CalculateAgeNextBirthday(_person)) & ")")
+            End If
+            If rbHandles.Checked Then
+                If _person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle) Then
+                    _outString.Append(" @").Append(_person.Social.TwitterHandle)
+                End If
             End If
             _outString.Append(vbCrLf)
         Next
@@ -221,7 +196,7 @@ Public Class FrmTwitterImage
     End Sub
 #End Region
 #Region "functions"
-    Private Function BuildLists(oPersonlist As List(Of Person), availableLength As Integer, _numberOfNamesPerTweet As Integer) As List(Of List(Of Person))
+    Private Function BuildLists(oPersonlist As List(Of Person), availableLength As Integer, _numberOfNamesPerTweet As Integer, _type As String) As List(Of List(Of Person))
         Dim ListOfLists As New List(Of List(Of Person))
         Dim _ct As Integer = 0
         Dim _tweetSize As Integer = 0
@@ -230,7 +205,7 @@ Public Class FrmTwitterImage
             Dim _tweetCt As Integer = 0
             Do Until _ct = oPersonlist.Count OrElse _tweetCt = _numberOfNamesPerTweet
                 Dim _person As Person = oPersonlist(_ct)
-                _tweetSize += GetTweetLineLength(_person)
+                _tweetSize += GetTweetLineLength(_person, _type)
                 _tweetList.Add(_person)
                 _tweetCt += 1
                 _ct += 1
@@ -245,20 +220,22 @@ Public Class FrmTwitterImage
         Loop
         Return ListOfLists
     End Function
-    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer) As List(Of List(Of Person))
+    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As String) As List(Of List(Of Person))
         Dim _totalLength As Integer = 0
         Dim availableLength As Integer = TWEET_SIZE - _headerLength
         For Each _person As Person In oPersonlist
-            Dim _tweetLineLength As Integer = GetTweetLineLength(_person)
+            Dim _tweetLineLength As Integer = GetTweetLineLength(_person, _type)
             _totalLength += _tweetLineLength
         Next
         Dim _numberOfTweets As Integer = Math.Ceiling(_totalLength / availableLength)
         Dim _numberOfNamesPerTweet As Integer = If(NudPersonsPerTweet.Value > 0, NudPersonsPerTweet.Value, Math.Ceiling(oPersonlist.Count / _numberOfTweets))
-        Dim ListOfLists As List(Of List(Of Person)) = BuildLists(oPersonlist, availableLength, _numberOfNamesPerTweet)
+        Dim ListOfLists As List(Of List(Of Person)) = BuildLists(oPersonlist, availableLength, _numberOfNamesPerTweet, _type)
         Return ListOfLists
     End Function
-    Private Function GetTweetLineLength(_person As Person) As Integer
-        Return _person.Name.Length + _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 3, 1)
+    Private Function GetTweetLineLength(_person As Person, _type As String) As Integer
+        Return _person.Name.Length _
+            + If(rbHandles.Checked, _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 3, 1), 0) _
+            + If(_type = "B" And rbAges.Checked, 5, 0)
     End Function
     Private Function GetHeading(_typeNode As String) As String
         Dim _header As String = ""
@@ -296,11 +273,27 @@ Public Class FrmTwitterImage
         _splitContainer.Name = "SplitContainer" & CStr(_index)
 
         _splitContainer.Panel1.Controls.Add(NewNumericUpDown(_index))
-        _splitContainer.Panel1.Controls.Add(NewLabel(_index, 3, 430, "Width", "Label1"))
+        _splitContainer.Panel1.Controls.Add(NewLabel(_index, 3, 432, "Width", "Label1"))
         _splitContainer.Panel1.Controls.Add(NewPictureBox(_index))
-
+        Dim _newSendButton As Button = NewButton(_index, 213, 428, "Send", "BtnSend")
+        _splitContainer.Panel1.Controls.Add(_newSendButton)
+        AddHandler _newSendButton.Click, AddressOf BtnSendClick
         _splitContainer.Panel2.Controls.Add(NewRichTextBox(_index))
         Return _splitContainer
+    End Function
+    Private Function NewButton(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _buttonNameBase As String) As Button
+        Dim _button As New Button
+        With _button
+            .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            .Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .ForeColor = System.Drawing.Color.RoyalBlue
+            .Location = New System.Drawing.Point(_locationX, _locationY)
+            .Name = _buttonNameBase & _index
+            .Size = New System.Drawing.Size(139, 33)
+            .Text = _text
+            .UseVisualStyleBackColor = True
+        End With
+        Return _button
     End Function
     Private Function NewLabel(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _labelNameBase As String) As Label
         Dim _label1 As New Label
@@ -399,5 +392,152 @@ Public Class FrmTwitterImage
         cboMonth.SelectedIndex = Today.Month - 1
     End Sub
 
+    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
+        BuildTrees()
+        GenerateImages()
+    End Sub
+    Private Sub BuildTrees()
+        DisplayStatus("Selecting...")
+        tvBirthday.Nodes.Clear()
+        personTable.Clear()
+        If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
+            Dim _day As Integer = cboDay.SelectedIndex + 1
+            Dim _mth As Integer = cboMonth.SelectedIndex + 1
+            Dim testDate As Date = New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
+            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, True)
+            oBirthdayList = FindBirthdays(_day, _mth, True)
+            oAnniversaryList = FindAnniversaries(_day, _mth, True)
+            LblImageCount.Text = CStr(personTable.Count) + " people selected"
+            AddTypeNode(oAnniversaryList, testDate, tvBirthday, "Anniversary")
+            AddTypeNode(oBirthdayList, testDate, tvBirthday, "Birthday")
+            DisplayStatus("Selection Complete")
+        Else
+            MsgBox("Select a date", MsgBoxStyle.Exclamation, "Error")
+        End If
+    End Sub
+    Private Function AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, _treeView As TreeView, _type As String) As TreeNode
+        Dim newBirthdayNode As TreeNode = _treeView.Nodes.Add(Format(testDate, "MMMM dd") & _type, _type)
+        newBirthdayNode.Checked = True
+        For Each oPerson As Person In oBirthdayTable
+            AddNameNode(newBirthdayNode, oPerson, _type)
+        Next
+        newBirthdayNode.Expand()
+        Return newBirthdayNode
+    End Function
+    Private Function AddNameNode(newBirthdayNode As TreeNode, oPerson As Person, _type As String) As TreeNode
+        Dim newNameNode As TreeNode = newBirthdayNode.Nodes.Add(oPerson.Name)
+        If oPerson.Social IsNot Nothing Then
+            If Not String.IsNullOrEmpty(oPerson.Social.TwitterHandle) Then
+                Dim _twitterNode As TreeNode = newNameNode.Nodes.Add("twitter", oPerson.Social.TwitterHandle)
+                _twitterNode.Checked = True
+            End If
+            newNameNode.Checked = True
+            If oPerson.Social.IsNoTweet = True Then
+                newNameNode.Checked = False
+            End If
+        End If
+        newNameNode.Nodes.Add("id", oPerson.Id)
+        newNameNode.Nodes.Add("desc", oPerson.ShortDesc)
+        newNameNode.Nodes.Add("length", oPerson.Name.Length)
+        newNameNode.Nodes.Add("year", oPerson.BirthYear)
+        Dim _age As Integer = CalculateAgeNextBirthday(oPerson)
+        Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
+        _ageNode.Checked = (_type = "Birthday")
+        Return newNameNode
+    End Function
+    Private Function CalculateAgeNextBirthday(oPerson As Person) As Integer
+        Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
+        Dim _thisMonth As Integer = Today.Month
+        Dim _thisDay As Integer = Today.Day
+        Dim _years As Integer = DateDiff(DateInterval.Year, _dob, Today)
+        If _thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay) Then
+            _years += 1
+        End If
+        Return _years
+    End Function
+
+    Private Sub BtnSendClick(sender As Object, e As EventArgs)
+        If cmbTwitterUsers.SelectedIndex >= 0 Then
+            SendTweet()
+        Else
+            Using _sendTweet As New FrmSendTwitter
+                _sendTweet.TweetText = GetRichTextBoxFromPage(TabControl1.SelectedTab).Text
+                _sendTweet.ShowDialog()
+            End Using
+        End If
+    End Sub
+    Private Sub FillTwitterUserList()
+        cmbTwitterUsers.Items.Clear()
+        Dim _users As List(Of String) = GetTwitterUsers()
+        For Each _user As String In _users
+            cmbTwitterUsers.Items.Add(_user)
+        Next
+    End Sub
+
+    Private Sub SendTweet()
+        Dim isOkToSend As Boolean = True
+        If cmbTwitterUsers.SelectedIndex >= 0 Then
+            Try
+                Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
+                If _auth IsNot Nothing Then
+                    If String.IsNullOrEmpty(_auth.Verifier) Then
+                        isOkToSend = False
+                    Else
+                        tw.Verifier = _auth.Verifier
+                    End If
+                    If String.IsNullOrEmpty(_auth.Token) Then
+                        isOkToSend = False
+                    Else
+                        tw.Token = _auth.Token
+                    End If
+                    If String.IsNullOrEmpty(_auth.TokenSecret) Then
+                        isOkToSend = False
+                    Else
+                        tw.TokenSecret = _auth.TokenSecret
+                    End If
+                Else
+                    isOkToSend = False
+                End If
+            Catch ex As Exception
+                WriteTrace(ex.Message)
+                isOkToSend = False
+            End Try
+        End If
+        WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
+        If isOkToSend Then
+            SendTheTweet(GetRichTextBoxFromPage(TabControl1.SelectedTab).Text)
+        End If
+        WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
+
+    End Sub
+
+    Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False)
+        rtbTweet.Text &= vbCrLf & sText
+        If isStatus Then DisplayStatus(sText)
+    End Sub
+    Private Sub SendTheTweet(_tweetText As String)
+        DisplayStatus("Sending Tweet")
+        Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
+        Dim sto = New SendTweetOptions
+        Dim msg = _tweetText
+        sto.Status = msg.Substring(0, Math.Min(msg.Length, 280)) ' max tweet length; tweets fail if too long...
+        Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
+        If _twitterStatus IsNot Nothing Then
+            InsertTweet(sto.Status, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name)
+            WriteTrace("OK: " & _twitterStatus.Id, True)
+        Else
+            ' tweet failed
+            WriteTrace("Failed", True)
+        End If
+    End Sub
+    Private Sub GetAuthData()
+        Dim _auth As TwitterOAuth = GetAuthById("Twitter")
+        tw.ConsumerKey = _auth.Token
+        tw.ConsumerSecret = _auth.TokenSecret
+    End Sub
+
+    Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
+        GenerateImages()
+    End Sub
 #End Region
 End Class

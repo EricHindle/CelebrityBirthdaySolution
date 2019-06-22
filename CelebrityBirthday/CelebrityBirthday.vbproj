@@ -174,6 +174,12 @@
     <Compile Include="FrmMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmMenu2.Designer.vb">
+      <DependentUpon>FrmMenu2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMenu2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmOptions.Designer.vb">
       <DependentUpon>frmOptions.vb</DependentUpon>
     </Compile>
@@ -206,16 +212,16 @@
     <Compile Include="Twitter\FrmSendTwitter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTwitterImage.Designer.vb">
+    <Compile Include="Twitter\frmTwitterImage.Designer.vb">
       <DependentUpon>frmTwitterImage.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmTwitterImage.vb">
+    <Compile Include="Twitter\frmTwitterImage.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTwitterOutput.Designer.vb">
+    <Compile Include="Twitter\frmTwitterOutput.Designer.vb">
       <DependentUpon>frmTwitterOutput.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmTwitterOutput.vb">
+    <Compile Include="Twitter\frmTwitterOutput.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmUpdateDatabase.Designer.vb">
@@ -283,6 +289,9 @@
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmMenu2.resx">
+      <DependentUpon>FrmMenu2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmOptions.resx">
       <DependentUpon>frmOptions.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -301,10 +310,10 @@
     <EmbeddedResource Include="Twitter\FrmSendTwitter.resx">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTwitterImage.resx">
+    <EmbeddedResource Include="Twitter\frmTwitterImage.resx">
       <DependentUpon>frmTwitterImage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTwitterOutput.resx">
+    <EmbeddedResource Include="Twitter\frmTwitterOutput.resx">
       <DependentUpon>frmTwitterOutput.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateDatabase.resx">

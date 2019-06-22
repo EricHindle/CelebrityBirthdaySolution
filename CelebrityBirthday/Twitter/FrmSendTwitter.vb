@@ -7,6 +7,24 @@ Imports mshtml
 Imports tweetsharp
 Imports System.Threading.Tasks
 Public Class FrmSendTwitter
+    Private _sendAs As String
+    Private _tweetText As String
+    Public Property TweetText() As String
+        Get
+            Return _tweetText
+        End Get
+        Set(ByVal value As String)
+            _tweetText = value
+        End Set
+    End Property
+    Public Property SendAs() As String
+        Get
+            Return _sendAs
+        End Get
+        Set(ByVal value As String)
+            _sendAs = value
+        End Set
+    End Property
     Private isDone As Boolean
     Private ReadOnly tw As New TwitterOAuth
     Private tweetId As String
@@ -46,7 +64,7 @@ Public Class FrmSendTwitter
             Dim _innerHtml As String = webHtml.Body.InnerHtml
             Dim doc As IHTMLDocument2 = WebBrowser1.Document.DomDocument
             Dim allElements As IHTMLElementCollection = doc.all
-                Dim allHeads As IHTMLElementCollection = allElements.tags("head")
+            Dim allHeads As IHTMLElementCollection = allElements.tags("head")
             For Each element As HTMLHeadElement In allHeads
                 Dim allMeta As IHTMLElementCollection = element.getElementsByTagName("meta")
 
@@ -227,8 +245,9 @@ Public Class FrmSendTwitter
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
-        FillTwitterUserList
-
+        FillTwitterUserList()
+        cmbTwitterUsers.SelectedIndex = cmbTwitterUsers.FindStringExact(SendAs)
+        rtbTweetText.Text = TweetText
     End Sub
 
     Private Sub FillTwitterUserList()

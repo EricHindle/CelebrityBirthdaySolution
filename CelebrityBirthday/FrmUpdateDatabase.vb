@@ -222,7 +222,7 @@ Public Class FrmUpdateDatabase
                 txtLoadDay.Text = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
             End If
             Dim selectedIndex As Integer = -1
-            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
             For Each operson As Person In personTable
                 lbPeople.Items.Add(operson.BirthYear & " " & operson.Name)
                 If findPersonInList > -1 AndAlso findPersonInList = operson.Id Then

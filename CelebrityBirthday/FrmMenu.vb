@@ -16,13 +16,7 @@
         End Using
         Me.Show()
     End Sub
-    Private Sub BtnTwitter_Click(sender As Object, e As EventArgs) Handles BtnTwitter.Click
-        Me.Hide()
-        Using _twitterForm As New frmTwitterOutput
-            _twitterForm.ShowDialog()
-        End Using
-        Me.Show()
-    End Sub
+
     Private Sub BtnDatabase_Click(sender As Object, e As EventArgs) Handles BtnDatabase.Click
         Me.Hide()
         Using _database As New FrmUpdateDatabase
@@ -65,10 +59,10 @@
         End Using
         Me.Show()
     End Sub
-    Private Sub BtnMosaic_Click(sender As Object, e As EventArgs) Handles BtnMosaic.Click
+    Private Sub BtnTweet_Click(sender As Object, e As EventArgs) Handles BtnTweet.Click
         Me.Hide()
-        Using _mosaic As New FrmTwitterImage
-            _mosaic.ShowDialog()
+        Using _tweet As New FrmTweet
+            _tweet.ShowDialog()
         End Using
         Me.Show()
     End Sub
@@ -80,18 +74,11 @@
         End If
     End Sub
 
-    Private Sub BtnBrownBread_Click(sender As Object, e As EventArgs) Handles BtnBrownBread.Click
+    Private Sub BtnMore_Click(sender As Object, e As EventArgs) Handles BtnMore.Click
         Me.Hide()
-        Using _warning As New FrmDeathCheck
-            _warning.ShowDialog()
+        Using _menu2 As New FrmMenu2
+            _menu2.ShowDialog()
         End Using
         Me.Show()
-    End Sub
-
-    Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
-        Using _sendTwitter As New FrmSendTwitter
-            _sendTwitter.ShowDialog()
-
-        End Using
     End Sub
 End Class

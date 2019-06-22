@@ -32,7 +32,7 @@ Public Class FrmWordPress
             txtLoadMth.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "MM"))
             txtLoadYr.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
             personTable = New List(Of Person)
-            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
             GenFullText()
             GenExcerpt()
             WebBrowser1.DocumentText = TextToHtml(txtCurrentText.Text)

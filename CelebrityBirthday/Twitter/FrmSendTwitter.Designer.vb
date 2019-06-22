@@ -69,7 +69,7 @@ Partial Class FrmSendTwitter
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(694, 551)
+        Me.btnClose.Location = New System.Drawing.Point(630, 551)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(139, 33)
         Me.btnClose.TabIndex = 22
@@ -81,7 +81,7 @@ Partial Class FrmSendTwitter
         Me.btnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSelect.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnSelect.Location = New System.Drawing.Point(655, 11)
+        Me.btnSelect.Location = New System.Drawing.Point(591, 11)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(139, 33)
         Me.btnSelect.TabIndex = 21
@@ -106,7 +106,7 @@ Partial Class FrmSendTwitter
         Me.BtnAuthenticate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnAuthenticate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAuthenticate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAuthenticate.Location = New System.Drawing.Point(287, 551)
+        Me.BtnAuthenticate.Location = New System.Drawing.Point(223, 551)
         Me.BtnAuthenticate.Name = "BtnAuthenticate"
         Me.BtnAuthenticate.Size = New System.Drawing.Size(139, 33)
         Me.BtnAuthenticate.TabIndex = 24
@@ -136,7 +136,7 @@ Partial Class FrmSendTwitter
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(467, 551)
+        Me.BtnSend.Location = New System.Drawing.Point(403, 551)
         Me.BtnSend.Name = "BtnSend"
         Me.BtnSend.Size = New System.Drawing.Size(139, 33)
         Me.BtnSend.TabIndex = 27
@@ -150,7 +150,7 @@ Partial Class FrmSendTwitter
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 598)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(845, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(781, 22)
         Me.StatusStrip1.TabIndex = 28
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -167,7 +167,7 @@ Partial Class FrmSendTwitter
         Me.SplitContainer1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.SplitContainer1.Location = New System.Drawing.Point(430, 50)
+        Me.SplitContainer1.Location = New System.Drawing.Point(366, 50)
         Me.SplitContainer1.Name = "SplitContainer1"
         Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -207,7 +207,7 @@ Partial Class FrmSendTwitter
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(845, 620)
+        Me.ClientSize = New System.Drawing.Size(781, 620)
         Me.Controls.Add(Me.cmbTwitterUsers)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.SplitContainer1)

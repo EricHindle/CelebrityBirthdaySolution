@@ -12,6 +12,8 @@
     Private ReadOnly oFullPersonTable As New CelebrityBirthdayDataSet.FullPersonDataTable
     Private ReadOnly oTwitterAuthTa As New CelebrityBirthdayDataSetTableAdapters.TwitterAuthTableAdapter
     Private ReadOnly oTwitterAuthTable As New CelebrityBirthdayDataSet.TwitterAuthDataTable
+    Private ReadOnly oTweetTa As New CelebrityBirthdayDataSetTableAdapters.TweetsTableAdapter
+
 #End Region
 #Region "person"
     Public Function DeletePerson(ByVal _id As Integer)
@@ -113,12 +115,16 @@
         Next
         Return oPersonList
     End Function
-    Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer) As List(Of Person)
+    Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean) As List(Of Person)
         Dim oPersonList As New List(Of Person)
         oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
         For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
             Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            oPersonList.Add(oPerson)
+            If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
+                oPersonList.Add(oPerson)
+            Else
+                Debug.Print("Excluding " & oPerson.Name)
+            End If
         Next
         Return oPersonList
     End Function
@@ -132,19 +138,29 @@
         Next
         Return _List
     End Function
-    Public Function FindBirthdays(oDay As Integer, oMonth As Integer)
+    Public Function FindBirthdays(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean)
         oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
         Dim _List As New List(Of Person)
         For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-            _List.Add(New Person(oRow))
+            Dim oPerson As Person = New Person(oRow)
+            If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
+                _List.Add(oPerson)
+            Else
+                Debug.Print("Excluding " & oPerson.Name)
+            End If
         Next
         Return _List
     End Function
-    Public Function FindAnniversaries(oDay As Integer, oMonth As Integer)
+    Public Function FindAnniversaries(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean)
         oFullPersonTa.FillByAnniversary(oFullPersonTable, oDay, oMonth)
         Dim _List As New List(Of Person)
         For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-            _List.Add(New Person(oRow))
+            Dim oPerson As Person = New Person(oRow)
+            If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
+                _List.Add(oPerson)
+            Else
+                Debug.Print("Excluding " & oPerson.Name)
+            End If
         Next
         Return _List
     End Function
@@ -254,6 +270,9 @@
             _list.Add(oRow.Id)
         Next
         Return _list
+    End Function
+    Public Function InsertTweet(pText As String, pMonth As Integer?, pDay As Integer?, pSeq As Integer?, pId As String, pAccount As String) As Boolean
+        oTweetTa.InsertTweet(Now, pText, pMonth, pDay, pSeq, pId, pAccount)
     End Function
 #End Region
 End Module

@@ -28,15 +28,13 @@ Partial Class FrmMenu
         Me.BtnPictures = New System.Windows.Forms.Button()
         Me.BtnOptions = New System.Windows.Forms.Button()
         Me.BtnSearch = New System.Windows.Forms.Button()
-        Me.BtnTwitter = New System.Windows.Forms.Button()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnBrowser = New System.Windows.Forms.Button()
         Me.BtnWordPress = New System.Windows.Forms.Button()
-        Me.BtnMosaic = New System.Windows.Forms.Button()
+        Me.BtnTweet = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.BtnBrownBread = New System.Windows.Forms.Button()
-        Me.BtnTest = New System.Windows.Forms.Button()
+        Me.BtnMore = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -63,7 +61,7 @@ Partial Class FrmMenu
         'BtnPictures
         '
         Me.BtnPictures.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPictures.Location = New System.Drawing.Point(202, 339)
+        Me.BtnPictures.Location = New System.Drawing.Point(21, 416)
         Me.BtnPictures.Name = "BtnPictures"
         Me.BtnPictures.Size = New System.Drawing.Size(151, 49)
         Me.BtnPictures.TabIndex = 5
@@ -73,7 +71,7 @@ Partial Class FrmMenu
         'BtnOptions
         '
         Me.BtnOptions.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnOptions.Location = New System.Drawing.Point(21, 487)
+        Me.BtnOptions.Location = New System.Drawing.Point(202, 416)
         Me.BtnOptions.Name = "BtnOptions"
         Me.BtnOptions.Size = New System.Drawing.Size(151, 49)
         Me.BtnOptions.TabIndex = 8
@@ -83,27 +81,17 @@ Partial Class FrmMenu
         'BtnSearch
         '
         Me.BtnSearch.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSearch.Location = New System.Drawing.Point(21, 413)
+        Me.BtnSearch.Location = New System.Drawing.Point(21, 341)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(151, 49)
         Me.BtnSearch.TabIndex = 6
         Me.BtnSearch.Text = "Search"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
-        'BtnTwitter
-        '
-        Me.BtnTwitter.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTwitter.Location = New System.Drawing.Point(21, 265)
-        Me.BtnTwitter.Name = "BtnTwitter"
-        Me.BtnTwitter.Size = New System.Drawing.Size(151, 49)
-        Me.BtnTwitter.TabIndex = 2
-        Me.BtnTwitter.Text = "Twitter"
-        Me.BtnTwitter.UseVisualStyleBackColor = True
-        '
         'BtnClose
         '
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(202, 563)
+        Me.BtnClose.Location = New System.Drawing.Point(108, 571)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(151, 49)
         Me.BtnClose.TabIndex = 9
@@ -127,7 +115,7 @@ Partial Class FrmMenu
         'BtnBrowser
         '
         Me.BtnBrowser.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnBrowser.Location = New System.Drawing.Point(202, 413)
+        Me.BtnBrowser.Location = New System.Drawing.Point(202, 341)
         Me.BtnBrowser.Name = "BtnBrowser"
         Me.BtnBrowser.Size = New System.Drawing.Size(151, 49)
         Me.BtnBrowser.TabIndex = 7
@@ -137,22 +125,22 @@ Partial Class FrmMenu
         'BtnWordPress
         '
         Me.BtnWordPress.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWordPress.Location = New System.Drawing.Point(21, 339)
+        Me.BtnWordPress.Location = New System.Drawing.Point(202, 266)
         Me.BtnWordPress.Name = "BtnWordPress"
         Me.BtnWordPress.Size = New System.Drawing.Size(151, 49)
         Me.BtnWordPress.TabIndex = 4
         Me.BtnWordPress.Text = "WordPress"
         Me.BtnWordPress.UseVisualStyleBackColor = True
         '
-        'BtnMosaic
+        'BtnTweet
         '
-        Me.BtnMosaic.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnMosaic.Location = New System.Drawing.Point(202, 265)
-        Me.BtnMosaic.Name = "BtnMosaic"
-        Me.BtnMosaic.Size = New System.Drawing.Size(151, 49)
-        Me.BtnMosaic.TabIndex = 3
-        Me.BtnMosaic.Text = "Mosaic"
-        Me.BtnMosaic.UseVisualStyleBackColor = True
+        Me.BtnTweet.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnTweet.Location = New System.Drawing.Point(21, 266)
+        Me.BtnTweet.Name = "BtnTweet"
+        Me.BtnTweet.Size = New System.Drawing.Size(151, 49)
+        Me.BtnTweet.TabIndex = 3
+        Me.BtnTweet.Text = "Send Tweet"
+        Me.BtnTweet.UseVisualStyleBackColor = True
         '
         'PictureBox1
         '
@@ -165,35 +153,24 @@ Partial Class FrmMenu
         Me.PictureBox1.TabIndex = 11
         Me.PictureBox1.TabStop = False
         '
-        'BtnBrownBread
+        'BtnMore
         '
-        Me.BtnBrownBread.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnBrownBread.Location = New System.Drawing.Point(202, 487)
-        Me.BtnBrownBread.Name = "BtnBrownBread"
-        Me.BtnBrownBread.Size = New System.Drawing.Size(151, 49)
-        Me.BtnBrownBread.TabIndex = 12
-        Me.BtnBrownBread.Text = "Brown Bread"
-        Me.BtnBrownBread.UseVisualStyleBackColor = True
-        '
-        'BtnTest
-        '
-        Me.BtnTest.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTest.Location = New System.Drawing.Point(21, 563)
-        Me.BtnTest.Name = "BtnTest"
-        Me.BtnTest.Size = New System.Drawing.Size(151, 49)
-        Me.BtnTest.TabIndex = 13
-        Me.BtnTest.Text = "Test"
-        Me.BtnTest.UseVisualStyleBackColor = True
+        Me.BtnMore.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnMore.Location = New System.Drawing.Point(21, 491)
+        Me.BtnMore.Name = "BtnMore"
+        Me.BtnMore.Size = New System.Drawing.Size(151, 49)
+        Me.BtnMore.TabIndex = 12
+        Me.BtnMore.Text = "More..."
+        Me.BtnMore.UseVisualStyleBackColor = True
         '
         'FrmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(377, 624)
+        Me.ClientSize = New System.Drawing.Size(377, 643)
         Me.ControlBox = False
-        Me.Controls.Add(Me.BtnTest)
-        Me.Controls.Add(Me.BtnBrownBread)
+        Me.Controls.Add(Me.BtnMore)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.BtnWordPress)
         Me.Controls.Add(Me.BtnBrowser)
@@ -201,8 +178,7 @@ Partial Class FrmMenu
         Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.BtnOptions)
         Me.Controls.Add(Me.BtnSearch)
-        Me.Controls.Add(Me.BtnMosaic)
-        Me.Controls.Add(Me.BtnTwitter)
+        Me.Controls.Add(Me.BtnTweet)
         Me.Controls.Add(Me.BtnPictures)
         Me.Controls.Add(Me.BtnImages)
         Me.Controls.Add(Me.BtnDatabase)
@@ -222,13 +198,11 @@ Partial Class FrmMenu
     Friend WithEvents BtnPictures As Button
     Friend WithEvents BtnOptions As Button
     Friend WithEvents BtnSearch As Button
-    Friend WithEvents BtnTwitter As Button
     Friend WithEvents BtnClose As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents BtnBrowser As Button
     Friend WithEvents BtnWordPress As Button
-    Friend WithEvents BtnMosaic As Button
+    Friend WithEvents BtnTweet As Button
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents BtnBrownBread As Button
-    Friend WithEvents BtnTest As Button
+    Friend WithEvents BtnMore As Button
 End Class
