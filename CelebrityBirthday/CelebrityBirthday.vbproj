@@ -212,10 +212,10 @@
     <Compile Include="Twitter\FrmSendTwitter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Twitter\frmTwitterImage.Designer.vb">
-      <DependentUpon>frmTwitterImage.vb</DependentUpon>
+    <Compile Include="Twitter\FrmTweet.Designer.vb">
+      <DependentUpon>FrmTweet.vb</DependentUpon>
     </Compile>
-    <Compile Include="Twitter\frmTwitterImage.vb">
+    <Compile Include="Twitter\FrmTweet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Twitter\frmTwitterOutput.Designer.vb">
@@ -310,8 +310,8 @@
     <EmbeddedResource Include="Twitter\FrmSendTwitter.resx">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Twitter\frmTwitterImage.resx">
-      <DependentUpon>frmTwitterImage.vb</DependentUpon>
+    <EmbeddedResource Include="Twitter\FrmTweet.resx">
+      <DependentUpon>FrmTweet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\frmTwitterOutput.resx">
       <DependentUpon>frmTwitterOutput.vb</DependentUpon>

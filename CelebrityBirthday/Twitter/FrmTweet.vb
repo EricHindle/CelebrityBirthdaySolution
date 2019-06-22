@@ -256,29 +256,36 @@ Public Class FrmTweet
             '   .Location = New System.Drawing.Point(4, 22)
             .Name = "ImageTabPage_" & CStr(_index)
             .Padding = New System.Windows.Forms.Padding(3)
-            .Size = New System.Drawing.Size(412, 426)
-            .Controls.Add(NewSplitContainer(newTabpage.TabIndex))
+            .Size = New System.Drawing.Size(698, 574)
+            .BackColor = Color.AliceBlue
+            .Controls.Add(NewSplitContainer(newTabpage.TabIndex, newTabpage.Size.Width - 10, newTabpage.Size.Height - 10))
 
         End With
         Return newTabpage
     End Function
-    Private Function NewSplitContainer(_index As Integer) As SplitContainer
+    Private Function NewSplitContainer(_index As Integer, _width As Integer, _height As Integer) As SplitContainer
         Dim _splitContainer As New SplitContainer With {
         .Location = New System.Drawing.Point(9, 6),
-            .Size = New System.Drawing.Size(817, 471),
+            .Size = New System.Drawing.Size(_width, _height),
             .SplitterDistance = 384
         }
-        _splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        _splitContainer.Location = New System.Drawing.Point(9, 6)
-        _splitContainer.Name = "SplitContainer" & CStr(_index)
-
-        _splitContainer.Panel1.Controls.Add(NewNumericUpDown(_index))
-        _splitContainer.Panel1.Controls.Add(NewLabel(_index, 3, 432, "Width", "Label1"))
-        _splitContainer.Panel1.Controls.Add(NewPictureBox(_index))
-        Dim _newSendButton As Button = NewButton(_index, 213, 428, "Send", "BtnSend")
-        _splitContainer.Panel1.Controls.Add(_newSendButton)
-        AddHandler _newSendButton.Click, AddressOf BtnSendClick
-        _splitContainer.Panel2.Controls.Add(NewRichTextBox(_index))
+        With _splitContainer
+            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            .Location = New System.Drawing.Point(9, 6)
+            .Name = "SplitContainer" & CStr(_index)
+            .Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                Or System.Windows.Forms.AnchorStyles.Left) _
+                Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            .Panel1.BackColor = Color.AliceBlue
+            .Panel1.Controls.Add(NewNumericUpDown(_index, 47, 521))
+            .Panel1.Controls.Add(NewLabel(_index, 3, 522, "Width", "Label1"))
+            .Panel1.Controls.Add(NewPictureBox(_index))
+            Dim _newSendButton As Button = NewButton(_index, 213, 518, "Send", "BtnSend")
+            .Panel1.Controls.Add(_newSendButton)
+            AddHandler _newSendButton.Click, AddressOf BtnSendClick
+            .Panel2.BackColor = Color.AliceBlue
+            .Panel2.Controls.Add(NewRichTextBox(_index, _splitContainer.Panel2.Size.Width - 6, _splitContainer.Panel2.Size.Height - 6))
+        End With
         Return _splitContainer
     End Function
     Private Function NewButton(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _buttonNameBase As String) As Button
@@ -318,11 +325,11 @@ Public Class FrmTweet
         End With
         Return _picBox
     End Function
-    Private Function NewNumericUpDown(_index As String) As NumericUpDown
+    Private Function NewNumericUpDown(_index As String, _locationX As Integer, _locationY As Integer) As NumericUpDown
         Dim _nud As New NumericUpDown
         With _nud
             .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-            .Location = New System.Drawing.Point(49, 428)
+            .Location = New System.Drawing.Point(_locationX, _locationY)
             .Minimum = New Decimal(New Integer() {1, 0, 0, 0})
             .Name = NUD_BASENAME & _index
             .Size = New System.Drawing.Size(53, 22)
@@ -332,16 +339,16 @@ Public Class FrmTweet
         AddHandler _nud.ValueChanged, AddressOf Horizontal_ValueChanged
         Return _nud
     End Function
-    Private Function NewRichTextBox(_index As String) As RichTextBox
+    Private Function NewRichTextBox(_index As String, _width As Integer, _height As Integer) As RichTextBox
         Dim _newRtb As New System.Windows.Forms.RichTextBox()
         With _newRtb
             .Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
            Or System.Windows.Forms.AnchorStyles.Left) _
            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            .Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             .Location = New System.Drawing.Point(3, 3)
             .Name = RTB_CONTROL_NAME & _index
-            .Size = New System.Drawing.Size(415, 447)
+            .Size = New System.Drawing.Size(_width, _height)
             .Text = ""
             .ContextMenuStrip = ContextMenuStrip1
         End With
@@ -538,6 +545,10 @@ Public Class FrmTweet
 
     Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
         GenerateImages()
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
     End Sub
 #End Region
 End Class

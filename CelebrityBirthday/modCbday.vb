@@ -77,8 +77,7 @@ Module modCbday
             If pos.Count = 4 Then
                 oForm.Top = CInt(pos(0))
                 oForm.Left = CInt(pos(1))
-                oForm.Height = CInt(pos(2))
-                oForm.Width = CInt(pos(3))
+
             End If
         End If
     End Sub
