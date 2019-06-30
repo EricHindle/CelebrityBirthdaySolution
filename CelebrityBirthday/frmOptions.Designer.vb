@@ -48,6 +48,8 @@ Partial Class FrmOptions
         Me.BtnGlobalSettings = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.NudSentences = New System.Windows.Forms.NumericUpDown()
+        Me.TxtTwitterImagePath = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,7 +60,7 @@ Partial Class FrmOptions
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnCancel.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCancel.Location = New System.Drawing.Point(392, 505)
+        Me.btnCancel.Location = New System.Drawing.Point(392, 568)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(87, 41)
         Me.btnCancel.TabIndex = 0
@@ -70,7 +72,7 @@ Partial Class FrmOptions
         Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnSave.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnSave.Location = New System.Drawing.Point(272, 505)
+        Me.btnSave.Location = New System.Drawing.Point(272, 568)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(87, 41)
         Me.btnSave.TabIndex = 1
@@ -131,7 +133,7 @@ Partial Class FrmOptions
         Me.Version.BackColor = System.Drawing.Color.Transparent
         Me.Version.Font = New System.Drawing.Font("Papyrus", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Version.Location = New System.Drawing.Point(12, 522)
+        Me.Version.Location = New System.Drawing.Point(12, 585)
         Me.Version.Name = "Version"
         Me.Version.Size = New System.Drawing.Size(214, 28)
         Me.Version.TabIndex = 8
@@ -141,7 +143,7 @@ Partial Class FrmOptions
         '
         Me.BtnResetForms.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnResetForms.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnResetForms.Location = New System.Drawing.Point(16, 425)
+        Me.BtnResetForms.Location = New System.Drawing.Point(16, 515)
         Me.BtnResetForms.Name = "BtnResetForms"
         Me.BtnResetForms.Size = New System.Drawing.Size(86, 73)
         Me.BtnResetForms.TabIndex = 9
@@ -222,6 +224,8 @@ Partial Class FrmOptions
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.TxtTwitterImagePath)
+        Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.txtTwitterFilePath)
         Me.GroupBox1.Controls.Add(Me.txtNewImagePath)
         Me.GroupBox1.Controls.Add(Me.txtImagePath)
@@ -230,7 +234,7 @@ Partial Class FrmOptions
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(16, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(521, 128)
+        Me.GroupBox1.Size = New System.Drawing.Size(521, 167)
         Me.GroupBox1.TabIndex = 18
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "File Paths"
@@ -249,7 +253,7 @@ Partial Class FrmOptions
         Me.GroupBox2.Controls.Add(Me.TxtWordPress)
         Me.GroupBox2.Controls.Add(Me.Label7)
         Me.GroupBox2.Controls.Add(Me.TxtImageSearch)
-        Me.GroupBox2.Location = New System.Drawing.Point(16, 146)
+        Me.GroupBox2.Location = New System.Drawing.Point(16, 236)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(521, 264)
         Me.GroupBox2.TabIndex = 19
@@ -279,7 +283,7 @@ Partial Class FrmOptions
         '
         Me.BtnGlobalSettings.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGlobalSettings.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 425)
+        Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 515)
         Me.BtnGlobalSettings.Name = "BtnGlobalSettings"
         Me.BtnGlobalSettings.Size = New System.Drawing.Size(86, 73)
         Me.BtnGlobalSettings.TabIndex = 20
@@ -289,7 +293,7 @@ Partial Class FrmOptions
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(225, 425)
+        Me.Label9.Location = New System.Drawing.Point(225, 515)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(89, 14)
         Me.Label9.TabIndex = 21
@@ -297,7 +301,7 @@ Partial Class FrmOptions
         '
         'NudSentences
         '
-        Me.NudSentences.Location = New System.Drawing.Point(329, 423)
+        Me.NudSentences.Location = New System.Drawing.Point(329, 513)
         Me.NudSentences.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudSentences.Name = "NudSentences"
@@ -305,12 +309,28 @@ Partial Class FrmOptions
         Me.NudSentences.TabIndex = 22
         Me.NudSentences.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
+        'TxtTwitterImagePath
+        '
+        Me.TxtTwitterImagePath.Location = New System.Drawing.Point(172, 125)
+        Me.TxtTwitterImagePath.Name = "TxtTwitterImagePath"
+        Me.TxtTwitterImagePath.Size = New System.Drawing.Size(333, 22)
+        Me.TxtTwitterImagePath.TabIndex = 8
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(13, 128)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(136, 14)
+        Me.Label10.TabIndex = 9
+        Me.Label10.Text = "Twitter Image File Path"
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(549, 559)
+        Me.ClientSize = New System.Drawing.Size(549, 622)
         Me.Controls.Add(Me.NudSentences)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.BtnGlobalSettings)
@@ -358,4 +378,6 @@ Partial Class FrmOptions
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents NudSentences As NumericUpDown
+    Friend WithEvents TxtTwitterImagePath As TextBox
+    Friend WithEvents Label10 As Label
 End Class

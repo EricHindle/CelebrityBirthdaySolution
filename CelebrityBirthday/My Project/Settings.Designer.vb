@@ -281,6 +281,18 @@ Namespace My
                 Me("wikiSentences") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Twitter\Images")>  _
+        Public Property twitterImageFolder() As String
+            Get
+                Return CType(Me("twitterImageFolder"),String)
+            End Get
+            Set
+                Me("twitterImageFolder") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

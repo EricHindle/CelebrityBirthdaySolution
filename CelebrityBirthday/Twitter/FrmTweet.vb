@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Text
 Imports TweetSharp
@@ -72,19 +73,23 @@ Public Class FrmTweet
         End If
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
-        DisplayStatus("Saving Files")
-        Dim _path As String = Path.Combine(My.Settings.ImgFolder, "mosaics")
+        For Each _page As TabPage In TabControl1.TabPages
+            SaveImage(_page)
+        Next
+    End Sub
+    Private Function SaveImage(_page As TabPage) As String
+        DisplayStatus("Saving File")
+        Dim _path As String = My.Settings.twitterImageFolder
         If Not My.Computer.FileSystem.DirectoryExists(_path) Then
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
-        For Each _page As TabPage In TabControl1.TabPages
-            Dim _add As String = _page.Text
-            Dim _fileName As String = _add.Replace("_", "_" & cboDay.SelectedItem & "_" & cboMonth.SelectedItem & "_") & "_mosaic_" & ".jpg"
-            Dim _pictureBox As PictureBox = GetPictureBoxFromPage(_page)
-            ImageUtil.saveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, Path.Combine(_path, _fileName))
-        Next
-        DisplayStatus("Files saved")
-    End Sub
+        Dim _add As String = _page.Text
+        Dim _fileName As String = Path.Combine(_path, _add.Replace("_", "_" & cboDay.SelectedItem & "_" & cboMonth.SelectedItem & "_mosaic_") & ".jpg")
+        Dim _pictureBox As PictureBox = GetPictureBoxFromPage(_page)
+        ImageUtil.saveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, _fileName)
+        DisplayStatus("File saved")
+        Return _fileName
+    End Function
     Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.twitterimagepos)
         GetAuthData()
@@ -115,14 +120,13 @@ Public Class FrmTweet
             My.Computer.Clipboard.SetText(_rtb.Text)
         End If
     End Sub
-
 #End Region
 #Region "subroutines"
     Private Sub GeneratePictures(_tweetLists As List(Of List(Of Person)), _tabTitle As String, _imageStart As Integer)
         For _imageIndex As Integer = _imageStart To _tweetLists.Count - 1
             Dim _imageList As List(Of Person) = _tweetLists(_imageIndex)
             DisplayStatus(">" & CStr(_imageIndex), True)
-            Dim newImageTabPage As TabPage = CreateNewImageTabPage(_imageIndex, _tabTitle)
+            Dim newImageTabPage As TabPage = CreateNewImageTabPage(_imageIndex, _tabTitle & CStr(_imageIndex - _imageStart + 1))
             Dim pbControl As PictureBox = GetPictureBoxFromPage(newImageTabPage)
             Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newImageTabPage)
             IsNoGenerate = True
@@ -249,7 +253,7 @@ Public Class FrmTweet
     End Function
     Private Function CreateNewImageTabPage(_index As Integer, _tabTitle As String) As TabPage
         Dim newTabpage As New TabPage
-        Dim tabTitle As String = _tabTitle & CStr(_index)
+        Dim tabTitle As String = _tabTitle
         With newTabpage
             .Text = tabTitle
             .TabIndex = _index
@@ -465,7 +469,7 @@ Public Class FrmTweet
 
     Private Sub BtnSendClick(sender As Object, e As EventArgs)
         If cmbTwitterUsers.SelectedIndex >= 0 Then
-            SendTweet()
+            SendTweet(SaveImage(TabControl1.SelectedTab))
         Else
             Using _sendTweet As New FrmSendTwitter
                 _sendTweet.TweetText = GetRichTextBoxFromPage(TabControl1.SelectedTab).Text
@@ -481,7 +485,7 @@ Public Class FrmTweet
         Next
     End Sub
 
-    Private Sub SendTweet()
+    Private Sub SendTweet(_filename As String)
         Dim isOkToSend As Boolean = True
         If cmbTwitterUsers.SelectedIndex >= 0 Then
             Try
@@ -512,7 +516,7 @@ Public Class FrmTweet
         End If
         WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
         If isOkToSend Then
-            SendTheTweet(GetRichTextBoxFromPage(TabControl1.SelectedTab).Text)
+            SendTheTweet(GetRichTextBoxFromPage(TabControl1.SelectedTab).Text, _filename)
         End If
         WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
 
@@ -522,15 +526,32 @@ Public Class FrmTweet
         rtbTweet.Text &= vbCrLf & sText
         If isStatus Then DisplayStatus(sText)
     End Sub
-    Private Sub SendTheTweet(_tweetText As String)
+
+    Private Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
         DisplayStatus("Sending Tweet")
         Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim sto = New SendTweetOptions
         Dim msg = _tweetText
         sto.Status = msg.Substring(0, Math.Min(msg.Length, 280)) ' max tweet length; tweets fail if too long...
+        Dim _mediaId As String = Nothing
+        If chkImages.Checked Then
+            Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _filename)
+            If _twitterUplMedia IsNot Nothing Then
+                Dim _uploadedSize As Long = _twitterUplMedia.Size
+                Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
+                WriteTrace("Image upload size: " & CStr(_uploadedSize), False)
+                _mediaId = _twitterUplMedia.Media_Id
+            Else
+                WriteTrace("No image upload", False)
+            End If
+        End If
+        If Not String.IsNullOrEmpty(_mediaId) Then
+            InsertTweet("", cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
+            sto.MediaIds = {_mediaId}
+        End If
         Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
         If _twitterStatus IsNot Nothing Then
-            InsertTweet(sto.Status, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name)
+            InsertTweet(sto.Status, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
             WriteTrace("OK: " & _twitterStatus.Id, True)
         Else
             ' tweet failed
@@ -543,12 +564,5 @@ Public Class FrmTweet
         tw.ConsumerSecret = _auth.TokenSecret
     End Sub
 
-    Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
-        GenerateImages()
-    End Sub
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
-    End Sub
 #End Region
 End Class

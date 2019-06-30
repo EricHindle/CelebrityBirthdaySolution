@@ -448,13 +448,13 @@ Partial Class FrmTweet
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.Size = New System.Drawing.Size(59, 23)
         Me.RadioButton1.TabIndex = 36
-        Me.RadioButton1.TabStop = True
         Me.RadioButton1.Text = "None"
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'rbHandles
         '
         Me.rbHandles.AutoSize = True
+        Me.rbHandles.Checked = True
         Me.rbHandles.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbHandles.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbHandles.Location = New System.Drawing.Point(17, 21)
@@ -474,7 +474,6 @@ Partial Class FrmTweet
         Me.rbAges.Name = "rbAges"
         Me.rbAges.Size = New System.Drawing.Size(52, 23)
         Me.rbAges.TabIndex = 35
-        Me.rbAges.TabStop = True
         Me.rbAges.Text = "Age"
         Me.rbAges.UseVisualStyleBackColor = True
         '
@@ -501,6 +500,8 @@ Partial Class FrmTweet
         'chkImages
         '
         Me.chkImages.AutoSize = True
+        Me.chkImages.Checked = True
+        Me.chkImages.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkImages.ForeColor = System.Drawing.Color.RoyalBlue
         Me.chkImages.Location = New System.Drawing.Point(24, 83)

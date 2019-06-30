@@ -13,6 +13,7 @@
         My.Settings.newimagepath = txtNewImagePath.Text
         My.Settings.ImgFolder = txtImagePath.Text
         My.Settings.TwitterFilePath = txtTwitterFilePath.Text
+        My.Settings.twitterImageFolder = TxtTwitterImagePath.Text
         My.Settings.TwitterSearchUrl = txtTwitterSearch.Text
         My.Settings.WordPressUrl = TxtWordPress.Text
         My.Settings.wikiSearchUrl = TxtWikiSearch.Text
@@ -31,6 +32,7 @@
         txtNewImagePath.Text = My.Settings.newimagepath
         txtImagePath.Text = My.Settings.ImgFolder
         txtTwitterFilePath.Text = My.Settings.TwitterFilePath
+        TxtTwitterImagePath.Text = My.Settings.twitterImageFolder
         txtTwitterSearch.Text = My.Settings.TwitterSearchUrl
         TxtWordPress.Text = My.Settings.WordPressUrl
         TxtWikiSearch.Text = My.Settings.wikiSearchUrl

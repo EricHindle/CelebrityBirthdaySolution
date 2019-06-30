@@ -64,5 +64,8 @@
     <Setting Name="wikiSentences" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4</Value>
     </Setting>
+    <Setting Name="twitterImageFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F:\CelebrityBirthday\Twitter\Images</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -320,7 +320,7 @@ Public Class FrmSendTwitter
         Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
         WriteTrace(StatusToString(_twitterStatus))
         If _twitterStatus IsNot Nothing Then
-            oTweetTa.InsertTweet(Now, sto.Status, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name)
+            oTweetTa.InsertTweet(Now, sto.Status, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
             WriteTrace("OK: " & _twitterStatus.Id, True)
         Else
             ' tweet failed

@@ -271,8 +271,8 @@
         Next
         Return _list
     End Function
-    Public Function InsertTweet(pText As String, pMonth As Integer?, pDay As Integer?, pSeq As Integer?, pId As String, pAccount As String) As Boolean
-        oTweetTa.InsertTweet(Now, pText, pMonth, pDay, pSeq, pId, pAccount)
+    Public Function InsertTweet(pText As String, pMonth As Integer?, pDay As Integer?, pSeq As Integer?, pId As String, pAccount As String, pType As String) As Boolean
+        oTweetTa.InsertTweet(Now, pText, pMonth, pDay, pSeq, pId, pAccount, pType)
     End Function
 #End Region
 End Module

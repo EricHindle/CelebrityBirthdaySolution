@@ -2498,6 +2498,8 @@ Partial Public Class CelebrityBirthdayDataSet
         
         Private columntweetAccount As Global.System.Data.DataColumn
         
+        Private columntweetType As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -2598,6 +2600,14 @@ Partial Public Class CelebrityBirthdayDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property tweetTypeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columntweetType
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2634,9 +2644,9 @@ Partial Public Class CelebrityBirthdayDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddTweetsRow(ByVal tweetDateSent As Date, ByVal tweetText As String, ByVal tweetMonth As Integer, ByVal tweetDay As Integer, ByVal tweetSeq As Integer, ByVal tweetId As String, ByVal tweetAccount As String) As TweetsRow
+        Public Overloads Function AddTweetsRow(ByVal tweetDateSent As Date, ByVal tweetText As String, ByVal tweetMonth As Integer, ByVal tweetDay As Integer, ByVal tweetSeq As Integer, ByVal tweetId As String, ByVal tweetAccount As String, ByVal tweetType As String) As TweetsRow
             Dim rowTweetsRow As TweetsRow = CType(Me.NewRow,TweetsRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, tweetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, tweetAccount}
+            Dim columnValuesArray() As Object = New Object() {Nothing, tweetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, tweetAccount, tweetType}
             rowTweetsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTweetsRow)
             Return rowTweetsRow
@@ -2673,6 +2683,7 @@ Partial Public Class CelebrityBirthdayDataSet
             Me.columntweetSeq = MyBase.Columns("tweetSeq")
             Me.columntweetId = MyBase.Columns("tweetId")
             Me.columntweetAccount = MyBase.Columns("tweetAccount")
+            Me.columntweetType = MyBase.Columns("tweetType")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2694,6 +2705,8 @@ Partial Public Class CelebrityBirthdayDataSet
             MyBase.Columns.Add(Me.columntweetId)
             Me.columntweetAccount = New Global.System.Data.DataColumn("tweetAccount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columntweetAccount)
+            Me.columntweetType = New Global.System.Data.DataColumn("tweetType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columntweetType)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnId}, true))
             Me.columnId.AutoIncrement = true
             Me.columnId.AutoIncrementSeed = -1
@@ -2704,6 +2717,7 @@ Partial Public Class CelebrityBirthdayDataSet
             Me.columntweetText.MaxLength = 280
             Me.columntweetId.MaxLength = 20
             Me.columntweetAccount.MaxLength = 50
+            Me.columntweetType.MaxLength = 1
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4702,6 +4716,21 @@ Partial Public Class CelebrityBirthdayDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property tweetType() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTweets.tweetTypeColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'tweetType' in table 'Tweets' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTweets.tweetTypeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IstweetDateSentNull() As Boolean
             Return Me.IsNull(Me.tableTweets.tweetDateSentColumn)
         End Function
@@ -4782,6 +4811,18 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SettweetAccountNull()
             Me(Me.tableTweets.tweetAccountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IstweetTypeNull() As Boolean
+            Return Me.IsNull(Me.tableTweets.tweetTypeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SettweetTypeNull()
+            Me(Me.tableTweets.tweetTypeColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -8379,6 +8420,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             tableMapping.ColumnMappings.Add("tweetSeq", "tweetSeq")
             tableMapping.ColumnMappings.Add("tweetId", "tweetId")
             tableMapping.ColumnMappings.Add("tweetAccount", "tweetAccount")
+            tableMapping.ColumnMappings.Add("tweetType", "tweetType")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -8390,7 +8432,9 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                 "R ([tweetDay] = @Original_tweetDay)) AND ((@IsNull_tweetSeq = 1 AND [tweetSeq] I"& _ 
                 "S NULL) OR ([tweetSeq] = @Original_tweetSeq)) AND ((@IsNull_tweetId = 1 AND [twe"& _ 
                 "etId] IS NULL) OR ([tweetId] = @Original_tweetId)) AND ((@IsNull_tweetAccount = "& _ 
-                "1 AND [tweetAccount] IS NULL) OR ([tweetAccount] = @Original_tweetAccount)))"
+                "1 AND [tweetAccount] IS NULL) OR ([tweetAccount] = @Original_tweetAccount)) AND "& _ 
+                "((@IsNull_tweetType = 1 AND [tweetType] IS NULL) OR ([tweetType] = @Original_twe"& _ 
+                "etType)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Id", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_tweetDateSent", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetDateSent", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -8407,13 +8451,15 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_tweetId", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_tweetAccount", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetAccount", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_tweetAccount", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetAccount", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_tweetType", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetType", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_tweetType", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetType", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [Tweets] ([tweetDateSent], [tweetText], [tweetMonth], [tweetDay], [tw"& _ 
-                "eetSeq], [tweetId], [tweetAccount]) VALUES (@tweetDateSent, @tweetText, @tweetMo"& _ 
-                "nth, @tweetDay, @tweetSeq, @tweetId, @tweetAccount);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, tweetDateSent, "& _ 
-                "tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, tweetAccount FROM Tweets WHE"& _ 
-                "RE (Id = SCOPE_IDENTITY())"
+                "eetSeq], [tweetId], [tweetAccount], [tweetType]) VALUES (@tweetDateSent, @tweetT"& _ 
+                "ext, @tweetMonth, @tweetDay, @tweetSeq, @tweetId, @tweetAccount, @tweetType);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"S"& _ 
+                "ELECT Id, tweetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, twe"& _ 
+                "etAccount, tweetType FROM Tweets WHERE (Id = SCOPE_IDENTITY())"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetDateSent", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetDateSent", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetText", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetText", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -8422,21 +8468,24 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetSeq", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetSeq", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetId", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetAccount", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetAccount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetType", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [Tweets] SET [tweetDateSent] = @tweetDateSent, [tweetText] = @tweetText, ["& _ 
                 "tweetMonth] = @tweetMonth, [tweetDay] = @tweetDay, [tweetSeq] = @tweetSeq, [twee"& _ 
-                "tId] = @tweetId, [tweetAccount] = @tweetAccount WHERE (([Id] = @Original_Id) AND"& _ 
-                " ((@IsNull_tweetDateSent = 1 AND [tweetDateSent] IS NULL) OR ([tweetDateSent] = "& _ 
-                "@Original_tweetDateSent)) AND ((@IsNull_tweetText = 1 AND [tweetText] IS NULL) O"& _ 
-                "R ([tweetText] = @Original_tweetText)) AND ((@IsNull_tweetMonth = 1 AND [tweetMo"& _ 
-                "nth] IS NULL) OR ([tweetMonth] = @Original_tweetMonth)) AND ((@IsNull_tweetDay ="& _ 
-                " 1 AND [tweetDay] IS NULL) OR ([tweetDay] = @Original_tweetDay)) AND ((@IsNull_t"& _ 
-                "weetSeq = 1 AND [tweetSeq] IS NULL) OR ([tweetSeq] = @Original_tweetSeq)) AND (("& _ 
-                "@IsNull_tweetId = 1 AND [tweetId] IS NULL) OR ([tweetId] = @Original_tweetId)) A"& _ 
-                "ND ((@IsNull_tweetAccount = 1 AND [tweetAccount] IS NULL) OR ([tweetAccount] = @"& _ 
-                "Original_tweetAccount)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, tweetDateSent, tweetText, tweetMonth, twee"& _ 
-                "tDay, tweetSeq, tweetId, tweetAccount FROM Tweets WHERE (Id = @Id)"
+                "tId] = @tweetId, [tweetAccount] = @tweetAccount, [tweetType] = @tweetType WHERE "& _ 
+                "(([Id] = @Original_Id) AND ((@IsNull_tweetDateSent = 1 AND [tweetDateSent] IS NU"& _ 
+                "LL) OR ([tweetDateSent] = @Original_tweetDateSent)) AND ((@IsNull_tweetText = 1 "& _ 
+                "AND [tweetText] IS NULL) OR ([tweetText] = @Original_tweetText)) AND ((@IsNull_t"& _ 
+                "weetMonth = 1 AND [tweetMonth] IS NULL) OR ([tweetMonth] = @Original_tweetMonth)"& _ 
+                ") AND ((@IsNull_tweetDay = 1 AND [tweetDay] IS NULL) OR ([tweetDay] = @Original_"& _ 
+                "tweetDay)) AND ((@IsNull_tweetSeq = 1 AND [tweetSeq] IS NULL) OR ([tweetSeq] = @"& _ 
+                "Original_tweetSeq)) AND ((@IsNull_tweetId = 1 AND [tweetId] IS NULL) OR ([tweetI"& _ 
+                "d] = @Original_tweetId)) AND ((@IsNull_tweetAccount = 1 AND [tweetAccount] IS NU"& _ 
+                "LL) OR ([tweetAccount] = @Original_tweetAccount)) AND ((@IsNull_tweetType = 1 AN"& _ 
+                "D [tweetType] IS NULL) OR ([tweetType] = @Original_tweetType)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, twe"& _ 
+                "etDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, tweetAccount, tw"& _ 
+                "eetType FROM Tweets WHERE (Id = @Id)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetDateSent", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetDateSent", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetText", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetText", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -8445,6 +8494,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetSeq", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetSeq", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetId", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetAccount", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetAccount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetType", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Id", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_tweetDateSent", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetDateSent", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_tweetDateSent", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetDateSent", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -8460,6 +8510,8 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_tweetId", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_tweetAccount", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetAccount", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_tweetAccount", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetAccount", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_tweetType", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetType", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_tweetType", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetType", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
@@ -8477,15 +8529,15 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT Id, tweetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, twe"& _ 
-                "etAccount FROM Tweets"
+                "etAccount, tweetType FROM Tweets"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
             Me._commandCollection(1).CommandText = "INSERT INTO Tweets"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (tweetDateSent, tweetText, tweetMont"& _ 
-                "h, tweetDay, tweetSeq, tweetId, tweetAccount)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@tweetDateSent,@tw"& _ 
-                "eetText,@tweetMonth,@tweetDay,@tweetSeq,@tweetId,@tweetAccount); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, tw"& _ 
-                "eetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, tweetAccount FR"& _ 
-                "OM Tweets WHERE (Id = SCOPE_IDENTITY())"
+                "h, tweetDay, tweetSeq, tweetId, tweetAccount, tweetType)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@tweetD"& _ 
+                "ateSent,@tweetText,@tweetMonth,@tweetDay,@tweetSeq,@tweetId,@tweetAccount,@tweet"& _ 
+                "Type);  "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, tweetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, t"& _ 
+                "weetId, tweetAccount FROM Tweets WHERE (Id = SCOPE_IDENTITY())"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetDateSent", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetDateSent", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetText", Global.System.Data.SqlDbType.NVarChar, 280, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetText", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -8494,6 +8546,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetSeq", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetSeq", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetId", Global.System.Data.SqlDbType.NChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetAccount", Global.System.Data.SqlDbType.NChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetAccount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetType", Global.System.Data.SqlDbType.NChar, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8552,7 +8605,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_Id As Integer, ByVal Original_tweetDateSent As Global.System.Nullable(Of Date), ByVal Original_tweetText As String, ByVal Original_tweetMonth As Global.System.Nullable(Of Integer), ByVal Original_tweetDay As Global.System.Nullable(Of Integer), ByVal Original_tweetSeq As Global.System.Nullable(Of Integer), ByVal Original_tweetId As String, ByVal Original_tweetAccount As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_Id As Integer, ByVal Original_tweetDateSent As Global.System.Nullable(Of Date), ByVal Original_tweetText As String, ByVal Original_tweetMonth As Global.System.Nullable(Of Integer), ByVal Original_tweetDay As Global.System.Nullable(Of Integer), ByVal Original_tweetSeq As Global.System.Nullable(Of Integer), ByVal Original_tweetId As String, ByVal Original_tweetAccount As String, ByVal Original_tweetType As String) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_Id,Integer)
             If (Original_tweetDateSent.HasValue = true) Then
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
@@ -8603,6 +8656,13 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_tweetAccount,String)
             End If
+            If (Original_tweetType Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_tweetType,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -8622,7 +8682,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal tweetDateSent As Global.System.Nullable(Of Date), ByVal tweetText As String, ByVal tweetMonth As Global.System.Nullable(Of Integer), ByVal tweetDay As Global.System.Nullable(Of Integer), ByVal tweetSeq As Global.System.Nullable(Of Integer), ByVal tweetId As String, ByVal tweetAccount As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal tweetDateSent As Global.System.Nullable(Of Date), ByVal tweetText As String, ByVal tweetMonth As Global.System.Nullable(Of Integer), ByVal tweetDay As Global.System.Nullable(Of Integer), ByVal tweetSeq As Global.System.Nullable(Of Integer), ByVal tweetId As String, ByVal tweetAccount As String, ByVal tweetType As String) As Integer
             If (tweetDateSent.HasValue = true) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = CType(tweetDateSent.Value,Date)
             Else
@@ -8658,6 +8718,11 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(6).Value = CType(tweetAccount,String)
             End If
+            If (tweetType Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(tweetType,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -8685,6 +8750,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                     ByVal tweetSeq As Global.System.Nullable(Of Integer),  _
                     ByVal tweetId As String,  _
                     ByVal tweetAccount As String,  _
+                    ByVal tweetType As String,  _
                     ByVal Original_Id As Integer,  _
                     ByVal Original_tweetDateSent As Global.System.Nullable(Of Date),  _
                     ByVal Original_tweetText As String,  _
@@ -8693,6 +8759,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                     ByVal Original_tweetSeq As Global.System.Nullable(Of Integer),  _
                     ByVal Original_tweetId As String,  _
                     ByVal Original_tweetAccount As String,  _
+                    ByVal Original_tweetType As String,  _
                     ByVal Id As Integer) As Integer
             If (tweetDateSent.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = CType(tweetDateSent.Value,Date)
@@ -8729,57 +8796,69 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(6).Value = CType(tweetAccount,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_Id,Integer)
-            If (Original_tweetDateSent.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_tweetDateSent.Value,Date)
+            If (tweetType Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(tweetType,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_Id,Integer)
+            If (Original_tweetDateSent.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_tweetDateSent.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
             If (Original_tweetText Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_tweetText,String)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_tweetText,String)
             End If
             If (Original_tweetMonth.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_tweetMonth.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_tweetMonth.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
             End If
             If (Original_tweetDay.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_tweetDay.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_tweetDay.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             End If
             If (Original_tweetSeq.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_tweetSeq.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_tweetSeq.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             End If
             If (Original_tweetId Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_tweetId,String)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_tweetId,String)
             End If
             If (Original_tweetAccount Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_tweetAccount,String)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_tweetAccount,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Id,Integer)
+            If (Original_tweetType Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_tweetType,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Id,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -8799,15 +8878,32 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal tweetDateSent As Global.System.Nullable(Of Date), ByVal tweetText As String, ByVal tweetMonth As Global.System.Nullable(Of Integer), ByVal tweetDay As Global.System.Nullable(Of Integer), ByVal tweetSeq As Global.System.Nullable(Of Integer), ByVal tweetId As String, ByVal tweetAccount As String, ByVal Original_Id As Integer, ByVal Original_tweetDateSent As Global.System.Nullable(Of Date), ByVal Original_tweetText As String, ByVal Original_tweetMonth As Global.System.Nullable(Of Integer), ByVal Original_tweetDay As Global.System.Nullable(Of Integer), ByVal Original_tweetSeq As Global.System.Nullable(Of Integer), ByVal Original_tweetId As String, ByVal Original_tweetAccount As String) As Integer
-            Return Me.Update(tweetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, tweetAccount, Original_Id, Original_tweetDateSent, Original_tweetText, Original_tweetMonth, Original_tweetDay, Original_tweetSeq, Original_tweetId, Original_tweetAccount, Original_Id)
+        Public Overloads Overridable Function Update( _
+                    ByVal tweetDateSent As Global.System.Nullable(Of Date),  _
+                    ByVal tweetText As String,  _
+                    ByVal tweetMonth As Global.System.Nullable(Of Integer),  _
+                    ByVal tweetDay As Global.System.Nullable(Of Integer),  _
+                    ByVal tweetSeq As Global.System.Nullable(Of Integer),  _
+                    ByVal tweetId As String,  _
+                    ByVal tweetAccount As String,  _
+                    ByVal tweetType As String,  _
+                    ByVal Original_Id As Integer,  _
+                    ByVal Original_tweetDateSent As Global.System.Nullable(Of Date),  _
+                    ByVal Original_tweetText As String,  _
+                    ByVal Original_tweetMonth As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_tweetDay As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_tweetSeq As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_tweetId As String,  _
+                    ByVal Original_tweetAccount As String,  _
+                    ByVal Original_tweetType As String) As Integer
+            Return Me.Update(tweetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, tweetAccount, tweetType, Original_Id, Original_tweetDateSent, Original_tweetText, Original_tweetMonth, Original_tweetDay, Original_tweetSeq, Original_tweetId, Original_tweetAccount, Original_tweetType, Original_Id)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, false)>  _
-        Public Overloads Overridable Function InsertTweet(ByVal tweetDateSent As Global.System.Nullable(Of Date), ByVal tweetText As String, ByVal tweetMonth As Global.System.Nullable(Of Integer), ByVal tweetDay As Global.System.Nullable(Of Integer), ByVal tweetSeq As Global.System.Nullable(Of Integer), ByVal tweetId As String, ByVal tweetAccount As String) As Integer
+        Public Overloads Overridable Function InsertTweet(ByVal tweetDateSent As Global.System.Nullable(Of Date), ByVal tweetText As String, ByVal tweetMonth As Global.System.Nullable(Of Integer), ByVal tweetDay As Global.System.Nullable(Of Integer), ByVal tweetSeq As Global.System.Nullable(Of Integer), ByVal tweetId As String, ByVal tweetAccount As String, ByVal tweetType As String) As Integer
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(1)
             If (tweetDateSent.HasValue = true) Then
                 command.Parameters(0).Value = CType(tweetDateSent.Value,Date)
@@ -8843,6 +8939,11 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                 command.Parameters(6).Value = Global.System.DBNull.Value
             Else
                 command.Parameters(6).Value = CType(tweetAccount,String)
+            End If
+            If (tweetType Is Nothing) Then
+                command.Parameters(7).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(7).Value = CType(tweetType,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
             If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
