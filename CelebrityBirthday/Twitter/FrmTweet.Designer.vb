@@ -191,7 +191,7 @@ Partial Class FrmTweet
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.RbSplitImages)
         Me.GroupBox1.Controls.Add(Me.RbSingleImage)
-        Me.GroupBox1.Location = New System.Drawing.Point(8, 239)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 231)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(139, 79)
         Me.GroupBox1.TabIndex = 13
@@ -423,7 +423,7 @@ Partial Class FrmTweet
         Me.GroupBox2.Controls.Add(Me.GroupBox1)
         Me.GroupBox2.Location = New System.Drawing.Point(1183, 252)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(153, 324)
+        Me.GroupBox2.Size = New System.Drawing.Size(153, 323)
         Me.GroupBox2.TabIndex = 30
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Tweet Options"
@@ -435,7 +435,7 @@ Partial Class FrmTweet
         Me.GroupBox3.Controls.Add(Me.rbAges)
         Me.GroupBox3.Location = New System.Drawing.Point(8, 112)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(137, 121)
+        Me.GroupBox3.Size = New System.Drawing.Size(137, 113)
         Me.GroupBox3.TabIndex = 37
         Me.GroupBox3.TabStop = False
         '
@@ -472,9 +472,9 @@ Partial Class FrmTweet
         Me.rbAges.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbAges.Location = New System.Drawing.Point(17, 50)
         Me.rbAges.Name = "rbAges"
-        Me.rbAges.Size = New System.Drawing.Size(52, 23)
+        Me.rbAges.Size = New System.Drawing.Size(87, 23)
         Me.rbAges.TabIndex = 35
-        Me.rbAges.Text = "Age"
+        Me.rbAges.Text = "Age/Year"
         Me.rbAges.UseVisualStyleBackColor = True
         '
         'cmbTwitterUsers

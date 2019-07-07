@@ -147,8 +147,12 @@ Public Class FrmTweet
 
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
-            If rbAges.Checked AndAlso _type.StartsWith("B") Then
-                _outString.Append(" (" & CStr(CalculateAgeNextBirthday(_person)) & ")")
+            If rbAges.Checked Then
+                If _type.StartsWith("B") Then
+                    _outString.Append(" (" & CStr(CalculateAgeNextBirthday(_person)) & ")")
+                Else
+                    _outString.Append(" (" & _person.BirthYear & ")")
+                End If
             End If
             If rbHandles.Checked Then
                 If _person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle) Then
@@ -239,7 +243,8 @@ Public Class FrmTweet
     Private Function GetTweetLineLength(_person As Person, _type As String) As Integer
         Return _person.Name.Length _
             + If(rbHandles.Checked, _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 3, 1), 0) _
-            + If(_type = "B" And rbAges.Checked, 5, 0)
+            + If(_type = "B" And rbAges.Checked, 5, 0) _
+            + If(_type = "A" And rbAges.Checked, 7, 0)
     End Function
     Private Function GetHeading(_typeNode As String) As String
         Dim _header As String = ""
@@ -563,6 +568,11 @@ Public Class FrmTweet
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
     End Sub
+
+    Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
+        GenerateImages()
+    End Sub
+
 
 #End Region
 End Class
