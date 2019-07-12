@@ -193,7 +193,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GlobalSettings.vb" />
-    <Compile Include="modTwitter.vb" />
+    <Compile Include="Twitter\modTwitter.vb" />
     <Compile Include="Twitter\FrmSendTwitter.Designer.vb">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>
     </Compile>

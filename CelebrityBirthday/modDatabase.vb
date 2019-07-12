@@ -222,12 +222,15 @@
     End Sub
 #End Region
 #Region "dates"
-    Public Sub UpdateDate(LoadYr As String, LoadMth As String, isDateAmend As Boolean, LoadDay As String, DayIndex As Decimal?, MonthIndex As Decimal?)
-        oDatesTa.UpdateDate(LoadYr, LoadMth, isDateAmend, LoadDay, DayIndex, MonthIndex)
+    Public Sub UpdateImageDate(LoadYr As String, LoadMth As String, isDateAmend As Boolean, LoadDay As String, DayIndex As Decimal?, MonthIndex As Decimal?)
+        oDatesTa.UpdateDate(LoadYr, LoadMth, isDateAmend, LoadDay, DayIndex, MonthIndex, "I")
     End Sub
-    Public Function GetWordPressLoadDate(oDay As Integer, oMonth As Integer) As Date?
+    Public Sub UpdatePageDate(LoadYr As String, LoadMth As String, isDateAmend As Boolean, LoadDay As String, DayIndex As Decimal?, MonthIndex As Decimal?)
+        oDatesTa.UpdateDate(LoadYr, LoadMth, isDateAmend, LoadDay, DayIndex, MonthIndex, "P")
+    End Sub
+    Public Function GetWordPressLoadDate(oDay As Integer, oMonth As Integer, oType As String) As Date?
         Dim loadDate As Date?
-        Dim iCt As Integer = oDatesTa.FillByDate(oDatesTable, oDay, oMonth)
+        Dim iCt As Integer = oDatesTa.FillByDateAndType(oDatesTable, oDay, oMonth, oType)
         Dim oDateRow As CelebrityBirthdayDataSet.DatesRow
         If iCt = 1 Then
             oDateRow = oDatesTable.Rows(0)
@@ -235,8 +238,8 @@
         End If
         Return loadDate
     End Function
-    Public Function GetDatesRow(oDay As Integer, oMonth As Integer) As CelebrityBirthday.CelebrityBirthdayDataSet.DatesRow
-        Dim iCt As Integer = oDatesTa.FillByDate(oDatesTable, oDay, oMonth)
+    Public Function GetDatesRow(oDay As Integer, oMonth As Integer, oType As String) As CelebrityBirthday.CelebrityBirthdayDataSet.DatesRow
+        Dim iCt As Integer = oDatesTa.FillByDateAndType(oDatesTable, oDay, oMonth, oType)
         Dim oDrow As CelebrityBirthdayDataSet.DatesRow = Nothing
         If iCt = 1 Then
             oDrow = oDatesTable.Rows(0)

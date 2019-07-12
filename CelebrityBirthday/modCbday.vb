@@ -191,8 +191,8 @@ Module modCbday
     Public Function GetGoogleSearchString(oText As String) As String
         Return My.Settings.googleImageSearch & oText.Replace(" ", "+")
     End Function
-    Public Function GetWordPressMonthUrl(oYear As String, oMonth As String, oDay As String, oDDay As String, oMMonth As String) As String
-        Return My.Settings.WordPressMonthUrl.Replace("#m", oMonth.ToLower).Replace("#y", oYear).Replace("#d", oDay).Replace("#D", oDDay).Replace("#M", oMMonth)
+    Public Function GetWordPressMonthUrl(oLoadYear As String, oLoadMonth As String, oLoadDay As String, oSelDay As String, oSelMonth As String) As String
+        Return My.Settings.WordPressMonthUrl.Replace("#m", oLoadMonth.ToLower).Replace("#y", oLoadYear).Replace("#d", oLoadDay).Replace("#D", oSelDay).Replace("#M", oSelMonth)
     End Function
     Public Function GetTwitterSearchString(oText As String) As String
         Return My.Settings.TwitterSearchUrl & oText.Replace(" ", "+")

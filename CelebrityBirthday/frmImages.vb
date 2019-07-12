@@ -57,7 +57,7 @@ Public Class FrmImages
             For Each oPerson As Person In personTable
                 ListBoxPeople.Items.Add(oPerson.BirthYear & " " & oPerson.Name)
             Next
-            Dim loadDate As Date? = GetWordPressLoadDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            Dim loadDate As Date? = GetWordPressLoadDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, "I")
             If loadDate IsNot Nothing Then
                 TxtWpLoadMth.Text = Format(loadDate.Value, "MM")
                 TxtWpLoadYear.Text = Format(loadDate.Value, "yyyy")

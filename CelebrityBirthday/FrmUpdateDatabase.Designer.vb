@@ -75,12 +75,11 @@ Partial Class FrmUpdateDatabase
         Me.btnUpdateAll = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.txtLoadDay = New System.Windows.Forms.TextBox()
-        Me.cbDateAmend = New System.Windows.Forms.CheckBox()
-        Me.btnLoadUpd = New System.Windows.Forms.Button()
+        Me.TxtImageLoadDay = New System.Windows.Forms.TextBox()
+        Me.BtnImageLoadUpd = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtLoadMth = New System.Windows.Forms.TextBox()
-        Me.txtLoadYr = New System.Windows.Forms.TextBox()
+        Me.TxtImageLoadMth = New System.Windows.Forms.TextBox()
+        Me.TxtImageLoadYr = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.UseNicknameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -98,18 +97,27 @@ Partial Class FrmUpdateDatabase
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.BtnGetWikiText = New System.Windows.Forms.Button()
         Me.NudSentences = New System.Windows.Forms.NumericUpDown()
+        Me.BtnWordPress = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.BtnPageLoadUpd = New System.Windows.Forms.Button()
+        Me.TxtPageLoadYr = New System.Windows.Forms.TextBox()
+        Me.TxtPageLoadMth = New System.Windows.Forms.TextBox()
+        Me.TxtPageLoadDay = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbNoTweet
         '
         Me.cbNoTweet.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cbNoTweet.AutoSize = True
-        Me.cbNoTweet.Location = New System.Drawing.Point(389, 562)
+        Me.cbNoTweet.ForeColor = System.Drawing.Color.Black
+        Me.cbNoTweet.Location = New System.Drawing.Point(389, 616)
         Me.cbNoTweet.Name = "cbNoTweet"
         Me.cbNoTweet.Size = New System.Drawing.Size(94, 18)
         Me.cbNoTweet.TabIndex = 100
@@ -119,8 +127,9 @@ Partial Class FrmUpdateDatabase
         'btnTwitter
         '
         Me.btnTwitter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnTwitter.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnTwitter.Location = New System.Drawing.Point(35, 555)
+        Me.btnTwitter.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTwitter.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnTwitter.Location = New System.Drawing.Point(35, 609)
         Me.btnTwitter.Name = "btnTwitter"
         Me.btnTwitter.Size = New System.Drawing.Size(87, 37)
         Me.btnTwitter.TabIndex = 119
@@ -132,7 +141,7 @@ Partial Class FrmUpdateDatabase
         Me.txtTwitter.AllowDrop = True
         Me.txtTwitter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtTwitter.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTwitter.Location = New System.Drawing.Point(162, 559)
+        Me.txtTwitter.Location = New System.Drawing.Point(162, 613)
         Me.txtTwitter.Name = "txtTwitter"
         Me.txtTwitter.Size = New System.Drawing.Size(217, 26)
         Me.txtTwitter.TabIndex = 99
@@ -141,7 +150,8 @@ Partial Class FrmUpdateDatabase
         '
         Me.Label16.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(129, 563)
+        Me.Label16.ForeColor = System.Drawing.Color.Black
+        Me.Label16.Location = New System.Drawing.Point(129, 617)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(18, 14)
         Me.Label16.TabIndex = 118
@@ -150,7 +160,8 @@ Partial Class FrmUpdateDatabase
         'btnTidyDob
         '
         Me.btnTidyDob.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnTidyDob.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTidyDob.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTidyDob.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnTidyDob.Location = New System.Drawing.Point(848, 232)
         Me.btnTidyDob.Name = "btnTidyDob"
         Me.btnTidyDob.Size = New System.Drawing.Size(61, 55)
@@ -162,7 +173,8 @@ Partial Class FrmUpdateDatabase
         '
         Me.btnRTB.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnRTB.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRTB.Location = New System.Drawing.Point(104, 370)
+        Me.btnRTB.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnRTB.Location = New System.Drawing.Point(104, 424)
         Me.btnRTB.Name = "btnRTB"
         Me.btnRTB.Size = New System.Drawing.Size(43, 29)
         Me.btnRTB.TabIndex = 116
@@ -180,13 +192,14 @@ Partial Class FrmUpdateDatabase
         Me.txtDesc.Multiline = True
         Me.txtDesc.Name = "txtDesc"
         Me.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDesc.Size = New System.Drawing.Size(672, 262)
+        Me.txtDesc.Size = New System.Drawing.Size(672, 316)
         Me.txtDesc.TabIndex = 92
         '
         'btnClearDesc
         '
         Me.btnClearDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClearDesc.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClearDesc.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClearDesc.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnClearDesc.Location = New System.Drawing.Point(848, 139)
         Me.btnClearDesc.Name = "btnClearDesc"
         Me.btnClearDesc.Size = New System.Drawing.Size(61, 28)
@@ -206,7 +219,8 @@ Partial Class FrmUpdateDatabase
         'btnTidy
         '
         Me.btnTidy.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnTidy.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTidy.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTidy.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnTidy.Location = New System.Drawing.Point(848, 184)
         Me.btnTidy.Name = "btnTidy"
         Me.btnTidy.Size = New System.Drawing.Size(61, 28)
@@ -217,7 +231,8 @@ Partial Class FrmUpdateDatabase
         'btnCopyBirthName
         '
         Me.btnCopyBirthName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCopyBirthName.Location = New System.Drawing.Point(848, 509)
+        Me.btnCopyBirthName.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnCopyBirthName.Location = New System.Drawing.Point(848, 563)
         Me.btnCopyBirthName.Name = "btnCopyBirthName"
         Me.btnCopyBirthName.Size = New System.Drawing.Size(35, 26)
         Me.btnCopyBirthName.TabIndex = 112
@@ -226,10 +241,11 @@ Partial Class FrmUpdateDatabase
         '
         'btnWiki
         '
-        Me.btnWiki.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnWiki.Location = New System.Drawing.Point(35, 170)
+        Me.btnWiki.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnWiki.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnWiki.Location = New System.Drawing.Point(35, 165)
         Me.btnWiki.Name = "btnWiki"
-        Me.btnWiki.Size = New System.Drawing.Size(69, 42)
+        Me.btnWiki.Size = New System.Drawing.Size(70, 47)
         Me.btnWiki.TabIndex = 110
         Me.btnWiki.Text = "Wiki" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Lookup"
         Me.btnWiki.UseVisualStyleBackColor = True
@@ -246,7 +262,8 @@ Partial Class FrmUpdateDatabase
         'btnCopyBirthPlace
         '
         Me.btnCopyBirthPlace.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCopyBirthPlace.Location = New System.Drawing.Point(848, 466)
+        Me.btnCopyBirthPlace.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnCopyBirthPlace.Location = New System.Drawing.Point(848, 520)
         Me.btnCopyBirthPlace.Name = "btnCopyBirthPlace"
         Me.btnCopyBirthPlace.Size = New System.Drawing.Size(35, 26)
         Me.btnCopyBirthPlace.TabIndex = 111
@@ -258,7 +275,8 @@ Partial Class FrmUpdateDatabase
         Me.Label15.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(35, 513)
+        Me.Label15.ForeColor = System.Drawing.Color.Black
+        Me.Label15.Location = New System.Drawing.Point(35, 567)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(67, 14)
         Me.Label15.TabIndex = 109
@@ -270,7 +288,7 @@ Partial Class FrmUpdateDatabase
         Me.txtBirthName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtBirthName.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBirthName.Location = New System.Drawing.Point(162, 509)
+        Me.txtBirthName.Location = New System.Drawing.Point(162, 563)
         Me.txtBirthName.Name = "txtBirthName"
         Me.txtBirthName.Size = New System.Drawing.Size(672, 26)
         Me.txtBirthName.TabIndex = 98
@@ -280,7 +298,8 @@ Partial Class FrmUpdateDatabase
         Me.Label14.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(35, 470)
+        Me.Label14.ForeColor = System.Drawing.Color.Black
+        Me.Label14.Location = New System.Drawing.Point(35, 524)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(60, 14)
         Me.Label14.TabIndex = 108
@@ -292,7 +311,7 @@ Partial Class FrmUpdateDatabase
         Me.txtBirthPlace.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtBirthPlace.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBirthPlace.Location = New System.Drawing.Point(162, 466)
+        Me.txtBirthPlace.Location = New System.Drawing.Point(162, 520)
         Me.txtBirthPlace.Name = "txtBirthPlace"
         Me.txtBirthPlace.Size = New System.Drawing.Size(672, 26)
         Me.txtBirthPlace.TabIndex = 97
@@ -308,6 +327,7 @@ Partial Class FrmUpdateDatabase
         '
         'btnSplitName
         '
+        Me.btnSplitName.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnSplitName.Location = New System.Drawing.Point(120, 54)
         Me.btnSplitName.Name = "btnSplitName"
         Me.btnSplitName.Size = New System.Drawing.Size(35, 26)
@@ -327,7 +347,8 @@ Partial Class FrmUpdateDatabase
         'btnCreateShortDesc
         '
         Me.btnCreateShortDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCreateShortDesc.Location = New System.Drawing.Point(848, 423)
+        Me.btnCreateShortDesc.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnCreateShortDesc.Location = New System.Drawing.Point(848, 477)
         Me.btnCreateShortDesc.Name = "btnCreateShortDesc"
         Me.btnCreateShortDesc.Size = New System.Drawing.Size(35, 26)
         Me.btnCreateShortDesc.TabIndex = 105
@@ -355,6 +376,8 @@ Partial Class FrmUpdateDatabase
         'btnDown
         '
         Me.btnDown.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDown.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDown.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnDown.Location = New System.Drawing.Point(1223, 108)
         Me.btnDown.Name = "btnDown"
         Me.btnDown.Size = New System.Drawing.Size(40, 43)
@@ -368,7 +391,7 @@ Partial Class FrmUpdateDatabase
         Me.txtShortDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtShortDesc.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtShortDesc.Location = New System.Drawing.Point(162, 423)
+        Me.txtShortDesc.Location = New System.Drawing.Point(162, 477)
         Me.txtShortDesc.Name = "txtShortDesc"
         Me.txtShortDesc.Size = New System.Drawing.Size(672, 26)
         Me.txtShortDesc.TabIndex = 95
@@ -378,7 +401,8 @@ Partial Class FrmUpdateDatabase
         Me.Label10.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(35, 426)
+        Me.Label10.ForeColor = System.Drawing.Color.Black
+        Me.Label10.Location = New System.Drawing.Point(35, 480)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(66, 14)
         Me.Label10.TabIndex = 103
@@ -387,6 +411,8 @@ Partial Class FrmUpdateDatabase
         'btnUp
         '
         Me.btnUp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUp.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUp.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnUp.Location = New System.Drawing.Point(1223, 58)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(40, 43)
@@ -441,6 +467,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.Black
         Me.Label7.Location = New System.Drawing.Point(271, 100)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(40, 14)
@@ -451,6 +478,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.Black
         Me.Label6.Location = New System.Drawing.Point(35, 137)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(67, 14)
@@ -470,6 +498,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
         Me.Label2.Location = New System.Drawing.Point(35, 100)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 14)
@@ -491,6 +520,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
         Me.Label1.Location = New System.Drawing.Point(35, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 14)
@@ -505,7 +535,7 @@ Partial Class FrmUpdateDatabase
         Me.rtbDesc.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbDesc.Location = New System.Drawing.Point(162, 137)
         Me.rtbDesc.Name = "rtbDesc"
-        Me.rtbDesc.Size = New System.Drawing.Size(672, 262)
+        Me.rtbDesc.Size = New System.Drawing.Size(672, 316)
         Me.rtbDesc.TabIndex = 115
         Me.rtbDesc.Text = ""
         Me.rtbDesc.Visible = False
@@ -513,7 +543,7 @@ Partial Class FrmUpdateDatabase
         'PictureBox1
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox1.Location = New System.Drawing.Point(35, 282)
+        Me.PictureBox1.Location = New System.Drawing.Point(35, 336)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(70, 65)
         Me.PictureBox1.TabIndex = 130
@@ -522,8 +552,9 @@ Partial Class FrmUpdateDatabase
         'btnUpdate
         '
         Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdate.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.Location = New System.Drawing.Point(162, 663)
+        Me.btnUpdate.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdate.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnUpdate.Location = New System.Drawing.Point(152, 749)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(100, 43)
         Me.btnUpdate.TabIndex = 122
@@ -533,8 +564,9 @@ Partial Class FrmUpdateDatabase
         'btnInsert
         '
         Me.btnInsert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnInsert.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInsert.Location = New System.Drawing.Point(44, 663)
+        Me.btnInsert.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnInsert.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnInsert.Location = New System.Drawing.Point(34, 749)
         Me.btnInsert.Name = "btnInsert"
         Me.btnInsert.Size = New System.Drawing.Size(100, 43)
         Me.btnInsert.TabIndex = 121
@@ -544,8 +576,9 @@ Partial Class FrmUpdateDatabase
         'btnClrNew
         '
         Me.btnClrNew.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnClrNew.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClrNew.Location = New System.Drawing.Point(526, 662)
+        Me.btnClrNew.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClrNew.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnClrNew.Location = New System.Drawing.Point(346, 749)
         Me.btnClrNew.Name = "btnClrNew"
         Me.btnClrNew.Size = New System.Drawing.Size(99, 43)
         Me.btnClrNew.TabIndex = 126
@@ -561,7 +594,7 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox1.Controls.Add(Me.btnUpdateSel)
         Me.GroupBox1.Controls.Add(Me.btnUpdateAll)
         Me.GroupBox1.Controls.Add(Me.btnDelete)
-        Me.GroupBox1.Location = New System.Drawing.Point(884, 566)
+        Me.GroupBox1.Location = New System.Drawing.Point(530, 633)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(353, 159)
         Me.GroupBox1.TabIndex = 134
@@ -570,24 +603,30 @@ Partial Class FrmUpdateDatabase
         '
         'btnClearList
         '
+        Me.btnClearList.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClearList.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnClearList.Location = New System.Drawing.Point(239, 96)
         Me.btnClearList.Name = "btnClearList"
         Me.btnClearList.Size = New System.Drawing.Size(100, 52)
         Me.btnClearList.TabIndex = 5
-        Me.btnClearList.Text = "Clear list"
+        Me.btnClearList.Text = "Clear List"
         Me.btnClearList.UseVisualStyleBackColor = True
         '
         'btnReloadSel
         '
+        Me.btnReloadSel.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReloadSel.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnReloadSel.Location = New System.Drawing.Point(132, 96)
         Me.btnReloadSel.Name = "btnReloadSel"
         Me.btnReloadSel.Size = New System.Drawing.Size(100, 52)
         Me.btnReloadSel.TabIndex = 4
-        Me.btnReloadSel.Text = "Reload table item"
+        Me.btnReloadSel.Text = "Reload Table Item"
         Me.btnReloadSel.UseVisualStyleBackColor = True
         '
         'btnLoadTable
         '
+        Me.btnLoadTable.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLoadTable.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnLoadTable.Location = New System.Drawing.Point(132, 38)
         Me.btnLoadTable.Name = "btnLoadTable"
         Me.btnLoadTable.Size = New System.Drawing.Size(100, 52)
@@ -597,24 +636,30 @@ Partial Class FrmUpdateDatabase
         '
         'btnUpdateSel
         '
+        Me.btnUpdateSel.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateSel.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnUpdateSel.Location = New System.Drawing.Point(24, 96)
         Me.btnUpdateSel.Name = "btnUpdateSel"
         Me.btnUpdateSel.Size = New System.Drawing.Size(100, 52)
         Me.btnUpdateSel.TabIndex = 3
-        Me.btnUpdateSel.Text = "Update db selected"
+        Me.btnUpdateSel.Text = "Update Db Selected"
         Me.btnUpdateSel.UseVisualStyleBackColor = True
         '
         'btnUpdateAll
         '
+        Me.btnUpdateAll.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateAll.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnUpdateAll.Location = New System.Drawing.Point(24, 38)
         Me.btnUpdateAll.Name = "btnUpdateAll"
         Me.btnUpdateAll.Size = New System.Drawing.Size(100, 52)
         Me.btnUpdateAll.TabIndex = 0
-        Me.btnUpdateAll.Text = "Update db  All"
+        Me.btnUpdateAll.Text = "Update Db  All"
         Me.btnUpdateAll.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
+        Me.btnDelete.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnDelete.Location = New System.Drawing.Point(239, 38)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(100, 52)
@@ -625,79 +670,73 @@ Partial Class FrmUpdateDatabase
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.Location = New System.Drawing.Point(1136, 742)
+        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnClose.Location = New System.Drawing.Point(1136, 781)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(100, 28)
+        Me.btnClose.Size = New System.Drawing.Size(100, 43)
         Me.btnClose.TabIndex = 135
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'txtLoadDay
+        'TxtImageLoadDay
         '
-        Me.txtLoadDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLoadDay.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadDay.Location = New System.Drawing.Point(952, 533)
-        Me.txtLoadDay.Name = "txtLoadDay"
-        Me.txtLoadDay.Size = New System.Drawing.Size(55, 22)
-        Me.txtLoadDay.TabIndex = 136
+        Me.TxtImageLoadDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtImageLoadDay.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtImageLoadDay.Location = New System.Drawing.Point(12, 133)
+        Me.TxtImageLoadDay.Name = "TxtImageLoadDay"
+        Me.TxtImageLoadDay.Size = New System.Drawing.Size(55, 22)
+        Me.TxtImageLoadDay.TabIndex = 136
         '
-        'cbDateAmend
+        'BtnImageLoadUpd
         '
-        Me.cbDateAmend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbDateAmend.AutoSize = True
-        Me.cbDateAmend.Location = New System.Drawing.Point(1003, 509)
-        Me.cbDateAmend.Name = "cbDateAmend"
-        Me.cbDateAmend.Size = New System.Drawing.Size(107, 18)
-        Me.cbDateAmend.TabIndex = 139
-        Me.cbDateAmend.Text = "Date amended"
-        Me.cbDateAmend.UseVisualStyleBackColor = True
-        '
-        'btnLoadUpd
-        '
-        Me.btnLoadUpd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnLoadUpd.Location = New System.Drawing.Point(1184, 531)
-        Me.btnLoadUpd.Name = "btnLoadUpd"
-        Me.btnLoadUpd.Size = New System.Drawing.Size(52, 27)
-        Me.btnLoadUpd.TabIndex = 140
-        Me.btnLoadUpd.Text = "Upd"
-        Me.btnLoadUpd.UseVisualStyleBackColor = True
+        Me.BtnImageLoadUpd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnImageLoadUpd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnImageLoadUpd.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnImageLoadUpd.Location = New System.Drawing.Point(251, 131)
+        Me.BtnImageLoadUpd.Name = "BtnImageLoadUpd"
+        Me.BtnImageLoadUpd.Size = New System.Drawing.Size(52, 27)
+        Me.BtnImageLoadUpd.TabIndex = 140
+        Me.BtnImageLoadUpd.Text = "Upd"
+        Me.BtnImageLoadUpd.UseVisualStyleBackColor = True
         '
         'Label5
         '
         Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(881, 538)
+        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.Location = New System.Drawing.Point(9, 107)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(62, 14)
+        Me.Label5.Size = New System.Drawing.Size(101, 14)
         Me.Label5.TabIndex = 141
-        Me.Label5.Text = "Load date"
+        Me.Label5.Text = "Image Load Date"
         '
-        'txtLoadMth
+        'TxtImageLoadMth
         '
-        Me.txtLoadMth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLoadMth.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadMth.Location = New System.Drawing.Point(1015, 533)
-        Me.txtLoadMth.Name = "txtLoadMth"
-        Me.txtLoadMth.Size = New System.Drawing.Size(55, 22)
-        Me.txtLoadMth.TabIndex = 137
+        Me.TxtImageLoadMth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtImageLoadMth.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtImageLoadMth.Location = New System.Drawing.Point(75, 133)
+        Me.TxtImageLoadMth.Name = "TxtImageLoadMth"
+        Me.TxtImageLoadMth.Size = New System.Drawing.Size(55, 22)
+        Me.TxtImageLoadMth.TabIndex = 137
         '
-        'txtLoadYr
+        'TxtImageLoadYr
         '
-        Me.txtLoadYr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLoadYr.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadYr.Location = New System.Drawing.Point(1078, 533)
-        Me.txtLoadYr.Name = "txtLoadYr"
-        Me.txtLoadYr.Size = New System.Drawing.Size(82, 22)
-        Me.txtLoadYr.TabIndex = 138
+        Me.TxtImageLoadYr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtImageLoadYr.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtImageLoadYr.Location = New System.Drawing.Point(138, 133)
+        Me.TxtImageLoadYr.Name = "TxtImageLoadYr"
+        Me.TxtImageLoadYr.Size = New System.Drawing.Size(82, 22)
+        Me.TxtImageLoadYr.TabIndex = 138
         '
         'Label11
         '
         Me.Label11.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(12, 730)
+        Me.Label11.ForeColor = System.Drawing.Color.Black
+        Me.Label11.Location = New System.Drawing.Point(12, 810)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(49, 14)
         Me.Label11.TabIndex = 142
@@ -775,14 +814,19 @@ Partial Class FrmUpdateDatabase
         '
         'lblStatus
         '
+        Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(0, 17)
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.lblStatus.Size = New System.Drawing.Size(3, 17)
         '
         'StatusStrip1
         '
+        Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 783)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 837)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(1271, 22)
@@ -791,10 +835,11 @@ Partial Class FrmUpdateDatabase
         '
         'BtnGetWikiText
         '
-        Me.BtnGetWikiText.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnGetWikiText.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnGetWikiText.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnGetWikiText.Location = New System.Drawing.Point(35, 219)
         Me.BtnGetWikiText.Name = "BtnGetWikiText"
-        Me.BtnGetWikiText.Size = New System.Drawing.Size(69, 42)
+        Me.BtnGetWikiText.Size = New System.Drawing.Size(69, 47)
         Me.BtnGetWikiText.TabIndex = 144
         Me.BtnGetWikiText.Text = "Get Wiki Text"
         Me.BtnGetWikiText.UseVisualStyleBackColor = True
@@ -809,22 +854,100 @@ Partial Class FrmUpdateDatabase
         Me.NudSentences.TabIndex = 145
         Me.NudSentences.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
+        'BtnWordPress
+        '
+        Me.BtnWordPress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnWordPress.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWordPress.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWordPress.Location = New System.Drawing.Point(62, 177)
+        Me.BtnWordPress.Name = "BtnWordPress"
+        Me.BtnWordPress.Size = New System.Drawing.Size(198, 38)
+        Me.BtnWordPress.TabIndex = 146
+        Me.BtnWordPress.Text = "Open WordPress"
+        Me.BtnWordPress.UseVisualStyleBackColor = True
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.BtnPageLoadUpd)
+        Me.GroupBox2.Controls.Add(Me.TxtPageLoadYr)
+        Me.GroupBox2.Controls.Add(Me.TxtPageLoadMth)
+        Me.GroupBox2.Controls.Add(Me.TxtPageLoadDay)
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.BtnWordPress)
+        Me.GroupBox2.Controls.Add(Me.BtnImageLoadUpd)
+        Me.GroupBox2.Controls.Add(Me.TxtImageLoadYr)
+        Me.GroupBox2.Controls.Add(Me.TxtImageLoadMth)
+        Me.GroupBox2.Controls.Add(Me.TxtImageLoadDay)
+        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Location = New System.Drawing.Point(917, 502)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(319, 233)
+        Me.GroupBox2.TabIndex = 147
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "WordPress"
+        '
+        'BtnPageLoadUpd
+        '
+        Me.BtnPageLoadUpd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPageLoadUpd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPageLoadUpd.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnPageLoadUpd.Location = New System.Drawing.Point(251, 60)
+        Me.BtnPageLoadUpd.Name = "BtnPageLoadUpd"
+        Me.BtnPageLoadUpd.Size = New System.Drawing.Size(52, 27)
+        Me.BtnPageLoadUpd.TabIndex = 150
+        Me.BtnPageLoadUpd.Text = "Upd"
+        Me.BtnPageLoadUpd.UseVisualStyleBackColor = True
+        '
+        'TxtPageLoadYr
+        '
+        Me.TxtPageLoadYr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtPageLoadYr.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPageLoadYr.Location = New System.Drawing.Point(138, 65)
+        Me.TxtPageLoadYr.Name = "TxtPageLoadYr"
+        Me.TxtPageLoadYr.Size = New System.Drawing.Size(82, 22)
+        Me.TxtPageLoadYr.TabIndex = 149
+        '
+        'TxtPageLoadMth
+        '
+        Me.TxtPageLoadMth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtPageLoadMth.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPageLoadMth.Location = New System.Drawing.Point(75, 65)
+        Me.TxtPageLoadMth.Name = "TxtPageLoadMth"
+        Me.TxtPageLoadMth.Size = New System.Drawing.Size(55, 22)
+        Me.TxtPageLoadMth.TabIndex = 148
+        '
+        'TxtPageLoadDay
+        '
+        Me.TxtPageLoadDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtPageLoadDay.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPageLoadDay.Location = New System.Drawing.Point(12, 65)
+        Me.TxtPageLoadDay.Name = "TxtPageLoadDay"
+        Me.TxtPageLoadDay.Size = New System.Drawing.Size(55, 22)
+        Me.TxtPageLoadDay.TabIndex = 147
+        '
+        'Label3
+        '
+        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.Black
+        Me.Label3.Location = New System.Drawing.Point(9, 35)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(94, 14)
+        Me.Label3.TabIndex = 151
+        Me.Label3.Text = "Page Load Date"
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
-        Me.ClientSize = New System.Drawing.Size(1271, 805)
+        Me.ClientSize = New System.Drawing.Size(1271, 859)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.NudSentences)
         Me.Controls.Add(Me.BtnGetWikiText)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.txtLoadDay)
-        Me.Controls.Add(Me.cbDateAmend)
-        Me.Controls.Add(Me.btnLoadUpd)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.txtLoadMth)
-        Me.Controls.Add(Me.txtLoadYr)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.PictureBox1)
@@ -871,6 +994,7 @@ Partial Class FrmUpdateDatabase
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.rtbDesc)
         Me.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimumSize = New System.Drawing.Size(1040, 710)
         Me.Name = "FrmUpdateDatabase"
@@ -882,6 +1006,8 @@ Partial Class FrmUpdateDatabase
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -938,12 +1064,11 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents btnUpdateAll As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnClose As Button
-    Friend WithEvents txtLoadDay As TextBox
-    Friend WithEvents cbDateAmend As CheckBox
-    Friend WithEvents btnLoadUpd As Button
+    Friend WithEvents TxtImageLoadDay As TextBox
+    Friend WithEvents BtnImageLoadUpd As Button
     Friend WithEvents Label5 As Label
-    Friend WithEvents txtLoadMth As TextBox
-    Friend WithEvents txtLoadYr As TextBox
+    Friend WithEvents TxtImageLoadMth As TextBox
+    Friend WithEvents TxtImageLoadYr As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents UseNicknameToolStripMenuItem As ToolStripMenuItem
@@ -961,4 +1086,11 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents BtnGetWikiText As Button
     Friend WithEvents NudSentences As NumericUpDown
+    Friend WithEvents BtnWordPress As Button
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents BtnPageLoadUpd As Button
+    Friend WithEvents TxtPageLoadYr As TextBox
+    Friend WithEvents TxtPageLoadMth As TextBox
+    Friend WithEvents TxtPageLoadDay As TextBox
+    Friend WithEvents Label3 As Label
 End Class

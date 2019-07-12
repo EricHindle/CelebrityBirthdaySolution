@@ -142,7 +142,7 @@ Public Class FrmUpdateDatabase
                 lbPeople.SelectedIndex = p
             Catch ex As Exception
                 MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
-                lblStatus.Text = ex.Message
+                ShowStatus(ex.Message)
             End Try
         Else
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
@@ -203,23 +203,28 @@ Public Class FrmUpdateDatabase
         UpdateAll()
     End Sub
     Private Sub BtnLoadTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoadTable.Click, cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
-        lblStatus.Text = ""
+        clearStatus()
         If CheckForChanges(personTable) Then
             If MsgBox("Save unsaved changes now?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Unsaved Changes") = MsgBoxResult.Yes Then
                 UpdateAll()
             End If
         End If
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
-            lblStatus.Text = "Loading Table From Database"
+            ShowStatus("Loading Table From Database")
             StatusStrip1.Refresh()
             personTable = New List(Of Person)
             lbPeople.Items.Clear()
-            Dim oDrow As CelebrityBirthdayDataSet.DatesRow = GetDatesRow(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            Dim oDrow As CelebrityBirthdayDataSet.DatesRow = GetDatesRow(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, "I")
             If oDrow IsNot Nothing Then
-                cbDateAmend.Checked = True
-                txtLoadYr.Text = If(oDrow.IsuploadyearNull, "", oDrow.uploadyear)
-                txtLoadMth.Text = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
-                txtLoadDay.Text = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
+                TxtImageLoadYr.Text = If(oDrow.IsuploadyearNull, "", oDrow.uploadyear)
+                TxtImageLoadMth.Text = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
+                TxtImageLoadDay.Text = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
+            End If
+            oDrow = GetDatesRow(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, "P")
+            If oDrow IsNot Nothing Then
+                TxtPageLoadYr.Text = If(oDrow.IsuploadyearNull, "", oDrow.uploadyear)
+                TxtPageLoadMth.Text = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
+                TxtPageLoadDay.Text = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
             End If
             Dim selectedIndex As Integer = -1
             personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
@@ -231,11 +236,11 @@ Public Class FrmUpdateDatabase
             Next
             lbPeople.SelectedIndex = selectedIndex
             findPersonInList = -1
-            lblStatus.Text += " - Complete"
+            AppendStatus(" - Complete")
         End If
     End Sub
     Private Sub BtnReloadSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadSel.Click
-        lblStatus.Text = "Loading Item From Database"
+        ShowStatus("Loading Item From Database")
         Me.Refresh()
         If lbPeople.SelectedIndex >= 0 And lbPeople.SelectedIndex < lbPeople.Items.Count Then
             If personTable(lbPeople.SelectedIndex) IsNot Nothing Then
@@ -249,10 +254,10 @@ Public Class FrmUpdateDatabase
                 End If
             End If
         End If
-        lblStatus.Text += " - Complete"
+        AppendStatus(" - Complete")
     End Sub
     Private Sub LbPeople_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbPeople.SelectedIndexChanged
-        lblStatus.Text = ""
+        clearStatus()
         SwapText("Text")
         bLoadingPerson = True
         If lbPeople.SelectedIndex >= 0 Then
@@ -264,9 +269,9 @@ Public Class FrmUpdateDatabase
         bLoadingPerson = False
     End Sub
     Private Sub BtnUpdateSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateSel.Click
-        lblStatus.Text = ""
+        clearStatus()
         If lbPeople.SelectedIndex >= 0 Then
-            lblStatus.Text = "Updating Database"
+            ShowStatus("Updating Database")
             StatusStrip1.Refresh()
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             If oPerson.Id < 0 Then
@@ -274,15 +279,14 @@ Public Class FrmUpdateDatabase
             Else
                 UpdatePerson(oPerson)
             End If
-            If cbDateAmend.Checked Then
-                UpdateDate(txtLoadYr.Text, txtLoadMth.Text, cbDateAmend.Checked, txtLoadDay.Text, cboDay.SelectedIndex, cboMonth.SelectedIndex)
-            End If
+            UpdateImageDate(TxtImageLoadYr.Text, TxtImageLoadMth.Text, True, TxtImageLoadDay.Text, cboDay.SelectedIndex, cboMonth.SelectedIndex)
+            UpdatePageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex, cboMonth.SelectedIndex)
             oPerson.UnsavedChanges = False
-            lblStatus.Text += " - Complete"
+            AppendStatus(" - Complete")
         End If
     End Sub
     Private Sub BtnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
-        lblStatus.Text = ""
+        clearStatus()
         TidyText()
         If lblID.Text.Length > 0 Then
             Dim id As Integer = CInt(lblID.Text)
@@ -303,7 +307,7 @@ Public Class FrmUpdateDatabase
                     Dim p As Integer = lbPeople.SelectedIndex
                     DisplayPersonList()
                     lbPeople.SelectedIndex = p
-                    lblStatus.Text = "Updated list"
+                    ShowStatus("Updated list")
 
                     Exit For
                 End If
@@ -325,9 +329,12 @@ Public Class FrmUpdateDatabase
         NudSentences.Value = My.Settings.wikiSentences
         Label11.Text = "Version: " & My.Application.Info.Version.ToString
         GetFormPos(Me, My.Settings.updformpos)
-        txtLoadYr.Text = ""
-        txtLoadMth.Text = ""
-        cbDateAmend.Checked = False
+        TxtImageLoadYr.Text = ""
+        TxtImageLoadMth.Text = ""
+        TxtImageLoadDay.Text = ""
+        TxtPageLoadYr.Text = ""
+        TxtPageLoadMth.Text = ""
+        TxtPageLoadDay.Text = ""
         bLoadingPerson = False
         rtbDesc.AllowDrop = True
         rtbDesc.EnableAutoDragDrop = True
@@ -358,16 +365,6 @@ Public Class FrmUpdateDatabase
         cboDay.SelectedIndex = -1
         cboMonth.SelectedIndex = -1
     End Sub
-    Private Sub AnyTextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtYear.TextChanged, txtDied.TextChanged,
-                                                                                                 txtForename.TextChanged, txtSurname.TextChanged,
-                                                                                                 txtName.TextChanged,
-                                                                                                 txtShortDesc.TextChanged, txtBirthName.TextChanged,
-                                                                                                 txtBirthPlace.TextChanged, txtDthDay.TextChanged,
-                                                                                                 txtDthMth.TextChanged
-        If Not bLoadingPerson Then
-            cbDateAmend.Checked = True
-        End If
-    End Sub
     Private Sub BtnWiki_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWiki.Click
         Dim item As String() = {""}
         If lblID.Text.Length > 0 And lbPeople.SelectedIndex >= 0 Then
@@ -379,7 +376,7 @@ Public Class FrmUpdateDatabase
         ElseIf txtName.TextLength > 0 Then
             item = Split(txtName.Text, " ")
         End If
-        If _browser Is Nothing OrElse _browser.isdisposed Then
+        If _browser Is Nothing OrElse _browser.IsDisposed Then
             _browser = New FrmBrowser
         End If
         _browser.SearchName = Join(item, " ").Trim
@@ -485,15 +482,15 @@ Public Class FrmUpdateDatabase
                 MsgBox("DEAD. Expired and gone to meet their maker. Pushing up the daisies." _
                     & vbCrLf & "Bereft of life, they rest in peace. Shuffled off this mortal coil" _
                     & vbCrLf & "Run down the curtain and joined the choir invisible.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly)
-                lblStatus.Text = "Dead"
+                ShowStatus("Dead")
                 Exit Sub
             End If
             If _search Is Nothing OrElse _search.IsDisposed Then
                 _search = New FrmBrowser
             End If
             _search.Show()
-            _search.searchName = oPerson.ForeName.Trim & " " & oPerson.Surname.Trim
-            _search.FindinTwitter()
+            _search.SearchName = oPerson.ForeName.Trim & " " & oPerson.Surname.Trim
+            _search.FindInTwitter()
         End If
     End Sub
 #End Region
@@ -546,7 +543,7 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub UpdateAll()
-        lblStatus.Text = "Updating Database"
+        ShowStatus("Updating Database")
         StatusStrip1.Refresh()
         Dim lastYear As String = ""
         Dim iSeq As Integer = 0
@@ -565,10 +562,10 @@ Public Class FrmUpdateDatabase
             End If
             oPerson.UnsavedChanges = False
         Next
-        If cbDateAmend.Checked Then
-            UpdateDate(txtLoadYr.Text, txtLoadMth.Text, cbDateAmend.Checked, txtLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-        End If
-        lblStatus.Text += " - Complete"
+        UpdateImageDate(TxtImageLoadYr.Text, TxtImageLoadMth.Text, True, TxtImageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+        UpdatepageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+
+        AppendStatus(" - Complete")
     End Sub
     Private Sub TidyAndFix()
         Dim _desc As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
@@ -649,10 +646,10 @@ Public Class FrmUpdateDatabase
                 cboDay.SelectedIndex = oPerson.BirthDay - 1
                 cboMonth.SelectedIndex = oPerson.BirthMonth - 1
             Else
-                lblStatus.Text = "Id not found"
+                ShowStatus("Id not found")
             End If
         Catch ex As Exception
-            lblStatus.Text = "Unable to load Person" & vbCrLf & ex.Message
+            ShowStatus("Unable to load Person" & vbCrLf & ex.Message)
         End Try
     End Sub
     Private Sub LoadScreenFromPerson(oPerson As Person)
@@ -669,8 +666,8 @@ Public Class FrmUpdateDatabase
         txtBirthName.Text = oPerson.BirthName
         txtBirthPlace.Text = oPerson.BirthPlace
         txtName.Text = MakeFullName(oPerson.ForeName, oPerson.Surname)
-        Dim sYear As String = txtLoadYr.Text
-            Dim sMth As String = txtLoadMth.Text
+        Dim sYear As String = TxtImageLoadYr.Text
+        Dim sMth As String = TxtImageLoadMth.Text
         If oPerson.Image IsNot Nothing Then
             PictureBox1.ImageLocation = Path.Combine(My.Settings.ImgFolder, oPerson.Image.ImageFileName & oPerson.Image.ImageFileType)
         End If
@@ -767,6 +764,37 @@ Public Class FrmUpdateDatabase
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, NudSentences.Value))
         Dim extract As String = GetExtractFromResponse(_response)
         txtDesc.Text = extract
+    End Sub
+
+    Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
+        ShowStatus("WordPress")
+
+        Using _wordpress As New FrmWordPress
+            _wordpress.DaySelection = cboDay.SelectedIndex + 1
+            _wordpress.MonthSelection = cboMonth.SelectedIndex + 1
+            _wordpress.ShowDialog()
+            End Using
+
+        clearStatus()
+    End Sub
+    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False)
+        lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
+        StatusStrip1.Refresh()
+    End Sub
+    Private Sub AppendStatus(pText As String)
+        ShowStatus(pText, True)
+    End Sub
+    Private Sub clearStatus()
+        ShowStatus("", False)
+    End Sub
+
+    Private Sub BtnImageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnImageLoadUpd.Click
+        UpdateImageDate(TxtImageLoadYr.Text, TxtImageLoadMth.Text, True, TxtImageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+
+    End Sub
+
+    Private Sub BtnPageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnPageLoadUpd.Click
+        UpdatePageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
     End Sub
 #End Region
 End Class

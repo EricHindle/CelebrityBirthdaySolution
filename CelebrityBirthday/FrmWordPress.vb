@@ -48,7 +48,7 @@ Public Class FrmWordPress
     End Sub
     Private Sub BtnLoadTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
-            Dim _wpDate As Date? = GetWordPressLoadDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            Dim _wpDate As Date? = GetWordPressLoadDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, "P")
             TxtLoadDay.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "dd"))
             txtLoadMth.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "MM"))
             txtLoadYr.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
@@ -203,6 +203,10 @@ Public Class FrmWordPress
             Process.Start(sUrl)
         End If
 
+    End Sub
+    Private Sub ShowStatus(pText As String)
+        lblStatus.Text = pText
+        StatusStrip1.Refresh()
     End Sub
 #End Region
 End Class
