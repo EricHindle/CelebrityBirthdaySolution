@@ -42,14 +42,16 @@ Partial Class FrmOptions
         Me.TxtWikiSearch = New System.Windows.Forms.TextBox()
         Me.txtTwitterSearch = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TxtTwitterImagePath = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TxtWikiExtract = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.BtnGlobalSettings = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.NudSentences = New System.Windows.Forms.NumericUpDown()
-        Me.TxtTwitterImagePath = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TxtWordPressDate = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -239,10 +241,28 @@ Partial Class FrmOptions
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "File Paths"
         '
+        'TxtTwitterImagePath
+        '
+        Me.TxtTwitterImagePath.Location = New System.Drawing.Point(172, 125)
+        Me.TxtTwitterImagePath.Name = "TxtTwitterImagePath"
+        Me.TxtTwitterImagePath.Size = New System.Drawing.Size(333, 22)
+        Me.TxtTwitterImagePath.TabIndex = 8
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(13, 128)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(136, 14)
+        Me.Label10.TabIndex = 9
+        Me.Label10.Text = "Twitter Image File Path"
+        '
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.TxtWordPressDate)
+        Me.GroupBox2.Controls.Add(Me.Label11)
         Me.GroupBox2.Controls.Add(Me.TxtWikiExtract)
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.txtTwitterSearch)
@@ -253,9 +273,9 @@ Partial Class FrmOptions
         Me.GroupBox2.Controls.Add(Me.TxtWordPress)
         Me.GroupBox2.Controls.Add(Me.Label7)
         Me.GroupBox2.Controls.Add(Me.TxtImageSearch)
-        Me.GroupBox2.Location = New System.Drawing.Point(16, 236)
+        Me.GroupBox2.Location = New System.Drawing.Point(16, 200)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(521, 264)
+        Me.GroupBox2.Size = New System.Drawing.Size(521, 300)
         Me.GroupBox2.TabIndex = 19
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "URLs"
@@ -264,7 +284,7 @@ Partial Class FrmOptions
         '
         Me.TxtWikiExtract.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtWikiExtract.Location = New System.Drawing.Point(172, 185)
+        Me.TxtWikiExtract.Location = New System.Drawing.Point(172, 233)
         Me.TxtWikiExtract.Multiline = True
         Me.TxtWikiExtract.Name = "TxtWikiExtract"
         Me.TxtWikiExtract.Size = New System.Drawing.Size(333, 61)
@@ -273,7 +293,7 @@ Partial Class FrmOptions
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(13, 188)
+        Me.Label8.Location = New System.Drawing.Point(13, 236)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(97, 14)
         Me.Label8.TabIndex = 18
@@ -309,21 +329,24 @@ Partial Class FrmOptions
         Me.NudSentences.TabIndex = 22
         Me.NudSentences.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'TxtTwitterImagePath
+        'TxtWordPressDate
         '
-        Me.TxtTwitterImagePath.Location = New System.Drawing.Point(172, 125)
-        Me.TxtTwitterImagePath.Name = "TxtTwitterImagePath"
-        Me.TxtTwitterImagePath.Size = New System.Drawing.Size(333, 22)
-        Me.TxtTwitterImagePath.TabIndex = 8
+        Me.TxtWordPressDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtWordPressDate.Location = New System.Drawing.Point(172, 182)
+        Me.TxtWordPressDate.Multiline = True
+        Me.TxtWordPressDate.Name = "TxtWordPressDate"
+        Me.TxtWordPressDate.Size = New System.Drawing.Size(333, 36)
+        Me.TxtWordPressDate.TabIndex = 21
         '
-        'Label10
+        'Label11
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(13, 128)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(136, 14)
-        Me.Label10.TabIndex = 9
-        Me.Label10.Text = "Twitter Image File Path"
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(13, 185)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(151, 14)
+        Me.Label11.TabIndex = 20
+        Me.Label11.Text = "WordPress Date Page URL"
         '
         'FrmOptions
         '
@@ -380,4 +403,6 @@ Partial Class FrmOptions
     Friend WithEvents NudSentences As NumericUpDown
     Friend WithEvents TxtTwitterImagePath As TextBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents TxtWordPressDate As TextBox
+    Friend WithEvents Label11 As Label
 End Class

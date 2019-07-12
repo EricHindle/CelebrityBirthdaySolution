@@ -7,7 +7,17 @@ Public Class FrmImages
     Private Const ID_NOT_FOUND As String = "Id not found"
     Private Const SEP As String = "/"
 #End Region
-
+#Region "properties"
+    Private _personId As Integer
+    Public Property PersonId() As Integer
+        Get
+            Return _personId
+        End Get
+        Set(ByVal value As Integer)
+            _personId = value
+        End Set
+    End Property
+#End Region
 
 #Region "variables"
     Private bLoadingPerson As Boolean = False
@@ -25,6 +35,9 @@ Public Class FrmImages
         txtLoadMth.Text = String.Empty
         cbImgType.SelectedIndex = 0
         bLoadingPerson = False
+        If _personId > 0 Then
+            LoadScreenFromId(_personId)
+        End If
     End Sub
     Private Sub BtnFindImage_Click(sender As Object, e As EventArgs) Handles BtnFindImage.Click
         Using _imagestore As New frmImageStore

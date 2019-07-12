@@ -44,12 +44,17 @@ Partial Class FrmSearch
         Me.BtnFindInWiki = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.BtnUpdate = New System.Windows.Forms.Button()
+        Me.BtnDbUpdate = New System.Windows.Forms.Button()
         Me.BtnClear = New System.Windows.Forms.Button()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.BtnImgUpdate = New System.Windows.Forms.Button()
+        Me.BtnTweet = New System.Windows.Forms.Button()
+        Me.BtnWordPress = New System.Windows.Forms.Button()
         CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'TxtForename
@@ -115,7 +120,7 @@ Partial Class FrmSearch
         Me.DgvPeople.ReadOnly = True
         Me.DgvPeople.RowHeadersVisible = False
         Me.DgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvPeople.Size = New System.Drawing.Size(923, 406)
+        Me.DgvPeople.Size = New System.Drawing.Size(923, 434)
         Me.DgvPeople.TabIndex = 19
         '
         'SelPersonId
@@ -178,7 +183,7 @@ Partial Class FrmSearch
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(974, 453)
+        Me.BtnClose.Location = New System.Drawing.Point(974, 481)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(117, 45)
         Me.BtnClose.TabIndex = 17
@@ -209,10 +214,10 @@ Partial Class FrmSearch
         '
         'GroupBox1
         '
-        Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.BtnSearchById)
         Me.GroupBox1.Controls.Add(Me.BtnSearchByName)
-        Me.GroupBox1.Location = New System.Drawing.Point(959, 104)
+        Me.GroupBox1.Location = New System.Drawing.Point(959, 92)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(135, 116)
         Me.GroupBox1.TabIndex = 22
@@ -221,9 +226,9 @@ Partial Class FrmSearch
         '
         'GroupBox2
         '
-        Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.Controls.Add(Me.BtnFindInWiki)
-        Me.GroupBox2.Location = New System.Drawing.Point(959, 235)
+        Me.GroupBox2.Location = New System.Drawing.Point(959, 214)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(135, 63)
         Me.GroupBox2.TabIndex = 23
@@ -246,7 +251,7 @@ Partial Class FrmSearch
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 516)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 544)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1106, 22)
         Me.StatusStrip1.TabIndex = 24
@@ -260,17 +265,16 @@ Partial Class FrmSearch
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.LblStatus.Size = New System.Drawing.Size(3, 17)
         '
-        'BtnUpdate
+        'BtnDbUpdate
         '
-        Me.BtnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnUpdate.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUpdate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdate.Location = New System.Drawing.Point(974, 347)
-        Me.BtnUpdate.Name = "BtnUpdate"
-        Me.BtnUpdate.Size = New System.Drawing.Size(117, 64)
-        Me.BtnUpdate.TabIndex = 25
-        Me.BtnUpdate.Text = "Update selected person"
-        Me.BtnUpdate.UseVisualStyleBackColor = True
+        Me.BtnDbUpdate.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDbUpdate.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnDbUpdate.Location = New System.Drawing.Point(15, 19)
+        Me.BtnDbUpdate.Name = "BtnDbUpdate"
+        Me.BtnDbUpdate.Size = New System.Drawing.Size(107, 36)
+        Me.BtnDbUpdate.TabIndex = 25
+        Me.BtnDbUpdate.Text = "Database"
+        Me.BtnDbUpdate.UseVisualStyleBackColor = True
         '
         'BtnClear
         '
@@ -283,14 +287,61 @@ Partial Class FrmSearch
         Me.BtnClear.Text = "Clear"
         Me.BtnClear.UseVisualStyleBackColor = True
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox3.Controls.Add(Me.BtnWordPress)
+        Me.GroupBox3.Controls.Add(Me.BtnTweet)
+        Me.GroupBox3.Controls.Add(Me.BtnImgUpdate)
+        Me.GroupBox3.Controls.Add(Me.BtnDbUpdate)
+        Me.GroupBox3.Location = New System.Drawing.Point(959, 283)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(135, 192)
+        Me.GroupBox3.TabIndex = 26
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Update"
+        '
+        'BtnImgUpdate
+        '
+        Me.BtnImgUpdate.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnImgUpdate.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnImgUpdate.Location = New System.Drawing.Point(15, 61)
+        Me.BtnImgUpdate.Name = "BtnImgUpdate"
+        Me.BtnImgUpdate.Size = New System.Drawing.Size(107, 36)
+        Me.BtnImgUpdate.TabIndex = 26
+        Me.BtnImgUpdate.Text = "Image"
+        Me.BtnImgUpdate.UseVisualStyleBackColor = True
+        '
+        'BtnTweet
+        '
+        Me.BtnTweet.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnTweet.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnTweet.Location = New System.Drawing.Point(15, 103)
+        Me.BtnTweet.Name = "BtnTweet"
+        Me.BtnTweet.Size = New System.Drawing.Size(107, 36)
+        Me.BtnTweet.TabIndex = 27
+        Me.BtnTweet.Text = "Twitter"
+        Me.BtnTweet.UseVisualStyleBackColor = True
+        '
+        'BtnWordPress
+        '
+        Me.BtnWordPress.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWordPress.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWordPress.Location = New System.Drawing.Point(15, 145)
+        Me.BtnWordPress.Name = "BtnWordPress"
+        Me.BtnWordPress.Size = New System.Drawing.Size(107, 36)
+        Me.BtnWordPress.TabIndex = 28
+        Me.BtnWordPress.Text = "WordPress"
+        Me.BtnWordPress.UseVisualStyleBackColor = True
+        '
         'FrmSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1106, 538)
+        Me.ClientSize = New System.Drawing.Size(1106, 566)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.BtnClear)
-        Me.Controls.Add(Me.BtnUpdate)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -309,6 +360,7 @@ Partial Class FrmSearch
         Me.GroupBox2.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -328,7 +380,7 @@ Partial Class FrmSearch
     Friend WithEvents BtnFindInWiki As Button
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents LblStatus As ToolStripStatusLabel
-    Friend WithEvents BtnUpdate As Button
+    Friend WithEvents BtnDbUpdate As Button
     Friend WithEvents BtnClear As Button
     Friend WithEvents SelPersonId As DataGridViewTextBoxColumn
     Friend WithEvents selPersonDay As DataGridViewTextBoxColumn
@@ -337,4 +389,8 @@ Partial Class FrmSearch
     Friend WithEvents SelPersonForename As DataGridViewTextBoxColumn
     Friend WithEvents SelPersonSurname As DataGridViewTextBoxColumn
     Friend WithEvents selDesc As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents BtnImgUpdate As Button
+    Friend WithEvents BtnTweet As Button
+    Friend WithEvents BtnWordPress As Button
 End Class

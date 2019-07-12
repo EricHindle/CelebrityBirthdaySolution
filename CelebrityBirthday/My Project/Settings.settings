@@ -67,5 +67,8 @@
     <Setting Name="twitterImageFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\CelebrityBirthday\Twitter\Images</Value>
     </Setting>
+    <Setting Name="WordPressMonthUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://celebritybirthday.wordpress.com/#y/#m/#d/#D-#M/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

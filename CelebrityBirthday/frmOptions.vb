@@ -20,6 +20,7 @@
         My.Settings.googleImageSearch = TxtImageSearch.Text
         My.Settings.wikiExtractSearch = TxtWikiExtract.Text
         My.Settings.wikiSentences = NudSentences.Value
+        My.Settings.WordPressMonthUrl = TxtWordPressDate.Text
         My.Settings.Save()
     End Sub
 
@@ -38,6 +39,7 @@
         TxtWikiSearch.Text = My.Settings.wikiSearchUrl
         TxtImageSearch.Text = My.Settings.googleImageSearch
         TxtWikiExtract.Text = My.Settings.wikiExtractSearch
+        TxtWordPressDate.Text = My.Settings.WordPressMonthUrl
         NudSentences.Value = My.Settings.wikiSentences
     End Sub
 

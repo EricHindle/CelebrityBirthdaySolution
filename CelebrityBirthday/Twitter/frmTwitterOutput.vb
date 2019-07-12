@@ -2,7 +2,6 @@
 
 Public Class frmTwitterOutput
 #Region "variables"
-    ReadOnly _search As frmSearchDb = Nothing
 #End Region
 #Region "constants"
 
@@ -18,9 +17,6 @@ Public Class frmTwitterOutput
         WriteFiles()
     End Sub
     Private Sub FrmTwitterOutput_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        If _search IsNot Nothing AndAlso Not _search.IsDisposed Then
-            _search.Close()
-        End If
         My.Settings.twitterfilespos = SetFormPos(Me)
         My.Settings.Save()
     End Sub

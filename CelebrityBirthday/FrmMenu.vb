@@ -1,11 +1,4 @@
 ﻿Public Class FrmMenu
-    Private Sub BtnMain_Click(sender As Object, e As EventArgs)
-        Me.Hide()
-        Using _main As New frmMain
-            _main.ShowDialog()
-        End Using
-        Me.Show()
-    End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
     End Sub

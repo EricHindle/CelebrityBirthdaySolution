@@ -19,6 +19,26 @@ Public Class FrmWordPress
     Private urlYear As String = "2013"
     Private urlMonth As String = "03"
 #End Region
+#Region "properties"
+    Private _daySelection As Integer
+    Private _monthSelection As Integer
+    Public Property MonthSelection() As Integer
+        Get
+            Return _monthSelection
+        End Get
+        Set(ByVal value As Integer)
+            _monthSelection = value
+        End Set
+    End Property
+    Public Property DaySelection() As Integer
+        Get
+            Return _daySelection
+        End Get
+        Set(ByVal value As Integer)
+            _daySelection = value
+        End Set
+    End Property
+#End Region
 #Region "form control handlers"
     Private Sub BtnCopyFull_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyFull.Click
         My.Computer.Clipboard.SetText(txtCurrentText.Text)
@@ -29,6 +49,7 @@ Public Class FrmWordPress
     Private Sub BtnLoadTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
             Dim _wpDate As Date? = GetWordPressLoadDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            TxtLoadDay.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "dd"))
             txtLoadMth.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "MM"))
             txtLoadYr.Text = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
             personTable = New List(Of Person)
@@ -40,6 +61,10 @@ Public Class FrmWordPress
     End Sub
     Private Sub FrmWordPress_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ClearForm()
+        If Not String.IsNullOrEmpty(_daySelection) AndAlso Not String.IsNullOrEmpty(_monthSelection) Then
+            cboDay.SelectedIndex = _daySelection - 1
+            cboMonth.SelectedIndex = _monthSelection - 1
+        End If
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
@@ -169,5 +194,15 @@ Public Class FrmWordPress
             .Append("</html>").ToString
         Return _html
     End Function
+
+    Private Sub BtnBrowser_Click(sender As Object, e As EventArgs) Handles BtnBrowser.Click
+        If cboMonth.SelectedIndex >= 0 Then
+            Dim _selMonth As String = cboMonth.SelectedItem
+            Dim _selDay As String = cboDay.SelectedItem
+            Dim sUrl As String = GetWordPressMonthUrl(txtLoadYr.Text, txtLoadMth.Text, TxtLoadDay.Text, _selDay, _selMonth.ToLower)
+            Process.Start(sUrl)
+        End If
+
+    End Sub
 #End Region
 End Class

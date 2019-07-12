@@ -36,7 +36,7 @@ Public Class FrmSearch
         LoadScreenFromId(CInt(txtId.Text))
         ShowStatus("Search complete")
     End Sub
-    Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnUpdate.Click
+    Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnDbUpdate.Click
         ShowStatus("Updating")
         If DgvPeople.SelectedRows.Count = 1 Then
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
@@ -110,6 +110,44 @@ Public Class FrmSearch
     Private Sub ShowStatus(pText As String)
         LblStatus.Text = pText
         StatusStrip1.Refresh()
+    End Sub
+
+    Private Sub BtnImgUpdate_Click(sender As Object, e As EventArgs) Handles BtnImgUpdate.Click
+        ShowStatus("Updating")
+        If DgvPeople.SelectedRows.Count = 1 Then
+            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
+            Using _update As New FrmImages
+                _update.PersonId = oRow.Cells(SelPersonId.Name).Value
+                _update.ShowDialog()
+            End Using
+        End If
+        ShowStatus("")
+    End Sub
+
+    Private Sub BtnTweet_Click(sender As Object, e As EventArgs) Handles BtnTweet.Click
+        ShowStatus("Tweeting")
+        If DgvPeople.SelectedRows.Count = 1 Then
+            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
+            Using _tweet As New FrmTweet
+                _tweet.DaySelection = oRow.Cells(selPersonDay.Name).Value
+                _tweet.MonthSelection = oRow.Cells(selPersonMonth.Name).Value
+                _tweet.ShowDialog()
+            End Using
+        End If
+        ShowStatus("")
+    End Sub
+
+    Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
+        ShowStatus("WordPress")
+        If DgvPeople.SelectedRows.Count = 1 Then
+            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
+            Using _wordpress As New FrmWordPress
+                _wordpress.DaySelection = oRow.Cells(selPersonDay.Name).Value
+                _wordpress.MonthSelection = oRow.Cells(selPersonMonth.Name).Value
+                _wordpress.ShowDialog()
+            End Using
+        End If
+        ShowStatus("")
     End Sub
 #End Region
 End Class

@@ -35,6 +35,8 @@ Partial Class FrmWordPress
         Me.txtLoadYr = New System.Windows.Forms.TextBox()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
+        Me.BtnBrowser = New System.Windows.Forms.Button()
+        Me.TxtLoadDay = New System.Windows.Forms.TextBox()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -48,10 +50,11 @@ Partial Class FrmWordPress
         'btnCopyExcerpt
         '
         Me.btnCopyExcerpt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCopyExcerpt.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCopyExcerpt.Location = New System.Drawing.Point(462, 142)
+        Me.btnCopyExcerpt.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCopyExcerpt.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnCopyExcerpt.Location = New System.Drawing.Point(462, 139)
         Me.btnCopyExcerpt.Name = "btnCopyExcerpt"
-        Me.btnCopyExcerpt.Size = New System.Drawing.Size(61, 26)
+        Me.btnCopyExcerpt.Size = New System.Drawing.Size(61, 29)
         Me.btnCopyExcerpt.TabIndex = 65
         Me.btnCopyExcerpt.Text = "Copy"
         Me.btnCopyExcerpt.UseVisualStyleBackColor = True
@@ -59,10 +62,11 @@ Partial Class FrmWordPress
         'btnCopyFull
         '
         Me.btnCopyFull.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCopyFull.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCopyFull.Location = New System.Drawing.Point(462, 280)
+        Me.btnCopyFull.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCopyFull.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnCopyFull.Location = New System.Drawing.Point(462, 275)
         Me.btnCopyFull.Name = "btnCopyFull"
-        Me.btnCopyFull.Size = New System.Drawing.Size(61, 26)
+        Me.btnCopyFull.Size = New System.Drawing.Size(61, 31)
         Me.btnCopyFull.TabIndex = 62
         Me.btnCopyFull.Text = "Copy"
         Me.btnCopyFull.UseVisualStyleBackColor = True
@@ -121,6 +125,8 @@ Partial Class FrmWordPress
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClose.Location = New System.Drawing.Point(948, 564)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 33)
@@ -197,12 +203,35 @@ Partial Class FrmWordPress
         Me.WebBrowser1.Size = New System.Drawing.Size(462, 531)
         Me.WebBrowser1.TabIndex = 0
         '
+        'BtnBrowser
+        '
+        Me.BtnBrowser.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnBrowser.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBrowser.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnBrowser.Location = New System.Drawing.Point(718, 564)
+        Me.BtnBrowser.Name = "BtnBrowser"
+        Me.BtnBrowser.Size = New System.Drawing.Size(106, 33)
+        Me.BtnBrowser.TabIndex = 88
+        Me.BtnBrowser.Text = "Open Browser"
+        Me.BtnBrowser.UseVisualStyleBackColor = True
+        '
+        'TxtLoadDay
+        '
+        Me.TxtLoadDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtLoadDay.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtLoadDay.Location = New System.Drawing.Point(377, 574)
+        Me.TxtLoadDay.Name = "TxtLoadDay"
+        Me.TxtLoadDay.Size = New System.Drawing.Size(48, 22)
+        Me.TxtLoadDay.TabIndex = 89
+        '
         'FrmWordPress
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1035, 609)
+        Me.Controls.Add(Me.TxtLoadDay)
+        Me.Controls.Add(Me.BtnBrowser)
         Me.Controls.Add(Me.SplitContainer2)
         Me.Controls.Add(Me.txtLoadMth)
         Me.Controls.Add(Me.txtLoadYr)
@@ -239,4 +268,6 @@ Partial Class FrmWordPress
     Friend WithEvents txtLoadYr As TextBox
     Friend WithEvents SplitContainer2 As SplitContainer
     Friend WithEvents WebBrowser1 As WebBrowser
+    Friend WithEvents BtnBrowser As Button
+    Friend WithEvents TxtLoadDay As TextBox
 End Class

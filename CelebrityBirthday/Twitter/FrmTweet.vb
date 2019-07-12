@@ -19,6 +19,26 @@ Public Class FrmTweet
     Private IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
 #End Region
+#Region "properties"
+    Private _daySelection As Integer
+    Private _monthSelection As Integer
+    Public Property MonthSelection() As Integer
+        Get
+            Return _monthSelection
+        End Get
+        Set(ByVal value As Integer)
+            _monthSelection = value
+        End Set
+    End Property
+    Public Property DaySelection() As Integer
+        Get
+            Return _daySelection
+        End Get
+        Set(ByVal value As Integer)
+            _daySelection = value
+        End Set
+    End Property
+#End Region
 #Region "form control handlers"
 
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -94,6 +114,10 @@ Public Class FrmTweet
         GetFormPos(Me, My.Settings.twitterimagepos)
         GetAuthData()
         FillTwitterUserList()
+        If Not String.IsNullOrEmpty(_daySelection) AndAlso Not String.IsNullOrEmpty(_monthSelection) Then
+            cboDay.SelectedIndex = _daySelection - 1
+            cboMonth.SelectedIndex = _monthSelection - 1
+        End If
     End Sub
     Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.twitterimagepos = SetFormPos(Me)
