@@ -279,8 +279,6 @@ Public Class FrmUpdateDatabase
             Else
                 UpdatePerson(oPerson)
             End If
-            UpdateImageDate(TxtImageLoadYr.Text, TxtImageLoadMth.Text, True, TxtImageLoadDay.Text, cboDay.SelectedIndex, cboMonth.SelectedIndex)
-            UpdatePageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex, cboMonth.SelectedIndex)
             oPerson.UnsavedChanges = False
             AppendStatus(" - Complete")
         End If
@@ -562,9 +560,6 @@ Public Class FrmUpdateDatabase
             End If
             oPerson.UnsavedChanges = False
         Next
-        UpdateImageDate(TxtImageLoadYr.Text, TxtImageLoadMth.Text, True, TxtImageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-        UpdatepageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-
         AppendStatus(" - Complete")
     End Sub
     Private Sub TidyAndFix()
@@ -787,12 +782,9 @@ Public Class FrmUpdateDatabase
     Private Sub clearStatus()
         ShowStatus("", False)
     End Sub
-
     Private Sub BtnImageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnImageLoadUpd.Click
         UpdateImageDate(TxtImageLoadYr.Text, TxtImageLoadMth.Text, True, TxtImageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-
     End Sub
-
     Private Sub BtnPageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnPageLoadUpd.Click
         UpdatePageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
     End Sub
