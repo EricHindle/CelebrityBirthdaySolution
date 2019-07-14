@@ -56,7 +56,7 @@ Partial Class FrmWordPress
         Me.btnCopyExcerpt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCopyExcerpt.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCopyExcerpt.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCopyExcerpt.Location = New System.Drawing.Point(462, 146)
+        Me.btnCopyExcerpt.Location = New System.Drawing.Point(456, 133)
         Me.btnCopyExcerpt.Name = "btnCopyExcerpt"
         Me.btnCopyExcerpt.Size = New System.Drawing.Size(61, 29)
         Me.btnCopyExcerpt.TabIndex = 65
@@ -68,7 +68,7 @@ Partial Class FrmWordPress
         Me.btnCopyFull.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCopyFull.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCopyFull.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCopyFull.Location = New System.Drawing.Point(462, 286)
+        Me.btnCopyFull.Location = New System.Drawing.Point(456, 262)
         Me.btnCopyFull.Name = "btnCopyFull"
         Me.btnCopyFull.Size = New System.Drawing.Size(61, 31)
         Me.btnCopyFull.TabIndex = 62
@@ -86,7 +86,7 @@ Partial Class FrmWordPress
         Me.txtCurrentExcerpt.Multiline = True
         Me.txtCurrentExcerpt.Name = "txtCurrentExcerpt"
         Me.txtCurrentExcerpt.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCurrentExcerpt.Size = New System.Drawing.Size(458, 192)
+        Me.txtCurrentExcerpt.Size = New System.Drawing.Size(452, 179)
         Me.txtCurrentExcerpt.TabIndex = 58
         Me.txtCurrentExcerpt.WordWrap = False
         '
@@ -101,7 +101,7 @@ Partial Class FrmWordPress
         Me.txtCurrentText.Multiline = True
         Me.txtCurrentText.Name = "txtCurrentText"
         Me.txtCurrentText.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCurrentText.Size = New System.Drawing.Size(453, 334)
+        Me.txtCurrentText.Size = New System.Drawing.Size(447, 310)
         Me.txtCurrentText.TabIndex = 57
         Me.txtCurrentText.WordWrap = False
         '
@@ -122,8 +122,8 @@ Partial Class FrmWordPress
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.txtCurrentExcerpt)
         Me.SplitContainer1.Panel2.Controls.Add(Me.btnCopyExcerpt)
-        Me.SplitContainer1.Size = New System.Drawing.Size(541, 553)
-        Me.SplitContainer1.SplitterDistance = 347
+        Me.SplitContainer1.Size = New System.Drawing.Size(535, 516)
+        Me.SplitContainer1.SplitterDistance = 323
         Me.SplitContainer1.TabIndex = 68
         '
         'BtnClose
@@ -131,7 +131,7 @@ Partial Class FrmWordPress
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(948, 592)
+        Me.BtnClose.Location = New System.Drawing.Point(937, 555)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 33)
         Me.BtnClose.TabIndex = 69
@@ -144,7 +144,7 @@ Partial Class FrmWordPress
         Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
-        Me.cboMonth.Location = New System.Drawing.Point(88, 598)
+        Me.cboMonth.Location = New System.Drawing.Point(88, 561)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(207, 27)
         Me.cboMonth.TabIndex = 84
@@ -155,25 +155,25 @@ Partial Class FrmWordPress
         Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(11, 598)
+        Me.cboDay.Location = New System.Drawing.Point(11, 561)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(71, 27)
         Me.cboDay.TabIndex = 83
         '
         'txtLoadMth
         '
-        Me.txtLoadMth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtLoadMth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtLoadMth.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadMth.Location = New System.Drawing.Point(431, 603)
+        Me.txtLoadMth.Location = New System.Drawing.Point(430, 566)
         Me.txtLoadMth.Name = "txtLoadMth"
         Me.txtLoadMth.Size = New System.Drawing.Size(48, 22)
         Me.txtLoadMth.TabIndex = 85
         '
         'txtLoadYr
         '
-        Me.txtLoadYr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtLoadYr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtLoadYr.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadYr.Location = New System.Drawing.Point(485, 603)
+        Me.txtLoadYr.Location = New System.Drawing.Point(484, 566)
         Me.txtLoadYr.Name = "txtLoadYr"
         Me.txtLoadYr.Size = New System.Drawing.Size(71, 22)
         Me.txtLoadYr.TabIndex = 86
@@ -194,8 +194,8 @@ Partial Class FrmWordPress
         'SplitContainer2.Panel2
         '
         Me.SplitContainer2.Panel2.Controls.Add(Me.WebBrowser1)
-        Me.SplitContainer2.Size = New System.Drawing.Size(1011, 553)
-        Me.SplitContainer2.SplitterDistance = 541
+        Me.SplitContainer2.Size = New System.Drawing.Size(1000, 516)
+        Me.SplitContainer2.SplitterDistance = 535
         Me.SplitContainer2.TabIndex = 87
         '
         'WebBrowser1
@@ -204,7 +204,7 @@ Partial Class FrmWordPress
         Me.WebBrowser1.Location = New System.Drawing.Point(0, 0)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(462, 549)
+        Me.WebBrowser1.Size = New System.Drawing.Size(457, 512)
         Me.WebBrowser1.TabIndex = 0
         '
         'BtnBrowser
@@ -212,7 +212,7 @@ Partial Class FrmWordPress
         Me.BtnBrowser.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowser.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowser.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnBrowser.Location = New System.Drawing.Point(718, 592)
+        Me.BtnBrowser.Location = New System.Drawing.Point(707, 555)
         Me.BtnBrowser.Name = "BtnBrowser"
         Me.BtnBrowser.Size = New System.Drawing.Size(106, 33)
         Me.BtnBrowser.TabIndex = 88
@@ -221,9 +221,9 @@ Partial Class FrmWordPress
         '
         'TxtLoadDay
         '
-        Me.TxtLoadDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtLoadDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TxtLoadDay.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtLoadDay.Location = New System.Drawing.Point(377, 602)
+        Me.TxtLoadDay.Location = New System.Drawing.Point(376, 565)
         Me.TxtLoadDay.Name = "TxtLoadDay"
         Me.TxtLoadDay.Size = New System.Drawing.Size(48, 22)
         Me.TxtLoadDay.TabIndex = 89
@@ -233,9 +233,9 @@ Partial Class FrmWordPress
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 649)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 612)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1035, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1024, 22)
         Me.StatusStrip1.TabIndex = 90
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -249,8 +249,9 @@ Partial Class FrmWordPress
         '
         'Label1
         '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(374, 585)
+        Me.Label1.Location = New System.Drawing.Point(374, 548)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(94, 14)
         Me.Label1.TabIndex = 91
@@ -261,7 +262,7 @@ Partial Class FrmWordPress
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1035, 671)
+        Me.ClientSize = New System.Drawing.Size(1024, 634)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.TxtLoadDay)

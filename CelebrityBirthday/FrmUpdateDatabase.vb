@@ -576,6 +576,7 @@ Public Class FrmUpdateDatabase
             txtDesc.Text = Join(_parts.ToArray, ".") & "."
         End If
         rtbDesc.Text = txtDesc.Text
+        TidyText()
     End Sub
     Private Sub TidyText()
         Dim newText As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
@@ -787,6 +788,19 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub BtnPageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnPageLoadUpd.Click
         UpdatePageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+    End Sub
+
+    Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
+        If CInt(lblID.Text) > -1 Then
+            ShowStatus("Images")
+            Using _update As New FrmImages
+                _update.PersonId = CInt(lblID.Text)
+                _update.ShowDialog()
+            End Using
+            ShowStatus("")
+        Else
+            ShowStatus("No person selected")
+        End If
     End Sub
 #End Region
 End Class

@@ -104,6 +104,7 @@ Partial Class FrmUpdateDatabase
         Me.TxtPageLoadMth = New System.Windows.Forms.TextBox()
         Me.TxtPageLoadDay = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.BtnImages = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -543,9 +544,9 @@ Partial Class FrmUpdateDatabase
         'PictureBox1
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox1.Location = New System.Drawing.Point(35, 336)
+        Me.PictureBox1.Location = New System.Drawing.Point(36, 306)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(70, 65)
+        Me.PictureBox1.Size = New System.Drawing.Size(69, 65)
         Me.PictureBox1.TabIndex = 130
         Me.PictureBox1.TabStop = False
         '
@@ -837,7 +838,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.BtnGetWikiText.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGetWikiText.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGetWikiText.Location = New System.Drawing.Point(35, 219)
+        Me.BtnGetWikiText.Location = New System.Drawing.Point(36, 219)
         Me.BtnGetWikiText.Name = "BtnGetWikiText"
         Me.BtnGetWikiText.Size = New System.Drawing.Size(69, 47)
         Me.BtnGetWikiText.TabIndex = 144
@@ -937,12 +938,25 @@ Partial Class FrmUpdateDatabase
         Me.Label3.TabIndex = 151
         Me.Label3.Text = "Page Load Date"
         '
+        'BtnImages
+        '
+        Me.BtnImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnImages.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnImages.Location = New System.Drawing.Point(36, 377)
+        Me.BtnImages.Name = "BtnImages"
+        Me.BtnImages.Size = New System.Drawing.Size(69, 28)
+        Me.BtnImages.TabIndex = 148
+        Me.BtnImages.Text = "Images"
+        Me.BtnImages.UseVisualStyleBackColor = True
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1271, 859)
+        Me.Controls.Add(Me.BtnImages)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.NudSentences)
         Me.Controls.Add(Me.BtnGetWikiText)
@@ -1093,4 +1107,5 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents TxtPageLoadMth As TextBox
     Friend WithEvents TxtPageLoadDay As TextBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents BtnImages As Button
 End Class
