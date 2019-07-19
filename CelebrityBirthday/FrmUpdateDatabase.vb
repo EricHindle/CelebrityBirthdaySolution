@@ -566,31 +566,35 @@ Public Class FrmUpdateDatabase
         Dim _desc As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
         Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
         If _parts.Count = 3 Then
-            Dim _datePart As String = RemovePhrases(_parts(1))
+            Dim _datePart As String = ExtractAndRemovePhrases(_parts(1))
             Dim _knownAs As List(Of String) = KnownAs(_parts)
             If _knownAs.Count > 0 Then
-                isUseAsBirthName(_knownAs(0))
+                IsUseAsBirthName(_knownAs(0))
             End If
 
             txtDesc.Text = _parts(0) & "(" & _datePart & ")" & _parts(2)
         End If
-        '_parts = ParseStringWithChar(txtDesc.Text, ".")
-        'Dim words As List(Of String) = ParseStringWithChar(_parts.Last, " ")
-        'If ExtractNameandPlace(words) Then
-        '    _parts.RemoveAt(_parts.Count - 1)
-        '    txtDesc.Text = Join(_parts.ToArray, ".") & "."
-        'End If
-
         rtbDesc.Text = txtDesc.Text
         TidyText()
     End Sub
 
-    Private Sub isUseAsBirthName(_birthName As String)
+    Private Function IsUseAsBirthName(_birthName As String) As Boolean
+        Dim isUsed As Boolean = False
         If MsgBox("Use " & _birthName & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth name") = MsgBoxResult.Yes Then
             txtBirthName.Text = _birthName
+            isUsed = True
         End If
-    End Sub
+        Return isUsed
+    End Function
 
+    Private Function IsUseAsBirthPlace(_birthPlace As String) As Boolean
+        Dim isUsed As Boolean = False
+        If MsgBox("Use " & _birthPlace & " as birthplace?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth place") = MsgBoxResult.Yes Then
+            txtBirthPlace.Text = _birthPlace
+            isUsed = True
+        End If
+        Return isUsed
+    End Function
     Private Function KnownAs(ByRef _parts As List(Of String)) As List(Of String)
         Dim _foundNames As New List(Of String)(2)
         Dim _birthName As String = _parts(0)
@@ -723,76 +727,78 @@ Public Class FrmUpdateDatabase
         End If
         Return sNickName & " "
     End Function
-
-
-    Private Function RemovePhrases(ByVal _innerText As String) As String
+    Private Function ExtractAndRemovePhrases(ByVal _innerText As String) As String
         Dim _dateString As String = ""
+        _innerText = _innerText.Trim(";")
         Dim _phrases As String() = Split(_innerText, ";")
-        For Each _phrase As String In _phrases
-            Dim _wordList As List(Of String) = Split(Trim(_phrase), " ").ToList
-            ExtractNameandPlace(_wordList)
-        Next
         If _phrases.Count = 1 Then
             Return _innerText
             Exit Function
         End If
-        For Each _Phrase As String In _phrases
-            If MsgBox(_innerText & vbCrLf & vbCrLf & "Remove: " & _Phrase & " ?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Remove phrase") = MsgBoxResult.No Then
-                _dateString &= _Phrase & ";"
+        Dim _phraseNumber As Integer = 0
+        For Each _phrase As String In _phrases
+            _phraseNumber += 1
+            Dim _wordList As List(Of String) = Split(Trim(_phrase), " ").ToList
+            Dim isRemove As MsgBoxResult
+
+            If ExtractNameandPlace(_wordList, _phraseNumber) Then
+                isRemove = MsgBoxResult.Yes
+            Else
+                isRemove = MsgBox(_innerText & vbCrLf & vbCrLf & "Remove: " & _phrase & " ?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Remove phrase")
+            End If
+            If isRemove = MsgBoxResult.No Then
+                _dateString &= _phrase & ";"
+            Else
+                If _wordList.First.ToLower = "born" Then
+                    _dateString &= "born "
+                End If
             End If
         Next
         Return _dateString.Trim(";").Trim()
     End Function
-    Private Function ExtractNameandPlace(_words As List(Of String)) As Boolean
-        Dim isextracted As Boolean = False
-        Dim isNamePart As Boolean = False
-        Dim isPlacePart As Boolean = False
-        Dim isDatePart As Boolean
-        Dim _date As String = ""
+    Private Function ExtractNameandPlace(_words As List(Of String), _phraseNumber As Integer) As Boolean
+        Dim isExtract As Boolean = False
+        Dim isNamePart As Boolean = (_phraseNumber = 1)
+        Dim isPlacePart As Boolean = (_phraseNumber = 3)
         Dim _name As String = ""
         Dim _place As String = ""
-
-        If _words.First.ToLower = "born" Then
-            For Each _word As String In _words
-                Select Case _word.ToLower
-                    Case "born"
-                        isNamePart = True
-                        isPlacePart = False
-                        isDatePart = False
-                    Case "in"
-                        isNamePart = False
-                        isPlacePart = True
-                        isDatePart = False
-                    Case "at"
-                        isNamePart = False
-                        isPlacePart = True
-                        isDatePart = False
-                    Case "on"
-                        isNamePart = False
-                        isPlacePart = False
-                        isDatePart = True
-                    Case Else
-                        If isNamePart Then
-                            _name &= _word & " "
-                        End If
-                        If isPlacePart Then
-                            _place &= _word & " "
-                        End If
-                End Select
-            Next
+        For Each _word As String In _words
+            Select Case _word.ToLower
+                Case "born"
+                    isNamePart = True
+                    isPlacePart = False
+                Case "in"
+                    isNamePart = False
+                    isPlacePart = True
+                Case "at"
+                    isNamePart = False
+                    isPlacePart = True
+                Case "on"
+                    isNamePart = False
+                    isPlacePart = False
+                Case "as"
+                    isNamePart = True
+                    isPlacePart = False
+                Case Else
+                    If isNamePart Then
+                        _name &= _word & " "
+                    End If
+                    If isPlacePart Then
+                        _place &= _word & " "
+                    End If
+            End Select
+        Next
+        If IsDate(_name) Or IsDate(_place) Then
+            _name = ""
+            _place = ""
         End If
         If Not String.IsNullOrEmpty(_name.Trim()) Then
-            isUseAsBirthName(_name.Trim())
-            isextracted = True
+            isExtract = IsUseAsBirthName(_name.Trim())
         End If
         If Not String.IsNullOrEmpty(_place.Trim()) Then
-            txtBirthPlace.Text = _place.Trim()
-            isextracted = True
+            isExtract = IsUseAsBirthPlace(_place.Trim())
         End If
-        If Not String.IsNullOrEmpty(_date.Trim()) Then
-            isextracted = True
-        End If
-        Return isextracted
+        Return isExtract
     End Function
 
     Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
