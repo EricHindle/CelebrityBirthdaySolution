@@ -567,44 +567,46 @@ Public Class FrmUpdateDatabase
         Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
         If _parts.Count = 3 Then
             Dim _datePart As String = RemovePhrases(_parts(1))
+            Dim _knownAs As List(Of String) = KnownAs(_parts)
+            If _knownAs.Count > 0 Then
+                isUseAsBirthName(_knownAs(0))
+            End If
+
             txtDesc.Text = _parts(0) & "(" & _datePart & ")" & _parts(2)
         End If
-        _parts = ParseStringWithChar(txtDesc.Text, ".")
-        Dim words As List(Of String) = ParseStringWithChar(_parts.Last, " ")
-        If ExtractNameandPlace(words) Then
-            _parts.RemoveAt(_parts.Count - 1)
-            txtDesc.Text = Join(_parts.ToArray, ".") & "."
-        End If
-        Dim _knownAs As List(Of String) = KnownAs()
-        If _knownAs.Count > 0 Then
-            If MsgBox("Use " & _knownAs(0) & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth name") = MsgBoxResult.Yes Then
-                txtBirthName.Text = _knownAs(0)
-            End If
-        End If
-            rtbDesc.Text = txtDesc.Text
-            TidyText()
+        '_parts = ParseStringWithChar(txtDesc.Text, ".")
+        'Dim words As List(Of String) = ParseStringWithChar(_parts.Last, " ")
+        'If ExtractNameandPlace(words) Then
+        '    _parts.RemoveAt(_parts.Count - 1)
+        '    txtDesc.Text = Join(_parts.ToArray, ".") & "."
+        'End If
+
+        rtbDesc.Text = txtDesc.Text
+        TidyText()
     End Sub
 
-    Private Function KnownAs() As List(Of String)
+    Private Sub isUseAsBirthName(_birthName As String)
+        If MsgBox("Use " & _birthName & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth name") = MsgBoxResult.Yes Then
+            txtBirthName.Text = _birthName
+        End If
+    End Sub
+
+    Private Function KnownAs(ByRef _parts As List(Of String)) As List(Of String)
         Dim _foundNames As New List(Of String)(2)
-        Dim _birthName As String = ""
+        Dim _birthName As String = _parts(0)
         Dim _stageName As String = ""
-        Dim _parts As List(Of String) = ParseStringWithChar(txtDesc.Text, "(")
-        If _parts.Count > 1 Then
-            _birthName = _parts(0)
-            If _parts(1).ToLower.Contains("known as") Or _parts(1).ToLower.Contains("known professionally as") Then
-                Dim _knownParts As List(Of String) = ParseStringWithString(_parts(1), "as")
-                If _knownParts.Count > 1 Then
-                    Dim _nameParts As List(Of String) = ParseStringWithChar(_knownParts(1), ",")
-                    _stageName = Trim(_nameParts(0))
-                End If
+        If _parts(2).ToLower.Contains("known as") Or _parts(2).ToLower.Contains("known professionally as") Then
+            Dim _knownParts As List(Of String) = ParseStringWithString(_parts(2), "as")
+            If _knownParts.Count > 1 Then
+                Dim _nameParts As List(Of String) = ParseStringWithChar(_knownParts(1), ",")
+                _stageName = Trim(_nameParts(0))
             End If
         End If
         If Not String.IsNullOrEmpty(_stageName) Then
             If MsgBox("Replace " & _birthName & " with " & _stageName & "?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
                 _parts(0) = _stageName & " "
-                _parts(1) = _parts(1).Replace(_stageName & ",", "").Replace("professionally ", "").Replace(", known as ", "")
-                txtDesc.Text = Join(_parts.ToArray, "(")
+                _parts(2) = _parts(2).Replace(_stageName & ",", "").Replace("professionally ", "").Replace("also ", "").Replace(", known as ", "")
+                'txtDesc.Text = Join(_parts.ToArray, "(")
                 _foundNames.Add(_birthName)
                 _foundNames.Add(_stageName)
             End If
@@ -726,6 +728,10 @@ Public Class FrmUpdateDatabase
     Private Function RemovePhrases(ByVal _innerText As String) As String
         Dim _dateString As String = ""
         Dim _phrases As String() = Split(_innerText, ";")
+        For Each _phrase As String In _phrases
+            Dim _wordList As List(Of String) = Split(Trim(_phrase), " ").ToList
+            ExtractNameandPlace(_wordList)
+        Next
         If _phrases.Count = 1 Then
             Return _innerText
             Exit Function
@@ -776,7 +782,7 @@ Public Class FrmUpdateDatabase
             Next
         End If
         If Not String.IsNullOrEmpty(_name.Trim()) Then
-            txtBirthName.Text = _name.Trim()
+            isUseAsBirthName(_name.Trim())
             isextracted = True
         End If
         If Not String.IsNullOrEmpty(_place.Trim()) Then
