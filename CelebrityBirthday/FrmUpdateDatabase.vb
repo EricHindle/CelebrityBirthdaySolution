@@ -575,9 +575,43 @@ Public Class FrmUpdateDatabase
             _parts.RemoveAt(_parts.Count - 1)
             txtDesc.Text = Join(_parts.ToArray, ".") & "."
         End If
-        rtbDesc.Text = txtDesc.Text
-        TidyText()
+        Dim _knownAs As List(Of String) = KnownAs()
+        If _knownAs.Count > 0 Then
+            If MsgBox("Use " & _knownAs(0) & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth name") = MsgBoxResult.Yes Then
+                txtBirthName.Text = _knownAs(0)
+            End If
+        End If
+            rtbDesc.Text = txtDesc.Text
+            TidyText()
     End Sub
+
+    Private Function KnownAs() As List(Of String)
+        Dim _foundNames As New List(Of String)(2)
+        Dim _birthName As String = ""
+        Dim _stageName As String = ""
+        Dim _parts As List(Of String) = ParseStringWithChar(txtDesc.Text, "(")
+        If _parts.Count > 1 Then
+            _birthName = _parts(0)
+            If _parts(1).ToLower.Contains("known as") Or _parts(1).ToLower.Contains("known professionally as") Then
+                Dim _knownParts As List(Of String) = ParseStringWithString(_parts(1), "as")
+                If _knownParts.Count > 1 Then
+                    Dim _nameParts As List(Of String) = ParseStringWithChar(_knownParts(1), ",")
+                    _stageName = Trim(_nameParts(0))
+                End If
+            End If
+        End If
+        If Not String.IsNullOrEmpty(_stageName) Then
+            If MsgBox("Replace " & _birthName & " with " & _stageName & "?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
+                _parts(0) = _stageName & " "
+                _parts(1) = _parts(1).Replace(_stageName & ",", "").Replace("professionally ", "").Replace(", known as ", "")
+                txtDesc.Text = Join(_parts.ToArray, "(")
+                _foundNames.Add(_birthName)
+                _foundNames.Add(_stageName)
+            End If
+        End If
+        Return _foundNames
+    End Function
+
     Private Sub TidyText()
         Dim newText As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
         Dim charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c}

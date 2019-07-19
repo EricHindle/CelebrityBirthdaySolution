@@ -56,7 +56,7 @@ Partial Class FrmWordPress
         Me.btnCopyExcerpt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCopyExcerpt.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCopyExcerpt.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCopyExcerpt.Location = New System.Drawing.Point(456, 133)
+        Me.btnCopyExcerpt.Location = New System.Drawing.Point(399, 115)
         Me.btnCopyExcerpt.Name = "btnCopyExcerpt"
         Me.btnCopyExcerpt.Size = New System.Drawing.Size(61, 29)
         Me.btnCopyExcerpt.TabIndex = 65
@@ -68,7 +68,7 @@ Partial Class FrmWordPress
         Me.btnCopyFull.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCopyFull.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCopyFull.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCopyFull.Location = New System.Drawing.Point(456, 262)
+        Me.btnCopyFull.Location = New System.Drawing.Point(399, 236)
         Me.btnCopyFull.Name = "btnCopyFull"
         Me.btnCopyFull.Size = New System.Drawing.Size(61, 31)
         Me.btnCopyFull.TabIndex = 62
@@ -86,7 +86,7 @@ Partial Class FrmWordPress
         Me.txtCurrentExcerpt.Multiline = True
         Me.txtCurrentExcerpt.Name = "txtCurrentExcerpt"
         Me.txtCurrentExcerpt.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCurrentExcerpt.Size = New System.Drawing.Size(452, 179)
+        Me.txtCurrentExcerpt.Size = New System.Drawing.Size(395, 161)
         Me.txtCurrentExcerpt.TabIndex = 58
         Me.txtCurrentExcerpt.WordWrap = False
         '
@@ -101,7 +101,7 @@ Partial Class FrmWordPress
         Me.txtCurrentText.Multiline = True
         Me.txtCurrentText.Name = "txtCurrentText"
         Me.txtCurrentText.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCurrentText.Size = New System.Drawing.Size(447, 310)
+        Me.txtCurrentText.Size = New System.Drawing.Size(390, 284)
         Me.txtCurrentText.TabIndex = 57
         Me.txtCurrentText.WordWrap = False
         '
@@ -122,8 +122,8 @@ Partial Class FrmWordPress
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.txtCurrentExcerpt)
         Me.SplitContainer1.Panel2.Controls.Add(Me.btnCopyExcerpt)
-        Me.SplitContainer1.Size = New System.Drawing.Size(535, 516)
-        Me.SplitContainer1.SplitterDistance = 323
+        Me.SplitContainer1.Size = New System.Drawing.Size(508, 516)
+        Me.SplitContainer1.SplitterDistance = 298
         Me.SplitContainer1.TabIndex = 68
         '
         'BtnClose
@@ -195,7 +195,7 @@ Partial Class FrmWordPress
         '
         Me.SplitContainer2.Panel2.Controls.Add(Me.WebBrowser1)
         Me.SplitContainer2.Size = New System.Drawing.Size(1000, 516)
-        Me.SplitContainer2.SplitterDistance = 535
+        Me.SplitContainer2.SplitterDistance = 508
         Me.SplitContainer2.TabIndex = 87
         '
         'WebBrowser1
@@ -204,7 +204,7 @@ Partial Class FrmWordPress
         Me.WebBrowser1.Location = New System.Drawing.Point(0, 0)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(457, 512)
+        Me.WebBrowser1.Size = New System.Drawing.Size(484, 512)
         Me.WebBrowser1.TabIndex = 0
         '
         'BtnBrowser

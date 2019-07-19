@@ -543,7 +543,6 @@ Partial Class FrmUpdateDatabase
         '
         'PictureBox1
         '
-        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Location = New System.Drawing.Point(36, 306)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(69, 65)
@@ -869,6 +868,7 @@ Partial Class FrmUpdateDatabase
         '
         'GroupBox2
         '
+        Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.Controls.Add(Me.BtnPageLoadUpd)
         Me.GroupBox2.Controls.Add(Me.TxtPageLoadYr)
         Me.GroupBox2.Controls.Add(Me.TxtPageLoadMth)
@@ -940,7 +940,6 @@ Partial Class FrmUpdateDatabase
         '
         'BtnImages
         '
-        Me.BtnImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnImages.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnImages.Location = New System.Drawing.Point(36, 377)
