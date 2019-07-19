@@ -605,7 +605,7 @@ Public Class FrmUpdateDatabase
         If Not String.IsNullOrEmpty(_stageName) Then
             If MsgBox("Replace " & _birthName & " with " & _stageName & "?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
                 _parts(0) = _stageName & " "
-                _parts(2) = _parts(2).Replace(_stageName & ",", "").Replace("professionally ", "").Replace("also ", "").Replace(", known as ", "")
+                _parts(2) = _parts(2).Replace(_stageName & ",", "").Replace("professionally ", "").Replace("better ", "").Replace("also ", "").Replace(", known as ", "")
                 'txtDesc.Text = Join(_parts.ToArray, "(")
                 _foundNames.Add(_birthName)
                 _foundNames.Add(_stageName)
