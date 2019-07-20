@@ -283,7 +283,6 @@ Module modCbday
         Try
             Dim sr As System.IO.StreamReader = New System.IO.StreamReader(pResponse.GetResponseStream())
             wikipage = sr.ReadToEnd
-            Debug.Print(wikipage)
             Dim jss As New JavaScriptSerializer()
             Dim extractDictionary As Dictionary(Of String, Object) = jss.Deserialize(Of Dictionary(Of String, Object))(wikipage)
             Dim queryDictionary As Dictionary(Of String, Object) = extractDictionary("query")
@@ -292,7 +291,6 @@ Module modCbday
                 Dim pageDictionary As Dictionary(Of String, Object) = _pagesList(0)
                 _extract = TryCast(pageDictionary("extract"), String)
                 _extract = _extract.Replace(vbLf, " ").Replace(".", ". ").Replace("  ", " ")
-
             End If
         Catch ex As Exception
             Debug.Print(ex.Message)

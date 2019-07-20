@@ -9,6 +9,8 @@ Public Class FrmUpdateDatabase
     Private _search As FrmBrowser = Nothing
     Private _browser As FrmBrowser
     Private findPersonInList As Integer = -1
+    Private isGotBirthName As Boolean = False
+    Private isGotStageName As Boolean = False
 #End Region
 #Region "properties"
     Private _personId As Integer
@@ -461,7 +463,13 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub UseNicknameToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UseNicknameToolStripMenuItem.Click
         If txtDesc.SelectionLength > 0 Then
-            txtDesc.SelectedText = GetNickname(txtDesc.SelectedText)
+            Dim _selStart As Integer = txtDesc.SelectionStart
+            Dim _selLength As Integer = txtDesc.SelectionLength
+            Dim sNickname As String = GetNickname(txtDesc.SelectedText)
+            txtDesc.SelectionStart = _selStart
+            txtDesc.SelectionLength = _selLength
+            txtDesc.Cut()
+            txtDesc.Paste(sNickname)
         End If
     End Sub
     Private Sub BtnTidy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTidy.Click
@@ -563,16 +571,20 @@ Public Class FrmUpdateDatabase
         AppendStatus(" - Complete")
     End Sub
     Private Sub TidyAndFix()
+        isGotBirthName = False
+        isGotStageName = False
         Dim _desc As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
         Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
+        If _parts(0).IndexOf("""") > 0 Then
+            _parts(0) = GetNickname(_parts(0))
+        End If
         If _parts.Count = 3 Then
             Dim _datePart As String = ExtractAndRemovePhrases(_parts(1))
             Dim _knownAs As List(Of String) = KnownAs(_parts)
-            If _knownAs.Count > 0 Then
+            If _knownAs.Count > 0 And Not isGotBirthName Then
                 IsUseAsBirthName(_knownAs(0))
             End If
-
-            txtDesc.Text = _parts(0) & "(" & _datePart & ")" & _parts(2)
+            txtDesc.Text = Trim(_parts(0)) & " (" & _datePart & ")" & _parts(2)
         End If
         rtbDesc.Text = txtDesc.Text
         TidyText()
@@ -582,6 +594,7 @@ Public Class FrmUpdateDatabase
         Dim isUsed As Boolean = False
         If MsgBox("Use " & _birthName & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth name") = MsgBoxResult.Yes Then
             txtBirthName.Text = _birthName
+            isGotBirthName = True
             isUsed = True
         End If
         Return isUsed
@@ -597,25 +610,36 @@ Public Class FrmUpdateDatabase
     End Function
     Private Function KnownAs(ByRef _parts As List(Of String)) As List(Of String)
         Dim _foundNames As New List(Of String)(2)
-        Dim _birthName As String = _parts(0)
+        Dim _birthName As String = Trim(_parts(0))
         Dim _stageName As String = ""
         If _parts(2).ToLower.Contains("known as") Or _parts(2).ToLower.Contains("known professionally as") Then
             Dim _knownParts As List(Of String) = ParseStringWithString(_parts(2), "as")
-            If _knownParts.Count > 1 Then
-                Dim _nameParts As List(Of String) = ParseStringWithChar(_knownParts(1), ",")
-                _stageName = Trim(_nameParts(0))
-            End If
+            Dim _nameParts As List(Of String) = ParseStringWithChar(_knownParts(1), ",")
+            _stageName = Trim(_nameParts(0))
         End If
         If Not String.IsNullOrEmpty(_stageName) Then
-            If MsgBox("Replace " & _birthName & " with " & _stageName & "?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
-                _parts(0) = _stageName & " "
-                _parts(2) = _parts(2).Replace(_stageName & ",", "").Replace("professionally ", "").Replace("better ", "").Replace("also ", "").Replace(", known as ", "")
-                'txtDesc.Text = Join(_parts.ToArray, "(")
-                _foundNames.Add(_birthName)
-                _foundNames.Add(_stageName)
+            If _stageName.ToLower <> _birthName.ToLower Then
+                If MsgBox("Replace " & _birthName & " with " & _stageName & "?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
+                    _parts(0) = _stageName
+                    _parts = RemoveKnownAs(_parts, _stageName)
+                    'txtDesc.Text = Join(_parts.ToArray, "(")
+                    _foundNames.Add(_birthName)
+                    _foundNames.Add(_stageName)
+                Else
+                    If MsgBox("Remove known as ?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
+                        _parts = RemoveKnownAs(_parts, _stageName)
+                    End If
+                End If
+            Else
+                _parts = RemoveKnownAs(_parts, _stageName)
             End If
         End If
         Return _foundNames
+    End Function
+
+    Private Shared Function RemoveKnownAs(_parts As List(Of String), _stageName As String) As List(Of String)
+        _parts(2) = _parts(2).Replace(_stageName & ",", "").Replace("commonly ", "").Replace("professionally ", "").Replace("better ", "").Replace("also ", "").Replace(", known as ", "")
+        Return _parts
     End Function
 
     Private Sub TidyText()
@@ -631,15 +655,6 @@ Public Class FrmUpdateDatabase
                     txtDthMth.Text = Format(d1, "MM")
                     txtDied.Text = Format(d1, "yyyy")
                 End If
-            End If
-        End If
-        Dim s3 As String() = Split(newText, "(")
-        If s3.Count > 1 Then
-            If s3(0).IndexOf("""") > 0 Then
-                Dim birthName As String = s3(0)
-                s3(0) = GetNickname(birthName)
-                txtBirthName.Text = birthName
-                newText = Join(s3, "(")
             End If
         End If
         Dim trimmedTextBefore As String = ""
@@ -720,16 +735,21 @@ Public Class FrmUpdateDatabase
     End Function
     Private Function GetNickname(ByRef sName As String) As String
         Dim names As String() = Split(sName, """")
-        Dim sNickName As String = ""
+        Dim sReturnName As String = sName
         If names.Length > 2 Then
-            sNickName = names(1).Trim & " " & names(2).Trim
-            sName = names(0).Trim & " " & names(2).Trim
+            Dim sNickName As String = names(1).Trim & " " & names(2).Trim
+            Dim sNoNickName As String = names(0).Trim & " " & names(2).Trim
+            If MsgBox("Use " & sNickName & " as name and " & sNoNickName & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Nickname") = MsgBoxResult.Yes Then
+                txtBirthName.Text = sNoNickName
+                sReturnName = sNickName
+                isGotBirthName = True
+            End If
         End If
-        Return sNickName & " "
+        Return sReturnName
     End Function
     Private Function ExtractAndRemovePhrases(ByVal _innerText As String) As String
         Dim _dateString As String = ""
-        _innerText = _innerText.Trim(";")
+        _innerText = _innerText.Trim(New Char() {";", " "})
         Dim _phrases As String() = Split(_innerText, ";")
         If _phrases.Count = 1 Then
             Return _innerText
@@ -848,5 +868,42 @@ Public Class FrmUpdateDatabase
             ShowStatus("No person selected")
         End If
     End Sub
+
+    Private Sub RemoveMiddleWordsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles RemoveMiddleWordsToolStripMenuItem1.Click
+        If txtDesc.SelectionLength > 0 Then
+            RemoveMiddleNames()
+        End If
+    End Sub
+
+    Private Sub RemoveMiddleNames()
+        Dim _selStart As Integer = txtDesc.SelectionStart
+        Dim _selLength As Integer = txtDesc.SelectionLength
+        Dim _words As List(Of String) = Split(txtDesc.SelectedText.Trim(), " ").ToList
+        Dim sShortname As String = _words.First & If(_words.Count > 1, " " & _words.Last, "")
+        txtDesc.SelectionStart = _selStart
+        txtDesc.SelectionLength = _selLength
+        txtDesc.Cut()
+        txtDesc.Paste(sShortname)
+    End Sub
+
+    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+        If txtDesc.SelectionLength > 0 Then
+            txtBirthName.Text = txtDesc.SelectedText
+        End If
+    End Sub
+
+    Private Sub SaveRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveRemoveToolStripMenuItem.Click
+        If txtDesc.SelectionLength > 0 Then
+            txtBirthName.Text = txtDesc.SelectedText
+            RemoveMiddleNames()
+        End If
+    End Sub
+
+    Private Sub BirthPlaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BirthPlaceToolStripMenuItem.Click
+        If txtDesc.SelectionLength > 0 Then
+            txtBirthPlace.Text = txtDesc.SelectedText
+        End If
+    End Sub
+
 #End Region
 End Class
