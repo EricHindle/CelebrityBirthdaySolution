@@ -891,6 +891,7 @@ Public Class FrmUpdateDatabase
             Dim _selStart As Integer = txtDesc.SelectionStart
             Dim _selLength As Integer = txtDesc.SelectionLength
             Dim sShortname As String = txtName.Text
+            txtBirthName.Text = txtDesc.SelectedText
             txtDesc.SelectionStart = _selStart
             txtDesc.SelectionLength = _selLength
             txtDesc.Cut()
