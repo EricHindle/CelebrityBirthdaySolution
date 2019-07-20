@@ -869,7 +869,7 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
 
-    Private Sub RemoveMiddleWordsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles RemoveMiddleWordsToolStripMenuItem1.Click
+    Private Sub RemoveMiddleWordsToolStripMenuItem1_Click(sender As Object, e As EventArgs)
         If txtDesc.SelectionLength > 0 Then
             RemoveMiddleNames()
         End If
@@ -886,22 +886,22 @@ Public Class FrmUpdateDatabase
         txtDesc.Paste(sShortname)
     End Sub
 
-    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+    Private Sub UseNameTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseNameTextToolStripMenuItem.Click
         If txtDesc.SelectionLength > 0 Then
-            txtBirthName.Text = txtDesc.SelectedText
+            Dim _selStart As Integer = txtDesc.SelectionStart
+            Dim _selLength As Integer = txtDesc.SelectionLength
+            Dim sShortname As String = txtName.Text
+            txtDesc.SelectionStart = _selStart
+            txtDesc.SelectionLength = _selLength
+            txtDesc.Cut()
+            txtDesc.Paste(sShortname)
         End If
     End Sub
 
-    Private Sub SaveRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveRemoveToolStripMenuItem.Click
+    Private Sub ShortenNameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShortenNameToolStripMenuItem.Click
         If txtDesc.SelectionLength > 0 Then
             txtBirthName.Text = txtDesc.SelectedText
             RemoveMiddleNames()
-        End If
-    End Sub
-
-    Private Sub BirthPlaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BirthPlaceToolStripMenuItem.Click
-        If txtDesc.SelectionLength > 0 Then
-            txtBirthPlace.Text = txtDesc.SelectedText
         End If
     End Sub
 

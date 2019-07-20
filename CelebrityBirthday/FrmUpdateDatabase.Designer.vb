@@ -31,6 +31,18 @@ Partial Class FrmUpdateDatabase
         Me.btnTidyDob = New System.Windows.Forms.Button()
         Me.btnRTB = New System.Windows.Forms.Button()
         Me.txtDesc = New System.Windows.Forms.TextBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.UseNicknameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.UpperCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LowercaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TitleCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnClearDesc = New System.Windows.Forms.Button()
         Me.txtDthMth = New System.Windows.Forms.TextBox()
         Me.btnTidy = New System.Windows.Forms.Button()
@@ -81,18 +93,6 @@ Partial Class FrmUpdateDatabase
         Me.TxtImageLoadMth = New System.Windows.Forms.TextBox()
         Me.TxtImageLoadYr = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.UseNicknameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.UpperCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LowercaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TitleCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.BtnGetWikiText = New System.Windows.Forms.Button()
@@ -105,14 +105,11 @@ Partial Class FrmUpdateDatabase
         Me.TxtPageLoadDay = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.BtnImages = New System.Windows.Forms.Button()
-        Me.BirthNameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BirthPlaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RemoveMiddleWordsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaveRemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UseNameTextToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShortenNameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
-        Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -201,6 +198,76 @@ Partial Class FrmUpdateDatabase
         Me.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtDesc.Size = New System.Drawing.Size(672, 316)
         Me.txtDesc.TabIndex = 92
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UseNicknameToolStripMenuItem, Me.ShortenNameToolStripMenuItem, Me.UseNameTextToolStripMenuItem, Me.ToolStripSeparator3, Me.UpperCaseToolStripMenuItem, Me.LowercaseToolStripMenuItem, Me.TitleCaseToolStripMenuItem, Me.ToolStripSeparator2, Me.CopyToolStripMenuItem, Me.CutToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ClearToolStripMenuItem, Me.SelectAllToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 280)
+        '
+        'UseNicknameToolStripMenuItem
+        '
+        Me.UseNicknameToolStripMenuItem.Name = "UseNicknameToolStripMenuItem"
+        Me.UseNicknameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UseNicknameToolStripMenuItem.Text = "Use Nickname"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(177, 6)
+        '
+        'UpperCaseToolStripMenuItem
+        '
+        Me.UpperCaseToolStripMenuItem.Name = "UpperCaseToolStripMenuItem"
+        Me.UpperCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UpperCaseToolStripMenuItem.Text = "UPPERCASE"
+        '
+        'LowercaseToolStripMenuItem
+        '
+        Me.LowercaseToolStripMenuItem.Name = "LowercaseToolStripMenuItem"
+        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LowercaseToolStripMenuItem.Text = "lowercase"
+        '
+        'TitleCaseToolStripMenuItem
+        '
+        Me.TitleCaseToolStripMenuItem.Name = "TitleCaseToolStripMenuItem"
+        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TitleCaseToolStripMenuItem.Text = "Title Case"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
+        '
+        'CopyToolStripMenuItem
+        '
+        Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CopyToolStripMenuItem.Text = "Copy"
+        '
+        'CutToolStripMenuItem
+        '
+        Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
+        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CutToolStripMenuItem.Text = "Cut"
+        '
+        'PasteToolStripMenuItem
+        '
+        Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
+        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PasteToolStripMenuItem.Text = "Paste"
+        '
+        'ClearToolStripMenuItem
+        '
+        Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ClearToolStripMenuItem.Text = "Clear"
+        '
+        'SelectAllToolStripMenuItem
+        '
+        Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SelectAllToolStripMenuItem.Text = "Select All"
         '
         'btnClearDesc
         '
@@ -748,76 +815,6 @@ Partial Class FrmUpdateDatabase
         Me.Label11.TabIndex = 142
         Me.Label11.Text = "Label11"
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UseNicknameToolStripMenuItem, Me.BirthNameToolStripMenuItem, Me.BirthPlaceToolStripMenuItem, Me.ToolStripSeparator3, Me.UpperCaseToolStripMenuItem, Me.LowercaseToolStripMenuItem, Me.TitleCaseToolStripMenuItem, Me.ToolStripSeparator2, Me.CopyToolStripMenuItem, Me.CutToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ClearToolStripMenuItem, Me.SelectAllToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 280)
-        '
-        'UseNicknameToolStripMenuItem
-        '
-        Me.UseNicknameToolStripMenuItem.Name = "UseNicknameToolStripMenuItem"
-        Me.UseNicknameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.UseNicknameToolStripMenuItem.Text = "Use Nickname"
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(177, 6)
-        '
-        'UpperCaseToolStripMenuItem
-        '
-        Me.UpperCaseToolStripMenuItem.Name = "UpperCaseToolStripMenuItem"
-        Me.UpperCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.UpperCaseToolStripMenuItem.Text = "UPPERCASE"
-        '
-        'LowercaseToolStripMenuItem
-        '
-        Me.LowercaseToolStripMenuItem.Name = "LowercaseToolStripMenuItem"
-        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.LowercaseToolStripMenuItem.Text = "lowercase"
-        '
-        'TitleCaseToolStripMenuItem
-        '
-        Me.TitleCaseToolStripMenuItem.Name = "TitleCaseToolStripMenuItem"
-        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.TitleCaseToolStripMenuItem.Text = "Title Case"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
-        '
-        'CopyToolStripMenuItem
-        '
-        Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.CopyToolStripMenuItem.Text = "Copy"
-        '
-        'CutToolStripMenuItem
-        '
-        Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
-        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.CutToolStripMenuItem.Text = "Cut"
-        '
-        'PasteToolStripMenuItem
-        '
-        Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
-        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PasteToolStripMenuItem.Text = "Paste"
-        '
-        'ClearToolStripMenuItem
-        '
-        Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ClearToolStripMenuItem.Text = "Clear"
-        '
-        'SelectAllToolStripMenuItem
-        '
-        Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
-        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.SelectAllToolStripMenuItem.Text = "Select All"
-        '
         'lblStatus
         '
         Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
@@ -955,36 +952,17 @@ Partial Class FrmUpdateDatabase
         Me.BtnImages.Text = "Images"
         Me.BtnImages.UseVisualStyleBackColor = True
         '
-        'BirthNameToolStripMenuItem
+        'UseNameTextToolStripMenuItem
         '
-        Me.BirthNameToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveMiddleWordsToolStripMenuItem1, Me.SaveToolStripMenuItem, Me.SaveRemoveToolStripMenuItem})
-        Me.BirthNameToolStripMenuItem.Name = "BirthNameToolStripMenuItem"
-        Me.BirthNameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.BirthNameToolStripMenuItem.Text = "Birth name"
+        Me.UseNameTextToolStripMenuItem.Name = "UseNameTextToolStripMenuItem"
+        Me.UseNameTextToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UseNameTextToolStripMenuItem.Text = "Use Title Name"
         '
-        'BirthPlaceToolStripMenuItem
+        'ShortenNameToolStripMenuItem
         '
-        Me.BirthPlaceToolStripMenuItem.Name = "BirthPlaceToolStripMenuItem"
-        Me.BirthPlaceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.BirthPlaceToolStripMenuItem.Text = "Birth place"
-        '
-        'RemoveMiddleWordsToolStripMenuItem1
-        '
-        Me.RemoveMiddleWordsToolStripMenuItem1.Name = "RemoveMiddleWordsToolStripMenuItem1"
-        Me.RemoveMiddleWordsToolStripMenuItem1.Size = New System.Drawing.Size(195, 22)
-        Me.RemoveMiddleWordsToolStripMenuItem1.Text = "Remove middle names"
-        '
-        'SaveToolStripMenuItem
-        '
-        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.SaveToolStripMenuItem.Text = "Save as birth name"
-        '
-        'SaveRemoveToolStripMenuItem
-        '
-        Me.SaveRemoveToolStripMenuItem.Name = "SaveRemoveToolStripMenuItem"
-        Me.SaveRemoveToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.SaveRemoveToolStripMenuItem.Text = "Save and Remove"
+        Me.ShortenNameToolStripMenuItem.Name = "ShortenNameToolStripMenuItem"
+        Me.ShortenNameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ShortenNameToolStripMenuItem.Text = "Shorten Name"
         '
         'FrmUpdateDatabase
         '
@@ -1050,9 +1028,9 @@ Partial Class FrmUpdateDatabase
         Me.Name = "FrmUpdateDatabase"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Update Database"
+        Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
-        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1144,9 +1122,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents TxtPageLoadDay As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents BtnImages As Button
-    Friend WithEvents BirthNameToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BirthPlaceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RemoveMiddleWordsToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SaveRemoveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UseNameTextToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShortenNameToolStripMenuItem As ToolStripMenuItem
 End Class
