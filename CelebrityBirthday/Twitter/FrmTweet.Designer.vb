@@ -47,7 +47,7 @@ Partial Class FrmTweet
         Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BtnCopyAll = New System.Windows.Forms.Button()
-        Me.NudPersonsPerTweet = New System.Windows.Forms.NumericUpDown()
+        Me.NudBirthdaysPerTweet = New System.Windows.Forms.NumericUpDown()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblError = New System.Windows.Forms.Label()
         Me.TxtStats = New System.Windows.Forms.TextBox()
@@ -64,6 +64,10 @@ Partial Class FrmTweet
         Me.chkImages = New System.Windows.Forms.CheckBox()
         Me.rtbTweet = New System.Windows.Forms.RichTextBox()
         Me.BtnReGen = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.NudAnnivsPerTweet = New System.Windows.Forms.NumericUpDown()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,9 +79,10 @@ Partial Class FrmTweet
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
-        CType(Me.NudPersonsPerTweet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NudBirthdaysPerTweet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.NudAnnivsPerTweet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -115,7 +120,7 @@ Partial Class FrmTweet
         Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(14, 13)
+        Me.cboDay.Location = New System.Drawing.Point(14, 11)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(95, 27)
         Me.cboDay.TabIndex = 2
@@ -125,7 +130,7 @@ Partial Class FrmTweet
         Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
-        Me.cboMonth.Location = New System.Drawing.Point(117, 13)
+        Me.cboMonth.Location = New System.Drawing.Point(117, 11)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(240, 27)
         Me.cboMonth.TabIndex = 3
@@ -147,7 +152,7 @@ Partial Class FrmTweet
         Me.LblImageCount.AutoSize = True
         Me.LblImageCount.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblImageCount.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.LblImageCount.Location = New System.Drawing.Point(609, 17)
+        Me.LblImageCount.Location = New System.Drawing.Point(310, 158)
         Me.LblImageCount.Name = "LblImageCount"
         Me.LblImageCount.Size = New System.Drawing.Size(63, 22)
         Me.LblImageCount.TabIndex = 6
@@ -335,22 +340,22 @@ Partial Class FrmTweet
         Me.BtnCopyAll.Text = "Copy All"
         Me.BtnCopyAll.UseVisualStyleBackColor = True
         '
-        'NudPersonsPerTweet
+        'NudBirthdaysPerTweet
         '
-        Me.NudPersonsPerTweet.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudPersonsPerTweet.ForeColor = System.Drawing.Color.Black
-        Me.NudPersonsPerTweet.Location = New System.Drawing.Point(806, 17)
-        Me.NudPersonsPerTweet.Name = "NudPersonsPerTweet"
-        Me.NudPersonsPerTweet.Size = New System.Drawing.Size(56, 24)
-        Me.NudPersonsPerTweet.TabIndex = 23
-        Me.NudPersonsPerTweet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.NudBirthdaysPerTweet.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NudBirthdaysPerTweet.ForeColor = System.Drawing.Color.Black
+        Me.NudBirthdaysPerTweet.Location = New System.Drawing.Point(564, 11)
+        Me.NudBirthdaysPerTweet.Name = "NudBirthdaysPerTweet"
+        Me.NudBirthdaysPerTweet.Size = New System.Drawing.Size(56, 24)
+        Me.NudBirthdaysPerTweet.TabIndex = 23
+        Me.NudBirthdaysPerTweet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label1.Location = New System.Drawing.Point(868, 17)
+        Me.Label1.Location = New System.Drawing.Point(626, 12)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(78, 22)
         Me.Label1.TabIndex = 24
@@ -362,7 +367,7 @@ Partial Class FrmTweet
         Me.lblError.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lblError.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblError.ForeColor = System.Drawing.Color.White
-        Me.lblError.Location = New System.Drawing.Point(444, 15)
+        Me.lblError.Location = New System.Drawing.Point(1071, 12)
         Me.lblError.Name = "lblError"
         Me.lblError.Padding = New System.Windows.Forms.Padding(3)
         Me.lblError.Size = New System.Drawing.Size(106, 25)
@@ -384,7 +389,7 @@ Partial Class FrmTweet
         '
         Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnToday.Location = New System.Drawing.Point(363, 13)
+        Me.BtnToday.Location = New System.Drawing.Point(363, 9)
         Me.BtnToday.Name = "BtnToday"
         Me.BtnToday.Size = New System.Drawing.Size(75, 30)
         Me.BtnToday.TabIndex = 27
@@ -517,9 +522,9 @@ Partial Class FrmTweet
         Me.rtbTweet.BackColor = System.Drawing.Color.Black
         Me.rtbTweet.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbTweet.ForeColor = System.Drawing.Color.White
-        Me.rtbTweet.Location = New System.Drawing.Point(243, 158)
+        Me.rtbTweet.Location = New System.Drawing.Point(243, 197)
         Me.rtbTweet.Name = "rtbTweet"
-        Me.rtbTweet.Size = New System.Drawing.Size(222, 478)
+        Me.rtbTweet.Size = New System.Drawing.Size(222, 439)
         Me.rtbTweet.TabIndex = 31
         Me.rtbTweet.Text = ""
         '
@@ -534,12 +539,59 @@ Partial Class FrmTweet
         Me.BtnReGen.Text = "ReGenerate"
         Me.BtnReGen.UseVisualStyleBackColor = True
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Label4.Location = New System.Drawing.Point(935, 13)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(78, 22)
+        Me.Label4.TabIndex = 34
+        Me.Label4.Text = "per Tweet"
+        '
+        'NudAnnivsPerTweet
+        '
+        Me.NudAnnivsPerTweet.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NudAnnivsPerTweet.ForeColor = System.Drawing.Color.Black
+        Me.NudAnnivsPerTweet.Location = New System.Drawing.Point(873, 12)
+        Me.NudAnnivsPerTweet.Name = "NudAnnivsPerTweet"
+        Me.NudAnnivsPerTweet.Size = New System.Drawing.Size(56, 24)
+        Me.NudAnnivsPerTweet.TabIndex = 33
+        Me.NudAnnivsPerTweet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Label5.Location = New System.Drawing.Point(485, 13)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(73, 22)
+        Me.Label5.TabIndex = 35
+        Me.Label5.Text = "Birthdays"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Label6.Location = New System.Drawing.Point(771, 14)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(96, 22)
+        Me.Label6.TabIndex = 36
+        Me.Label6.Text = "Anniversaries"
+        '
         'FrmTweet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1348, 671)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.NudAnnivsPerTweet)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.BtnReGen)
         Me.Controls.Add(Me.rtbTweet)
@@ -549,7 +601,7 @@ Partial Class FrmTweet
         Me.Controls.Add(Me.TxtStats)
         Me.Controls.Add(Me.lblError)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.NudPersonsPerTweet)
+        Me.Controls.Add(Me.NudBirthdaysPerTweet)
         Me.Controls.Add(Me.BtnCopyAll)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.BtnCopyselected)
@@ -578,11 +630,12 @@ Partial Class FrmTweet
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.ContextMenuStrip1.ResumeLayout(False)
-        CType(Me.NudPersonsPerTweet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NudBirthdaysPerTweet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        CType(Me.NudAnnivsPerTweet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -610,7 +663,7 @@ Partial Class FrmTweet
     Friend WithEvents CopyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BtnCopyAll As Button
     Friend WithEvents CopyAllToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NudPersonsPerTweet As NumericUpDown
+    Friend WithEvents NudBirthdaysPerTweet As NumericUpDown
     Friend WithEvents Label1 As Label
     Friend WithEvents lblError As Label
     Friend WithEvents TxtStats As TextBox
@@ -628,4 +681,8 @@ Partial Class FrmTweet
     Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents BtnReGen As Button
     Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents NudAnnivsPerTweet As NumericUpDown
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
 End Class
