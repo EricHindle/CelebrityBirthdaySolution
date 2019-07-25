@@ -336,12 +336,15 @@ Public Class FrmTweet
         Return newNameNode
     End Function
     Private Function CalculateAgeNextBirthday(oPerson As Person) As Integer
-        Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
-        Dim _thisMonth As Integer = Today.Month
-        Dim _thisDay As Integer = Today.Day
-        Dim _years As Integer = DateDiff(DateInterval.Year, _dob, Today)
-        If _thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay) Then
-            _years += 1
+        Dim _years As Integer = 0
+        If oPerson.BirthYear > 0 Then
+            Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
+            Dim _thisMonth As Integer = Today.Month
+            Dim _thisDay As Integer = Today.Day
+            _years = DateDiff(DateInterval.Year, _dob, Today)
+            If _thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay) Then
+                _years += 1
+            End If
         End If
         Return _years
     End Function
@@ -397,16 +400,19 @@ Public Class FrmTweet
         Dim _outString As New StringBuilder
         _outString.Append(cboMonth.SelectedItem).Append(" ").Append(cboDay.SelectedItem).Append(vbCrLf).Append(vbCrLf)
         _outString.Append(GetHeading(_type)).Append(vbCrLf)
-
         Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
-
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
             If rbAges.Checked Then
                 If _type.StartsWith("B") Then
                     _outString.Append(" (" & CStr(CalculateAgeNextBirthday(_person)) & ")")
                 Else
-                    _outString.Append(" (" & _person.BirthYear & ")")
+                    Dim _yr As Integer = CInt(_person.BirthYear)
+                    Dim _birthyear As String = CStr(Math.Abs(_yr))
+                    If _yr < 0 Then
+                        _birthyear &= " BCE"
+                    End If
+                    _outString.Append(" (" & _birthyear & ")")
                 End If
             End If
             If rbHandles.Checked Then
@@ -422,7 +428,6 @@ Public Class FrmTweet
         _textBox.Text = _outString.ToString
     End Sub
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
-
         If _imageTable.Count > 0 Then
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
             GenerateImage(_pictureBox, _imageTable, _width, _height)

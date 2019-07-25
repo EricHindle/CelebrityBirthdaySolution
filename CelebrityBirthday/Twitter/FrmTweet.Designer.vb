@@ -151,7 +151,7 @@ Partial Class FrmTweet
         Me.LblImageCount.AutoSize = True
         Me.LblImageCount.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblImageCount.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.LblImageCount.Location = New System.Drawing.Point(310, 158)
+        Me.LblImageCount.Location = New System.Drawing.Point(282, 158)
         Me.LblImageCount.Name = "LblImageCount"
         Me.LblImageCount.Size = New System.Drawing.Size(63, 22)
         Me.LblImageCount.TabIndex = 6

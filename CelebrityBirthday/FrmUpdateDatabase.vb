@@ -650,7 +650,7 @@ Public Class FrmUpdateDatabase
         If s1.Count > 1 Then
             Dim s2 As String() = Split(s1(1), ")")
             If s2.Count > 1 Then
-                If IsDate(s2(0)) Then
+                If IsDate(s2(0)) And Not s2(0).EndsWith("AD") And Not s2(0).EndsWith("BC") Then
                     Dim d1 As Date = CDate(s2(0))
                     txtDthDay.Text = Format(d1, "dd")
                     txtDthMth.Text = Format(d1, "MM")
