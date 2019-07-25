@@ -49,7 +49,6 @@ Partial Class FrmTweet
         Me.BtnCopyAll = New System.Windows.Forms.Button()
         Me.NudBirthdaysPerTweet = New System.Windows.Forms.NumericUpDown()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblError = New System.Windows.Forms.Label()
         Me.TxtStats = New System.Windows.Forms.TextBox()
         Me.BtnToday = New System.Windows.Forms.Button()
         Me.tvBirthday = New System.Windows.Forms.TreeView()
@@ -361,20 +360,6 @@ Partial Class FrmTweet
         Me.Label1.TabIndex = 24
         Me.Label1.Text = "per Tweet"
         '
-        'lblError
-        '
-        Me.lblError.AutoSize = True
-        Me.lblError.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblError.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblError.ForeColor = System.Drawing.Color.White
-        Me.lblError.Location = New System.Drawing.Point(1071, 12)
-        Me.lblError.Name = "lblError"
-        Me.lblError.Padding = New System.Windows.Forms.Padding(3)
-        Me.lblError.Size = New System.Drawing.Size(106, 25)
-        Me.lblError.TabIndex = 25
-        Me.lblError.Text = "** Error **"
-        Me.lblError.Visible = False
-        '
         'TxtStats
         '
         Me.TxtStats.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -599,7 +584,6 @@ Partial Class FrmTweet
         Me.Controls.Add(Me.tvBirthday)
         Me.Controls.Add(Me.BtnToday)
         Me.Controls.Add(Me.TxtStats)
-        Me.Controls.Add(Me.lblError)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.NudBirthdaysPerTweet)
         Me.Controls.Add(Me.BtnCopyAll)
@@ -665,7 +649,6 @@ Partial Class FrmTweet
     Friend WithEvents CopyAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NudBirthdaysPerTweet As NumericUpDown
     Friend WithEvents Label1 As Label
-    Friend WithEvents lblError As Label
     Friend WithEvents TxtStats As TextBox
     Friend WithEvents BtnToday As Button
     Friend WithEvents tvBirthday As TreeView

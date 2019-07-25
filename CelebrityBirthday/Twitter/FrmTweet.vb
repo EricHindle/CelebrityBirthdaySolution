@@ -40,40 +40,8 @@ Public Class FrmTweet
     End Property
 #End Region
 #Region "form control handlers"
-
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
-    End Sub
-    Private Sub GenerateImages()
-        DisplayStatus("Generating images")
-        lblError.Visible = False
-        TxtStats.Text = ""
-        If cboDay.SelectedIndex > -1 AndAlso cboMonth.SelectedIndex > -1 Then
-            TabControl1.TabPages.Clear()
-            TabControl1.Refresh()
-            Dim tabTitle As String
-            Dim _imageStart As Integer = 0
-            Dim _dateLength As Integer = cboDay.SelectedItem.length + cboMonth.SelectedItem.length + 1
-            oTweetLists = New List(Of List(Of Person))
-            If RbSingleImage.Checked Then
-                oTweetLists.Add(personTable)
-                tabTitle = "Full_"
-                GeneratePictures(oTweetLists, tabTitle, _imageStart)
-            Else
-                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, "B")
-                oTweetLists.AddRange(_birthdayImageTweets)
-                tabTitle = "Birthdays_"
-                GeneratePictures(oTweetLists, tabTitle, _imageStart)
-                _imageStart = oTweetLists.Count
-                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, "A")
-                oTweetLists.AddRange(_annivImageTweets)
-                tabTitle = "Anniv_"
-                GeneratePictures(oTweetLists, tabTitle, _imageStart)
-            End If
-            DisplayStatus("Images Complete")
-        Else
-            MsgBox("Select some people", MsgBoxStyle.Exclamation, "Error")
-        End If
     End Sub
     Private Sub Horizontal_ValueChanged(sender As Object, e As System.EventArgs)
         If Not IsNoGenerate Then
@@ -97,19 +65,6 @@ Public Class FrmTweet
             SaveImage(_page)
         Next
     End Sub
-    Private Function SaveImage(_page As TabPage) As String
-        DisplayStatus("Saving File")
-        Dim _path As String = My.Settings.twitterImageFolder
-        If Not My.Computer.FileSystem.DirectoryExists(_path) Then
-            My.Computer.FileSystem.CreateDirectory(_path)
-        End If
-        Dim _add As String = _page.Text
-        Dim _fileName As String = Path.Combine(_path, _add.Replace("_", "_" & cboDay.SelectedItem & "_" & cboMonth.SelectedItem & "_mosaic_") & ".jpg")
-        Dim _pictureBox As PictureBox = GetPictureBoxFromPage(_page)
-        ImageUtil.saveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, _fileName)
-        DisplayStatus("File saved")
-        Return _fileName
-    End Function
     Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.twitterimagepos)
         GetAuthData()
@@ -144,81 +99,19 @@ Public Class FrmTweet
             My.Computer.Clipboard.SetText(_rtb.Text)
         End If
     End Sub
+    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
+        cboDay.SelectedIndex = Today.Day - 1
+        cboMonth.SelectedIndex = Today.Month - 1
+    End Sub
+    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
+        BuildTrees()
+        GenerateAllTweets()
+    End Sub
+    Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
+        GenerateAllTweets()
+    End Sub
 #End Region
-#Region "subroutines"
-    Private Sub GeneratePictures(_tweetLists As List(Of List(Of Person)), _tabTitle As String, _imageStart As Integer)
-        For _imageIndex As Integer = _imageStart To _tweetLists.Count - 1
-            Dim _imageList As List(Of Person) = _tweetLists(_imageIndex)
-            DisplayStatus(">" & CStr(_imageIndex), True)
-            Dim newImageTabPage As TabPage = CreateNewImageTabPage(_imageIndex, _tabTitle & CStr(_imageIndex - _imageStart + 1))
-            Dim pbControl As PictureBox = GetPictureBoxFromPage(newImageTabPage)
-            Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newImageTabPage)
-            IsNoGenerate = True
-            TabControl1.TabPages.Add(newImageTabPage)
-            GetNudFromPage(newImageTabPage).Value = DEFAULT_WIDTH
-            Dim _width As Integer = DEFAULT_WIDTH
-            GeneratePicture(pbControl, _imageList, _width)
-            GenerateText(rtbControl, _imageList, _tabTitle.Substring(0, 1), _imageIndex - _imageStart + 1, _tweetLists.Count - _imageStart)
-            IsNoGenerate = False
-        Next
-    End Sub
-    Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person), _type As String, _index As Integer, _numberOfLists As Integer)
-        Dim _outString As New StringBuilder
-        _outString.Append(cboMonth.SelectedItem).Append(" ").Append(cboDay.SelectedItem).Append(vbCrLf).Append(vbCrLf)
-        _outString.Append(GetHeading(_type)).Append(vbCrLf)
-
-        Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
-
-        For Each _person As Person In _imageTable
-            _outString.Append(_person.Name)
-            If rbAges.Checked Then
-                If _type.StartsWith("B") Then
-                    _outString.Append(" (" & CStr(CalculateAgeNextBirthday(_person)) & ")")
-                Else
-                    _outString.Append(" (" & _person.BirthYear & ")")
-                End If
-            End If
-            If rbHandles.Checked Then
-                If _person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle) Then
-                    _outString.Append(" @").Append(_person.Social.TwitterHandle)
-                End If
-            End If
-            _outString.Append(vbCrLf)
-        Next
-        If Not String.IsNullOrEmpty(_footer) Then
-            _outString.Append(vbCrLf).Append(_footer).Append(vbCrLf)
-        End If
-        _textBox.Text = _outString.ToString
-    End Sub
-
-    Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
-
-        If _imageTable.Count > 0 Then
-            Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
-            GenerateImage(_pictureBox, _imageTable, _width, _height)
-        Else
-            _pictureBox.Image = Nothing
-        End If
-    End Sub
-    Private Sub GenerateImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
-        Dim _mosaic As Image = New Bitmap(My.Resources.blank, 60 * _width, 60 * _height)
-        Dim oGraphics As Graphics = Graphics.FromImage(_mosaic)
-        oGraphics.DrawImage(My.Resources.id, New Point(_mosaic.Width - 60, _mosaic.Height - 60))
-        Dim _imgHPos As Integer = -1
-        Dim _imgVPos As Integer = 0
-        For Each _person As Person In _imageTable
-            Dim _image As Image = _person.Image.Photo
-            _imgHPos += 1
-            If _imgHPos = _width Then
-                _imgVPos += 1
-                _imgHPos = 0
-            End If
-            Dim oBitMap As Bitmap = ImageUtil.resizeImageToBitmap(_image, 60, 60)
-            oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
-        Next
-        _pictureBox.Image = _mosaic
-        DisplayStatus("Image complete", True)
-    End Sub
+#Region "Form subroutines"
     Private Sub DisplayStatus(_text As String, Optional _isAppend As Boolean = False)
         If _isAppend Then
             LblStatus.Text &= _text
@@ -227,105 +120,39 @@ Public Class FrmTweet
         End If
         StatusStrip1.Refresh()
     End Sub
-#End Region
-#Region "functions"
-    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As String) As List(Of List(Of Person))
-        Dim availableLength As Integer = TWEET_SIZE - _headerLength
-        Dim _totalLengthOfTweet As Integer = 0
-        Dim _lengthsText As String = ""
-        Dim _numberOfTweets As Integer = GetExpectedNumberOfTweets(oPersonlist, _type, availableLength, _totalLengthOfTweet)
-        Dim _startIndex As Integer = 0
-        Dim _endIndex As Integer = oPersonlist.Count - 1
-
-        Dim _numberOfNamesPerTweet As Integer = GetNumberOfPersonsPerTweet(oPersonlist.Count, _type, _numberOfTweets)
-
-        Dim ListOfLists As New List(Of List(Of Person))
-        Do Until _startIndex >= _endIndex
-            Dim _rangeCount As Integer = Math.Min(_numberOfNamesPerTweet, _endIndex + 1)
-            Dim _range As List(Of Person) = oPersonlist.GetRange(_endIndex - _rangeCount + 1, _rangeCount)
-            Dim _numberOfNamesThisTweet As Integer = _numberOfNamesPerTweet
-            Do Until GetExpectedNumberOfTweets(_range, _type, availableLength, _totalLengthOfTweet) = 1
-                _numberOfNamesThisTweet -= 1
-                _rangeCount = Math.Min(_numberOfNamesThisTweet, _endIndex + 1)
-                _range = oPersonlist.GetRange(_endIndex - _rangeCount + 1, _rangeCount)
-            Loop
-            _lengthsText = CStr(_totalLengthOfTweet) & vbCrLf & _lengthsText
-            ListOfLists.Add(BuildList(_range))
-            _endIndex -= _rangeCount
-        Loop
-        TxtStats.Text &= _lengthsText
-        ListOfLists.Reverse()
-        Return ListOfLists
-    End Function
-    Private Function GetNumberOfPersonsPerTweet(oPersonListCount As Integer, _type As String, oNumberOfTweets As Integer) As Integer
-        Dim _nudValue As Integer = 0
-        Dim _numberOfPersonsPerTweet As Integer = 0
-        If _type.ToLower = "b" Then
-            _nudValue = NudBirthdaysPerTweet.Value
+    Private Sub BtnSendClick(sender As Object, e As EventArgs)
+        If cmbTwitterUsers.SelectedIndex >= 0 Then
+            SendTweet(SaveImage(TabControl1.SelectedTab))
         Else
-            _nudValue = NudAnnivsPerTweet.Value
+            Using _sendTweet As New FrmSendTwitter
+                _sendTweet.TweetText = GetRichTextBoxFromPage(TabControl1.SelectedTab).Text
+                _sendTweet.ShowDialog()
+            End Using
         End If
-        If _nudValue > 0 Then
-            _numberOfPersonsPerTweet = _nudValue
-        Else
-            _numberOfPersonsPerTweet = Math.Ceiling(oPersonListCount / oNumberOfTweets)
-        End If
-        Return _numberOfPersonsPerTweet
-    End Function
-    Private Function BuildList(oPersonList As List(Of Person)) As List(Of Person)
-        Dim _tweetList As New List(Of Person)
-        For Each oPerson As Person In oPersonList
-            _tweetList.Add(oPerson)
+    End Sub
+    Private Sub FillTwitterUserList()
+        cmbTwitterUsers.Items.Clear()
+        Dim _users As List(Of String) = GetTwitterUsers()
+        For Each _user As String In _users
+            cmbTwitterUsers.Items.Add(_user)
         Next
-        Return _tweetList
-    End Function
-    Private Function GetExpectedNumberOfTweets(oPersonlist As List(Of Person), _type As String, availableLength As Integer, ByRef _totalLength As Integer) As Integer
-        _totalLength = GetTotalLengthOfTweet(oPersonlist, _type)
-        Return Math.Ceiling(_totalLength / availableLength)
-    End Function
-
-    Private Function GetTotalLengthOfTweet(oPersonlist As List(Of Person), _type As String) As Integer
-        Dim _totalLength As Integer = 0
-        For Each _person As Person In oPersonlist
-            Dim _tweetLineLength As Integer = GetTweetLineLength(_person, _type)
-            _totalLength += _tweetLineLength
-        Next
-        Return _totalLength
-    End Function
-
-    Private Function GetTweetLineLength(_person As Person, _type As String) As Integer
-        Dim _length As Integer = _person.Name.Length _
-            + If(rbHandles.Checked, _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 2, 0), 0) _
-            + If(_type = "B" And rbAges.Checked, 5, 0) _
-            + If(_type = "A" And rbAges.Checked, 7, 0) _
-            + 1
-        Return _length
-    End Function
-    Private Function GetHeading(_typeNode As String) As String
-        Dim _header As String = ""
-        If _typeNode.StartsWith("A") Then
-            _header = ANNIV_HDR
+    End Sub
+    Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False)
+        rtbTweet.Text &= vbCrLf & sText
+        If isStatus Then DisplayStatus(sText)
+    End Sub
+    Private Function SaveImage(_page As TabPage) As String
+        DisplayStatus("Saving File")
+        Dim _path As String = My.Settings.twitterImageFolder
+        If Not My.Computer.FileSystem.DirectoryExists(_path) Then
+            My.Computer.FileSystem.CreateDirectory(_path)
         End If
-        If _typeNode.StartsWith("B") Then
-            _header = BIRTHDAY_HDR
-        End If
-        Return _header
-    End Function
-    Private Function CreateNewImageTabPage(_index As Integer, _tabTitle As String) As TabPage
-        Dim newTabpage As New TabPage
-        Dim tabTitle As String = _tabTitle
-        With newTabpage
-            .Text = tabTitle
-            .TabIndex = _index
-            '   .Location = New System.Drawing.Point(4, 22)
-            .Name = "ImageTabPage_" & CStr(_index)
-            .Padding = New System.Windows.Forms.Padding(3)
-            .Size = New System.Drawing.Size(698, 574)
-            .BackColor = Color.AliceBlue
-            .Controls.Add(NewSplitContainer(newTabpage.TabIndex, newTabpage.Size.Width - 10, newTabpage.Size.Height - 10))
-
-        End With
-        Return newTabpage
+        Dim _add As String = _page.Text
+        Dim _fileName As String = Path.Combine(_path, _add.Replace("_", "_" & cboDay.SelectedItem & "_" & cboMonth.SelectedItem & "_mosaic_") & ".jpg")
+        Dim _pictureBox As PictureBox = GetPictureBoxFromPage(_page)
+        ImageUtil.saveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, _fileName)
+        DisplayStatus("File saved")
+        Return _fileName
     End Function
     Private Function NewSplitContainer(_index As Integer, _width As Integer, _height As Integer) As SplitContainer
         Dim _splitContainer As New SplitContainer With {
@@ -457,16 +284,8 @@ Public Class FrmTweet
         End If
         Return _sc
     End Function
-
-    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
-        cboDay.SelectedIndex = Today.Day - 1
-        cboMonth.SelectedIndex = Today.Month - 1
-    End Sub
-
-    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
-        BuildTrees()
-        GenerateImages()
-    End Sub
+#End Region
+#Region "Tree subroutines"
     Private Sub BuildTrees()
         DisplayStatus("Selecting...")
         tvBirthday.Nodes.Clear()
@@ -526,25 +345,110 @@ Public Class FrmTweet
         End If
         Return _years
     End Function
-
-    Private Sub BtnSendClick(sender As Object, e As EventArgs)
-        If cmbTwitterUsers.SelectedIndex >= 0 Then
-            SendTweet(SaveImage(TabControl1.SelectedTab))
+#End Region
+#Region "Tweet subroutines"
+    Private Sub GenerateAllTweets()
+        DisplayStatus("Generating tweets")
+        TxtStats.Text = ""
+        If cboDay.SelectedIndex > -1 AndAlso cboMonth.SelectedIndex > -1 Then
+            TabControl1.TabPages.Clear()
+            TabControl1.Refresh()
+            Dim tabTitle As String
+            Dim _imageStart As Integer = 0
+            Dim _dateLength As Integer = cboDay.SelectedItem.length + cboMonth.SelectedItem.length + 1
+            oTweetLists = New List(Of List(Of Person))
+            If RbSingleImage.Checked Then
+                oTweetLists.Add(personTable)
+                tabTitle = "Full_"
+                GenerateTweets(oTweetLists, tabTitle, _imageStart)
+            Else
+                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, "B")
+                oTweetLists.AddRange(_birthdayImageTweets)
+                tabTitle = "Birthdays_"
+                GenerateTweets(oTweetLists, tabTitle, _imageStart)
+                _imageStart = oTweetLists.Count
+                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, "A")
+                oTweetLists.AddRange(_annivImageTweets)
+                tabTitle = "Anniv_"
+                GenerateTweets(oTweetLists, tabTitle, _imageStart)
+            End If
+            DisplayStatus("Images Complete")
         Else
-            Using _sendTweet As New FrmSendTwitter
-                _sendTweet.TweetText = GetRichTextBoxFromPage(TabControl1.SelectedTab).Text
-                _sendTweet.ShowDialog()
-            End Using
+            MsgBox("Select some people", MsgBoxStyle.Exclamation, "Error")
         End If
     End Sub
-    Private Sub FillTwitterUserList()
-        cmbTwitterUsers.Items.Clear()
-        Dim _users As List(Of String) = GetTwitterUsers()
-        For Each _user As String In _users
-            cmbTwitterUsers.Items.Add(_user)
+    Private Sub GenerateTweets(_tweetLists As List(Of List(Of Person)), _tabTitle As String, _listStart As Integer)
+        For _personIndex As Integer = _listStart To _tweetLists.Count - 1
+            Dim _personList As List(Of Person) = _tweetLists(_personIndex)
+            DisplayStatus(">" & CStr(_personIndex), True)
+            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, _tabTitle & CStr(_personIndex - _listStart + 1))
+            Dim pbControl As PictureBox = GetPictureBoxFromPage(newTweetTabPage)
+            Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
+            IsNoGenerate = True
+            TabControl1.TabPages.Add(newTweetTabPage)
+            GetNudFromPage(newTweetTabPage).Value = DEFAULT_WIDTH
+            Dim _width As Integer = DEFAULT_WIDTH
+            GeneratePicture(pbControl, _personList, _width)
+            GenerateText(rtbControl, _personList, _tabTitle.Substring(0, 1), _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
+            IsNoGenerate = False
         Next
     End Sub
+    Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person), _type As String, _index As Integer, _numberOfLists As Integer)
+        Dim _outString As New StringBuilder
+        _outString.Append(cboMonth.SelectedItem).Append(" ").Append(cboDay.SelectedItem).Append(vbCrLf).Append(vbCrLf)
+        _outString.Append(GetHeading(_type)).Append(vbCrLf)
 
+        Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
+
+        For Each _person As Person In _imageTable
+            _outString.Append(_person.Name)
+            If rbAges.Checked Then
+                If _type.StartsWith("B") Then
+                    _outString.Append(" (" & CStr(CalculateAgeNextBirthday(_person)) & ")")
+                Else
+                    _outString.Append(" (" & _person.BirthYear & ")")
+                End If
+            End If
+            If rbHandles.Checked Then
+                If _person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle) Then
+                    _outString.Append(" @").Append(_person.Social.TwitterHandle)
+                End If
+            End If
+            _outString.Append(vbCrLf)
+        Next
+        If Not String.IsNullOrEmpty(_footer) Then
+            _outString.Append(vbCrLf).Append(_footer).Append(vbCrLf)
+        End If
+        _textBox.Text = _outString.ToString
+    End Sub
+    Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
+
+        If _imageTable.Count > 0 Then
+            Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
+            GenerateImage(_pictureBox, _imageTable, _width, _height)
+        Else
+            _pictureBox.Image = Nothing
+        End If
+    End Sub
+    Private Sub GenerateImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
+        Dim _mosaic As Image = New Bitmap(My.Resources.blank, 60 * _width, 60 * _height)
+        Dim oGraphics As Graphics = Graphics.FromImage(_mosaic)
+        oGraphics.DrawImage(My.Resources.id, New Point(_mosaic.Width - 60, _mosaic.Height - 60))
+        Dim _imgHPos As Integer = -1
+        Dim _imgVPos As Integer = 0
+        For Each _person As Person In _imageTable
+            Dim _image As Image = _person.Image.Photo
+            _imgHPos += 1
+            If _imgHPos = _width Then
+                _imgVPos += 1
+                _imgHPos = 0
+            End If
+            Dim oBitMap As Bitmap = ImageUtil.resizeImageToBitmap(_image, 60, 60)
+            oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
+        Next
+        _pictureBox.Image = _mosaic
+        DisplayStatus("Image complete", True)
+    End Sub
     Private Sub SendTweet(_filename As String)
         Dim isOkToSend As Boolean = True
         If cmbTwitterUsers.SelectedIndex >= 0 Then
@@ -581,12 +485,6 @@ Public Class FrmTweet
         WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
 
     End Sub
-
-    Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False)
-        rtbTweet.Text &= vbCrLf & sText
-        If isStatus Then DisplayStatus(sText)
-    End Sub
-
     Private Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
         DisplayStatus("Sending Tweet")
         Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
@@ -623,10 +521,101 @@ Public Class FrmTweet
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
     End Sub
+    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As String) As List(Of List(Of Person))
+        Dim availableLength As Integer = TWEET_SIZE - _headerLength
+        Dim _totalLengthOfTweet As Integer = 0
+        Dim _lengthsText As String = ""
+        Dim _numberOfTweets As Integer = GetExpectedNumberOfTweets(oPersonlist, _type, availableLength, _totalLengthOfTweet)
+        Dim _startIndex As Integer = 0
+        Dim _endIndex As Integer = oPersonlist.Count - 1
 
-    Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
-        GenerateImages()
-    End Sub
+        Dim _numberOfNamesPerTweet As Integer = GetNumberOfPersonsPerTweet(oPersonlist.Count, _type, _numberOfTweets)
 
+        Dim ListOfLists As New List(Of List(Of Person))
+        Do Until _startIndex >= _endIndex
+            Dim _rangeCount As Integer = Math.Min(_numberOfNamesPerTweet, _endIndex + 1)
+            Dim _range As List(Of Person) = oPersonlist.GetRange(_endIndex - _rangeCount + 1, _rangeCount)
+            Dim _numberOfNamesThisTweet As Integer = _numberOfNamesPerTweet
+            Do Until GetExpectedNumberOfTweets(_range, _type, availableLength, _totalLengthOfTweet) = 1
+                _numberOfNamesThisTweet -= 1
+                _rangeCount = Math.Min(_numberOfNamesThisTweet, _endIndex + 1)
+                _range = oPersonlist.GetRange(_endIndex - _rangeCount + 1, _rangeCount)
+            Loop
+            _lengthsText = CStr(_totalLengthOfTweet) & vbCrLf & _lengthsText
+            ListOfLists.Add(BuildList(_range))
+            _endIndex -= _rangeCount
+        Loop
+        TxtStats.Text &= _lengthsText
+        ListOfLists.Reverse()
+        Return ListOfLists
+    End Function
+    Private Function GetNumberOfPersonsPerTweet(oPersonListCount As Integer, _type As String, oNumberOfTweets As Integer) As Integer
+        Dim _nudValue As Integer = 0
+        Dim _numberOfPersonsPerTweet As Integer = 0
+        If _type.ToLower = "b" Then
+            _nudValue = NudBirthdaysPerTweet.Value
+        Else
+            _nudValue = NudAnnivsPerTweet.Value
+        End If
+        If _nudValue > 0 Then
+            _numberOfPersonsPerTweet = _nudValue
+        Else
+            _numberOfPersonsPerTweet = Math.Ceiling(oPersonListCount / oNumberOfTweets)
+        End If
+        Return _numberOfPersonsPerTweet
+    End Function
+    Private Function BuildList(oPersonList As List(Of Person)) As List(Of Person)
+        Dim _tweetList As New List(Of Person)
+        For Each oPerson As Person In oPersonList
+            _tweetList.Add(oPerson)
+        Next
+        Return _tweetList
+    End Function
+    Private Function GetExpectedNumberOfTweets(oPersonlist As List(Of Person), _type As String, availableLength As Integer, ByRef _totalLength As Integer) As Integer
+        _totalLength = GetTotalLengthOfTweet(oPersonlist, _type)
+        Return Math.Ceiling(_totalLength / availableLength)
+    End Function
+    Private Function GetTotalLengthOfTweet(oPersonlist As List(Of Person), _type As String) As Integer
+        Dim _totalLength As Integer = 0
+        For Each _person As Person In oPersonlist
+            Dim _tweetLineLength As Integer = GetTweetLineLength(_person, _type)
+            _totalLength += _tweetLineLength
+        Next
+        Return _totalLength
+    End Function
+    Private Function GetTweetLineLength(_person As Person, _type As String) As Integer
+        Dim _length As Integer = _person.Name.Length _
+            + If(rbHandles.Checked, _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 2, 0), 0) _
+            + If(_type = "B" And rbAges.Checked, 5, 0) _
+            + If(_type = "A" And rbAges.Checked, 7, 0) _
+            + 1
+        Return _length
+    End Function
+    Private Function GetHeading(_typeNode As String) As String
+        Dim _header As String = ""
+        If _typeNode.StartsWith("A") Then
+            _header = ANNIV_HDR
+        End If
+        If _typeNode.StartsWith("B") Then
+            _header = BIRTHDAY_HDR
+        End If
+        Return _header
+    End Function
+    Private Function CreateNewTweetTabPage(_index As Integer, _tabTitle As String) As TabPage
+        Dim newTabpage As New TabPage
+        Dim tabTitle As String = _tabTitle
+        With newTabpage
+            .Text = tabTitle
+            .TabIndex = _index
+            '   .Location = New System.Drawing.Point(4, 22)
+            .Name = "ImageTabPage_" & CStr(_index)
+            .Padding = New System.Windows.Forms.Padding(3)
+            .Size = New System.Drawing.Size(698, 574)
+            .BackColor = Color.AliceBlue
+            .Controls.Add(NewSplitContainer(newTabpage.TabIndex, newTabpage.Size.Width - 10, newTabpage.Size.Height - 10))
+
+        End With
+        Return newTabpage
+    End Function
 #End Region
 End Class
