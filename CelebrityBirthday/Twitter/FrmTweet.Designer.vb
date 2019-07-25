@@ -379,7 +379,6 @@ Partial Class FrmTweet
         Me.TxtStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TxtStats.Size = New System.Drawing.Size(139, 83)
         Me.TxtStats.TabIndex = 26
-        Me.TxtStats.Visible = False
         '
         'BtnToday
         '

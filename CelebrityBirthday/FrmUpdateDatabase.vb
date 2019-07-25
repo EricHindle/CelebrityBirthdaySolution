@@ -520,6 +520,7 @@ Public Class FrmUpdateDatabase
     Private Sub ClearDetails()
         lblID.Text = ""
         txtDesc.Text = ""
+        txtWiki.Text = ""
         txtShortDesc.Text = ""
         txtDied.Text = ""
         txtName.Text = ""
@@ -717,6 +718,7 @@ Public Class FrmUpdateDatabase
         txtBirthName.Text = oPerson.BirthName
         txtBirthPlace.Text = oPerson.BirthPlace
         txtName.Text = MakeFullName(oPerson.ForeName, oPerson.Surname)
+        txtWiki.Text = GetWikiText(2)
         Dim sYear As String = TxtImageLoadYr.Text
         Dim sMth As String = TxtImageLoadMth.Text
         If oPerson.Image IsNot Nothing Then
@@ -822,11 +824,15 @@ Public Class FrmUpdateDatabase
     End Function
 
     Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
-        Dim _searchName As String = MakeFullName(txtForename.Text, txtSurname.Text)
-        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, NudSentences.Value))
-        Dim extract As String = GetExtractFromResponse(_response)
-        txtDesc.Text = extract
+        txtDesc.Text = GetWikiText(NudSentences.Value)
     End Sub
+
+    Private Function GetWikiText(_sentences As Integer) As String
+        Dim _searchName As String = MakeFullName(txtForename.Text, txtSurname.Text)
+        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _sentences))
+        Dim extract As String = GetExtractFromResponse(_response)
+        Return extract
+    End Function
 
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
         ShowStatus("WordPress")

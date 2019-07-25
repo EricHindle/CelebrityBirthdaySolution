@@ -33,6 +33,8 @@ Partial Class FrmUpdateDatabase
         Me.txtDesc = New System.Windows.Forms.TextBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.UseNicknameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShortenNameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UseNameTextToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.UpperCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LowercaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -105,8 +107,8 @@ Partial Class FrmUpdateDatabase
         Me.TxtPageLoadDay = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.BtnImages = New System.Windows.Forms.Button()
-        Me.UseNameTextToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ShortenNameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.txtWiki = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -117,13 +119,13 @@ Partial Class FrmUpdateDatabase
         '
         'cbNoTweet
         '
-        Me.cbNoTweet.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cbNoTweet.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbNoTweet.AutoSize = True
         Me.cbNoTweet.ForeColor = System.Drawing.Color.Black
         Me.cbNoTweet.Location = New System.Drawing.Point(389, 616)
         Me.cbNoTweet.Name = "cbNoTweet"
         Me.cbNoTweet.Size = New System.Drawing.Size(94, 18)
-        Me.cbNoTweet.TabIndex = 100
+        Me.cbNoTweet.TabIndex = 47
         Me.cbNoTweet.Text = "Don't tweet"
         Me.cbNoTweet.UseVisualStyleBackColor = True
         '
@@ -135,19 +137,20 @@ Partial Class FrmUpdateDatabase
         Me.btnTwitter.Location = New System.Drawing.Point(35, 609)
         Me.btnTwitter.Name = "btnTwitter"
         Me.btnTwitter.Size = New System.Drawing.Size(87, 37)
-        Me.btnTwitter.TabIndex = 119
+        Me.btnTwitter.TabIndex = 45
         Me.btnTwitter.Text = "Twitter:"
         Me.btnTwitter.UseVisualStyleBackColor = True
         '
         'txtTwitter
         '
         Me.txtTwitter.AllowDrop = True
-        Me.txtTwitter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTwitter.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTwitter.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTwitter.Location = New System.Drawing.Point(162, 613)
         Me.txtTwitter.Name = "txtTwitter"
         Me.txtTwitter.Size = New System.Drawing.Size(217, 26)
-        Me.txtTwitter.TabIndex = 99
+        Me.txtTwitter.TabIndex = 11
         '
         'Label16
         '
@@ -157,7 +160,7 @@ Partial Class FrmUpdateDatabase
         Me.Label16.Location = New System.Drawing.Point(129, 617)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(18, 14)
-        Me.Label16.TabIndex = 118
+        Me.Label16.TabIndex = 46
         Me.Label16.Text = "@"
         '
         'btnTidyDob
@@ -168,7 +171,7 @@ Partial Class FrmUpdateDatabase
         Me.btnTidyDob.Location = New System.Drawing.Point(848, 232)
         Me.btnTidyDob.Name = "btnTidyDob"
         Me.btnTidyDob.Size = New System.Drawing.Size(61, 55)
-        Me.btnTidyDob.TabIndex = 117
+        Me.btnTidyDob.TabIndex = 21
         Me.btnTidyDob.Text = "Tidy and Fix"
         Me.btnTidyDob.UseVisualStyleBackColor = True
         '
@@ -177,10 +180,10 @@ Partial Class FrmUpdateDatabase
         Me.btnRTB.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnRTB.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRTB.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnRTB.Location = New System.Drawing.Point(104, 424)
+        Me.btnRTB.Location = New System.Drawing.Point(120, 424)
         Me.btnRTB.Name = "btnRTB"
-        Me.btnRTB.Size = New System.Drawing.Size(43, 29)
-        Me.btnRTB.TabIndex = 116
+        Me.btnRTB.Size = New System.Drawing.Size(36, 29)
+        Me.btnRTB.TabIndex = 18
         Me.btnRTB.Text = "RTB"
         Me.btnRTB.UseVisualStyleBackColor = True
         '
@@ -197,76 +200,88 @@ Partial Class FrmUpdateDatabase
         Me.txtDesc.Name = "txtDesc"
         Me.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtDesc.Size = New System.Drawing.Size(672, 316)
-        Me.txtDesc.TabIndex = 92
+        Me.txtDesc.TabIndex = 7
         '
         'ContextMenuStrip1
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UseNicknameToolStripMenuItem, Me.ShortenNameToolStripMenuItem, Me.UseNameTextToolStripMenuItem, Me.ToolStripSeparator3, Me.UpperCaseToolStripMenuItem, Me.LowercaseToolStripMenuItem, Me.TitleCaseToolStripMenuItem, Me.ToolStripSeparator2, Me.CopyToolStripMenuItem, Me.CutToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ClearToolStripMenuItem, Me.SelectAllToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 280)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(155, 258)
         '
         'UseNicknameToolStripMenuItem
         '
         Me.UseNicknameToolStripMenuItem.Name = "UseNicknameToolStripMenuItem"
-        Me.UseNicknameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UseNicknameToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.UseNicknameToolStripMenuItem.Text = "Use Nickname"
+        '
+        'ShortenNameToolStripMenuItem
+        '
+        Me.ShortenNameToolStripMenuItem.Name = "ShortenNameToolStripMenuItem"
+        Me.ShortenNameToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.ShortenNameToolStripMenuItem.Text = "Shorten Name"
+        '
+        'UseNameTextToolStripMenuItem
+        '
+        Me.UseNameTextToolStripMenuItem.Name = "UseNameTextToolStripMenuItem"
+        Me.UseNameTextToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.UseNameTextToolStripMenuItem.Text = "Use Title Name"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(151, 6)
         '
         'UpperCaseToolStripMenuItem
         '
         Me.UpperCaseToolStripMenuItem.Name = "UpperCaseToolStripMenuItem"
-        Me.UpperCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UpperCaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.UpperCaseToolStripMenuItem.Text = "UPPERCASE"
         '
         'LowercaseToolStripMenuItem
         '
         Me.LowercaseToolStripMenuItem.Name = "LowercaseToolStripMenuItem"
-        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.LowercaseToolStripMenuItem.Text = "lowercase"
         '
         'TitleCaseToolStripMenuItem
         '
         Me.TitleCaseToolStripMenuItem.Name = "TitleCaseToolStripMenuItem"
-        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.TitleCaseToolStripMenuItem.Text = "Title Case"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(151, 6)
         '
         'CopyToolStripMenuItem
         '
         Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.CopyToolStripMenuItem.Text = "Copy"
         '
         'CutToolStripMenuItem
         '
         Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
-        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.CutToolStripMenuItem.Text = "Cut"
         '
         'PasteToolStripMenuItem
         '
         Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
-        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.PasteToolStripMenuItem.Text = "Paste"
         '
         'ClearToolStripMenuItem
         '
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.ClearToolStripMenuItem.Text = "Clear"
         '
         'SelectAllToolStripMenuItem
         '
         Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
-        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.SelectAllToolStripMenuItem.Text = "Select All"
         '
         'btnClearDesc
@@ -277,7 +292,7 @@ Partial Class FrmUpdateDatabase
         Me.btnClearDesc.Location = New System.Drawing.Point(848, 139)
         Me.btnClearDesc.Name = "btnClearDesc"
         Me.btnClearDesc.Size = New System.Drawing.Size(61, 28)
-        Me.btnClearDesc.TabIndex = 113
+        Me.btnClearDesc.TabIndex = 19
         Me.btnClearDesc.Text = "Clear"
         Me.btnClearDesc.UseVisualStyleBackColor = True
         '
@@ -288,7 +303,7 @@ Partial Class FrmUpdateDatabase
         Me.txtDthMth.Location = New System.Drawing.Point(387, 97)
         Me.txtDthMth.Name = "txtDthMth"
         Me.txtDthMth.Size = New System.Drawing.Size(34, 24)
-        Me.txtDthMth.TabIndex = 89
+        Me.txtDthMth.TabIndex = 5
         '
         'btnTidy
         '
@@ -298,7 +313,7 @@ Partial Class FrmUpdateDatabase
         Me.btnTidy.Location = New System.Drawing.Point(848, 184)
         Me.btnTidy.Name = "btnTidy"
         Me.btnTidy.Size = New System.Drawing.Size(61, 28)
-        Me.btnTidy.TabIndex = 114
+        Me.btnTidy.TabIndex = 20
         Me.btnTidy.Text = "Tidy"
         Me.btnTidy.UseVisualStyleBackColor = True
         '
@@ -309,7 +324,7 @@ Partial Class FrmUpdateDatabase
         Me.btnCopyBirthName.Location = New System.Drawing.Point(848, 563)
         Me.btnCopyBirthName.Name = "btnCopyBirthName"
         Me.btnCopyBirthName.Size = New System.Drawing.Size(35, 26)
-        Me.btnCopyBirthName.TabIndex = 112
+        Me.btnCopyBirthName.TabIndex = 41
         Me.btnCopyBirthName.Text = "<"
         Me.btnCopyBirthName.UseVisualStyleBackColor = True
         '
@@ -320,7 +335,7 @@ Partial Class FrmUpdateDatabase
         Me.btnWiki.Location = New System.Drawing.Point(35, 165)
         Me.btnWiki.Name = "btnWiki"
         Me.btnWiki.Size = New System.Drawing.Size(70, 47)
-        Me.btnWiki.TabIndex = 110
+        Me.btnWiki.TabIndex = 14
         Me.btnWiki.Text = "Wiki" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Lookup"
         Me.btnWiki.UseVisualStyleBackColor = True
         '
@@ -331,7 +346,7 @@ Partial Class FrmUpdateDatabase
         Me.txtDthDay.Location = New System.Drawing.Point(346, 97)
         Me.txtDthDay.Name = "txtDthDay"
         Me.txtDthDay.Size = New System.Drawing.Size(33, 24)
-        Me.txtDthDay.TabIndex = 88
+        Me.txtDthDay.TabIndex = 4
         '
         'btnCopyBirthPlace
         '
@@ -340,7 +355,7 @@ Partial Class FrmUpdateDatabase
         Me.btnCopyBirthPlace.Location = New System.Drawing.Point(848, 520)
         Me.btnCopyBirthPlace.Name = "btnCopyBirthPlace"
         Me.btnCopyBirthPlace.Size = New System.Drawing.Size(35, 26)
-        Me.btnCopyBirthPlace.TabIndex = 111
+        Me.btnCopyBirthPlace.TabIndex = 40
         Me.btnCopyBirthPlace.Text = "<"
         Me.btnCopyBirthPlace.UseVisualStyleBackColor = True
         '
@@ -353,7 +368,7 @@ Partial Class FrmUpdateDatabase
         Me.Label15.Location = New System.Drawing.Point(35, 567)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(67, 14)
-        Me.Label15.TabIndex = 109
+        Me.Label15.TabIndex = 44
         Me.Label15.Text = "Birth Name"
         '
         'txtBirthName
@@ -365,7 +380,7 @@ Partial Class FrmUpdateDatabase
         Me.txtBirthName.Location = New System.Drawing.Point(162, 563)
         Me.txtBirthName.Name = "txtBirthName"
         Me.txtBirthName.Size = New System.Drawing.Size(672, 26)
-        Me.txtBirthName.TabIndex = 98
+        Me.txtBirthName.TabIndex = 10
         '
         'Label14
         '
@@ -376,7 +391,7 @@ Partial Class FrmUpdateDatabase
         Me.Label14.Location = New System.Drawing.Point(35, 524)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(60, 14)
-        Me.Label14.TabIndex = 108
+        Me.Label14.TabIndex = 43
         Me.Label14.Text = "Birthplace"
         '
         'txtBirthPlace
@@ -388,14 +403,14 @@ Partial Class FrmUpdateDatabase
         Me.txtBirthPlace.Location = New System.Drawing.Point(162, 520)
         Me.txtBirthPlace.Name = "txtBirthPlace"
         Me.txtBirthPlace.Size = New System.Drawing.Size(672, 26)
-        Me.txtBirthPlace.TabIndex = 97
+        Me.txtBirthPlace.TabIndex = 9
         '
         'btnCreateFullName
         '
         Me.btnCreateFullName.Location = New System.Drawing.Point(120, 16)
         Me.btnCreateFullName.Name = "btnCreateFullName"
         Me.btnCreateFullName.Size = New System.Drawing.Size(35, 26)
-        Me.btnCreateFullName.TabIndex = 107
+        Me.btnCreateFullName.TabIndex = 12
         Me.btnCreateFullName.Text = ">"
         Me.btnCreateFullName.UseVisualStyleBackColor = True
         '
@@ -405,7 +420,7 @@ Partial Class FrmUpdateDatabase
         Me.btnSplitName.Location = New System.Drawing.Point(120, 54)
         Me.btnSplitName.Name = "btnSplitName"
         Me.btnSplitName.Size = New System.Drawing.Size(35, 26)
-        Me.btnSplitName.TabIndex = 106
+        Me.btnSplitName.TabIndex = 13
         Me.btnSplitName.Text = ">"
         Me.btnSplitName.UseVisualStyleBackColor = True
         '
@@ -416,7 +431,7 @@ Partial Class FrmUpdateDatabase
         Me.lblID.Location = New System.Drawing.Point(35, 58)
         Me.lblID.Name = "lblID"
         Me.lblID.Size = New System.Drawing.Size(0, 18)
-        Me.lblID.TabIndex = 104
+        Me.lblID.TabIndex = 35
         '
         'btnCreateShortDesc
         '
@@ -425,7 +440,7 @@ Partial Class FrmUpdateDatabase
         Me.btnCreateShortDesc.Location = New System.Drawing.Point(848, 477)
         Me.btnCreateShortDesc.Name = "btnCreateShortDesc"
         Me.btnCreateShortDesc.Size = New System.Drawing.Size(35, 26)
-        Me.btnCreateShortDesc.TabIndex = 105
+        Me.btnCreateShortDesc.TabIndex = 39
         Me.btnCreateShortDesc.Text = "<"
         Me.btnCreateShortDesc.UseVisualStyleBackColor = True
         '
@@ -437,7 +452,7 @@ Partial Class FrmUpdateDatabase
         Me.txtSurname.Location = New System.Drawing.Point(490, 54)
         Me.txtSurname.Name = "txtSurname"
         Me.txtSurname.Size = New System.Drawing.Size(295, 26)
-        Me.txtSurname.TabIndex = 86
+        Me.txtSurname.TabIndex = 2
         '
         'txtForename
         '
@@ -445,7 +460,7 @@ Partial Class FrmUpdateDatabase
         Me.txtForename.Location = New System.Drawing.Point(162, 54)
         Me.txtForename.Name = "txtForename"
         Me.txtForename.Size = New System.Drawing.Size(317, 26)
-        Me.txtForename.TabIndex = 85
+        Me.txtForename.TabIndex = 1
         '
         'btnDown
         '
@@ -455,7 +470,7 @@ Partial Class FrmUpdateDatabase
         Me.btnDown.Location = New System.Drawing.Point(1223, 108)
         Me.btnDown.Name = "btnDown"
         Me.btnDown.Size = New System.Drawing.Size(40, 43)
-        Me.btnDown.TabIndex = 102
+        Me.btnDown.TabIndex = 26
         Me.btnDown.Text = "Dn"
         Me.btnDown.UseVisualStyleBackColor = True
         '
@@ -468,7 +483,7 @@ Partial Class FrmUpdateDatabase
         Me.txtShortDesc.Location = New System.Drawing.Point(162, 477)
         Me.txtShortDesc.Name = "txtShortDesc"
         Me.txtShortDesc.Size = New System.Drawing.Size(672, 26)
-        Me.txtShortDesc.TabIndex = 95
+        Me.txtShortDesc.TabIndex = 8
         '
         'Label10
         '
@@ -479,7 +494,7 @@ Partial Class FrmUpdateDatabase
         Me.Label10.Location = New System.Drawing.Point(35, 480)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(66, 14)
-        Me.Label10.TabIndex = 103
+        Me.Label10.TabIndex = 42
         Me.Label10.Text = "Short desc"
         '
         'btnUp
@@ -490,7 +505,7 @@ Partial Class FrmUpdateDatabase
         Me.btnUp.Location = New System.Drawing.Point(1223, 58)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(40, 43)
-        Me.btnUp.TabIndex = 101
+        Me.btnUp.TabIndex = 25
         Me.btnUp.Text = "Up"
         Me.btnUp.UseVisualStyleBackColor = True
         '
@@ -504,7 +519,7 @@ Partial Class FrmUpdateDatabase
         Me.lbPeople.Location = New System.Drawing.Point(926, 58)
         Me.lbPeople.Name = "lbPeople"
         Me.lbPeople.Size = New System.Drawing.Size(284, 418)
-        Me.lbPeople.TabIndex = 83
+        Me.lbPeople.TabIndex = 24
         '
         'cboMonth
         '
@@ -515,7 +530,7 @@ Partial Class FrmUpdateDatabase
         Me.cboMonth.Location = New System.Drawing.Point(1003, 18)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(207, 27)
-        Me.cboMonth.TabIndex = 82
+        Me.cboMonth.TabIndex = 23
         '
         'cboDay
         '
@@ -526,7 +541,7 @@ Partial Class FrmUpdateDatabase
         Me.cboDay.Location = New System.Drawing.Point(926, 18)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(71, 27)
-        Me.cboDay.TabIndex = 81
+        Me.cboDay.TabIndex = 22
         '
         'txtDied
         '
@@ -535,7 +550,7 @@ Partial Class FrmUpdateDatabase
         Me.txtDied.Location = New System.Drawing.Point(429, 97)
         Me.txtDied.Name = "txtDied"
         Me.txtDied.Size = New System.Drawing.Size(61, 24)
-        Me.txtDied.TabIndex = 91
+        Me.txtDied.TabIndex = 6
         '
         'Label7
         '
@@ -545,7 +560,7 @@ Partial Class FrmUpdateDatabase
         Me.Label7.Location = New System.Drawing.Point(271, 100)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(40, 14)
-        Me.Label7.TabIndex = 94
+        Me.Label7.TabIndex = 37
         Me.Label7.Text = "Death"
         '
         'Label6
@@ -556,7 +571,7 @@ Partial Class FrmUpdateDatabase
         Me.Label6.Location = New System.Drawing.Point(35, 137)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(67, 14)
-        Me.Label6.TabIndex = 96
+        Me.Label6.TabIndex = 38
         Me.Label6.Text = "Description"
         '
         'txtYear
@@ -566,7 +581,7 @@ Partial Class FrmUpdateDatabase
         Me.txtYear.Location = New System.Drawing.Point(162, 97)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(79, 24)
-        Me.txtYear.TabIndex = 87
+        Me.txtYear.TabIndex = 3
         '
         'Label2
         '
@@ -576,7 +591,7 @@ Partial Class FrmUpdateDatabase
         Me.Label2.Location = New System.Drawing.Point(35, 100)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 14)
-        Me.Label2.TabIndex = 93
+        Me.Label2.TabIndex = 36
         Me.Label2.Text = "Year born"
         '
         'txtName
@@ -588,7 +603,7 @@ Partial Class FrmUpdateDatabase
         Me.txtName.Location = New System.Drawing.Point(162, 18)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(623, 26)
-        Me.txtName.TabIndex = 84
+        Me.txtName.TabIndex = 0
         '
         'Label1
         '
@@ -598,7 +613,7 @@ Partial Class FrmUpdateDatabase
         Me.Label1.Location = New System.Drawing.Point(35, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 14)
-        Me.Label1.TabIndex = 90
+        Me.Label1.TabIndex = 34
         Me.Label1.Text = "Name"
         '
         'rtbDesc
@@ -610,7 +625,7 @@ Partial Class FrmUpdateDatabase
         Me.rtbDesc.Location = New System.Drawing.Point(162, 137)
         Me.rtbDesc.Name = "rtbDesc"
         Me.rtbDesc.Size = New System.Drawing.Size(672, 316)
-        Me.rtbDesc.TabIndex = 115
+        Me.rtbDesc.TabIndex = 33
         Me.rtbDesc.Text = ""
         Me.rtbDesc.Visible = False
         '
@@ -624,37 +639,37 @@ Partial Class FrmUpdateDatabase
         '
         'btnUpdate
         '
-        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnUpdate.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnUpdate.Location = New System.Drawing.Point(152, 749)
+        Me.btnUpdate.Location = New System.Drawing.Point(659, 613)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(100, 43)
-        Me.btnUpdate.TabIndex = 122
+        Me.btnUpdate.TabIndex = 28
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnInsert
         '
-        Me.btnInsert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnInsert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnInsert.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnInsert.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnInsert.Location = New System.Drawing.Point(34, 749)
+        Me.btnInsert.Location = New System.Drawing.Point(534, 613)
         Me.btnInsert.Name = "btnInsert"
         Me.btnInsert.Size = New System.Drawing.Size(100, 43)
-        Me.btnInsert.TabIndex = 121
+        Me.btnInsert.TabIndex = 27
         Me.btnInsert.Text = "Insert"
         Me.btnInsert.UseVisualStyleBackColor = True
         '
         'btnClrNew
         '
-        Me.btnClrNew.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnClrNew.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClrNew.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClrNew.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClrNew.Location = New System.Drawing.Point(346, 749)
+        Me.btnClrNew.Location = New System.Drawing.Point(784, 613)
         Me.btnClrNew.Name = "btnClrNew"
         Me.btnClrNew.Size = New System.Drawing.Size(99, 43)
-        Me.btnClrNew.TabIndex = 126
+        Me.btnClrNew.TabIndex = 29
         Me.btnClrNew.Text = "Clear"
         Me.btnClrNew.UseVisualStyleBackColor = True
         '
@@ -667,10 +682,10 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox1.Controls.Add(Me.btnUpdateSel)
         Me.GroupBox1.Controls.Add(Me.btnUpdateAll)
         Me.GroupBox1.Controls.Add(Me.btnDelete)
-        Me.GroupBox1.Location = New System.Drawing.Point(530, 633)
+        Me.GroupBox1.Location = New System.Drawing.Point(534, 680)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(353, 159)
-        Me.GroupBox1.TabIndex = 134
+        Me.GroupBox1.Size = New System.Drawing.Size(353, 144)
+        Me.GroupBox1.TabIndex = 30
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Database"
         '
@@ -678,10 +693,10 @@ Partial Class FrmUpdateDatabase
         '
         Me.btnClearList.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClearList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClearList.Location = New System.Drawing.Point(239, 96)
+        Me.btnClearList.Location = New System.Drawing.Point(238, 21)
         Me.btnClearList.Name = "btnClearList"
         Me.btnClearList.Size = New System.Drawing.Size(100, 52)
-        Me.btnClearList.TabIndex = 5
+        Me.btnClearList.TabIndex = 2
         Me.btnClearList.Text = "Clear List"
         Me.btnClearList.UseVisualStyleBackColor = True
         '
@@ -689,10 +704,10 @@ Partial Class FrmUpdateDatabase
         '
         Me.btnReloadSel.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnReloadSel.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnReloadSel.Location = New System.Drawing.Point(132, 96)
+        Me.btnReloadSel.Location = New System.Drawing.Point(132, 21)
         Me.btnReloadSel.Name = "btnReloadSel"
         Me.btnReloadSel.Size = New System.Drawing.Size(100, 52)
-        Me.btnReloadSel.TabIndex = 4
+        Me.btnReloadSel.TabIndex = 1
         Me.btnReloadSel.Text = "Reload Table Item"
         Me.btnReloadSel.UseVisualStyleBackColor = True
         '
@@ -700,10 +715,10 @@ Partial Class FrmUpdateDatabase
         '
         Me.btnLoadTable.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLoadTable.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnLoadTable.Location = New System.Drawing.Point(132, 38)
+        Me.btnLoadTable.Location = New System.Drawing.Point(132, 79)
         Me.btnLoadTable.Name = "btnLoadTable"
         Me.btnLoadTable.Size = New System.Drawing.Size(100, 52)
-        Me.btnLoadTable.TabIndex = 1
+        Me.btnLoadTable.TabIndex = 4
         Me.btnLoadTable.Text = "Reload Full Table"
         Me.btnLoadTable.UseVisualStyleBackColor = True
         '
@@ -711,10 +726,10 @@ Partial Class FrmUpdateDatabase
         '
         Me.btnUpdateSel.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdateSel.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnUpdateSel.Location = New System.Drawing.Point(24, 96)
+        Me.btnUpdateSel.Location = New System.Drawing.Point(25, 21)
         Me.btnUpdateSel.Name = "btnUpdateSel"
         Me.btnUpdateSel.Size = New System.Drawing.Size(100, 52)
-        Me.btnUpdateSel.TabIndex = 3
+        Me.btnUpdateSel.TabIndex = 0
         Me.btnUpdateSel.Text = "Update Db Selected"
         Me.btnUpdateSel.UseVisualStyleBackColor = True
         '
@@ -722,10 +737,10 @@ Partial Class FrmUpdateDatabase
         '
         Me.btnUpdateAll.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdateAll.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnUpdateAll.Location = New System.Drawing.Point(24, 38)
+        Me.btnUpdateAll.Location = New System.Drawing.Point(25, 79)
         Me.btnUpdateAll.Name = "btnUpdateAll"
         Me.btnUpdateAll.Size = New System.Drawing.Size(100, 52)
-        Me.btnUpdateAll.TabIndex = 0
+        Me.btnUpdateAll.TabIndex = 3
         Me.btnUpdateAll.Text = "Update Db  All"
         Me.btnUpdateAll.UseVisualStyleBackColor = True
         '
@@ -733,10 +748,10 @@ Partial Class FrmUpdateDatabase
         '
         Me.btnDelete.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnDelete.Location = New System.Drawing.Point(239, 38)
+        Me.btnDelete.Location = New System.Drawing.Point(238, 79)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(100, 52)
-        Me.btnDelete.TabIndex = 2
+        Me.btnDelete.TabIndex = 5
         Me.btnDelete.Text = "Delete Person"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
@@ -748,7 +763,7 @@ Partial Class FrmUpdateDatabase
         Me.btnClose.Location = New System.Drawing.Point(1136, 781)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(100, 43)
-        Me.btnClose.TabIndex = 135
+        Me.btnClose.TabIndex = 32
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -759,7 +774,7 @@ Partial Class FrmUpdateDatabase
         Me.TxtImageLoadDay.Location = New System.Drawing.Point(12, 133)
         Me.TxtImageLoadDay.Name = "TxtImageLoadDay"
         Me.TxtImageLoadDay.Size = New System.Drawing.Size(55, 22)
-        Me.TxtImageLoadDay.TabIndex = 136
+        Me.TxtImageLoadDay.TabIndex = 3
         '
         'BtnImageLoadUpd
         '
@@ -769,7 +784,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnImageLoadUpd.Location = New System.Drawing.Point(251, 131)
         Me.BtnImageLoadUpd.Name = "BtnImageLoadUpd"
         Me.BtnImageLoadUpd.Size = New System.Drawing.Size(52, 27)
-        Me.BtnImageLoadUpd.TabIndex = 140
+        Me.BtnImageLoadUpd.TabIndex = 7
         Me.BtnImageLoadUpd.Text = "Upd"
         Me.BtnImageLoadUpd.UseVisualStyleBackColor = True
         '
@@ -782,7 +797,7 @@ Partial Class FrmUpdateDatabase
         Me.Label5.Location = New System.Drawing.Point(9, 107)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(101, 14)
-        Me.Label5.TabIndex = 141
+        Me.Label5.TabIndex = 10
         Me.Label5.Text = "Image Load Date"
         '
         'TxtImageLoadMth
@@ -792,7 +807,7 @@ Partial Class FrmUpdateDatabase
         Me.TxtImageLoadMth.Location = New System.Drawing.Point(75, 133)
         Me.TxtImageLoadMth.Name = "TxtImageLoadMth"
         Me.TxtImageLoadMth.Size = New System.Drawing.Size(55, 22)
-        Me.TxtImageLoadMth.TabIndex = 137
+        Me.TxtImageLoadMth.TabIndex = 4
         '
         'TxtImageLoadYr
         '
@@ -801,7 +816,7 @@ Partial Class FrmUpdateDatabase
         Me.TxtImageLoadYr.Location = New System.Drawing.Point(138, 133)
         Me.TxtImageLoadYr.Name = "TxtImageLoadYr"
         Me.TxtImageLoadYr.Size = New System.Drawing.Size(82, 22)
-        Me.TxtImageLoadYr.TabIndex = 138
+        Me.TxtImageLoadYr.TabIndex = 5
         '
         'Label11
         '
@@ -812,7 +827,7 @@ Partial Class FrmUpdateDatabase
         Me.Label11.Location = New System.Drawing.Point(12, 810)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(49, 14)
-        Me.Label11.TabIndex = 142
+        Me.Label11.TabIndex = 50
         Me.Label11.Text = "Label11"
         '
         'lblStatus
@@ -833,7 +848,7 @@ Partial Class FrmUpdateDatabase
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(1271, 22)
-        Me.StatusStrip1.TabIndex = 143
+        Me.StatusStrip1.TabIndex = 51
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'BtnGetWikiText
@@ -843,7 +858,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnGetWikiText.Location = New System.Drawing.Point(36, 219)
         Me.BtnGetWikiText.Name = "BtnGetWikiText"
         Me.BtnGetWikiText.Size = New System.Drawing.Size(69, 47)
-        Me.BtnGetWikiText.TabIndex = 144
+        Me.BtnGetWikiText.TabIndex = 15
         Me.BtnGetWikiText.Text = "Get Wiki Text"
         Me.BtnGetWikiText.UseVisualStyleBackColor = True
         '
@@ -854,7 +869,7 @@ Partial Class FrmUpdateDatabase
         Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudSentences.Name = "NudSentences"
         Me.NudSentences.Size = New System.Drawing.Size(46, 22)
-        Me.NudSentences.TabIndex = 145
+        Me.NudSentences.TabIndex = 16
         Me.NudSentences.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'BtnWordPress
@@ -865,7 +880,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnWordPress.Location = New System.Drawing.Point(62, 177)
         Me.BtnWordPress.Name = "BtnWordPress"
         Me.BtnWordPress.Size = New System.Drawing.Size(198, 38)
-        Me.BtnWordPress.TabIndex = 146
+        Me.BtnWordPress.TabIndex = 8
         Me.BtnWordPress.Text = "Open WordPress"
         Me.BtnWordPress.UseVisualStyleBackColor = True
         '
@@ -886,7 +901,7 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox2.Location = New System.Drawing.Point(917, 502)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(319, 233)
-        Me.GroupBox2.TabIndex = 147
+        Me.GroupBox2.TabIndex = 31
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "WordPress"
         '
@@ -898,7 +913,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnPageLoadUpd.Location = New System.Drawing.Point(251, 60)
         Me.BtnPageLoadUpd.Name = "BtnPageLoadUpd"
         Me.BtnPageLoadUpd.Size = New System.Drawing.Size(52, 27)
-        Me.BtnPageLoadUpd.TabIndex = 150
+        Me.BtnPageLoadUpd.TabIndex = 6
         Me.BtnPageLoadUpd.Text = "Upd"
         Me.BtnPageLoadUpd.UseVisualStyleBackColor = True
         '
@@ -909,7 +924,7 @@ Partial Class FrmUpdateDatabase
         Me.TxtPageLoadYr.Location = New System.Drawing.Point(138, 65)
         Me.TxtPageLoadYr.Name = "TxtPageLoadYr"
         Me.TxtPageLoadYr.Size = New System.Drawing.Size(82, 22)
-        Me.TxtPageLoadYr.TabIndex = 149
+        Me.TxtPageLoadYr.TabIndex = 2
         '
         'TxtPageLoadMth
         '
@@ -918,7 +933,7 @@ Partial Class FrmUpdateDatabase
         Me.TxtPageLoadMth.Location = New System.Drawing.Point(75, 65)
         Me.TxtPageLoadMth.Name = "TxtPageLoadMth"
         Me.TxtPageLoadMth.Size = New System.Drawing.Size(55, 22)
-        Me.TxtPageLoadMth.TabIndex = 148
+        Me.TxtPageLoadMth.TabIndex = 1
         '
         'TxtPageLoadDay
         '
@@ -927,7 +942,7 @@ Partial Class FrmUpdateDatabase
         Me.TxtPageLoadDay.Location = New System.Drawing.Point(12, 65)
         Me.TxtPageLoadDay.Name = "TxtPageLoadDay"
         Me.TxtPageLoadDay.Size = New System.Drawing.Size(55, 22)
-        Me.TxtPageLoadDay.TabIndex = 147
+        Me.TxtPageLoadDay.TabIndex = 0
         '
         'Label3
         '
@@ -938,7 +953,7 @@ Partial Class FrmUpdateDatabase
         Me.Label3.Location = New System.Drawing.Point(9, 35)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(94, 14)
-        Me.Label3.TabIndex = 151
+        Me.Label3.TabIndex = 9
         Me.Label3.Text = "Page Load Date"
         '
         'BtnImages
@@ -948,21 +963,32 @@ Partial Class FrmUpdateDatabase
         Me.BtnImages.Location = New System.Drawing.Point(36, 377)
         Me.BtnImages.Name = "BtnImages"
         Me.BtnImages.Size = New System.Drawing.Size(69, 28)
-        Me.BtnImages.TabIndex = 148
+        Me.BtnImages.TabIndex = 17
         Me.BtnImages.Text = "Images"
         Me.BtnImages.UseVisualStyleBackColor = True
         '
-        'UseNameTextToolStripMenuItem
+        'txtWiki
         '
-        Me.UseNameTextToolStripMenuItem.Name = "UseNameTextToolStripMenuItem"
-        Me.UseNameTextToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.UseNameTextToolStripMenuItem.Text = "Use Title Name"
+        Me.txtWiki.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtWiki.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtWiki.Location = New System.Drawing.Point(38, 703)
+        Me.txtWiki.Multiline = True
+        Me.txtWiki.Name = "txtWiki"
+        Me.txtWiki.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtWiki.Size = New System.Drawing.Size(411, 87)
+        Me.txtWiki.TabIndex = 49
+        Me.txtWiki.Text = "xxxxxx"
         '
-        'ShortenNameToolStripMenuItem
+        'Label4
         '
-        Me.ShortenNameToolStripMenuItem.Name = "ShortenNameToolStripMenuItem"
-        Me.ShortenNameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ShortenNameToolStripMenuItem.Text = "Shorten Name"
+        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(35, 679)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(29, 14)
+        Me.Label4.TabIndex = 48
+        Me.Label4.Text = "Wiki"
         '
         'FrmUpdateDatabase
         '
@@ -970,6 +996,8 @@ Partial Class FrmUpdateDatabase
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1271, 859)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.txtWiki)
         Me.Controls.Add(Me.BtnImages)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.NudSentences)
@@ -1024,7 +1052,7 @@ Partial Class FrmUpdateDatabase
         Me.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MinimumSize = New System.Drawing.Size(1040, 710)
+        Me.MinimumSize = New System.Drawing.Size(1100, 710)
         Me.Name = "FrmUpdateDatabase"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Update Database"
@@ -1124,4 +1152,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents BtnImages As Button
     Friend WithEvents UseNameTextToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ShortenNameToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents txtWiki As TextBox
+    Friend WithEvents Label4 As Label
 End Class

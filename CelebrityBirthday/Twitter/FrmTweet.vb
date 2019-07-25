@@ -48,24 +48,24 @@ Public Class FrmTweet
         DisplayStatus("Generating images")
         lblError.Visible = False
         TxtStats.Text = ""
-        TxtStats.Visible = False
+        '   TxtStats.Visible = False
         If cboDay.SelectedIndex > -1 AndAlso cboMonth.SelectedIndex > -1 Then
             TabControl1.TabPages.Clear()
             Dim tabTitle As String
             Dim _imageStart As Integer = 0
-            Dim _dateLength As Integer = cboDay.SelectedItem.length + cboMonth.SelectedItem.length + 4
+            Dim _dateLength As Integer = cboDay.SelectedItem.length + cboMonth.SelectedItem.length + 1
             oTweetLists = New List(Of List(Of Person))
             If RbSingleImage.Checked Then
                 oTweetLists.Add(personTable)
                 tabTitle = "Full_"
                 GeneratePictures(oTweetLists, tabTitle, _imageStart)
             Else
-                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length, "B")
+                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, "B")
                 oTweetLists.AddRange(_birthdayImageTweets)
                 tabTitle = "Birthdays_"
                 GeneratePictures(oTweetLists, tabTitle, _imageStart)
                 _imageStart = oTweetLists.Count
-                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length, "A")
+                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, "A")
                 oTweetLists.AddRange(_annivImageTweets)
                 tabTitle = "Anniv_"
                 GeneratePictures(oTweetLists, tabTitle, _imageStart)
@@ -190,6 +190,7 @@ Public Class FrmTweet
         End If
         _textBox.Text = _outString.ToString
     End Sub
+
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
 
         If _imageTable.Count > 0 Then
@@ -228,47 +229,49 @@ Public Class FrmTweet
     End Sub
 #End Region
 #Region "functions"
-    Private Function BuildLists(oPersonlist As List(Of Person), availableLength As Integer, _numberOfNamesPerTweet As Integer, _type As String) As List(Of List(Of Person))
+    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As String) As List(Of List(Of Person))
+        Dim availableLength As Integer = TWEET_SIZE - _headerLength
+        Dim _numberOfTweets As Integer = GetExpectedNumberOfTweets(oPersonlist, _type, availableLength)
+        Dim _startIndex As Integer = 0
+        Dim _endIndex As Integer = oPersonlist.Count - 1
+        Dim _numberOfNamesPerTweet As Integer = Math.Ceiling(oPersonlist.Count / _numberOfTweets)
         Dim ListOfLists As New List(Of List(Of Person))
-        Dim _ct As Integer = 0
-        Dim _tweetSize As Integer = 0
-        Do Until _ct = oPersonlist.Count
-            Dim _tweetList As New List(Of Person)
-            Dim _tweetCt As Integer = 0
-            Do Until _ct = oPersonlist.Count OrElse _tweetCt = _numberOfNamesPerTweet
-                Dim _person As Person = oPersonlist(_ct)
-                _tweetSize += GetTweetLineLength(_person, _type)
-                _tweetList.Add(_person)
-                _tweetCt += 1
-                _ct += 1
+        Do Until _startIndex >= _endIndex
+            Dim _rangeCount As Integer = Math.Min(_numberOfNamesPerTweet, _endIndex + 1)
+            Dim _range As List(Of Person) = oPersonlist.GetRange(_endIndex - _rangeCount + 1, _rangeCount)
+            Do Until GetExpectedNumberOfTweets(_range, _type, availableLength) = 1
+                Dim _numberOfNamesThisTweet As Integer = _numberOfNamesPerTweet - 1
+                _rangeCount = Math.Min(_numberOfNamesThisTweet, _endIndex + 1)
+                _range = oPersonlist.GetRange(_endIndex - _rangeCount + 1, _rangeCount)
             Loop
-            ListOfLists.Add(_tweetList)
-            TxtStats.Text &= CStr(_tweetSize) & vbCrLf
-            If _tweetSize > availableLength Then
-                lblError.Visible = True
-                TxtStats.Visible = True
-            End If
-            _tweetSize = 0
+            ListOfLists.Add(BuildList(_range))
+            _endIndex -= _rangeCount
         Loop
+        ListOfLists.Reverse()
         Return ListOfLists
     End Function
-    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As String) As List(Of List(Of Person))
+    Private Function BuildList(oPersonList As List(Of Person)) As List(Of Person)
+        Dim _tweetList As New List(Of Person)
+        For Each oPerson As Person In oPersonList
+            _tweetList.Add(oPerson)
+        Next
+        Return _tweetList
+    End Function
+    Private Function GetExpectedNumberOfTweets(oPersonlist As List(Of Person), _type As String, availableLength As Integer) As Integer
         Dim _totalLength As Integer = 0
-        Dim availableLength As Integer = TWEET_SIZE - _headerLength
         For Each _person As Person In oPersonlist
             Dim _tweetLineLength As Integer = GetTweetLineLength(_person, _type)
             _totalLength += _tweetLineLength
         Next
-        Dim _numberOfTweets As Integer = Math.Ceiling(_totalLength / availableLength)
-        Dim _numberOfNamesPerTweet As Integer = If(NudPersonsPerTweet.Value > 0, NudPersonsPerTweet.Value, Math.Ceiling(oPersonlist.Count / _numberOfTweets))
-        Dim ListOfLists As List(Of List(Of Person)) = BuildLists(oPersonlist, availableLength, _numberOfNamesPerTweet, _type)
-        Return ListOfLists
+        Return Math.Ceiling(_totalLength / availableLength)
     End Function
     Private Function GetTweetLineLength(_person As Person, _type As String) As Integer
-        Return _person.Name.Length _
-            + If(rbHandles.Checked, _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 3, 1), 0) _
+        Dim _length As Integer = _person.Name.Length _
+            + If(rbHandles.Checked, _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 2, 0), 0) _
             + If(_type = "B" And rbAges.Checked, 5, 0) _
-            + If(_type = "A" And rbAges.Checked, 7, 0)
+            + If(_type = "A" And rbAges.Checked, 7, 0) _
+            + 1
+        Return _length
     End Function
     Private Function GetHeading(_typeNode As String) As String
         Dim _header As String = ""
