@@ -293,7 +293,8 @@ Public Class FrmUpdateDatabase
             For Each oPerson As Person In personTable
                 If oPerson.Id = id Then
                     oPerson.BirthYear = txtYear.Text
-                    oPerson.DeathYear = CInt("0" & txtDied.Text)
+                    oPerson.DeathYear = 0
+                    Integer.TryParse(txtDied.Text, oPerson.DeathYear)
                     oPerson.Description = txtDesc.Text.Trim
                     oPerson.ForeName = txtForename.Text.Trim
                     oPerson.Surname = txtSurname.Text.Trim
@@ -574,8 +575,7 @@ Public Class FrmUpdateDatabase
     Private Sub TidyAndFix()
         isGotBirthName = False
         isGotStageName = False
-        Dim _desc As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
-        Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
+        Dim _parts As List(Of String) = TidyText()
         If _parts.Count > 0 Then
             If _parts(0).IndexOf("""") > 0 Then
                 _parts(0) = GetNickname(_parts(0))
@@ -594,7 +594,7 @@ Public Class FrmUpdateDatabase
             txtDesc.Text = Trim(_parts(0)) & " (" & _datePart & ")" & _parts(2)
         End If
         rtbDesc.Text = txtDesc.Text
-        TidyText()
+
     End Sub
 
     Private Function IsUseAsBirthName(_birthName As String) As Boolean
@@ -649,19 +649,14 @@ Public Class FrmUpdateDatabase
         Return _parts
     End Function
 
-    Private Sub TidyText()
+    Private Function TidyText() As List(Of String)
         Dim newText As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
+        Dim _parts As List(Of String) = ParseStringWithBrackets(newText)
         Dim charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c}
-        Dim s1 As String() = Split(newText, " - ")
-        If s1.Count > 1 Then
-            Dim s2 As String() = Split(s1(1), ")")
-            If s2.Count > 1 Then
-                If IsDate(s2(0)) And Not s2(0).EndsWith("AD") And Not s2(0).EndsWith("BC") Then
-                    Dim d1 As Date = CDate(s2(0))
-                    txtDthDay.Text = Format(d1, "dd")
-                    txtDthMth.Text = Format(d1, "MM")
-                    txtDied.Text = Format(d1, "yyyy")
-                End If
+        If _parts.Count = 3 Then
+            Dim _dates As String() = Split(_parts(1), " - ")
+            If _dates.Count = 2 Then
+                ExtractDeathDate(_dates(1))
             End If
         End If
         Dim trimmedTextBefore As String = ""
@@ -682,7 +677,29 @@ Public Class FrmUpdateDatabase
         txtBirthPlace.Text = RemoveSquareBrackets(FixQuotes(txtBirthPlace.Text).Replace(".", "").Replace(";", "")).Trim(charsToTrim)
         txtTwitter.Text = RemoveBadCharacters(txtTwitter.Text, {8207}).Trim
         rtbDesc.Text = txtDesc.Text
+        Return _parts
+    End Function
+    Private Sub ExtractDeathDate(_date As String)
+        Dim _deathDate As String = _date.Trim.TrimEnd({"E"c})
+        Dim isBC As Boolean = False
+        If _deathDate.EndsWith("AD") Then
+            _deathDate = _date.TrimEnd({" "c, "A"c, "D"c})
+        ElseIf _deathDate.EndsWith("BC") Then
+            _deathDate = _date.TrimEnd({" "c, "B"c, "C"c})
+            isBC = True
+        End If
+        If IsDate(_deathDate) Then
+            Dim d1 As Date = CDate(_deathDate)
+            txtDthDay.Text = Format(d1, "dd")
+            txtDthMth.Text = Format(d1, "MM")
+            Dim _inx = Len(_deathDate) - 1
+            Do Until _inx < 0 OrElse Not IsNumeric(_deathDate.Substring(_inx, 1))
+                _inx -= 1
+            Loop
+            txtDied.Text = If(isBC, "-", "") & _deathDate.Substring(_inx + 1)
+        End If
     End Sub
+
     Private Sub SwapText(ByVal currentVal As String)
         If currentVal = "RTB" Then
             rtbDesc.Text = txtDesc.Text
