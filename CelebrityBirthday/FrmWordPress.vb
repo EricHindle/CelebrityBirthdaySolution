@@ -77,7 +77,8 @@ Public Class FrmWordPress
         For Each oPerson As Person In personTable
             setImageDate(oPerson.Id)
             If oPerson.BirthYear <> lastYear Then
-                newText.Append("<h3>").Append(oPerson.BirthYear).Append("</h3>").Append(vbCrLf)
+                Dim _birthYear As Integer = Math.Abs(CInt(oPerson.BirthYear))
+                newText.Append("<h3>").Append(CStr(_birthYear)).Append(If(oPerson.BirthYear < 0, " BCE", "")).Append("</h3>").Append(vbCrLf)
                 lastYear = oPerson.BirthYear
             End If
             Dim lowername As String = oPerson.Image.ImageFileName
@@ -88,7 +89,7 @@ Public Class FrmWordPress
             If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
                 sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
             End If
-            Dim sDied As String = " (d. " & CStr(oPerson.DeathYear) & ")"
+            Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
             With newText
                 .Append(A_TAG_START)
                 .Append(urlYear)
