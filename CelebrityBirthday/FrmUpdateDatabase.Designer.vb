@@ -167,11 +167,12 @@ Partial Class FrmUpdateDatabase
         '
         'btnTidyDob
         '
+        Me.btnTidyDob.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnTidyDob.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnTidyDob.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnTidyDob.Location = New System.Drawing.Point(405, 137)
+        Me.btnTidyDob.Location = New System.Drawing.Point(848, 241)
         Me.btnTidyDob.Name = "btnTidyDob"
-        Me.btnTidyDob.Size = New System.Drawing.Size(103, 25)
+        Me.btnTidyDob.Size = New System.Drawing.Size(61, 57)
         Me.btnTidyDob.TabIndex = 21
         Me.btnTidyDob.Text = "Tidy and Fix"
         Me.btnTidyDob.UseVisualStyleBackColor = True
@@ -308,11 +309,12 @@ Partial Class FrmUpdateDatabase
         '
         'btnTidy
         '
+        Me.btnTidy.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnTidy.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnTidy.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnTidy.Location = New System.Drawing.Point(338, 137)
+        Me.btnTidy.Location = New System.Drawing.Point(848, 187)
         Me.btnTidy.Name = "btnTidy"
-        Me.btnTidy.Size = New System.Drawing.Size(61, 25)
+        Me.btnTidy.Size = New System.Drawing.Size(61, 37)
         Me.btnTidy.TabIndex = 20
         Me.btnTidy.Text = "Tidy"
         Me.btnTidy.UseVisualStyleBackColor = True

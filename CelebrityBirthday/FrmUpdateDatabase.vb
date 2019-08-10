@@ -745,8 +745,8 @@ Public Class FrmUpdateDatabase
         Dim names As String() = Split(sName, """")
         Dim sReturnName As String = sName
         If names.Length > 2 Then
-            Dim sNickName As String = names(1).Trim & " " & names(2)
-            Dim sNoNickName As String = names(0).Trim & " " & names(2).Trim
+            Dim sNickName As String = names(1).Trim & names(2)
+            Dim sNoNickName As String = Trim(names(0).Trim & names(2))
             If MsgBox("Use " & sNickName.Trim & " as name and " & sNoNickName.Substring(0, Math.Min(40, sNoNickName.Length)) & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Nickname") = MsgBoxResult.Yes Then
                 txtBirthName.Text = sNoNickName
                 sReturnName = sNickName
