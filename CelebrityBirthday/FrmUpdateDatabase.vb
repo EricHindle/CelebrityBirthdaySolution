@@ -747,7 +747,7 @@ Public Class FrmUpdateDatabase
         If names.Length > 2 Then
             Dim sNickName As String = names(1).Trim & " " & names(2)
             Dim sNoNickName As String = names(0).Trim & " " & names(2).Trim
-            If MsgBox("Use " & sNickName.Trim & " as name and " & sNoNickName.Substring(0, Math.Max(40, sNoNickName.Length)) & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Nickname") = MsgBoxResult.Yes Then
+            If MsgBox("Use " & sNickName.Trim & " as name and " & sNoNickName.Substring(0, Math.Min(40, sNoNickName.Length)) & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Nickname") = MsgBoxResult.Yes Then
                 txtBirthName.Text = sNoNickName
                 sReturnName = sNickName
                 isGotBirthName = True
