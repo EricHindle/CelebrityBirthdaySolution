@@ -35,16 +35,12 @@ Public Class FrmDeathCheck
         Dim _desc As String = RemoveSquareBrackets(FixQuotes(extract))
         Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
         If _parts.Count = 3 Then
-            Debug.Print(_parts(1))
             Dim datePart As String = _parts(1)
             Dim _dates As String() = Split(datePart, " - ")
             If _dates.Count = 2 Then
                 Try
-                    Debug.Print(_dates(1))
                     If IsDate(_dates(1)) Then
                         _deathDate = CDate(_dates(1))
-                    Else
-                        Debug.Print(_searchName & " Not a date " & _dates(1))
                     End If
                 Catch ex As Exception
                     Debug.Print(_searchName & " Not a date " & _dates(1))

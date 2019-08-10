@@ -576,14 +576,20 @@ Public Class FrmUpdateDatabase
         isGotStageName = False
         Dim _desc As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
         Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
-        If _parts(0).IndexOf("""") > 0 Then
-            _parts(0) = GetNickname(_parts(0))
+        If _parts.Count > 0 Then
+            If _parts(0).IndexOf("""") > 0 Then
+                _parts(0) = GetNickname(_parts(0))
+            End If
         End If
         If _parts.Count = 3 Then
             Dim _datePart As String = ExtractAndRemovePhrases(_parts(1))
             Dim _knownAs As List(Of String) = KnownAs(_parts)
             If _knownAs.Count > 0 And Not isGotBirthName Then
                 IsUseAsBirthName(_knownAs(0))
+            End If
+            _datePart = _datePart.Replace("  ", " ")
+            If _datePart.ToLower.StartsWith("born ") And _datePart.Contains("-") Then
+                _datePart = _datePart.Remove(0, 5)
             End If
             txtDesc.Text = Trim(_parts(0)) & " (" & _datePart & ")" & _parts(2)
         End If
@@ -739,9 +745,9 @@ Public Class FrmUpdateDatabase
         Dim names As String() = Split(sName, """")
         Dim sReturnName As String = sName
         If names.Length > 2 Then
-            Dim sNickName As String = names(1).Trim & " " & names(2).Trim
+            Dim sNickName As String = names(1).Trim & " " & names(2)
             Dim sNoNickName As String = names(0).Trim & " " & names(2).Trim
-            If MsgBox("Use " & sNickName & " as name and " & sNoNickName & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Nickname") = MsgBoxResult.Yes Then
+            If MsgBox("Use " & sNickName.Trim & " as name and " & sNoNickName.Substring(0, Math.Max(40, sNoNickName.Length)) & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Nickname") = MsgBoxResult.Yes Then
                 txtBirthName.Text = sNoNickName
                 sReturnName = sNickName
                 isGotBirthName = True
@@ -893,6 +899,10 @@ Public Class FrmUpdateDatabase
     End Sub
 
     Private Sub UseNameTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseNameTextToolStripMenuItem.Click
+        UseTitleName()
+    End Sub
+
+    Private Sub UseTitleName()
         If txtDesc.SelectionLength > 0 Then
             Dim _selStart As Integer = txtDesc.SelectionStart
             Dim _selLength As Integer = txtDesc.SelectionLength
@@ -909,6 +919,15 @@ Public Class FrmUpdateDatabase
         If txtDesc.SelectionLength > 0 Then
             txtBirthName.Text = txtDesc.SelectedText
             RemoveMiddleNames()
+        End If
+    End Sub
+
+    Private Sub BtnTitleName_Click(sender As Object, e As EventArgs) Handles BtnTitleName.Click
+        Dim _parts As List(Of String) = ParseStringWithBrackets(txtDesc.Text)
+        If _parts.Count > 1 Then
+            txtDesc.SelectionStart = 0
+            txtDesc.SelectionLength = _parts(0).Trim.Length
+            UseTitleName()
         End If
     End Sub
 

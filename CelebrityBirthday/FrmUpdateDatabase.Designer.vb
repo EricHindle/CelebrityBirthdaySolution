@@ -109,6 +109,8 @@ Partial Class FrmUpdateDatabase
         Me.BtnImages = New System.Windows.Forms.Button()
         Me.txtWiki = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.BtnTitleName = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -165,12 +167,11 @@ Partial Class FrmUpdateDatabase
         '
         'btnTidyDob
         '
-        Me.btnTidyDob.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnTidyDob.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnTidyDob.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnTidyDob.Location = New System.Drawing.Point(848, 232)
+        Me.btnTidyDob.Location = New System.Drawing.Point(405, 137)
         Me.btnTidyDob.Name = "btnTidyDob"
-        Me.btnTidyDob.Size = New System.Drawing.Size(61, 55)
+        Me.btnTidyDob.Size = New System.Drawing.Size(103, 25)
         Me.btnTidyDob.TabIndex = 21
         Me.btnTidyDob.Text = "Tidy and Fix"
         Me.btnTidyDob.UseVisualStyleBackColor = True
@@ -195,11 +196,11 @@ Partial Class FrmUpdateDatabase
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtDesc.ContextMenuStrip = Me.ContextMenuStrip1
         Me.txtDesc.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDesc.Location = New System.Drawing.Point(162, 137)
+        Me.txtDesc.Location = New System.Drawing.Point(162, 165)
         Me.txtDesc.Multiline = True
         Me.txtDesc.Name = "txtDesc"
         Me.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDesc.Size = New System.Drawing.Size(672, 316)
+        Me.txtDesc.Size = New System.Drawing.Size(672, 288)
         Me.txtDesc.TabIndex = 7
         '
         'ContextMenuStrip1
@@ -289,9 +290,9 @@ Partial Class FrmUpdateDatabase
         Me.btnClearDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClearDesc.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClearDesc.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClearDesc.Location = New System.Drawing.Point(848, 139)
+        Me.btnClearDesc.Location = New System.Drawing.Point(773, 137)
         Me.btnClearDesc.Name = "btnClearDesc"
-        Me.btnClearDesc.Size = New System.Drawing.Size(61, 28)
+        Me.btnClearDesc.Size = New System.Drawing.Size(61, 25)
         Me.btnClearDesc.TabIndex = 19
         Me.btnClearDesc.Text = "Clear"
         Me.btnClearDesc.UseVisualStyleBackColor = True
@@ -307,12 +308,11 @@ Partial Class FrmUpdateDatabase
         '
         'btnTidy
         '
-        Me.btnTidy.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnTidy.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnTidy.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnTidy.Location = New System.Drawing.Point(848, 184)
+        Me.btnTidy.Location = New System.Drawing.Point(338, 137)
         Me.btnTidy.Name = "btnTidy"
-        Me.btnTidy.Size = New System.Drawing.Size(61, 28)
+        Me.btnTidy.Size = New System.Drawing.Size(61, 25)
         Me.btnTidy.TabIndex = 20
         Me.btnTidy.Text = "Tidy"
         Me.btnTidy.UseVisualStyleBackColor = True
@@ -622,9 +622,9 @@ Partial Class FrmUpdateDatabase
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rtbDesc.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rtbDesc.Location = New System.Drawing.Point(162, 137)
+        Me.rtbDesc.Location = New System.Drawing.Point(162, 165)
         Me.rtbDesc.Name = "rtbDesc"
-        Me.rtbDesc.Size = New System.Drawing.Size(672, 316)
+        Me.rtbDesc.Size = New System.Drawing.Size(672, 288)
         Me.rtbDesc.TabIndex = 33
         Me.rtbDesc.Text = ""
         Me.rtbDesc.Visible = False
@@ -990,12 +990,33 @@ Partial Class FrmUpdateDatabase
         Me.Label4.TabIndex = 48
         Me.Label4.Text = "Wiki"
         '
+        'BtnTitleName
+        '
+        Me.BtnTitleName.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnTitleName.Location = New System.Drawing.Point(162, 137)
+        Me.BtnTitleName.Name = "BtnTitleName"
+        Me.BtnTitleName.Size = New System.Drawing.Size(89, 25)
+        Me.BtnTitleName.TabIndex = 131
+        Me.BtnTitleName.Text = "Title name"
+        Me.BtnTitleName.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(257, 137)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 25)
+        Me.Button2.TabIndex = 132
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1271, 859)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.BtnTitleName)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtWiki)
         Me.Controls.Add(Me.BtnImages)
@@ -1154,4 +1175,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents ShortenNameToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents txtWiki As TextBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents BtnTitleName As Button
+    Friend WithEvents Button2 As Button
 End Class
