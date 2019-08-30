@@ -16,15 +16,29 @@ Public Class FrmDeathCheck
 
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         DisplayMessage("Finding the living")
-        personTable = FindLivingPeople()
+        Try
+            personTable = FindLivingPeople()
+        Catch ex As Exception
+            If MsgBox("Exception during list load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
+                Exit Sub
+            End If
+        End Try
+
         DisplayMessage("Found " & CStr(personTable.Count) & " people")
         For Each _person In personTable
             DisplayMessage(CStr(_person.Id) & " " & _person.Name)
-            AddAllRow(_person)
-            Dim _dateOfDeath As String = GetWikiDeathDate(_person.Name)
-            If _dateOfDeath IsNot Nothing Then
-                AddXRow(_person, _dateOfDeath, "")
-            End If
+            Try
+                AddAllRow(_person)
+                Dim _dateOfDeath As String = GetWikiDeathDate(_person.Name)
+                If _dateOfDeath IsNot Nothing Then
+                    AddXRow(_person, _dateOfDeath, "")
+                End If
+            Catch ex As Exception
+                If MsgBox("Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
+                    Exit Sub
+                End If
+            End Try
+
         Next
     End Sub
 
