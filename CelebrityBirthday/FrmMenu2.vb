@@ -27,4 +27,12 @@
         End Using
         Me.Show()
     End Sub
+
+    Private Sub BtnTapestry_Click(sender As Object, e As EventArgs) Handles BtnTapestry.Click
+        Me.Hide()
+        Using _tapestryForm As New FrmMosaic
+            _tapestryForm.ShowDialog()
+        End Using
+        Me.Show()
+    End Sub
 End Class

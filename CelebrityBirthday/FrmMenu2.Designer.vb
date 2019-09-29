@@ -28,6 +28,7 @@ Partial Class FrmMenu2
         Me.BtnTwitter = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnClose = New System.Windows.Forms.Button()
+        Me.BtnTapestry = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -36,7 +37,7 @@ Partial Class FrmMenu2
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PictureBox1.Image = Global.CelebrityBirthday.My.Resources.Resources.cake_with_candle
         Me.PictureBox1.Location = New System.Drawing.Point(15, 15)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(6)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(100, 133)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -46,8 +47,8 @@ Partial Class FrmMenu2
         'BtnTest
         '
         Me.BtnTest.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTest.Location = New System.Drawing.Point(15, 248)
-        Me.BtnTest.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.BtnTest.Location = New System.Drawing.Point(186, 237)
+        Me.BtnTest.Margin = New System.Windows.Forms.Padding(6)
         Me.BtnTest.Name = "BtnTest"
         Me.BtnTest.Size = New System.Drawing.Size(151, 49)
         Me.BtnTest.TabIndex = 16
@@ -58,7 +59,7 @@ Partial Class FrmMenu2
         '
         Me.BtnBrownBread.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnBrownBread.Location = New System.Drawing.Point(185, 176)
-        Me.BtnBrownBread.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.BtnBrownBread.Margin = New System.Windows.Forms.Padding(6)
         Me.BtnBrownBread.Name = "BtnBrownBread"
         Me.BtnBrownBread.Size = New System.Drawing.Size(151, 49)
         Me.BtnBrownBread.TabIndex = 15
@@ -69,7 +70,7 @@ Partial Class FrmMenu2
         '
         Me.BtnTwitter.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnTwitter.Location = New System.Drawing.Point(15, 176)
-        Me.BtnTwitter.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.BtnTwitter.Margin = New System.Windows.Forms.Padding(6)
         Me.BtnTwitter.Name = "BtnTwitter"
         Me.BtnTwitter.Size = New System.Drawing.Size(151, 49)
         Me.BtnTwitter.TabIndex = 14
@@ -100,6 +101,17 @@ Partial Class FrmMenu2
         Me.BtnClose.Text = "Close"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
+        'BtnTapestry
+        '
+        Me.BtnTapestry.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnTapestry.Location = New System.Drawing.Point(15, 237)
+        Me.BtnTapestry.Margin = New System.Windows.Forms.Padding(6)
+        Me.BtnTapestry.Name = "BtnTapestry"
+        Me.BtnTapestry.Size = New System.Drawing.Size(151, 49)
+        Me.BtnTapestry.TabIndex = 19
+        Me.BtnTapestry.Text = "Tapestry"
+        Me.BtnTapestry.UseVisualStyleBackColor = True
+        '
         'FrmMenu2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 25.0!)
@@ -107,6 +119,7 @@ Partial Class FrmMenu2
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(352, 509)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnTapestry)
         Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnTest)
@@ -115,7 +128,7 @@ Partial Class FrmMenu2
         Me.Controls.Add(Me.PictureBox1)
         Me.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
-        Me.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.Margin = New System.Windows.Forms.Padding(6)
         Me.Name = "FrmMenu2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -130,4 +143,5 @@ Partial Class FrmMenu2
     Friend WithEvents BtnTwitter As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents BtnClose As Button
+    Friend WithEvents BtnTapestry As Button
 End Class
