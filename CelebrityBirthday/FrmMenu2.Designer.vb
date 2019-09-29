@@ -22,6 +22,7 @@ Partial Class FrmMenu2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMenu2))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.BtnTest = New System.Windows.Forms.Button()
         Me.BtnBrownBread = New System.Windows.Forms.Button()
@@ -128,6 +129,7 @@ Partial Class FrmMenu2
         Me.Controls.Add(Me.PictureBox1)
         Me.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(6)
         Me.Name = "FrmMenu2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent

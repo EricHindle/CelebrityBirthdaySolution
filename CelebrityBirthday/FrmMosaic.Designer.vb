@@ -94,6 +94,8 @@ Partial Class FrmMosaic
         '
         Me.NudWidth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.NudWidth.Location = New System.Drawing.Point(536, 633)
+        Me.NudWidth.Maximum = New Decimal(New Integer() {500, 0, 0, 0})
+        Me.NudWidth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudWidth.Name = "NudWidth"
         Me.NudWidth.Size = New System.Drawing.Size(120, 22)
         Me.NudWidth.TabIndex = 3
@@ -113,6 +115,8 @@ Partial Class FrmMosaic
         '
         Me.NudHeight.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.NudHeight.Location = New System.Drawing.Point(536, 661)
+        Me.NudHeight.Maximum = New Decimal(New Integer() {500, 0, 0, 0})
+        Me.NudHeight.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudHeight.Name = "NudHeight"
         Me.NudHeight.Size = New System.Drawing.Size(120, 22)
         Me.NudHeight.TabIndex = 5

@@ -46,6 +46,8 @@ Public Class FrmMosaic
             oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
         Next
         _pictureBox.Image = _mosaic
+        LblImgShown.Text = CStr(NudWidth.Value * NudHeight.Value)
+        LblImgShown.Refresh()
         DisplayStatus("Image complete")
     End Sub
 
@@ -57,7 +59,12 @@ Public Class FrmMosaic
             Dim _PersonTable As New CelebrityBirthdayDataSet.FullPersonDataTable
             _PersonTa.FillByMonth(_PersonTable, cboMonth.SelectedIndex + 1)
             For Each _personRow As CelebrityBirthdayDataSet.FullPersonRow In _PersonTable
-                _imageList.Add(New Person(_personRow))
+                Dim _person As New Person(_personRow)
+                If _person.image.photo IsNot Nothing Then
+                    _imageList.Add(_person)
+                Else
+                    Debug.Print(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))
+                End If
             Next
             lblImgCount.Text = CStr(_imageList.Count)
             lblImgCount.Refresh()
@@ -69,14 +76,18 @@ Public Class FrmMosaic
 
     Private Sub NudWidth_ValueChanged(sender As Object, e As EventArgs) Handles NudWidth.ValueChanged
         If _imageList.Count > 0 And NudWidth.Value > 0 Then
-            NudHeight.Value = Int(_imageList.Count / NudWidth.Value)
+            Try
+                NudHeight.Value = Int(_imageList.Count / NudWidth.Value)
+            Catch ex As Exception
+                NudHeight.Value = NudHeight.Maximum
+            End Try
             GenerateImage(PictureBox1, _imageList, NudWidth.Value, NudHeight.Value)
         End If
     End Sub
 
     Private Sub BtnRegen_Click(sender As Object, e As EventArgs) Handles BtnRegen.Click
-
-        GenerateImage(PictureBox1, _imageList, NudWidth.Value, NudHeight.Value)
-        LblImgShown.Text = CStr(NudWidth.Value * NudHeight.Value)
+        If _imageList.Count > 0 And NudWidth.Value > 0 Then
+            GenerateImage(PictureBox1, _imageList, NudWidth.Value, NudHeight.Value)
+        End If
     End Sub
 End Class

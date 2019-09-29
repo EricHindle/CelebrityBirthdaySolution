@@ -112,6 +112,8 @@ Public Class ImageIdentity
                 Catch ex As Exception
                     MsgBox(_Filename & " " & ex.Message, MsgBoxStyle.Exclamation, "Exception")
                 End Try
+            Else
+                Debug.Print(_Filename & " does not exist")
             End If
         End If
         Return _imageFromFile
