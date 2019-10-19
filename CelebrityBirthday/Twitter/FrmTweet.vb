@@ -18,10 +18,13 @@ Public Class FrmTweet
     Private oTweetLists As New List(Of List(Of Person))
     Private IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
+    Private isBuildingTrees As Boolean
 #End Region
 #Region "properties"
     Private _daySelection As Integer
     Private _monthSelection As Integer
+
+
     Public Property MonthSelection() As Integer
         Get
             Return _monthSelection
@@ -110,6 +113,7 @@ Public Class FrmTweet
     Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
         GenerateAllTweets()
     End Sub
+
 #End Region
 #Region "Form subroutines"
     Private Sub DisplayStatus(_text As String, Optional _isAppend As Boolean = False)
@@ -287,6 +291,7 @@ Public Class FrmTweet
 #End Region
 #Region "Tree subroutines"
     Private Sub BuildTrees()
+        isBuildingTrees = True
         DisplayStatus("Selecting...")
         tvBirthday.Nodes.Clear()
         personTable.Clear()
@@ -304,6 +309,7 @@ Public Class FrmTweet
         Else
             MsgBox("Select a date", MsgBoxStyle.Exclamation, "Error")
         End If
+        isBuildingTrees = False
     End Sub
     Private Function AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, _treeView As TreeView, _type As String) As TreeNode
         Dim newBirthdayNode As TreeNode = _treeView.Nodes.Add(Format(testDate, "MMMM dd") & _type, _type)
@@ -361,8 +367,25 @@ Public Class FrmTweet
             Dim _dateLength As Integer = cboDay.SelectedItem.length + cboMonth.SelectedItem.length + 1
             oTweetLists = New List(Of List(Of Person))
             If RbSingleImage.Checked Then
-                oTweetLists.Add(personTable)
-                tabTitle = "Full_"
+                Dim _selectedPersons As New List(Of Person)
+                For Each _node As TreeNode In tvBirthday.Nodes
+                    For Each _nameNode As TreeNode In _node.Nodes
+                        If _nameNode.Checked Then
+                            For Each _dataNode As TreeNode In _nameNode.Nodes
+                                If _dataNode.Name = "id" Then
+                                    _selectedPersons.Add(GetPersonById(CInt(_dataNode.Text)))
+                                End If
+                            Next
+                        End If
+                    Next
+                Next
+                    oTweetLists.Add(_selectedPersons)
+                If rbBotsd.Checked Then
+                    tabTitle = "SD_"
+                Else
+                    tabTitle = "Full_"
+                End If
+
                 GenerateTweets(oTweetLists, tabTitle, _imageStart)
             Else
                 Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, "B")
@@ -392,7 +415,11 @@ Public Class FrmTweet
             GetNudFromPage(newTweetTabPage).Value = DEFAULT_WIDTH
             Dim _width As Integer = DEFAULT_WIDTH
             GeneratePicture(pbControl, _personList, _width)
-            GenerateText(rtbControl, _personList, _tabTitle.Substring(0, 1), _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
+            If rbBotsd.Checked Then
+                GenerateText(rtbControl, _personList)
+            Else
+                GenerateText(rtbControl, _personList, _tabTitle.Substring(0, 1), _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
+            End If
             IsNoGenerate = False
         Next
     End Sub
@@ -427,6 +454,37 @@ Public Class FrmTweet
         End If
         _textBox.Text = _outString.ToString
     End Sub
+    Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person))
+        Dim _outString As New StringBuilder
+        Dim _index As Integer = 0
+        Dim _dob As String = ""
+        For Each _person As Person In _imageTable
+            Select Case _index
+                Case 0
+                    _dob = Format(_person.DateOfBirth, "dd MMMM yyyy")
+                Case _imageTable.Count - 1
+                    _outString.Append(vbCrLf)
+                    _outString.Append("and ")
+                Case Else
+                    _outString.Append(",")
+                    _outString.Append(vbCrLf)
+            End Select
+            _outString.Append(_person.ShortDesc.Trim("."))
+            _outString.Append(" ")
+            _outString.Append(_person.Name)
+            _index += 1
+        Next
+        _outString.Append(vbCrLf)
+        _outString.Append("were ")
+        If _imageTable.Count = 2 Then
+            _outString.Append("both")
+        Else
+            _outString.Append("all")
+        End If
+        _outString.Append(" born on ")
+        _outString.Append(_dob)
+        _textBox.Text = _outString.ToString
+    End Sub
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
         If _imageTable.Count > 0 Then
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
@@ -452,7 +510,7 @@ Public Class FrmTweet
             oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
         Next
         _pictureBox.Image = _mosaic
-        DisplayStatus("Image complete", True)
+        DisplayStatus("Image complete", False)
     End Sub
     Private Sub SendTweet(_filename As String)
         Dim isOkToSend As Boolean = True
@@ -622,5 +680,30 @@ Public Class FrmTweet
         End With
         Return newTabpage
     End Function
+
+    Private Sub TvBirthday_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck
+        If Not isBuildingTrees Then
+            Dim node As TreeNode = e.Node
+            Dim ischecked As Boolean = node.Checked
+            Try
+                For Each subNode As TreeNode In node.Nodes
+                    subNode.Checked = ischecked
+                Next
+            Catch sysex As System.StackOverflowException
+                Debug.Print(sysex.Message)
+            Catch ex As Exception
+                Debug.Print(ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub BtnBotsd_Click(sender As Object, e As EventArgs) Handles BtnBotsd.Click
+        rbBotsd.Checked = True
+        RbSingleImage.Checked = True
+        For Each _node As TreeNode In tvBirthday.Nodes
+            _node.Checked = False
+        Next
+        cmbTwitterUsers.SelectedIndex = cmbTwitterUsers.FindString("NotTwins1")
+    End Sub
 #End Region
 End Class
