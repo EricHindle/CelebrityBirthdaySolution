@@ -52,6 +52,7 @@ Public Class FrmMosaic
     End Sub
 
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
+        Dim ct As Integer = 0
         DisplayStatus("Selecting Images")
         _imageList = New List(Of Person)
         If cboMonth.SelectedIndex >= 0 Then
@@ -59,8 +60,12 @@ Public Class FrmMosaic
             Dim _PersonTable As New CelebrityBirthdayDataSet.FullPersonDataTable
             _PersonTa.FillByMonth(_PersonTable, cboMonth.SelectedIndex + 1)
             For Each _personRow As CelebrityBirthdayDataSet.FullPersonRow In _PersonTable
+                ct += 1
                 Dim _person As New Person(_personRow)
-                If _person.image.photo IsNot Nothing Then
+                'If ct > 850 Then
+                '    Debug.Print(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))
+                'End If
+                If _person.Image.Photo IsNot Nothing Then
                     _imageList.Add(_person)
                 Else
                     Debug.Print(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))

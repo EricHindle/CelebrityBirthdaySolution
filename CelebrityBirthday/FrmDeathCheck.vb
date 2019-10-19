@@ -4,8 +4,6 @@ Imports System.Web.Script.Serialization
 Public Class FrmDeathCheck
     Private personTable As List(Of Person)
 
-
-
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
@@ -34,7 +32,7 @@ Public Class FrmDeathCheck
                     AddXRow(_person, _dateOfDeath, "")
                 End If
             Catch ex As Exception
-                If MsgBox("Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
+                If MsgBox(_person.Name & vbCrLf & "Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
                     Exit Sub
                 End If
             End Try
@@ -96,5 +94,17 @@ Public Class FrmDeathCheck
                 _outfile.WriteLine(_row.Cells(xId.Name).Value & "," & _row.Cells(xName.Name).Value & "," & _row.Cells(xBirth.Name).Value & "," & _row.Cells(xDeath.Name).Value)
             Next
         End Using
+    End Sub
+
+    Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvWarnings.CellDoubleClick
+        If e.RowIndex >= 0 And e.RowIndex < dgvWarnings.Rows.Count Then
+            Dim tRow As DataGridViewRow = dgvWarnings.Rows(e.RowIndex)
+            Dim _index As Integer = tRow.Cells(xId.Name).Value
+            Using _update As New FrmUpdateDatabase
+                _update.PersonId = _index
+                _update.ShowDialog()
+            End Using
+        End If
+
     End Sub
 End Class

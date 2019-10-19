@@ -164,11 +164,18 @@ Module modCbday
             b = memorystream.ToArray()
             If b.Length > 0 Then
                 Dim bw As BinaryWriter = Nothing
+                Dim isOkToWrite As Boolean = True
                 Try
-                    bw = New BinaryWriter(File.Open(strFName, FileMode.Create))
-                    bw.Write(b)
+                    If My.Computer.FileSystem.FileExists(strFName) Then
+                        isOkToWrite = MsgBox("File exists. OK to continue?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes
+                    End If
+                    If isOkToWrite Then
+                        Dim _fileStream As FileStream = File.Open(strFName, FileMode.Create)
+                        bw = New BinaryWriter(_fileStream)
+                        bw.Write(b)
+                    End If
                 Catch ex As Exception
-                    MsgBox("Error writing file")
+                    MsgBox("Error writing file" & vbCrLf & ex.Message)
                     rtnval = False
                 Finally
                     If bw IsNot Nothing Then
