@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Text
 Imports TweetSharp
 
 Public Class FrmBotsd
@@ -17,10 +18,10 @@ Public Class FrmBotsd
     End Property
     Public Property ThisDay() As Integer
         Get
-            Return _Day
+            Return _day
         End Get
         Set(ByVal value As Integer)
-            _Day = value
+            _day = value
         End Set
     End Property
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -172,6 +173,10 @@ Public Class FrmBotsd
     End Sub
 
     Private Sub dgvPairs_SelectionChanged(sender As Object, e As EventArgs) Handles dgvPairs.SelectionChanged
+        GeneratePair()
+    End Sub
+
+    Private Sub GeneratePair()
         If dgvPairs.SelectedRows.Count = 1 Then
             Try
                 Dim _pickPerson1 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
@@ -186,9 +191,66 @@ Public Class FrmBotsd
                 DtpDob2.Value = _pickPerson2.DateOfBirth.Value
                 TxtShortDesc2.Text = _pickPerson2.ShortDesc
                 LblId2.Text = CStr(_pickPerson2.Id)
+
+
+                Dim _selectedPersons As New List(Of Person)
+                _selectedPersons.Add(_pickPerson1)
+                _selectedPersons.Add(_pickPerson2)
+                GeneratePicture(PictureBox1, _selectedPersons, NudPic1Horizontal.Value)
+                GenerateText(_selectedPersons)
             Catch ex As Exception
                 DisplayStatus("Person exception")
             End Try
         End If
+    End Sub
+
+    Private Sub GenerateText(_imageTable As List(Of Person))
+        Dim _outString As New StringBuilder
+        Dim _index As Integer = 0
+        Dim _dob As String = ""
+        For Each _person As Person In _imageTable
+            Select Case _index
+                Case 0
+                    _dob = Format(_person.DateOfBirth, "dd MMMM yyyy")
+                Case _imageTable.Count - 1
+                    _outString.Append(vbCrLf)
+                    _outString.Append("and ")
+                Case Else
+                    _outString.Append(",")
+                    _outString.Append(vbCrLf)
+            End Select
+            _outString.Append(_person.ShortDesc.Trim("."))
+            _outString.Append(" ")
+            _outString.Append(_person.Name)
+            _index += 1
+        Next
+        _outString.Append(vbCrLf)
+        _outString.Append("were ")
+        If _imageTable.Count = 2 Then
+            _outString.Append("both")
+        Else
+            _outString.Append("all")
+        End If
+        _outString.Append(" born on ")
+        _outString.Append(_dob)
+        rtbFile1.Text = _outString.ToString
+    End Sub
+
+    Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
+
+    End Sub
+
+    Private Sub BtnSwap_Click(sender As Object, e As EventArgs) Handles BtnSwap.Click
+        If dgvPairs.SelectedRows.Count = 1 Then
+            Dim _row As DataGridViewRow = dgvPairs.SelectedRows(0)
+            Dim _saveId As Integer = _row.Cells(pairId1.Name).Value
+            Dim _saveName As String = _row.Cells(pairPerson1.Name).Value
+            _row.Cells(pairId1.Name).Value = _row.Cells(pairId2.Name).Value
+            _row.Cells(pairPerson1.Name).Value = _row.Cells(pairPerson2.Name).Value
+            _row.Cells(pairId2.Name).Value = _saveId
+            _row.Cells(pairPerson2.Name).Value = _saveName
+        End If
+        GeneratePair()
+
     End Sub
 End Class

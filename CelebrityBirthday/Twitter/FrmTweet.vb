@@ -380,7 +380,7 @@ Public Class FrmTweet
                         End If
                     Next
                 Next
-                    oTweetLists.Add(_selectedPersons)
+                oTweetLists.Add(_selectedPersons)
                 If rbBotsd.Checked Then
                     tabTitle = "SD_"
                 Else

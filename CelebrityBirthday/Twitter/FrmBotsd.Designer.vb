@@ -33,6 +33,10 @@ Partial Class FrmBotsd
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.rtbFile1 = New System.Windows.Forms.RichTextBox()
         Me.dgvPairs = New System.Windows.Forms.DataGridView()
+        Me.pairPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TxtForename1 = New System.Windows.Forms.TextBox()
         Me.TxtSurname1 = New System.Windows.Forms.TextBox()
         Me.TxtShortDesc1 = New System.Windows.Forms.TextBox()
@@ -54,10 +58,6 @@ Partial Class FrmBotsd
         Me.chkImages = New System.Windows.Forms.CheckBox()
         Me.LblDay = New System.Windows.Forms.Label()
         Me.LblMonth = New System.Windows.Forms.Label()
-        Me.pairPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -179,6 +179,36 @@ Partial Class FrmBotsd
         Me.dgvPairs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvPairs.Size = New System.Drawing.Size(343, 497)
         Me.dgvPairs.TabIndex = 36
+        '
+        'pairPerson1
+        '
+        Me.pairPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson1.HeaderText = "Person1"
+        Me.pairPerson1.Name = "pairPerson1"
+        Me.pairPerson1.ReadOnly = True
+        Me.pairPerson1.Width = 170
+        '
+        'pairPerson2
+        '
+        Me.pairPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson2.HeaderText = "Person2"
+        Me.pairPerson2.Name = "pairPerson2"
+        Me.pairPerson2.ReadOnly = True
+        Me.pairPerson2.Width = 170
+        '
+        'pairId1
+        '
+        Me.pairId1.HeaderText = "Id1"
+        Me.pairId1.Name = "pairId1"
+        Me.pairId1.ReadOnly = True
+        Me.pairId1.Visible = False
+        '
+        'pairId2
+        '
+        Me.pairId2.HeaderText = "Id2"
+        Me.pairId2.Name = "pairId2"
+        Me.pairId2.ReadOnly = True
+        Me.pairId2.Visible = False
         '
         'TxtForename1
         '
@@ -387,36 +417,6 @@ Partial Class FrmBotsd
         Me.LblMonth.Size = New System.Drawing.Size(68, 25)
         Me.LblMonth.TabIndex = 48
         Me.LblMonth.Text = "January"
-        '
-        'pairPerson1
-        '
-        Me.pairPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson1.HeaderText = "Person1"
-        Me.pairPerson1.Name = "pairPerson1"
-        Me.pairPerson1.ReadOnly = True
-        Me.pairPerson1.Width = 170
-        '
-        'pairPerson2
-        '
-        Me.pairPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson2.HeaderText = "Person2"
-        Me.pairPerson2.Name = "pairPerson2"
-        Me.pairPerson2.ReadOnly = True
-        Me.pairPerson2.Width = 170
-        '
-        'pairId1
-        '
-        Me.pairId1.HeaderText = "Id1"
-        Me.pairId1.Name = "pairId1"
-        Me.pairId1.ReadOnly = True
-        Me.pairId1.Visible = False
-        '
-        'pairId2
-        '
-        Me.pairId2.HeaderText = "Id2"
-        Me.pairId2.Name = "pairId2"
-        Me.pairId2.ReadOnly = True
-        Me.pairId2.Visible = False
         '
         'FrmBotsd
         '
