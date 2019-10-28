@@ -40,10 +40,13 @@ Partial Class FrmMosaic
         Me.BtnRegen = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.LblImgShown = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.nudSkip = New System.Windows.Forms.NumericUpDown()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudWidth, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudHeight, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSkip, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -93,11 +96,11 @@ Partial Class FrmMosaic
         'NudWidth
         '
         Me.NudWidth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.NudWidth.Location = New System.Drawing.Point(536, 633)
+        Me.NudWidth.Location = New System.Drawing.Point(226, 665)
         Me.NudWidth.Maximum = New Decimal(New Integer() {500, 0, 0, 0})
         Me.NudWidth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudWidth.Name = "NudWidth"
-        Me.NudWidth.Size = New System.Drawing.Size(120, 22)
+        Me.NudWidth.Size = New System.Drawing.Size(68, 22)
         Me.NudWidth.TabIndex = 3
         Me.NudWidth.Value = New Decimal(New Integer() {20, 0, 0, 0})
         '
@@ -105,7 +108,7 @@ Partial Class FrmMosaic
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(490, 635)
+        Me.Label1.Location = New System.Drawing.Point(180, 669)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(40, 14)
         Me.Label1.TabIndex = 4
@@ -114,11 +117,11 @@ Partial Class FrmMosaic
         'NudHeight
         '
         Me.NudHeight.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.NudHeight.Location = New System.Drawing.Point(536, 661)
+        Me.NudHeight.Location = New System.Drawing.Point(349, 665)
         Me.NudHeight.Maximum = New Decimal(New Integer() {500, 0, 0, 0})
         Me.NudHeight.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudHeight.Name = "NudHeight"
-        Me.NudHeight.Size = New System.Drawing.Size(120, 22)
+        Me.NudHeight.Size = New System.Drawing.Size(68, 22)
         Me.NudHeight.TabIndex = 5
         Me.NudHeight.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
@@ -126,7 +129,7 @@ Partial Class FrmMosaic
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(487, 663)
+        Me.Label2.Location = New System.Drawing.Point(300, 669)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(43, 14)
         Me.Label2.TabIndex = 6
@@ -229,12 +232,33 @@ Partial Class FrmMosaic
         Me.LblImgShown.TabIndex = 13
         Me.LblImgShown.Text = "0"
         '
+        'Label6
+        '
+        Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(439, 669)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(62, 14)
+        Me.Label6.TabIndex = 16
+        Me.Label6.Text = "Skip Rows"
+        '
+        'nudSkip
+        '
+        Me.nudSkip.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.nudSkip.Location = New System.Drawing.Point(507, 665)
+        Me.nudSkip.Maximum = New Decimal(New Integer() {500, 0, 0, 0})
+        Me.nudSkip.Name = "nudSkip"
+        Me.nudSkip.Size = New System.Drawing.Size(68, 22)
+        Me.nudSkip.TabIndex = 15
+        '
         'FrmMosaic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1276, 719)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.nudSkip)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.LblImgShown)
         Me.Controls.Add(Me.BtnRegen)
@@ -260,6 +284,7 @@ Partial Class FrmMosaic
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudWidth, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudHeight, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSkip, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -282,4 +307,6 @@ Partial Class FrmMosaic
     Friend WithEvents BtnRegen As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents LblImgShown As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents nudSkip As NumericUpDown
 End Class
