@@ -19,6 +19,7 @@ Public Class FrmTweet
     Private IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
     Private isBuildingTrees As Boolean
+
 #End Region
 #Region "properties"
     Private _daySelection As Integer
@@ -488,28 +489,13 @@ Public Class FrmTweet
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
         If _imageTable.Count > 0 Then
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
-            GenerateImage(_pictureBox, _imageTable, _width, _height)
+            GenerateTweetImage(_pictureBox, _imageTable, _width, _height)
         Else
             _pictureBox.Image = Nothing
         End If
     End Sub
-    Private Sub GenerateImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
-        Dim _mosaic As Image = New Bitmap(My.Resources.blank, 60 * _width, 60 * _height)
-        Dim oGraphics As Graphics = Graphics.FromImage(_mosaic)
-        oGraphics.DrawImage(My.Resources.id, New Point(_mosaic.Width - 60, _mosaic.Height - 60))
-        Dim _imgHPos As Integer = -1
-        Dim _imgVPos As Integer = 0
-        For Each _person As Person In _imageTable
-            Dim _image As Image = _person.Image.Photo
-            _imgHPos += 1
-            If _imgHPos = _width Then
-                _imgVPos += 1
-                _imgHPos = 0
-            End If
-            Dim oBitMap As Bitmap = ImageUtil.resizeImageToBitmap(_image, 60, 60)
-            oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
-        Next
-        _pictureBox.Image = _mosaic
+    Private Sub GenerateTweetImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
+        ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height)
         DisplayStatus("Image complete", False)
     End Sub
     Private Sub SendTweet(_filename As String)
@@ -686,9 +672,7 @@ Public Class FrmTweet
             Dim node As TreeNode = e.Node
             Dim ischecked As Boolean = node.Checked
             Try
-                For Each subNode As TreeNode In node.Nodes
-                    subNode.Checked = ischecked
-                Next
+
             Catch sysex As System.StackOverflowException
                 Debug.Print(sysex.Message)
             Catch ex As Exception
@@ -699,8 +683,25 @@ Public Class FrmTweet
 
     Private Sub BtnBotsd_Click(sender As Object, e As EventArgs) Handles BtnBotsd.Click
         Using _botsd As New FrmBotsd
-            _botsd.Show()
+            _botsd.ThisDay = cboDay.SelectedIndex + 1
+            _botsd.ThisMonth = cboMonth.SelectedIndex + 1
+
+            Dim oFullList As New List(Of Person)
+            oFullList.AddRange(oBirthdayList)
+        oFullList.AddRange(oAnniversaryList)
+            Do Until oFullList.Count = 0
+                Dim _Person1 As Person = oFullList(0)
+                oFullList.RemoveAt(0)
+                For Each _person2 In oFullList
+                    If _Person1.DateOfBirth = _person2.DateOfBirth Then
+                        _botsd.AddPair(_Person1, _person2)
+                    End If
+                Next
+            Loop
+
+            _botsd.ShowDialog()
         End Using
+
 
 
         'rbBotsd.Checked = True

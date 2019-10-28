@@ -104,4 +104,23 @@ Public Class ImageUtil
         oEncoderParameters.Param(0) = oEncoderParameter
         Return oEncoderParameters
     End Function
+    Public Shared Sub GenerateImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
+        Dim _mosaic As Image = New Bitmap(My.Resources.blank, 60 * _width, 60 * _height)
+        Dim oGraphics As Graphics = Graphics.FromImage(_mosaic)
+        oGraphics.DrawImage(My.Resources.id, New Point(_mosaic.Width - 60, _mosaic.Height - 60))
+        Dim _imgHPos As Integer = -1
+        Dim _imgVPos As Integer = 0
+        For Each _person As Person In _imageTable
+            Dim _image As Image = _person.Image.Photo
+            _imgHPos += 1
+            If _imgHPos = _width Then
+                _imgVPos += 1
+                _imgHPos = 0
+            End If
+            Dim oBitMap As Bitmap = ImageUtil.resizeImageToBitmap(_image, 60, 60)
+            oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
+        Next
+        _pictureBox.Image = _mosaic
+
+    End Sub
 End Class

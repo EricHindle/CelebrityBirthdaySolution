@@ -25,6 +25,7 @@ Partial Class FrmBotsd
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmBotsd))
         Me.rtbTweet = New System.Windows.Forms.RichTextBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.BtnSend = New System.Windows.Forms.Button()
         Me.NudPic1Horizontal = New System.Windows.Forms.NumericUpDown()
@@ -32,26 +33,32 @@ Partial Class FrmBotsd
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.rtbFile1 = New System.Windows.Forms.RichTextBox()
         Me.dgvPairs = New System.Windows.Forms.DataGridView()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TxtForename1 = New System.Windows.Forms.TextBox()
+        Me.TxtSurname1 = New System.Windows.Forms.TextBox()
+        Me.TxtShortDesc1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.BtnUpdate1 = New System.Windows.Forms.Button()
+        Me.LblId1 = New System.Windows.Forms.Label()
+        Me.DtpDob1 = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtnUpdate2 = New System.Windows.Forms.Button()
+        Me.LblId2 = New System.Windows.Forms.Label()
+        Me.DtpDob2 = New System.Windows.Forms.DateTimePicker()
+        Me.TxtShortDesc2 = New System.Windows.Forms.TextBox()
+        Me.TxtForename2 = New System.Windows.Forms.TextBox()
+        Me.TxtSurname2 = New System.Windows.Forms.TextBox()
+        Me.BtnGenerate = New System.Windows.Forms.Button()
+        Me.BtnSwap = New System.Windows.Forms.Button()
+        Me.cmbTwitterUsers = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.pickPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pickPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chkImages = New System.Windows.Forms.CheckBox()
+        Me.LblDay = New System.Windows.Forms.Label()
+        Me.LblMonth = New System.Windows.Forms.Label()
+        Me.pairPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairId1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairId2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvPairs, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,7 +75,7 @@ Partial Class FrmBotsd
         Me.rtbTweet.ForeColor = System.Drawing.Color.White
         Me.rtbTweet.Location = New System.Drawing.Point(1028, 6)
         Me.rtbTweet.Name = "rtbTweet"
-        Me.rtbTweet.Size = New System.Drawing.Size(222, 493)
+        Me.rtbTweet.Size = New System.Drawing.Size(222, 497)
         Me.rtbTweet.TabIndex = 32
         Me.rtbTweet.Text = ""
         '
@@ -76,18 +83,27 @@ Partial Class FrmBotsd
         '
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 542)
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 546)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1262, 22)
         Me.StatusStrip1.TabIndex = 33
         Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'LblStatus
+        '
+        Me.LblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.LblStatus.Name = "LblStatus"
+        Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.LblStatus.Size = New System.Drawing.Size(3, 17)
         '
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1111, 506)
+        Me.btnClose.Location = New System.Drawing.Point(1111, 510)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(139, 33)
         Me.btnClose.TabIndex = 34
@@ -107,7 +123,7 @@ Partial Class FrmBotsd
         '
         'NudPic1Horizontal
         '
-        Me.NudPic1Horizontal.Location = New System.Drawing.Point(361, 99)
+        Me.NudPic1Horizontal.Location = New System.Drawing.Point(373, 99)
         Me.NudPic1Horizontal.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudPic1Horizontal.Name = "NudPic1Horizontal"
         Me.NudPic1Horizontal.Size = New System.Drawing.Size(53, 23)
@@ -118,7 +134,7 @@ Partial Class FrmBotsd
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(361, 80)
+        Me.Label2.Location = New System.Drawing.Point(370, 80)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(41, 16)
         Me.Label2.TabIndex = 10
@@ -141,7 +157,7 @@ Partial Class FrmBotsd
         Me.rtbFile1.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbFile1.Location = New System.Drawing.Point(727, 6)
         Me.rtbFile1.Name = "rtbFile1"
-        Me.rtbFile1.Size = New System.Drawing.Size(295, 237)
+        Me.rtbFile1.Size = New System.Drawing.Size(295, 241)
         Me.rtbFile1.TabIndex = 14
         Me.rtbFile1.Text = ""
         '
@@ -154,170 +170,239 @@ Partial Class FrmBotsd
         Me.dgvPairs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.dgvPairs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pickPerson1, Me.pickPerson2, Me.pairId1, Me.pairId2})
-        Me.dgvPairs.Location = New System.Drawing.Point(12, 6)
+        Me.dgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pairPerson1, Me.pairPerson2, Me.pairId1, Me.pairId2})
+        Me.dgvPairs.Location = New System.Drawing.Point(12, 37)
+        Me.dgvPairs.MultiSelect = False
         Me.dgvPairs.Name = "dgvPairs"
         Me.dgvPairs.ReadOnly = True
         Me.dgvPairs.RowHeadersVisible = False
-        Me.dgvPairs.Size = New System.Drawing.Size(343, 493)
+        Me.dgvPairs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvPairs.Size = New System.Drawing.Size(343, 497)
         Me.dgvPairs.TabIndex = 36
         '
-        'TextBox1
+        'TxtForename1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(6, 23)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(259, 23)
-        Me.TextBox1.TabIndex = 37
+        Me.TxtForename1.Location = New System.Drawing.Point(6, 23)
+        Me.TxtForename1.Name = "TxtForename1"
+        Me.TxtForename1.Size = New System.Drawing.Size(259, 23)
+        Me.TxtForename1.TabIndex = 37
         '
-        'TextBox2
+        'TxtSurname1
         '
-        Me.TextBox2.Location = New System.Drawing.Point(271, 23)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(381, 23)
-        Me.TextBox2.TabIndex = 38
+        Me.TxtSurname1.Location = New System.Drawing.Point(271, 23)
+        Me.TxtSurname1.Name = "TxtSurname1"
+        Me.TxtSurname1.Size = New System.Drawing.Size(381, 23)
+        Me.TxtSurname1.TabIndex = 38
         '
-        'TextBox3
+        'TxtShortDesc1
         '
-        Me.TextBox3.Location = New System.Drawing.Point(6, 52)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(646, 23)
-        Me.TextBox3.TabIndex = 39
+        Me.TxtShortDesc1.Location = New System.Drawing.Point(6, 52)
+        Me.TxtShortDesc1.Name = "TxtShortDesc1"
+        Me.TxtShortDesc1.Size = New System.Drawing.Size(646, 23)
+        Me.TxtShortDesc1.TabIndex = 39
         '
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.Button1)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.DateTimePicker1)
-        Me.GroupBox1.Controls.Add(Me.TextBox3)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
-        Me.GroupBox1.Controls.Add(Me.TextBox2)
-        Me.GroupBox1.Location = New System.Drawing.Point(364, 249)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdate1)
+        Me.GroupBox1.Controls.Add(Me.LblId1)
+        Me.GroupBox1.Controls.Add(Me.DtpDob1)
+        Me.GroupBox1.Controls.Add(Me.TxtShortDesc1)
+        Me.GroupBox1.Controls.Add(Me.TxtForename1)
+        Me.GroupBox1.Controls.Add(Me.TxtSurname1)
+        Me.GroupBox1.Location = New System.Drawing.Point(364, 253)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(658, 114)
         Me.GroupBox1.TabIndex = 40
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Person 1"
         '
-        'DateTimePicker1
+        'BtnUpdate1
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(120, 81)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(158, 23)
-        Me.DateTimePicker1.TabIndex = 40
+        Me.BtnUpdate1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate1.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdate1.Location = New System.Drawing.Point(491, 81)
+        Me.BtnUpdate1.Name = "BtnUpdate1"
+        Me.BtnUpdate1.Size = New System.Drawing.Size(139, 27)
+        Me.BtnUpdate1.TabIndex = 42
+        Me.BtnUpdate1.Text = "Update"
+        Me.BtnUpdate1.UseVisualStyleBackColor = True
+        '
+        'LblId1
+        '
+        Me.LblId1.AutoSize = True
+        Me.LblId1.Location = New System.Drawing.Point(6, 86)
+        Me.LblId1.Name = "LblId1"
+        Me.LblId1.Size = New System.Drawing.Size(45, 16)
+        Me.LblId1.TabIndex = 41
+        Me.LblId1.Text = "Label1"
+        '
+        'DtpDob1
+        '
+        Me.DtpDob1.Location = New System.Drawing.Point(120, 81)
+        Me.DtpDob1.Name = "DtpDob1"
+        Me.DtpDob1.Size = New System.Drawing.Size(158, 23)
+        Me.DtpDob1.TabIndex = 40
         '
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.Button2)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.DateTimePicker2)
-        Me.GroupBox2.Controls.Add(Me.TextBox4)
-        Me.GroupBox2.Controls.Add(Me.TextBox5)
-        Me.GroupBox2.Controls.Add(Me.TextBox6)
-        Me.GroupBox2.Location = New System.Drawing.Point(361, 385)
+        Me.GroupBox2.Controls.Add(Me.BtnUpdate2)
+        Me.GroupBox2.Controls.Add(Me.LblId2)
+        Me.GroupBox2.Controls.Add(Me.DtpDob2)
+        Me.GroupBox2.Controls.Add(Me.TxtShortDesc2)
+        Me.GroupBox2.Controls.Add(Me.TxtForename2)
+        Me.GroupBox2.Controls.Add(Me.TxtSurname2)
+        Me.GroupBox2.Location = New System.Drawing.Point(361, 389)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(658, 114)
         Me.GroupBox2.TabIndex = 41
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Person 2"
         '
-        'DateTimePicker2
+        'BtnUpdate2
         '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(123, 81)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(158, 23)
-        Me.DateTimePicker2.TabIndex = 40
+        Me.BtnUpdate2.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate2.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdate2.Location = New System.Drawing.Point(485, 81)
+        Me.BtnUpdate2.Name = "BtnUpdate2"
+        Me.BtnUpdate2.Size = New System.Drawing.Size(139, 27)
+        Me.BtnUpdate2.TabIndex = 43
+        Me.BtnUpdate2.Text = "Update"
+        Me.BtnUpdate2.UseVisualStyleBackColor = True
         '
-        'TextBox4
+        'LblId2
         '
-        Me.TextBox4.Location = New System.Drawing.Point(6, 52)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(646, 23)
-        Me.TextBox4.TabIndex = 39
+        Me.LblId2.AutoSize = True
+        Me.LblId2.Location = New System.Drawing.Point(6, 86)
+        Me.LblId2.Name = "LblId2"
+        Me.LblId2.Size = New System.Drawing.Size(45, 16)
+        Me.LblId2.TabIndex = 42
+        Me.LblId2.Text = "Label3"
         '
-        'TextBox5
+        'DtpDob2
         '
-        Me.TextBox5.Location = New System.Drawing.Point(6, 23)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(262, 23)
-        Me.TextBox5.TabIndex = 37
+        Me.DtpDob2.Location = New System.Drawing.Point(123, 81)
+        Me.DtpDob2.Name = "DtpDob2"
+        Me.DtpDob2.Size = New System.Drawing.Size(158, 23)
+        Me.DtpDob2.TabIndex = 40
         '
-        'TextBox6
+        'TxtShortDesc2
         '
-        Me.TextBox6.Location = New System.Drawing.Point(274, 22)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(378, 23)
-        Me.TextBox6.TabIndex = 38
+        Me.TxtShortDesc2.Location = New System.Drawing.Point(6, 52)
+        Me.TxtShortDesc2.Name = "TxtShortDesc2"
+        Me.TxtShortDesc2.Size = New System.Drawing.Size(646, 23)
+        Me.TxtShortDesc2.TabIndex = 39
         '
-        'Label1
+        'TxtForename2
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 86)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(45, 16)
-        Me.Label1.TabIndex = 41
-        Me.Label1.Text = "Label1"
+        Me.TxtForename2.Location = New System.Drawing.Point(6, 23)
+        Me.TxtForename2.Name = "TxtForename2"
+        Me.TxtForename2.Size = New System.Drawing.Size(262, 23)
+        Me.TxtForename2.TabIndex = 37
+        '
+        'TxtSurname2
+        '
+        Me.TxtSurname2.Location = New System.Drawing.Point(274, 22)
+        Me.TxtSurname2.Name = "TxtSurname2"
+        Me.TxtSurname2.Size = New System.Drawing.Size(378, 23)
+        Me.TxtSurname2.TabIndex = 38
+        '
+        'BtnGenerate
+        '
+        Me.BtnGenerate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnGenerate.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnGenerate.Location = New System.Drawing.Point(565, 113)
+        Me.BtnGenerate.Name = "BtnGenerate"
+        Me.BtnGenerate.Size = New System.Drawing.Size(139, 33)
+        Me.BtnGenerate.TabIndex = 42
+        Me.BtnGenerate.Text = "Generate"
+        Me.BtnGenerate.UseVisualStyleBackColor = True
+        '
+        'BtnSwap
+        '
+        Me.BtnSwap.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSwap.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSwap.Location = New System.Drawing.Point(565, 161)
+        Me.BtnSwap.Name = "BtnSwap"
+        Me.BtnSwap.Size = New System.Drawing.Size(139, 33)
+        Me.BtnSwap.TabIndex = 43
+        Me.BtnSwap.Text = "Swap"
+        Me.BtnSwap.UseVisualStyleBackColor = True
+        '
+        'cmbTwitterUsers
+        '
+        Me.cmbTwitterUsers.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbTwitterUsers.FormattingEnabled = True
+        Me.cmbTwitterUsers.Location = New System.Drawing.Point(373, 170)
+        Me.cmbTwitterUsers.Name = "cmbTwitterUsers"
+        Me.cmbTwitterUsers.Size = New System.Drawing.Size(127, 24)
+        Me.cmbTwitterUsers.TabIndex = 45
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 86)
+        Me.Label3.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Label3.Location = New System.Drawing.Point(369, 148)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(45, 16)
-        Me.Label3.TabIndex = 42
-        Me.Label3.Text = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(62, 19)
+        Me.Label3.TabIndex = 44
+        Me.Label3.Text = "Send As"
         '
-        'Button1
+        'chkImages
         '
-        Me.Button1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Button1.Location = New System.Drawing.Point(491, 81)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(139, 27)
-        Me.Button1.TabIndex = 42
-        Me.Button1.Text = "Update"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.chkImages.AutoSize = True
+        Me.chkImages.Checked = True
+        Me.chkImages.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkImages.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.chkImages.Location = New System.Drawing.Point(373, 200)
+        Me.chkImages.Name = "chkImages"
+        Me.chkImages.Size = New System.Drawing.Size(107, 23)
+        Me.chkImages.TabIndex = 46
+        Me.chkImages.Text = "Include Images"
+        Me.chkImages.UseVisualStyleBackColor = True
         '
-        'Button2
+        'LblDay
         '
-        Me.Button2.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Button2.Location = New System.Drawing.Point(485, 81)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(139, 27)
-        Me.Button2.TabIndex = 43
-        Me.Button2.Text = "Update"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.LblDay.AutoSize = True
+        Me.LblDay.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDay.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.LblDay.Location = New System.Drawing.Point(33, 9)
+        Me.LblDay.Name = "LblDay"
+        Me.LblDay.Size = New System.Drawing.Size(21, 25)
+        Me.LblDay.TabIndex = 47
+        Me.LblDay.Text = "1"
         '
-        'Button3
+        'LblMonth
         '
-        Me.Button3.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Button3.Location = New System.Drawing.Point(565, 113)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(139, 33)
-        Me.Button3.TabIndex = 42
-        Me.Button3.Text = "Generate"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.LblMonth.AutoSize = True
+        Me.LblMonth.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblMonth.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.LblMonth.Location = New System.Drawing.Point(86, 9)
+        Me.LblMonth.Name = "LblMonth"
+        Me.LblMonth.Size = New System.Drawing.Size(68, 25)
+        Me.LblMonth.TabIndex = 48
+        Me.LblMonth.Text = "January"
         '
-        'pickPerson1
+        'pairPerson1
         '
-        Me.pickPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pickPerson1.HeaderText = "Person1"
-        Me.pickPerson1.Name = "pickPerson1"
-        Me.pickPerson1.ReadOnly = True
-        Me.pickPerson1.Width = 170
+        Me.pairPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson1.HeaderText = "Person1"
+        Me.pairPerson1.Name = "pairPerson1"
+        Me.pairPerson1.ReadOnly = True
+        Me.pairPerson1.Width = 170
         '
-        'pickPerson2
+        'pairPerson2
         '
-        Me.pickPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pickPerson2.HeaderText = "Person2"
-        Me.pickPerson2.Name = "pickPerson2"
-        Me.pickPerson2.ReadOnly = True
-        Me.pickPerson2.Width = 170
+        Me.pairPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson2.HeaderText = "Person2"
+        Me.pairPerson2.Name = "pairPerson2"
+        Me.pairPerson2.ReadOnly = True
+        Me.pairPerson2.Width = 170
         '
         'pairId1
         '
@@ -333,25 +418,19 @@ Partial Class FrmBotsd
         Me.pairId2.ReadOnly = True
         Me.pairId2.Visible = False
         '
-        'Button4
-        '
-        Me.Button4.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Button4.Location = New System.Drawing.Point(565, 161)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(139, 33)
-        Me.Button4.TabIndex = 43
-        Me.Button4.Text = "Swap"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'FrmBotsd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1262, 564)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button3)
+        Me.ClientSize = New System.Drawing.Size(1262, 568)
+        Me.Controls.Add(Me.LblMonth)
+        Me.Controls.Add(Me.LblDay)
+        Me.Controls.Add(Me.chkImages)
+        Me.Controls.Add(Me.cmbTwitterUsers)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.BtnSwap)
+        Me.Controls.Add(Me.BtnGenerate)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.rtbFile1)
@@ -368,6 +447,8 @@ Partial Class FrmBotsd
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmBotsd"
         Me.Text = "Born On The Same Day"
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvPairs, System.ComponentModel.ISupportInitialize).EndInit()
@@ -389,24 +470,30 @@ Partial Class FrmBotsd
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents rtbFile1 As RichTextBox
     Friend WithEvents dgvPairs As DataGridView
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TxtForename1 As TextBox
+    Friend WithEvents TxtSurname1 As TextBox
+    Friend WithEvents TxtShortDesc1 As TextBox
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents LblId1 As Label
+    Friend WithEvents DtpDob1 As DateTimePicker
     Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents LblId2 As Label
+    Friend WithEvents DtpDob2 As DateTimePicker
+    Friend WithEvents TxtShortDesc2 As TextBox
+    Friend WithEvents TxtForename2 As TextBox
+    Friend WithEvents TxtSurname2 As TextBox
+    Friend WithEvents BtnUpdate1 As Button
+    Friend WithEvents BtnUpdate2 As Button
+    Friend WithEvents BtnGenerate As Button
+    Friend WithEvents BtnSwap As Button
+    Friend WithEvents cmbTwitterUsers As ComboBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents DateTimePicker2 As DateTimePicker
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents pickPerson1 As DataGridViewTextBoxColumn
-    Friend WithEvents pickPerson2 As DataGridViewTextBoxColumn
+    Friend WithEvents LblStatus As ToolStripStatusLabel
+    Friend WithEvents chkImages As CheckBox
+    Friend WithEvents LblDay As Label
+    Friend WithEvents LblMonth As Label
+    Friend WithEvents pairPerson1 As DataGridViewTextBoxColumn
+    Friend WithEvents pairPerson2 As DataGridViewTextBoxColumn
     Friend WithEvents pairId1 As DataGridViewTextBoxColumn
     Friend WithEvents pairId2 As DataGridViewTextBoxColumn
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button4 As Button
 End Class
