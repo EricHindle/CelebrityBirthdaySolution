@@ -698,12 +698,17 @@ Public Class FrmTweet
     End Sub
 
     Private Sub BtnBotsd_Click(sender As Object, e As EventArgs) Handles BtnBotsd.Click
-        rbBotsd.Checked = True
-        RbSingleImage.Checked = True
-        For Each _node As TreeNode In tvBirthday.Nodes
-            _node.Checked = False
-        Next
-        cmbTwitterUsers.SelectedIndex = cmbTwitterUsers.FindString("NotTwins1")
+        Using _botsd As New FrmBotsd
+            _botsd.Show()
+        End Using
+
+
+        'rbBotsd.Checked = True
+        'RbSingleImage.Checked = True
+        'For Each _node As TreeNode In tvBirthday.Nodes
+        '    _node.Checked = False
+        'Next
+        'cmbTwitterUsers.SelectedIndex = cmbTwitterUsers.FindString("NotTwins1")
     End Sub
 #End Region
 End Class
