@@ -381,12 +381,7 @@ Public Class FrmTweet
                     Next
                 Next
                 oTweetLists.Add(_selectedPersons)
-                If rbBotsd.Checked Then
-                    tabTitle = "SD_"
-                Else
-                    tabTitle = "Full_"
-                End If
-
+                tabTitle = "Full_"
                 GenerateTweets(oTweetLists, tabTitle, _imageStart)
             Else
                 Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, "B")
@@ -416,11 +411,7 @@ Public Class FrmTweet
             GetNudFromPage(newTweetTabPage).Value = DEFAULT_WIDTH
             Dim _width As Integer = DEFAULT_WIDTH
             GeneratePicture(pbControl, _personList, _width)
-            If rbBotsd.Checked Then
-                GenerateText(rtbControl, _personList)
-            Else
-                GenerateText(rtbControl, _personList, _tabTitle.Substring(0, 1), _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
-            End If
+            GenerateText(rtbControl, _personList, _tabTitle.Substring(0, 1), _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
             IsNoGenerate = False
         Next
     End Sub
@@ -453,37 +444,6 @@ Public Class FrmTweet
         If Not String.IsNullOrEmpty(_footer) Then
             _outString.Append(vbCrLf).Append(_footer).Append(vbCrLf)
         End If
-        _textBox.Text = _outString.ToString
-    End Sub
-    Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person))
-        Dim _outString As New StringBuilder
-        Dim _index As Integer = 0
-        Dim _dob As String = ""
-        For Each _person As Person In _imageTable
-            Select Case _index
-                Case 0
-                    _dob = Format(_person.DateOfBirth, "dd MMMM yyyy")
-                Case _imageTable.Count - 1
-                    _outString.Append(vbCrLf)
-                    _outString.Append("and ")
-                Case Else
-                    _outString.Append(",")
-                    _outString.Append(vbCrLf)
-            End Select
-            _outString.Append(_person.ShortDesc.Trim("."))
-            _outString.Append(" ")
-            _outString.Append(_person.Name)
-            _index += 1
-        Next
-        _outString.Append(vbCrLf)
-        _outString.Append("were ")
-        If _imageTable.Count = 2 Then
-            _outString.Append("both")
-        Else
-            _outString.Append("all")
-        End If
-        _outString.Append(" born on ")
-        _outString.Append(_dob)
         _textBox.Text = _outString.ToString
     End Sub
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
@@ -688,7 +648,7 @@ Public Class FrmTweet
 
             Dim oFullList As New List(Of Person)
             oFullList.AddRange(oBirthdayList)
-        oFullList.AddRange(oAnniversaryList)
+            oFullList.AddRange(oAnniversaryList)
             Do Until oFullList.Count = 0
                 Dim _Person1 As Person = oFullList(0)
                 oFullList.RemoveAt(0)
@@ -702,14 +662,7 @@ Public Class FrmTweet
             _botsd.ShowDialog()
         End Using
 
-
-
-        'rbBotsd.Checked = True
-        'RbSingleImage.Checked = True
-        'For Each _node As TreeNode In tvBirthday.Nodes
-        '    _node.Checked = False
-        'Next
-        'cmbTwitterUsers.SelectedIndex = cmbTwitterUsers.FindString("NotTwins1")
     End Sub
+
 #End Region
 End Class

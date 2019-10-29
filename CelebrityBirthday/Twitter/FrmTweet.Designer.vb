@@ -55,7 +55,6 @@ Partial Class FrmTweet
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.rbBotsd = New System.Windows.Forms.RadioButton()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.rbHandles = New System.Windows.Forms.RadioButton()
         Me.rbAges = New System.Windows.Forms.RadioButton()
@@ -91,7 +90,7 @@ Partial Class FrmTweet
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 687)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 661)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(1348, 22)
@@ -162,7 +161,7 @@ Partial Class FrmTweet
         'NudPic1Horizontal
         '
         Me.NudPic1Horizontal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.NudPic1Horizontal.Location = New System.Drawing.Point(58, 556)
+        Me.NudPic1Horizontal.Location = New System.Drawing.Point(58, 530)
         Me.NudPic1Horizontal.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudPic1Horizontal.Name = "NudPic1Horizontal"
         Me.NudPic1Horizontal.Size = New System.Drawing.Size(53, 22)
@@ -174,7 +173,7 @@ Partial Class FrmTweet
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 560)
+        Me.Label2.Location = New System.Drawing.Point(12, 534)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 14)
         Me.Label2.TabIndex = 10
@@ -182,10 +181,10 @@ Partial Class FrmTweet
         '
         'btnClose
         '
-        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1191, 627)
+        Me.btnClose.Location = New System.Drawing.Point(1189, 607)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(139, 33)
         Me.btnClose.TabIndex = 12
@@ -197,7 +196,7 @@ Partial Class FrmTweet
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.RbSplitImages)
         Me.GroupBox1.Controls.Add(Me.RbSingleImage)
-        Me.GroupBox1.Location = New System.Drawing.Point(8, 263)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 231)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(139, 79)
         Me.GroupBox1.TabIndex = 13
@@ -238,7 +237,7 @@ Partial Class FrmTweet
         Me.TabControl1.Location = New System.Drawing.Point(471, 46)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(706, 628)
+        Me.TabControl1.Size = New System.Drawing.Size(706, 602)
         Me.TabControl1.TabIndex = 19
         '
         'TabPage1
@@ -247,7 +246,7 @@ Partial Class FrmTweet
         Me.TabPage1.Location = New System.Drawing.Point(4, 23)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(698, 601)
+        Me.TabPage1.Size = New System.Drawing.Size(698, 575)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Born On This Day"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -271,7 +270,7 @@ Partial Class FrmTweet
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.rtbFile1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(683, 589)
+        Me.SplitContainer1.Size = New System.Drawing.Size(683, 563)
         Me.SplitContainer1.SplitterDistance = 369
         Me.SplitContainer1.TabIndex = 23
         '
@@ -280,7 +279,7 @@ Partial Class FrmTweet
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(206, 545)
+        Me.BtnSend.Location = New System.Drawing.Point(206, 519)
         Me.BtnSend.Name = "BtnSend"
         Me.BtnSend.Size = New System.Drawing.Size(139, 33)
         Me.BtnSend.TabIndex = 34
@@ -295,7 +294,7 @@ Partial Class FrmTweet
         Me.rtbFile1.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbFile1.Location = New System.Drawing.Point(3, 3)
         Me.rtbFile1.Name = "rtbFile1"
-        Me.rtbFile1.Size = New System.Drawing.Size(297, 576)
+        Me.rtbFile1.Size = New System.Drawing.Size(297, 550)
         Me.rtbFile1.TabIndex = 14
         Me.rtbFile1.Text = ""
         '
@@ -390,7 +389,7 @@ Partial Class FrmTweet
         Me.tvBirthday.CheckBoxes = True
         Me.tvBirthday.Location = New System.Drawing.Point(14, 49)
         Me.tvBirthday.Name = "tvBirthday"
-        Me.tvBirthday.Size = New System.Drawing.Size(223, 625)
+        Me.tvBirthday.Size = New System.Drawing.Size(223, 599)
         Me.tvBirthday.TabIndex = 28
         '
         'btnSelect
@@ -414,41 +413,28 @@ Partial Class FrmTweet
         Me.GroupBox2.Controls.Add(Me.GroupBox1)
         Me.GroupBox2.Location = New System.Drawing.Point(1183, 252)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(153, 357)
+        Me.GroupBox2.Size = New System.Drawing.Size(153, 326)
         Me.GroupBox2.TabIndex = 30
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Tweet Options"
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.rbBotsd)
         Me.GroupBox3.Controls.Add(Me.RadioButton1)
         Me.GroupBox3.Controls.Add(Me.rbHandles)
         Me.GroupBox3.Controls.Add(Me.rbAges)
         Me.GroupBox3.Location = New System.Drawing.Point(8, 112)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(137, 145)
+        Me.GroupBox3.Size = New System.Drawing.Size(137, 113)
         Me.GroupBox3.TabIndex = 37
         Me.GroupBox3.TabStop = False
-        '
-        'rbBotsd
-        '
-        Me.rbBotsd.AutoSize = True
-        Me.rbBotsd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbBotsd.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.rbBotsd.Location = New System.Drawing.Point(16, 79)
-        Me.rbBotsd.Name = "rbBotsd"
-        Me.rbBotsd.Size = New System.Drawing.Size(75, 23)
-        Me.rbBotsd.TabIndex = 37
-        Me.rbBotsd.Text = "BotSD"
-        Me.rbBotsd.UseVisualStyleBackColor = True
         '
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
         Me.RadioButton1.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RadioButton1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.RadioButton1.Location = New System.Drawing.Point(16, 108)
+        Me.RadioButton1.Location = New System.Drawing.Point(16, 79)
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.Size = New System.Drawing.Size(59, 23)
         Me.RadioButton1.TabIndex = 36
@@ -524,7 +510,7 @@ Partial Class FrmTweet
         Me.rtbTweet.ForeColor = System.Drawing.Color.White
         Me.rtbTweet.Location = New System.Drawing.Point(243, 231)
         Me.rtbTweet.Name = "rtbTweet"
-        Me.rtbTweet.Size = New System.Drawing.Size(222, 443)
+        Me.rtbTweet.Size = New System.Drawing.Size(222, 417)
         Me.rtbTweet.TabIndex = 31
         Me.rtbTweet.Text = ""
         '
@@ -598,7 +584,7 @@ Partial Class FrmTweet
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1348, 709)
+        Me.ClientSize = New System.Drawing.Size(1348, 683)
         Me.Controls.Add(Me.BtnBotsd)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
@@ -695,6 +681,5 @@ Partial Class FrmTweet
     Friend WithEvents NudAnnivsPerTweet As NumericUpDown
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents rbBotsd As RadioButton
     Friend WithEvents BtnBotsd As Button
 End Class

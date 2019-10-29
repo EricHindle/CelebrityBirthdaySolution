@@ -78,6 +78,10 @@
         UpdateSocialMedia(oPerson)
         Return iCt
     End Function
+    Public Function UpdateShortDesc(ByVal oPerson As Person) As Integer
+        Dim iCt As Integer = oPersonTa.UpdateShortDesc(oPerson.ShortDesc, oPerson.Id)
+        Return iCt
+    End Function
     Public Function GetPeopleByDate(oDay As Integer, oMonth As Integer) As ArrayList
         Dim oPersonTable As New ArrayList
         oPersonTa.FillByMonthDay(modDatabase.oPersonTable, oMonth, oDay)

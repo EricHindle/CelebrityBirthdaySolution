@@ -27,16 +27,6 @@ Public Class FrmBotsd
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-    Private Sub BtnSendClick(sender As Object, e As EventArgs)
-        If cmbTwitterUsers.SelectedIndex >= 0 Then
-            SendTweet(SaveImage())
-        Else
-            Using _sendTweet As New FrmSendTwitter
-                _sendTweet.TweetText = rtbFile1.Text
-                _sendTweet.ShowDialog()
-            End Using
-        End If
-    End Sub
     Private Function SaveImage() As String
         DisplayStatus("Saving File")
         Dim _path As String = My.Settings.twitterImageFolder
@@ -191,8 +181,6 @@ Public Class FrmBotsd
                 DtpDob2.Value = _pickPerson2.DateOfBirth.Value
                 TxtShortDesc2.Text = _pickPerson2.ShortDesc
                 LblId2.Text = CStr(_pickPerson2.Id)
-
-
                 Dim _selectedPersons As New List(Of Person)
                 _selectedPersons.Add(_pickPerson1)
                 _selectedPersons.Add(_pickPerson2)
@@ -237,7 +225,11 @@ Public Class FrmBotsd
     End Sub
 
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
-
+        If cmbTwitterUsers.SelectedIndex >= 0 Then
+            SendTweet(SaveImage())
+        Else
+            DisplayStatus("Select Sender")
+        End If
     End Sub
 
     Private Sub BtnSwap_Click(sender As Object, e As EventArgs) Handles BtnSwap.Click
@@ -252,5 +244,31 @@ Public Class FrmBotsd
         End If
         GeneratePair()
 
+    End Sub
+
+    Private Sub BtnGenerate_Click(sender As Object, e As EventArgs) Handles BtnGenerate.Click
+        GeneratePair()
+    End Sub
+
+    Private Sub BtnUpdate1_Click(sender As Object, e As EventArgs) Handles BtnUpdate1.Click
+        Dim _pickPerson1 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
+        _pickPerson1.ShortDesc = TxtShortDesc1.Text
+        If UpdateShortDesc(_pickPerson1) = 1 Then
+            DisplayStatus("Updated person 1")
+        Else
+            DisplayStatus("Updated failed")
+        End If
+
+    End Sub
+
+    Private Sub BtnUpdate2_Click(sender As Object, e As EventArgs) Handles BtnUpdate2.Click
+        Dim _pickPerson2 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
+        _pickPerson2.ShortDesc = TxtShortDesc2.Text
+
+        If UpdateShortDesc(_pickPerson2) = 1 Then
+            DisplayStatus("Updated person 2")
+        Else
+            DisplayStatus("Updated failed")
+        End If
     End Sub
 End Class
