@@ -199,7 +199,7 @@ Public Class FrmBotsd
         For Each _person As Person In _imageTable
             Select Case _index
                 Case 0
-                    _dob = Format(_person.DateOfBirth, "dd MMMM yyyy")
+                    _dob = Format(_person.DateOfBirth, "d MMMM yyyy")
                 Case _imageTable.Count - 1
                     _outString.Append(vbCrLf)
                     _outString.Append("and ")
