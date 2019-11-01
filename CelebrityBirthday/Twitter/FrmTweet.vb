@@ -645,20 +645,27 @@ Public Class FrmTweet
         Using _botsd As New FrmBotsd
             _botsd.ThisDay = cboDay.SelectedIndex + 1
             _botsd.ThisMonth = cboMonth.SelectedIndex + 1
-
-            Dim oFullList As New List(Of Person)
-            oFullList.AddRange(oBirthdayList)
-            oFullList.AddRange(oAnniversaryList)
-            Do Until oFullList.Count = 0
-                Dim _Person1 As Person = oFullList(0)
-                oFullList.RemoveAt(0)
-                For Each _person2 In oFullList
-                    If _Person1.DateOfBirth = _person2.DateOfBirth Then
-                        _botsd.AddPair(_Person1, _person2)
+            Dim _fullList As New List(Of Person)
+            _fullList.AddRange(oBirthdayList)
+            _fullList.AddRange(oAnniversaryList)
+            Do Until _fullList.Count = 0
+                Dim _sameYearList As New List(Of Person)
+                Dim _person1 As Person = _fullList(0)
+                _fullList.RemoveAt(0)
+                For Each _person2 In _fullList
+                    Debug.Print(_person2.Name & " " & Format(_person2.DateOfBirth, "dd MMM yyyy"))
+                    If _person1.DateOfBirth = _person2.DateOfBirth Then
+                        _sameYearList.Add(_person2)
                     End If
                 Next
+                For Each _matchedPerson As Person In _sameYearList
+                    _fullList.Remove(_matchedPerson)
+                Next
+                If _sameYearList.Count > 0 Then
+                    _sameYearList.Add(_person1)
+                    _botsd.AddList(_sameYearList)
+                End If
             Loop
-
             _botsd.ShowDialog()
         End Using
 

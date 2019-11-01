@@ -3,7 +3,7 @@ Imports System.Text
 Imports TweetSharp
 
 Public Class FrmBotsd
-    Private oImagePair As New List(Of Person)
+    Private _imageList As New List(Of Person)
     Private IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
     Private _day As Integer
@@ -58,7 +58,7 @@ Public Class FrmBotsd
 
     Private Sub NudPic1Horizontal_ValueChanged(sender As Object, e As EventArgs) Handles NudPic1Horizontal.ValueChanged
         If Not IsNoGenerate Then
-            GeneratePicture(PictureBox1, oImagePair, NudPic1Horizontal.Value)
+            GeneratePicture(PictureBox1, _imageList, NudPic1Horizontal.Value)
         End If
     End Sub
 
@@ -143,10 +143,12 @@ Public Class FrmBotsd
     End Sub
 
     Private Sub FrmBotsd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        IsNoGenerate = True
         LblMonth.Text = Format(New Date(2000, _month, 1), "MMMM")
         LblDay.Text = CStr(_day)
         GetAuthData()
         FillTwitterUserList()
+        IsNoGenerate = False
     End Sub
     Private Sub GetAuthData()
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
@@ -154,12 +156,25 @@ Public Class FrmBotsd
         tw.ConsumerSecret = _auth.TokenSecret
     End Sub
 
-    Public Sub AddPair(ByRef _person1 As Person, _person2 As Person)
+    Public Sub AddList(ByRef _persons As List(Of Person))
         Dim _pairRow As DataGridViewRow = dgvPairs.Rows(dgvPairs.Rows.Add())
-        _pairRow.Cells(pairId1.Name).Value = _person1.Id
-        _pairRow.Cells(pairId2.Name).Value = _person2.Id
-        _pairRow.Cells(pairPerson1.Name).Value = _person1.Name
-        _pairRow.Cells(pairPerson2.Name).Value = _person2.Name
+        If _persons.Count > 0 Then
+            _pairRow.Cells(pairId1.Name).Value = _persons(0).Id
+            _pairRow.Cells(pairPerson1.Name).Value = _persons(0).Name
+        End If
+        If _persons.Count > 1 Then
+            _pairRow.Cells(pairId2.Name).Value = _persons(1).Id
+            _pairRow.Cells(pairPerson2.Name).Value = _persons(1).Name
+        End If
+        If _persons.Count > 2 Then
+            _pairRow.Cells(pairId3.Name).Value = _persons(2).Id
+            _pairRow.Cells(pairPerson3.Name).Value = _persons(2).Name
+        End If
+        If _persons.Count > 3 Then
+            _pairRow.Cells(pairId4.Name).Value = _persons(3).Id
+            _pairRow.Cells(pairPerson4.Name).Value = _persons(3).Name
+        End If
+
     End Sub
 
     Private Sub dgvPairs_SelectionChanged(sender As Object, e As EventArgs) Handles dgvPairs.SelectionChanged
@@ -171,23 +186,49 @@ Public Class FrmBotsd
             Try
                 Dim _pickPerson1 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
                 Dim _pickPerson2 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
-                TxtForename1.Text = _pickPerson1.ForeName
-                TxtSurname1.Text = _pickPerson1.Surname
-                DtpDob1.Value = _pickPerson1.DateOfBirth.Value
-                TxtShortDesc1.Text = _pickPerson1.ShortDesc
-                LblId1.Text = CStr(_pickPerson1.Id)
-                TxtForename2.Text = _pickPerson2.ForeName
-                TxtSurname2.Text = _pickPerson2.Surname
-                DtpDob2.Value = _pickPerson2.DateOfBirth.Value
-                TxtShortDesc2.Text = _pickPerson2.ShortDesc
-                LblId2.Text = CStr(_pickPerson2.Id)
-                Dim _selectedPersons As New List(Of Person)
-                _selectedPersons.Add(_pickPerson1)
-                _selectedPersons.Add(_pickPerson2)
-                GeneratePicture(PictureBox1, _selectedPersons, NudPic1Horizontal.Value)
-                GenerateText(_selectedPersons)
+                Dim _pickPerson3 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
+                Dim _pickPerson4 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
+                _imageList = New List(Of Person)
+                If _pickPerson1 IsNot Nothing Then
+                    TxtForename1.Text = _pickPerson1.ForeName
+                    TxtSurname1.Text = _pickPerson1.Surname
+                    DtpDob1.Value = _pickPerson1.DateOfBirth.Value
+                    TxtShortDesc1.Text = _pickPerson1.ShortDesc
+                    LblId1.Text = CStr(_pickPerson1.Id)
+                    _imageList.Add(_pickPerson1)
+                    chkSel1.Checked = False
+                End If
+                If _pickPerson2 IsNot Nothing Then
+                    TxtForename2.Text = _pickPerson2.ForeName
+                    TxtSurname2.Text = _pickPerson2.Surname
+                    DtpDob2.Value = _pickPerson2.DateOfBirth.Value
+                    TxtShortDesc2.Text = _pickPerson2.ShortDesc
+                    LblId2.Text = CStr(_pickPerson2.Id)
+                    _imageList.Add(_pickPerson2)
+                    ChkSel2.Checked = False
+                End If
+                If _pickPerson3 IsNot Nothing Then
+                    TxtForename3.Text = _pickPerson3.ForeName
+                    TxtSurname3.Text = _pickPerson3.Surname
+                    DtpDob3.Value = _pickPerson3.DateOfBirth.Value
+                    TxtShortDesc3.Text = _pickPerson3.ShortDesc
+                    LblId3.Text = CStr(_pickPerson3.Id)
+                    _imageList.Add(_pickPerson3)
+                    ChkSel3.Checked = False
+                End If
+                If _pickPerson4 IsNot Nothing Then
+                    TxtForename4.Text = _pickPerson4.ForeName
+                    TxtSurname4.Text = _pickPerson4.Surname
+                    DtpDob4.Value = _pickPerson4.DateOfBirth.Value
+                    TxtShortDesc4.Text = _pickPerson4.ShortDesc
+                    LblId4.Text = CStr(_pickPerson4.Id)
+                    _imageList.Add(_pickPerson4)
+                    ChkSel4.Checked = False
+                End If
+                GeneratePicture(PictureBox1, _imageList, NudPic1Horizontal.Value)
+                GenerateText(_imageList)
             Catch ex As Exception
-                DisplayStatus("Person exception")
+            DisplayStatus("Person exception")
             End Try
         End If
     End Sub
@@ -234,16 +275,56 @@ Public Class FrmBotsd
 
     Private Sub BtnSwap_Click(sender As Object, e As EventArgs) Handles BtnSwap.Click
         If dgvPairs.SelectedRows.Count = 1 Then
+            Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked)
+            If _selCount <> -2 Then
+                MsgBox("Select two persons", MsgBoxStyle.Exclamation, "Error")
+                Exit Sub
+            End If
             Dim _row As DataGridViewRow = dgvPairs.SelectedRows(0)
-            Dim _saveId As Integer = _row.Cells(pairId1.Name).Value
-            Dim _saveName As String = _row.Cells(pairPerson1.Name).Value
-            _row.Cells(pairId1.Name).Value = _row.Cells(pairId2.Name).Value
-            _row.Cells(pairPerson1.Name).Value = _row.Cells(pairPerson2.Name).Value
-            _row.Cells(pairId2.Name).Value = _saveId
-            _row.Cells(pairPerson2.Name).Value = _saveName
+            Dim sel1IdCol As String
+            Dim sel2IdCol As String
+            Dim sel1NameCol As String
+            Dim sel2NameCol As String
+
+            If chkSel1.Checked Then
+                sel1IdCol = pairId1.Name
+                sel1NameCol = pairPerson1.Name
+                If ChkSel2.Checked Then
+                    sel2IdCol = pairId2.Name
+                    sel2NameCol = pairPerson2.Name
+                Else
+                    If ChkSel3.Checked Then
+                        sel2IdCol = pairId3.Name
+                        sel2NameCol = pairPerson3.Name
+                    Else
+                        sel2IdCol = pairId4.Name
+                        sel2NameCol = pairPerson4.Name
+                    End If
+                End If
+            ElseIf ChkSel2.Checked Then
+                sel1IdCol = pairId2.Name
+                sel1NameCol = pairPerson2.Name
+                If ChkSel3.Checked Then
+                    sel2IdCol = pairId3.Name
+                    sel2NameCol = pairPerson3.Name
+                Else
+                    sel2IdCol = pairId4.Name
+                    sel2NameCol = pairPerson4.Name
+                End If
+            Else
+                sel1IdCol = pairId3.Name
+                sel1NameCol = pairPerson3.Name
+                sel2IdCol = pairId4.Name
+                sel2NameCol = pairPerson4.Name
+            End If
+            Dim _saveId As Integer = _row.Cells(sel1IdCol).Value
+            Dim _saveName As String = _row.Cells(sel1NameCol).Value
+            _row.Cells(sel1IdCol).Value = _row.Cells(sel2IdCol).Value
+            _row.Cells(sel1NameCol).Value = _row.Cells(sel2NameCol).Value
+            _row.Cells(sel2IdCol).Value = _saveId
+            _row.Cells(sel2NameCol).Value = _saveName
         End If
         GeneratePair()
-
     End Sub
 
     Private Sub BtnGenerate_Click(sender As Object, e As EventArgs) Handles BtnGenerate.Click
@@ -271,4 +352,25 @@ Public Class FrmBotsd
             DisplayStatus("Updated failed")
         End If
     End Sub
+    Private Sub BtnUpdate3_Click(sender As Object, e As EventArgs) Handles BtnUpdate3.Click
+        Dim _pickPerson3 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
+        _pickPerson3.ShortDesc = TxtShortDesc3.Text
+
+        If UpdateShortDesc(_pickPerson3) = 1 Then
+            DisplayStatus("Updated person 3")
+        Else
+            DisplayStatus("Updated failed")
+        End If
+    End Sub
+    Private Sub BtnUpdate4_Click(sender As Object, e As EventArgs) Handles BtnUpdate4.Click
+        Dim _pickPerson4 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
+        _pickPerson4.ShortDesc = TxtShortDesc4.Text
+
+        If UpdateShortDesc(_pickPerson4) = 1 Then
+            DisplayStatus("Updated person 4")
+        Else
+            DisplayStatus("Updated failed")
+        End If
+    End Sub
+
 End Class
