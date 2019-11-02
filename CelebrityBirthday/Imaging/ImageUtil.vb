@@ -8,16 +8,19 @@ Public Class ImageUtil
         BMP
         TIFF
         PNG
+        ALL
     End Enum
     Public Enum OpenOrSave
         Open
         Save
     End Enum
-    Public Shared imageFilter As String() = {"jpeg files (*.jpg;*.jpeg;*.jpe;*.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif", _
-                                             "gif files (*.gif)|*.gif", _
-                                             "bmp files (*.bmp;*.dib;*.rle)|*.bmp;*.dib;*.rle", _
-                                             "tiff files (*.tif*.tiff)|*.tif;*.tiff", _
-                                             "png files (*.png)|*.png"}
+    Public Shared imageFilter As String() = {"jpeg files (*.jpg;*.jpeg;*.jpe;*.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif",
+                                             "gif files (*.gif)|*.gif",
+                                             "bmp files (*.bmp;*.dib;*.rle)|*.bmp;*.dib;*.rle",
+                                             "tiff files (*.tif*.tiff)|*.tif;*.tiff",
+                                             "png files (*.png)|*.png",
+                                             "all files (*.*)|*.*"}
+    Private Shared sImageCacheFolder As String
 
     Public Shared Function convertImageTypeToFormat(ByVal imgType As ImageType) As Imaging.ImageFormat
         Dim iFormat As Imaging.ImageFormat = Imaging.ImageFormat.Jpeg
@@ -35,8 +38,8 @@ Public Class ImageUtil
         End Select
         Return iFormat
     End Function
-    Public Shared Function saveImageFromPictureBox(ByVal oPicture As PictureBox, ByVal sourceWidth As Integer, ByVal sourceHeight As Integer, ByVal targetFile As String, Optional ByVal imgType As ImageType = ImageType.JPEG) As String
-        Dim targetBitmap As System.Drawing.Bitmap = resizeImageToBitmap(oPicture.Image, oPicture.Width, oPicture.Height)
+    Public Shared Function SaveImageFromPictureBox(ByVal oPicture As PictureBox, ByVal targetWidth As Integer, ByVal targetHeight As Integer, ByVal targetFile As String, Optional ByVal imgType As ImageType = ImageType.JPEG) As String
+        Dim targetBitmap As System.Drawing.Bitmap = resizeImageToBitmap(oPicture.Image, targetWidth, targetHeight)
 
         If Not String.IsNullOrEmpty(targetFile) Then
             Try
@@ -48,6 +51,40 @@ Public Class ImageUtil
         targetBitmap.Dispose()
         Return targetFile
     End Function
+    Public Shared Function GetImageFileName(ByVal dialogType As OpenOrSave, Optional ByVal imgType As Integer = 0) As String
+        Dim sFilename As String = ""
+
+        If dialogType = OpenOrSave.Open Then
+            Using fbd As New OpenFileDialog
+                sFilename = ShowFileDialog(fbd, imgType, sImageCacheFolder)
+            End Using
+        Else
+            Using fbd As New SaveFileDialog
+                sFilename = ShowFileDialog(fbd, imgType, sImageCacheFolder)
+            End Using
+        End If
+        Return sFilename
+    End Function
+
+    Public Shared Function ShowFileDialog(ByVal fbd As FileDialog, Optional ByVal imgType As Integer = 0, Optional ByVal initialDirectory As String = Nothing) As String
+        Dim sFilename As String = ""
+        fbd.Filter = imageFilter(imgType)
+        fbd.FilterIndex = 0
+        fbd.RestoreDirectory = False
+        fbd.CheckFileExists = False
+        If String.IsNullOrEmpty(initialDirectory) Then
+            '          fbd.InitialDirectory = sSharedFolder
+        Else
+            fbd.InitialDirectory = initialDirectory
+        End If
+
+        If fbd.ShowDialog() = DialogResult.OK Then
+            sFilename = fbd.FileName
+        End If
+
+        Return sFilename
+    End Function
+
     Public Shared Function resizeImageToBitmap(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
         Dim targetBitmap As System.Drawing.Bitmap = New System.Drawing.Bitmap(targetWidth, targetHeight)
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
@@ -74,7 +111,7 @@ Public Class ImageUtil
 
         Return targetBitmap
     End Function
-    Private Shared Function initialiseGraphics(ByVal oImage As Image) As Graphics
+    Public Shared Function initialiseGraphics(ByVal oImage As Image) As Graphics
         Dim oGraphics As Graphics = Graphics.FromImage(oImage)
         oGraphics.SmoothingMode = SmoothingMode.HighQuality
         oGraphics.CompositingQuality = CompositingQuality.HighQuality

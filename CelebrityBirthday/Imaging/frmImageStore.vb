@@ -10,6 +10,7 @@ Public Class frmImageStore
     Dim sApplicationPath As String
     Dim bLoadingPicture As Boolean = False
     Dim isSaved As Boolean = True
+    Dim _latestSavedFile As String = ""
 #End Region
 #Region "properties"
     Private _forename As String
@@ -122,6 +123,7 @@ Public Class frmImageStore
             memorystream.Dispose()
             response = Nothing
             PicStatus.Text = "Saved " & strFName
+            _latestSavedFile = strFName
             isSaved = True
         Catch ex As Exception
             If DisplayException(ex) = MsgBoxResult.No Then Exit Sub
@@ -199,5 +201,14 @@ Public Class frmImageStore
     Private Function DisplayException(ByVal ex As Exception) As MsgBoxResult
         Return MsgBox("Exception: " & ex.Message & vbCrLf & If(ex.InnerException Is Nothing, "", ex.InnerException.Message) & vbCrLf & "OK to continue?", MsgBoxStyle.YesNo, "Excpetion")
     End Function
+
+    Private Sub BtnEditImage_Click(sender As Object, e As EventArgs) Handles BtnEditImage.Click
+        Using _editImage As New frmImageCapture
+            _editImage.ImageFile = _latestSavedFile
+
+            _editImage.ShowDialog()
+        End Using
+    End Sub
+
 #End Region
 End Class

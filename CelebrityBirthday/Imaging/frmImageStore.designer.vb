@@ -37,6 +37,7 @@ Partial Class frmImageStore
         Me.TxtForename = New System.Windows.Forms.TextBox()
         Me.lblSearchUrl = New System.Windows.Forms.Label()
         Me.TxtSurname = New System.Windows.Forms.TextBox()
+        Me.BtnEditImage = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -169,12 +170,25 @@ Partial Class frmImageStore
         Me.TxtSurname.Size = New System.Drawing.Size(209, 22)
         Me.TxtSurname.TabIndex = 79
         '
+        'BtnEditImage
+        '
+        Me.BtnEditImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnEditImage.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnEditImage.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnEditImage.Location = New System.Drawing.Point(920, 390)
+        Me.BtnEditImage.Name = "BtnEditImage"
+        Me.BtnEditImage.Size = New System.Drawing.Size(87, 59)
+        Me.BtnEditImage.TabIndex = 80
+        Me.BtnEditImage.Text = "Edit Image"
+        Me.BtnEditImage.UseVisualStyleBackColor = True
+        '
         'frmImageStore
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1022, 661)
+        Me.Controls.Add(Me.BtnEditImage)
         Me.Controls.Add(Me.TxtSurname)
         Me.Controls.Add(Me.lblSearchUrl)
         Me.Controls.Add(Me.TxtForename)
@@ -212,4 +226,5 @@ Partial Class frmImageStore
     Friend WithEvents TxtForename As TextBox
     Friend WithEvents lblSearchUrl As Label
     Friend WithEvents TxtSurname As TextBox
+    Friend WithEvents BtnEditImage As Button
 End Class

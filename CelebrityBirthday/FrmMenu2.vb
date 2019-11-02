@@ -35,4 +35,12 @@
         End Using
         Me.Show()
     End Sub
+
+    Private Sub BtnImageEditing_Click(sender As Object, e As EventArgs) Handles BtnImageEditing.Click
+        Me.Hide()
+        Using _imgEditForm As New frmImageCapture
+            _imgEditForm.ShowDialog()
+        End Using
+        Me.Show()
+    End Sub
 End Class

@@ -30,6 +30,7 @@ Partial Class FrmMenu2
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.BtnTapestry = New System.Windows.Forms.Button()
+        Me.BtnImageEditing = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -113,6 +114,17 @@ Partial Class FrmMenu2
         Me.BtnTapestry.Text = "Tapestry"
         Me.BtnTapestry.UseVisualStyleBackColor = True
         '
+        'BtnImageEditing
+        '
+        Me.BtnImageEditing.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnImageEditing.Location = New System.Drawing.Point(15, 298)
+        Me.BtnImageEditing.Margin = New System.Windows.Forms.Padding(6)
+        Me.BtnImageEditing.Name = "BtnImageEditing"
+        Me.BtnImageEditing.Size = New System.Drawing.Size(151, 49)
+        Me.BtnImageEditing.TabIndex = 20
+        Me.BtnImageEditing.Text = "Image Editing"
+        Me.BtnImageEditing.UseVisualStyleBackColor = True
+        '
         'FrmMenu2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 25.0!)
@@ -120,6 +132,7 @@ Partial Class FrmMenu2
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(352, 509)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnImageEditing)
         Me.Controls.Add(Me.BtnTapestry)
         Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.Label1)
@@ -146,4 +159,5 @@ Partial Class FrmMenu2
     Friend WithEvents Label1 As Label
     Friend WithEvents BtnClose As Button
     Friend WithEvents BtnTapestry As Button
+    Friend WithEvents BtnImageEditing As Button
 End Class

@@ -162,10 +162,16 @@
     <Compile Include="frmGlobalSettings.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmImages.Designer.vb">
+    <Compile Include="Imaging\frmImageCapture.designer.vb">
+      <DependentUpon>frmImageCapture.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Imaging\frmImageCapture.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Imaging\frmImages.Designer.vb">
       <DependentUpon>frmImages.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmImages.vb">
+    <Compile Include="Imaging\frmImages.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmMenu.Designer.vb">
@@ -192,10 +198,10 @@
     <Compile Include="FrmSearch.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMosaic.Designer.vb">
+    <Compile Include="Imaging\FrmMosaic.Designer.vb">
       <DependentUpon>FrmMosaic.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmMosaic.vb">
+    <Compile Include="Imaging\FrmMosaic.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GlobalSettings.vb" />
@@ -236,7 +242,7 @@
     <Compile Include="FrmWordPress.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImageUtil.vb" />
+    <Compile Include="Imaging\ImageUtil.vb" />
     <Compile Include="modCbday.vb" />
     <Compile Include="modDatabase.vb" />
     <Compile Include="modText.vb" />
@@ -256,10 +262,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Domain\Person.vb" />
-    <Compile Include="frmImageStore.designer.vb">
+    <Compile Include="Imaging\frmImageStore.designer.vb">
       <DependentUpon>frmImageStore.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmImageStore.vb">
+    <Compile Include="Imaging\frmImageStore.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SplashScreen1.Designer.vb">
@@ -283,7 +289,10 @@
     <EmbeddedResource Include="frmGlobalSettings.resx">
       <DependentUpon>frmGlobalSettings.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmImages.resx">
+    <EmbeddedResource Include="Imaging\frmImageCapture.resx">
+      <DependentUpon>frmImageCapture.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Imaging\frmImages.resx">
       <DependentUpon>frmImages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMenu.resx">
@@ -299,7 +308,7 @@
     <EmbeddedResource Include="FrmSearch.resx">
       <DependentUpon>FrmSearch.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMosaic.resx">
+    <EmbeddedResource Include="Imaging\FrmMosaic.resx">
       <DependentUpon>FrmMosaic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\FrmBotsd.resx">
@@ -326,7 +335,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmImageStore.resx">
+    <EmbeddedResource Include="Imaging\frmImageStore.resx">
       <DependentUpon>frmImageStore.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
