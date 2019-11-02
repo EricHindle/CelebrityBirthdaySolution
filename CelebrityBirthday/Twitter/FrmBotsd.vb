@@ -189,6 +189,10 @@ Public Class FrmBotsd
                 Dim _pickPerson3 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
                 Dim _pickPerson4 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
                 _imageList = New List(Of Person)
+                chkSel1.Checked = False
+                ChkSel2.Checked = False
+                ChkSel3.Checked = False
+                ChkSel4.Checked = False
                 If _pickPerson1 IsNot Nothing Then
                     TxtForename1.Text = _pickPerson1.ForeName
                     TxtSurname1.Text = _pickPerson1.Surname
@@ -196,7 +200,14 @@ Public Class FrmBotsd
                     TxtShortDesc1.Text = _pickPerson1.ShortDesc
                     LblId1.Text = CStr(_pickPerson1.Id)
                     _imageList.Add(_pickPerson1)
-                    chkSel1.Checked = False
+                    GroupBox1.Enabled = True
+                Else
+                    TxtForename1.Text = ""
+                    TxtSurname1.Text = ""
+                    DtpDob1.Value = Today
+                    TxtShortDesc1.Text = ""
+                    LblId1.Text = ""
+                    GroupBox1.Enabled = False
                 End If
                 If _pickPerson2 IsNot Nothing Then
                     TxtForename2.Text = _pickPerson2.ForeName
@@ -205,7 +216,14 @@ Public Class FrmBotsd
                     TxtShortDesc2.Text = _pickPerson2.ShortDesc
                     LblId2.Text = CStr(_pickPerson2.Id)
                     _imageList.Add(_pickPerson2)
-                    ChkSel2.Checked = False
+                    GroupBox2.Enabled = True
+                Else
+                    TxtForename2.Text = ""
+                    TxtSurname2.Text = ""
+                    DtpDob2.Value = Today
+                    TxtShortDesc2.Text = ""
+                    LblId2.Text = ""
+                    GroupBox2.Enabled = False
                 End If
                 If _pickPerson3 IsNot Nothing Then
                     TxtForename3.Text = _pickPerson3.ForeName
@@ -214,7 +232,14 @@ Public Class FrmBotsd
                     TxtShortDesc3.Text = _pickPerson3.ShortDesc
                     LblId3.Text = CStr(_pickPerson3.Id)
                     _imageList.Add(_pickPerson3)
-                    ChkSel3.Checked = False
+                    GroupBox3.Enabled = True
+                Else
+                    TxtForename3.Text = ""
+                    TxtSurname3.Text = ""
+                    DtpDob3.Value = Today
+                    TxtShortDesc3.Text = ""
+                    LblId3.Text = ""
+                    GroupBox3.Enabled = False
                 End If
                 If _pickPerson4 IsNot Nothing Then
                     TxtForename4.Text = _pickPerson4.ForeName
@@ -223,7 +248,14 @@ Public Class FrmBotsd
                     TxtShortDesc4.Text = _pickPerson4.ShortDesc
                     LblId4.Text = CStr(_pickPerson4.Id)
                     _imageList.Add(_pickPerson4)
-                    ChkSel4.Checked = False
+                    GroupBox4.Enabled = True
+                Else
+                    TxtForename4.Text = ""
+                    TxtSurname4.Text = ""
+                    DtpDob4.Value = Today
+                    TxtShortDesc4.Text = ""
+                    LblId4.Text = ""
+                    GroupBox4.Enabled = False
                 End If
                 GeneratePicture(PictureBox1, _imageList, NudPic1Horizontal.Value)
                 GenerateText(_imageList)
