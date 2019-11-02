@@ -29,9 +29,9 @@ Partial Class frmImageCapture
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.BtnRotate = New System.Windows.Forms.Button()
-        Me.picCapture = New System.Windows.Forms.PictureBox()
+        Me.PicCapture = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.previewPictureBox = New System.Windows.Forms.PictureBox()
+        Me.PreviewPictureBox = New System.Windows.Forms.PictureBox()
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.BtnLoadImage = New System.Windows.Forms.Button()
@@ -40,20 +40,27 @@ Partial Class frmImageCapture
         Me.lblFilename = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.tbBrightness = New System.Windows.Forms.TrackBar()
+        Me.TbBrightness = New System.Windows.Forms.TrackBar()
         Me.btnReset = New System.Windows.Forms.Label()
-        Me.tbContrast = New System.Windows.Forms.TrackBar()
+        Me.TbContrast = New System.Windows.Forms.TrackBar()
         Me.BtnResetAdjustments = New System.Windows.Forms.Button()
         Me.pnlAdjustImage = New System.Windows.Forms.Panel()
         Me.nudSaveSize = New System.Windows.Forms.NumericUpDown()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rbBlack = New System.Windows.Forms.RadioButton()
+        Me.rbWhite = New System.Windows.Forms.RadioButton()
+        Me.rbRed = New System.Windows.Forms.RadioButton()
+        Me.rbYellow = New System.Windows.Forms.RadioButton()
+        Me.BtnSave = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
-        CType(Me.picCapture, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.previewPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbBrightness, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PicCapture, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PreviewPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TbBrightness, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TbContrast, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAdjustImage.SuspendLayout()
         CType(Me.nudSaveSize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -103,16 +110,16 @@ Partial Class frmImageCapture
         Me.ToolTip1.SetToolTip(Me.BtnRotate, "Rotate image 90deg")
         Me.BtnRotate.UseVisualStyleBackColor = False
         '
-        'picCapture
+        'PicCapture
         '
-        Me.picCapture.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.picCapture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.picCapture.Location = New System.Drawing.Point(136, 39)
-        Me.picCapture.Name = "picCapture"
-        Me.picCapture.Size = New System.Drawing.Size(500, 400)
-        Me.picCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.picCapture.TabIndex = 21
-        Me.picCapture.TabStop = False
+        Me.PicCapture.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.PicCapture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PicCapture.Location = New System.Drawing.Point(136, 39)
+        Me.PicCapture.Name = "PicCapture"
+        Me.PicCapture.Size = New System.Drawing.Size(500, 400)
+        Me.PicCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PicCapture.TabIndex = 21
+        Me.PicCapture.TabStop = False
         '
         'Label1
         '
@@ -124,16 +131,16 @@ Partial Class frmImageCapture
         Me.Label1.Text = "Raw Image"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         '
-        'previewPictureBox
+        'PreviewPictureBox
         '
-        Me.previewPictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.previewPictureBox.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.previewPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.previewPictureBox.Location = New System.Drawing.Point(785, 39)
-        Me.previewPictureBox.Name = "previewPictureBox"
-        Me.previewPictureBox.Size = New System.Drawing.Size(120, 120)
-        Me.previewPictureBox.TabIndex = 29
-        Me.previewPictureBox.TabStop = False
+        Me.PreviewPictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PreviewPictureBox.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.PreviewPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PreviewPictureBox.Location = New System.Drawing.Point(785, 39)
+        Me.PreviewPictureBox.Name = "PreviewPictureBox"
+        Me.PreviewPictureBox.Size = New System.Drawing.Size(120, 120)
+        Me.PreviewPictureBox.TabIndex = 29
+        Me.PreviewPictureBox.TabStop = False
         '
         'BtnClear
         '
@@ -217,49 +224,51 @@ Partial Class frmImageCapture
         '
         Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.Location = New System.Drawing.Point(12, 70)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(67, 16)
+        Me.Label6.Size = New System.Drawing.Size(68, 19)
         Me.Label6.TabIndex = 36
         Me.Label6.Text = "Brightness"
         '
-        'tbBrightness
+        'TbBrightness
         '
-        Me.tbBrightness.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbBrightness.AutoSize = False
-        Me.tbBrightness.LargeChange = 2
-        Me.tbBrightness.Location = New System.Drawing.Point(0, 89)
-        Me.tbBrightness.Maximum = 30
-        Me.tbBrightness.Minimum = 10
-        Me.tbBrightness.Name = "tbBrightness"
-        Me.tbBrightness.Size = New System.Drawing.Size(91, 27)
-        Me.tbBrightness.TabIndex = 35
-        Me.tbBrightness.TickFrequency = 2
-        Me.tbBrightness.Value = 20
+        Me.TbBrightness.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TbBrightness.AutoSize = False
+        Me.TbBrightness.LargeChange = 2
+        Me.TbBrightness.Location = New System.Drawing.Point(2, 92)
+        Me.TbBrightness.Maximum = 30
+        Me.TbBrightness.Minimum = 10
+        Me.TbBrightness.Name = "TbBrightness"
+        Me.TbBrightness.Size = New System.Drawing.Size(91, 27)
+        Me.TbBrightness.TabIndex = 35
+        Me.TbBrightness.TickFrequency = 2
+        Me.TbBrightness.Value = 20
         '
         'btnReset
         '
         Me.btnReset.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnReset.AutoSize = True
+        Me.btnReset.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnReset.Location = New System.Drawing.Point(17, 10)
         Me.btnReset.Name = "btnReset"
-        Me.btnReset.Size = New System.Drawing.Size(56, 16)
+        Me.btnReset.Size = New System.Drawing.Size(60, 19)
         Me.btnReset.TabIndex = 38
         Me.btnReset.Text = "Contrast"
         '
-        'tbContrast
+        'TbContrast
         '
-        Me.tbContrast.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbContrast.AutoSize = False
-        Me.tbContrast.LargeChange = 3
-        Me.tbContrast.Location = New System.Drawing.Point(0, 29)
-        Me.tbContrast.Maximum = 28
-        Me.tbContrast.Minimum = 1
-        Me.tbContrast.Name = "tbContrast"
-        Me.tbContrast.Size = New System.Drawing.Size(91, 27)
-        Me.tbContrast.TabIndex = 37
-        Me.tbContrast.TickFrequency = 3
-        Me.tbContrast.Value = 10
+        Me.TbContrast.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TbContrast.AutoSize = False
+        Me.TbContrast.LargeChange = 3
+        Me.TbContrast.Location = New System.Drawing.Point(2, 32)
+        Me.TbContrast.Maximum = 28
+        Me.TbContrast.Minimum = 1
+        Me.TbContrast.Name = "TbContrast"
+        Me.TbContrast.Size = New System.Drawing.Size(91, 27)
+        Me.TbContrast.TabIndex = 37
+        Me.TbContrast.TickFrequency = 3
+        Me.TbContrast.Value = 10
         '
         'BtnResetAdjustments
         '
@@ -278,9 +287,9 @@ Partial Class frmImageCapture
         Me.pnlAdjustImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlAdjustImage.Controls.Add(Me.btnReset)
         Me.pnlAdjustImage.Controls.Add(Me.BtnResetAdjustments)
-        Me.pnlAdjustImage.Controls.Add(Me.tbBrightness)
+        Me.pnlAdjustImage.Controls.Add(Me.TbBrightness)
         Me.pnlAdjustImage.Controls.Add(Me.Label6)
-        Me.pnlAdjustImage.Controls.Add(Me.tbContrast)
+        Me.pnlAdjustImage.Controls.Add(Me.TbContrast)
         Me.pnlAdjustImage.Location = New System.Drawing.Point(645, 39)
         Me.pnlAdjustImage.Name = "pnlAdjustImage"
         Me.pnlAdjustImage.Size = New System.Drawing.Size(100, 180)
@@ -288,6 +297,7 @@ Partial Class frmImageCapture
         '
         'nudSaveSize
         '
+        Me.nudSaveSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.nudSaveSize.Location = New System.Drawing.Point(847, 175)
         Me.nudSaveSize.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
         Me.nudSaveSize.Minimum = New Decimal(New Integer() {60, 0, 0, 0})
@@ -298,12 +308,81 @@ Partial Class frmImageCapture
         '
         'Label5
         '
+        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(766, 177)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(62, 16)
+        Me.Label5.Size = New System.Drawing.Size(66, 21)
         Me.Label5.TabIndex = 43
         Me.Label5.Text = "Save size"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.rbYellow)
+        Me.GroupBox1.Controls.Add(Me.rbRed)
+        Me.GroupBox1.Controls.Add(Me.rbWhite)
+        Me.GroupBox1.Controls.Add(Me.rbBlack)
+        Me.GroupBox1.Location = New System.Drawing.Point(770, 254)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(143, 81)
+        Me.GroupBox1.TabIndex = 44
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Pen"
+        '
+        'rbBlack
+        '
+        Me.rbBlack.AutoSize = True
+        Me.rbBlack.Location = New System.Drawing.Point(8, 22)
+        Me.rbBlack.Name = "rbBlack"
+        Me.rbBlack.Size = New System.Drawing.Size(55, 20)
+        Me.rbBlack.TabIndex = 0
+        Me.rbBlack.Text = "Black"
+        Me.rbBlack.UseVisualStyleBackColor = True
+        '
+        'rbWhite
+        '
+        Me.rbWhite.AutoSize = True
+        Me.rbWhite.Location = New System.Drawing.Point(8, 48)
+        Me.rbWhite.Name = "rbWhite"
+        Me.rbWhite.Size = New System.Drawing.Size(59, 20)
+        Me.rbWhite.TabIndex = 1
+        Me.rbWhite.Text = "White"
+        Me.rbWhite.UseVisualStyleBackColor = True
+        '
+        'rbRed
+        '
+        Me.rbRed.AutoSize = True
+        Me.rbRed.Location = New System.Drawing.Point(71, 22)
+        Me.rbRed.Name = "rbRed"
+        Me.rbRed.Size = New System.Drawing.Size(48, 20)
+        Me.rbRed.TabIndex = 2
+        Me.rbRed.Text = "Red"
+        Me.rbRed.UseVisualStyleBackColor = True
+        '
+        'rbYellow
+        '
+        Me.rbYellow.AutoSize = True
+        Me.rbYellow.Checked = True
+        Me.rbYellow.Location = New System.Drawing.Point(71, 48)
+        Me.rbYellow.Name = "rbYellow"
+        Me.rbYellow.Size = New System.Drawing.Size(63, 20)
+        Me.rbYellow.TabIndex = 3
+        Me.rbYellow.TabStop = True
+        Me.rbYellow.Text = "Yellow"
+        Me.rbYellow.UseVisualStyleBackColor = True
+        '
+        'BtnSave
+        '
+        Me.BtnSave.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BtnSave.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSave.Location = New System.Drawing.Point(12, 239)
+        Me.BtnSave.Name = "BtnSave"
+        Me.BtnSave.Size = New System.Drawing.Size(89, 57)
+        Me.BtnSave.TabIndex = 45
+        Me.BtnSave.Text = "Save Image"
+        Me.BtnSave.UseVisualStyleBackColor = True
         '
         'frmImageCapture
         '
@@ -312,6 +391,8 @@ Partial Class frmImageCapture
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(934, 518)
+        Me.Controls.Add(Me.BtnSave)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.nudSaveSize)
         Me.Controls.Add(Me.BtnRotate)
@@ -323,9 +404,9 @@ Partial Class frmImageCapture
         Me.Controls.Add(Me.BtnLoadImage)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.BtnClear)
-        Me.Controls.Add(Me.previewPictureBox)
+        Me.Controls.Add(Me.PreviewPictureBox)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.picCapture)
+        Me.Controls.Add(Me.PicCapture)
         Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -339,13 +420,15 @@ Partial Class frmImageCapture
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
-        CType(Me.picCapture, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.previewPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbBrightness, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PicCapture, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PreviewPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TbBrightness, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TbContrast, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlAdjustImage.ResumeLayout(False)
         Me.pnlAdjustImage.PerformLayout()
         CType(Me.nudSaveSize, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -354,9 +437,9 @@ Partial Class frmImageCapture
     Friend WithEvents lblStatus As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents BtnClose As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents picCapture As System.Windows.Forms.PictureBox
+    Friend WithEvents PicCapture As System.Windows.Forms.PictureBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents previewPictureBox As System.Windows.Forms.PictureBox
+    Friend WithEvents PreviewPictureBox As System.Windows.Forms.PictureBox
     Friend WithEvents BtnClear As System.Windows.Forms.Button
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents BtnLoadImage As System.Windows.Forms.Button
@@ -365,12 +448,18 @@ Partial Class frmImageCapture
     Friend WithEvents lblFilename As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents tbBrightness As System.Windows.Forms.TrackBar
+    Friend WithEvents TbBrightness As System.Windows.Forms.TrackBar
     Friend WithEvents btnReset As System.Windows.Forms.Label
-    Friend WithEvents tbContrast As System.Windows.Forms.TrackBar
+    Friend WithEvents TbContrast As System.Windows.Forms.TrackBar
     Friend WithEvents BtnResetAdjustments As System.Windows.Forms.Button
     Friend WithEvents pnlAdjustImage As System.Windows.Forms.Panel
     Friend WithEvents BtnRotate As System.Windows.Forms.Button
     Friend WithEvents nudSaveSize As NumericUpDown
     Friend WithEvents Label5 As Label
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents rbYellow As RadioButton
+    Friend WithEvents rbRed As RadioButton
+    Friend WithEvents rbWhite As RadioButton
+    Friend WithEvents rbBlack As RadioButton
+    Friend WithEvents BtnSave As Button
 End Class

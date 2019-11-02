@@ -205,7 +205,6 @@ Public Class frmImageStore
     Private Sub BtnEditImage_Click(sender As Object, e As EventArgs) Handles BtnEditImage.Click
         Using _editImage As New frmImageCapture
             _editImage.ImageFile = _latestSavedFile
-
             _editImage.ShowDialog()
         End Using
     End Sub

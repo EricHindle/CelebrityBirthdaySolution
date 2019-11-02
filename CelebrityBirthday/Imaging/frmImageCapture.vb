@@ -1,91 +1,34 @@
-﻿'
-' Copyright (c) 2015, William Hill plc
-' St. John’s Centre, 31 Merrion Street, Leeds, LS2 8LQ
-' All rights reserved.
-'
-' Author Eric Hindle
-' Created Aug 2015
-
-Imports System.Runtime.InteropServices
+﻿Imports System.Runtime.InteropServices
 Imports System.Drawing.Drawing2D
 Imports System.IO
 Imports System.Drawing.Imaging
 
 Public Class frmImageCapture
-#Region "user32 functions"
-    Const WM_CAP As Short = &H400S
-    Const WM_CAP_DRIVER_CONNECT As Integer = WM_CAP + 10
-    Const WM_CAP_DRIVER_DISCONNECT As Integer = WM_CAP + 11
-    Const WM_CAP_EDIT_COPY As Integer = WM_CAP + 30
-    Const WM_CAP_SET_PREVIEW As Integer = WM_CAP + 50
-    Const WM_CAP_SET_PREVIEWRATE As Integer = WM_CAP + 52
-    Const WM_CAP_SET_SCALE As Integer = WM_CAP + 53
-    Const WM_CAP_GET_STATUS As Integer = WM_CAP + 54
-    Const WS_CHILD As Integer = &H40000000
-    Const WS_VISIBLE As Integer = &H10000000
-    Const SWP_NOMOVE As Short = &H2S
-    Const SWP_NOSIZE As Short = 1
-    Const SWP_NOZORDER As Short = &H4S
-    Const HWND_BOTTOM As Short = 1
-
-    Dim iDevice As Integer = 0 ' Current device ID
-    Dim hHwnd As Integer ' Handle to preview window
-
-    Private Class NativeMethods
-        Declare Function GetTickCount Lib "kernel32" () As Long
-        Declare Function SendMessage Lib "user32" Alias "SendMessageA" _
-        (ByVal hwnd As Integer, ByVal wMsg As Integer, ByVal wParam As Integer, _
-        <MarshalAs(UnmanagedType.AsAny)> ByVal lParam As Object) As Integer
-
-        Declare Function SetWindowPos Lib "user32" Alias "SetWindowPos" (ByVal hwnd As Integer, _
-            ByVal hWndInsertAfter As Integer, ByVal x As Integer, ByVal y As Integer, _
-            ByVal cx As Integer, ByVal cy As Integer, ByVal wFlags As Integer) As Integer
-
-        Declare Function DestroyWindow Lib "user32" (ByVal hndw As Integer) As Boolean
-
-        Declare Function capCreateCaptureWindowA Lib "avicap32.dll" _
-            (ByVal lpszWindowName As String, ByVal dwStyle As Integer, _
-            ByVal x As Integer, ByVal y As Integer, ByVal nWidth As Integer, _
-            ByVal nHeight As Short, ByVal hWndParent As Integer, _
-            ByVal nID As Integer) As Integer
-
-        Declare Function capGetDriverDescriptionA Lib "avicap32.dll" (ByVal wDriver As Short, _
-            ByVal lpszName As String, ByVal cbName As Integer, ByVal lpszVer As String, _
-            ByVal cbVer As Integer) As Boolean
-    End Class
-#End Region
-
 #Region "Constants"
 
     Private Const SAVED_MESSAGE As String = "Image saved to "
     Private Const NOT_SAVED_MESSAGE As String = "Image not saved"
     Private Const STD_CAP_WIDTH As Integer = 500
     Private Const STD_CAP_HEIGHT As Integer = 400
-    Private Const MAX_IMG_WIDTH As Integer = 1000
-    Private Const MAX_IMG_HEIGHT As Integer = 700
+    Private Const MAX_IMG_WIDTH As Integer = 1200
+    Private Const MAX_IMG_HEIGHT As Integer = 900
+    Private Const IMG_AREA_SEL As String = "Image area selected"
+    Private Const IMG_SHRUNK As String = "Image shrunk to "
 
 #End Region
-
 #Region "Variables"
     Private cropX As Integer
     Private cropY As Integer
     Private cropWidth As Integer
     Private cropHeight As Integer
-    Private oCropX As Integer
-    Private oCropY As Integer
     Private cropBitmap As Bitmap
     Private cropPen As Pen
     Private cropPenSize As Integer = 1
-    Private cropDashStyle As Drawing2D.DashStyle = Drawing2D.DashStyle.Solid
     Private cropPenColor As Color = Color.Yellow
-
-    Private tmppoint As Point
     Private iStartWidth As Integer
     Private iStartHeight As Integer
-
     Private imageShrinkRatio As Decimal = 1
     Private originalImage As Image = Nothing
-    Private rotateAngle As Integer = 0
 #End Region
 #Region "properties"
     Private _imageFile As String
@@ -98,7 +41,6 @@ Public Class frmImageCapture
         End Set
     End Property
 #End Region
-
 #Region "Form"
     Private Sub form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         iStartHeight = Me.Size.Height
@@ -111,29 +53,25 @@ Public Class frmImageCapture
             If Not String.IsNullOrEmpty(_imageFile) Then
                 Dim oImage As Image = Image.FromFile(_imageFile)
                 originalImage = oImage.Clone
-
                 If oImage IsNot Nothing Then
-                    displayRawImage(oImage)
+                    DisplayRawImage(oImage)
                 End If
                 oImage.Dispose()
             End If
         Catch ex As Exception
-            MsgBox("Exception when loading an image" & vbCrLf & ex.Message, MsgBoxStyle.Exclamation, "Error")
+            DisplayStatus("Exception when loading an image", True, ex)
             GC.Collect()
         End Try
     End Sub
-
     Private Sub ResetWindow()
-        picCapture.Width = STD_CAP_WIDTH
-        picCapture.Height = STD_CAP_HEIGHT
+        PicCapture.Width = STD_CAP_WIDTH
+        PicCapture.Height = STD_CAP_HEIGHT
         Me.Width = iStartWidth
         Me.Height = iStartHeight
     End Sub
-
     Private Sub Form_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
-        disposeImages()
+        DisposeImages()
     End Sub
-
     ''' <summary>
     ''' Load an image from a file
     ''' </summary>
@@ -154,9 +92,8 @@ Public Class frmImageCapture
             If Not String.IsNullOrEmpty(oImageFilename) Then
                 Dim oImage As Image = Image.FromFile(oImageFilename)
                 originalImage = oImage.Clone
-
                 If oImage IsNot Nothing Then
-                    displayRawImage(oImage)
+                    DisplayRawImage(oImage)
                 End If
                 oImage.Dispose()
             End If
@@ -164,11 +101,9 @@ Public Class frmImageCapture
             GC.Collect()
         End Try
     End Sub
-
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
     End Sub
-
     ''' <summary>
     ''' Reset the form
     ''' </summary>
@@ -177,135 +112,181 @@ Public Class frmImageCapture
     ''' <remarks></remarks>
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
         ResetWindow()
-        picCapture.Image = Nothing
-        clearCropSelection()
-        disposeImages()
+        PicCapture.Image = Nothing
+        ClearCropSelection()
+        DisposeImages()
     End Sub
-
-    Private Sub btnCroppedSave_Click(sender As Object, e As EventArgs)
-
-        saveImagePlain()
-
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+        SaveImagePlain(PicCapture, PicCapture.Width, PicCapture.Height)
     End Sub
-
     Private Sub BtnSaveCroppedImage_Click(sender As Object, e As EventArgs) Handles BtnSaveCroppedImage.Click
-
-        Dim imageFileName As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Save, ImageUtil.ImageType.JPEG)
-        Dim w As Integer = nudSaveSize.Value
-        Dim h As Integer = nudSaveSize.Value
-        ImageUtil.SaveImageFromPictureBox(previewPictureBox, w, h, imageFileName, ImageUtil.ImageType.JPEG)
+        SaveImagePlain(PreviewPictureBox, nudSaveSize.Value, nudSaveSize.Value)
     End Sub
-
+    Private Sub btnRotate_Click(sender As Object, e As EventArgs) Handles BtnRotate.Click
+        If originalImage IsNot Nothing Then
+            originalImage.RotateFlip(RotateFlipType.Rotate90FlipNone)
+            DisplayRawImage(originalImage.Clone)
+        End If
+    End Sub
+    ''' <summary>
+    ''' Reset the contrast and brightness to their default values
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btnResetAdjustments_Click(sender As Object, e As EventArgs) Handles BtnResetAdjustments.Click
+        TbBrightness.Value = 20
+        TbContrast.Value = 10
+        AdjustImage()
+    End Sub
+    Private Sub RbRed_CheckedChanged(sender As Object, e As EventArgs) Handles rbRed.CheckedChanged
+        cropPenColor = Color.Red
+        cropPen = New Pen(cropPenColor, cropPenSize) With {
+            .DashStyle = DashStyle.DashDot
+        }
+    End Sub
+    Private Sub RbBlack_CheckedChanged(sender As Object, e As EventArgs) Handles rbBlack.CheckedChanged
+        cropPenColor = Color.Black
+        cropPen = New Pen(cropPenColor, cropPenSize) With {
+            .DashStyle = DashStyle.DashDot
+        }
+    End Sub
+    Private Sub RbWhite_CheckedChanged(sender As Object, e As EventArgs) Handles rbWhite.CheckedChanged
+        cropPenColor = Color.White
+        cropPen = New Pen(cropPenColor, cropPenSize) With {
+            .DashStyle = DashStyle.DashDot
+        }
+    End Sub
+    Private Sub RbYellow_CheckedChanged(sender As Object, e As EventArgs) Handles rbYellow.CheckedChanged
+        cropPenColor = Color.Yellow
+        cropPen = New Pen(cropPenColor, cropPenSize) With {
+            .DashStyle = DashStyle.DashDot
+        }
+    End Sub
 #End Region
-
 #Region "Subroutines"
-    Private Sub saveImagePlain()
+    Private Sub SaveImagePlain(ByRef _pictureBox As PictureBox, _width As Integer, _height As Integer)
         Try
-            Dim w As Integer = previewPictureBox.Image.Width
-            Dim h As Integer = previewPictureBox.Image.Height
-            ImageUtil.SaveImageFromPictureBox(previewPictureBox, w, h, ImageUtil.ImageType.JPEG)
-
+            Dim imageFileName As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Save, ImageUtil.ImageType.JPEG)
+            Dim w As Integer = _width
+            Dim h As Integer = _height
+            ImageUtil.SaveImageFromPictureBox(_pictureBox, w, h, imageFileName, ImageUtil.ImageType.JPEG)
+            DisplayStatus(SAVED_MESSAGE & imageFileName, False)
         Catch ex As Exception
-            ' LogUtil.Exception("Exception when saving cropped image", ex, FORM_NAME, getErrorCode(SystemModule.IMAGES, ErrorType.FILESYSTEM, FailedAction.ERROR_SAVING_FILE))
+            DisplayStatus(NOT_SAVED_MESSAGE, True, ex)
         End Try
-
     End Sub
-
-    Private Sub logStatus(ByVal sText As String, Optional ByVal islogged As Boolean = False, Optional ByVal level As TraceEventType = TraceEventType.Information)
+    Private Sub DisplayStatus(ByVal sText As String, isMessageBox As Boolean, Optional ex As Exception = Nothing, Optional _style As MsgBoxStyle = MsgBoxStyle.Exclamation)
         lblStatus.Text = sText
-        '       If islogged Then LogUtil.addLog(sText, level, FORM_NAME)
+        StatusStrip1.Refresh()
+        If isMessageBox Then
+            Dim _message As String = sText & If(ex Is Nothing, "", vbCrLf & ex.Message)
+            MsgBox(_message, _style, "Information")
+        End If
     End Sub
-
-
-
+    Private Sub DisplayRawImage(ByRef oImage As Image)
+        Dim sizeMessage As String = ""
+        If oImage.Size.Height > MAX_IMG_HEIGHT Or oImage.Size.Width > MAX_IMG_WIDTH Then
+            oImage = ShrinkImage(oImage)
+            sizeMessage = IMG_SHRUNK
+        End If
+        sizeMessage += CStr(oImage.Size.Width) & " x " & CStr(oImage.Size.Height)
+        If oImage.Size.Height > STD_CAP_HEIGHT Or oImage.Size.Width > STD_CAP_WIDTH Then
+            Dim _newLocation As Point = New Point(10, 10)
+            Me.Location = _newLocation
+            Me.Height = iStartHeight + oImage.Size.Height - STD_CAP_HEIGHT
+            Me.Width = iStartWidth + oImage.Size.Width - STD_CAP_WIDTH
+        End If
+        PicCapture.Image = oImage.Clone
+        ClearCropSelection()
+        If PicCapture.Image IsNot Nothing Then
+            DisplayStatus("Image file loaded, " & sizeMessage, False)
+        End If
+    End Sub
+    Private Sub DisposeImages()
+        If originalImage IsNot Nothing Then originalImage.Dispose()
+        If cropBitmap IsNot Nothing Then cropBitmap.Dispose()
+        GC.Collect()
+    End Sub
 #End Region
-
 #Region "Image Cropping"
-    Private Sub picCapture_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picCapture.MouseDown
+    Private Sub PicCapture_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PicCapture.MouseDown
         Try
             If e.Button = Windows.Forms.MouseButtons.Left Then
-                clearCropSelection()
+                ClearCropSelection()
                 cropX = e.X
                 cropY = e.Y
                 Cursor = Cursors.Cross
             End If
-            picCapture.Refresh()
+            PicCapture.Refresh()
         Catch exc As Exception
-            ' LogUtil.Exception("MouseDown exception", exc, FORM_NAME, getErrorCode(SystemModule.IMAGES, ErrorType.APPLICATION, FailedAction.MOUSE_ERROR))
+            DisplayStatus("MouseDown exception", True, exc)
         End Try
-
     End Sub
-    Private Sub picCapture_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picCapture.MouseMove
+    Private Sub PicCapture_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PicCapture.MouseMove
         Try
             If e.Button = Windows.Forms.MouseButtons.Left Then
-                picCapture.Refresh()
+                PicCapture.Refresh()
                 cropWidth = e.X - cropX
-                cropHeight = cropWidth
-                picCapture.CreateGraphics.DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight)
+                cropHeight = cropWidth  ' square selection
+                PicCapture.CreateGraphics.DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight)
             End If
         Catch exc As Exception
-            ' LogUtil.Exception("MouseMove exception", exc, FORM_NAME, getErrorCode(SystemModule.IMAGES, ErrorType.APPLICATION, FailedAction.MOUSE_ERROR))
-            If Err.Number = 5 Then Exit Sub
-            End Try
-
+            DisplayStatus("MouseMove exception", True, exc)
+        End Try
     End Sub
-    Private Sub picCapture_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picCapture.MouseUp
-
-
+    Private Sub PicCapture_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PicCapture.MouseUp
         Try
-                Cursor = Cursors.Default
-                captureCroppedArea()
-                logStatus("Image area selected")
-            Catch exc As Exception
-                ' LogUtil.Exception("MouseUp exception", exc, FORM_NAME, getErrorCode(SystemModule.IMAGES, ErrorType.APPLICATION, FailedAction.MOUSE_ERROR))
-            End Try
-
-
+            Cursor = Cursors.Default
+            CaptureCroppedArea()
+            DisplayStatus(IMG_AREA_SEL, False)
+        Catch exc As Exception
+            DisplayStatus("MouseUp exception", True, exc)
+        End Try
     End Sub
-    Private Sub clearCropSelection()
+    Private Sub ClearCropSelection()
         cropWidth = 0
         cropHeight = 0
         cropBitmap = Nothing
-        cropPen = New Pen(cropPenColor, cropPenSize)
-        cropPen.DashStyle = DashStyle.DashDot
-        '     previewPictureBox.Image = My.Resources.NoImage
+        cropPen = New Pen(cropPenColor, cropPenSize) With {
+            .DashStyle = DashStyle.DashDot
+        }
+        PreviewPictureBox.Image = My.Resources.NoImage
         pnlAdjustImage.Enabled = False
     End Sub
-    Private Sub captureCroppedArea()
+    Private Sub CaptureCroppedArea()
         Try
             ' Extract cropped area from original picture into cropBitmap
-
             cropBitmap = ImageUtil.extractCroppedAreaFromImage(originalImage, cropWidth * imageShrinkRatio, cropHeight * imageShrinkRatio, cropX * imageShrinkRatio, cropY * imageShrinkRatio)
-
             ' Resize cropBitmap to fit preview picture box
-            previewPictureBox.Image = ImageUtil.resizeImageToBitmap(cropBitmap, previewPictureBox.Width, previewPictureBox.Height)
+            PreviewPictureBox.Image = ImageUtil.resizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
             pnlAdjustImage.Enabled = True
-
         Catch exc As Exception
-            ' LogUtil.Exception("captureCroppedArea exception", exc, FORM_NAME, getErrorCode(SystemModule.IMAGES, ErrorType.APPLICATION, FailedAction.IMAGE_PROCESSING_ERROR))
+            DisplayStatus("CaptureCroppedArea exception", True, exc)
         End Try
     End Sub
-
-    Private Function shrinkImage(ByVal sourceImage As Image) As Bitmap
-
-        Dim hratio As Decimal = sourceImage.Height / MAX_IMG_HEIGHT
-        Dim wratio As Decimal = sourceImage.Width / MAX_IMG_WIDTH
-        Dim targetHeight As Integer = 0
-        Dim targetWidth As Integer = 0
-        If hratio > wratio Then
-            targetWidth = Int(sourceImage.Width / hratio)
-            targetHeight = Int(sourceImage.Height / hratio)
-            imageShrinkRatio = hratio
-        Else
-            targetWidth = Int(sourceImage.Width / wratio)
-            targetHeight = Int(sourceImage.Height / wratio)
-            imageShrinkRatio = wratio
-        End If
-        Return ImageUtil.resizeImageToBitmap(sourceImage, targetWidth, targetHeight)
-
+    Private Function ShrinkImage(ByVal sourceImage As Image) As Bitmap
+        Dim _newBitmap As New Bitmap(10, 10)
+        Try
+            Dim hratio As Decimal = sourceImage.Height / MAX_IMG_HEIGHT
+            Dim wratio As Decimal = sourceImage.Width / MAX_IMG_WIDTH
+            Dim targetHeight As Integer
+            Dim targetWidth As Integer
+            If hratio > wratio Then
+                targetWidth = Int(sourceImage.Width / hratio)
+                targetHeight = Int(sourceImage.Height / hratio)
+                imageShrinkRatio = hratio
+            Else
+                targetWidth = Int(sourceImage.Width / wratio)
+                targetHeight = Int(sourceImage.Height / wratio)
+                imageShrinkRatio = wratio
+            End If
+            _newBitmap = ImageUtil.resizeImageToBitmap(sourceImage, targetWidth, targetHeight)
+        Catch exc As Exception
+            DisplayStatus("ShrinkImage exception", True, exc)
+        End Try
+        Return _newBitmap
     End Function
-
-
 #End Region
 #Region "Picture adjustment"
     ''' <summary>
@@ -314,36 +295,33 @@ Public Class frmImageCapture
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub tbContrast_Scroll(sender As Object, e As EventArgs) Handles tbContrast.Scroll
-        adjustImage()
+    Private Sub TbContrast_Scroll(sender As Object, e As EventArgs) Handles TbContrast.Scroll
+        AdjustImage()
     End Sub
-
     ''' <summary>
     ''' Adjust the brightness of the cropped image
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub tbBrightness_Scroll(sender As Object, e As EventArgs) Handles tbBrightness.Scroll
-        adjustImage()
+    Private Sub TbBrightness_Scroll(sender As Object, e As EventArgs) Handles TbBrightness.Scroll
+        AdjustImage()
     End Sub
-
     ''' <summary>
     ''' Gets a 5 x 5 matrix that contains the coordinates for the RGBAW space, based on the trackbar settings.
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Private Function getColourMatrix() As Single()()
-        Dim oContrastSetting As Single = tbContrast.Value / 10
-        Dim oBrightnessSetting As Single = (tbBrightness.Value / 20) - 1
-        Return { _
-                         New Single() {oContrastSetting, 0, 0, 0, 0}, _
-                         New Single() {0, oContrastSetting, 0, 0, 0}, _
-                         New Single() {0, 0, oContrastSetting, 0, 0}, _
-                         New Single() {0, 0, 0, 1, 0}, _
+    Private Function GetColourMatrix() As Single()()
+        Dim oContrastSetting As Single = TbContrast.Value / 10
+        Dim oBrightnessSetting As Single = (TbBrightness.Value / 20) - 1
+        Return {
+                         New Single() {oContrastSetting, 0, 0, 0, 0},
+                         New Single() {0, oContrastSetting, 0, 0, 0},
+                         New Single() {0, 0, oContrastSetting, 0, 0},
+                         New Single() {0, 0, 0, 1, 0},
                          New Single() {oBrightnessSetting, oBrightnessSetting, oBrightnessSetting, 0, 1}}
     End Function
-
     ''' <summary>
     ''' Adjust the contrast and brightness of the cropped image
     ''' </summary>
@@ -352,67 +330,22 @@ Public Class frmImageCapture
     ''' Redraw the bitmap with the new  contrast and brightness settings into a target bitmap
     ''' Store the target bitmap in the image on screen
     ''' </remarks>
-    Private Sub adjustImage()
-        Dim oPoints() As Point = { _
-            New Point(0, 0), _
-            New Point(previewPictureBox.Image.Width, 0), _
-            New Point(0, previewPictureBox.Image.Height) _
+    Private Sub AdjustImage()
+        Dim oPoints() As Point = {
+            New Point(0, 0),
+            New Point(PreviewPictureBox.Image.Width, 0),
+            New Point(0, PreviewPictureBox.Image.Height)
         }
-        Dim oRectangle As New Rectangle(0, 0, previewPictureBox.Image.Width, previewPictureBox.Image.Height)
+        Dim oRectangle As New Rectangle(0, 0, PreviewPictureBox.Image.Width, PreviewPictureBox.Image.Height)
         Dim oImageAttributes As New ImageAttributes
-        Dim oColourMatrix As New ColorMatrix(getColourMatrix)
+        Dim oColourMatrix As New ColorMatrix(GetColourMatrix)
         oImageAttributes.SetColorMatrix(oColourMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap)
-        Dim oSourceBitMap As Bitmap = ImageUtil.resizeImageToBitmap(cropBitmap, previewPictureBox.Width, previewPictureBox.Height)
-        Dim oTargetBitmap As System.Drawing.Bitmap = New Bitmap(previewPictureBox.Image.Width, previewPictureBox.Image.Height)
+        Dim oSourceBitMap As Bitmap = ImageUtil.resizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
+        Dim oTargetBitmap As System.Drawing.Bitmap = New Bitmap(PreviewPictureBox.Image.Width, PreviewPictureBox.Image.Height)
         Dim oGraphics As Graphics = ImageUtil.initialiseGraphics(oTargetBitmap)
         oGraphics.DrawImage(oSourceBitMap, oPoints, oRectangle, GraphicsUnit.Pixel, oImageAttributes)
-        previewPictureBox.Image = oTargetBitmap
+        PreviewPictureBox.Image = oTargetBitmap
     End Sub
 
-    ''' <summary>
-    ''' Reset the contrast and brightness to their default values
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub btnResetAdjustments_Click(sender As Object, e As EventArgs) Handles BtnResetAdjustments.Click
-        tbBrightness.Value = 20
-        tbContrast.Value = 10
-        adjustImage()
-    End Sub
-
-    Private Sub disposeImages()
-        If originalImage IsNot Nothing Then originalImage.Dispose()
-        If cropBitmap IsNot Nothing Then cropBitmap.Dispose()
-        GC.Collect()
-    End Sub
 #End Region
-
-    Private Sub btnRotate_Click(sender As Object, e As EventArgs) Handles BtnRotate.Click
-        If originalImage IsNot Nothing Then
-            originalImage.RotateFlip(RotateFlipType.Rotate90FlipNone)
-            displayRawImage(originalImage.Clone)
-        End If
-
-    End Sub
-
-    Private Sub displayRawImage(ByRef oImage As Image)
-        Dim sizeMessage As String = ""
-        If oImage.Size.Height > MAX_IMG_HEIGHT Or oImage.Size.Width > MAX_IMG_WIDTH Then
-            oImage = shrinkImage(oImage)
-            sizeMessage = "Image shrunk to "
-        End If
-        sizeMessage += CStr(oImage.Size.Width) & "x" & CStr(oImage.Size.Height)
-        If oImage.Size.Height > STD_CAP_HEIGHT Or oImage.Size.Width > STD_CAP_WIDTH Then
-            Me.Height = iStartHeight + oImage.Size.Height - STD_CAP_HEIGHT
-            Me.Width = iStartWidth + oImage.Size.Width - STD_CAP_WIDTH
-        End If
-        picCapture.Image = oImage.Clone
-        clearCropSelection()
-        If picCapture.Image IsNot Nothing Then
-            logStatus("Image file loaded, " & sizeMessage, True)
-
-        End If
-    End Sub
-
 End Class
