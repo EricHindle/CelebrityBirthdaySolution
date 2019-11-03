@@ -119,7 +119,7 @@ Public Class FrmImages
         LoadScreenFromId(txtId.Text)
     End Sub
     Private Sub BtnPicSave_Click(sender As Object, e As EventArgs) Handles BtnPicSave.Click
-        Dim oFilename As String = Path.Combine(My.Settings.ImgFolder, txtImgName.Text & cbImgType.SelectedItem)
+        Dim oFilename As String = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.SelectedItem)
         SaveImage(TxtImageUrl.Text, oFilename)
     End Sub
     Private Sub BtnLoadDateUpdate_Click(sender As Object, e As EventArgs) Handles BtnLoadDateUpdate.Click
@@ -149,7 +149,7 @@ Public Class FrmImages
         PictureBox2.ImageLocation = TxtImageFilename.Text
     End Sub
     Private Sub BtnFileImgGen_Click(sender As Object, e As EventArgs) Handles BtnFileImgGen.Click
-        TxtImageFilename.Text = Path.Combine(My.Settings.ImgFolder, txtImgName.Text & cbImgType.SelectedItem)
+        TxtImageFilename.Text = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.SelectedItem)
     End Sub
     Private Sub BtnWpImgGen_Click(sender As Object, e As EventArgs) Handles BtnWpImgGen.Click
         TxtImageUrl.Text = My.Settings.WordPressUrl & txtLoadYr.Text & SEP & txtLoadMth.Text & SEP & txtImgName.Text & cbImgType.SelectedItem
@@ -206,8 +206,8 @@ Public Class FrmImages
             txtLoadYr.Text = sYear
             Try
                 Dim sSimplename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
-                Dim generatedImageName As String = Path.Combine(My.Settings.ImgFolder, sSimplename & cbImgType.SelectedItem)
-                Dim storedImageName As String = Path.Combine(My.Settings.ImgFolder, oPerson.Image.ImageFileName.Trim & cbImgType.SelectedItem)
+                Dim generatedImageName As String = Path.Combine(My.Settings.ImgPath, sSimplename & cbImgType.SelectedItem)
+                Dim storedImageName As String = Path.Combine(My.Settings.ImgPath, oPerson.Image.ImageFileName.Trim & cbImgType.SelectedItem)
                 TxtImageFilename.Text = storedImageName
                 PictureBox1.ImageLocation = String.Empty
                 PictureBox2.ImageLocation = String.Empty

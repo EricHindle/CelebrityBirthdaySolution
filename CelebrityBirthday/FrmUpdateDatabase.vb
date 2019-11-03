@@ -742,7 +742,7 @@ Public Class FrmUpdateDatabase
         Dim sYear As String = TxtImageLoadYr.Text
         Dim sMth As String = TxtImageLoadMth.Text
         If oPerson.Image IsNot Nothing Then
-            PictureBox1.ImageLocation = Path.Combine(My.Settings.ImgFolder, oPerson.Image.ImageFileName & oPerson.Image.ImageFileType)
+            PictureBox1.ImageLocation = Path.Combine(My.Settings.ImgPath, oPerson.Image.ImageFileName & oPerson.Image.ImageFileType)
         End If
         If oPerson.Social IsNot Nothing Then
             txtTwitter.Text = If(oPerson.Social.TwitterHandle, "")

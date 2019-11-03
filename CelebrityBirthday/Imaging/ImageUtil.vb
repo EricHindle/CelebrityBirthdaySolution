@@ -22,7 +22,7 @@ Public Class ImageUtil
                                              "all files (*.*)|*.*"}
     Private Shared sImageCacheFolder As String
 
-    Public Shared Function convertImageTypeToFormat(ByVal imgType As ImageType) As Imaging.ImageFormat
+    Public Shared Function ConvertImageTypeToFormat(ByVal imgType As ImageType) As Imaging.ImageFormat
         Dim iFormat As Imaging.ImageFormat = Imaging.ImageFormat.Jpeg
         Select Case imgType
             Case ImageType.JPEG
@@ -51,16 +51,28 @@ Public Class ImageUtil
         targetBitmap.Dispose()
         Return targetFile
     End Function
-    Public Shared Function GetImageFileName(ByVal dialogType As OpenOrSave, Optional ByVal imgType As Integer = 0) As String
+    Public Shared Function GetImageFileName(ByVal pDialogType As OpenOrSave, Optional ByVal pImgType As Integer = 0, Optional ByVal pFolder As String = Nothing, Optional ByVal pFilename As String = Nothing) As String
         Dim sFilename As String = ""
 
-        If dialogType = OpenOrSave.Open Then
+        If pDialogType = OpenOrSave.Open Then
             Using fbd As New OpenFileDialog
-                sFilename = ShowFileDialog(fbd, imgType, sImageCacheFolder)
+                If Not String.IsNullOrEmpty(pFolder) Then
+                    fbd.InitialDirectory = pFolder
+                End If
+                If Not String.IsNullOrEmpty(pFilename) Then
+                    fbd.FileName = pFilename
+                End If
+                sFilename = ShowFileDialog(fbd, pImgType, sImageCacheFolder)
             End Using
         Else
             Using fbd As New SaveFileDialog
-                sFilename = ShowFileDialog(fbd, imgType, sImageCacheFolder)
+                If Not String.IsNullOrEmpty(pFolder) Then
+                    fbd.InitialDirectory = pFolder
+                End If
+                If Not String.IsNullOrEmpty(pFilename) Then
+                    fbd.FileName = pFilename
+                End If
+                sFilename = ShowFileDialog(fbd, pImgType, sImageCacheFolder)
             End Using
         End If
         Return sFilename
@@ -85,33 +97,36 @@ Public Class ImageUtil
         Return sFilename
     End Function
 
-    Public Shared Function resizeImageToBitmap(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
+    Public Shared Function ResizeImageToBitmap(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
         Dim targetBitmap As System.Drawing.Bitmap = New System.Drawing.Bitmap(targetWidth, targetHeight)
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
-        Dim oBitMap As Bitmap = New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
-        Dim oGraphics As Graphics = initialiseGraphics(targetBitmap)
-        Try
-            oGraphics.DrawImage(oBitMap, targetRectangle, 0, 0, sourceImage.Width, sourceImage.Height, GraphicsUnit.Pixel)
-        Catch ex As Exception
-            MsgBox("resizeImageToBitmap:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
-        End Try
 
+        Dim oGraphics As Graphics = initialiseGraphics(targetBitmap)
+            Try
+            Using oBitMap As New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
+                oGraphics.DrawImage(oBitMap, targetRectangle, 0, 0, sourceImage.Width, sourceImage.Height, GraphicsUnit.Pixel)
+            End Using
+        Catch ex As Exception
+                MsgBox("resizeImageToBitmap:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
+            End Try
         Return targetBitmap
     End Function
-    Public Shared Function extractCroppedAreaFromImage(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
+    Public Shared Function ExtractCroppedAreaFromImage(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
         Dim targetBitmap As System.Drawing.Bitmap = New Bitmap(targetWidth, targetHeight)
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
-        Dim oBitMap As Bitmap = New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
+
         Dim oGraphics As Graphics = initialiseGraphics(targetBitmap)
         Try
-            oGraphics.DrawImage(oBitMap, 0, 0, targetRectangle, GraphicsUnit.Pixel)
+            Using oBitMap As New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
+                oGraphics.DrawImage(oBitMap, 0, 0, targetRectangle, GraphicsUnit.Pixel)
+            End Using
         Catch ex As Exception
             MsgBox("extractCroppedAreaFromImage:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
         End Try
 
         Return targetBitmap
     End Function
-    Public Shared Function initialiseGraphics(ByVal oImage As Image) As Graphics
+    Public Shared Function InitialiseGraphics(ByVal oImage As Image) As Graphics
         Dim oGraphics As Graphics = Graphics.FromImage(oImage)
         oGraphics.SmoothingMode = SmoothingMode.HighQuality
         oGraphics.CompositingQuality = CompositingQuality.HighQuality
@@ -119,11 +134,10 @@ Public Class ImageUtil
         oGraphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
         Return oGraphics
     End Function
-    Private Shared Function getCodecInfo(ByVal imgType As ImageType) As System.Drawing.Imaging.ImageCodecInfo
+    Private Shared Function GetCodecInfo(ByVal imgType As ImageType) As System.Drawing.Imaging.ImageCodecInfo
         Dim arrayICI() As System.Drawing.Imaging.ImageCodecInfo = System.Drawing.Imaging.ImageCodecInfo.GetImageEncoders()
         Dim thisICI As System.Drawing.Imaging.ImageCodecInfo = Nothing
-        Dim x As Integer = 0
-        For x = 0 To arrayICI.Length - 1
+        For x As Integer = 0 To arrayICI.Length - 1
             If (arrayICI(x).FormatDescription.Equals(imgType.ToString)) Then
                 thisICI = arrayICI(x)
                 Exit For
@@ -131,7 +145,7 @@ Public Class ImageUtil
         Next
         Return thisICI
     End Function
-    Private Shared Function getEncoderParameters() As System.Drawing.Imaging.EncoderParameters
+    Private Shared Function GetEncoderParameters() As System.Drawing.Imaging.EncoderParameters
         Dim oEncoder As System.Drawing.Imaging.Encoder
         Dim oEncoderParameter As System.Drawing.Imaging.EncoderParameter
         Dim oEncoderParameters As System.Drawing.Imaging.EncoderParameters

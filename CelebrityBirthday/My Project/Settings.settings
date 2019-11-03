@@ -17,10 +17,10 @@
     <Setting Name="imgselectpos" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ImgFolder" Type="System.String" Scope="User">
+    <Setting Name="ImgPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\CelebrityBirthday\Images</Value>
     </Setting>
-    <Setting Name="newimagepath" Type="System.String" Scope="User">
+    <Setting Name="NewImagePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\CelebrityBirthday\Images\new</Value>
     </Setting>
     <Setting Name="CelebrityBirthdayConnectionString" Type="(Connection string)" Scope="Application">

@@ -10,8 +10,8 @@
     End Sub
 
     Private Sub SaveOptions()
-        My.Settings.newimagepath = txtNewImagePath.Text
-        My.Settings.ImgFolder = txtImagePath.Text
+        My.Settings.NewImagePath = txtNewImagePath.Text
+        My.Settings.ImgPath = txtImagePath.Text
         My.Settings.TwitterFilePath = txtTwitterFilePath.Text
         My.Settings.twitterImageFolder = TxtTwitterImagePath.Text
         My.Settings.TwitterSearchUrl = txtTwitterSearch.Text
@@ -30,8 +30,8 @@
     End Sub
 
     Private Sub LoadOptions()
-        txtNewImagePath.Text = My.Settings.newimagepath
-        txtImagePath.Text = My.Settings.ImgFolder
+        txtNewImagePath.Text = My.Settings.NewImagePath
+        txtImagePath.Text = My.Settings.ImgPath
         txtTwitterFilePath.Text = My.Settings.TwitterFilePath
         TxtTwitterImagePath.Text = My.Settings.twitterImageFolder
         txtTwitterSearch.Text = My.Settings.TwitterSearchUrl

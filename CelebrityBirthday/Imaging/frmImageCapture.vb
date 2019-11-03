@@ -32,6 +32,24 @@ Public Class frmImageCapture
 #End Region
 #Region "properties"
     Private _imageFile As String
+    Private _forename As String
+    Private _surname As String
+    Public Property Surname() As String
+        Get
+            Return _surname
+        End Get
+        Set(ByVal value As String)
+            _surname = value
+        End Set
+    End Property
+    Public Property Forename() As String
+        Get
+            Return _forename
+        End Get
+        Set(ByVal value As String)
+            _forename = value
+        End Set
+    End Property
     Public Property ImageFile() As String
         Get
             Return _imageFile
@@ -42,11 +60,13 @@ Public Class frmImageCapture
     End Property
 #End Region
 #Region "Form"
-    Private Sub form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         iStartHeight = Me.Size.Height
         iStartWidth = Me.Size.Width
         cropBitmap = Nothing
         lblFilename.Text = _imageFile
+        TxtForename.Text = _forename
+        TxtSurname.Text = _surname
         Try
             Dim sizeMessage As String = ""
             imageShrinkRatio = 1
@@ -83,7 +103,7 @@ Public Class frmImageCapture
     ''' Shrink the image if necessary so that it can be displayed
     ''' Clear the crop selection
     ''' Display the image</remarks>
-    Private Sub btnLoadImage_Click(sender As Object, e As EventArgs) Handles BtnLoadImage.Click
+    Private Sub BtnLoadImage_Click(sender As Object, e As EventArgs) Handles BtnLoadImage.Click
         Try
             Dim oImageFilename As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Open, ImageUtil.ImageType.ALL)
             lblFilename.Text = Path.GetFileName(oImageFilename)
@@ -110,19 +130,19 @@ Public Class frmImageCapture
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
         ResetWindow()
         PicCapture.Image = Nothing
         ClearCropSelection()
         DisposeImages()
     End Sub
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        SaveImagePlain(PicCapture, PicCapture.Width, PicCapture.Height)
+        SaveImagePlain(PicCapture, PicCapture.Width, PicCapture.Height, False)
     End Sub
     Private Sub BtnSaveCroppedImage_Click(sender As Object, e As EventArgs) Handles BtnSaveCroppedImage.Click
-        SaveImagePlain(PreviewPictureBox, nudSaveSize.Value, nudSaveSize.Value)
+        SaveImagePlain(PreviewPictureBox, nudSaveSize.Value, nudSaveSize.Value, True)
     End Sub
-    Private Sub btnRotate_Click(sender As Object, e As EventArgs) Handles BtnRotate.Click
+    Private Sub BtnRotate_Click(sender As Object, e As EventArgs) Handles BtnRotate.Click
         If originalImage IsNot Nothing Then
             originalImage.RotateFlip(RotateFlipType.Rotate90FlipNone)
             DisplayRawImage(originalImage.Clone)
@@ -134,7 +154,7 @@ Public Class frmImageCapture
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub btnResetAdjustments_Click(sender As Object, e As EventArgs) Handles BtnResetAdjustments.Click
+    Private Sub BtnResetAdjustments_Click(sender As Object, e As EventArgs) Handles BtnResetAdjustments.Click
         TbBrightness.Value = 20
         TbContrast.Value = 10
         AdjustImage()
@@ -165,13 +185,22 @@ Public Class frmImageCapture
     End Sub
 #End Region
 #Region "Subroutines"
-    Private Sub SaveImagePlain(ByRef _pictureBox As PictureBox, _width As Integer, _height As Integer)
+    Private Sub SaveImagePlain(ByRef _pictureBox As PictureBox, _width As Integer, _height As Integer, Optional isCropped As Boolean = True)
         Try
-            Dim imageFileName As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Save, ImageUtil.ImageType.JPEG)
-            Dim w As Integer = _width
-            Dim h As Integer = _height
-            ImageUtil.SaveImageFromPictureBox(_pictureBox, w, h, imageFileName, ImageUtil.ImageType.JPEG)
-            DisplayStatus(SAVED_MESSAGE & imageFileName, False)
+            Dim _path As String = If(isCropped, My.Settings.ImgPath, My.Settings.NewImagePath)
+            Dim _filename As String = If(String.IsNullOrEmpty(TxtForename.Text), "", TxtForename.Text.ToLower.Trim) &
+                    If(String.IsNullOrEmpty(TxtSurname.Text) Or String.IsNullOrEmpty(TxtForename.Text), "", "_") &
+                    If(String.IsNullOrEmpty(TxtSurname.Text), "", TxtSurname.Text.ToLower.Trim) &
+                    If(String.IsNullOrEmpty(TxtSurname.Text) Or String.IsNullOrEmpty(TxtForename.Text), "", ".jpg")
+            Dim imageFileName As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Save, ImageUtil.ImageType.JPEG, _path, _filename)
+            If Not String.IsNullOrEmpty(imageFileName) Then
+                Dim w As Integer = _width
+                Dim h As Integer = _height
+                ImageUtil.SaveImageFromPictureBox(_pictureBox, w, h, imageFileName, ImageUtil.ImageType.JPEG)
+                DisplayStatus(SAVED_MESSAGE & imageFileName, False)
+            Else
+                DisplayStatus(NOT_SAVED_MESSAGE, False)
+            End If
         Catch ex As Exception
             DisplayStatus(NOT_SAVED_MESSAGE, True, ex)
         End Try
@@ -345,6 +374,13 @@ Public Class frmImageCapture
         Dim oGraphics As Graphics = ImageUtil.initialiseGraphics(oTargetBitmap)
         oGraphics.DrawImage(oSourceBitMap, oPoints, oRectangle, GraphicsUnit.Pixel, oImageAttributes)
         PreviewPictureBox.Image = oTargetBitmap
+    End Sub
+
+    Private Sub NudPenSize_ValueChanged(sender As Object, e As EventArgs) Handles nudPenSize.ValueChanged
+        cropPenSize = nudPenSize.Value
+        cropPen = New Pen(cropPenColor, cropPenSize) With {
+           .DashStyle = DashStyle.DashDot
+       }
     End Sub
 
 #End Region

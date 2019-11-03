@@ -3,7 +3,7 @@
 Imports System.Net
 Imports System.Reflection
 
-Public Class frmImageStore
+Public Class FrmImageStore
 #Region "variables"
     Dim b() As Byte '   Store picture bytes
     Dim sImagePath As String
@@ -38,7 +38,7 @@ Public Class frmImageStore
         TxtSurname.Text = _surname
         GetFormPos(Me, My.Settings.imgselectpos)
         sApplicationPath = My.Application.Info.DirectoryPath
-        sImagePath = My.Settings.newimagepath.Replace("<applicationpath>", sApplicationPath)
+        sImagePath = My.Settings.NewImagePath.Replace("<applicationpath>", sApplicationPath)
         OpenImageSearch()
         LblImagePath.Text = sImagePath
         lblPicUrl.Text = ""
@@ -48,7 +48,7 @@ Public Class frmImageStore
         isSaved = True
     End Sub
     Private Sub BtnSavepic_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSavepic.Click
-        sImagePath = My.Settings.newimagepath.Replace("<applicationpath>", sApplicationPath)
+        sImagePath = My.Settings.NewImagePath.Replace("<applicationpath>", sApplicationPath)
         If bLoadingPicture Then
             MsgBox("Picture still loading", MsgBoxStyle.Information)
             Exit Sub
@@ -141,10 +141,10 @@ Public Class frmImageStore
         Me.Close()
     End Sub
     Private Sub BtnSelFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelFolder.Click
-        FolderBrowserDialog1.SelectedPath = My.Settings.newimagepath
+        FolderBrowserDialog1.SelectedPath = My.Settings.NewImagePath
         If FolderBrowserDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
             Dim sFolder = FolderBrowserDialog1.SelectedPath
-            My.Settings.newimagepath = sFolder
+            My.Settings.NewImagePath = sFolder
             My.Settings.Save()
             LblImagePath.Text = sFolder
         End If
@@ -205,6 +205,8 @@ Public Class frmImageStore
     Private Sub BtnEditImage_Click(sender As Object, e As EventArgs) Handles BtnEditImage.Click
         Using _editImage As New frmImageCapture
             _editImage.ImageFile = _latestSavedFile
+            _editImage.Forename = TxtForename.Text
+            _editImage.Surname = TxtSurname.Text
             _editImage.ShowDialog()
         End Using
     End Sub

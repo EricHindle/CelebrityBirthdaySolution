@@ -105,7 +105,7 @@ Public Class ImageIdentity
     Private Function GetPhotoFromFile() As Image
         Dim _imageFromFile As Image = New Bitmap(60, 60)
         If Not String.IsNullOrEmpty(_imageFileName) Then
-            Dim _Filename As String = Path.Combine(My.Settings.ImgFolder, _imageFileName & _imageFileType)
+            Dim _Filename As String = Path.Combine(My.Settings.ImgPath, _imageFileName & _imageFileType)
             If My.Computer.FileSystem.FileExists(_Filename) Then
                 Try
                     _imageFromFile = Image.FromFile(_Filename)
