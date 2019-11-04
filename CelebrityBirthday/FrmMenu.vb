@@ -60,6 +60,8 @@
         Me.Show()
     End Sub
     Private Sub FrmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
+
         If My.Settings.callUpgrade = 0 Then
             My.Settings.Upgrade()
             My.Settings.callUpgrade = 1
@@ -74,4 +76,5 @@
         End Using
         Me.Show()
     End Sub
+
 End Class

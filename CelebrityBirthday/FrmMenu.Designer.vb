@@ -35,6 +35,7 @@ Partial Class FrmMenu
         Me.BtnTweet = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.BtnMore = New System.Windows.Forms.Button()
+        Me.Version = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -163,13 +164,28 @@ Partial Class FrmMenu
         Me.BtnMore.Text = "More..."
         Me.BtnMore.UseVisualStyleBackColor = True
         '
+        'Version
+        '
+        Me.Version.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Version.AutoSize = True
+        Me.Version.BackColor = System.Drawing.Color.Transparent
+        Me.Version.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Version.Location = New System.Drawing.Point(12, 652)
+        Me.Version.Name = "Version"
+        Me.Version.Size = New System.Drawing.Size(152, 22)
+        Me.Version.TabIndex = 12
+        Me.Version.Text = "Version {0}.{1}.{2}.{3}"
+        Me.Version.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        '
         'FrmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(377, 643)
+        Me.ClientSize = New System.Drawing.Size(377, 683)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Version)
         Me.Controls.Add(Me.BtnMore)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.BtnWordPress)
@@ -205,4 +221,5 @@ Partial Class FrmMenu
     Friend WithEvents BtnTweet As Button
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents BtnMore As Button
+    Friend WithEvents Version As Label
 End Class

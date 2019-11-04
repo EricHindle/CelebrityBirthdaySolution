@@ -157,7 +157,7 @@ Public Class FrmBotsd
     End Sub
 
     Public Sub AddList(ByRef _persons As List(Of Person))
-        Dim _pairRow As DataGridViewRow = dgvPairs.Rows(dgvPairs.Rows.Add())
+        Dim _pairRow As DataGridViewRow = DgvPairs.Rows(DgvPairs.Rows.Add())
         If _persons.Count > 0 Then
             _pairRow.Cells(pairId1.Name).Value = _persons(0).Id
             _pairRow.Cells(pairPerson1.Name).Value = _persons(0).Name
@@ -177,17 +177,17 @@ Public Class FrmBotsd
 
     End Sub
 
-    Private Sub dgvPairs_SelectionChanged(sender As Object, e As EventArgs) Handles dgvPairs.SelectionChanged
+    Private Sub DgvPairs_SelectionChanged(sender As Object, e As EventArgs) Handles DgvPairs.SelectionChanged
         GeneratePair()
     End Sub
 
     Private Sub GeneratePair()
-        If dgvPairs.SelectedRows.Count = 1 Then
+        If DgvPairs.SelectedRows.Count = 1 Then
             Try
-                Dim _pickPerson1 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
-                Dim _pickPerson2 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
-                Dim _pickPerson3 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
-                Dim _pickPerson4 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
+                Dim _pickPerson1 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
+                Dim _pickPerson2 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
+                Dim _pickPerson3 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
+                Dim _pickPerson4 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
                 _imageList = New List(Of Person)
                 chkSel1.Checked = False
                 ChkSel2.Checked = False
@@ -260,7 +260,7 @@ Public Class FrmBotsd
                 GeneratePicture(PictureBox1, _imageList, NudPic1Horizontal.Value)
                 GenerateText(_imageList)
             Catch ex As Exception
-            DisplayStatus("Person exception")
+                DisplayStatus("Person exception")
             End Try
         End If
     End Sub
@@ -280,9 +280,10 @@ Public Class FrmBotsd
                     _outString.Append(",")
                     _outString.Append(vbCrLf)
             End Select
-            _outString.Append(_person.ShortDesc.Trim("."))
-            _outString.Append(" ")
             _outString.Append(_person.Name)
+            _outString.Append(", ")
+            _outString.Append(_person.ShortDesc.Trim("."))
+            _outString.Append(",")
             _index += 1
         Next
         _outString.Append(vbCrLf)
@@ -306,13 +307,13 @@ Public Class FrmBotsd
     End Sub
 
     Private Sub BtnSwap_Click(sender As Object, e As EventArgs) Handles BtnSwap.Click
-        If dgvPairs.SelectedRows.Count = 1 Then
+        If DgvPairs.SelectedRows.Count = 1 Then
             Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked)
             If _selCount <> -2 Then
                 MsgBox("Select two persons", MsgBoxStyle.Exclamation, "Error")
                 Exit Sub
             End If
-            Dim _row As DataGridViewRow = dgvPairs.SelectedRows(0)
+            Dim _row As DataGridViewRow = DgvPairs.SelectedRows(0)
             Dim sel1IdCol As String
             Dim sel2IdCol As String
             Dim sel1NameCol As String
@@ -364,7 +365,7 @@ Public Class FrmBotsd
     End Sub
 
     Private Sub BtnUpdate1_Click(sender As Object, e As EventArgs) Handles BtnUpdate1.Click
-        Dim _pickPerson1 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
+        Dim _pickPerson1 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
         _pickPerson1.ShortDesc = TxtShortDesc1.Text
         If UpdateShortDesc(_pickPerson1) = 1 Then
             DisplayStatus("Updated person 1")
@@ -375,7 +376,7 @@ Public Class FrmBotsd
     End Sub
 
     Private Sub BtnUpdate2_Click(sender As Object, e As EventArgs) Handles BtnUpdate2.Click
-        Dim _pickPerson2 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
+        Dim _pickPerson2 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
         _pickPerson2.ShortDesc = TxtShortDesc2.Text
 
         If UpdateShortDesc(_pickPerson2) = 1 Then
@@ -385,7 +386,7 @@ Public Class FrmBotsd
         End If
     End Sub
     Private Sub BtnUpdate3_Click(sender As Object, e As EventArgs) Handles BtnUpdate3.Click
-        Dim _pickPerson3 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
+        Dim _pickPerson3 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
         _pickPerson3.ShortDesc = TxtShortDesc3.Text
 
         If UpdateShortDesc(_pickPerson3) = 1 Then
@@ -395,7 +396,7 @@ Public Class FrmBotsd
         End If
     End Sub
     Private Sub BtnUpdate4_Click(sender As Object, e As EventArgs) Handles BtnUpdate4.Click
-        Dim _pickPerson4 As Person = GetFullPersonById(dgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
+        Dim _pickPerson4 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
         _pickPerson4.ShortDesc = TxtShortDesc4.Text
 
         If UpdateShortDesc(_pickPerson4) = 1 Then

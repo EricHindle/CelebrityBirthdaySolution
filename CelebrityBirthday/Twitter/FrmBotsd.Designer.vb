@@ -32,7 +32,7 @@ Partial Class FrmBotsd
         Me.Label2 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.rtbFile1 = New System.Windows.Forms.RichTextBox()
-        Me.dgvPairs = New System.Windows.Forms.DataGridView()
+        Me.DgvPairs = New System.Windows.Forms.DataGridView()
         Me.pairPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairPerson3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -83,7 +83,7 @@ Partial Class FrmBotsd
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dgvPairs, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvPairs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -189,24 +189,24 @@ Partial Class FrmBotsd
         Me.rtbFile1.TabIndex = 14
         Me.rtbFile1.Text = ""
         '
-        'dgvPairs
+        'DgvPairs
         '
-        Me.dgvPairs.AllowUserToAddRows = False
-        Me.dgvPairs.AllowUserToDeleteRows = False
-        Me.dgvPairs.AllowUserToResizeColumns = False
-        Me.dgvPairs.AllowUserToResizeRows = False
-        Me.dgvPairs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.DgvPairs.AllowUserToAddRows = False
+        Me.DgvPairs.AllowUserToDeleteRows = False
+        Me.DgvPairs.AllowUserToResizeColumns = False
+        Me.DgvPairs.AllowUserToResizeRows = False
+        Me.DgvPairs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.dgvPairs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pairPerson1, Me.pairPerson2, Me.pairPerson3, Me.pairPerson4, Me.pairId1, Me.pairId2, Me.pairId3, Me.pairId4})
-        Me.dgvPairs.Location = New System.Drawing.Point(12, 74)
-        Me.dgvPairs.MultiSelect = False
-        Me.dgvPairs.Name = "dgvPairs"
-        Me.dgvPairs.ReadOnly = True
-        Me.dgvPairs.RowHeadersVisible = False
-        Me.dgvPairs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvPairs.Size = New System.Drawing.Size(605, 285)
-        Me.dgvPairs.TabIndex = 36
+        Me.DgvPairs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pairPerson1, Me.pairPerson2, Me.pairPerson3, Me.pairPerson4, Me.pairId1, Me.pairId2, Me.pairId3, Me.pairId4})
+        Me.DgvPairs.Location = New System.Drawing.Point(12, 74)
+        Me.DgvPairs.MultiSelect = False
+        Me.DgvPairs.Name = "DgvPairs"
+        Me.DgvPairs.ReadOnly = True
+        Me.DgvPairs.RowHeadersVisible = False
+        Me.DgvPairs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvPairs.Size = New System.Drawing.Size(605, 285)
+        Me.DgvPairs.TabIndex = 36
         '
         'pairPerson1
         '
@@ -699,7 +699,7 @@ Partial Class FrmBotsd
         Me.Controls.Add(Me.rtbFile1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.BtnSend)
-        Me.Controls.Add(Me.dgvPairs)
+        Me.Controls.Add(Me.DgvPairs)
         Me.Controls.Add(Me.NudPic1Horizontal)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.PictureBox1)
@@ -715,7 +715,7 @@ Partial Class FrmBotsd
         Me.StatusStrip1.PerformLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dgvPairs, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvPairs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -737,7 +737,7 @@ Partial Class FrmBotsd
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents rtbFile1 As RichTextBox
-    Friend WithEvents dgvPairs As DataGridView
+    Friend WithEvents DgvPairs As DataGridView
     Friend WithEvents TxtForename1 As TextBox
     Friend WithEvents TxtSurname1 As TextBox
     Friend WithEvents TxtShortDesc1 As TextBox
