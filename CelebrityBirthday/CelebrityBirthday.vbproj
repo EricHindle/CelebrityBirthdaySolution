@@ -162,6 +162,7 @@
     <Compile Include="frmGlobalSettings.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="Imaging\frmImageCapture.designer.vb">
       <DependentUpon>frmImageCapture.vb</DependentUpon>
     </Compile>

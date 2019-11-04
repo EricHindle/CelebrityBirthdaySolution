@@ -111,6 +111,7 @@ Partial Class FrmUpdateDatabase
         Me.Label4 = New System.Windows.Forms.Label()
         Me.BtnTitleName = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.BtnToday = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -1011,12 +1012,24 @@ Partial Class FrmUpdateDatabase
         Me.Button2.TabIndex = 132
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'BtnToday
+        '
+        Me.BtnToday.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnToday.Location = New System.Drawing.Point(837, 16)
+        Me.BtnToday.Name = "BtnToday"
+        Me.BtnToday.Size = New System.Drawing.Size(72, 28)
+        Me.BtnToday.TabIndex = 133
+        Me.BtnToday.Text = "Today"
+        Me.BtnToday.UseVisualStyleBackColor = True
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1271, 859)
+        Me.Controls.Add(Me.BtnToday)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.BtnTitleName)
         Me.Controls.Add(Me.Label4)
@@ -1179,4 +1192,5 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents Label4 As Label
     Friend WithEvents BtnTitleName As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents BtnToday As Button
 End Class

@@ -492,7 +492,6 @@ Public Class FrmTweet
             SendTheTweet(GetRichTextBoxFromPage(TabControl1.SelectedTab).Text, _filename)
         End If
         WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
-
     End Sub
     Private Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
         DisplayStatus("Sending Tweet")
@@ -559,8 +558,8 @@ Public Class FrmTweet
         Return ListOfLists
     End Function
     Private Function GetNumberOfPersonsPerTweet(oPersonListCount As Integer, _type As String, oNumberOfTweets As Integer) As Integer
-        Dim _nudValue As Integer = 0
-        Dim _numberOfPersonsPerTweet As Integer = 0
+        Dim _nudValue As Integer
+        Dim _numberOfPersonsPerTweet As Integer
         If _type.ToLower = "b" Then
             _nudValue = NudBirthdaysPerTweet.Value
         Else

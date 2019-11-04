@@ -1,12 +1,12 @@
 ﻿Imports System.Text
 Imports System.IO
 Imports System.Net
+Imports CelebrityBirthday
 
 Public Class FrmUpdateDatabase
 #Region "variables"
     Private personTable As List(Of Person)
     Private bLoadingPerson As Boolean = False
-    Private _search As FrmBrowser = Nothing
     Private _browser As FrmBrowser
     Private findPersonInList As Integer = -1
     Private isGotBirthName As Boolean = False
@@ -22,6 +22,17 @@ Public Class FrmUpdateDatabase
         End Get
         Set(ByVal value As Integer)
             _personId = value
+        End Set
+    End Property
+
+    Public Property Search As FrmBrowser = Nothing
+
+    Public Property Browser As FrmBrowser
+        Get
+            Return _browser
+        End Get
+        Set(value As FrmBrowser)
+            _browser = value
         End Set
     End Property
 #End Region
@@ -204,7 +215,7 @@ Public Class FrmUpdateDatabase
         UpdateAll()
     End Sub
     Private Sub BtnLoadTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoadTable.Click, cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
-        clearStatus()
+        ClearStatus()
         If CheckForChanges(personTable) Then
             If MsgBox("Save unsaved changes now?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Unsaved Changes") = MsgBoxResult.Yes Then
                 UpdateAll()
@@ -258,7 +269,7 @@ Public Class FrmUpdateDatabase
         AppendStatus(" - Complete")
     End Sub
     Private Sub LbPeople_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbPeople.SelectedIndexChanged
-        clearStatus()
+        ClearStatus()
         SwapText("Text")
         bLoadingPerson = True
         If lbPeople.SelectedIndex >= 0 Then
@@ -270,7 +281,7 @@ Public Class FrmUpdateDatabase
         bLoadingPerson = False
     End Sub
     Private Sub BtnUpdateSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateSel.Click
-        clearStatus()
+        ClearStatus()
         If lbPeople.SelectedIndex >= 0 Then
             ShowStatus("Updating Database")
             StatusStrip1.Refresh()
@@ -285,7 +296,7 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub BtnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
-        clearStatus()
+        ClearStatus()
         TidyText()
         If lblID.Text.Length > 0 Then
             Dim id As Integer = CInt(lblID.Text)
@@ -316,11 +327,11 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub FrmAddCbdy_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If _search IsNot Nothing AndAlso Not _search.IsDisposed Then
-            _search.Close()
+        If Search IsNot Nothing AndAlso Not Search.IsDisposed Then
+            Search.Close()
         End If
-        If _browser IsNot Nothing AndAlso Not _browser.IsDisposed Then
-            _browser.Close()
+        If Browser IsNot Nothing AndAlso Not Browser.IsDisposed Then
+            Browser.Close()
         End If
         My.Settings.updformpos = SetFormPos(Me)
         My.Settings.Save()
@@ -376,12 +387,12 @@ Public Class FrmUpdateDatabase
         ElseIf txtName.TextLength > 0 Then
             item = Split(txtName.Text, " ")
         End If
-        If _browser Is Nothing OrElse _browser.IsDisposed Then
-            _browser = New FrmBrowser
+        If Browser Is Nothing OrElse Browser.IsDisposed Then
+            Browser = New FrmBrowser
         End If
-        _browser.SearchName = Join(item, " ").Trim
-        _browser.FindinWiki()
-        _browser.Show()
+        Browser.SearchName = Join(item, " ").Trim
+        Browser.FindinWiki()
+        Browser.Show()
 
 
     End Sub
@@ -491,12 +502,12 @@ Public Class FrmUpdateDatabase
                 ShowStatus("Dead")
                 Exit Sub
             End If
-            If _search Is Nothing OrElse _search.IsDisposed Then
-                _search = New FrmBrowser
+            If Search Is Nothing OrElse Search.IsDisposed Then
+                Search = New FrmBrowser
             End If
-            _search.Show()
-            _search.SearchName = oPerson.ForeName.Trim & " " & oPerson.Surname.Trim
-            _search.FindInTwitter()
+            Search.Show()
+            Search.SearchName = oPerson.ForeName.Trim & " " & oPerson.Surname.Trim
+            Search.FindInTwitter()
         End If
     End Sub
 #End Region
@@ -860,7 +871,7 @@ Public Class FrmUpdateDatabase
             _wordpress.ShowDialog()
         End Using
 
-        clearStatus()
+        ClearStatus()
     End Sub
     Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False)
         lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
@@ -869,7 +880,7 @@ Public Class FrmUpdateDatabase
     Private Sub AppendStatus(pText As String)
         ShowStatus(pText, True)
     End Sub
-    Private Sub clearStatus()
+    Private Sub ClearStatus()
         ShowStatus("", False)
     End Sub
     Private Sub BtnImageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnImageLoadUpd.Click
@@ -934,6 +945,9 @@ Public Class FrmUpdateDatabase
             UseTitleName()
         End If
     End Sub
-
+    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
+        cboDay.SelectedIndex = Today.Day - 1
+        cboMonth.SelectedIndex = Today.Month - 1
+    End Sub
 #End Region
 End Class

@@ -28,13 +28,13 @@
         "Entry"
         {
         "MsmKey" = "8:_4755CE8DE735CD8FD625B88A470E5490"
-        "OwnerKey" = "8:_06C716F18158FE528E14F533DB7F39FF"
+        "OwnerKey" = "8:_D45E564116E443A5815B939302B8E6B8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_4755CE8DE735CD8FD625B88A470E5490"
-        "OwnerKey" = "8:_D45E564116E443A5815B939302B8E6B8"
+        "OwnerKey" = "8:_06C716F18158FE528E14F533DB7F39FF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -88,19 +88,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_06C716F18158FE528E14F533DB7F39FF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B821BFB22F08F7EE65FCC1AF83CD45E3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D64C19E980B77275548719B50F9125BF"
+        "OwnerKey" = "8:_4755CE8DE735CD8FD625B88A470E5490"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,7 +100,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4755CE8DE735CD8FD625B88A470E5490"
+        "OwnerKey" = "8:_D64C19E980B77275548719B50F9125BF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B821BFB22F08F7EE65FCC1AF83CD45E3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_06C716F18158FE528E14F533DB7F39FF"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -217,11 +217,6 @@
             "AssemblyAsmDisplayName" = "8:TweetSharp, Version=6.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_06C716F18158FE528E14F533DB7F39FF"
-                    {
-                    "Name" = "8:TweetSharp.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:TweetSharp.dll"
             "TargetName" = "8:"
@@ -248,11 +243,6 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_4755CE8DE735CD8FD625B88A470E5490"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -279,11 +269,6 @@
             "AssemblyAsmDisplayName" = "8:Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B821BFB22F08F7EE65FCC1AF83CD45E3"
-                    {
-                    "Name" = "8:Hammock.ClientProfile.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Hammock.ClientProfile.dll"
             "TargetName" = "8:"
@@ -330,11 +315,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D64C19E980B77275548719B50F9125BF"
-                    {
-                    "Name" = "8:System.Net.Http.Formatting.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.Formatting.dll"
             "TargetName" = "8:"
@@ -361,11 +341,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_EFED33DE5BE57117F32012EC6C51A2B3"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -460,7 +435,7 @@
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.25.2"
+        "ProductVersion" = "8:1.25.0"
         "Manufacturer" = "8:netWYrks"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
