@@ -366,29 +366,14 @@ Public Class TwitterOAuth
                 p.Credentials = New NetworkCredential(Globals.Proxy_Username, Globals.Proxy_Password)
                 Request.Proxy = p
             End If
-            'Dim _webHeaderCollection As New WebHeaderCollection
-            'Dim qs As NameValueCollection = HttpUtility.ParseQueryString(PostData)
-
-            '_webHeaderCollection.Add(qs)
-
-            ''Dim _headers As String() = Split(PostData, "&")
-            ''For Each _header As String In _headers
-            '    _webHeaderCollection.Add(_header.Replace("=", ":"))
-            'Next
-
             Request.Headers.Add("Authorization", "OAuth " + PostData.Replace("&", ","))
-
-            Debug.Print(Request.Headers.Item("Authorization"))
-
             Dim wr As System.Net.WebResponse = Request.GetResponse
             Globals.API_HourlyLimit = wr.Headers("X-RateLimit-Limit")
             Globals.API_RemainingHits = wr.Headers("X-RateLimit-Remaining")
             Globals.API_Reset = wr.Headers("X-RateLimit-Reset")
-
             Using ResponseReader As New StreamReader(wr.GetResponseStream())
                 Return ResponseReader.ReadToEnd
             End Using
-
         Catch ex As Exception
             Dim Message As String = Nothing
             If TypeOf ex Is WebException Then

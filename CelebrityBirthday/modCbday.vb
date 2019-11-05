@@ -255,9 +255,6 @@ Module modCbday
         Dim _post As String = _string.Substring(_lastClose + 1)
         Dim _pre As String = _string.Substring(0, _firstOpen)
         Dim _inner As String = _string.Substring(_firstOpen + 1, _lastClose - _firstOpen - 1)
-        Debug.Print(_pre)
-        Debug.Print(_inner)
-        Debug.Print(_post)
         Return MakeList(_pre, _inner, _post)
     End Function
 

@@ -257,7 +257,6 @@ Public Class frmTwitterOutput
     Private Sub WriteNodesToTweet(_outfile As StreamWriter, _date As String, _header As String, _tweetNodes As List(Of TreeNode), _firstTweetToWrite As Integer, _lastTweetToWrite As Integer, _footer As String)
         Dim _length As Integer = 0
         _length += WriteHeader(_outfile, _date, _header)
-        Debug.Print(CStr(_length))
         For _tweetNumber = _firstTweetToWrite To _lastTweetToWrite
             If _tweetNumber < _tweetNodes.Count Then
                 _length += WriteTweetLine(_outfile, _tweetNodes(_tweetNumber))
@@ -278,13 +277,11 @@ Public Class frmTwitterOutput
             _outfile.WriteLine(_footer)
         End If
         _length += _footer.Length + 1
-        Debug.Print(_footer & " " & CStr(_footer.Length + 1))
         _outfile.WriteLine("----------------------------------- " & CStr(_length))
     End Sub
     Private Function WriteTweetLine(_outfile As StreamWriter, _personNode As TreeNode) As Integer
         Dim _nextLine As String = MakeTweetLine(_personNode)
         _outfile.WriteLine(_nextLine)
-        Debug.Print(_nextLine & " " & CStr(_nextLine.Length + 1))
         Return _nextLine.Length + 1
     End Function
     Private Function MakeTweetLine(_personNode As TreeNode) As String

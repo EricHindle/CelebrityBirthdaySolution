@@ -204,9 +204,7 @@ Public Class frmImageCapture
                     If(String.IsNullOrEmpty(TxtSurname.Text) Or String.IsNullOrEmpty(TxtForename.Text), "", ".jpg")
             Dim imageFileName As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Save, ImageUtil.ImageType.JPEG, _path, _filename)
             If Not String.IsNullOrEmpty(imageFileName) Then
-                Dim w As Integer = _width
-                Dim h As Integer = _height
-                ImageUtil.SaveImageFromPictureBox(_pictureBox, w, h, imageFileName, ImageUtil.ImageType.JPEG)
+                ImageUtil.SaveImageFromPictureBox(_pictureBox, _width, _height, imageFileName, ImageUtil.ImageType.JPEG)
                 imageFile = imageFileName
                 DisplayStatus(SAVED_MESSAGE & imageFileName, False)
             Else

@@ -141,7 +141,7 @@ Partial Class frmImageCapture
         Me.PreviewPictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PreviewPictureBox.BackColor = System.Drawing.Color.LightSteelBlue
         Me.PreviewPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PreviewPictureBox.Location = New System.Drawing.Point(778, 40)
+        Me.PreviewPictureBox.Location = New System.Drawing.Point(805, 40)
         Me.PreviewPictureBox.Name = "PreviewPictureBox"
         Me.PreviewPictureBox.Size = New System.Drawing.Size(60, 60)
         Me.PreviewPictureBox.TabIndex = 29

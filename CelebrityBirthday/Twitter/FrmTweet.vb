@@ -652,7 +652,6 @@ Public Class FrmTweet
                 Dim _person1 As Person = _fullList(0)
                 _fullList.RemoveAt(0)
                 For Each _person2 In _fullList
-                    Debug.Print(_person2.Name & " " & Format(_person2.DateOfBirth, "dd MMM yyyy"))
                     If _person1.DateOfBirth = _person2.DateOfBirth Then
                         _sameYearList.Add(_person2)
                     End If
