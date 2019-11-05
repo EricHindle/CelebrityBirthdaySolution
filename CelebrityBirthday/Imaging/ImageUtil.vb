@@ -39,13 +39,13 @@ Public Class ImageUtil
         Return iFormat
     End Function
     Public Shared Function SaveImageFromPictureBox(ByVal oPicture As PictureBox, ByVal targetWidth As Integer, ByVal targetHeight As Integer, ByVal targetFile As String, Optional ByVal imgType As ImageType = ImageType.JPEG) As String
-        Dim targetBitmap As System.Drawing.Bitmap = resizeImageToBitmap(oPicture.Image, targetWidth, targetHeight)
 
+        Dim targetBitmap As System.Drawing.Bitmap = ResizeImageToBitmap(oPicture.Image, targetWidth, targetHeight)
         If Not String.IsNullOrEmpty(targetFile) Then
             Try
-                targetBitmap.Save(targetFile, getCodecInfo(imgType), getEncoderParameters)
+                targetBitmap.Save(targetFile, GetCodecInfo(imgType), GetEncoderParameters)
             Catch ex As Exception
-                MsgBox(targetFile & ":" & ex.Message, MsgBoxStyle.Exclamation, "Error")
+                MsgBox(targetFile & " : " & ex.Message, MsgBoxStyle.Exclamation, "Error")
             End Try
         End If
         targetBitmap.Dispose()
@@ -151,7 +151,7 @@ Public Class ImageUtil
         Dim oEncoderParameters As System.Drawing.Imaging.EncoderParameters
         oEncoder = System.Drawing.Imaging.Encoder.Quality
         oEncoderParameters = New System.Drawing.Imaging.EncoderParameters(1)
-        oEncoderParameter = New System.Drawing.Imaging.EncoderParameter(oEncoder, 60L)
+        oEncoderParameter = New System.Drawing.Imaging.EncoderParameter(oEncoder, 100L)
         oEncoderParameters.Param(0) = oEncoderParameter
         Return oEncoderParameters
     End Function

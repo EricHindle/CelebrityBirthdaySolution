@@ -15,6 +15,15 @@ Public Class FrmImageStore
 #Region "properties"
     Private _forename As String
     Private _surname As String
+    Private _savedImage As String
+    Public Property SavedImage() As String
+        Get
+            Return _savedImage
+        End Get
+        Set(ByVal value As String)
+            _savedImage = value
+        End Set
+    End Property
     Public Property Surname() As String
         Get
             Return _surname
@@ -203,11 +212,13 @@ Public Class FrmImageStore
     End Function
 
     Private Sub BtnEditImage_Click(sender As Object, e As EventArgs) Handles BtnEditImage.Click
+        _savedImage = Nothing
         Using _editImage As New frmImageCapture
             _editImage.ImageFile = _latestSavedFile
             _editImage.Forename = TxtForename.Text
             _editImage.Surname = TxtSurname.Text
             _editImage.ShowDialog()
+            _savedImage = _editImage.SavedImage
         End Using
     End Sub
 

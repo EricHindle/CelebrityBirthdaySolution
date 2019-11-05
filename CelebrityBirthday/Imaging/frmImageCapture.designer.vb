@@ -33,7 +33,7 @@ Partial Class frmImageCapture
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PreviewPictureBox = New System.Windows.Forms.PictureBox()
         Me.BtnClear = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblCroppedImage = New System.Windows.Forms.Label()
         Me.BtnLoadImage = New System.Windows.Forms.Button()
         Me.BtnSaveCroppedImage = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -48,6 +48,8 @@ Partial Class frmImageCapture
         Me.nudSaveSize = New System.Windows.Forms.NumericUpDown()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.nudPenSize = New System.Windows.Forms.NumericUpDown()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.rbYellow = New System.Windows.Forms.RadioButton()
         Me.rbRed = New System.Windows.Forms.RadioButton()
         Me.rbWhite = New System.Windows.Forms.RadioButton()
@@ -55,8 +57,7 @@ Partial Class frmImageCapture
         Me.BtnSave = New System.Windows.Forms.Button()
         Me.TxtSurname = New System.Windows.Forms.TextBox()
         Me.TxtForename = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.nudPenSize = New System.Windows.Forms.NumericUpDown()
+        Me.BtnResize = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PicCapture, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PreviewPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -140,9 +141,9 @@ Partial Class frmImageCapture
         Me.PreviewPictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PreviewPictureBox.BackColor = System.Drawing.Color.LightSteelBlue
         Me.PreviewPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PreviewPictureBox.Location = New System.Drawing.Point(785, 39)
+        Me.PreviewPictureBox.Location = New System.Drawing.Point(778, 40)
         Me.PreviewPictureBox.Name = "PreviewPictureBox"
-        Me.PreviewPictureBox.Size = New System.Drawing.Size(120, 120)
+        Me.PreviewPictureBox.Size = New System.Drawing.Size(60, 60)
         Me.PreviewPictureBox.TabIndex = 29
         Me.PreviewPictureBox.TabStop = False
         '
@@ -157,16 +158,16 @@ Partial Class frmImageCapture
         Me.BtnClear.Text = "Clear Image"
         Me.BtnClear.UseVisualStyleBackColor = True
         '
-        'Label2
+        'lblCroppedImage
         '
-        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(765, 9)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(140, 27)
-        Me.Label2.TabIndex = 10
-        Me.Label2.Text = "Cropped Image"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.lblCroppedImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblCroppedImage.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCroppedImage.Location = New System.Drawing.Point(765, 9)
+        Me.lblCroppedImage.Name = "lblCroppedImage"
+        Me.lblCroppedImage.Size = New System.Drawing.Size(140, 27)
+        Me.lblCroppedImage.TabIndex = 10
+        Me.lblCroppedImage.Text = "Cropped Image"
+        Me.lblCroppedImage.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'BtnLoadImage
         '
@@ -302,7 +303,7 @@ Partial Class frmImageCapture
         'nudSaveSize
         '
         Me.nudSaveSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nudSaveSize.Location = New System.Drawing.Point(847, 175)
+        Me.nudSaveSize.Location = New System.Drawing.Point(833, 175)
         Me.nudSaveSize.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
         Me.nudSaveSize.Minimum = New Decimal(New Integer() {60, 0, 0, 0})
         Me.nudSaveSize.Name = "nudSaveSize"
@@ -315,7 +316,7 @@ Partial Class frmImageCapture
         Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(766, 177)
+        Me.Label5.Location = New System.Drawing.Point(756, 177)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(66, 21)
         Me.Label5.TabIndex = 43
@@ -336,6 +337,28 @@ Partial Class frmImageCapture
         Me.GroupBox1.TabIndex = 44
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Pen"
+        '
+        'nudPenSize
+        '
+        Me.nudPenSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nudPenSize.Location = New System.Drawing.Point(77, 77)
+        Me.nudPenSize.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.nudPenSize.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudPenSize.Name = "nudPenSize"
+        Me.nudPenSize.Size = New System.Drawing.Size(35, 23)
+        Me.nudPenSize.TabIndex = 45
+        Me.nudPenSize.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label7
+        '
+        Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(15, 79)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(53, 19)
+        Me.Label7.TabIndex = 44
+        Me.Label7.Text = "Pen size"
         '
         'rbYellow
         '
@@ -408,35 +431,24 @@ Partial Class frmImageCapture
         Me.TxtForename.Size = New System.Drawing.Size(184, 23)
         Me.TxtForename.TabIndex = 80
         '
-        'Label7
+        'BtnResize
         '
-        Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(15, 79)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(53, 19)
-        Me.Label7.TabIndex = 44
-        Me.Label7.Text = "Pen size"
-        '
-        'nudPenSize
-        '
-        Me.nudPenSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nudPenSize.Location = New System.Drawing.Point(77, 77)
-        Me.nudPenSize.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.nudPenSize.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudPenSize.Name = "nudPenSize"
-        Me.nudPenSize.Size = New System.Drawing.Size(35, 23)
-        Me.nudPenSize.TabIndex = 45
-        Me.nudPenSize.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.BtnResize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnResize.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnResize.Location = New System.Drawing.Point(897, 174)
+        Me.BtnResize.Name = "BtnResize"
+        Me.BtnResize.Size = New System.Drawing.Size(25, 23)
+        Me.BtnResize.TabIndex = 82
+        Me.BtnResize.Text = "*"
+        Me.BtnResize.UseVisualStyleBackColor = True
         '
         'frmImageCapture
         '
-        Me.AcceptButton = Me.BtnClose
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(934, 518)
+        Me.Controls.Add(Me.BtnResize)
         Me.Controls.Add(Me.TxtSurname)
         Me.Controls.Add(Me.TxtForename)
         Me.Controls.Add(Me.BtnSave)
@@ -450,7 +462,7 @@ Partial Class frmImageCapture
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.BtnSaveCroppedImage)
         Me.Controls.Add(Me.BtnLoadImage)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lblCroppedImage)
         Me.Controls.Add(Me.BtnClear)
         Me.Controls.Add(Me.PreviewPictureBox)
         Me.Controls.Add(Me.Label1)
@@ -489,7 +501,7 @@ Partial Class frmImageCapture
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents PreviewPictureBox As System.Windows.Forms.PictureBox
     Friend WithEvents BtnClear As System.Windows.Forms.Button
-    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents lblCroppedImage As System.Windows.Forms.Label
     Friend WithEvents BtnLoadImage As System.Windows.Forms.Button
     Friend WithEvents BtnSaveCroppedImage As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -514,4 +526,5 @@ Partial Class frmImageCapture
     Friend WithEvents TxtForename As TextBox
     Friend WithEvents nudPenSize As NumericUpDown
     Friend WithEvents Label7 As Label
+    Friend WithEvents BtnResize As Button
 End Class

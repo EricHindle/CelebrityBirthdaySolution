@@ -34,6 +34,15 @@ Public Class frmImageCapture
     Private _imageFile As String
     Private _forename As String
     Private _surname As String
+    Private _savedImage As String
+    Public Property SavedImage() As String
+        Get
+            Return _savedImage
+        End Get
+        Set(ByVal value As String)
+            _savedImage = value
+        End Set
+    End Property
     Public Property Surname() As String
         Get
             Return _surname
@@ -140,7 +149,7 @@ Public Class frmImageCapture
         SaveImagePlain(PicCapture, PicCapture.Width, PicCapture.Height, False)
     End Sub
     Private Sub BtnSaveCroppedImage_Click(sender As Object, e As EventArgs) Handles BtnSaveCroppedImage.Click
-        SaveImagePlain(PreviewPictureBox, nudSaveSize.Value, nudSaveSize.Value, True)
+        _savedImage = SaveImagePlain(PreviewPictureBox, nudSaveSize.Value, nudSaveSize.Value, True)
     End Sub
     Private Sub BtnRotate_Click(sender As Object, e As EventArgs) Handles BtnRotate.Click
         If originalImage IsNot Nothing Then
@@ -185,11 +194,12 @@ Public Class frmImageCapture
     End Sub
 #End Region
 #Region "Subroutines"
-    Private Sub SaveImagePlain(ByRef _pictureBox As PictureBox, _width As Integer, _height As Integer, Optional isCropped As Boolean = True)
+    Private Function SaveImagePlain(ByRef _pictureBox As PictureBox, _width As Integer, _height As Integer, Optional isCropped As Boolean = True) As String
+        Dim imageFile As String = Nothing
         Try
             Dim _path As String = If(isCropped, My.Settings.ImgPath, My.Settings.NewImagePath)
             Dim _filename As String = If(String.IsNullOrEmpty(TxtForename.Text), "", TxtForename.Text.ToLower.Trim) &
-                    If(String.IsNullOrEmpty(TxtSurname.Text) Or String.IsNullOrEmpty(TxtForename.Text), "", "_") &
+                    If(String.IsNullOrEmpty(TxtSurname.Text) Or String.IsNullOrEmpty(TxtForename.Text), "", "-") &
                     If(String.IsNullOrEmpty(TxtSurname.Text), "", TxtSurname.Text.ToLower.Trim) &
                     If(String.IsNullOrEmpty(TxtSurname.Text) Or String.IsNullOrEmpty(TxtForename.Text), "", ".jpg")
             Dim imageFileName As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Save, ImageUtil.ImageType.JPEG, _path, _filename)
@@ -197,6 +207,7 @@ Public Class frmImageCapture
                 Dim w As Integer = _width
                 Dim h As Integer = _height
                 ImageUtil.SaveImageFromPictureBox(_pictureBox, w, h, imageFileName, ImageUtil.ImageType.JPEG)
+                imageFile = imageFileName
                 DisplayStatus(SAVED_MESSAGE & imageFileName, False)
             Else
                 DisplayStatus(NOT_SAVED_MESSAGE, False)
@@ -204,7 +215,8 @@ Public Class frmImageCapture
         Catch ex As Exception
             DisplayStatus(NOT_SAVED_MESSAGE, True, ex)
         End Try
-    End Sub
+        Return imageFile
+    End Function
     Private Sub DisplayStatus(ByVal sText As String, isMessageBox As Boolean, Optional ex As Exception = Nothing, Optional _style As MsgBoxStyle = MsgBoxStyle.Exclamation)
         lblStatus.Text = sText
         StatusStrip1.Refresh()
@@ -381,6 +393,27 @@ Public Class frmImageCapture
         cropPen = New Pen(cropPenColor, cropPenSize) With {
            .DashStyle = DashStyle.DashDot
        }
+    End Sub
+
+    Private Sub nudSaveSize_ValueChanged(sender As Object, e As EventArgs) Handles nudSaveSize.ValueChanged
+        ResizeCroppedImage()
+    End Sub
+
+    Private Sub ResizeCroppedImage()
+        Try
+            PreviewPictureBox.Size = New Size(nudSaveSize.Value, nudSaveSize.Value)
+            PreviewPictureBox.Location = New Point(lblCroppedImage.Location.X + (lblCroppedImage.Size.Width - PreviewPictureBox.Size.Width) / 2, PreviewPictureBox.Location.Y)
+            If cropWidth > 0 And cropHeight > 0 Then
+                CaptureCroppedArea()
+            End If
+        Catch ex As Exception
+            DisplayStatus("Error resizing cropped image", True, ex)
+        End Try
+
+    End Sub
+
+    Private Sub BtnResize_Click(sender As Object, e As EventArgs) Handles BtnResize.Click
+
     End Sub
 
 #End Region

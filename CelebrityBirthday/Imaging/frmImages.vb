@@ -40,12 +40,26 @@ Public Class FrmImages
         End If
     End Sub
     Private Sub BtnFindImage_Click(sender As Object, e As EventArgs) Handles BtnFindImage.Click
-        Using _imagestore As New frmImageStore
+        Dim _savedFile As String = Nothing
+        Using _imagestore As New FrmImageStore
             _imagestore.Forename = TxtForename.Text.Trim
             _imagestore.Surname = TxtSurname.Text.Trim
             _imagestore.ShowDialog()
+            _savedFile = _imagestore.SavedImage
         End Using
+        If Not String.IsNullOrEmpty(_savedFile) Then
+            ReplaceImageFile(_savedFile)
+        End If
     End Sub
+
+    Private Sub ReplaceImageFile(savedFile As String)
+        If MsgBox("Use new saved file?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "New image") = MsgBoxResult.Yes Then
+            txtImgName.Text = Path.GetFileNameWithoutExtension(savedFile)
+            TxtImageFilename.Text = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.SelectedItem)
+            PictureBox2.ImageLocation = TxtImageFilename.Text
+        End If
+    End Sub
+
     Private Sub BirthDate_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         lblStatus.Text = String.Empty
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
