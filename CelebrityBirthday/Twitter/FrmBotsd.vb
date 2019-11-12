@@ -277,7 +277,6 @@ Public Class FrmBotsd
                     _outString.Append(vbCrLf)
                     _outString.Append("and ")
                 Case Else
-                    _outString.Append(",")
                     _outString.Append(vbCrLf)
             End Select
             _outString.Append(_person.Name)
