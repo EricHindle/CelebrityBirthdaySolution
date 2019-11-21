@@ -108,8 +108,11 @@ Public Class FrmTweet
         cboMonth.SelectedIndex = Today.Month - 1
     End Sub
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
-        BuildTrees()
-        GenerateAllTweets()
+        If BuildTrees() Then
+            GenerateAllTweets()
+        Else
+            DisplayStatus("No people selected")
+        End If
     End Sub
     Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
         GenerateAllTweets()
@@ -291,8 +294,9 @@ Public Class FrmTweet
     End Function
 #End Region
 #Region "Tree subroutines"
-    Private Sub BuildTrees()
+    Private Function BuildTrees() As Boolean
         isBuildingTrees = True
+        Dim isBuiltOk As Boolean = False
         DisplayStatus("Selecting...")
         tvBirthday.Nodes.Clear()
         personTable.Clear()
@@ -307,11 +311,13 @@ Public Class FrmTweet
             AddTypeNode(oAnniversaryList, testDate, tvBirthday, "Anniversary")
             AddTypeNode(oBirthdayList, testDate, tvBirthday, "Birthday")
             DisplayStatus("Selection Complete")
+            isBuiltOk = True
         Else
             MsgBox("Select a date", MsgBoxStyle.Exclamation, "Error")
         End If
         isBuildingTrees = False
-    End Sub
+        Return isBuiltOk
+    End Function
     Private Function AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, _treeView As TreeView, _type As String) As TreeNode
         Dim newBirthdayNode As TreeNode = _treeView.Nodes.Add(Format(testDate, "MMMM dd") & _type, _type)
         newBirthdayNode.Checked = True
