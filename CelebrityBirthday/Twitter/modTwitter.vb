@@ -13,8 +13,6 @@ Module modTwitter
             _mediaFile.Content = _imgstream
             _uploadOptions.Media = _mediaFile
             _twitterUplMedia = pTwitterService.UploadMedia(_uploadOptions)
-
-
         End Using
         Return _twitterUplMedia
 

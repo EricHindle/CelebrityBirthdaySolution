@@ -298,8 +298,21 @@ Public Class FrmBotsd
     End Sub
 
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
+        Dim _imageFilename As String = Nothing
+        If chkImages.Checked Then
+            If PictureBox1.Image IsNot Nothing Then
+                _imageFilename = SaveImage()
+            Else
+                If MsgBox("No image to send. OK to continue?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "No image") = MsgBoxResult.Yes Then
+                    chkImages.Checked = False
+                Else
+                    DisplayStatus("Tweet not sent - no image")
+                    Exit Sub
+                End If
+            End If
+        End If
         If cmbTwitterUsers.SelectedIndex >= 0 Then
-            SendTweet(SaveImage())
+            SendTweet(_imageFilename)
         Else
             DisplayStatus("Select Sender")
         End If
