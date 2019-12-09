@@ -594,6 +594,7 @@ Partial Class FrmTweet
         '
         'BtnUncheck
         '
+        Me.BtnUncheck.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnUncheck.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUncheck.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnUncheck.Location = New System.Drawing.Point(14, 615)
