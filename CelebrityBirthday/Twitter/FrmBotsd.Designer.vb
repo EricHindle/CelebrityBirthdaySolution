@@ -173,7 +173,7 @@ Partial Class FrmBotsd
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PictureBox1.Location = New System.Drawing.Point(630, 6)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(366, 62)
+        Me.PictureBox1.Size = New System.Drawing.Size(366, 86)
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
         '
@@ -183,9 +183,9 @@ Partial Class FrmBotsd
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rtbFile1.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rtbFile1.Location = New System.Drawing.Point(633, 74)
+        Me.rtbFile1.Location = New System.Drawing.Point(630, 98)
         Me.rtbFile1.Name = "rtbFile1"
-        Me.rtbFile1.Size = New System.Drawing.Size(363, 207)
+        Me.rtbFile1.Size = New System.Drawing.Size(363, 183)
         Me.rtbFile1.TabIndex = 14
         Me.rtbFile1.Text = ""
         '

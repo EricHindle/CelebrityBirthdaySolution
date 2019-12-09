@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_06B79C29AF69E5BD8FF593D765D9ABCC"
+        "OwnerKey" = "8:_D64C19E980B77275548719B50F9125BF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_06C716F18158FE528E14F533DB7F39FF"
         "OwnerKey" = "8:_D45E564116E443A5815B939302B8E6B8"
         "MsmSig" = "8:_UNDEFINED"
@@ -34,6 +40,12 @@
         "Entry"
         {
         "MsmKey" = "8:_4755CE8DE735CD8FD625B88A470E5490"
+        "OwnerKey" = "8:_D45E564116E443A5815B939302B8E6B8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AF1A06BDDAA0CD4CC6384F83A47D57C5"
         "OwnerKey" = "8:_D45E564116E443A5815B939302B8E6B8"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -69,20 +81,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EFED33DE5BE57117F32012EC6C51A2B3"
-        "OwnerKey" = "8:_D64C19E980B77275548719B50F9125BF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EFED33DE5BE57117F32012EC6C51A2B3"
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D45E564116E443A5815B939302B8E6B8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D45E564116E443A5815B939302B8E6B8"
+        "OwnerKey" = "8:_AF1A06BDDAA0CD4CC6384F83A47D57C5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,7 +112,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EFED33DE5BE57117F32012EC6C51A2B3"
+        "OwnerKey" = "8:_06B79C29AF69E5BD8FF593D765D9ABCC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -210,6 +216,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_06B79C29AF69E5BD8FF593D765D9ABCC"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:TRUE"
+            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_06B79C29AF69E5BD8FF593D765D9ABCC"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Net.Http.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_3FAAFC6696C94CB78D7585C4184052B0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_06C716F18158FE528E14F533DB7F39FF"
             {
             "AssemblyRegister" = "3:1"
@@ -255,6 +292,37 @@
                     }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_3FAAFC6696C94CB78D7585C4184052B0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AF1A06BDDAA0CD4CC6384F83A47D57C5"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                "ScatterAssemblies"
+                {
+                    "_AF1A06BDDAA0CD4CC6384F83A47D57C5"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_3FAAFC6696C94CB78D7585C4184052B0"
@@ -354,37 +422,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EFED33DE5BE57117F32012EC6C51A2B3"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-                "ScatterAssemblies"
-                {
-                    "_EFED33DE5BE57117F32012EC6C51A2B3"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:System.Net.Http.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_3FAAFC6696C94CB78D7585C4184052B0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -452,15 +489,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:CelebrityBirthday"
-        "ProductCode" = "8:{638E52F6-14D1-496D-9BFB-1C25FFFA299F}"
-        "PackageCode" = "8:{2C4BA7A1-38E3-4748-8A55-EE5BD2806459}"
+        "ProductCode" = "8:{DEABBB2D-CD93-42AF-844B-7EB46EF9E7A1}"
+        "PackageCode" = "8:{8EC53A8B-B87F-4ADA-BAF4-D22846E870FA}"
         "UpgradeCode" = "8:{468C0A34-5E55-4989-9007-4D7F24BE0298}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.26.0"
+        "ProductVersion" = "8:1.27.0"
         "Manufacturer" = "8:netWYrks"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

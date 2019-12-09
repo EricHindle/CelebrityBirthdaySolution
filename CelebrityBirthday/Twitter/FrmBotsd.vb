@@ -36,7 +36,7 @@ Public Class FrmBotsd
         Dim _add As String = "BOTSD"
         Dim _fileName As String = Path.Combine(_path, _add.Replace("_", "_" & LblDay.Text & "_" & LblMonth.Text & "_mosaic_") & ".jpg")
 
-        ImageUtil.saveImageFromPictureBox(PictureBox1, PictureBox1.Width, PictureBox1.Height, _fileName)
+        ImageUtil.SaveImageFromPictureBox(PictureBox1, PictureBox1.Width, PictureBox1.Height, _fileName)
         DisplayStatus("File saved")
         Return _fileName
     End Function
@@ -55,13 +55,11 @@ Public Class FrmBotsd
             _pictureBox.Image = Nothing
         End If
     End Sub
-
     Private Sub NudPic1Horizontal_ValueChanged(sender As Object, e As EventArgs) Handles NudPic1Horizontal.ValueChanged
         If Not IsNoGenerate Then
             GeneratePicture(PictureBox1, _imageList, NudPic1Horizontal.Value)
         End If
     End Sub
-
     Private Sub SendTweet(_filename As String)
         Dim isOkToSend As Boolean = True
         If cmbTwitterUsers.SelectedIndex >= 0 Then
@@ -103,7 +101,7 @@ Public Class FrmBotsd
         Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim sto = New SendTweetOptions
         Dim msg = _tweetText
-        sto.Status = msg.Substring(0, Math.Min(msg.Length, 280)) ' max tweet length; tweets fail if too long...
+        sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
         Dim _mediaId As String = Nothing
         If chkImages.Checked Then
             Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _filename)
@@ -141,7 +139,6 @@ Public Class FrmBotsd
         End If
         StatusStrip1.Refresh()
     End Sub
-
     Private Sub FrmBotsd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         IsNoGenerate = True
         LblMonth.Text = Format(New Date(2000, _month, 1), "MMMM")
@@ -155,7 +152,6 @@ Public Class FrmBotsd
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
     End Sub
-
     Public Sub AddList(ByRef _persons As List(Of Person))
         Dim _pairRow As DataGridViewRow = DgvPairs.Rows(DgvPairs.Rows.Add())
         If _persons.Count > 0 Then
@@ -176,11 +172,9 @@ Public Class FrmBotsd
         End If
 
     End Sub
-
     Private Sub DgvPairs_SelectionChanged(sender As Object, e As EventArgs) Handles DgvPairs.SelectionChanged
         GeneratePair()
     End Sub
-
     Private Sub GeneratePair()
         If DgvPairs.SelectedRows.Count = 1 Then
             Try
@@ -264,7 +258,6 @@ Public Class FrmBotsd
             End Try
         End If
     End Sub
-
     Private Sub GenerateText(_imageTable As List(Of Person))
         Dim _outString As New StringBuilder
         Dim _index As Integer = 0
@@ -296,7 +289,6 @@ Public Class FrmBotsd
         _outString.Append(_dob)
         rtbFile1.Text = _outString.ToString
     End Sub
-
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         Dim _imageFilename As String = Nothing
         If chkImages.Checked Then
@@ -317,7 +309,6 @@ Public Class FrmBotsd
             DisplayStatus("Select Sender")
         End If
     End Sub
-
     Private Sub BtnSwap_Click(sender As Object, e As EventArgs) Handles BtnSwap.Click
         If DgvPairs.SelectedRows.Count = 1 Then
             Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked)
@@ -371,11 +362,9 @@ Public Class FrmBotsd
         End If
         GeneratePair()
     End Sub
-
     Private Sub BtnGenerate_Click(sender As Object, e As EventArgs) Handles BtnGenerate.Click
         GeneratePair()
     End Sub
-
     Private Sub BtnUpdate1_Click(sender As Object, e As EventArgs) Handles BtnUpdate1.Click
         Dim _pickPerson1 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
         _pickPerson1.ShortDesc = TxtShortDesc1.Text
@@ -386,7 +375,6 @@ Public Class FrmBotsd
         End If
 
     End Sub
-
     Private Sub BtnUpdate2_Click(sender As Object, e As EventArgs) Handles BtnUpdate2.Click
         Dim _pickPerson2 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
         _pickPerson2.ShortDesc = TxtShortDesc2.Text

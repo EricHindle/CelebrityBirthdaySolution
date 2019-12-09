@@ -20,7 +20,7 @@ Public Class ImageUtil
                                              "tiff files (*.tif*.tiff)|*.tif;*.tiff",
                                              "png files (*.png)|*.png",
                                              "all files (*.*)|*.*"}
-    Private Shared sImageCacheFolder As String
+    Private Shared ReadOnly sImageCacheFolder As String
 
     Public Shared Function ConvertImageTypeToFormat(ByVal imgType As ImageType) As Imaging.ImageFormat
         Dim iFormat As Imaging.ImageFormat = Imaging.ImageFormat.Jpeg
@@ -81,7 +81,6 @@ Public Class ImageUtil
         End If
         Return sFilename
     End Function
-
     Public Shared Function ShowFileDialog(ByVal fbd As FileDialog, Optional ByVal imgType As Integer = 0, Optional ByVal initialDirectory As String = Nothing) As String
         Dim sFilename As String = ""
         fbd.Filter = imageFilter(imgType)
@@ -100,19 +99,18 @@ Public Class ImageUtil
 
         Return sFilename
     End Function
-
     Public Shared Function ResizeImageToBitmap(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
         Dim targetBitmap As System.Drawing.Bitmap = New System.Drawing.Bitmap(targetWidth, targetHeight)
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
 
-        Dim oGraphics As Graphics = initialiseGraphics(targetBitmap)
-            Try
+        Dim oGraphics As Graphics = InitialiseGraphics(targetBitmap)
+        Try
             Using oBitMap As New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
                 oGraphics.DrawImage(oBitMap, targetRectangle, 0, 0, sourceImage.Width, sourceImage.Height, GraphicsUnit.Pixel)
             End Using
         Catch ex As Exception
-                MsgBox("resizeImageToBitmap:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
-            End Try
+            MsgBox("resizeImageToBitmap:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
+        End Try
         Return targetBitmap
     End Function
     Public Shared Function ExtractCroppedAreaFromImage(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
@@ -160,9 +158,10 @@ Public Class ImageUtil
         Return oEncoderParameters
     End Function
     Public Shared Sub GenerateImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
-        Dim _mosaic As Image = New Bitmap(My.Resources.blank, 60 * _width, 60 * _height)
+        '   Dim _mosaic As Image = New Bitmap(My.Resources.blank, 60 * _width, 60 * _height)
+        Dim _mosaic As Image = New Bitmap(My.Resources.blank, Math.Max(60 * _width, 300), Math.Max((60 * _height) + 18, 80))
         Dim oGraphics As Graphics = Graphics.FromImage(_mosaic)
-        oGraphics.DrawImage(My.Resources.id, New Point(_mosaic.Width - 60, _mosaic.Height - 60))
+        oGraphics.DrawImage(My.Resources.id, New Point(_mosaic.Width - 125, _mosaic.Height - 18))
         Dim _imgHPos As Integer = -1
         Dim _imgVPos As Integer = 0
         For Each _person As Person In _imageTable

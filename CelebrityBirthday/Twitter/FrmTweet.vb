@@ -64,6 +64,13 @@ Public Class FrmTweet
             End If
         End If
     End Sub
+    Private Sub RtbTextChanged(sender As Object, e As EventArgs)
+        TxtStats.Text = ""
+        For Each _page As TabPage In TabControl1.TabPages
+            Dim _rtb As RichTextBox = GetRichTextBoxFromPage(_page)
+            TxtStats.Text &= If(_rtb.TextLength >= TWEET_MAX_LEN, "** ", "") & _rtb.TextLength & vbCrLf
+        Next
+    End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         For Each _page As TabPage In TabControl1.TabPages
             SaveImage(_page)
@@ -117,7 +124,70 @@ Public Class FrmTweet
     Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
         GenerateAllTweets()
     End Sub
+    Private Sub BtnBotsd_Click(sender As Object, e As EventArgs) Handles BtnBotsd.Click
+        Using _botsd As New FrmBotsd
+            _botsd.ThisDay = cboDay.SelectedIndex + 1
+            _botsd.ThisMonth = cboMonth.SelectedIndex + 1
+            Dim _fullList As New List(Of Person)
+            _fullList.AddRange(oBirthdayList)
+            _fullList.AddRange(oAnniversaryList)
+            Do Until _fullList.Count = 0
+                Dim _sameYearList As New List(Of Person)
+                Dim _person1 As Person = _fullList(0)
+                _fullList.RemoveAt(0)
+                For Each _person2 In _fullList
+                    If _person1.DateOfBirth = _person2.DateOfBirth Then
+                        _sameYearList.Add(_person2)
+                    End If
+                Next
+                For Each _matchedPerson As Person In _sameYearList
+                    _fullList.Remove(_matchedPerson)
+                Next
+                If _sameYearList.Count > 0 Then
+                    _sameYearList.Add(_person1)
+                    _botsd.AddList(_sameYearList)
+                End If
+            Loop
+            _botsd.ShowDialog()
+        End Using
 
+    End Sub
+    Private Sub BtnTotd_Click(sender As Object, e As EventArgs) Handles BtnTotd.Click
+        If CountOfCheckedNames() = 1 Then
+            Dim newPageIndex As Integer = TabControl1.TabCount
+            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(newPageIndex, "Tweet of the Day")
+            Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
+            Dim pbControl As PictureBox = GetPictureBoxFromPage(newTweetTabPage)
+            For Each _topNode As TreeNode In tvBirthday.Nodes
+                For Each _personNode As TreeNode In _topNode.Nodes
+                    If _personNode.Checked Then
+                        For Each _detailNode As TreeNode In _personNode.Nodes
+                            If _detailNode.Name = "id" Then
+                                Dim _person As Person = GetFullPersonById(CInt(_detailNode.Text))
+                                rtbControl.Text = _person.Description & vbCrLf & " "
+                                Dim _pictureList As New List(Of Person) From {_person}
+                                GeneratePicture(pbControl, _pictureList, 1)
+                            End If
+                        Next
+                    End If
+                Next
+            Next
+            TabControl1.TabPages.Add(newTweetTabPage)
+            RtbTextChanged(Nothing, Nothing)
+        End If
+    End Sub
+    Private Sub BtnUncheck_Click(sender As Object, e As EventArgs) Handles BtnUncheck.Click
+        For Each _node As TreeNode In tvBirthday.Nodes
+            Try
+                _node.Checked = False
+                For Each subNode As TreeNode In _node.Nodes
+                    subNode.Checked = False
+                Next
+            Catch ex As Exception
+                Debug.Print(ex.Message)
+            End Try
+        Next
+    End Sub
 #End Region
 #Region "Form subroutines"
     Private Sub DisplayStatus(_text As String, Optional _isAppend As Boolean = False)
@@ -158,7 +228,7 @@ Public Class FrmTweet
         Dim _add As String = _page.Text
         Dim _fileName As String = Path.Combine(_path, _add.Replace("_", "_" & cboDay.SelectedItem & "_" & cboMonth.SelectedItem & "_mosaic_") & ".jpg")
         Dim _pictureBox As PictureBox = GetPictureBoxFromPage(_page)
-        ImageUtil.saveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, _fileName)
+        ImageUtil.SaveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, _fileName)
         DisplayStatus("File saved")
         Return _fileName
     End Function
@@ -251,6 +321,7 @@ Public Class FrmTweet
             .Text = ""
             .ContextMenuStrip = ContextMenuStrip1
         End With
+        AddHandler _newRtb.TextChanged, AddressOf RtbTextChanged
         Return _newRtb
     End Function
     Private Function GetPictureBoxFromPage(_tabpage As TabPage) As PictureBox
@@ -361,6 +432,19 @@ Public Class FrmTweet
         End If
         Return _years
     End Function
+    Private Function CountOfCheckedNames() As Integer
+        Dim _count As Integer = 0
+        For Each _node As TreeNode In tvBirthday.Nodes
+            Try
+                For Each subNode As TreeNode In _node.Nodes
+                    If subNode.Checked Then _count += 1
+                Next
+            Catch ex As Exception
+                Debug.Print(ex.Message)
+            End Try
+        Next
+        Return _count
+    End Function
 #End Region
 #Region "Tweet subroutines"
     Private Sub GenerateAllTweets()
@@ -468,26 +552,7 @@ Public Class FrmTweet
         Dim isOkToSend As Boolean = True
         If cmbTwitterUsers.SelectedIndex >= 0 Then
             Try
-                Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
-                If _auth IsNot Nothing Then
-                    If String.IsNullOrEmpty(_auth.Verifier) Then
-                        isOkToSend = False
-                    Else
-                        tw.Verifier = _auth.Verifier
-                    End If
-                    If String.IsNullOrEmpty(_auth.Token) Then
-                        isOkToSend = False
-                    Else
-                        tw.Token = _auth.Token
-                    End If
-                    If String.IsNullOrEmpty(_auth.TokenSecret) Then
-                        isOkToSend = False
-                    Else
-                        tw.TokenSecret = _auth.TokenSecret
-                    End If
-                Else
-                    isOkToSend = False
-                End If
+                isOkToSend = SetupOAuth(isOkToSend)
             Catch ex As Exception
                 WriteTrace(ex.Message)
                 isOkToSend = False
@@ -499,12 +564,36 @@ Public Class FrmTweet
         End If
         WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
     End Sub
+    Private Function SetupOAuth(isOkToSend As Boolean) As Boolean
+        Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
+        If _auth IsNot Nothing Then
+            If String.IsNullOrEmpty(_auth.Verifier) Then
+                isOkToSend = False
+            Else
+                tw.Verifier = _auth.Verifier
+            End If
+            If String.IsNullOrEmpty(_auth.Token) Then
+                isOkToSend = False
+            Else
+                tw.Token = _auth.Token
+            End If
+            If String.IsNullOrEmpty(_auth.TokenSecret) Then
+                isOkToSend = False
+            Else
+                tw.TokenSecret = _auth.TokenSecret
+            End If
+        Else
+            isOkToSend = False
+        End If
+
+        Return isOkToSend
+    End Function
     Private Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
         DisplayStatus("Sending Tweet")
         Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim sto = New SendTweetOptions
         Dim msg = _tweetText
-        sto.Status = msg.Substring(0, Math.Min(msg.Length, 280)) ' max tweet length; tweets fail if too long...
+        sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
         Dim _mediaId As String = Nothing
         If chkImages.Checked Then
             Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _filename)
@@ -536,7 +625,7 @@ Public Class FrmTweet
         tw.ConsumerSecret = _auth.TokenSecret
     End Sub
     Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As String) As List(Of List(Of Person))
-        Dim availableLength As Integer = TWEET_SIZE - _headerLength
+        Dim availableLength As Integer = TWEET_MAX_LEN - _headerLength
         Dim _totalLengthOfTweet As Integer = 0
         Dim _lengthsText As String = ""
         Dim _numberOfTweets As Integer = GetExpectedNumberOfTweets(oPersonlist, _type, availableLength, _totalLengthOfTweet)
@@ -632,48 +721,18 @@ Public Class FrmTweet
         Return newTabpage
     End Function
 
-    Private Sub TvBirthday_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck
-        If Not isBuildingTrees Then
-            Dim node As TreeNode = e.Node
-            Dim ischecked As Boolean = node.Checked
-            Try
+    'Private Sub TvBirthday_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck
+    '    If Not isBuildingTrees Then
+    '        Dim node As TreeNode = e.Node
+    '        Dim ischecked As Boolean = node.Checked
+    '        Try
 
-            Catch sysex As System.StackOverflowException
-                Debug.Print(sysex.Message)
-            Catch ex As Exception
-                Debug.Print(ex.Message)
-            End Try
-        End If
-    End Sub
-
-    Private Sub BtnBotsd_Click(sender As Object, e As EventArgs) Handles BtnBotsd.Click
-        Using _botsd As New FrmBotsd
-            _botsd.ThisDay = cboDay.SelectedIndex + 1
-            _botsd.ThisMonth = cboMonth.SelectedIndex + 1
-            Dim _fullList As New List(Of Person)
-            _fullList.AddRange(oBirthdayList)
-            _fullList.AddRange(oAnniversaryList)
-            Do Until _fullList.Count = 0
-                Dim _sameYearList As New List(Of Person)
-                Dim _person1 As Person = _fullList(0)
-                _fullList.RemoveAt(0)
-                For Each _person2 In _fullList
-                    If _person1.DateOfBirth = _person2.DateOfBirth Then
-                        _sameYearList.Add(_person2)
-                    End If
-                Next
-                For Each _matchedPerson As Person In _sameYearList
-                    _fullList.Remove(_matchedPerson)
-                Next
-                If _sameYearList.Count > 0 Then
-                    _sameYearList.Add(_person1)
-                    _botsd.AddList(_sameYearList)
-                End If
-            Loop
-            _botsd.ShowDialog()
-        End Using
-
-    End Sub
-
+    '        Catch sysex As System.StackOverflowException
+    '            Debug.Print(sysex.Message)
+    '        Catch ex As Exception
+    '            Debug.Print(ex.Message)
+    '        End Try
+    '    End If
+    'End Sub
 #End Region
 End Class

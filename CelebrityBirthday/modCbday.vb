@@ -7,7 +7,7 @@ Imports System.Web.Script.Serialization
 Module modCbday
     Public Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
-    Public Const TWEET_SIZE As Integer = 279
+    Public Const TWEET_MAX_LEN As Integer = 279
 
     Public Const RTB_CONTROL_NAME As String = "RtbFile"
     Public Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
@@ -259,7 +259,7 @@ Module modCbday
     End Function
 
     Public Function NavigateToUrl(pSearchString As String) As WebResponse
-        Dim request As WebRequest = Nothing
+        Dim request As WebRequest
         ' Create a request for the URL. 
         request = WebRequest.Create(pSearchString)
         ' If required by the server, set the credentials.

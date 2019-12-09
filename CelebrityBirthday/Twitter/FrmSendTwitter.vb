@@ -287,7 +287,7 @@ Public Class FrmSendTwitter
         Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim sto = New SendTweetOptions
         Dim msg = rtbTweetText.Text
-        sto.Status = msg.Substring(0, Math.Min(msg.Length, 280)) ' max tweet length; tweets fail if too long...
+        sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
         Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
         WriteTrace(StatusToString(_twitterStatus))
         If _twitterStatus IsNot Nothing Then

@@ -220,7 +220,7 @@ Public Class frmTwitterOutput
 
         Dim _header As String = GetHeading(_typeNode)
         Dim _nextLine As String
-        Dim _tweetCount As Integer = TWEET_SIZE - _header.Length
+        Dim _tweetCount As Integer = TWEET_MAX_LEN - _header.Length
         Dim _tweetNodes As New List(Of TreeNode)
         Dim _numberOfLists As Integer = 1
         For Each _personNode As TreeNode In _typeNode.Nodes
@@ -230,7 +230,7 @@ Public Class frmTwitterOutput
                 _tweetCount -= _nextLine.Length + 1
                 If _tweetCount < 0 Then
                     _numberOfLists += 1
-                    _tweetCount = TWEET_SIZE - 1 - _header.Length - _nextLine.Length
+                    _tweetCount = TWEET_MAX_LEN - 1 - _header.Length - _nextLine.Length
                 End If
             End If
         Next
