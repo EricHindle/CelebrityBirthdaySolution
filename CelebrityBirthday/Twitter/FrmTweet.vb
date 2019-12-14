@@ -164,7 +164,11 @@ Public Class FrmTweet
                         For Each _detailNode As TreeNode In _personNode.Nodes
                             If _detailNode.Name = "id" Then
                                 Dim _person As Person = GetFullPersonById(CInt(_detailNode.Text))
-                                rtbControl.Text = _person.Description & vbCrLf & " "
+                                Dim _text As New StringBuilder()
+
+                                Dim _bday As New Date()
+                                _text.Append("Born on ").Append(Format(_person.DateOfBirth, "d MMMM yyyy")).Append(vbCrLf).Append(vbCrLf).Append(_person.Description)
+                                rtbControl.Text = _text.ToString
                                 Dim _pictureList As New List(Of Person) From {_person}
                                 GeneratePicture(pbControl, _pictureList, 1)
                             End If
