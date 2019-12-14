@@ -164,10 +164,7 @@ Public Class FrmTweet
                         For Each _detailNode As TreeNode In _personNode.Nodes
                             If _detailNode.Name = "id" Then
                                 Dim _person As Person = GetFullPersonById(CInt(_detailNode.Text))
-                                Dim _text As New StringBuilder()
-
-                                Dim _bday As New Date()
-                                _text.Append("Born on ").Append(Format(_person.DateOfBirth, "d MMMM yyyy")).Append(vbCrLf).Append(vbCrLf).Append(_person.Description)
+                                Dim _text As String = BuildTweetText(_person)
                                 rtbControl.Text = _text.ToString
                                 Dim _pictureList As New List(Of Person) From {_person}
                                 GeneratePicture(pbControl, _pictureList, 1)
@@ -180,6 +177,34 @@ Public Class FrmTweet
             RtbTextChanged(Nothing, Nothing)
         End If
     End Sub
+
+    Private Shared Function BuildTweetText(ByRef _person As Person) As String
+        Dim _text As New StringBuilder
+        Dim _died As String = " (d. " & CStr(Math.Abs(_person.DeathYear)) & If(_person.DeathYear < 0, " BCE", "") & ")"
+        _text.Append("Born on ").Append(Format(_person.DateOfBirth, "d MMMM yyyy")) _
+            .Append(vbCrLf) _
+            .Append(vbCrLf) _
+            .Append(_person.Description)
+        If _person.BirthName.Length > 0 Or _person.BirthPlace.Length > 0 Then
+            _text.Append(vbCrLf) _
+            .Append(vbCrLf) _
+            .Append("Born")
+            If _person.BirthName.Length > 0 Then
+                _text.Append(" ") _
+                    .Append(_person.BirthName)
+            End If
+            If _person.BirthPlace.Length > 0 Then
+                _text.Append(" in ") _
+                    .Append(_person.BirthPlace)
+            End If
+            _text.Append(".")
+        End If
+        If _person.DeathYear <> 0 Then
+            _text.Append(_died)
+        End If
+        Return _text.ToString
+    End Function
+
     Private Sub BtnUncheck_Click(sender As Object, e As EventArgs) Handles BtnUncheck.Click
         For Each _node As TreeNode In tvBirthday.Nodes
             Try
