@@ -89,7 +89,7 @@ Public Class FrmDateCheck
                     If _dates.Length > 0 Then
                         Try
                             Dim firstPart As String = _dates(0)
-                            firstPart = firstPart.Replace("N.", "").Replace("S.", "").Replace("(", "").Replace(")", "").Replace("O.", "").Replace(";", "")
+                            firstPart = firstPart.Replace("N.", "").Replace("S.", "").Replace("(", "").Replace(")", "").Replace("O.", "").Replace(";", "").Replace("  ", " ")
                             Dim DateParts As String() = Split(firstPart, " ")
                             Dim DatePartsList As List(Of String) = DateParts.ToList
 
@@ -127,15 +127,6 @@ Public Class FrmDateCheck
         lblStatus.Text = oText
         StatusStrip1.Refresh()
     End Sub
-
-    'Private Function AddAllRow(oPerson As Person) As DataGridViewRow
-    '    Dim _newRow As DataGridViewRow = dgvAllPersons.Rows(dgvAllPersons.Rows.Add())
-    '    _newRow.Cells(allId.Name).Value = oPerson.Id
-    '    _newRow.Cells(allName.Name).Value = oPerson.Name
-    '    _newRow.Cells(allDob.Name).Value = If(oPerson.DateOfBirth Is Nothing, "", Format(oPerson.DateOfBirth.Value, "dd MMM yyyy"))
-    '    dgvAllPersons.Refresh()
-    '    Return _newRow
-    'End Function
 
     Private Function AddXRow(oPerson As Person, oDateOfBirth As String, oDesc As String) As DataGridViewRow
         Dim _newRow As DataGridViewRow = dgvWarnings.Rows(dgvWarnings.Rows.Add())
