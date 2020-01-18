@@ -142,6 +142,14 @@
         Next
         Return _List
     End Function
+    Public Function FindEverybody() As List(Of Person)
+        oPersonTa.Fill(oPersonTable)
+        Dim _List As New List(Of Person)
+        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
+            _List.Add(New Person(oRow))
+        Next
+        Return _List
+    End Function
     Public Function FindBirthdays(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean)
         oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
         Dim _List As New List(Of Person)

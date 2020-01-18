@@ -49,12 +49,12 @@ Public Class FrmDeathCheck
         If _parts.Count = 3 Then
             Dim datePart As String = _parts(1)
             Dim _dates As String() = Split(datePart, " - ")
-            If _dates.Count = 2 Then
+            If _dates.Length = 2 Then
                 Try
                     If IsDate(_dates(1)) Then
                         _deathDate = CDate(_dates(1))
                     End If
-                Catch ex As Exception
+                Catch ex As overflowException
                     Debug.Print(_searchName & " Not a date " & _dates(1))
                 End Try
             End If

@@ -216,7 +216,7 @@ Module modCbday
         Dim _rtb As New RichTextBox
         Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
-        If _controls.Count > 0 Then
+        If _controls.Length > 0 Then
             _rtb = TryCast(_controls(0), RichTextBox)
         End If
         Return _rtb
@@ -260,8 +260,9 @@ Module modCbday
 
     Public Function NavigateToUrl(pSearchString As String) As WebResponse
         Dim request As WebRequest
+        Dim _uri As New Uri(pSearchString)
         ' Create a request for the URL. 
-        request = WebRequest.Create(pSearchString)
+        request = WebRequest.Create(_uri)
         ' If required by the server, set the credentials.
         request.Credentials = CredentialCache.DefaultCredentials
         Return request.GetResponse()
@@ -274,13 +275,21 @@ Module modCbday
             wikipage = sr.ReadToEnd
             Dim jss As New JavaScriptSerializer()
             Dim extractDictionary As Dictionary(Of String, Object) = jss.Deserialize(Of Dictionary(Of String, Object))(wikipage)
-            Dim queryDictionary As Dictionary(Of String, Object) = extractDictionary("query")
-            Dim _pagesList As ArrayList = TryCast(queryDictionary("pages"), ArrayList)
-            If _pagesList IsNot Nothing Then
-                Dim pageDictionary As Dictionary(Of String, Object) = _pagesList(0)
-                _extract = TryCast(pageDictionary("extract"), String)
-                _extract = _extract.Replace(vbLf, " ").Replace(".", ". ").Replace("  ", " ")
+            If extractDictionary.ContainsKey("query") Then
+                Dim queryDictionary As Dictionary(Of String, Object) = extractDictionary("query")
+                If queryDictionary.ContainsKey("pages") Then
+                    Dim _pagesList As ArrayList = TryCast(queryDictionary("pages"), ArrayList)
+                    If _pagesList IsNot Nothing Then
+                        Dim pageDictionary As Dictionary(Of String, Object) = _pagesList(0)
+                        If pageDictionary.ContainsKey("extract") Then
+                            _extract = TryCast(pageDictionary("extract"), String)
+                            _extract = _extract.Replace(vbLf, " ").Replace(".", ". ").Replace("  ", " ")
+                        End If
+                    End If
+                End If
             End If
+
+            sr.Dispose()
         Catch ex As Exception
             Debug.Print(ex.Message)
             Debug.Print(wikipage)

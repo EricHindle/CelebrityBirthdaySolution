@@ -43,4 +43,12 @@
         End Using
         Me.Show()
     End Sub
+
+    Private Sub txtBirthdateCheck_Click(sender As Object, e As EventArgs) Handles txtBirthdateCheck.Click
+        Me.Hide()
+        Using _check As New FrmDateCheck
+            _check.ShowDialog()
+        End Using
+        Me.Show()
+    End Sub
 End Class

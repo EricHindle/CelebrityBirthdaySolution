@@ -268,6 +268,25 @@
         _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet)
         _unsavedChanges = False
     End Sub
+    Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.PersonRow)
+        _id = oRow.id
+        _forename = oRow.forename
+        _surname = oRow.surname
+        _description = oRow.longdesc
+        _ShortDesc = oRow.shortdesc
+        _birthDay = oRow.birthday
+        _birthMonth = oRow.birthmonth
+        _birthYear = oRow.birthyear
+        _deathYear = oRow.deathyear
+        _deathMonth = oRow.deathmonth
+        _deathday = oRow.deathday
+        _birthPlace = oRow.birthplace
+        _birthName = oRow.birthname
+        _image = Nothing
+        _sortSeq = oRow.sortseq
+        _social = Nothing
+        _unsavedChanges = False
+    End Sub
     Public ReadOnly Property IBirthYear() As Integer
         Get
             Dim iYr As Integer = 0
