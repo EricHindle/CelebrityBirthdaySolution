@@ -22,17 +22,18 @@ Partial Class FrmDateCheck
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDateCheck))
         Me.dgvWarnings = New System.Windows.Forms.DataGridView()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.btnClose = New System.Windows.Forms.Button()
-        Me.BtnWrite = New System.Windows.Forms.Button()
-        Me.BtnStart = New System.Windows.Forms.Button()
         Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xWikiBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.BtnWrite = New System.Windows.Forms.Button()
+        Me.BtnStart = New System.Windows.Forms.Button()
         CType(Me.dgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -54,6 +55,45 @@ Partial Class FrmDateCheck
         Me.dgvWarnings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvWarnings.Size = New System.Drawing.Size(923, 493)
         Me.dgvWarnings.TabIndex = 0
+        '
+        'xId
+        '
+        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xId.HeaderText = "Id"
+        Me.xId.Name = "xId"
+        Me.xId.ReadOnly = True
+        Me.xId.Width = 50
+        '
+        'xName
+        '
+        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xName.HeaderText = "Name"
+        Me.xName.Name = "xName"
+        Me.xName.ReadOnly = True
+        Me.xName.Width = 250
+        '
+        'xBirth
+        '
+        Me.xBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xBirth.HeaderText = "Birth Date"
+        Me.xBirth.Name = "xBirth"
+        Me.xBirth.ReadOnly = True
+        Me.xBirth.Width = 125
+        '
+        'xWikiBirth
+        '
+        Me.xWikiBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xWikiBirth.HeaderText = "Wiki Birth Date"
+        Me.xWikiBirth.Name = "xWikiBirth"
+        Me.xWikiBirth.ReadOnly = True
+        Me.xWikiBirth.Width = 125
+        '
+        'xDesc
+        '
+        Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.xDesc.HeaderText = "Description"
+        Me.xDesc.Name = "xDesc"
+        Me.xDesc.ReadOnly = True
         '
         'StatusStrip1
         '
@@ -110,45 +150,6 @@ Partial Class FrmDateCheck
         Me.BtnStart.Text = "Start Check"
         Me.BtnStart.UseVisualStyleBackColor = True
         '
-        'xId
-        '
-        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xId.HeaderText = "Id"
-        Me.xId.Name = "xId"
-        Me.xId.ReadOnly = True
-        Me.xId.Width = 50
-        '
-        'xName
-        '
-        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xName.HeaderText = "Name"
-        Me.xName.Name = "xName"
-        Me.xName.ReadOnly = True
-        Me.xName.Width = 250
-        '
-        'xBirth
-        '
-        Me.xBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xBirth.HeaderText = "Birth Date"
-        Me.xBirth.Name = "xBirth"
-        Me.xBirth.ReadOnly = True
-        Me.xBirth.Width = 125
-        '
-        'xWikiBirth
-        '
-        Me.xWikiBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xWikiBirth.HeaderText = "Wiki Birth Date"
-        Me.xWikiBirth.Name = "xWikiBirth"
-        Me.xWikiBirth.ReadOnly = True
-        Me.xWikiBirth.Width = 125
-        '
-        'xDesc
-        '
-        Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.xDesc.HeaderText = "Description"
-        Me.xDesc.Name = "xDesc"
-        Me.xDesc.ReadOnly = True
-        '
         'FrmDateCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -160,6 +161,7 @@ Partial Class FrmDateCheck
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.BtnWrite)
         Me.Controls.Add(Me.BtnStart)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmDateCheck"
         Me.Text = "Date Check"
         CType(Me.dgvWarnings, System.ComponentModel.ISupportInitialize).EndInit()
