@@ -360,7 +360,10 @@ Public Class FrmUpdateDatabase
         txtName.Text = txtName.Text.Trim
         Dim names As String() = Split(txtName.Text, " ")
         txtSurname.Text = names(UBound(names))
-        txtForename.Text = txtName.Text.Replace(txtSurname.Text, "").Trim
+        If Not String.IsNullOrEmpty(txtSurname.Text) Then
+            txtForename.Text = txtName.Text.Replace(txtSurname.Text, "").Trim
+        End If
+
     End Sub
     Private Sub BtnCreateFullName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateFullName.Click
         txtName.Text = MakeFullName(txtForename.Text, txtSurname.Text)
@@ -890,16 +893,21 @@ Public Class FrmUpdateDatabase
         UpdatePageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
     End Sub
     Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
-        If CInt(lblID.Text) > -1 Then
-            ShowStatus("Images")
-            Using _update As New FrmImages
-                _update.PersonId = CInt(lblID.Text)
-                _update.ShowDialog()
-            End Using
-            ShowStatus("")
-        Else
+        Try
+            If CInt(lblID.Text) > -1 Then
+                ShowStatus("Images")
+                Using _update As New FrmImages
+                    _update.PersonId = CInt(lblID.Text)
+                    _update.ShowDialog()
+                End Using
+                ShowStatus("")
+            Else
+                ShowStatus("No person selected")
+            End If
+        Catch ex As InvalidCastException
             ShowStatus("No person selected")
-        End If
+        End Try
+
     End Sub
     Private Sub RemoveMiddleWordsToolStripMenuItem1_Click(sender As Object, e As EventArgs)
         If txtDesc.SelectionLength > 0 Then

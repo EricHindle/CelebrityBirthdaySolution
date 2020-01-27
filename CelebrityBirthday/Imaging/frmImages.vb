@@ -137,6 +137,13 @@ Public Class FrmImages
         SaveImage(TxtImageUrl.Text, oFilename)
     End Sub
     Private Sub BtnLoadDateUpdate_Click(sender As Object, e As EventArgs) Handles BtnLoadDateUpdate.Click
+        If String.IsNullOrEmpty(txtImgName.Text) Then
+            txtImgName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
+        End If
+        If String.IsNullOrEmpty(txtLoadMth.Text) And String.IsNullOrEmpty(txtLoadYr.Text) Then
+            txtLoadMth.Text = TxtWpLoadMth.Text
+            txtLoadYr.Text = TxtWpLoadYear.Text
+        End If
         Dim _id As Integer = CInt(txtId.Text)
         If IsExistsImage(_id) Then
             UpdateImage(_id, txtImgName.Text, cbImgType.SelectedItem, txtLoadMth.Text, txtLoadYr.Text)
