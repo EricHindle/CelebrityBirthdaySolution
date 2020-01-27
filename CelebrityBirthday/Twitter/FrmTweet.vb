@@ -664,7 +664,7 @@ Public Class FrmTweet
         Dim _numberOfNamesPerTweet As Integer = GetNumberOfPersonsPerTweet(oPersonlist.Count, _type, _numberOfTweets)
 
         Dim ListOfLists As New List(Of List(Of Person))
-        Do Until _startIndex >= _endIndex
+        Do Until _startIndex > _endIndex
             Dim _rangeCount As Integer = Math.Min(_numberOfNamesPerTweet, _endIndex + 1)
             Dim _range As List(Of Person) = oPersonlist.GetRange(_endIndex - _rangeCount + 1, _rangeCount)
             Dim _numberOfNamesThisTweet As Integer = _numberOfNamesPerTweet
