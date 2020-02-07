@@ -6,7 +6,7 @@ Imports TweetSharp
 
 Public Class FrmTweet
 #Region "constants"
-    Private Const DEFAULT_WIDTH As Integer = 6
+    Private Const DEFAULT_WIDTH As Integer = 5
     Private Const NUD_BASENAME As String = "NudHorizontal"
     Private Const PICBOX_BASENAME As String = "pictureBox"
     Private Const SC_BASENAME As String = "SplitContainer"
@@ -574,7 +574,7 @@ Public Class FrmTweet
         End If
     End Sub
     Private Sub GenerateTweetImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
-        ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height)
+        ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, rbImageRight.Checked)
         DisplayStatus("Image complete", False)
     End Sub
     Private Sub SendTweet(_filename As String)

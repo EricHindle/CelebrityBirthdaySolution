@@ -50,7 +50,7 @@ Public Class FrmBotsd
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
         If _imageTable.Count > 0 Then
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
-            ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height)
+            ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, True)
         Else
             _pictureBox.Image = Nothing
         End If
