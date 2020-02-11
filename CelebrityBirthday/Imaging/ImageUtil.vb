@@ -14,6 +14,12 @@ Public Class ImageUtil
         Open
         Save
     End Enum
+
+    Public Enum AlignType
+        Right
+        Left
+        Centre
+    End Enum
     Public Shared imageFilter As String() = {"jpeg files (*.jpg;*.jpeg;*.jpe;*.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif",
                                              "gif files (*.gif)|*.gif",
                                              "bmp files (*.bmp;*.dib;*.rle)|*.bmp;*.dib;*.rle",
@@ -158,56 +164,40 @@ Public Class ImageUtil
         Return oEncoderParameters
     End Function
 
-    Public Shared Sub GenerateImage(oPictureBox As PictureBox, imageTable As List(Of Person), widthImageCount As Integer, _height As Integer, _rightAlign As Boolean)
-        Dim mosaic As Image = New Bitmap(My.Resources.blank, Math.Max(60 * widthImageCount, 300), Math.Max((60 * _height) + 18, 80))
+    Public Shared Sub GenerateImage(oPictureBox As PictureBox, imageTable As List(Of Person), widthImageCount As Integer, pHeight As Integer, pAlignType As AlignType)
+        Dim mosaic As Image = New Bitmap(My.Resources.blank, Math.Max(60 * widthImageCount, 300), Math.Max((60 * pHeight) + 18, 80))
         Dim oGraphics As Graphics = Graphics.FromImage(mosaic)
         oGraphics.DrawImage(My.Resources.id, New Point(mosaic.Width - 125, mosaic.Height - 18))
-        If _rightAlign Then
-            oPictureBox.Image = PlaceImagesRight(mosaic, oGraphics, widthImageCount, imageTable)
-        Else
-            oPictureBox.Image = PlaceImagesLeft(mosaic, oGraphics, widthImageCount, imageTable)
-        End If
-    End Sub
-
-    Public Shared Function PlaceImagesRight(ByRef mosaic As Image, ByRef oGraphics As Graphics, widthImageCount As Integer, imageTable As List(Of Person)) As Image
-        Dim _numberOfImagesWide As Integer = mosaic.Width / 60
-        Dim _startPos As Integer = _numberOfImagesWide - widthImageCount
-        Dim _imgHPos As Integer = _startPos - 1
-        Dim _imgVPos As Integer = 0
-        Dim _imageCt As Integer = imageTable.Count
-        For Each _person As Person In imageTable
-            Dim _image As Image = _person.Image.Photo
-            _imgHPos += 1
-            If _imgHPos >= _numberOfImagesWide Then
-                _imgVPos += 1
-                If _imageCt >= widthImageCount Then
-                    _imgHPos = _startPos
-                Else
-                    _imgHPos = _numberOfImagesWide - _imageCt
-                End If
-
-            End If
-            Dim oBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(_image, 60, 60)
-            oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
-            _imageCt -= 1
-        Next
-        Return mosaic
-    End Function
-
-    Public Shared Function PlaceImagesLeft(ByRef mosaic As Image, ByRef oGraphics As Graphics, widthImageCount As Integer, imageTable As List(Of Person)) As Image
+        Dim lastWidth As Integer = imageTable.Count Mod widthImageCount
         Dim _imgHPos As Integer = -1
         Dim _imgVPos As Integer = 0
         For Each _person As Person In imageTable
+            Dim rowStartPos As Integer = 0
+            Dim rowImageWidth As Integer = widthImageCount
             Dim _image As Image = _person.Image.Photo
             _imgHPos += 1
             If _imgHPos = widthImageCount Then
                 _imgVPos += 1
                 _imgHPos = 0
             End If
+            If _imgVPos = pHeight - 1 Then
+                If lastWidth > 0 Then
+                    rowImageWidth = lastWidth
+                End If
+            End If
+            Select Case pAlignType
+                Case AlignType.Right
+                    rowStartPos = mosaic.Width - (rowImageWidth * 60)
+                Case AlignType.Left
+                    rowStartPos = 0
+                Case AlignType.Centre
+                    rowStartPos = (mosaic.Width - (rowImageWidth * 60)) / 2
+            End Select
+
             Dim oBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(_image, 60, 60)
-            oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
+            oGraphics.DrawImage(oBitMap, New Point((60 * _imgHPos) + rowStartPos, 60 * _imgVPos))
         Next
-        Return mosaic
-    End Function
+        oPictureBox.Image = mosaic
+    End Sub
 
 End Class

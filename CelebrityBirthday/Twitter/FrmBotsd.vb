@@ -48,9 +48,18 @@ Public Class FrmBotsd
         Next
     End Sub
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
+        Dim pAlignType As ImageUtil.AlignType
+        Select Case True
+            Case rbImageRight.Checked
+                pAlignType = ImageUtil.AlignType.Right
+            Case rbImageLeft.Checked
+                pAlignType = ImageUtil.AlignType.Left
+            Case rbImageCentre.Checked
+                pAlignType = ImageUtil.AlignType.Centre
+        End Select
         If _imageTable.Count > 0 Then
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
-            ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, True)
+            ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, pAlignType)
         Else
             _pictureBox.Image = Nothing
         End If

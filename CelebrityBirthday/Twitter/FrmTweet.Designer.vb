@@ -54,6 +54,9 @@ Partial Class FrmTweet
         Me.tvBirthday = New System.Windows.Forms.TreeView()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.rbImageRight = New System.Windows.Forms.RadioButton()
+        Me.rbImageLeft = New System.Windows.Forms.RadioButton()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.rbHandles = New System.Windows.Forms.RadioButton()
@@ -70,9 +73,7 @@ Partial Class FrmTweet
         Me.BtnBotsd = New System.Windows.Forms.Button()
         Me.BtnTotd = New System.Windows.Forms.Button()
         Me.BtnUncheck = New System.Windows.Forms.Button()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.rbImageRight = New System.Windows.Forms.RadioButton()
-        Me.rbImageLeft = New System.Windows.Forms.RadioButton()
+        Me.rbImageCentre = New System.Windows.Forms.RadioButton()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,9 +87,9 @@ Partial Class FrmTweet
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.NudBirthdaysPerTweet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.NudAnnivsPerTweet, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -202,9 +203,9 @@ Partial Class FrmTweet
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.RbSplitImages)
         Me.GroupBox1.Controls.Add(Me.RbSingleImage)
-        Me.GroupBox1.Location = New System.Drawing.Point(8, 231)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 216)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(139, 79)
+        Me.GroupBox1.Size = New System.Drawing.Size(139, 78)
         Me.GroupBox1.TabIndex = 13
         Me.GroupBox1.TabStop = False
         '
@@ -214,7 +215,7 @@ Partial Class FrmTweet
         Me.RbSplitImages.Checked = True
         Me.RbSplitImages.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbSplitImages.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.RbSplitImages.Location = New System.Drawing.Point(23, 49)
+        Me.RbSplitImages.Location = New System.Drawing.Point(23, 44)
         Me.RbSplitImages.Name = "RbSplitImages"
         Me.RbSplitImages.Size = New System.Drawing.Size(100, 22)
         Me.RbSplitImages.TabIndex = 1
@@ -227,7 +228,7 @@ Partial Class FrmTweet
         Me.RbSingleImage.AutoSize = True
         Me.RbSingleImage.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbSingleImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.RbSingleImage.Location = New System.Drawing.Point(23, 21)
+        Me.RbSingleImage.Location = New System.Drawing.Point(23, 16)
         Me.RbSingleImage.Name = "RbSingleImage"
         Me.RbSingleImage.Size = New System.Drawing.Size(92, 22)
         Me.RbSingleImage.TabIndex = 0
@@ -425,14 +426,50 @@ Partial Class FrmTweet
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Tweet Options"
         '
+        'GroupBox4
+        '
+        Me.GroupBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox4.Controls.Add(Me.rbImageCentre)
+        Me.GroupBox4.Controls.Add(Me.rbImageRight)
+        Me.GroupBox4.Controls.Add(Me.rbImageLeft)
+        Me.GroupBox4.Location = New System.Drawing.Point(8, 297)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(139, 94)
+        Me.GroupBox4.TabIndex = 38
+        Me.GroupBox4.TabStop = False
+        '
+        'rbImageRight
+        '
+        Me.rbImageRight.AutoSize = True
+        Me.rbImageRight.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageRight.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.rbImageRight.Location = New System.Drawing.Point(23, 41)
+        Me.rbImageRight.Name = "rbImageRight"
+        Me.rbImageRight.Size = New System.Drawing.Size(84, 22)
+        Me.rbImageRight.TabIndex = 1
+        Me.rbImageRight.Text = "Image Right"
+        Me.rbImageRight.UseVisualStyleBackColor = True
+        '
+        'rbImageLeft
+        '
+        Me.rbImageLeft.AutoSize = True
+        Me.rbImageLeft.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageLeft.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.rbImageLeft.Location = New System.Drawing.Point(23, 16)
+        Me.rbImageLeft.Name = "rbImageLeft"
+        Me.rbImageLeft.Size = New System.Drawing.Size(77, 22)
+        Me.rbImageLeft.TabIndex = 0
+        Me.rbImageLeft.Text = "ImageLeft"
+        Me.rbImageLeft.UseVisualStyleBackColor = True
+        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.RadioButton1)
         Me.GroupBox3.Controls.Add(Me.rbHandles)
         Me.GroupBox3.Controls.Add(Me.rbAges)
-        Me.GroupBox3.Location = New System.Drawing.Point(8, 112)
+        Me.GroupBox3.Location = New System.Drawing.Point(8, 104)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(137, 113)
+        Me.GroupBox3.Size = New System.Drawing.Size(137, 107)
         Me.GroupBox3.TabIndex = 37
         Me.GroupBox3.TabStop = False
         '
@@ -441,7 +478,7 @@ Partial Class FrmTweet
         Me.RadioButton1.AutoSize = True
         Me.RadioButton1.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RadioButton1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.RadioButton1.Location = New System.Drawing.Point(16, 79)
+        Me.RadioButton1.Location = New System.Drawing.Point(16, 72)
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.Size = New System.Drawing.Size(59, 23)
         Me.RadioButton1.TabIndex = 36
@@ -454,7 +491,7 @@ Partial Class FrmTweet
         Me.rbHandles.Checked = True
         Me.rbHandles.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbHandles.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.rbHandles.Location = New System.Drawing.Point(17, 21)
+        Me.rbHandles.Location = New System.Drawing.Point(16, 14)
         Me.rbHandles.Name = "rbHandles"
         Me.rbHandles.Size = New System.Drawing.Size(119, 23)
         Me.rbHandles.TabIndex = 34
@@ -467,7 +504,7 @@ Partial Class FrmTweet
         Me.rbAges.AutoSize = True
         Me.rbAges.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbAges.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.rbAges.Location = New System.Drawing.Point(17, 50)
+        Me.rbAges.Location = New System.Drawing.Point(16, 43)
         Me.rbAges.Name = "rbAges"
         Me.rbAges.Size = New System.Drawing.Size(87, 23)
         Me.rbAges.TabIndex = 35
@@ -478,7 +515,7 @@ Partial Class FrmTweet
         '
         Me.cmbTwitterUsers.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbTwitterUsers.FormattingEnabled = True
-        Me.cmbTwitterUsers.Location = New System.Drawing.Point(14, 53)
+        Me.cmbTwitterUsers.Location = New System.Drawing.Point(14, 46)
         Me.cmbTwitterUsers.Name = "cmbTwitterUsers"
         Me.cmbTwitterUsers.Size = New System.Drawing.Size(127, 24)
         Me.cmbTwitterUsers.TabIndex = 33
@@ -488,7 +525,7 @@ Partial Class FrmTweet
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label3.Location = New System.Drawing.Point(10, 31)
+        Me.Label3.Location = New System.Drawing.Point(10, 24)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(62, 19)
         Me.Label3.TabIndex = 32
@@ -501,7 +538,7 @@ Partial Class FrmTweet
         Me.chkImages.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkImages.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.chkImages.Location = New System.Drawing.Point(24, 83)
+        Me.chkImages.Location = New System.Drawing.Point(24, 75)
         Me.chkImages.Name = "chkImages"
         Me.chkImages.Size = New System.Drawing.Size(107, 23)
         Me.chkImages.TabIndex = 0
@@ -609,42 +646,19 @@ Partial Class FrmTweet
         Me.BtnUncheck.Text = "Uncheck All"
         Me.BtnUncheck.UseVisualStyleBackColor = True
         '
-        'GroupBox4
+        'rbImageCentre
         '
-        Me.GroupBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox4.Controls.Add(Me.rbImageRight)
-        Me.GroupBox4.Controls.Add(Me.rbImageLeft)
-        Me.GroupBox4.Location = New System.Drawing.Point(8, 316)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(139, 79)
-        Me.GroupBox4.TabIndex = 38
-        Me.GroupBox4.TabStop = False
-        '
-        'rbImageRight
-        '
-        Me.rbImageRight.AutoSize = True
-        Me.rbImageRight.Checked = True
-        Me.rbImageRight.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbImageRight.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.rbImageRight.Location = New System.Drawing.Point(23, 49)
-        Me.rbImageRight.Name = "rbImageRight"
-        Me.rbImageRight.Size = New System.Drawing.Size(84, 22)
-        Me.rbImageRight.TabIndex = 1
-        Me.rbImageRight.TabStop = True
-        Me.rbImageRight.Text = "Image Right"
-        Me.rbImageRight.UseVisualStyleBackColor = True
-        '
-        'rbImageLeft
-        '
-        Me.rbImageLeft.AutoSize = True
-        Me.rbImageLeft.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbImageLeft.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.rbImageLeft.Location = New System.Drawing.Point(23, 21)
-        Me.rbImageLeft.Name = "rbImageLeft"
-        Me.rbImageLeft.Size = New System.Drawing.Size(77, 22)
-        Me.rbImageLeft.TabIndex = 0
-        Me.rbImageLeft.Text = "ImageLeft"
-        Me.rbImageLeft.UseVisualStyleBackColor = True
+        Me.rbImageCentre.AutoSize = True
+        Me.rbImageCentre.Checked = True
+        Me.rbImageCentre.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageCentre.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.rbImageCentre.Location = New System.Drawing.Point(23, 66)
+        Me.rbImageCentre.Name = "rbImageCentre"
+        Me.rbImageCentre.Size = New System.Drawing.Size(92, 22)
+        Me.rbImageCentre.TabIndex = 2
+        Me.rbImageCentre.TabStop = True
+        Me.rbImageCentre.Text = "ImageCentre"
+        Me.rbImageCentre.UseVisualStyleBackColor = True
         '
         'FrmTweet
         '
@@ -699,11 +713,11 @@ Partial Class FrmTweet
         CType(Me.NudBirthdaysPerTweet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.NudAnnivsPerTweet, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -758,4 +772,5 @@ Partial Class FrmTweet
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents rbImageRight As RadioButton
     Friend WithEvents rbImageLeft As RadioButton
+    Friend WithEvents rbImageCentre As RadioButton
 End Class

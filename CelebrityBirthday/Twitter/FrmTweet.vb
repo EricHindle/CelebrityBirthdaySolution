@@ -148,6 +148,15 @@ Public Class FrmTweet
                     _botsd.AddList(_sameYearList)
                 End If
             Loop
+            Select Case True
+                Case rbImageRight.Checked
+                    _botsd.rbImageRight.Checked = True
+                Case rbImageLeft.Checked
+                    _botsd.rbImageLeft.Checked = True
+                Case rbImageCentre.Checked
+                    _botsd.rbImageCentre.Checked = True
+            End Select
+
             _botsd.ShowDialog()
         End Using
 
@@ -574,7 +583,16 @@ Public Class FrmTweet
         End If
     End Sub
     Private Sub GenerateTweetImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
-        ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, rbImageRight.Checked)
+        Dim pAlignType As ImageUtil.AlignType
+        Select Case True
+            Case rbImageRight.Checked
+                pAlignType = ImageUtil.AlignType.Right
+            Case rbImageLeft.Checked
+                pAlignType = ImageUtil.AlignType.Left
+            Case rbImageCentre.Checked
+                pAlignType = ImageUtil.AlignType.Centre
+        End Select
+        ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, pAlignType)
         DisplayStatus("Image complete", False)
     End Sub
     Private Sub SendTweet(_filename As String)
