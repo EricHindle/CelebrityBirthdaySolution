@@ -43,6 +43,7 @@ Public Class FrmImageStore
 #End Region
 #Region "form control handlers"
     Private Sub ImageStore_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        PictureBox1.AllowDrop = True
         TxtForename.Text = _forename
         TxtSurname.Text = _surname
         GetFormPos(Me, My.Settings.imgselectpos)
@@ -50,100 +51,41 @@ Public Class FrmImageStore
         sImagePath = My.Settings.NewImagePath.Replace("<applicationpath>", sApplicationPath)
         OpenImageSearch()
         LblImagePath.Text = sImagePath
-        lblPicUrl.Text = ""
         If My.Computer.FileSystem.DirectoryExists(sImagePath) = False Then
             My.Computer.FileSystem.CreateDirectory(sImagePath)
         End If
         isSaved = True
     End Sub
     Private Sub BtnSavepic_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSavepic.Click
+
         sImagePath = My.Settings.NewImagePath.Replace("<applicationpath>", sApplicationPath)
-        If bLoadingPicture Then
-            MsgBox("Picture still loading", MsgBoxStyle.Information)
-            Exit Sub
-        End If
-        Dim url As String = lblPicUrl.Text
-        Dim ext As String = Path.GetExtension(url)
-        If String.IsNullOrEmpty(ext) Then
-            ext = ".jpg"
-        End If
-        Dim picname As String = Path.GetFileNameWithoutExtension(url)
-        Dim strFName As String = ""
-        Dim _Filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
-        Dim request As WebRequest = Nothing
         Try
-            For Each c In Path.GetInvalidFileNameChars()
-                _Filename = _Filename.Replace(c, "").Trim
-            Next
-            strFName = Path.Combine(sImagePath, _Filename & ext)
-            PicStatus.Text = "Saving " & picname
-            Me.Refresh()
-            If My.Computer.FileSystem.FileExists(strFName) Then
-                strFName = GetUniqueFname(strFName)
-            End If
-            Me.Refresh()
-            ' Create a request for the URL. 
-            request = WebRequest.Create(url)
-            ' If required by the server, set the credentials.
-            request.Credentials = CredentialCache.DefaultCredentials
-        Catch ex As Exception
-            If DisplayException(ex) = MsgBoxResult.No Then Exit Sub
-        End Try
-        ' Get the response.
-        Try
-            Dim response As WebResponse = request.GetResponse()
+            Dim _Filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
+            If String.IsNullOrEmpty(_Filename) = False Then
 
-            ' Display the status.
-            PicStatus.Text = CType(response, HttpWebResponse).StatusDescription
-            Me.Refresh()
-            ' Get the stream containing content returned by the server.
-            Dim dataStream As Stream = response.GetResponseStream()
 
-            ' Read the content.
-            Dim buffer(4096) As Byte
-            Dim memorystream As New MemoryStream
-            Dim bct As Integer = -1
-            PicStatus.Text = "Writing memory stream"
-            Me.Refresh()
-            Do While (bct <> 0)
-                bct = dataStream.Read(buffer, 0, buffer.Length)
-                memorystream.Write(buffer, 0, bct)
-            Loop
-            b = memorystream.ToArray()
-            PicStatus.Text = "Writing file"
-            Me.Refresh()
-            If b.Length > 0 Then
-                Dim bw As BinaryWriter = Nothing
-                Try
-                    bw = New BinaryWriter(File.Open(strFName, FileMode.Create))
-                    bw.Write(b)
-                Catch ex As Exception
-                    MsgBox("Error writing file")
-                Finally
-                    If bw IsNot Nothing Then
-                        bw.Close()
-                    End If
-                    bw = Nothing
-                End Try
+                Dim strFName As String = Path.Combine(sImagePath, _Filename & ".jpg")
+
+                Me.Refresh()
+                If My.Computer.FileSystem.FileExists(strFName) Then
+                    strFName = GetUniqueFname(strFName)
+                End If
+                _latestSavedFile = strFName
+                lblImageFile.Text = strFName
+                PicStatus.Text = "Saving " & strFName
+                Me.Refresh()
+                PictureBox1.Image.Save(strFName, Imaging.ImageFormat.Jpeg)
+                PicStatus.Text = "Saved " & strFName
+                isSaved = True
+            Else
+                MsgBox("No name entered. Cannot save to file.", MsgBoxStyle.Exclamation, "Missing name")
             End If
-            ' Clean up the streams and the response.
-            memorystream.Close()
-            response.Close()
-            memorystream.Dispose()
-            response = Nothing
-            PicStatus.Text = "Saved " & strFName
-            _latestSavedFile = strFName
-            isSaved = True
         Catch ex As Exception
             If DisplayException(ex) = MsgBoxResult.No Then Exit Sub
             PicStatus.Text = ex.Message
         End Try
     End Sub
-    Private Sub PicBrowser_DocumentCompleted(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles PicBrowser.DocumentCompleted
-        PicStatus.Text = "Picture complete"
-        bLoadingPicture = False
-        lblPicUrl.Text = PicBrowser.Url.ToString
-    End Sub
+
     Private Sub BtnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         My.Settings.imgselectpos = SetFormPos(Me)
         My.Settings.Save()
@@ -162,13 +104,9 @@ Public Class FrmImageStore
         My.Settings.imgselectpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
-    Private Sub PicBrowser_NewWindow(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles PicBrowser.NewWindow
-        e.Cancel = True
-        PicBrowser.Navigate(PicBrowser.StatusText)
-    End Sub
+
     Private Sub BtnGetImage_Click(sender As Object, e As EventArgs) Handles btnGetImage.Click
         isSaved = False
-        lblPicUrl.Text = ""
         OpenImageSearch()
         PicStatus.Text = "Getting images for " & TxtForename.Text.Trim
     End Sub
@@ -179,10 +117,7 @@ Public Class FrmImageStore
             End If
         End If
     End Sub
-    Private Sub PicBrowser_Navigated(sender As Object, e As WebBrowserNavigatedEventArgs) Handles PicBrowser.Navigated
-        lblPicUrl.Text = If(PicBrowser.Url Is Nothing, "", PicBrowser.Url.ToString)
-        isSaved = False
-    End Sub
+
 #End Region
 #Region "functions"
     Private Sub OpenImageSearch()
@@ -190,7 +125,6 @@ Public Class FrmImageStore
         If Not String.IsNullOrEmpty(_name) Then
             Dim sUrl As String = GetGoogleSearchString(_name)
             Process.Start(sUrl)
-            lblSearchUrl.Text = sUrl
         End If
     End Sub
     Private Function GetUniqueFname(ByVal filename As String) As String
@@ -222,5 +156,38 @@ Public Class FrmImageStore
         End Using
     End Sub
 
+    Private Sub btnLoadImage_Click(sender As Object, e As EventArgs) Handles btnLoadImage.Click
+        Try
+            Dim oImageFilename As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Open, ImageUtil.ImageType.ALL)
+            _latestSavedFile = Path.GetFileName(oImageFilename)
+            lblImageFile.Text = _latestSavedFile
+            Dim sizeMessage As String = ""
+            If Not String.IsNullOrEmpty(oImageFilename) Then
+                Dim oImage As Image = Image.FromFile(oImageFilename)
+                Dim loadedImage As Image = oImage.Clone
+                If oImage IsNot Nothing Then
+                    PictureBox1.Image = loadedImage
+                End If
+                oImage.Dispose()
+            End If
+            Dim filenameparts As List(Of String) = Split(Path.GetFileNameWithoutExtension(_latestSavedFile), "-").ToList
+            If TxtSurname.Text = "" Then
+                TxtSurname.Text = filenameparts.Last
+                filenameparts.RemoveAt(filenameparts.Count - 1)
+            End If
+
+            If TxtForename.Text = "" Then
+                TxtForename.Text = String.Join(" ", filenameparts)
+            End If
+        Catch ex As Exception
+            GC.Collect()
+        End Try
+    End Sub
+
+    Private Sub PasteImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PasteImageToolStripMenuItem.Click
+        If Clipboard.ContainsImage Then
+            PictureBox1.Image = Clipboard.GetImage
+        End If
+    End Sub
 #End Region
 End Class
