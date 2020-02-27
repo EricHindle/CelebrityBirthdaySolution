@@ -65,6 +65,7 @@ Public Class FrmWordPress
             cboDay.SelectedIndex = _daySelection - 1
             cboMonth.SelectedIndex = _monthSelection - 1
         End If
+        GetFormPos(Me, My.Settings.wprformpos)
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
@@ -208,6 +209,11 @@ Public Class FrmWordPress
     Private Sub ShowStatus(pText As String)
         lblStatus.Text = pText
         StatusStrip1.Refresh()
+    End Sub
+
+    Private Sub FrmWordPress_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        My.Settings.wprformpos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
 #End Region
 End Class

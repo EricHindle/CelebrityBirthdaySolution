@@ -125,10 +125,12 @@ Public Class ImageUtil
 
         Dim oGraphics As Graphics = initialiseGraphics(targetBitmap)
         Try
-            Using oBitMap As New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
-                oGraphics.DrawImage(oBitMap, 0, 0, targetRectangle, GraphicsUnit.Pixel)
-            End Using
-        Catch ex As Exception
+            If sourceImage IsNot Nothing Then
+                Using oBitMap As New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
+                    oGraphics.DrawImage(oBitMap, 0, 0, targetRectangle, GraphicsUnit.Pixel)
+                End Using
+            End If
+        Catch ex As ArgumentNullException
             MsgBox("extractCroppedAreaFromImage:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
         End Try
 

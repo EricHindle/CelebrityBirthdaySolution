@@ -47,9 +47,9 @@ Partial Class FrmSearch
         Me.BtnDbUpdate = New System.Windows.Forms.Button()
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.BtnImgUpdate = New System.Windows.Forms.Button()
-        Me.BtnTweet = New System.Windows.Forms.Button()
         Me.BtnWordPress = New System.Windows.Forms.Button()
+        Me.BtnTweet = New System.Windows.Forms.Button()
+        Me.BtnImgUpdate = New System.Windows.Forms.Button()
         CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -301,16 +301,16 @@ Partial Class FrmSearch
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Update"
         '
-        'BtnImgUpdate
+        'BtnWordPress
         '
-        Me.BtnImgUpdate.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnImgUpdate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnImgUpdate.Location = New System.Drawing.Point(15, 61)
-        Me.BtnImgUpdate.Name = "BtnImgUpdate"
-        Me.BtnImgUpdate.Size = New System.Drawing.Size(107, 36)
-        Me.BtnImgUpdate.TabIndex = 26
-        Me.BtnImgUpdate.Text = "Image"
-        Me.BtnImgUpdate.UseVisualStyleBackColor = True
+        Me.BtnWordPress.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWordPress.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWordPress.Location = New System.Drawing.Point(15, 145)
+        Me.BtnWordPress.Name = "BtnWordPress"
+        Me.BtnWordPress.Size = New System.Drawing.Size(107, 36)
+        Me.BtnWordPress.TabIndex = 28
+        Me.BtnWordPress.Text = "WordPress"
+        Me.BtnWordPress.UseVisualStyleBackColor = True
         '
         'BtnTweet
         '
@@ -323,16 +323,16 @@ Partial Class FrmSearch
         Me.BtnTweet.Text = "Twitter"
         Me.BtnTweet.UseVisualStyleBackColor = True
         '
-        'BtnWordPress
+        'BtnImgUpdate
         '
-        Me.BtnWordPress.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnWordPress.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWordPress.Location = New System.Drawing.Point(15, 145)
-        Me.BtnWordPress.Name = "BtnWordPress"
-        Me.BtnWordPress.Size = New System.Drawing.Size(107, 36)
-        Me.BtnWordPress.TabIndex = 28
-        Me.BtnWordPress.Text = "WordPress"
-        Me.BtnWordPress.UseVisualStyleBackColor = True
+        Me.BtnImgUpdate.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnImgUpdate.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnImgUpdate.Location = New System.Drawing.Point(15, 61)
+        Me.BtnImgUpdate.Name = "BtnImgUpdate"
+        Me.BtnImgUpdate.Size = New System.Drawing.Size(107, 36)
+        Me.BtnImgUpdate.TabIndex = 26
+        Me.BtnImgUpdate.Text = "Image"
+        Me.BtnImgUpdate.UseVisualStyleBackColor = True
         '
         'FrmSearch
         '

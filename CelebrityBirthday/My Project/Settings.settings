@@ -70,5 +70,17 @@
     <Setting Name="WordPressMonthUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://celebritybirthday.wordpress.com/#y/#m/#d/#D-#M/</Value>
     </Setting>
+    <Setting Name="srchformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="bwsrformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="wprformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="capformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

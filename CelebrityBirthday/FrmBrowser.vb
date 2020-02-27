@@ -56,6 +56,8 @@
     End Sub
     Private Sub FrmBrowser_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         WebBrowser1.Stop()
+        My.Settings.bwsrformpos = SetFormPos(Me)
+        My.Settings.Save()
         Me.Dispose()
     End Sub
 #End Region
@@ -70,10 +72,14 @@
         NavigateToUrl(GetTwitterSearchString(_searchName))
     End Sub
     Public Sub NavigateToUrl(pSearchString As String)
-        _url = pSearchString
+        Dim _uri As New Uri(pSearchString)
         lblNav.Text = "Finding " & _searchName
         TxtSearchName.Text = _searchName
-        WebBrowser1.Navigate(_url)
+        WebBrowser1.Navigate(_uri)
+    End Sub
+
+    Private Sub FrmBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetFormPos(Me, My.Settings.bwsrformpos)
     End Sub
 #End Region
 End Class

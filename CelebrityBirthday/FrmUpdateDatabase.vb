@@ -226,29 +226,34 @@ Public Class FrmUpdateDatabase
             StatusStrip1.Refresh()
             personTable = New List(Of Person)
             lbPeople.Items.Clear()
-            Dim oDrow As CelebrityBirthdayDataSet.DatesRow = GetDatesRow(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, "I")
-            If oDrow IsNot Nothing Then
-                TxtImageLoadYr.Text = If(oDrow.IsuploadyearNull, "", oDrow.uploadyear)
-                TxtImageLoadMth.Text = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
-                TxtImageLoadDay.Text = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
-            End If
-            oDrow = GetDatesRow(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, "P")
-            If oDrow IsNot Nothing Then
-                TxtPageLoadYr.Text = If(oDrow.IsuploadyearNull, "", oDrow.uploadyear)
-                TxtPageLoadMth.Text = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
-                TxtPageLoadDay.Text = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
-            End If
             Dim selectedIndex As Integer = -1
             personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
-            For Each operson As Person In personTable
-                lbPeople.Items.Add(operson.BirthYear & " " & operson.Name)
-                If findPersonInList > -1 AndAlso findPersonInList = operson.Id Then
-                    selectedIndex = lbPeople.Items.Count - 1
+            If personTable.Count > 0 Then
+                For Each operson As Person In personTable
+                    lbPeople.Items.Add(operson.BirthYear & " " & operson.Name)
+                    If findPersonInList > -1 AndAlso findPersonInList = operson.Id Then
+                        selectedIndex = lbPeople.Items.Count - 1
+                    End If
+                Next
+                Dim oDrow As CelebrityBirthdayDataSet.DatesRow = GetDatesRow(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, "I")
+                If oDrow IsNot Nothing Then
+                    TxtImageLoadYr.Text = If(oDrow.IsuploadyearNull, "", oDrow.uploadyear)
+                    TxtImageLoadMth.Text = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
+                    TxtImageLoadDay.Text = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
                 End If
-            Next
+                oDrow = GetDatesRow(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, "P")
+                If oDrow IsNot Nothing Then
+                    TxtPageLoadYr.Text = If(oDrow.IsuploadyearNull, "", oDrow.uploadyear)
+                    TxtPageLoadMth.Text = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
+                    TxtPageLoadDay.Text = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
+                End If
+                AppendStatus(" - Complete")
+            Else
+                AppendStatus(" - No data")
+            End If
             lbPeople.SelectedIndex = selectedIndex
             findPersonInList = -1
-            AppendStatus(" - Complete")
+
         End If
     End Sub
     Private Sub BtnReloadSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadSel.Click

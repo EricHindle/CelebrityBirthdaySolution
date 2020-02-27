@@ -70,6 +70,7 @@ Public Class frmImageCapture
 #End Region
 #Region "Form"
     Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetFormPos(Me, My.Settings.capformpos)
         iStartHeight = Me.Size.Height
         iStartWidth = Me.Size.Width
         cropBitmap = Nothing
@@ -412,6 +413,11 @@ Public Class frmImageCapture
 
     Private Sub BtnResize_Click(sender As Object, e As EventArgs) Handles BtnResize.Click
 
+    End Sub
+
+    Private Sub frmImageCapture_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        My.Settings.capformpos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
 
 #End Region

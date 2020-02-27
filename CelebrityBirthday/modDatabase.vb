@@ -1,4 +1,7 @@
-﻿Module modDatabase
+﻿Imports System.Data.Common
+Imports System.Data.SqlClient
+
+Module modDatabase
 #Region "data"
     Private ReadOnly oTwta As New CelebrityBirthdayDataSetTableAdapters.SocialMediaTableAdapter
     Private ReadOnly oTwtable As New CelebrityBirthdayDataSet.SocialMediaDataTable
@@ -121,15 +124,20 @@
     End Function
     Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean) As List(Of Person)
         Dim oPersonList As New List(Of Person)
-        oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-            Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
-                oPersonList.Add(oPerson)
-            Else
-                Debug.Print("Excluding " & oPerson.Name)
-            End If
-        Next
+        Try
+            oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
+            For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
+                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+                If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
+                    oPersonList.Add(oPerson)
+                Else
+                    Debug.Print("Excluding " & oPerson.Name)
+                End If
+            Next
+        Catch dbex As DbException
+            MsgBox("Database exception" & vbCrLf & dbex.Message, MsgBoxStyle.Exclamation, "dB Error")
+        End Try
+
         Return oPersonList
     End Function
     Public Function FindLivingPeople() As List(Of Person)
@@ -251,11 +259,15 @@
         Return loadDate
     End Function
     Public Function GetDatesRow(oDay As Integer, oMonth As Integer, oType As String) As CelebrityBirthday.CelebrityBirthdayDataSet.DatesRow
-        Dim iCt As Integer = oDatesTa.FillByDateAndType(oDatesTable, oDay, oMonth, oType)
         Dim oDrow As CelebrityBirthdayDataSet.DatesRow = Nothing
-        If iCt = 1 Then
-            oDrow = oDatesTable.Rows(0)
-        End If
+        Try
+            Dim iCt As Integer = oDatesTa.FillByDateAndType(oDatesTable, oDay, oMonth, oType)
+            If iCt = 1 Then
+                oDrow = oDatesTable.Rows(0)
+            End If
+        Catch dbex As DbException
+            MsgBox("Database exception" & vbCrLf & dbex.Message, MsgBoxStyle.Exclamation, "dB Error")
+        End Try
         Return oDrow
     End Function
     Public Function GetAuthById(pId As String) As TwitterOAuth

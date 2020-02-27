@@ -116,6 +116,8 @@ Public Class FrmImageStore
                 e.Cancel = True
             End If
         End If
+        My.Settings.imgselectpos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
 
 #End Region
