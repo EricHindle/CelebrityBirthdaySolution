@@ -52,6 +52,10 @@
         My.Settings.imgformpos = "5~5~687~1003"
         My.Settings.twitterfilespos = "5~5~600~600"
         My.Settings.twitterimagepos = "5~5~600~600"
+        My.Settings.capformpos = "5~5~950~560"
+        My.Settings.bwsrformpos = "5~5~1200~730"
+        My.Settings.srchformpos = "5~5~1125~600"
+        My.Settings.wprformpos = "5~5~1040~670"
         My.Settings.Save()
     End Sub
 

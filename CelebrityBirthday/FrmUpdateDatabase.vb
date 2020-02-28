@@ -253,7 +253,6 @@ Public Class FrmUpdateDatabase
             End If
             lbPeople.SelectedIndex = selectedIndex
             findPersonInList = -1
-
         End If
     End Sub
     Private Sub BtnReloadSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadSel.Click

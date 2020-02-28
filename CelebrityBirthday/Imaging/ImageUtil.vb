@@ -111,10 +111,12 @@ Public Class ImageUtil
 
         Dim oGraphics As Graphics = InitialiseGraphics(targetBitmap)
         Try
-            Using oBitMap As New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
-                oGraphics.DrawImage(oBitMap, targetRectangle, 0, 0, sourceImage.Width, sourceImage.Height, GraphicsUnit.Pixel)
-            End Using
-        Catch ex As Exception
+            If sourceImage IsNot Nothing Then
+                Using oBitMap As New Bitmap(sourceImage, sourceImage.Width, sourceImage.Height)
+                    oGraphics.DrawImage(oBitMap, targetRectangle, 0, 0, sourceImage.Width, sourceImage.Height, GraphicsUnit.Pixel)
+                End Using
+            End If
+        Catch ex As ArgumentNullException
             MsgBox("resizeImageToBitmap:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
         End Try
         Return targetBitmap
