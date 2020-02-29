@@ -175,6 +175,12 @@
     <Compile Include="frmGlobalSettings.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmText.Designer.vb">
+      <DependentUpon>frmText.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmText.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="Imaging\frmImageCapture.designer.vb">
       <DependentUpon>frmImageCapture.vb</DependentUpon>
@@ -305,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmGlobalSettings.resx">
       <DependentUpon>frmGlobalSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmText.resx">
+      <DependentUpon>frmText.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Imaging\frmImageCapture.resx">
       <DependentUpon>frmImageCapture.vb</DependentUpon>

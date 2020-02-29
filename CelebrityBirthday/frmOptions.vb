@@ -56,6 +56,8 @@
         My.Settings.bwsrformpos = "5~5~1200~730"
         My.Settings.srchformpos = "5~5~1125~600"
         My.Settings.wprformpos = "5~5~1040~670"
+        My.Settings.textformpos = "5~5~800~500"
+        My.Settings.botsdformpos = "5~5~1300~650"
         My.Settings.Save()
     End Sub
 

@@ -409,21 +409,26 @@ Public Class FrmTweet
         DisplayStatus("Selecting...")
         tvBirthday.Nodes.Clear()
         personTable.Clear()
-        If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
-            Dim _day As Integer = cboDay.SelectedIndex + 1
-            Dim _mth As Integer = cboMonth.SelectedIndex + 1
-            Dim testDate As Date = New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
-            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, True)
-            oBirthdayList = FindBirthdays(_day, _mth, True)
-            oAnniversaryList = FindAnniversaries(_day, _mth, True)
-            LblImageCount.Text = CStr(personTable.Count) + " people selected"
-            AddTypeNode(oAnniversaryList, testDate, tvBirthday, "Anniversary")
-            AddTypeNode(oBirthdayList, testDate, tvBirthday, "Birthday")
-            DisplayStatus("Selection Complete")
-            isBuiltOk = True
-        Else
-            MsgBox("Select a date", MsgBoxStyle.Exclamation, "Error")
-        End If
+        Try
+            If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
+                Dim _day As Integer = cboDay.SelectedIndex + 1
+                Dim _mth As Integer = cboMonth.SelectedIndex + 1
+                Dim testDate As Date = New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
+                personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, True)
+                oBirthdayList = FindBirthdays(_day, _mth, True)
+                oAnniversaryList = FindAnniversaries(_day, _mth, True)
+                LblImageCount.Text = CStr(personTable.Count) + " people selected"
+                AddTypeNode(oAnniversaryList, testDate, tvBirthday, "Anniversary")
+                AddTypeNode(oBirthdayList, testDate, tvBirthday, "Birthday")
+                DisplayStatus("Selection Complete")
+                isBuiltOk = True
+            Else
+                MsgBox("Select a date", MsgBoxStyle.Exclamation, "Error")
+            End If
+        Catch ex As ArgumentOutOfRangeException
+            MsgBox("Exception" & vbCrLf & ex.Message, MsgBoxStyle.Exclamation, "Error")
+            isBuiltOk = False
+        End Try
         isBuildingTrees = False
         Return isBuiltOk
     End Function
