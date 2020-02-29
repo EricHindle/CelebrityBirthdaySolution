@@ -13,11 +13,11 @@ Imports System.Net
 Public Class TwitterOAuth
         Inherits OAuth
 
-    Public Const REQUEST_TOKEN As String = "https://api.twitter.com/oauth/request_token"
+    Public Const REQUESTTOKEN As String = "https://api.twitter.com/oauth/request_token"
     Public Const AUTHORIZE As String = "https://api.twitter.com/oauth/authorize"
-    Public Const ACCESS_TOKEN As String = "https://api.twitter.com/oauth/access_token"
+    Public Const ACCESSTOKEN As String = "https://api.twitter.com/oauth/access_token"
     Public Const AUTHENTICATE As String = "https://api.twitter.com/oauth/authenticate"
-    Public Const XACCESS_TOKEN As String = "https://api.twitter.com/oauth/access_token"
+    Public Const XACCESSTOKEN As String = "https://api.twitter.com/oauth/access_token"
 
     Public ConsumerKey As String
     Public ConsumerSecret As String
@@ -25,7 +25,7 @@ Public Class TwitterOAuth
     Public Token As String = String.Empty
     Public TokenSecret As String = String.Empty
     Public Verifier As String = String.Empty
-        Public CallbackUrl As String = "http://www.netwyrks.co.uk/hattyburpday"
+    Public CallbackUrl As String = "http://www.netwyrks.co.uk/hattyburpday"
     Public Sub New()
     End Sub
     Public Sub New(ByVal ConsumerKey As String, ByVal ConsumerKeySecret As String)
@@ -47,7 +47,7 @@ Public Class TwitterOAuth
     End Sub
     Public Function GetAuthorizationLink() As String
         Dim ReturnValue As String = Nothing
-        Dim Response As String = OAuthWebRequest_CB(Method.POST, REQUEST_TOKEN, String.Empty)
+        Dim Response As String = OAuthWebRequestCB(Method.POST, REQUESTTOKEN, String.Empty)
         If Response.Length > 0 Then
             Dim qs As NameValueCollection = HttpUtility.ParseQueryString(Response)
             If qs("oauth_token") IsNot Nothing Then
@@ -59,7 +59,7 @@ Public Class TwitterOAuth
     End Function
     Public Function GetAuthenticationLink() As String
         Dim ReturnValue As String = Nothing
-        Dim Response As String = OAuthWebRequest(Method.GET, REQUEST_TOKEN, String.Empty)
+        Dim Response As String = OAuthWebRequest(Method.GET, REQUESTTOKEN, String.Empty)
         If Response.Length > 0 Then
             Dim qs As NameValueCollection = HttpUtility.ParseQueryString(Response)
             If qs("oauth_token") IsNot Nothing Then
@@ -74,7 +74,7 @@ Public Class TwitterOAuth
         Dim ReturnValue As Boolean
 
         Try
-            Dim Response As String = OAuthWebRequest(Method.GET, String.Format("{0}?oauth_verifier={1}", ACCESS_TOKEN, PIN), String.Empty)
+            Dim Response As String = OAuthWebRequest(Method.GET, String.Format("{0}?oauth_verifier={1}", ACCESSTOKEN, PIN), String.Empty)
             If Response.Length > 0 Then
                 Dim qs As NameValueCollection = HttpUtility.ParseQueryString(Response)
                 If qs("oauth_token") IsNot Nothing Then
@@ -96,23 +96,23 @@ Public Class TwitterOAuth
     End Function
     Public Sub GetXAccess(ByVal p_strUserName As String, ByVal p_strPassword As String)
 
-            Dim strInformation As String
-            strInformation = "?x_auth_username=" & p_strUserName & "&x_auth_password=" & p_strPassword & "&x_auth_mode=client_auth"
-            Dim response As String = OAuthWebRequest(Method.POST, XACCESS_TOKEN, strInformation)
-            If response.Length > 0 Then
-                Dim qs As NameValueCollection = HttpUtility.ParseQueryString(response)
-                If qs("oauth_token") IsNot Nothing Then
-                    Token = qs("oauth_token")
-                End If
-                If qs("oauth_token_secret") IsNot Nothing Then
-                    TokenSecret = qs("oauth_token_secret")
-                End If
+        Dim strInformation As String
+        strInformation = "?x_auth_username=" & p_strUserName & "&x_auth_password=" & p_strPassword & "&x_auth_mode=client_auth"
+        Dim response As String = OAuthWebRequest(Method.POST, XACCESSTOKEN, strInformation)
+        If response.Length > 0 Then
+            Dim qs As NameValueCollection = HttpUtility.ParseQueryString(response)
+            If qs("oauth_token") IsNot Nothing Then
+                Token = qs("oauth_token")
             End If
-        End Sub
+            If qs("oauth_token_secret") IsNot Nothing Then
+                TokenSecret = qs("oauth_token_secret")
+            End If
+        End If
+    End Sub
     Public Sub GetAccessToken(ByVal AuthToken As String, ByVal AuthVerifier As String)
         Token = AuthToken
         Verifier = AuthVerifier
-        Dim Response As String = OAuthWebRequest(Method.GET, ACCESS_TOKEN, String.Empty)
+        Dim Response As String = OAuthWebRequest(Method.GET, ACCESSTOKEN, String.Empty)
         If Response.Length > 0 Then
             Dim qs As NameValueCollection = HttpUtility.ParseQueryString(Response)
             If qs("oauth_token") IsNot Nothing Then
@@ -124,40 +124,40 @@ Public Class TwitterOAuth
         End If
     End Sub
     Public Function OAuthWebUpload(ByVal RequestMethod As Method, ByVal url As String, ByVal PostData As String, ByVal p_FileName As String, ByVal p_FileFieldName As String) As String
-            Dim outURL As String = String.Empty
-            Dim QueryString As String = String.Empty
+        Dim outURL As String = String.Empty
+        Dim QueryString As String = String.Empty
 
-            Dim ReturnValue As String = String.Empty
-            ServicePointManager.ServerCertificateValidationCallback = New System.Net.Security.RemoteCertificateValidationCallback(AddressOf ValidateCertificate)
-            If PostData.Length > 0 Then
-                Dim qs As NameValueCollection = HttpUtility.ParseQueryString(PostData)
-                PostData = String.Empty
-                For Each key As String In qs.AllKeys
-                    If PostData.Length > 0 Then
-                        PostData &= "&"
-                    End If
-                    qs(key) = HttpUtility.UrlDecode(qs(key))
-                    qs(key) = OAuthUrlEncode(qs(key))
-                    PostData &= key & "=" & qs(key)
-                Next
-            End If
-            If url.IndexOf("?") > 0 Then
-                url &= "&"
-            Else
-                url &= "?"
+        Dim ReturnValue As String = String.Empty
+        ServicePointManager.ServerCertificateValidationCallback = New System.Net.Security.RemoteCertificateValidationCallback(AddressOf ValidateCertificate)
+        If PostData.Length > 0 Then
+            Dim qs As NameValueCollection = HttpUtility.ParseQueryString(PostData)
+            PostData = String.Empty
+            For Each key As String In qs.AllKeys
+                If PostData.Length > 0 Then
+                    PostData &= "&"
+                End If
+                qs(key) = HttpUtility.UrlDecode(qs(key))
+                qs(key) = OAuthUrlEncode(qs(key))
+                PostData &= key & "=" & qs(key)
+            Next
+        End If
+        If url.IndexOf("?") > 0 Then
+            url &= "&"
+        Else
+            url &= "?"
 
-            End If
-            Dim requestUri As New Uri(url)
-            Dim nonce As String = GenerateNonce()
-            Dim TimeStamp As String = GenerateTimeStamp()
-            Dim Sig As String = GenerateSignature(requestUri, Me.ConsumerKey, Me.ConsumerSecret, Me.Token, Me.TokenSecret, RequestMethod.ToString, TimeStamp, nonce, outURL, QueryString, CallbackUrl, Verifier)
-            QueryString &= "&oauth_signature=" + OAuthUrlEncode(Sig)
-            PostData = QueryString
-            QueryString = String.Empty
-            ReturnValue = WebUpload(RequestMethod, outURL + QueryString, PostData, p_FileName, p_FileFieldName)
-            Return ReturnValue
+        End If
+        Dim requestUri As New Uri(url)
+        Dim nonce As String = GenerateNonce()
+        Dim TimeStamp As String = GenerateTimeStamp()
+        Dim Sig As String = GenerateSignature(requestUri, Me.ConsumerKey, Me.ConsumerSecret, Me.Token, Me.TokenSecret, RequestMethod.ToString, TimeStamp, nonce, outURL, QueryString, CallbackUrl, Verifier)
+        QueryString &= "&oauth_signature=" + OAuthUrlEncode(Sig)
+        PostData = QueryString
+        QueryString = String.Empty
+        ReturnValue = WebUpload(RequestMethod, outURL + QueryString, PostData, p_FileName, p_FileFieldName)
+        Return ReturnValue
 
-        End Function
+    End Function
     Public Function WebUpload(ByVal RequestMethod As Method, ByVal Url As String, ByVal PostData As String, ByVal p_FileName As String, ByVal p_FileFieldName As String) As String
         Try
             Dim request As HttpWebRequest = TryCast(System.Net.WebRequest.Create(Url), HttpWebRequest)
@@ -345,7 +345,7 @@ Public Class TwitterOAuth
     End Function
     Public Function GetAuthorizationLink_CB() As String
         Dim ReturnValue As String = Nothing
-        Dim Response As String = OAuthWebRequest_CB(Method.POST, REQUEST_TOKEN, String.Empty)
+        Dim Response As String = OAuthWebRequestCB(Method.POST, REQUESTTOKEN, String.Empty)
         If Response.Length > 0 Then
             Dim qs As NameValueCollection = HttpUtility.ParseQueryString(Response)
             If qs("oauth_token") IsNot Nothing Then
@@ -395,7 +395,7 @@ Public Class TwitterOAuth
             Throw tax
         End Try
     End Function
-    Public Function OAuthWebRequest_CB(ByVal RequestMethod As Method, ByVal url As String, ByVal PostData As String) As String
+    Public Function OAuthWebRequestCB(ByVal RequestMethod As Method, ByVal url As String, ByVal PostData As String) As String
         Dim OutURL As String = String.Empty
         Dim QueryString As String = String.Empty
         Dim ReturnValue As String = String.Empty

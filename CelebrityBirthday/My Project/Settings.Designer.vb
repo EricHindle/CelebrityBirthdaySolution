@@ -353,6 +353,30 @@ Namespace My
                 Me("capformpos") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property botsdformpos() As String
+            Get
+                Return CType(Me("botsdformpos"),String)
+            End Get
+            Set
+                Me("botsdformpos") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property sndtwformpos() As String
+            Get
+                Return CType(Me("sndtwformpos"),String)
+            End Get
+            Set
+                Me("sndtwformpos") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

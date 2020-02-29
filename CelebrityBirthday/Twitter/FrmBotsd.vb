@@ -149,6 +149,7 @@ Public Class FrmBotsd
         StatusStrip1.Refresh()
     End Sub
     Private Sub FrmBotsd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetFormPos(Me, My.Settings.botsdformpos)
         IsNoGenerate = True
         LblMonth.Text = Format(New Date(2000, _month, 1), "MMMM")
         LblDay.Text = CStr(_day)
@@ -161,23 +162,26 @@ Public Class FrmBotsd
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
     End Sub
-    Public Sub AddList(ByRef _persons As List(Of Person))
+    Public Sub AddList(ByRef personsList As List(Of Person))
         Dim _pairRow As DataGridViewRow = DgvPairs.Rows(DgvPairs.Rows.Add())
-        If _persons.Count > 0 Then
-            _pairRow.Cells(pairId1.Name).Value = _persons(0).Id
-            _pairRow.Cells(pairPerson1.Name).Value = _persons(0).Name
-        End If
-        If _persons.Count > 1 Then
-            _pairRow.Cells(pairId2.Name).Value = _persons(1).Id
-            _pairRow.Cells(pairPerson2.Name).Value = _persons(1).Name
-        End If
-        If _persons.Count > 2 Then
-            _pairRow.Cells(pairId3.Name).Value = _persons(2).Id
-            _pairRow.Cells(pairPerson3.Name).Value = _persons(2).Name
-        End If
-        If _persons.Count > 3 Then
-            _pairRow.Cells(pairId4.Name).Value = _persons(3).Id
-            _pairRow.Cells(pairPerson4.Name).Value = _persons(3).Name
+        If personsList IsNot Nothing Then
+            If personsList.Count > 0 Then
+                _pairRow.Cells(pairYear.Name).Value = personsList(0).BirthYear
+                _pairRow.Cells(pairId1.Name).Value = personsList(0).Id
+                _pairRow.Cells(pairPerson1.Name).Value = personsList(0).Name
+            End If
+            If personsList.Count > 1 Then
+                _pairRow.Cells(pairId2.Name).Value = personsList(1).Id
+                _pairRow.Cells(pairPerson2.Name).Value = personsList(1).Name
+            End If
+            If personsList.Count > 2 Then
+                _pairRow.Cells(pairId3.Name).Value = personsList(2).Id
+                _pairRow.Cells(pairPerson3.Name).Value = personsList(2).Name
+            End If
+            If personsList.Count > 3 Then
+                _pairRow.Cells(pairId4.Name).Value = personsList(3).Id
+                _pairRow.Cells(pairPerson4.Name).Value = personsList(3).Name
+            End If
         End If
 
     End Sub
@@ -412,6 +416,44 @@ Public Class FrmBotsd
             DisplayStatus("Updated person 4")
         Else
             DisplayStatus("Updated failed")
+        End If
+    End Sub
+
+    Private Sub FrmBotsd_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        My.Settings.botsdformpos = SetFormPos(Me)
+        My.Settings.Save()
+    End Sub
+
+    Private Sub CopyToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles CopyToolStripMenuItem.Click
+        GetSourceControl(menuItem).Copy()
+    End Sub
+    Private Sub CutToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles CutToolStripMenuItem.Click
+        GetSourceControl(menuItem).Cut()
+    End Sub
+    Private Sub SelectAllToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectAllToolStripMenuItem.Click
+        Dim sourceControl As Object = GetSourceControl(sender)
+
+        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            If _textBox IsNot Nothing Then
+                _textBox.SelectAll()
+            End If
+        End If
+
+    End Sub
+    Private Sub PasteToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem.Click
+        Dim sourceControl As Object = GetSourceControl(menuItem)
+        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            _textBox.Paste()
+        End If
+
+    End Sub
+    Private Sub ClearToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles ClearToolStripMenuItem.Click
+        Dim sourceControl As Object = GetSourceControl(menuItem)
+        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            _textBox.Text = ""
         End If
     End Sub
 

@@ -49,6 +49,7 @@ Public Class FrmSendTwitter
         WriteTrace("Back from Authenticate " & Format(Now, "hh:MM:ss"))
     End Sub
     Private Sub FrmSendTwitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetFormPos(Me, My.Settings.sndtwformpos)
         WebBrowser1.Navigate("about:blank")
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
         tw.ConsumerKey = _auth.Token
@@ -96,6 +97,8 @@ Public Class FrmSendTwitter
     End Sub
     Private Sub FrmSendTwitter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         oTweetTa.Dispose()
+        My.Settings.sndtwformpos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
 #End Region
 #Region "subroutines"
@@ -161,7 +164,7 @@ Public Class FrmSendTwitter
             WriteTrace("Building POST " & Format(Now, "hh:MM:ss"))
             Dim baseString As String = "POST"
             baseString &= "&"
-            baseString &= Uri.EscapeDataString(TwitterOAuth.ACCESS_TOKEN)
+            baseString &= Uri.EscapeDataString(TwitterOAuth.ACCESSTOKEN)
             baseString &= "&"
             baseString &= Uri.EscapeDataString(parameterCollection)
             Dim signingKey = Uri.EscapeDataString(tw.ConsumerSecret)
@@ -228,7 +231,7 @@ Public Class FrmSendTwitter
             WriteTrace("Building POST " & Format(Now, "hh:MM:ss"))
             Dim baseString As String = "POST"
             baseString &= "&"
-            baseString &= Uri.EscapeDataString(TwitterOAuth.REQUEST_TOKEN)
+            baseString &= Uri.EscapeDataString(TwitterOAuth.REQUESTTOKEN)
             baseString &= "&"
             baseString &= Uri.EscapeDataString(parameterCollection)
             WriteTrace(baseString)

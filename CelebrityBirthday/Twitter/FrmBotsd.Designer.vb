@@ -22,6 +22,7 @@ Partial Class FrmBotsd
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmBotsd))
         Me.rtbTweet = New System.Windows.Forms.RichTextBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
@@ -33,14 +34,6 @@ Partial Class FrmBotsd
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.rtbFile1 = New System.Windows.Forms.RichTextBox()
         Me.DgvPairs = New System.Windows.Forms.DataGridView()
-        Me.pairPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TxtForename1 = New System.Windows.Forms.TextBox()
         Me.TxtSurname1 = New System.Windows.Forms.TextBox()
         Me.TxtShortDesc1 = New System.Windows.Forms.TextBox()
@@ -81,9 +74,24 @@ Partial Class FrmBotsd
         Me.TxtForename4 = New System.Windows.Forms.TextBox()
         Me.TxtSurname4 = New System.Windows.Forms.TextBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.rbImageCentre = New System.Windows.Forms.RadioButton()
         Me.rbImageRight = New System.Windows.Forms.RadioButton()
         Me.rbImageLeft = New System.Windows.Forms.RadioButton()
-        Me.rbImageCentre = New System.Windows.Forms.RadioButton()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.pairYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -93,6 +101,7 @@ Partial Class FrmBotsd
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'rtbTweet
@@ -102,7 +111,7 @@ Partial Class FrmBotsd
         Me.rtbTweet.BackColor = System.Drawing.Color.Black
         Me.rtbTweet.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbTweet.ForeColor = System.Drawing.Color.White
-        Me.rtbTweet.Location = New System.Drawing.Point(1002, 6)
+        Me.rtbTweet.Location = New System.Drawing.Point(1053, 6)
         Me.rtbTweet.Name = "rtbTweet"
         Me.rtbTweet.Size = New System.Drawing.Size(200, 353)
         Me.rtbTweet.TabIndex = 32
@@ -115,7 +124,7 @@ Partial Class FrmBotsd
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 590)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1214, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1265, 22)
         Me.StatusStrip1.TabIndex = 33
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -132,7 +141,7 @@ Partial Class FrmBotsd
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1063, 551)
+        Me.btnClose.Location = New System.Drawing.Point(1114, 551)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(139, 33)
         Me.btnClose.TabIndex = 34
@@ -144,7 +153,7 @@ Partial Class FrmBotsd
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(864, 326)
+        Me.BtnSend.Location = New System.Drawing.Point(915, 326)
         Me.BtnSend.Name = "BtnSend"
         Me.BtnSend.Size = New System.Drawing.Size(126, 33)
         Me.BtnSend.TabIndex = 34
@@ -154,7 +163,7 @@ Partial Class FrmBotsd
         'NudPic1Horizontal
         '
         Me.NudPic1Horizontal.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.NudPic1Horizontal.Location = New System.Drawing.Point(561, 35)
+        Me.NudPic1Horizontal.Location = New System.Drawing.Point(612, 35)
         Me.NudPic1Horizontal.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
         Me.NudPic1Horizontal.Name = "NudPic1Horizontal"
         Me.NudPic1Horizontal.Size = New System.Drawing.Size(53, 23)
@@ -166,7 +175,7 @@ Partial Class FrmBotsd
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(573, 16)
+        Me.Label2.Location = New System.Drawing.Point(624, 16)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(41, 16)
         Me.Label2.TabIndex = 10
@@ -176,7 +185,7 @@ Partial Class FrmBotsd
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Location = New System.Drawing.Point(630, 6)
+        Me.PictureBox1.Location = New System.Drawing.Point(681, 6)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(366, 86)
         Me.PictureBox1.TabIndex = 1
@@ -187,10 +196,11 @@ Partial Class FrmBotsd
         Me.rtbFile1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rtbFile1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.rtbFile1.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rtbFile1.Location = New System.Drawing.Point(630, 98)
+        Me.rtbFile1.Location = New System.Drawing.Point(681, 98)
         Me.rtbFile1.Name = "rtbFile1"
-        Me.rtbFile1.Size = New System.Drawing.Size(363, 183)
+        Me.rtbFile1.Size = New System.Drawing.Size(366, 183)
         Me.rtbFile1.TabIndex = 14
         Me.rtbFile1.Text = ""
         '
@@ -203,83 +213,15 @@ Partial Class FrmBotsd
         Me.DgvPairs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DgvPairs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pairPerson1, Me.pairPerson2, Me.pairPerson3, Me.pairPerson4, Me.pairId1, Me.pairId2, Me.pairId3, Me.pairId4})
+        Me.DgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pairYear, Me.pairPerson1, Me.pairPerson2, Me.pairPerson3, Me.pairPerson4, Me.pairId1, Me.pairId2, Me.pairId3, Me.pairId4})
         Me.DgvPairs.Location = New System.Drawing.Point(12, 74)
         Me.DgvPairs.MultiSelect = False
         Me.DgvPairs.Name = "DgvPairs"
         Me.DgvPairs.ReadOnly = True
         Me.DgvPairs.RowHeadersVisible = False
         Me.DgvPairs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvPairs.Size = New System.Drawing.Size(605, 285)
+        Me.DgvPairs.Size = New System.Drawing.Size(663, 285)
         Me.DgvPairs.TabIndex = 36
-        '
-        'pairPerson1
-        '
-        Me.pairPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson1.HeaderText = "Person1"
-        Me.pairPerson1.Name = "pairPerson1"
-        Me.pairPerson1.ReadOnly = True
-        Me.pairPerson1.Width = 150
-        '
-        'pairPerson2
-        '
-        Me.pairPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson2.HeaderText = "Person2"
-        Me.pairPerson2.Name = "pairPerson2"
-        Me.pairPerson2.ReadOnly = True
-        Me.pairPerson2.Width = 150
-        '
-        'pairPerson3
-        '
-        Me.pairPerson3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson3.HeaderText = "Person3"
-        Me.pairPerson3.Name = "pairPerson3"
-        Me.pairPerson3.ReadOnly = True
-        Me.pairPerson3.Width = 150
-        '
-        'pairPerson4
-        '
-        Me.pairPerson4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson4.HeaderText = "Person4"
-        Me.pairPerson4.Name = "pairPerson4"
-        Me.pairPerson4.ReadOnly = True
-        Me.pairPerson4.Width = 150
-        '
-        'pairId1
-        '
-        Me.pairId1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId1.HeaderText = "Id1"
-        Me.pairId1.Name = "pairId1"
-        Me.pairId1.ReadOnly = True
-        Me.pairId1.Visible = False
-        Me.pairId1.Width = 30
-        '
-        'pairId2
-        '
-        Me.pairId2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId2.HeaderText = "Id2"
-        Me.pairId2.Name = "pairId2"
-        Me.pairId2.ReadOnly = True
-        Me.pairId2.Visible = False
-        Me.pairId2.Width = 30
-        '
-        'pairId3
-        '
-        Me.pairId3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId3.HeaderText = "Id3"
-        Me.pairId3.Name = "pairId3"
-        Me.pairId3.ReadOnly = True
-        Me.pairId3.Visible = False
-        Me.pairId3.Width = 30
-        '
-        'pairId4
-        '
-        Me.pairId4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId4.HeaderText = "Id4"
-        Me.pairId4.Name = "pairId4"
-        Me.pairId4.ReadOnly = True
-        Me.pairId4.Visible = False
-        Me.pairId4.Width = 30
         '
         'TxtForename1
         '
@@ -446,7 +388,7 @@ Partial Class FrmBotsd
         Me.BtnGenerate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnGenerate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGenerate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGenerate.Location = New System.Drawing.Point(774, 288)
+        Me.BtnGenerate.Location = New System.Drawing.Point(825, 288)
         Me.BtnGenerate.Name = "BtnGenerate"
         Me.BtnGenerate.Size = New System.Drawing.Size(111, 33)
         Me.BtnGenerate.TabIndex = 42
@@ -458,7 +400,7 @@ Partial Class FrmBotsd
         Me.BtnSwap.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSwap.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSwap.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSwap.Location = New System.Drawing.Point(899, 287)
+        Me.BtnSwap.Location = New System.Drawing.Point(950, 287)
         Me.BtnSwap.Name = "BtnSwap"
         Me.BtnSwap.Size = New System.Drawing.Size(91, 33)
         Me.BtnSwap.TabIndex = 43
@@ -470,7 +412,7 @@ Partial Class FrmBotsd
         Me.cmbTwitterUsers.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbTwitterUsers.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbTwitterUsers.FormattingEnabled = True
-        Me.cmbTwitterUsers.Location = New System.Drawing.Point(711, 330)
+        Me.cmbTwitterUsers.Location = New System.Drawing.Point(762, 330)
         Me.cmbTwitterUsers.Name = "cmbTwitterUsers"
         Me.cmbTwitterUsers.Size = New System.Drawing.Size(127, 24)
         Me.cmbTwitterUsers.TabIndex = 45
@@ -481,7 +423,7 @@ Partial Class FrmBotsd
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label3.Location = New System.Drawing.Point(643, 333)
+        Me.Label3.Location = New System.Drawing.Point(694, 333)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(62, 19)
         Me.Label3.TabIndex = 44
@@ -495,7 +437,7 @@ Partial Class FrmBotsd
         Me.chkImages.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkImages.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.chkImages.Location = New System.Drawing.Point(647, 294)
+        Me.chkImages.Location = New System.Drawing.Point(698, 294)
         Me.chkImages.Name = "chkImages"
         Me.chkImages.Size = New System.Drawing.Size(107, 23)
         Me.chkImages.TabIndex = 46
@@ -534,7 +476,7 @@ Partial Class FrmBotsd
         Me.GroupBox3.Controls.Add(Me.TxtShortDesc3)
         Me.GroupBox3.Controls.Add(Me.TxtForename3)
         Me.GroupBox3.Controls.Add(Me.TxtSurname3)
-        Me.GroupBox3.Location = New System.Drawing.Point(534, 365)
+        Me.GroupBox3.Location = New System.Drawing.Point(585, 365)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(462, 84)
         Me.GroupBox3.TabIndex = 44
@@ -614,7 +556,7 @@ Partial Class FrmBotsd
         Me.GroupBox4.Controls.Add(Me.TxtShortDesc4)
         Me.GroupBox4.Controls.Add(Me.TxtForename4)
         Me.GroupBox4.Controls.Add(Me.TxtSurname4)
-        Me.GroupBox4.Location = New System.Drawing.Point(534, 455)
+        Me.GroupBox4.Location = New System.Drawing.Point(585, 455)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(462, 84)
         Me.GroupBox4.TabIndex = 44
@@ -690,11 +632,23 @@ Partial Class FrmBotsd
         Me.GroupBox5.Controls.Add(Me.rbImageCentre)
         Me.GroupBox5.Controls.Add(Me.rbImageRight)
         Me.GroupBox5.Controls.Add(Me.rbImageLeft)
-        Me.GroupBox5.Location = New System.Drawing.Point(1026, 370)
+        Me.GroupBox5.Location = New System.Drawing.Point(1077, 370)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(139, 112)
         Me.GroupBox5.TabIndex = 49
         Me.GroupBox5.TabStop = False
+        '
+        'rbImageCentre
+        '
+        Me.rbImageCentre.AutoSize = True
+        Me.rbImageCentre.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageCentre.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.rbImageCentre.Location = New System.Drawing.Point(23, 77)
+        Me.rbImageCentre.Name = "rbImageCentre"
+        Me.rbImageCentre.Size = New System.Drawing.Size(92, 22)
+        Me.rbImageCentre.TabIndex = 2
+        Me.rbImageCentre.Text = "ImageCentre"
+        Me.rbImageCentre.UseVisualStyleBackColor = True
         '
         'rbImageRight
         '
@@ -722,24 +676,124 @@ Partial Class FrmBotsd
         Me.rbImageLeft.Text = "ImageLeft"
         Me.rbImageLeft.UseVisualStyleBackColor = True
         '
-        'rbImageCentre
+        'ContextMenuStrip1
         '
-        Me.rbImageCentre.AutoSize = True
-        Me.rbImageCentre.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbImageCentre.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.rbImageCentre.Location = New System.Drawing.Point(23, 77)
-        Me.rbImageCentre.Name = "rbImageCentre"
-        Me.rbImageCentre.Size = New System.Drawing.Size(92, 22)
-        Me.rbImageCentre.TabIndex = 2
-        Me.rbImageCentre.Text = "ImageCentre"
-        Me.rbImageCentre.UseVisualStyleBackColor = True
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem, Me.CutToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ClearToolStripMenuItem, Me.SelectAllToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(123, 114)
+        '
+        'CopyToolStripMenuItem
+        '
+        Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.CopyToolStripMenuItem.Text = "Copy"
+        '
+        'CutToolStripMenuItem
+        '
+        Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
+        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.CutToolStripMenuItem.Text = "Cut"
+        '
+        'PasteToolStripMenuItem
+        '
+        Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
+        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.PasteToolStripMenuItem.Text = "Paste"
+        '
+        'ClearToolStripMenuItem
+        '
+        Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.ClearToolStripMenuItem.Text = "Clear"
+        '
+        'SelectAllToolStripMenuItem
+        '
+        Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.SelectAllToolStripMenuItem.Text = "Select All"
+        '
+        'pairYear
+        '
+        Me.pairYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairYear.HeaderText = "Year"
+        Me.pairYear.Name = "pairYear"
+        Me.pairYear.ReadOnly = True
+        Me.pairYear.Width = 60
+        '
+        'pairPerson1
+        '
+        Me.pairPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson1.HeaderText = "Person1"
+        Me.pairPerson1.Name = "pairPerson1"
+        Me.pairPerson1.ReadOnly = True
+        Me.pairPerson1.Width = 150
+        '
+        'pairPerson2
+        '
+        Me.pairPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson2.HeaderText = "Person2"
+        Me.pairPerson2.Name = "pairPerson2"
+        Me.pairPerson2.ReadOnly = True
+        Me.pairPerson2.Width = 150
+        '
+        'pairPerson3
+        '
+        Me.pairPerson3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson3.HeaderText = "Person3"
+        Me.pairPerson3.Name = "pairPerson3"
+        Me.pairPerson3.ReadOnly = True
+        Me.pairPerson3.Width = 150
+        '
+        'pairPerson4
+        '
+        Me.pairPerson4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson4.HeaderText = "Person4"
+        Me.pairPerson4.Name = "pairPerson4"
+        Me.pairPerson4.ReadOnly = True
+        Me.pairPerson4.Width = 150
+        '
+        'pairId1
+        '
+        Me.pairId1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId1.HeaderText = "Id1"
+        Me.pairId1.Name = "pairId1"
+        Me.pairId1.ReadOnly = True
+        Me.pairId1.Visible = False
+        Me.pairId1.Width = 30
+        '
+        'pairId2
+        '
+        Me.pairId2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId2.HeaderText = "Id2"
+        Me.pairId2.Name = "pairId2"
+        Me.pairId2.ReadOnly = True
+        Me.pairId2.Visible = False
+        Me.pairId2.Width = 30
+        '
+        'pairId3
+        '
+        Me.pairId3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId3.HeaderText = "Id3"
+        Me.pairId3.Name = "pairId3"
+        Me.pairId3.ReadOnly = True
+        Me.pairId3.Visible = False
+        Me.pairId3.Width = 30
+        '
+        'pairId4
+        '
+        Me.pairId4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId4.HeaderText = "Id4"
+        Me.pairId4.Name = "pairId4"
+        Me.pairId4.ReadOnly = True
+        Me.pairId4.Visible = False
+        Me.pairId4.Width = 30
         '
         'FrmBotsd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1214, 612)
+        Me.ClientSize = New System.Drawing.Size(1265, 612)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
@@ -782,6 +836,7 @@ Partial Class FrmBotsd
         Me.GroupBox4.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -832,14 +887,6 @@ Partial Class FrmBotsd
     Friend WithEvents TxtShortDesc4 As TextBox
     Friend WithEvents TxtForename4 As TextBox
     Friend WithEvents TxtSurname4 As TextBox
-    Friend WithEvents pairPerson1 As DataGridViewTextBoxColumn
-    Friend WithEvents pairPerson2 As DataGridViewTextBoxColumn
-    Friend WithEvents pairPerson3 As DataGridViewTextBoxColumn
-    Friend WithEvents pairPerson4 As DataGridViewTextBoxColumn
-    Friend WithEvents pairId1 As DataGridViewTextBoxColumn
-    Friend WithEvents pairId2 As DataGridViewTextBoxColumn
-    Friend WithEvents pairId3 As DataGridViewTextBoxColumn
-    Friend WithEvents pairId4 As DataGridViewTextBoxColumn
     Friend WithEvents chkSel1 As CheckBox
     Friend WithEvents ChkSel2 As CheckBox
     Friend WithEvents ChkSel3 As CheckBox
@@ -848,4 +895,19 @@ Partial Class FrmBotsd
     Friend WithEvents rbImageCentre As RadioButton
     Friend WithEvents rbImageRight As RadioButton
     Friend WithEvents rbImageLeft As RadioButton
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents CopyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PasteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ClearToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents pairYear As DataGridViewTextBoxColumn
+    Friend WithEvents pairPerson1 As DataGridViewTextBoxColumn
+    Friend WithEvents pairPerson2 As DataGridViewTextBoxColumn
+    Friend WithEvents pairPerson3 As DataGridViewTextBoxColumn
+    Friend WithEvents pairPerson4 As DataGridViewTextBoxColumn
+    Friend WithEvents pairId1 As DataGridViewTextBoxColumn
+    Friend WithEvents pairId2 As DataGridViewTextBoxColumn
+    Friend WithEvents pairId3 As DataGridViewTextBoxColumn
+    Friend WithEvents pairId4 As DataGridViewTextBoxColumn
 End Class

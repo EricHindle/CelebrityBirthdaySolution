@@ -4,7 +4,7 @@ Imports System.Net
 Imports System.IO
 Imports System.Drawing.Drawing2D
 Imports System.Web.Script.Serialization
-Module modCbday
+Friend Module modCbday
     Public Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Public Const TWEET_MAX_LEN As Integer = 279
@@ -12,17 +12,21 @@ Module modCbday
     Public Const RTB_CONTROL_NAME As String = "RtbFile"
     Public Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
     Public Const TABPAGE_BASENAME As String = "TabPage_"
-
-    Private Declare Function SendMessageLong Lib "user32" Alias _
-        "SendMessageA" (ByVal hWnd As IntPtr, ByVal wMsg As _
-        Int32, ByVal wParam As Int32, ByVal lParam As Int32) As _
-        Long
+    Public myCultureInfo As CultureInfo = CultureInfo.CurrentUICulture
+    Private Class NativeMethods
+        Public Declare Function SendMessageLong Lib "user32" _
+                        Alias "SendMessageA" (ByVal hWnd As IntPtr,
+                                              ByVal wMsg As Int32,
+                                              ByVal wParam As Int32,
+                                              ByVal lParam As Int32) As Long
+    End Class
     Private Structure POINTAPI
         Public X As Integer
         Public Y As Integer
     End Structure
     Private Const EM_CHARFROMPOS As Int32 = &HD7
     Dim _lookup As Dictionary(Of Char, String) = Nothing
+
     Public Function ToSimpleCharacters(ByVal original As String) As String
         Dim rtnvalue As String = original
         If original <> String.Empty Then
@@ -100,7 +104,7 @@ Module modCbday
             Y))
 
         ' Get the character number
-        TextBoxCursorPos = SendMessageLong(oBox.Handle,
+        TextBoxCursorPos = NativeMethods.SendMessageLong(oBox.Handle,
             EM_CHARFROMPOS, 0&, CLng(pt.X + pt.Y * &H10000)) _
             And &HFFFF&
     End Function
@@ -297,3 +301,5 @@ Module modCbday
         Return _extract
     End Function
 End Module
+
+

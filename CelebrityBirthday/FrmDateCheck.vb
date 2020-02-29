@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Data.Common
+Imports System.IO
 Imports System.Net
 Imports System.Web.Script.Serialization
 
@@ -43,7 +44,7 @@ Public Class FrmDateCheck
         DisplayMessage("Finding everybody")
         Try
             personTable = FindEverybody()
-        Catch ex As Exception
+        Catch ex As DbException
             If MsgBox("Exception during list load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
                 Exit Sub
             End If

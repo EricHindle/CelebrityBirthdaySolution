@@ -146,15 +146,15 @@ Public Class OAuth
         End If
 
         If String.IsNullOrEmpty(ConsumerKey) Then
-            Throw New ArgumentNullException("ConsumerKey")
+            Throw New ArgumentNullException(NameOf(ConsumerKey))
         End If
 
         If String.IsNullOrEmpty(HTTPMethod) Then
-            Throw New ArgumentNullException("HTTPMethod")
+            Throw New ArgumentNullException(NameOf(HTTPMethod))
         End If
 
         If String.IsNullOrEmpty(SignatureType) Then
-            Throw New ArgumentNullException("SignatureType")
+            Throw New ArgumentNullException(NameOf(SignatureType))
         End If
 
         NormalizedURL = Nothing

@@ -26,7 +26,7 @@
     End Sub
     Private Sub BtnPictures_Click(sender As Object, e As EventArgs) Handles BtnPictures.Click
         Me.Hide()
-        Using _pictures As New frmImageStore
+        Using _pictures As New FrmImageStore
             _pictures.ShowDialog()
         End Using
         Me.Show()
@@ -61,7 +61,6 @@
     End Sub
     Private Sub FrmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
-
         If My.Settings.callUpgrade = 0 Then
             My.Settings.Upgrade()
             My.Settings.callUpgrade = 1
