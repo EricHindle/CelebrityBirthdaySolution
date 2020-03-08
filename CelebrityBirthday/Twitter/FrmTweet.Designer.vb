@@ -55,6 +55,7 @@ Partial Class FrmTweet
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.rbImageCentre = New System.Windows.Forms.RadioButton()
         Me.rbImageRight = New System.Windows.Forms.RadioButton()
         Me.rbImageLeft = New System.Windows.Forms.RadioButton()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -73,7 +74,6 @@ Partial Class FrmTweet
         Me.BtnBotsd = New System.Windows.Forms.Button()
         Me.BtnTotd = New System.Windows.Forms.Button()
         Me.BtnUncheck = New System.Windows.Forms.Button()
-        Me.rbImageCentre = New System.Windows.Forms.RadioButton()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -438,6 +438,20 @@ Partial Class FrmTweet
         Me.GroupBox4.TabIndex = 38
         Me.GroupBox4.TabStop = False
         '
+        'rbImageCentre
+        '
+        Me.rbImageCentre.AutoSize = True
+        Me.rbImageCentre.Checked = True
+        Me.rbImageCentre.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageCentre.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.rbImageCentre.Location = New System.Drawing.Point(23, 66)
+        Me.rbImageCentre.Name = "rbImageCentre"
+        Me.rbImageCentre.Size = New System.Drawing.Size(92, 22)
+        Me.rbImageCentre.TabIndex = 2
+        Me.rbImageCentre.TabStop = True
+        Me.rbImageCentre.Text = "ImageCentre"
+        Me.rbImageCentre.UseVisualStyleBackColor = True
+        '
         'rbImageRight
         '
         Me.rbImageRight.AutoSize = True
@@ -645,20 +659,6 @@ Partial Class FrmTweet
         Me.BtnUncheck.TabIndex = 39
         Me.BtnUncheck.Text = "Uncheck All"
         Me.BtnUncheck.UseVisualStyleBackColor = True
-        '
-        'rbImageCentre
-        '
-        Me.rbImageCentre.AutoSize = True
-        Me.rbImageCentre.Checked = True
-        Me.rbImageCentre.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbImageCentre.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.rbImageCentre.Location = New System.Drawing.Point(23, 66)
-        Me.rbImageCentre.Name = "rbImageCentre"
-        Me.rbImageCentre.Size = New System.Drawing.Size(92, 22)
-        Me.rbImageCentre.TabIndex = 2
-        Me.rbImageCentre.TabStop = True
-        Me.rbImageCentre.Text = "ImageCentre"
-        Me.rbImageCentre.UseVisualStyleBackColor = True
         '
         'FrmTweet
         '

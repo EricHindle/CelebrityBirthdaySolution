@@ -773,6 +773,11 @@ Public Class FrmTweet
         Return newTabpage
     End Function
 
+    Private Sub DateSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
+        NudBirthdaysPerTweet.Value = 0
+        NudAnnivsPerTweet.Value = 0
+    End Sub
+
     'Private Sub TvBirthday_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck
     '    If Not isBuildingTrees Then
     '        Dim node As TreeNode = e.Node
