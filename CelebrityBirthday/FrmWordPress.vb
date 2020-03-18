@@ -6,7 +6,8 @@ Public Class FrmWordPress
     Private Const A_TAG_END As String = """>"
     Private Const IMG_TAG_START As String = "<img title="""
     Private Const IMG_TAG_MIDDLE As String = """ src=""http://celebritybirthday.files.wordpress.com/"
-    Private Const IMG_TAG_END As String = """ alt="""" width=""60"" height=""60"" />"
+    Private Const IMG_TAG_ALT As String = " alt="""
+    Private Const IMG_TAG_SIZE As String = " width=""60"" height=""60"" />"
     Private Const STRONG_TAG_START As String = "</a> <strong>"
     Private Const STRONG_TAG_END As String = "</strong>"
     Private Const EXCERPT_START As String = "Today's Birthdays:<br />"
@@ -84,7 +85,7 @@ Public Class FrmWordPress
             End If
             Dim lowername As String = oPerson.Image.ImageFileName
             If lowername.Length = 0 Then
-                lowername = oPerson.Name.ToLower.Replace(" ", "-").Replace(".", "")
+                lowername = oPerson.Name.ToLower(myCultureInfo).Replace(" ", "-").Replace(".", "")
             End If
             Dim sBorn As String = ""
             If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
@@ -109,7 +110,11 @@ Public Class FrmWordPress
                 .Append("/")
                 .Append(lowername)
                 .Append(oPerson.Image.ImageFileType)
-                .Append(IMG_TAG_END)
+                .Append("""")
+                .Append(IMG_TAG_ALT)
+                .Append(oPerson.Name)
+                .Append("""")
+                .Append(IMG_TAG_SIZE)
                 .Append(STRONG_TAG_START)
                 .Append(oPerson.Name)
                 .Append(STRONG_TAG_END)
@@ -201,7 +206,7 @@ Public Class FrmWordPress
         If cboMonth.SelectedIndex >= 0 Then
             Dim _selMonth As String = cboMonth.SelectedItem
             Dim _selDay As String = cboDay.SelectedItem
-            Dim sUrl As String = GetWordPressMonthUrl(txtLoadYr.Text, txtLoadMth.Text, TxtLoadDay.Text, _selDay, _selMonth.ToLower)
+            Dim sUrl As String = GetWordPressMonthUrl(txtLoadYr.Text, txtLoadMth.Text, TxtLoadDay.Text, _selDay, _selMonth.ToLower(myCultureInfo))
             Process.Start(sUrl)
         End If
 

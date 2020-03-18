@@ -173,8 +173,7 @@ Public Class FrmTweet
                         For Each _detailNode As TreeNode In _personNode.Nodes
                             If _detailNode.Name = "id" Then
                                 Dim _person As Person = GetFullPersonById(CInt(_detailNode.Text))
-                                Dim _text As String = BuildTweetText(_person)
-                                rtbControl.Text = _text.ToString
+                                rtbControl.Text = BuildTweetText(_person)
                                 Dim _pictureList As New List(Of Person) From {_person}
                                 GeneratePicture(pbControl, _pictureList, 1)
                             End If
@@ -748,10 +747,10 @@ Public Class FrmTweet
     End Function
     Private Function GetHeading(_typeNode As String) As String
         Dim _header As String = ""
-        If _typeNode.StartsWith("A") Then
+        If _typeNode.StartsWith("A", True, myCultureInfo) Then
             _header = ANNIV_HDR
         End If
-        If _typeNode.StartsWith("B") Then
+        If _typeNode.StartsWith("B", True, myCultureInfo) Then
             _header = BIRTHDAY_HDR
         End If
         Return _header
