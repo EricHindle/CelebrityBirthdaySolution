@@ -41,10 +41,12 @@ Partial Class FrmImageStore
         Me.BtnEditImage = New System.Windows.Forms.Button()
         Me.btnLoadImage = New System.Windows.Forms.Button()
         Me.lblImageFile = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnSavepic
@@ -52,7 +54,7 @@ Partial Class FrmImageStore
         Me.btnSavepic.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSavepic.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSavepic.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnSavepic.Location = New System.Drawing.Point(920, 299)
+        Me.btnSavepic.Location = New System.Drawing.Point(920, 273)
         Me.btnSavepic.Name = "btnSavepic"
         Me.btnSavepic.Size = New System.Drawing.Size(87, 59)
         Me.btnSavepic.TabIndex = 64
@@ -76,9 +78,9 @@ Partial Class FrmImageStore
         Me.btnSelFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelFolder.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSelFolder.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnSelFolder.Location = New System.Drawing.Point(920, 108)
+        Me.btnSelFolder.Location = New System.Drawing.Point(920, 113)
         Me.btnSelFolder.Name = "btnSelFolder"
-        Me.btnSelFolder.Size = New System.Drawing.Size(87, 64)
+        Me.btnSelFolder.Size = New System.Drawing.Size(87, 59)
         Me.btnSelFolder.TabIndex = 69
         Me.btnSelFolder.Text = "Set image folder"
         Me.btnSelFolder.UseVisualStyleBackColor = True
@@ -101,7 +103,7 @@ Partial Class FrmImageStore
         Me.btnGetImage.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnGetImage.Location = New System.Drawing.Point(920, 33)
         Me.btnGetImage.Name = "btnGetImage"
-        Me.btnGetImage.Size = New System.Drawing.Size(87, 57)
+        Me.btnGetImage.Size = New System.Drawing.Size(87, 59)
         Me.btnGetImage.TabIndex = 72
         Me.btnGetImage.Text = "Search for Images"
         Me.btnGetImage.UseVisualStyleBackColor = True
@@ -179,7 +181,7 @@ Partial Class FrmImageStore
         Me.BtnEditImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnEditImage.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnEditImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnEditImage.Location = New System.Drawing.Point(920, 390)
+        Me.BtnEditImage.Location = New System.Drawing.Point(920, 353)
         Me.BtnEditImage.Name = "BtnEditImage"
         Me.BtnEditImage.Size = New System.Drawing.Size(87, 59)
         Me.BtnEditImage.TabIndex = 80
@@ -191,7 +193,7 @@ Partial Class FrmImageStore
         Me.btnLoadImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnLoadImage.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLoadImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnLoadImage.Location = New System.Drawing.Point(920, 188)
+        Me.btnLoadImage.Location = New System.Drawing.Point(920, 193)
         Me.btnLoadImage.Name = "btnLoadImage"
         Me.btnLoadImage.Size = New System.Drawing.Size(87, 59)
         Me.btnLoadImage.TabIndex = 81
@@ -208,12 +210,21 @@ Partial Class FrmImageStore
         Me.lblImageFile.TabIndex = 83
         Me.lblImageFile.Text = "Image File"
         '
+        'PictureBox2
+        '
+        Me.PictureBox2.Location = New System.Drawing.Point(929, 436)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(69, 65)
+        Me.PictureBox2.TabIndex = 132
+        Me.PictureBox2.TabStop = False
+        '
         'FrmImageStore
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1022, 661)
+        Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.lblImageFile)
         Me.Controls.Add(Me.btnLoadImage)
         Me.Controls.Add(Me.BtnEditImage)
@@ -236,6 +247,7 @@ Partial Class FrmImageStore
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -257,4 +269,5 @@ Partial Class FrmImageStore
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents PasteImageToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblImageFile As Label
+    Friend WithEvents PictureBox2 As PictureBox
 End Class

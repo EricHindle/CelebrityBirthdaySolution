@@ -2,11 +2,12 @@
 
 Public Class FrmWordPress
 #Region "constants"
+    Private Const DOUBLE_QUOTES As String = """"
     Private Const A_TAG_START As String = "<a href=""http://celebritybirthday.files.wordpress.com/"
-    Private Const A_TAG_END As String = """>"
-    Private Const IMG_TAG_START As String = "<img title="""
-    Private Const IMG_TAG_MIDDLE As String = """ src=""http://celebritybirthday.files.wordpress.com/"
-    Private Const IMG_TAG_ALT As String = " alt="""
+    Private Const A_TAG_END As String = ">"
+    Private Const IMG_TAG_START As String = "<img title="
+    Private Const IMG_TAG_MIDDLE As String = " src=""http://celebritybirthday.files.wordpress.com/"
+    Private Const IMG_TAG_ALT As String = " alt="
     Private Const IMG_TAG_SIZE As String = " width=""60"" height=""60"" />"
     Private Const STRONG_TAG_START As String = "</a> <strong>"
     Private Const STRONG_TAG_END As String = "</strong>"
@@ -14,6 +15,7 @@ Public Class FrmWordPress
     Private Const EXCERPT_DIV As String = "<div style=""width:200px;float:left;font-family:arial;font-size:12px;"">"
     Private Const EXCERPT_DIV_END As String = "</div>"
     Private Const BREAK As String = "<br>"
+    Private Const SLASH As String = "/"
 #End Region
 #Region "variables"
     Dim personTable As List(Of Person)
@@ -73,6 +75,9 @@ Public Class FrmWordPress
     End Sub
 #End Region
 #Region "subroutines"
+    Shared Function AddQuotes(pText As String) As String
+        Return DOUBLE_QUOTES & pText & DOUBLE_QUOTES
+    End Function
     Private Sub GenFullText()
         Dim lastYear As String = ""
         Dim newText As New StringBuilder()
@@ -95,25 +100,25 @@ Public Class FrmWordPress
             With newText
                 .Append(A_TAG_START)
                 .Append(urlYear)
-                .Append("/")
+                .Append(SLASH)
                 .Append(urlMonth)
-                .Append("/")
+                .Append(SLASH)
                 .Append(lowername)
                 .Append(oPerson.Image.ImageFileType)
+                .Append(DOUBLE_QUOTES)
                 .Append(A_TAG_END)
                 .Append(IMG_TAG_START)
-                .Append(oPerson.Name)
+                .Append(AddQuotes(oPerson.Name))
                 .Append(IMG_TAG_MIDDLE)
                 .Append(urlYear)
-                .Append("/")
+                .Append(SLASH)
                 .Append(urlMonth)
-                .Append("/")
+                .Append(SLASH)
                 .Append(lowername)
                 .Append(oPerson.Image.ImageFileType)
-                .Append("""")
+                .Append(DOUBLE_QUOTES)
                 .Append(IMG_TAG_ALT)
-                .Append(oPerson.Name)
-                .Append("""")
+                .Append(AddQuotes(oPerson.Name))
                 .Append(IMG_TAG_SIZE)
                 .Append(STRONG_TAG_START)
                 .Append(oPerson.Name)
@@ -124,6 +129,7 @@ Public Class FrmWordPress
                 .Append(If(oPerson.DeathYear = 0, "", sDied))
                 .Append(vbCrLf)
                 .Append(BREAK)
+                .Append(vbCrLf)
             End With
         Next
         txtCurrentText.Text = newText.ToString

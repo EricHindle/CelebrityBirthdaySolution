@@ -961,5 +961,9 @@ Public Class FrmUpdateDatabase
         cboDay.SelectedIndex = Today.Day - 1
         cboMonth.SelectedIndex = Today.Month - 1
     End Sub
+
+    Private Sub NudSentences_ValueChanged(sender As Object, e As EventArgs) Handles NudSentences.ValueChanged
+
+    End Sub
 #End Region
 End Class

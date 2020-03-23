@@ -24,7 +24,7 @@ Partial Class FrmMenu2
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMenu2))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.BtnTest = New System.Windows.Forms.Button()
+        Me.BtnSendTweet = New System.Windows.Forms.Button()
         Me.BtnBrownBread = New System.Windows.Forms.Button()
         Me.BtnTwitter = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -47,16 +47,16 @@ Partial Class FrmMenu2
         Me.PictureBox1.TabIndex = 13
         Me.PictureBox1.TabStop = False
         '
-        'BtnTest
+        'BtnSendTweet
         '
-        Me.BtnTest.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTest.Location = New System.Drawing.Point(186, 237)
-        Me.BtnTest.Margin = New System.Windows.Forms.Padding(6)
-        Me.BtnTest.Name = "BtnTest"
-        Me.BtnTest.Size = New System.Drawing.Size(151, 49)
-        Me.BtnTest.TabIndex = 16
-        Me.BtnTest.Text = "Test"
-        Me.BtnTest.UseVisualStyleBackColor = True
+        Me.BtnSendTweet.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSendTweet.Location = New System.Drawing.Point(186, 237)
+        Me.BtnSendTweet.Margin = New System.Windows.Forms.Padding(6)
+        Me.BtnSendTweet.Name = "BtnSendTweet"
+        Me.BtnSendTweet.Size = New System.Drawing.Size(151, 49)
+        Me.BtnSendTweet.TabIndex = 16
+        Me.BtnSendTweet.Text = "Single Tweet"
+        Me.BtnSendTweet.UseVisualStyleBackColor = True
         '
         'BtnBrownBread
         '
@@ -149,7 +149,7 @@ Partial Class FrmMenu2
         Me.Controls.Add(Me.BtnTapestry)
         Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.BtnTest)
+        Me.Controls.Add(Me.BtnSendTweet)
         Me.Controls.Add(Me.BtnBrownBread)
         Me.Controls.Add(Me.BtnTwitter)
         Me.Controls.Add(Me.PictureBox1)
@@ -166,7 +166,7 @@ Partial Class FrmMenu2
     End Sub
 
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents BtnTest As Button
+    Friend WithEvents BtnSendTweet As Button
     Friend WithEvents BtnBrownBread As Button
     Friend WithEvents BtnTwitter As Button
     Friend WithEvents Label1 As Label

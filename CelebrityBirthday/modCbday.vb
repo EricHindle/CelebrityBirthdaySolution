@@ -132,8 +132,8 @@ Friend Module modCbday
         Return isUnsavedChanges
     End Function
     Public Function MakeImageName(oForename As String, oSurname As String) As String
-        oForename = oForename.ToLower.Trim
-        oSurname = oSurname.ToLower.Trim
+        oForename = oForename.ToLower(myCultureInfo).Trim
+        oSurname = oSurname.ToLower(myCultureInfo).Trim
         Dim sImgName As String = ToSimpleCharacters(If(String.IsNullOrEmpty(oForename), "", oForename & " ") & oSurname).Replace(" ", "-").Replace("'", "").Replace(".", "-").Replace("--", "-")
         Return sImgName
     End Function

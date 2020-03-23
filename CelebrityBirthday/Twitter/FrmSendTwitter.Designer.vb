@@ -9,6 +9,7 @@ Partial Class FrmSendTwitter
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
             End If
+            oTweetTa.Dispose()
         Finally
             MyBase.Dispose(disposing)
         End Try
@@ -23,122 +24,97 @@ Partial Class FrmSendTwitter
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSendTwitter))
-        Me.cboDay = New System.Windows.Forms.ComboBox()
-        Me.cboMonth = New System.Windows.Forms.ComboBox()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.btnSelect = New System.Windows.Forms.Button()
-        Me.rtbTweet = New System.Windows.Forms.RichTextBox()
+        Me.rtbTweetProgress = New System.Windows.Forms.RichTextBox()
         Me.BtnAuthenticate = New System.Windows.Forms.Button()
-        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.rtbTweetText = New System.Windows.Forms.RichTextBox()
         Me.BtnSend = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmbTwitterUsers = New System.Windows.Forms.ComboBox()
+        Me.BtnImage = New System.Windows.Forms.Button()
+        Me.BtnCreateFullName = New System.Windows.Forms.Button()
+        Me.BtnSplitName = New System.Windows.Forms.Button()
+        Me.TxtSurname = New System.Windows.Forms.TextBox()
+        Me.TxtForename = New System.Windows.Forms.TextBox()
+        Me.TxtName = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.LblImageFile = New System.Windows.Forms.Label()
+        Me.NudSentences = New System.Windows.Forms.NumericUpDown()
+        Me.BtnGetWikiText = New System.Windows.Forms.Button()
+        Me.LblImageName = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.chkImages = New System.Windows.Forms.CheckBox()
+        Me.LblTweetLength = New System.Windows.Forms.Label()
+        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.StatusStrip1.SuspendLayout()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer1.Panel1.SuspendLayout()
-        Me.SplitContainer1.Panel2.SuspendLayout()
-        Me.SplitContainer1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'cboDay
-        '
-        Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboDay.FormattingEnabled = True
-        Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(12, 12)
-        Me.cboDay.Name = "cboDay"
-        Me.cboDay.Size = New System.Drawing.Size(95, 27)
-        Me.cboDay.TabIndex = 19
-        '
-        'cboMonth
-        '
-        Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboMonth.FormattingEnabled = True
-        Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
-        Me.cboMonth.Location = New System.Drawing.Point(115, 12)
-        Me.cboMonth.Name = "cboMonth"
-        Me.cboMonth.Size = New System.Drawing.Size(240, 27)
-        Me.cboMonth.TabIndex = 20
         '
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(630, 551)
+        Me.btnClose.Location = New System.Drawing.Point(1156, 518)
+        Me.btnClose.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(139, 33)
+        Me.btnClose.Size = New System.Drawing.Size(162, 41)
         Me.btnClose.TabIndex = 22
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'btnSelect
+        'rtbTweetProgress
         '
-        Me.btnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSelect.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnSelect.Location = New System.Drawing.Point(591, 11)
-        Me.btnSelect.Name = "btnSelect"
-        Me.btnSelect.Size = New System.Drawing.Size(139, 33)
-        Me.btnSelect.TabIndex = 21
-        Me.btnSelect.Text = "Select"
-        Me.btnSelect.UseVisualStyleBackColor = True
-        '
-        'rtbTweet
-        '
-        Me.rtbTweet.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.rtbTweet.BackColor = System.Drawing.Color.Black
-        Me.rtbTweet.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rtbTweet.ForeColor = System.Drawing.Color.White
-        Me.rtbTweet.Location = New System.Drawing.Point(12, 107)
-        Me.rtbTweet.Name = "rtbTweet"
-        Me.rtbTweet.Size = New System.Drawing.Size(342, 436)
-        Me.rtbTweet.TabIndex = 23
-        Me.rtbTweet.Text = ""
+        Me.rtbTweetProgress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rtbTweetProgress.BackColor = System.Drawing.Color.Black
+        Me.rtbTweetProgress.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rtbTweetProgress.ForeColor = System.Drawing.Color.White
+        Me.rtbTweetProgress.Location = New System.Drawing.Point(569, 57)
+        Me.rtbTweetProgress.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.rtbTweetProgress.Name = "rtbTweetProgress"
+        Me.rtbTweetProgress.Size = New System.Drawing.Size(271, 452)
+        Me.rtbTweetProgress.TabIndex = 23
+        Me.rtbTweetProgress.Text = ""
         '
         'BtnAuthenticate
         '
         Me.BtnAuthenticate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnAuthenticate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAuthenticate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAuthenticate.Location = New System.Drawing.Point(223, 551)
+        Me.BtnAuthenticate.Location = New System.Drawing.Point(623, 518)
+        Me.BtnAuthenticate.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnAuthenticate.Name = "BtnAuthenticate"
-        Me.BtnAuthenticate.Size = New System.Drawing.Size(139, 33)
+        Me.BtnAuthenticate.Size = New System.Drawing.Size(162, 41)
         Me.BtnAuthenticate.TabIndex = 24
         Me.BtnAuthenticate.Text = "Authenticate"
         Me.BtnAuthenticate.UseVisualStyleBackColor = True
         '
-        'WebBrowser1
-        '
-        Me.WebBrowser1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.WebBrowser1.Location = New System.Drawing.Point(0, 0)
-        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(399, 331)
-        Me.WebBrowser1.TabIndex = 25
-        '
         'rtbTweetText
         '
-        Me.rtbTweetText.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.rtbTweetText.Location = New System.Drawing.Point(0, 0)
+        Me.rtbTweetText.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.rtbTweetText.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rtbTweetText.Location = New System.Drawing.Point(23, 372)
+        Me.rtbTweetText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.rtbTweetText.Name = "rtbTweetText"
-        Me.rtbTweetText.Size = New System.Drawing.Size(399, 152)
+        Me.rtbTweetText.Size = New System.Drawing.Size(420, 185)
         Me.rtbTweetText.TabIndex = 26
         Me.rtbTweetText.Text = ""
         '
         'BtnSend
         '
-        Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(403, 551)
+        Me.BtnSend.Location = New System.Drawing.Point(449, 449)
+        Me.BtnSend.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnSend.Name = "BtnSend"
-        Me.BtnSend.Size = New System.Drawing.Size(139, 33)
+        Me.BtnSend.Size = New System.Drawing.Size(96, 60)
         Me.BtnSend.TabIndex = 27
         Me.BtnSend.Text = "Send"
         Me.BtnSend.UseVisualStyleBackColor = True
@@ -148,9 +124,10 @@ Partial Class FrmSendTwitter
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 598)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 581)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(781, 22)
+        Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1332, 22)
         Me.StatusStrip1.TabIndex = 28
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -162,32 +139,12 @@ Partial Class FrmSendTwitter
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
         Me.lblStatus.Size = New System.Drawing.Size(5, 17)
         '
-        'SplitContainer1
-        '
-        Me.SplitContainer1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.SplitContainer1.Location = New System.Drawing.Point(366, 50)
-        Me.SplitContainer1.Name = "SplitContainer1"
-        Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
-        '
-        'SplitContainer1.Panel1
-        '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.WebBrowser1)
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.rtbTweetText)
-        Me.SplitContainer1.Size = New System.Drawing.Size(403, 495)
-        Me.SplitContainer1.SplitterDistance = 335
-        Me.SplitContainer1.TabIndex = 29
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label1.Location = New System.Drawing.Point(12, 62)
+        Me.Label1.Location = New System.Drawing.Point(851, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(71, 22)
         Me.Label1.TabIndex = 30
@@ -197,54 +154,240 @@ Partial Class FrmSendTwitter
         '
         Me.cmbTwitterUsers.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbTwitterUsers.FormattingEnabled = True
-        Me.cmbTwitterUsers.Location = New System.Drawing.Point(89, 62)
+        Me.cmbTwitterUsers.Location = New System.Drawing.Point(946, 20)
+        Me.cmbTwitterUsers.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmbTwitterUsers.Name = "cmbTwitterUsers"
-        Me.cmbTwitterUsers.Size = New System.Drawing.Size(265, 24)
+        Me.cmbTwitterUsers.Size = New System.Drawing.Size(257, 24)
         Me.cmbTwitterUsers.TabIndex = 31
+        '
+        'BtnImage
+        '
+        Me.BtnImage.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnImage.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnImage.Location = New System.Drawing.Point(23, 121)
+        Me.BtnImage.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.BtnImage.Name = "BtnImage"
+        Me.BtnImage.Size = New System.Drawing.Size(80, 34)
+        Me.BtnImage.TabIndex = 32
+        Me.BtnImage.Text = "Image"
+        Me.BtnImage.UseVisualStyleBackColor = True
+        '
+        'BtnCreateFullName
+        '
+        Me.BtnCreateFullName.Location = New System.Drawing.Point(23, 12)
+        Me.BtnCreateFullName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.BtnCreateFullName.Name = "BtnCreateFullName"
+        Me.BtnCreateFullName.Size = New System.Drawing.Size(41, 32)
+        Me.BtnCreateFullName.TabIndex = 36
+        Me.BtnCreateFullName.Text = ">"
+        Me.BtnCreateFullName.UseVisualStyleBackColor = True
+        '
+        'BtnSplitName
+        '
+        Me.BtnSplitName.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSplitName.Location = New System.Drawing.Point(23, 59)
+        Me.BtnSplitName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.BtnSplitName.Name = "BtnSplitName"
+        Me.BtnSplitName.Size = New System.Drawing.Size(41, 32)
+        Me.BtnSplitName.TabIndex = 37
+        Me.BtnSplitName.Text = ">"
+        Me.BtnSplitName.UseVisualStyleBackColor = True
+        '
+        'TxtSurname
+        '
+        Me.TxtSurname.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtSurname.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtSurname.Location = New System.Drawing.Point(329, 59)
+        Me.TxtSurname.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TxtSurname.Name = "TxtSurname"
+        Me.TxtSurname.Size = New System.Drawing.Size(195, 26)
+        Me.TxtSurname.TabIndex = 35
+        '
+        'TxtForename
+        '
+        Me.TxtForename.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtForename.Location = New System.Drawing.Point(72, 59)
+        Me.TxtForename.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TxtForename.Name = "TxtForename"
+        Me.TxtForename.Size = New System.Drawing.Size(249, 26)
+        Me.TxtForename.TabIndex = 34
+        '
+        'TxtName
+        '
+        Me.TxtName.AllowDrop = True
+        Me.TxtName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtName.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtName.Location = New System.Drawing.Point(72, 12)
+        Me.TxtName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TxtName.Name = "TxtName"
+        Me.TxtName.Size = New System.Drawing.Size(308, 26)
+        Me.TxtName.TabIndex = 33
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.CelebrityBirthday.My.Resources.Resources.NoImage
+        Me.PictureBox1.Location = New System.Drawing.Point(23, 276)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(80, 80)
+        Me.PictureBox1.TabIndex = 131
+        Me.PictureBox1.TabStop = False
+        '
+        'LblImageFile
+        '
+        Me.LblImageFile.AutoSize = True
+        Me.LblImageFile.Location = New System.Drawing.Point(114, 139)
+        Me.LblImageFile.Name = "LblImageFile"
+        Me.LblImageFile.Size = New System.Drawing.Size(68, 17)
+        Me.LblImageFile.TabIndex = 132
+        Me.LblImageFile.Text = "Image File"
+        '
+        'NudSentences
+        '
+        Me.NudSentences.Location = New System.Drawing.Point(117, 194)
+        Me.NudSentences.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.NudSentences.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NudSentences.Name = "NudSentences"
+        Me.NudSentences.Size = New System.Drawing.Size(54, 24)
+        Me.NudSentences.TabIndex = 134
+        Me.NudSentences.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'BtnGetWikiText
+        '
+        Me.BtnGetWikiText.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnGetWikiText.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnGetWikiText.Location = New System.Drawing.Point(23, 176)
+        Me.BtnGetWikiText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.BtnGetWikiText.Name = "BtnGetWikiText"
+        Me.BtnGetWikiText.Size = New System.Drawing.Size(80, 58)
+        Me.BtnGetWikiText.TabIndex = 133
+        Me.BtnGetWikiText.Text = "Get Wiki Text"
+        Me.BtnGetWikiText.UseVisualStyleBackColor = True
+        '
+        'LblImageName
+        '
+        Me.LblImageName.AutoSize = True
+        Me.LblImageName.Location = New System.Drawing.Point(114, 108)
+        Me.LblImageName.Name = "LblImageName"
+        Me.LblImageName.Size = New System.Drawing.Size(85, 17)
+        Me.LblImageName.TabIndex = 135
+        Me.LblImageName.Text = "Image Name"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Location = New System.Drawing.Point(124, 247)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(421, 109)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox2.TabIndex = 136
+        Me.PictureBox2.TabStop = False
+        '
+        'chkImages
+        '
+        Me.chkImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkImages.AutoSize = True
+        Me.chkImages.Checked = True
+        Me.chkImages.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkImages.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.chkImages.Location = New System.Drawing.Point(1209, 22)
+        Me.chkImages.Name = "chkImages"
+        Me.chkImages.Size = New System.Drawing.Size(107, 23)
+        Me.chkImages.TabIndex = 138
+        Me.chkImages.Text = "Include Images"
+        Me.chkImages.UseVisualStyleBackColor = True
+        '
+        'LblTweetLength
+        '
+        Me.LblTweetLength.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.LblTweetLength.AutoSize = True
+        Me.LblTweetLength.Location = New System.Drawing.Point(463, 396)
+        Me.LblTweetLength.Name = "LblTweetLength"
+        Me.LblTweetLength.Size = New System.Drawing.Size(16, 17)
+        Me.LblTweetLength.TabIndex = 137
+        Me.LblTweetLength.Text = "0"
+        '
+        'WebBrowser1
+        '
+        Me.WebBrowser1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.WebBrowser1.Location = New System.Drawing.Point(855, 57)
+        Me.WebBrowser1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(23, 25)
+        Me.WebBrowser1.Name = "WebBrowser1"
+        Me.WebBrowser1.Size = New System.Drawing.Size(466, 452)
+        Me.WebBrowser1.TabIndex = 139
         '
         'FrmSendTwitter
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(781, 620)
+        Me.ClientSize = New System.Drawing.Size(1332, 603)
+        Me.Controls.Add(Me.WebBrowser1)
+        Me.Controls.Add(Me.chkImages)
+        Me.Controls.Add(Me.LblTweetLength)
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.LblImageName)
+        Me.Controls.Add(Me.NudSentences)
+        Me.Controls.Add(Me.BtnGetWikiText)
+        Me.Controls.Add(Me.LblImageFile)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.BtnCreateFullName)
+        Me.Controls.Add(Me.BtnSplitName)
+        Me.Controls.Add(Me.TxtSurname)
+        Me.Controls.Add(Me.TxtForename)
+        Me.Controls.Add(Me.TxtName)
+        Me.Controls.Add(Me.BtnImage)
+        Me.Controls.Add(Me.rtbTweetText)
         Me.Controls.Add(Me.cmbTwitterUsers)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.BtnSend)
         Me.Controls.Add(Me.BtnAuthenticate)
-        Me.Controls.Add(Me.rtbTweet)
+        Me.Controls.Add(Me.rtbTweetProgress)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.btnSelect)
-        Me.Controls.Add(Me.cboDay)
-        Me.Controls.Add(Me.cboMonth)
+        Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmSendTwitter"
         Me.Text = "FrmSendTwitter"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
-        Me.SplitContainer1.Panel1.ResumeLayout(False)
-        Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainer1.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents cboDay As ComboBox
-    Friend WithEvents cboMonth As ComboBox
     Friend WithEvents btnClose As Button
-    Friend WithEvents btnSelect As Button
-    Friend WithEvents rtbTweet As RichTextBox
+    Friend WithEvents rtbTweetProgress As RichTextBox
     Friend WithEvents BtnAuthenticate As Button
-    Friend WithEvents WebBrowser1 As WebBrowser
     Friend WithEvents rtbTweetText As RichTextBox
     Friend WithEvents BtnSend As Button
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblStatus As ToolStripStatusLabel
-    Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents Label1 As Label
     Friend WithEvents cmbTwitterUsers As ComboBox
+    Friend WithEvents BtnImage As Button
+    Friend WithEvents BtnCreateFullName As Button
+    Friend WithEvents BtnSplitName As Button
+    Friend WithEvents TxtSurname As TextBox
+    Friend WithEvents TxtForename As TextBox
+    Friend WithEvents TxtName As TextBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents LblImageFile As Label
+    Friend WithEvents NudSentences As NumericUpDown
+    Friend WithEvents BtnGetWikiText As Button
+    Friend WithEvents LblImageName As Label
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents chkImages As CheckBox
+    Friend WithEvents LblTweetLength As Label
+    Friend WithEvents WebBrowser1 As WebBrowser
 End Class

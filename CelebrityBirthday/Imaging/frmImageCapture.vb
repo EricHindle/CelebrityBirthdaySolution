@@ -199,10 +199,7 @@ Public Class frmImageCapture
         Dim imageFile As String = Nothing
         Try
             Dim _path As String = If(isCropped, My.Settings.ImgPath, My.Settings.NewImagePath)
-            Dim _filename As String = If(String.IsNullOrEmpty(TxtForename.Text), "", TxtForename.Text.ToLower.Trim) &
-                    If(String.IsNullOrEmpty(TxtSurname.Text) Or String.IsNullOrEmpty(TxtForename.Text), "", "-") &
-                    If(String.IsNullOrEmpty(TxtSurname.Text), "", TxtSurname.Text.ToLower.Trim) &
-                    If(String.IsNullOrEmpty(TxtSurname.Text) Or String.IsNullOrEmpty(TxtForename.Text), "", ".jpg")
+            Dim _filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
             Dim imageFileName As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Save, ImageUtil.ImageType.JPEG, _path, _filename)
             If Not String.IsNullOrEmpty(imageFileName) Then
                 ImageUtil.SaveImageFromPictureBox(_pictureBox, _width, _height, imageFileName, ImageUtil.ImageType.JPEG)

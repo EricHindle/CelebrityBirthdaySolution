@@ -62,10 +62,7 @@ Public Class FrmImageStore
         Try
             Dim _Filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
             If String.IsNullOrEmpty(_Filename) = False Then
-
-
                 Dim strFName As String = Path.Combine(sImagePath, _Filename & ".jpg")
-
                 Me.Refresh()
                 If My.Computer.FileSystem.FileExists(strFName) Then
                     strFName = GetUniqueFname(strFName)
@@ -138,7 +135,7 @@ Public Class FrmImageStore
                     Exit For
                 End If
             Next
-        Catch ex As Exception
+        Catch ex As ArgumentException
             DisplayException(ex)
         End Try
         Return newfilename
@@ -155,13 +152,14 @@ Public Class FrmImageStore
             _editImage.Surname = TxtSurname.Text
             _editImage.ShowDialog()
             _savedImage = _editImage.SavedImage
+            PictureBox2.ImageLocation = _savedImage
         End Using
     End Sub
 
     Private Sub btnLoadImage_Click(sender As Object, e As EventArgs) Handles btnLoadImage.Click
         Try
             Dim oImageFilename As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Open, ImageUtil.ImageType.ALL)
-            _latestSavedFile = Path.GetFileName(oImageFilename)
+            _latestSavedFile = oImageFilename
             lblImageFile.Text = _latestSavedFile
             Dim sizeMessage As String = ""
             If Not String.IsNullOrEmpty(oImageFilename) Then

@@ -1,4 +1,6 @@
 ﻿Imports System.Collections.Specialized
+Imports System.IO
+Imports System.Net
 Imports System.Net.Http
 Imports System.Security.Cryptography
 Imports System.Text
@@ -30,6 +32,8 @@ Public Class FrmSendTwitter
     Private isDone As Boolean
     Private ReadOnly tw As New TwitterOAuth
     Private ReadOnly oTweetTa As New CelebrityBirthdayDataSetTableAdapters.TweetsTableAdapter
+    Private _twitterImagePath As String = Path.Combine(My.Settings.TwitterFilePath, "Images")
+
 #End Region
 #Region "form handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -50,7 +54,9 @@ Public Class FrmSendTwitter
     End Sub
     Private Sub FrmSendTwitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.sndtwformpos)
-        WebBrowser1.Navigate("about:blank")
+        NudSentences.Value = My.Settings.wikiSentences
+        rtbTweetText.AllowDrop = True
+        WebBrowser1.Navigate(New Uri("about:blank"))
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
@@ -94,6 +100,13 @@ Public Class FrmSendTwitter
         End If
         WriteTrace(isDone)
         WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
+
+
+
+
+
+
+
     End Sub
     Private Sub FrmSendTwitter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         oTweetTa.Dispose()
@@ -106,7 +119,7 @@ Public Class FrmSendTwitter
         WriteTrace("Navigating")
         WebBrowser1.Navigate("https://api.twitter.com/oauth/authorize?oauth_token=" & tw.Token)
     End Sub
-    Private Async Sub WebBrowser1_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles WebBrowser1.DocumentCompleted
+    Private Async Sub WebBrowser1_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs)
         WriteTrace("Browser document complete")
         Try
             Dim webHtml As Windows.Forms.HtmlDocument = WebBrowser1.Document
@@ -199,9 +212,9 @@ Public Class FrmSendTwitter
                 End If
                 WriteTrace("Got tokens " & Format(Now, "hh:MM:ss"))
             End If
-            rtbTweet.Text &= vbCrLf & "================="
-            rtbTweet.Text &= vbCrLf & tw.Token
-            rtbTweet.Text &= vbCrLf & tw.TokenSecret
+            rtbTweetProgress.Text &= vbCrLf & "================="
+            rtbTweetProgress.Text &= vbCrLf & tw.Token
+            rtbTweetProgress.Text &= vbCrLf & tw.TokenSecret
         End Using
 
 
@@ -267,8 +280,8 @@ Public Class FrmSendTwitter
                 End If
                 WriteTrace("Got tokens " & Format(Now, "hh:MM:ss"))
             End If
-            rtbTweet.Text &= vbCrLf & tw.Token
-            rtbTweet.Text &= vbCrLf & tw.TokenSecret
+            rtbTweetProgress.Text &= vbCrLf & tw.Token
+            rtbTweetProgress.Text &= vbCrLf & tw.TokenSecret
         End Using
         WriteTrace("Finished GetAuthToken " & Format(Now, "hh:MM:ss"))
         isDone = True
@@ -282,7 +295,7 @@ Public Class FrmSendTwitter
         Next
     End Sub
     Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False)
-        rtbTweet.Text &= vbCrLf & sText
+        rtbTweetProgress.Text &= vbCrLf & sText
         If isStatus Then ShowStatus(sText)
     End Sub
     Private Sub SendTheTweet()
@@ -291,10 +304,34 @@ Public Class FrmSendTwitter
         Dim sto = New SendTweetOptions
         Dim msg = rtbTweetText.Text
         sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
+        Dim _mediaId As String = Nothing
+        If chkImages.Checked Then
+            If My.Computer.FileSystem.FileExists(LblImageFile.Text) Then
+                WriteTrace("Saving Image")
+                Dim _path As String = My.Settings.twitterImageFolder
+                If Not My.Computer.FileSystem.DirectoryExists(_path) Then
+                    My.Computer.FileSystem.CreateDirectory(_path)
+                End If
+                Dim _fileName As String = Path.Combine(_path, "SingleTweetImage") & ".jpg"
+                Dim _imageFile As String = ImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
+                Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _imageFile)
+                If _twitterUplMedia IsNot Nothing Then
+                    Dim _uploadedSize As Long = _twitterUplMedia.Size
+                    Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
+                    WriteTrace("Image upload size: " & CStr(_uploadedSize), False)
+                    _mediaId = _twitterUplMedia.Media_Id
+                Else
+                    WriteTrace("No image upload", False)
+                End If
+            End If
+        End If
+        If Not String.IsNullOrEmpty(_mediaId) Then
+            InsertTweet("", Today.Month + 1, Today.Day + 1, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
+            sto.MediaIds = {_mediaId}
+        End If
         Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
-        WriteTrace(StatusToString(_twitterStatus))
         If _twitterStatus IsNot Nothing Then
-            oTweetTa.InsertTweet(Now, sto.Status, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
+            InsertTweet(sto.Status, Today.Month + 1, Today.Day + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
             WriteTrace("OK: " & _twitterStatus.Id, True)
         Else
             ' tweet failed
@@ -314,5 +351,115 @@ Public Class FrmSendTwitter
             .Append("User=").Append(pStatus.User.ScreenName).Append("(").Append(pStatus.User.Name).Append(")").Append(vbCrLf)
         Return statusText.ToString
     End Function
+
+    Private Sub BtnImage_Click(sender As Object, e As EventArgs) Handles BtnImage.Click
+        If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
+            LblImageName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
+            Using _imagestore As New FrmImageStore
+                _imagestore.Forename = TxtForename.Text.Trim
+                _imagestore.Surname = TxtSurname.Text.Trim
+                _imagestore.ShowDialog()
+                PictureBox1.ImageLocation = _imagestore.SavedImage
+                CreateTwitterImage(_imagestore.SavedImage)
+            End Using
+        Else
+            MsgBox("No name supplied", MsgBoxStyle.Exclamation, "Name missing")
+        End If
+    End Sub
+
+    Private Sub CreateTwitterImage(_image As String)
+        LblImageFile.Text = _image
+        Dim _imageidentity As New ImageIdentity(-1, _image, "", "", "")
+        Dim _person As New Person(TxtForename.Text, TxtSurname.Text, "", "", 0, 0, 0, 0, 0, 0, "", "", _imageidentity, Nothing)
+        Dim _pictureList As New List(Of Person) From {_person}
+        ImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, ImageUtil.AlignType.Centre)
+    End Sub
+
+    Private Sub BtnCreateFullName_Click(sender As Object, e As EventArgs) Handles BtnCreateFullName.Click
+        TxtName.Text = If(String.IsNullOrEmpty(TxtForename.Text), "", TxtForename.Text.Trim & " ") & TxtSurname.Text.Trim
+    End Sub
+
+    Private Sub BtnSplitName_Click(sender As Object, e As EventArgs) Handles BtnSplitName.Click
+        TxtName.Text = TxtName.Text.Trim
+        Dim names As String() = Split(TxtName.Text, " ")
+        TxtSurname.Text = names(UBound(names))
+        If Not String.IsNullOrEmpty(TxtSurname.Text) Then
+            TxtForename.Text = TxtName.Text.Replace(TxtSurname.Text, "").Trim
+        End If
+    End Sub
+    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtName.DragDrop,
+                                                                                            TxtForename.DragDrop,
+                                                                                            TxtSurname.DragDrop
+
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim oBox As TextBox = CType(sender, TextBox)
+            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
+            Dim textlen As Integer = oBox.TextLength
+            Dim startpos As Integer = oBox.SelectionStart
+            If textlen = 0 Then
+                oBox.Text = item.Trim
+            Else
+                If startpos = 0 Then
+                    oBox.SelectedText = item.TrimStart
+                Else
+                    If oBox.Text.Substring(startpos - 1, 1) = "." Then
+                        oBox.SelectedText = " " & item.TrimStart
+                    Else
+                        oBox.SelectedText = item
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+    Private Sub TextBox_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtName.DragOver,
+                                                                                                                    TxtForename.DragOver,
+                                                                                                                    TxtSurname.DragOver
+        Try
+            If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+                Dim oBox As TextBox = CType(sender, TextBox)
+                oBox.Select(TextBoxCursorPos(oBox, e.X, e.Y), 0)
+            End If
+        Catch ex As InvalidCastException
+
+        End Try
+    End Sub
+    Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtName.DragEnter,
+                                                                                                                TxtForename.DragEnter,
+                                                                                                                TxtSurname.DragEnter
+
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            e.Effect = DragDropEffects.Copy
+        Else
+            If e.Data.GetDataPresent(DataFormats.Text) Then
+                e.Effect = DragDropEffects.Copy
+            Else
+                e.Effect = DragDropEffects.None
+            End If
+        End If
+    End Sub
+
+    Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
+        rtbTweetText.Text = GetWikiText(NudSentences.Value)
+    End Sub
+    Private Function GetWikiText(_sentences As Integer) As String
+        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(TxtName.Text, _sentences))
+        Dim extract As String = GetExtractFromResponse(_response)
+        Return extract
+    End Function
+
+    Private Sub TxtForename_TextChanged(sender As Object, e As EventArgs) Handles TxtForename.TextChanged, TxtSurname.TextChanged
+        LblImageName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
+        Dim thumbnailImage As String = Path.Combine(My.Settings.ImgPath, LblImageName.Text) & ".jpg"
+        If My.Computer.FileSystem.FileExists(thumbnailImage) Then
+            PictureBox1.ImageLocation = thumbnailImage
+            CreateTwitterImage(thumbnailImage)
+            rtbTweetText.Text = GetWikiText(NudSentences.Value)
+        End If
+    End Sub
+
+    Private Sub rtbTweetText_TextChanged(sender As Object, e As EventArgs) Handles rtbTweetText.TextChanged
+        Dim _tweetLength As Integer = rtbTweetText.Text.Replace(vbCr, "").Length
+        LblTweetLength.Text = If(_tweetLength > 280, "** ", "") & CStr(_tweetLength)
+    End Sub
 #End Region
 End Class

@@ -3,7 +3,7 @@
         Me.Close()
     End Sub
 
-    Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
+    Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnSendTweet.Click
         Me.Hide()
         Using _sendTwitter As New FrmSendTwitter
             _sendTwitter.ShowDialog()
