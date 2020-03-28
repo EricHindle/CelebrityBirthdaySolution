@@ -15,6 +15,7 @@ Friend Module modCbday
     Public Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
     Public Const TABPAGE_BASENAME As String = "TabPage_"
     Public myCultureInfo As CultureInfo = CultureInfo.CurrentUICulture
+    Public myStringFormatProvider As IFormatProvider = myCultureInfo.GetFormat(GetType(String))
     Private Class NativeMethods
         Public Declare Function SendMessageLong Lib "user32" _
                         Alias "SendMessageA" (ByVal hWnd As IntPtr,
@@ -80,7 +81,7 @@ Friend Module modCbday
             oForm.WindowState = FormWindowState.Minimized
         Else
             Dim pos As String() = sPos.Split("~")
-            If pos.Count = 4 Then
+            If pos.Length = 4 Then
                 oForm.Top = CInt(pos(0))
                 oForm.Left = CInt(pos(1))
 

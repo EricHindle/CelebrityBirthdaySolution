@@ -60,13 +60,13 @@
         Me.Show()
     End Sub
     Private Sub FrmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
+        Version.Text = System.String.Format(myStringFormatProvider, Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
         If My.Settings.callUpgrade = 0 Then
             My.Settings.Upgrade()
             My.Settings.callUpgrade = 1
             My.Settings.Save()
         End If
-        LblCelebrities.Text = System.String.Format(LblCelebrities.Text, CStr(CountPeople()))
+        LblCelebrities.Text = System.String.Format(myStringFormatProvider, LblCelebrities.Text, CStr(CountPeople()))
     End Sub
 
     Private Sub BtnMore_Click(sender As Object, e As EventArgs) Handles BtnMore.Click

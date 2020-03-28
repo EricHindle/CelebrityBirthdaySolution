@@ -70,17 +70,17 @@ Public Class OAuth
             End If
         End Function
     End Class
-    Private Function ComputeHash(ByVal Algorithm As HashAlgorithm, ByVal Data As String) As String
+    Private Shared Function ComputeHash(ByVal Algorithm As HashAlgorithm, ByVal Data As String) As String
         If Algorithm IsNot Nothing Then
             If String.IsNullOrEmpty(Data) = False Then
                 Dim DataBuffer() As Byte = System.Text.Encoding.ASCII.GetBytes(Data)
                 Dim HashBytes() As Byte = Algorithm.ComputeHash(DataBuffer)
                 Return Convert.ToBase64String(HashBytes)
             Else
-                Throw New ArgumentNullException("Data")
+                Throw New ArgumentNullException(NameOf(Data))
             End If
         Else
-            Throw New ArgumentNullException("Algorithm")
+            Throw New ArgumentNullException(NameOf(Algorithm))
         End If
 
 
@@ -183,18 +183,18 @@ Public Class OAuth
 
         Parameters.Sort(New QueryParameterComparer)
 
-        NormalizedURL = String.Format("{0}://{1}", URL.Scheme, URL.Host)
+        NormalizedURL = String.Format(myStringFormatProvider, "{0}://{1}", URL.Scheme, URL.Host)
         If Not ((URL.Scheme = "http" And URL.Port = 80) Or (URL.Scheme = "https" And URL.Port = 443)) Then
-            NormalizedURL &= ":" + URL.Port.ToString
+            NormalizedURL &= ":" + URL.Port.ToString(myCultureInfo)
         End If
 
         NormalizedURL &= URL.AbsolutePath
         NormalizedRequestParameters = NormalizeRequestParameters(Parameters)
         Dim SignatureBase As New StringBuilder()
         With SignatureBase
-            .AppendFormat("{0}&", HTTPMethod.ToUpper())
-            .AppendFormat("{0}&", OAuthUrlEncode(NormalizedURL))
-            .AppendFormat("{0}", OAuthUrlEncode(NormalizedRequestParameters))
+            .AppendFormat(myStringFormatProvider, "{0}&", HTTPMethod.ToUpper(myCultureInfo))
+            .AppendFormat(myStringFormatProvider, "{0}&", OAuthUrlEncode(NormalizedURL))
+            .AppendFormat(myStringFormatProvider, "{0}", OAuthUrlEncode(NormalizedRequestParameters))
         End With
 
         Return SignatureBase.ToString
@@ -211,7 +211,7 @@ Public Class OAuth
 
         Select Case SignatureType
             Case SignatureTypes.PLAINTEXT
-                Return HttpUtility.UrlEncode(String.Format("{0}&{1}", ConsumerSecret, TokenSecret))
+                Return HttpUtility.UrlEncode(String.Format(myStringFormatProvider, "{0}&{1}", ConsumerSecret, TokenSecret))
 
             Case SignatureTypes.HMACSHA1
                 Dim SignatureBase As String = GenerateSignatureBase(url, ConsumerKey, Token, TokenSecret, HTTPMethod, TimeStamp, Nonce, HMACSHA1SignatureType, NormalizedUrl, NormalizedRequestParameters, CallbackUrl, Verifier)
@@ -223,7 +223,7 @@ Public Class OAuth
                 Else
                     ts = OAuthUrlEncode(TokenSecret)
                 End If
-                hmacsha1.Key = Encoding.ASCII.GetBytes(String.Format("{0}&{1}", OAuthUrlEncode(ConsumerSecret), ts))
+                hmacsha1.Key = Encoding.ASCII.GetBytes(String.Format(myStringFormatProvider, "{0}&{1}", OAuthUrlEncode(ConsumerSecret), ts))
                 Return GenerateSignatureUsingHash(SignatureBase, hmacsha1)
 
             Case SignatureTypes.RSASHA1
@@ -250,7 +250,7 @@ Public Class OAuth
 
         Select Case SignatureType
             Case SignatureTypes.PLAINTEXT
-                Return HttpUtility.UrlEncode(String.Format("{0}&{1}", ConsumerSecret, TokenSecret))
+                Return HttpUtility.UrlEncode(String.Format(myStringFormatProvider, "{0}&{1}", ConsumerSecret, TokenSecret))
 
             Case SignatureTypes.HMACSHA1
                 Dim SignatureBase As String = GenerateSignatureBase_CB(url, ConsumerKey, Token, TokenSecret, HTTPMethod, TimeStamp, Nonce, HMACSHA1SignatureType, NormalizedUrl, NormalizedRequestParameters, CallbackUrl, Verifier)
@@ -262,7 +262,7 @@ Public Class OAuth
                 Else
                     ts = OAuthUrlEncode(TokenSecret)
                 End If
-                hmacsha1.Key = Encoding.ASCII.GetBytes(String.Format("{0}&{1}", OAuthUrlEncode(ConsumerSecret), ts))
+                hmacsha1.Key = Encoding.ASCII.GetBytes(String.Format(myStringFormatProvider, "{0}&{1}", OAuthUrlEncode(ConsumerSecret), ts))
                 Return GenerateSignatureUsingHash(SignatureBase, hmacsha1)
 
             Case SignatureTypes.RSASHA1
@@ -319,7 +319,7 @@ Public Class OAuth
 
         Parameters.Sort(New QueryParameterComparer)
 
-        NormalizedURL = String.Format("{0}://{1}", URL.Scheme, URL.Host)
+        NormalizedURL = String.Format(myStringFormatProvider, "{0}://{1}", URL.Scheme, URL.Host)
         If Not ((URL.Scheme = "http" And URL.Port = 80) Or (URL.Scheme = "https" And URL.Port = 443)) Then
             NormalizedURL &= ":" + URL.Port.ToString
         End If

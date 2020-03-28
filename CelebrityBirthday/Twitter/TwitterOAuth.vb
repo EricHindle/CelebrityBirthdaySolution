@@ -74,7 +74,7 @@ Public Class TwitterOAuth
         Dim ReturnValue As Boolean
 
         Try
-            Dim Response As String = OAuthWebRequest(Method.GET, String.Format("{0}?oauth_verifier={1}", ACCESSTOKEN, PIN), String.Empty)
+            Dim Response As String = OAuthWebRequest(Method.GET, String.Format(myStringFormatProvider, "{0}?oauth_verifier={1}", ACCESSTOKEN, PIN), String.Empty)
             If Response.Length > 0 Then
                 Dim qs As NameValueCollection = HttpUtility.ParseQueryString(Response)
                 If qs("oauth_token") IsNot Nothing Then
@@ -177,10 +177,10 @@ Public Class TwitterOAuth
 
             Dim sbPostData As New StringBuilder
             Dim boundary As String = Guid.NewGuid.ToString
-            Dim header As String = String.Format("--{0}", boundary)
-            Dim footer As String = String.Format("--{0}--", boundary)
+            Dim header As String = String.Format(myStringFormatProvider, "--{0}", boundary)
+            Dim footer As String = String.Format(myStringFormatProvider, "--{0}--", boundary)
             request.Method = "POST"
-            request.ContentType = String.Format("multipart/form-data; boundary={0}", boundary)
+            request.ContentType = String.Format(myStringFormatProvider, "multipart/form-data; boundary={0}", boundary)
             Dim filecontenttype As String
             If p_FileName.ToLower.EndsWith(".jpg") Or p_FileName.ToLower.EndsWith(".jpeg") Then
                 filecontenttype = "image/jpg"
