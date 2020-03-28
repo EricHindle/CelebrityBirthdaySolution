@@ -193,6 +193,11 @@ Public Class frmImageCapture
             .DashStyle = DashStyle.DashDot
         }
     End Sub
+    Private Sub frmImageCapture_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        My.Settings.capformpos = SetFormPos(Me)
+        My.Settings.Save()
+    End Sub
+
 #End Region
 #Region "Subroutines"
     Private Function SaveImagePlain(ByRef _pictureBox As PictureBox, _width As Integer, _height As Integer, Optional isCropped As Boolean = True) As String
@@ -208,7 +213,7 @@ Public Class frmImageCapture
             Else
                 DisplayStatus(NOT_SAVED_MESSAGE, False)
             End If
-        Catch ex As Exception
+        Catch ex As argumentException
             DisplayStatus(NOT_SAVED_MESSAGE, True, ex)
         End Try
         Return imageFile
@@ -383,18 +388,15 @@ Public Class frmImageCapture
         oGraphics.DrawImage(oSourceBitMap, oPoints, oRectangle, GraphicsUnit.Pixel, oImageAttributes)
         PreviewPictureBox.Image = oTargetBitmap
     End Sub
-
     Private Sub NudPenSize_ValueChanged(sender As Object, e As EventArgs) Handles nudPenSize.ValueChanged
         cropPenSize = nudPenSize.Value
         cropPen = New Pen(cropPenColor, cropPenSize) With {
            .DashStyle = DashStyle.DashDot
        }
     End Sub
-
     Private Sub nudSaveSize_ValueChanged(sender As Object, e As EventArgs) Handles nudSaveSize.ValueChanged
         ResizeCroppedImage()
     End Sub
-
     Private Sub ResizeCroppedImage()
         Try
             PreviewPictureBox.Size = New Size(nudSaveSize.Value, nudSaveSize.Value)
@@ -407,15 +409,8 @@ Public Class frmImageCapture
         End Try
 
     End Sub
-
     Private Sub BtnResize_Click(sender As Object, e As EventArgs) Handles BtnResize.Click
 
     End Sub
-
-    Private Sub frmImageCapture_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        My.Settings.capformpos = SetFormPos(Me)
-        My.Settings.Save()
-    End Sub
-
 #End Region
 End Class

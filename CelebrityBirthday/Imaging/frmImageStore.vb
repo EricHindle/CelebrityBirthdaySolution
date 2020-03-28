@@ -57,7 +57,6 @@ Public Class FrmImageStore
         isSaved = True
     End Sub
     Private Sub BtnSavepic_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSavepic.Click
-
         sImagePath = My.Settings.NewImagePath.Replace("<applicationpath>", sApplicationPath)
         Try
             Dim _Filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
@@ -77,12 +76,11 @@ Public Class FrmImageStore
             Else
                 MsgBox("No name entered. Cannot save to file.", MsgBoxStyle.Exclamation, "Missing name")
             End If
-        Catch ex As Exception
+        Catch ex As ArgumentException
             If DisplayException(ex) = MsgBoxResult.No Then Exit Sub
             PicStatus.Text = ex.Message
         End Try
     End Sub
-
     Private Sub BtnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         My.Settings.imgselectpos = SetFormPos(Me)
         My.Settings.Save()
@@ -101,7 +99,6 @@ Public Class FrmImageStore
         My.Settings.imgselectpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
-
     Private Sub BtnGetImage_Click(sender As Object, e As EventArgs) Handles btnGetImage.Click
         isSaved = False
         OpenImageSearch()
@@ -115,6 +112,53 @@ Public Class FrmImageStore
         End If
         My.Settings.imgselectpos = SetFormPos(Me)
         My.Settings.Save()
+    End Sub
+    Private Sub BtnEditImage_Click(sender As Object, e As EventArgs) Handles BtnEditImage.Click
+        _savedImage = Nothing
+        Using _editImage As New frmImageCapture
+            _editImage.ImageFile = _latestSavedFile
+            _editImage.Forename = TxtForename.Text
+            _editImage.Surname = TxtSurname.Text
+            _editImage.ShowDialog()
+            _savedImage = _editImage.SavedImage
+            PictureBox2.ImageLocation = _savedImage
+        End Using
+    End Sub
+    Private Sub BtnLoadImage_Click(sender As Object, e As EventArgs) Handles btnLoadImage.Click
+        Try
+            Dim oImageFilename As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Open, ImageUtil.ImageType.ALL)
+            _latestSavedFile = oImageFilename
+            lblImageFile.Text = _latestSavedFile
+            Dim sizeMessage As String = ""
+            If Not String.IsNullOrEmpty(oImageFilename) Then
+                Dim oImage As Image = Image.FromFile(oImageFilename)
+                Dim loadedImage As Image = oImage.Clone
+                If oImage IsNot Nothing Then
+                    PictureBox1.Image = loadedImage
+                End If
+                oImage.Dispose()
+            End If
+            Dim filenameparts As List(Of String) = Split(Path.GetFileNameWithoutExtension(_latestSavedFile), "-").ToList
+            If String.IsNullOrEmpty(TxtSurname.Text) Then
+                TxtSurname.Text = filenameparts.Last
+                filenameparts.RemoveAt(filenameparts.Count - 1)
+            End If
+            If String.IsNullOrEmpty(TxtForename.Text) Then
+                TxtForename.Text = String.Join(" ", filenameparts)
+            End If
+        Catch ex As ArgumentException
+            DisplayException(ex)
+        Catch ex As FileNotFoundException
+            DisplayException(ex)
+        Catch ex As OutOfMemoryException
+            DisplayException(ex)
+            GC.Collect()
+        End Try
+    End Sub
+    Private Sub PasteImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PasteImageToolStripMenuItem.Click
+        If Clipboard.ContainsImage Then
+            PictureBox1.Image = Clipboard.GetImage
+        End If
     End Sub
 
 #End Region
@@ -140,54 +184,8 @@ Public Class FrmImageStore
         End Try
         Return newfilename
     End Function
-    Private Function DisplayException(ByVal ex As Exception) As MsgBoxResult
+    Private Shared Function DisplayException(ByVal ex As Exception) As MsgBoxResult
         Return MsgBox("Exception: " & ex.Message & vbCrLf & If(ex.InnerException Is Nothing, "", ex.InnerException.Message) & vbCrLf & "OK to continue?", MsgBoxStyle.YesNo, "Excpetion")
     End Function
-
-    Private Sub BtnEditImage_Click(sender As Object, e As EventArgs) Handles BtnEditImage.Click
-        _savedImage = Nothing
-        Using _editImage As New frmImageCapture
-            _editImage.ImageFile = _latestSavedFile
-            _editImage.Forename = TxtForename.Text
-            _editImage.Surname = TxtSurname.Text
-            _editImage.ShowDialog()
-            _savedImage = _editImage.SavedImage
-            PictureBox2.ImageLocation = _savedImage
-        End Using
-    End Sub
-
-    Private Sub btnLoadImage_Click(sender As Object, e As EventArgs) Handles btnLoadImage.Click
-        Try
-            Dim oImageFilename As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Open, ImageUtil.ImageType.ALL)
-            _latestSavedFile = oImageFilename
-            lblImageFile.Text = _latestSavedFile
-            Dim sizeMessage As String = ""
-            If Not String.IsNullOrEmpty(oImageFilename) Then
-                Dim oImage As Image = Image.FromFile(oImageFilename)
-                Dim loadedImage As Image = oImage.Clone
-                If oImage IsNot Nothing Then
-                    PictureBox1.Image = loadedImage
-                End If
-                oImage.Dispose()
-            End If
-            Dim filenameparts As List(Of String) = Split(Path.GetFileNameWithoutExtension(_latestSavedFile), "-").ToList
-            If TxtSurname.Text = "" Then
-                TxtSurname.Text = filenameparts.Last
-                filenameparts.RemoveAt(filenameparts.Count - 1)
-            End If
-
-            If TxtForename.Text = "" Then
-                TxtForename.Text = String.Join(" ", filenameparts)
-            End If
-        Catch ex As Exception
-            GC.Collect()
-        End Try
-    End Sub
-
-    Private Sub PasteImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PasteImageToolStripMenuItem.Click
-        If Clipboard.ContainsImage Then
-            PictureBox1.Image = Clipboard.GetImage
-        End If
-    End Sub
 #End Region
 End Class

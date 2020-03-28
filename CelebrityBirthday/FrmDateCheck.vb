@@ -56,9 +56,13 @@ Public Class FrmDateCheck
             _ct += 1
             DisplayMessage(CStr(_ct) & " of " & CStr(totalPeople))
             Try
-                Dim _wikiBirthInfo As wikiBirthInfo = GetWikiBirthDate(_person.Name)
+                Dim extract As String = ""
+                Dim _wikiBirthInfo As wikiBirthInfo = GetWikiBirthDate(_person.Name, extract)
                 Dim _dateOfBirth As Date? = _wikiBirthInfo.BirthDate
-                Dim _desc As String = _wikiBirthInfo.ErrorDesc
+                Dim _desc As String = extract
+                If Not String.IsNullOrEmpty(_wikiBirthInfo.ErrorDesc) Then
+                    _desc = _wikiBirthInfo.ErrorDesc
+                End If
                 If _dateOfBirth IsNot Nothing Then
                     If _dateOfBirth.Value <> _person.DateOfBirth Then
                         AddXRow(_person, Format(_dateOfBirth.Value, "dd MMM yyyy"), _desc)
@@ -75,12 +79,12 @@ Public Class FrmDateCheck
         Next
     End Sub
 
-    Private Function GetWikiBirthDate(_searchName As String) As wikiBirthInfo
+    Private Function GetWikiBirthDate(_searchName As String, ByRef extract As String) As wikiBirthInfo
         Dim _wikiBirthInfo As New wikiBirthInfo(Nothing, "")
         Dim _birthDate As Date? = Nothing
         Try
             Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
-            Dim extract As String = GetExtractFromResponse(_response)
+            extract = GetExtractFromResponse(_response)
             If extract.Contains("may refer to:") = False Then
                 Dim _desc As String = RemoveSquareBrackets(FixQuotes(extract))
                 Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)

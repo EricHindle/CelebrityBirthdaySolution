@@ -4,6 +4,8 @@ Imports System.Net
 Imports System.IO
 Imports System.Drawing.Drawing2D
 Imports System.Web.Script.Serialization
+Imports System.Reflection
+
 Friend Module modCbday
     Public Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
@@ -294,11 +296,24 @@ Friend Module modCbday
             End If
 
             sr.Dispose()
-        Catch ex As Exception
-            Debug.Print(ex.Message)
-            Debug.Print(wikipage)
+        Catch ex As ArgumentException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Argument")
+        Catch ex As InvalidOperationException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Invalid Operation")
+        Catch ex As OutOfMemoryException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Out Of Memory")
+        Catch ex As IOException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "IO")
         End Try
         Return _extract
+    End Function
+    Public Function DisplayException(pMethodBase As MethodBase, pException As Exception, pExceptionType As String) As MsgBoxResult
+        Return MsgBox(pMethodBase.Name & " : Database exception" & vbCrLf _
+            & pException.Message & vbCrLf _
+            & If(pException.InnerException Is Nothing, "", pException.InnerException.Message) _
+            & vbCrLf & "OK to continue?",
+                      MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation,
+                      pExceptionType)
     End Function
 End Module
 

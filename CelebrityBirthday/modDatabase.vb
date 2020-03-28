@@ -1,5 +1,6 @@
 ﻿Imports System.Data.Common
 Imports System.Data.SqlClient
+Imports System.Reflection
 
 Module modDatabase
 #Region "data"
@@ -25,27 +26,47 @@ Module modDatabase
     Public Function DeleteTwitterHandle(ByVal _id As Integer) As Integer
         Return oTwta.DeleteTwitter(_id)
     End Function
+    Public Function CountPeople() As Integer
+        Dim iCt As Integer = 0
+        Try
+            iCt = oPersonTa.CountPeople
+        Catch ex As dbexception
+            DisplayException(MethodBase.GetCurrentMethod, ex, "dB")
+        End Try
+        Return iCt
+    End Function
     Public Function GetPersonById(ByVal _id As Integer) As Person
-        Dim iCt As Integer = oPersonTa.FillById(oPersonTable, _id)
         Dim newPerson As Person = Nothing
-        If iCt = 1 Then
-            Dim oRow As CelebrityBirthdayDataSet.PersonRow = oPersonTable.Rows(0)
-            newPerson = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-        End If
+        Try
+            Dim iCt As Integer = oPersonTa.FillById(oPersonTable, _id)
+
+            If iCt = 1 Then
+                Dim oRow As CelebrityBirthdayDataSet.PersonRow = oPersonTable.Rows(0)
+                newPerson = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+            End If
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return newPerson
     End Function
     Public Function GetFullPersonById(ByVal _id As Integer) As Person
-        Dim iCt As Integer = oFullPersonTa.FillById(oFullPersonTable, _id)
         Dim newPerson As Person = Nothing
-        If iCt = 1 Then
-            Dim oRow As CelebrityBirthdayDataSet.FullPersonRow = oFullPersonTable.Rows(0)
-            newPerson = New Person(oRow)
-        End If
+        Try
+            Dim iCt As Integer = oFullPersonTa.FillById(oFullPersonTable, _id)
+            If iCt = 1 Then
+                Dim oRow As CelebrityBirthdayDataSet.FullPersonRow = oFullPersonTable.Rows(0)
+                newPerson = New Person(oRow)
+            End If
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return newPerson
     End Function
     Public Function InsertPerson(ByVal oPerson As Person) As Integer
         Dim sortSeq As Integer = 0
-        Dim newId As Integer = oPersonTa.InsertPerson(oPerson.ForeName,
+        Dim newId As Integer = -1
+        Try
+            newId = oPersonTa.InsertPerson(oPerson.ForeName,
                                                 oPerson.Surname,
                                                 CInt(oPerson.BirthYear),
                                                 oPerson.BirthMonth,
@@ -59,12 +80,17 @@ Module modDatabase
                                                 oPerson.BirthName,
                                                 oPerson.DeathMonth,
                                                 oPerson.DeathDay)
-        oPerson.Id = newId
-        UpdateSocialMedia(oPerson)
+            oPerson.Id = newId
+            UpdateSocialMedia(oPerson)
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return newId
     End Function
     Public Function UpdatePerson(ByVal oPerson As Person) As Integer
-        Dim iCt As Integer = oPersonTa.UpdatePerson(oPerson.ForeName,
+        Dim iCt As Integer = -1
+        Try
+            iCt = oPersonTa.UpdatePerson(oPerson.ForeName,
                                               oPerson.Surname,
                                               CInt(oPerson.BirthYear),
                                               oPerson.BirthMonth,
@@ -78,48 +104,72 @@ Module modDatabase
                                               oPerson.DeathMonth,
                                               oPerson.DeathDay,
                                               oPerson.Id)
-        UpdateSocialMedia(oPerson)
+            UpdateSocialMedia(oPerson)
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return iCt
     End Function
     Public Function UpdateShortDesc(ByVal oPerson As Person) As Integer
-        Dim iCt As Integer = oPersonTa.UpdateShortDesc(oPerson.ShortDesc, oPerson.Id)
+        Dim iCt As Integer = -1
+        Try
+            iCt = oPersonTa.UpdateShortDesc(oPerson.ShortDesc, oPerson.Id)
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return iCt
     End Function
     Public Function GetPeopleByDate(oDay As Integer, oMonth As Integer) As ArrayList
         Dim oPersonTable As New ArrayList
-        oPersonTa.FillByMonthDay(modDatabase.oPersonTable, oMonth, oDay)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In modDatabase.oPersonTable.Rows
-            Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            oPersonTable.Add(oPerson)
-        Next
+        Try
+            oPersonTa.FillByMonthDay(modDatabase.oPersonTable, oMonth, oDay)
+            For Each oRow As CelebrityBirthdayDataSet.PersonRow In modDatabase.oPersonTable.Rows
+                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+                oPersonTable.Add(oPerson)
+            Next
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return oPersonTable
     End Function
 
     Public Function GetPeopleByName(oForename As String, oSurname As String) As ArrayList
         Dim oPersonList As New ArrayList
-        oPersonTa.FillByName(oPersonTable, oForename, oSurname)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-            Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            oPersonList.Add(oPerson)
-        Next
+        Try
+            oPersonTa.FillByName(oPersonTable, oForename, oSurname)
+            For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
+                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+                oPersonList.Add(oPerson)
+            Next
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return oPersonList
     End Function
     Public Function GetPeopleLikeName(oForename As String, oSurname As String) As ArrayList
         Dim oPersonList As New ArrayList
-        oPersonTa.FillByPersonLikeName(oPersonTable, oForename, oSurname)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-            Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            oPersonList.Add(oPerson)
-        Next
+        Try
+            oPersonTa.FillByPersonLikeName(oPersonTable, oForename, oSurname)
+            For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
+                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+                oPersonList.Add(oPerson)
+            Next
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return oPersonList
     End Function
     Public Function FindPeopleLikeName(oForename As String, oSurname As String) As List(Of Person)
         Dim oPersonList As New List(Of Person)
-        oPersonTa.FillByPersonLikeName(oPersonTable, oForename, oSurname)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-            Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-            oPersonList.Add(oPerson)
-        Next
+        Try
+            oPersonTa.FillByPersonLikeName(oPersonTable, oForename, oSurname)
+            For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
+                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+                oPersonList.Add(oPerson)
+            Next
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return oPersonList
     End Function
     Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean) As List(Of Person)
@@ -134,64 +184,88 @@ Module modDatabase
                     Debug.Print("Excluding " & oPerson.Name)
                 End If
             Next
-        Catch dbex As DbException
-            MsgBox("Database exception" & vbCrLf & dbex.Message, MsgBoxStyle.Exclamation, "dB Error")
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
         End Try
 
         Return oPersonList
     End Function
     Public Function FindLivingPeople() As List(Of Person)
-        oFullPersonTa.Fill(oFullPersonTable)
         Dim _List As New List(Of Person)
-        For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-            If oRow.deathyear = 0 Then
-                _List.Add(New Person(oRow))
-            End If
-        Next
+        Try
+            oFullPersonTa.Fill(oFullPersonTable)
+
+            For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
+                If oRow.deathyear = 0 Then
+                    _List.Add(New Person(oRow))
+                End If
+            Next
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return _List
     End Function
     Public Function FindEverybody() As List(Of Person)
-        oPersonTa.Fill(oPersonTable)
         Dim _List As New List(Of Person)
-        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-            _List.Add(New Person(oRow))
-        Next
+        Try
+            oPersonTa.Fill(oPersonTable)
+
+            For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
+                _List.Add(New Person(oRow))
+            Next
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return _List
     End Function
     Public Function FindBirthdays(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean)
-        oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
         Dim _List As New List(Of Person)
-        For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-            Dim oPerson As Person = New Person(oRow)
-            If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
-                _List.Add(oPerson)
-            Else
-                Debug.Print("Excluding " & oPerson.Name)
-            End If
-        Next
+        Try
+            oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
+
+            For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
+                Dim oPerson As Person = New Person(oRow)
+                If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
+                    _List.Add(oPerson)
+                Else
+                    Debug.Print("Excluding " & oPerson.Name)
+                End If
+            Next
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return _List
     End Function
     Public Function FindAnniversaries(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean)
-        oFullPersonTa.FillByAnniversary(oFullPersonTable, oDay, oMonth)
         Dim _List As New List(Of Person)
-        For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-            Dim oPerson As Person = New Person(oRow)
-            If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
-                _List.Add(oPerson)
-            Else
-                Debug.Print("Excluding " & oPerson.Name)
-            End If
-        Next
+        Try
+            oFullPersonTa.FillByAnniversary(oFullPersonTable, oDay, oMonth)
+
+            For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
+                Dim oPerson As Person = New Person(oRow)
+                If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
+                    _List.Add(oPerson)
+                Else
+                    Debug.Print("Excluding " & oPerson.Name)
+                End If
+            Next
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return _List
     End Function
 #End Region
 #Region "image"
     Public Function GetImageById(ByVal _id As Integer) As ImageIdentity
-        Dim ict As Integer = oImgTa.FillById(oImgTable, _id)
         Dim oImage As ImageIdentity = New ImageIdentity()
-        If ict = 1 Then
-            oImage = New ImageIdentity(oImgTable.Rows(0))
-        End If
+        Try
+            Dim ict As Integer = oImgTa.FillById(oImgTable, _id)
+            If ict = 1 Then
+                oImage = New ImageIdentity(oImgTable.Rows(0))
+            End If
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return oImage
     End Function
     Public Function IsExistsImage(ByVal _id As Integer) As Boolean
@@ -216,13 +290,31 @@ Module modDatabase
         Return loadDate
     End Function
     Public Function InsertImage(oId As Integer, imgFileName As String, imgFileType As String, loadMonth As String, loadYear As String) As Integer
-        Return oImgTa.InsertImage(oId, imgFileName, imgFileType, loadYear, loadMonth)
+        Dim iCt As Integer = -1
+        Try
+            iCt = oImgTa.InsertImage(oId, imgFileName, imgFileType, loadYear, loadMonth)
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
+        Return iCt
     End Function
     Public Function UpdateImage(oId As Integer, imgFileName As String, imgFileType As String, loadMonth As String, loadYear As String) As Integer
-        Return oImgTa.UpdateImage(imgFileName, imgFileType, loadYear, loadMonth, oId)
+        Dim iCt As Integer = -1
+        Try
+            iCt = oImgTa.UpdateImage(imgFileName, imgFileType, loadYear, loadMonth, oId)
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
+        Return iCt
     End Function
     Public Function DeleteImage(oId As Integer) As Integer
-        Return oImgTa.DeleteImage(oId)
+        Dim iCt As Integer = -1
+        Try
+            iCt = oImgTa.DeleteImage(oId)
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
+        Return iCt
     End Function
 #End Region
 #Region "social media"
@@ -242,20 +334,36 @@ Module modDatabase
     End Sub
 #End Region
 #Region "dates"
-    Public Sub UpdateImageDate(LoadYr As String, LoadMth As String, isDateAmend As Boolean, LoadDay As String, DayIndex As Decimal?, MonthIndex As Decimal?)
-        oDatesTa.UpdateDate(LoadYr, LoadMth, isDateAmend, LoadDay, DayIndex, MonthIndex, "I")
-    End Sub
-    Public Sub UpdatePageDate(LoadYr As String, LoadMth As String, isDateAmend As Boolean, LoadDay As String, DayIndex As Decimal?, MonthIndex As Decimal?)
-        oDatesTa.UpdateDate(LoadYr, LoadMth, isDateAmend, LoadDay, DayIndex, MonthIndex, "P")
-    End Sub
+    Public Function UpdateImageDate(LoadYr As String, LoadMth As String, isDateAmend As Boolean, LoadDay As String, DayIndex As Decimal?, MonthIndex As Decimal?) As Integer
+        Dim iCt As Integer = -1
+        Try
+            iCt = oDatesTa.UpdateDate(LoadYr, LoadMth, isDateAmend, LoadDay, DayIndex, MonthIndex, "I")
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
+        Return iCt
+    End Function
+    Public Function UpdatePageDate(LoadYr As String, LoadMth As String, isDateAmend As Boolean, LoadDay As String, DayIndex As Decimal?, MonthIndex As Decimal?) As Integer
+        Dim iCt As Integer = -1
+        Try
+            iCt = oDatesTa.UpdateDate(LoadYr, LoadMth, isDateAmend, LoadDay, DayIndex, MonthIndex, "P")
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
+        Return iCt
+    End Function
     Public Function GetWordPressLoadDate(oDay As Integer, oMonth As Integer, oType As String) As Date?
         Dim loadDate As Date?
-        Dim iCt As Integer = oDatesTa.FillByDateAndType(oDatesTable, oDay, oMonth, oType)
-        Dim oDateRow As CelebrityBirthdayDataSet.DatesRow
-        If iCt = 1 Then
-            oDateRow = oDatesTable.Rows(0)
-            loadDate = New Date(CInt(oDateRow.uploadyear), CInt(oDateRow.uploadmonth), CInt(oDateRow.uploadday))
-        End If
+        Try
+            Dim iCt As Integer = oDatesTa.FillByDateAndType(oDatesTable, oDay, oMonth, oType)
+            Dim oDateRow As CelebrityBirthdayDataSet.DatesRow
+            If iCt = 1 Then
+                oDateRow = oDatesTable.Rows(0)
+                loadDate = New Date(CInt(oDateRow.uploadyear), CInt(oDateRow.uploadmonth), CInt(oDateRow.uploadday))
+            End If
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return loadDate
     End Function
     Public Function GetDatesRow(oDay As Integer, oMonth As Integer, oType As String) As CelebrityBirthday.CelebrityBirthdayDataSet.DatesRow
@@ -265,41 +373,59 @@ Module modDatabase
             If iCt = 1 Then
                 oDrow = oDatesTable.Rows(0)
             End If
-        Catch dbex As DbException
-            MsgBox("Database exception" & vbCrLf & dbex.Message, MsgBoxStyle.Exclamation, "dB Error")
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
         End Try
         Return oDrow
     End Function
     Public Function GetAuthById(pId As String) As TwitterOAuth
         Dim oTwAuth As TwitterOAuth = Nothing
-        If oTwitterAuthTa.FillById(oTwitterAuthTable, pId) = 1 Then
-            Dim oRow As CelebrityBirthdayDataSet.TwitterAuthRow = oTwitterAuthTable.Rows(0)
-            oTwAuth = New TwitterOAuth
-            oTwAuth.Token = If(oRow.IsTokenNull, "", oRow.Token)
-            oTwAuth.TokenSecret = If(oRow.IsSecretNull, "", oRow.Secret)
-            oTwAuth.Verifier = If(oRow.IsVerifierNull, "", oRow.Verifier)
-        End If
+        Try
+            If oTwitterAuthTa.FillById(oTwitterAuthTable, pId) = 1 Then
+                Dim oRow As CelebrityBirthdayDataSet.TwitterAuthRow = oTwitterAuthTable.Rows(0)
+                oTwAuth = New TwitterOAuth
+                oTwAuth.Token = If(oRow.IsTokenNull, "", oRow.Token)
+                oTwAuth.TokenSecret = If(oRow.IsSecretNull, "", oRow.Secret)
+                oTwAuth.Verifier = If(oRow.IsVerifierNull, "", oRow.Verifier)
+            End If
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return oTwAuth
     End Function
     Public Function UpdateAuth(pId, pToken, pSecret, pVerifier) As Boolean
         Dim isOK As Boolean
-        If GetAuthById(pId) Is Nothing Then
-            isOK = oTwitterAuthTa.InsertAuth(pId, pVerifier, pToken, pSecret) = 1
-        Else
-            isOK = oTwitterAuthTa.UpdateAuth(pVerifier, pToken, pSecret, pId) = 1
-        End If
+        Try
+            If GetAuthById(pId) Is Nothing Then
+                isOK = oTwitterAuthTa.InsertAuth(pId, pVerifier, pToken, pSecret) = 1
+            Else
+                isOK = oTwitterAuthTa.UpdateAuth(pVerifier, pToken, pSecret, pId) = 1
+            End If
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return isOK
     End Function
     Public Function GetTwitterUsers() As List(Of String)
         Dim _list As New List(Of String)
-        oTwitterAuthTa.Fill(oTwitterAuthTable)
-        For Each oRow As CelebrityBirthdayDataSet.TwitterAuthRow In oTwitterAuthTable.Rows
-            _list.Add(oRow.Id)
-        Next
+        Try
+            oTwitterAuthTa.Fill(oTwitterAuthTable)
+            For Each oRow As CelebrityBirthdayDataSet.TwitterAuthRow In oTwitterAuthTable.Rows
+                _list.Add(oRow.Id)
+            Next
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
         Return _list
     End Function
     Public Function InsertTweet(pText As String, pMonth As Integer?, pDay As Integer?, pSeq As Integer?, pId As String, pAccount As String, pType As String) As Boolean
-        oTweetTa.InsertTweet(Now, pText, pMonth, pDay, pSeq, pId, pAccount, pType)
+        Dim isOK As Boolean = False
+        Try
+            isOK = oTweetTa.InsertTweet(Now, pText, pMonth, pDay, pSeq, pId, pAccount, pType) = 1
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
+        Return isOK
     End Function
 #End Region
 End Module

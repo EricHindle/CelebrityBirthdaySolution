@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Drawing.Imaging
 Imports System.IO
+Imports System.Reflection
 Imports System.Text
 Imports TweetSharp
 
@@ -672,8 +673,10 @@ Public Class FrmTweet
     End Sub
     Private Sub GetAuthData()
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
-        tw.ConsumerKey = _auth.Token
-        tw.ConsumerSecret = _auth.TokenSecret
+        If _auth IsNot Nothing Then
+            tw.ConsumerKey = _auth.Token
+            tw.ConsumerSecret = _auth.TokenSecret
+        End If
     End Sub
     Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As String) As List(Of List(Of Person))
         Dim availableLength As Integer = TWEET_MAX_LEN - _headerLength
@@ -706,16 +709,21 @@ Public Class FrmTweet
     Private Function GetNumberOfPersonsPerTweet(oPersonListCount As Integer, _type As String, oNumberOfTweets As Integer) As Integer
         Dim _nudValue As Integer
         Dim _numberOfPersonsPerTweet As Integer
-        If _type.ToLower = "b" Then
-            _nudValue = NudBirthdaysPerTweet.Value
-        Else
-            _nudValue = NudAnnivsPerTweet.Value
-        End If
-        If _nudValue > 0 Then
-            _numberOfPersonsPerTweet = _nudValue
-        Else
-            _numberOfPersonsPerTweet = Math.Ceiling(oPersonListCount / oNumberOfTweets)
-        End If
+        Try
+            If _type.ToLower(myCultureInfo) = "b" Then
+                _nudValue = NudBirthdaysPerTweet.Value
+            Else
+                _nudValue = NudAnnivsPerTweet.Value
+            End If
+            If _nudValue > 0 Then
+                _numberOfPersonsPerTweet = _nudValue
+            Else
+                _numberOfPersonsPerTweet = Math.Ceiling(oPersonListCount / oNumberOfTweets)
+            End If
+        Catch ex As OverflowException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Overflow")
+        End Try
+
         Return _numberOfPersonsPerTweet
     End Function
     Private Function BuildList(oPersonList As List(Of Person)) As List(Of Person)

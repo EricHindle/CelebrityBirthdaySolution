@@ -66,6 +66,7 @@
             My.Settings.callUpgrade = 1
             My.Settings.Save()
         End If
+        LblCelebrities.Text = System.String.Format(LblCelebrities.Text, CStr(CountPeople()))
     End Sub
 
     Private Sub BtnMore_Click(sender As Object, e As EventArgs) Handles BtnMore.Click

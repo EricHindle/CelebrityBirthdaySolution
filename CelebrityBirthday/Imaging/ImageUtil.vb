@@ -45,16 +45,21 @@ Public Class ImageUtil
         Return iFormat
     End Function
     Public Shared Function SaveImageFromPictureBox(ByVal oPicture As PictureBox, ByVal targetWidth As Integer, ByVal targetHeight As Integer, ByVal targetFile As String, Optional ByVal imgType As ImageType = ImageType.JPEG) As String
-        Dim targetBitmap As System.Drawing.Bitmap
-        If oPicture.Image.Width = targetWidth And oPicture.Image.Height = targetHeight Then
-            targetBitmap = New Bitmap(oPicture.Image)
-        Else
-            targetBitmap = ResizeImageToBitmap(oPicture.Image, targetWidth, targetHeight)
+        Dim targetBitmap As System.Drawing.Bitmap = Nothing
+        If oPicture IsNot Nothing Then
+            If oPicture.Image.Width = targetWidth And oPicture.Image.Height = targetHeight Then
+                targetBitmap = New Bitmap(oPicture.Image)
+            Else
+                targetBitmap = ResizeImageToBitmap(oPicture.Image, targetWidth, targetHeight)
+            End If
         End If
-        If Not String.IsNullOrEmpty(targetFile) Then
+
+        If targetFile IsNot Nothing Then
             Try
                 targetBitmap.Save(targetFile, GetCodecInfo(imgType), GetEncoderParameters)
-            Catch ex As Exception
+            Catch ex As ArgumentException
+                MsgBox(targetFile & " : " & ex.Message, MsgBoxStyle.Exclamation, "Error")
+            Catch ex As Runtime.InteropServices.ExternalException
                 MsgBox(targetFile & " : " & ex.Message, MsgBoxStyle.Exclamation, "Error")
             End Try
         End If

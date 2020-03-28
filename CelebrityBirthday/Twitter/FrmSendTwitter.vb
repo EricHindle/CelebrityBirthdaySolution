@@ -461,5 +461,17 @@ Public Class FrmSendTwitter
         Dim _tweetLength As Integer = rtbTweetText.Text.Replace(vbCr, "").Length
         LblTweetLength.Text = If(_tweetLength > 280, "** ", "") & CStr(_tweetLength)
     End Sub
+
+    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        TxtForename.Text = ""
+        TxtSurname.Text = ""
+        rtbTweetProgress.Text = ""
+        rtbTweetText.Text = ""
+        PictureBox1.Image = My.Resources.NoImage
+        PictureBox2.Image = Nothing
+        LblTweetLength.Text = ""
+        LblImageName.Text = ""
+        LblImageFile.Text = ""
+    End Sub
 #End Region
 End Class

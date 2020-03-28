@@ -48,6 +48,7 @@ Partial Class FrmSendTwitter
         Me.chkImages = New System.Windows.Forms.CheckBox()
         Me.LblTweetLength = New System.Windows.Forms.Label()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
+        Me.BtnClear = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -323,12 +324,26 @@ Partial Class FrmSendTwitter
         Me.WebBrowser1.Size = New System.Drawing.Size(466, 452)
         Me.WebBrowser1.TabIndex = 139
         '
+        'BtnClear
+        '
+        Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnClear.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnClear.Location = New System.Drawing.Point(444, 12)
+        Me.BtnClear.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.BtnClear.Name = "BtnClear"
+        Me.BtnClear.Size = New System.Drawing.Size(80, 34)
+        Me.BtnClear.TabIndex = 140
+        Me.BtnClear.Text = "Clear"
+        Me.BtnClear.UseVisualStyleBackColor = True
+        '
         'FrmSendTwitter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1332, 603)
+        Me.Controls.Add(Me.BtnClear)
         Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.chkImages)
         Me.Controls.Add(Me.LblTweetLength)
@@ -390,4 +405,5 @@ Partial Class FrmSendTwitter
     Friend WithEvents chkImages As CheckBox
     Friend WithEvents LblTweetLength As Label
     Friend WithEvents WebBrowser1 As WebBrowser
+    Friend WithEvents BtnClear As Button
 End Class

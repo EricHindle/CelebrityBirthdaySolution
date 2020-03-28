@@ -36,6 +36,7 @@ Partial Class FrmMenu
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.BtnMore = New System.Windows.Forms.Button()
         Me.Version = New System.Windows.Forms.Label()
+        Me.LblCelebrities = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -171,20 +172,30 @@ Partial Class FrmMenu
         Me.Version.BackColor = System.Drawing.Color.Transparent
         Me.Version.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Version.Location = New System.Drawing.Point(12, 652)
+        Me.Version.Location = New System.Drawing.Point(12, 692)
         Me.Version.Name = "Version"
         Me.Version.Size = New System.Drawing.Size(152, 22)
         Me.Version.TabIndex = 12
         Me.Version.Text = "Version {0}.{1}.{2}.{3}"
         Me.Version.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         '
+        'LblCelebrities
+        '
+        Me.LblCelebrities.Location = New System.Drawing.Point(21, 638)
+        Me.LblCelebrities.Name = "LblCelebrities"
+        Me.LblCelebrities.Size = New System.Drawing.Size(332, 32)
+        Me.LblCelebrities.TabIndex = 13
+        Me.LblCelebrities.Text = "{0} Celebrities"
+        Me.LblCelebrities.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'FrmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(377, 683)
+        Me.ClientSize = New System.Drawing.Size(377, 723)
         Me.ControlBox = False
+        Me.Controls.Add(Me.LblCelebrities)
         Me.Controls.Add(Me.Version)
         Me.Controls.Add(Me.BtnMore)
         Me.Controls.Add(Me.PictureBox1)
@@ -222,4 +233,5 @@ Partial Class FrmMenu
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents BtnMore As Button
     Friend WithEvents Version As Label
+    Friend WithEvents LblCelebrities As Label
 End Class
