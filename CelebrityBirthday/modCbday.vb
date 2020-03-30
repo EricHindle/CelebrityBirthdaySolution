@@ -9,7 +9,7 @@ Imports System.Reflection
 Friend Module modCbday
     Public Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
-    Public Const TWEET_MAX_LEN As Integer = 279
+    Public Const TWEET_MAX_LEN As Integer = 280
 
     Public Const RTB_CONTROL_NAME As String = "RtbFile"
     Public Const BUTTON_CONTROL_NAME As String = "BtnRewrite"

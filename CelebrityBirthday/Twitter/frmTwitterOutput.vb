@@ -179,7 +179,7 @@ Public Class frmTwitterOutput
                     Dim newTabPage As TabPage = Me.NewTabPage(TwitterFilename, fileCount)
                     Dim _controls As Control() = newTabPage.Controls.Find(RTB_CONTROL_NAME & fileCount, False)
                     Dim rtbControl As New RichTextBox
-                    If _controls.Count > 0 Then
+                    If _controls.Any() Then
                         rtbControl = TryCast(_controls(0), RichTextBox)
                     End If
                     Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, TwitterFilename)
@@ -201,17 +201,17 @@ Public Class frmTwitterOutput
     End Sub
     Private Sub WriteTypes(_datenode As TreeNode, _outfile As StreamWriter)
         For Each _typeNode As TreeNode In _datenode.Nodes
-            If _typeNode.Checked AndAlso ((rbAnnivOnly.Checked And _typeNode.Text.StartsWith("A")) Or (rbBirthdaysOnly.Checked And _typeNode.Text.StartsWith("B")) Or rbBoth.Checked) Then
+            If _typeNode.Checked AndAlso ((rbAnnivOnly.Checked And _typeNode.Text.StartsWith("A", StringComparison.CurrentCultureIgnoreCase)) Or (rbBirthdaysOnly.Checked And _typeNode.Text.StartsWith("B")) Or rbBoth.Checked) Then
                 WritePersons(_outfile, _datenode.Text, _typeNode)
             End If
         Next
     End Sub
     Private Function GetHeading(_typeNode As TreeNode) As String
         Dim _header As String = ""
-        If _typeNode.Text.StartsWith("A") Then
+        If _typeNode.Text.StartsWith("A", StringComparison.CurrentCultureIgnoreCase) Then
             _header = ANNIV_HDR
         End If
-        If _typeNode.Text.StartsWith("B") Then
+        If _typeNode.Text.StartsWith("B", StringComparison.CurrentCultureIgnoreCase) Then
             _header = BIRTHDAY_HDR
         End If
         Return _header

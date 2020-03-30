@@ -101,7 +101,7 @@ Public Class FrmTweet
         Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
         My.Computer.Clipboard.Clear()
         If _rtb IsNot Nothing Then
-            My.Computer.Clipboard.SetText(_rtb.Text)
+            My.Computer.Clipboard.SetText(_rtb.Text.Trim(vbCrLf))
         End If
     End Sub
     Private Sub CopyAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyAllToolStripMenuItem.Click
@@ -216,14 +216,12 @@ Public Class FrmTweet
 
     Private Sub BtnUncheck_Click(sender As Object, e As EventArgs) Handles BtnUncheck.Click
         For Each _node As TreeNode In tvBirthday.Nodes
-            Try
-                _node.Checked = False
+            _node.Checked = False
+            If _node.Nodes IsNot Nothing Then
                 For Each subNode As TreeNode In _node.Nodes
                     subNode.Checked = False
                 Next
-            Catch ex As Exception
-                Debug.Print(ex.Message)
-            End Try
+            End If
         Next
     End Sub
 #End Region
@@ -367,7 +365,7 @@ Public Class FrmTweet
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
         Dim _controls As Control() = _sc.Panel1.Controls.Find(PICBOX_BASENAME & CStr(_index), False)
         Dim pbControl As New PictureBox
-        If _controls.Count > 0 Then
+        If _controls.Any() Then
             pbControl = TryCast(_controls(0), PictureBox)
         End If
         Return pbControl
@@ -377,7 +375,7 @@ Public Class FrmTweet
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
         Dim _controls As Control() = _sc.Panel1.Controls.Find(NUD_BASENAME & CStr(_index), False)
         Dim _control As New NumericUpDown
-        If _controls.Count > 0 Then
+        If _controls.Any() Then
             _control = TryCast(_controls(0), NumericUpDown)
         End If
         Return _control
@@ -387,7 +385,7 @@ Public Class FrmTweet
         Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabPage)
         Dim _controls As Control() = _sc.Panel2.Controls.Find(_tabName, False)
-        If _controls.Count > 0 Then
+        If _controls.Any() Then
             _rtb = TryCast(_controls(0), RichTextBox)
         End If
         Return _rtb
@@ -396,7 +394,7 @@ Public Class FrmTweet
         Dim _sc As New SplitContainer
         Dim _tabName As String = SC_BASENAME & CStr(_tabPage.TabIndex)
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
-        If _controls.Count > 0 Then
+        If _controls.Any() Then
             _sc = TryCast(_controls(0), SplitContainer)
         End If
         Return _sc
@@ -478,13 +476,11 @@ Public Class FrmTweet
     Private Function CountOfCheckedNames() As Integer
         Dim _count As Integer = 0
         For Each _node As TreeNode In tvBirthday.Nodes
-            Try
+            If _node IsNot Nothing Then
                 For Each subNode As TreeNode In _node.Nodes
                     If subNode.Checked Then _count += 1
                 Next
-            Catch ex As Exception
-                Debug.Print(ex.Message)
-            End Try
+            End If
         Next
         Return _count
     End Function
@@ -556,7 +552,7 @@ Public Class FrmTweet
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
             If rbAges.Checked Then
-                If _type.StartsWith("B") Then
+                If _type.StartsWith("B", StringComparison.CurrentCultureIgnoreCase) Then
                     _outString.Append(" (" & CStr(CalculateAgeNextBirthday(_person)) & ")")
                 Else
                     Dim _yr As Integer = CInt(_person.BirthYear)
@@ -575,7 +571,7 @@ Public Class FrmTweet
             _outString.Append(vbCrLf)
         Next
         If Not String.IsNullOrEmpty(_footer) Then
-            _outString.Append(vbCrLf).Append(_footer).Append(vbCrLf)
+            _outString.Append(vbCrLf).Append(_footer)
         End If
         _textBox.Text = _outString.ToString
     End Sub
