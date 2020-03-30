@@ -101,7 +101,7 @@ Public Class FrmTweet
         Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
         My.Computer.Clipboard.Clear()
         If _rtb IsNot Nothing Then
-            My.Computer.Clipboard.SetText(_rtb.Text.Trim(vbCrLf))
+            My.Computer.Clipboard.SetText(_rtb.Text.Trim(vbLf))
         End If
     End Sub
     Private Sub CopyAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyAllToolStripMenuItem.Click
@@ -546,8 +546,8 @@ Public Class FrmTweet
     End Sub
     Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person), _type As String, _index As Integer, _numberOfLists As Integer)
         Dim _outString As New StringBuilder
-        _outString.Append(cboMonth.SelectedItem).Append(" ").Append(cboDay.SelectedItem).Append(vbCrLf).Append(vbCrLf)
-        _outString.Append(GetHeading(_type)).Append(vbCrLf)
+        _outString.Append(cboMonth.SelectedItem).Append(" ").Append(cboDay.SelectedItem).Append(vbLf).Append(vbLf)
+        _outString.Append(GetHeading(_type)).Append(vbLf)
         Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
@@ -568,12 +568,12 @@ Public Class FrmTweet
                     _outString.Append(" @").Append(_person.Social.TwitterHandle)
                 End If
             End If
-            _outString.Append(vbCrLf)
+            _outString.Append(vbLf)
         Next
         If Not String.IsNullOrEmpty(_footer) Then
-            _outString.Append(vbCrLf).Append(_footer)
+            _outString.Append(vbLf).Append(_footer)
         End If
-        _textBox.Text = _outString.ToString
+        _textBox.Text = _outString.ToString.Trim(vbLf)
     End Sub
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
         If _imageTable.Count > 0 Then
