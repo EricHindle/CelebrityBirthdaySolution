@@ -44,7 +44,7 @@
         Me.Show()
     End Sub
 
-    Private Sub txtBirthdateCheck_Click(sender As Object, e As EventArgs) Handles txtBirthdateCheck.Click
+    Private Sub TxtBirthdateCheck_Click(sender As Object, e As EventArgs) Handles TxtBirthdateCheck.Click
         Me.Hide()
         Using _check As New FrmDateCheck
             _check.ShowDialog()

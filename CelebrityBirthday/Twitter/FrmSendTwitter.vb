@@ -43,7 +43,7 @@ Public Class FrmSendTwitter
         cmbTwitterUsers.SelectedIndex = -1
         WriteTrace("Entering GetAuthToken " & Format(Now, "hh:MM:ss"))
         isDone = False
-        Await GetAuthToken()
+        Await GetAuthToken().ConfigureAwait(True)
         WriteTrace(isDone)
         WriteTrace("Back from GetAuthToken " & Format(Now, "hh:MM:ss"))
         WriteTrace("Entering Authenticate " & Format(Now, "hh:MM:ss"))
@@ -67,31 +67,26 @@ Public Class FrmSendTwitter
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         Dim isOkToSend As Boolean = True
         If cmbTwitterUsers.SelectedIndex >= 0 Then
-            Try
-                Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
-                If _auth IsNot Nothing Then
-                    If String.IsNullOrEmpty(_auth.Verifier) Then
-                        isOkToSend = False
-                    Else
-                        tw.Verifier = _auth.Verifier
-                    End If
-                    If String.IsNullOrEmpty(_auth.Token) Then
-                        isOkToSend = False
-                    Else
-                        tw.Token = _auth.Token
-                    End If
-                    If String.IsNullOrEmpty(_auth.TokenSecret) Then
-                        isOkToSend = False
-                    Else
-                        tw.TokenSecret = _auth.TokenSecret
-                    End If
-                Else
+            Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
+            If _auth IsNot Nothing Then
+                If String.IsNullOrEmpty(_auth.Verifier) Then
                     isOkToSend = False
+                Else
+                    tw.Verifier = _auth.Verifier
                 End If
-            Catch ex As Exception
-                WriteTrace(ex.Message)
+                If String.IsNullOrEmpty(_auth.Token) Then
+                    isOkToSend = False
+                Else
+                    tw.Token = _auth.Token
+                End If
+                If String.IsNullOrEmpty(_auth.TokenSecret) Then
+                    isOkToSend = False
+                Else
+                    tw.TokenSecret = _auth.TokenSecret
+                End If
+            Else
                 isOkToSend = False
-            End Try
+            End If
         End If
         WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
         isDone = False
@@ -117,7 +112,7 @@ Public Class FrmSendTwitter
 #Region "subroutines"
     Private Sub Authenticate()
         WriteTrace("Navigating")
-        WebBrowser1.Navigate("https://api.twitter.com/oauth/authorize?oauth_token=" & tw.Token)
+        WebBrowser1.Navigate(New Uri("https://api.twitter.com/oauth/authorize?oauth_token=" & tw.Token))
     End Sub
     Private Async Sub WebBrowser1_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs)
         WriteTrace("Browser document complete")
@@ -131,7 +126,7 @@ Public Class FrmSendTwitter
                 Dim allMeta As IHTMLElementCollection = element.getElementsByTagName("meta")
                 For Each metaElement As IHTMLElement In allMeta
                     Dim _outerHTML As String = metaElement.outerHTML
-                    Dim _index As Integer = _outerHTML.IndexOf("oauth_verifier=")
+                    Dim _index As Integer = _outerHTML.IndexOf("oauth_verifier=", StringComparison.CurrentCultureIgnoreCase)
                     If _index > -1 Then
                         Dim _startIndex As Integer = _index + 15
                         Dim _length As Integer = _outerHTML.Length - _startIndex - 2
@@ -141,19 +136,19 @@ Public Class FrmSendTwitter
                         GlobalSettings.GetSetting(_twitterUser)
                         GlobalSettings.SetSetting(_twitterUser, "string", verifier, "twitter")
                         WriteTrace("Verifier = " & verifier)
-                        Await GetAccessToken()
+                        Await GetAccessToken().ConfigureAwait(True)
                         UpdateAuth(_twitterUser, tw.Token, tw.TokenSecret, tw.Verifier)
                     End If
                 Next
             Next
-        Catch ex As Exception
+        Catch ex As ArgumentException
             WriteTrace(ex.Message)
         End Try
         WriteTrace("Browser finished")
     End Sub
     Private Function GetTwitterName(_innerHtml As String) As String
-        Dim _pos1 As Integer = _innerHtml.IndexOf("span class=""name""") + 18
-        Dim _pos2 As Integer = _innerHtml.IndexOf("/span", _pos1)
+        Dim _pos1 As Integer = _innerHtml.IndexOf("span class=""name""", StringComparison.CurrentCultureIgnoreCase) + 18
+        Dim _pos2 As Integer = _innerHtml.IndexOf("/span", _pos1, StringComparison.CurrentCultureIgnoreCase)
         Dim _twitterName As String = "Unknown"
         If _pos1 > 0 AndAlso _pos2 > _pos1 Then
             _twitterName = _innerHtml.Substring(_pos1, _pos2 - _pos1 - 1)
@@ -193,10 +188,10 @@ Public Class FrmSendTwitter
             WriteTrace("Adding header " & Format(Now, "hh:MM:ss"))
             client.DefaultRequestHeaders.Add("Authorization", headerstring)
             WriteTrace("Posting " & Format(Now, "hh:MM:ss"))
-            Dim response As HttpResponseMessage = Await client.PostAsJsonAsync("oauth/access_token", "")
+            Dim response As HttpResponseMessage = Await client.PostAsJsonAsync("oauth/access_token", "").ConfigureAwait(True)
             WriteTrace("Back from POST " & Format(Now, "hh:MM:ss"))
             WriteTrace("Getting response " & Format(Now, "hh:MM:ss"))
-            Dim responseString = Await response.Content.ReadAsStringAsync()
+            Dim responseString = Await response.Content.ReadAsStringAsync().ConfigureAwait(True)
             WriteTrace("Back from getting response " & Format(Now, "hh:MM:ss"))
             If responseString.Length > 0 Then
                 WriteTrace("Getting tokens " & Format(Now, "hh:MM:ss"))
@@ -261,10 +256,10 @@ Public Class FrmSendTwitter
             WriteTrace("Adding header " & Format(Now, "hh:MM:ss"))
             client.DefaultRequestHeaders.Add("Authorization", headerstring)
             WriteTrace("Posting " & Format(Now, "hh:MM:ss"))
-            Dim response As HttpResponseMessage = Await client.PostAsJsonAsync("oauth/request_token", "")
+            Dim response As HttpResponseMessage = Await client.PostAsJsonAsync("oauth/request_token", "").ConfigureAwait(True)
             WriteTrace("Back from POST " & Format(Now, "hh:MM:ss"))
             WriteTrace("Getting response " & Format(Now, "hh:MM:ss"))
-            Dim responseString = Await response.Content.ReadAsStringAsync()
+            Dim responseString = Await response.Content.ReadAsStringAsync().ConfigureAwait(True)
             WriteTrace("Back from getting response " & Format(Now, "hh:MM:ss"))
             If responseString.Length > 0 Then
                 WriteTrace("Getting tokens " & Format(Now, "hh:MM:ss"))

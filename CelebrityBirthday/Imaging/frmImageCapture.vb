@@ -2,6 +2,7 @@
 Imports System.Drawing.Drawing2D
 Imports System.IO
 Imports System.Drawing.Imaging
+Imports System.Reflection
 
 Public Class frmImageCapture
 #Region "Constants"
@@ -88,9 +89,13 @@ Public Class frmImageCapture
                 End If
                 oImage.Dispose()
             End If
-        Catch ex As Exception
-            DisplayStatus("Exception when loading an image", True, ex)
+        Catch ex As OutOfMemoryException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Out of Memory")
             GC.Collect()
+        Catch ex As FileNotFoundException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "File Not Found")
+        Catch ex As ArgumentException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Argument")
         End Try
     End Sub
     Private Sub ResetWindow()
@@ -98,9 +103,6 @@ Public Class frmImageCapture
         PicCapture.Height = STD_CAP_HEIGHT
         Me.Width = iStartWidth
         Me.Height = iStartHeight
-    End Sub
-    Private Sub Form_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
-        DisposeImages()
     End Sub
     ''' <summary>
     ''' Load an image from a file
@@ -127,8 +129,13 @@ Public Class frmImageCapture
                 End If
                 oImage.Dispose()
             End If
-        Catch ex As Exception
+        Catch ex As OutOfMemoryException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Out of Memory")
             GC.Collect()
+        Catch ex As FileNotFoundException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "File Not Found")
+        Catch ex As ArgumentException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Argument")
         End Try
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
@@ -144,7 +151,6 @@ Public Class frmImageCapture
         ResetWindow()
         PicCapture.Image = Nothing
         ClearCropSelection()
-        DisposeImages()
     End Sub
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
         SaveImagePlain(PicCapture, PicCapture.Width, PicCapture.Height, False)
@@ -193,7 +199,7 @@ Public Class frmImageCapture
             .DashStyle = DashStyle.DashDot
         }
     End Sub
-    Private Sub frmImageCapture_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub FrmImageCapture_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.capformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
@@ -213,7 +219,7 @@ Public Class frmImageCapture
             Else
                 DisplayStatus(NOT_SAVED_MESSAGE, False)
             End If
-        Catch ex As argumentException
+        Catch ex As ArgumentException
             DisplayStatus(NOT_SAVED_MESSAGE, True, ex)
         End Try
         Return imageFile
@@ -245,25 +251,16 @@ Public Class frmImageCapture
             DisplayStatus("Image file loaded, " & sizeMessage, False)
         End If
     End Sub
-    Private Sub DisposeImages()
-        If originalImage IsNot Nothing Then originalImage.Dispose()
-        If cropBitmap IsNot Nothing Then cropBitmap.Dispose()
-        GC.Collect()
-    End Sub
 #End Region
 #Region "Image Cropping"
     Private Sub PicCapture_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PicCapture.MouseDown
-        Try
-            If e.Button = Windows.Forms.MouseButtons.Left Then
-                ClearCropSelection()
-                cropX = e.X
-                cropY = e.Y
-                Cursor = Cursors.Cross
-            End If
-            PicCapture.Refresh()
-        Catch exc As Exception
-            DisplayStatus("MouseDown exception", True, exc)
-        End Try
+        If e.Button = Windows.Forms.MouseButtons.Left Then
+            ClearCropSelection()
+            cropX = e.X
+            cropY = e.Y
+            Cursor = Cursors.Cross
+        End If
+        PicCapture.Refresh()
     End Sub
     Private Sub PicCapture_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PicCapture.MouseMove
         Try
@@ -273,7 +270,7 @@ Public Class frmImageCapture
                 cropHeight = cropWidth  ' square selection
                 PicCapture.CreateGraphics.DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight)
             End If
-        Catch exc As Exception
+        Catch exc As ArgumentNullException
             DisplayStatus("MouseMove exception", True, exc)
         End Try
     End Sub
@@ -282,7 +279,7 @@ Public Class frmImageCapture
             Cursor = Cursors.Default
             CaptureCroppedArea()
             DisplayStatus(IMG_AREA_SEL, False)
-        Catch exc As Exception
+        Catch exc As ArgumentException
             DisplayStatus("MouseUp exception", True, exc)
         End Try
     End Sub
@@ -299,11 +296,11 @@ Public Class frmImageCapture
     Private Sub CaptureCroppedArea()
         Try
             ' Extract cropped area from original picture into cropBitmap
-            cropBitmap = ImageUtil.extractCroppedAreaFromImage(originalImage, cropWidth * imageShrinkRatio, cropHeight * imageShrinkRatio, cropX * imageShrinkRatio, cropY * imageShrinkRatio)
+            cropBitmap = ImageUtil.ExtractCroppedAreaFromImage(originalImage, cropWidth * imageShrinkRatio, cropHeight * imageShrinkRatio, cropX * imageShrinkRatio, cropY * imageShrinkRatio)
             ' Resize cropBitmap to fit preview picture box
-            PreviewPictureBox.Image = ImageUtil.resizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
+            PreviewPictureBox.Image = ImageUtil.ResizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
             pnlAdjustImage.Enabled = True
-        Catch exc As Exception
+        Catch exc As ArgumentException
             DisplayStatus("CaptureCroppedArea exception", True, exc)
         End Try
     End Sub
@@ -323,8 +320,8 @@ Public Class frmImageCapture
                 targetHeight = Int(sourceImage.Height / wratio)
                 imageShrinkRatio = wratio
             End If
-            _newBitmap = ImageUtil.resizeImageToBitmap(sourceImage, targetWidth, targetHeight)
-        Catch exc As Exception
+            _newBitmap = ImageUtil.ResizeImageToBitmap(sourceImage, targetWidth, targetHeight)
+        Catch exc As ArithmeticException
             DisplayStatus("ShrinkImage exception", True, exc)
         End Try
         Return _newBitmap
@@ -382,11 +379,13 @@ Public Class frmImageCapture
         Dim oImageAttributes As New ImageAttributes
         Dim oColourMatrix As New ColorMatrix(GetColourMatrix)
         oImageAttributes.SetColorMatrix(oColourMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap)
-        Dim oSourceBitMap As Bitmap = ImageUtil.resizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
+        Dim oSourceBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
         Dim oTargetBitmap As System.Drawing.Bitmap = New Bitmap(PreviewPictureBox.Image.Width, PreviewPictureBox.Image.Height)
-        Dim oGraphics As Graphics = ImageUtil.initialiseGraphics(oTargetBitmap)
+        Dim oGraphics As Graphics = ImageUtil.InitialiseGraphics(oTargetBitmap)
         oGraphics.DrawImage(oSourceBitMap, oPoints, oRectangle, GraphicsUnit.Pixel, oImageAttributes)
         PreviewPictureBox.Image = oTargetBitmap
+        oImageAttributes.Dispose()
+        oSourceBitMap.Dispose()
     End Sub
     Private Sub NudPenSize_ValueChanged(sender As Object, e As EventArgs) Handles nudPenSize.ValueChanged
         cropPenSize = nudPenSize.Value
@@ -404,13 +403,26 @@ Public Class frmImageCapture
             If cropWidth > 0 And cropHeight > 0 Then
                 CaptureCroppedArea()
             End If
-        Catch ex As Exception
+        Catch ex As ArgumentException
             DisplayStatus("Error resizing cropped image", True, ex)
         End Try
 
     End Sub
-    Private Sub BtnResize_Click(sender As Object, e As EventArgs) Handles BtnResize.Click
 
+    'Form overrides dispose to clean up the component list.
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+            If disposing Then
+                If originalImage IsNot Nothing Then originalImage.Dispose()
+                If cropBitmap IsNot Nothing Then cropBitmap.Dispose()
+                If cropPen IsNot Nothing Then cropPen.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
     End Sub
 #End Region
 End Class

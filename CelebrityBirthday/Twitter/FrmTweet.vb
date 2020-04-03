@@ -364,40 +364,56 @@ Public Class FrmTweet
         Dim _index As Integer = _tabpage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
         Dim _controls As Control() = _sc.Panel1.Controls.Find(PICBOX_BASENAME & CStr(_index), False)
-        Dim pbControl As New PictureBox
         If _controls.Any() Then
-            pbControl = TryCast(_controls(0), PictureBox)
+            For _controlIndex = 0 To _controls.GetUpperBound(0)
+                If TryCast(_controls(_controlIndex), PictureBox) IsNot Nothing Then
+                    Return _controls(_controlIndex)
+                    Exit For
+                End If
+            Next
         End If
-        Return pbControl
+        Return Nothing
     End Function
     Private Function GetNudFromPage(_tabpage As TabPage) As NumericUpDown
         Dim _index As Integer = _tabpage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
         Dim _controls As Control() = _sc.Panel1.Controls.Find(NUD_BASENAME & CStr(_index), False)
-        Dim _control As New NumericUpDown
         If _controls.Any() Then
-            _control = TryCast(_controls(0), NumericUpDown)
+            For _controlIndex = 0 To _controls.GetUpperBound(0)
+                If TryCast(_controls(0), NumericUpDown) IsNot Nothing Then
+                    Return _controls(_controlIndex)
+                    Exit For
+                End If
+            Next
         End If
-        Return _control
+        Return Nothing
     End Function
     Private Function GetRichTextBoxFromPage(_tabPage As TabPage) As RichTextBox
-        Dim _rtb As New RichTextBox
         Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabPage)
         Dim _controls As Control() = _sc.Panel2.Controls.Find(_tabName, False)
         If _controls.Any() Then
-            _rtb = TryCast(_controls(0), RichTextBox)
+            For _controlIndex = 0 To _controls.GetUpperBound(0)
+                If TryCast(_controls(_controlIndex), RichTextBox) IsNot Nothing Then
+                    Return _controls(_controlIndex)
+                    Exit For
+                End If
+            Next
         End If
-        Return _rtb
+        Return Nothing
     End Function
     Private Function GetSplitContainerFromPage(_tabPage As TabPage) As SplitContainer
-        Dim _sc As New SplitContainer
         Dim _tabName As String = SC_BASENAME & CStr(_tabPage.TabIndex)
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
         If _controls.Any() Then
-            _sc = TryCast(_controls(0), SplitContainer)
+            For _controlIndex = 0 To _controls.GetUpperBound(0)
+                If TryCast(_controls(_controlIndex), SplitContainer) IsNot Nothing Then
+                    Return _controls(_controlIndex)
+                    Exit For
+                End If
+            Next
         End If
-        Return _sc
+        Return Nothing
     End Function
 #End Region
 #Region "Tree subroutines"
@@ -599,12 +615,7 @@ Public Class FrmTweet
     Private Sub SendTweet(_filename As String)
         Dim isOkToSend As Boolean = True
         If cmbTwitterUsers.SelectedIndex >= 0 Then
-            Try
-                isOkToSend = SetupOAuth(isOkToSend)
-            Catch ex As Exception
-                WriteTrace(ex.Message)
-                isOkToSend = False
-            End Try
+            isOkToSend = SetupOAuth(isOkToSend)
         End If
         WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
         If isOkToSend Then

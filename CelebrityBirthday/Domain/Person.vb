@@ -1,5 +1,8 @@
-﻿Public Class Person
+﻿Imports System.Reflection
 
+Public Class Person
+    Implements IDisposable
+#Region "properties"
     Private _id As Integer
     Private _forename As String
     Private _surname As String
@@ -17,6 +20,7 @@
     Private _deathMonth As Integer
     Private _image As ImageIdentity
     Private _social As SocialMedia
+
     Public Property Social() As SocialMedia
         Get
             Return _social
@@ -41,7 +45,6 @@
             _deathMonth = value
         End Set
     End Property
-
     Public Property DeathDay() As Integer
         Get
             Return _deathday
@@ -50,7 +53,6 @@
             _deathday = value
         End Set
     End Property
-
     Public Property BirthPlace() As String
         Get
             Return _birthPlace
@@ -59,7 +61,6 @@
             _birthPlace = value
         End Set
     End Property
-
     Public Property BirthName() As String
         Get
             Return _birthName
@@ -68,7 +69,6 @@
             _birthName = value
         End Set
     End Property
-
     Public Property UnsavedChanges() As Boolean
         Get
             Return _unsavedChanges
@@ -77,7 +77,6 @@
             _unsavedChanges = value
         End Set
     End Property
-
     Public Property Id() As Integer
         Get
             Return _id
@@ -86,7 +85,6 @@
             _id = value
         End Set
     End Property
-
     Public Property Sortseq() As Integer
         Get
             Return _sortSeq
@@ -95,7 +93,6 @@
             _sortSeq = value
         End Set
     End Property
-
     Public Property ShortDesc() As String
         Get
             Return _ShortDesc
@@ -112,7 +109,6 @@
             _birthDay = value
         End Set
     End Property
-
     Public Property BirthMonth() As Integer
         Get
             Return _birthMonth
@@ -121,7 +117,6 @@
             _birthMonth = value
         End Set
     End Property
-
     Public Property Description() As String
         Get
             Return _description
@@ -130,7 +125,6 @@
             _description = value
         End Set
     End Property
-
     Public Property DeathYear() As Integer
         Get
             Return _deathYear
@@ -139,7 +133,6 @@
             _deathYear = value
         End Set
     End Property
-
     Public Property BirthYear() As String
         Get
             Return _birthYear
@@ -156,8 +149,6 @@
             _surname = value
         End Set
     End Property
-
-
     Public Property ForeName() As String
         Get
             Return _forename
@@ -166,7 +157,54 @@
             _forename = value
         End Set
     End Property
-    Public Sub New()
+    Public ReadOnly Property IBirthYear() As Integer
+        Get
+            Dim iYr As Integer = 0
+            Dim isBC As Boolean = _birthYear.ToLower(myCultureInfo).IndexOf("bc", StringComparison.CurrentCultureIgnoreCase) >= 0
+            Try
+                iYr = Integer.Parse(_birthYear.ToLower(myCultureInfo).Replace("bc", "").Trim(), myStringFormatProvider)
+                If isBC Then
+                    iYr *= -1
+                End If
+            Catch ex As OverflowException
+            Catch ex As ArgumentException
+            Catch ex As FormatException
+            End Try
+            Return iYr
+        End Get
+    End Property
+    Public ReadOnly Property Name() As String
+        Get
+            Return If(String.IsNullOrEmpty(_forename), _surname, _forename & " " & _surname)
+        End Get
+    End Property
+    Public ReadOnly Property DateOfBirth As Date?
+        Get
+            Dim _dob As Date? = Nothing
+            Try
+                _dob = New Date(_birthYear, _birthMonth, _birthDay)
+            Catch ex As ArgumentOutOfRangeException
+                Debug.Print(Name & "Invalid date of birth")
+            End Try
+            Return _dob
+        End Get
+    End Property
+    Public ReadOnly Property DateOfDeath As Date?
+        Get
+            Dim _dod As Date? = Nothing
+            If _deathYear <> 0 Then
+                Try
+                    _dod = New Date(_birthYear, _birthMonth, _birthDay)
+                Catch ex As ArgumentOutOfRangeException
+                    Debug.Print("Invalid date of birth")
+                End Try
+            End If
+            Return _dod
+        End Get
+    End Property
+#End Region
+#Region "constructors"
+    Private Sub InitialisePerson()
         _id = -1
         _forename = ""
         _surname = ""
@@ -185,153 +223,133 @@
         _birthPlace = ""
         _social = New SocialMedia()
     End Sub
-
+    Public Sub New()
+        InitialisePerson()
+    End Sub
     Public Sub New(ByVal pForename As String, ByVal pSurname As String, ByVal pDesc As String, ByVal pShortDesc As String, ByVal pDay As Integer, ByVal pMonth As Integer, ByVal pYear As String, ByVal pDeathYr As Integer, ByVal pDeathMonth As Integer, ByVal pDeathDay As Integer, ByVal pBirthName As String, ByVal pBirthPlace As String, ByVal pImage As ImageIdentity, ByVal pSocial As SocialMedia)
+        InitialisePerson()
         _id = -1
-        _forename = pForename
-        _surname = pSurname
-        _ShortDesc = pShortDesc
+        _forename = If(pForename, "")
+        _surname = If(pSurname, "")
+        _ShortDesc = If(pShortDesc, "")
         _sortSeq = 0
-        _surname = pSurname
-        _description = pDesc
+        _description = If(pDesc, "")
         _birthDay = pDay
         _birthMonth = pMonth
-        _birthYear = pYear
+        _birthYear = If(pYear, "")
         _deathYear = pDeathYr
-        _image = pImage
+        _image = If(pImage, New ImageIdentity)
         _deathMonth = pDeathMonth
         _deathday = pDeathDay
-        _birthName = pBirthName
-        _birthPlace = pBirthPlace
-        _social = pSocial
+        _birthName = If(pBirthName, "")
+        _birthPlace = If(pBirthPlace, "")
+        _social = If(pSocial, New SocialMedia)
         _unsavedChanges = False
-
-        If pForename = "" And pSurname = "" Then
+        If String.IsNullOrEmpty(pForename) And String.IsNullOrEmpty(pSurname) Then
             MsgBox("Please supply a name", MsgBoxStyle.Exclamation, "Data error")
         End If
 
     End Sub
     Public Sub New(ByVal pPerson As Person)
-        _id = pPerson.Id
-        _forename = pPerson.ForeName
-        _surname = pPerson.Surname
-        _ShortDesc = pPerson.ShortDesc
-        _sortSeq = pPerson.Sortseq
-        _description = pPerson.Description
-        _birthDay = pPerson.BirthDay
-        _birthMonth = pPerson.BirthMonth
-        _birthYear = pPerson.BirthYear
-        _deathYear = pPerson.DeathYear
-        _image = pPerson.Image
-        _deathMonth = pPerson.DeathMonth
-        _deathday = pPerson.DeathDay
-        _birthName = pPerson.BirthName
-        _birthPlace = pPerson.BirthPlace
-        _social = pPerson.Social
+        InitialisePerson()
+        If pPerson IsNot Nothing Then
+            _id = pPerson.Id
+            _forename = pPerson.ForeName
+            _surname = pPerson.Surname
+            _ShortDesc = pPerson.ShortDesc
+            _sortSeq = pPerson.Sortseq
+            _description = pPerson.Description
+            _birthDay = pPerson.BirthDay
+            _birthMonth = pPerson.BirthMonth
+            _birthYear = pPerson.BirthYear
+            _deathYear = pPerson.DeathYear
+            _image = pPerson.Image
+            _deathMonth = pPerson.DeathMonth
+            _deathday = pPerson.DeathDay
+            _birthName = pPerson.BirthName
+            _birthPlace = pPerson.BirthPlace
+            _social = pPerson.Social
+        End If
         _unsavedChanges = False
     End Sub
     Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.PersonRow, ByVal oSocial As SocialMedia, ByVal oImage As ImageIdentity)
-        _id = oRow.id
-        _forename = oRow.forename
-        _surname = oRow.surname
-        _description = oRow.longdesc
-        _ShortDesc = oRow.shortdesc
-        _birthDay = oRow.birthday
-        _birthMonth = oRow.birthmonth
-        _birthYear = oRow.birthyear
-        _deathYear = oRow.deathyear
-        _deathMonth = oRow.deathmonth
-        _deathday = oRow.deathday
-        _birthPlace = oRow.birthplace
-        _birthName = oRow.birthname
-        _image = oImage
-        _sortSeq = oRow.sortseq
-        _social = oSocial
+        InitialisePerson()
+        If oRow IsNot Nothing Then
+            _id = oRow.id
+            _forename = oRow.forename
+            _surname = oRow.surname
+            _description = oRow.longdesc
+            _ShortDesc = oRow.shortdesc
+            _birthDay = oRow.birthday
+            _birthMonth = oRow.birthmonth
+            _birthYear = oRow.birthyear
+            _deathYear = oRow.deathyear
+            _deathMonth = oRow.deathmonth
+            _deathday = oRow.deathday
+            _birthPlace = oRow.birthplace
+            _birthName = oRow.birthname
+            _sortSeq = oRow.sortseq
+        End If
+        If oImage IsNot Nothing Then
+            _image = oImage
+        End If
+        If oSocial IsNot Nothing Then
+            _social = oSocial
+        End If
         _unsavedChanges = False
     End Sub
     Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.FullPersonRow)
-        _id = oRow.id
-        _forename = oRow.forename
-        _surname = oRow.surname
-        _description = oRow.longdesc
-        _ShortDesc = oRow.shortdesc
-        _birthDay = oRow.birthday
-        _birthMonth = oRow.birthmonth
-        _birthYear = oRow.birthyear
-        _deathYear = oRow.deathyear
-        _deathMonth = oRow.deathmonth
-        _deathday = oRow.deathday
-        _birthPlace = oRow.birthplace
-        _birthName = oRow.birthname
-        _image = New ImageIdentity(oRow.id, oRow.imgfilename, oRow.imgfiletype, oRow.imgloadmonth, oRow.imgloadyr)
-        _sortSeq = oRow.sortseq
-        _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet)
+        InitialisePerson()
+        If oRow IsNot Nothing Then
+            _id = oRow.id
+            _forename = oRow.forename
+            _surname = oRow.surname
+            _description = oRow.longdesc
+            _ShortDesc = oRow.shortdesc
+            _birthDay = oRow.birthday
+            _birthMonth = oRow.birthmonth
+            _birthYear = oRow.birthyear
+            _deathYear = oRow.deathyear
+            _deathMonth = oRow.deathmonth
+            _deathday = oRow.deathday
+            _birthPlace = oRow.birthplace
+            _birthName = oRow.birthname
+            _image = New ImageIdentity(oRow.id, oRow.imgfilename, oRow.imgfiletype, oRow.imgloadmonth, oRow.imgloadyr)
+            _sortSeq = oRow.sortseq
+            _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet)
+        End If
         _unsavedChanges = False
     End Sub
     Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.PersonRow)
-        _id = oRow.id
-        _forename = oRow.forename
-        _surname = oRow.surname
-        _description = oRow.longdesc
-        _ShortDesc = oRow.shortdesc
-        _birthDay = oRow.birthday
-        _birthMonth = oRow.birthmonth
-        _birthYear = oRow.birthyear
-        _deathYear = oRow.deathyear
-        _deathMonth = oRow.deathmonth
-        _deathday = oRow.deathday
-        _birthPlace = oRow.birthplace
-        _birthName = oRow.birthname
-        _image = Nothing
-        _sortSeq = oRow.sortseq
-        _social = Nothing
+        InitialisePerson()
+        If oRow IsNot Nothing Then
+            _id = oRow.id
+            _forename = oRow.forename
+            _surname = oRow.surname
+            _description = oRow.longdesc
+            _ShortDesc = oRow.shortdesc
+            _birthDay = oRow.birthday
+            _birthMonth = oRow.birthmonth
+            _birthYear = oRow.birthyear
+            _deathYear = oRow.deathyear
+            _deathMonth = oRow.deathmonth
+            _deathday = oRow.deathday
+            _birthPlace = oRow.birthplace
+            _birthName = oRow.birthname
+            _sortSeq = oRow.sortseq
+        End If
         _unsavedChanges = False
     End Sub
-    Public ReadOnly Property IBirthYear() As Integer
-        Get
-            Dim iYr As Integer = 0
-            Dim isBC As Boolean = _birthYear.ToLower.IndexOf("bc") >= 0
-            Try
-                iYr = Integer.Parse(_birthYear.ToLower.Replace("bc", "").Trim)
-                If isBC Then
-                    iYr *= -1
-                End If
-            Catch ex As Exception
-            End Try
-
-            Return iYr
-        End Get
-    End Property
-    Public ReadOnly Property Name() As String
-        Get
-            Return If(String.IsNullOrEmpty(_forename), _surname, _forename & " " & _surname)
-        End Get
-    End Property
-
-    Public ReadOnly Property DateOfBirth As Date?
-        Get
-            Dim _dob As Date? = Nothing
-            Try
-                _dob = New Date(_birthYear, _birthMonth, _birthDay)
-            Catch ex As Exception
-                Debug.Print(Name & "Invalid date of birth")
-            End Try
-            Return _dob
-        End Get
-    End Property
-
-    Public ReadOnly Property DateOfDeath As Date?
-        Get
-            Dim _dod As Date? = Nothing
-            If _deathYear <> 0 Then
-                Try
-                    _dod = New Date(_birthYear, _birthMonth, _birthDay)
-                Catch ex As Exception
-                    Debug.Print("Invalid date of birth")
-                End Try
-            End If
-            Return _dod
-        End Get
-    End Property
-
+#End Region
+#Region "dispose"
+    Protected Overridable Sub Dispose(disposing As Boolean)
+        If disposing Then
+            _image.Dispose()
+        End If
+    End Sub
+    Public Sub Dispose() Implements IDisposable.Dispose
+        Dispose(True)
+        GC.SuppressFinalize(Me)
+    End Sub
+#End Region
 End Class

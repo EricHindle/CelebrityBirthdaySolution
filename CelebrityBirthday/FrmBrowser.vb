@@ -1,12 +1,12 @@
 ﻿Public Class FrmBrowser
 #Region "properties"
     Private _searchName As String
-    Private _url As String
-    Public Property Url() As String
+    Private _url As Uri
+    Public Property Url() As Uri
         Get
             Return _url
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As Uri)
             _url = value
         End Set
     End Property
@@ -33,7 +33,7 @@
         End If
     End Sub
     Private Sub WebBrowser1_DocumentCompleted(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles WebBrowser1.DocumentCompleted
-        lblNav.Text = "Complete"
+        lblNav.Text = My.Resources.COMPLETE
         txtURL.Text = WebBrowser1.Url.AbsoluteUri
     End Sub
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -43,7 +43,7 @@
         WebBrowser1.GoForward()
     End Sub
     Private Sub BtnGo_Click(sender As Object, e As EventArgs) Handles btnGo.Click
-        WebBrowser1.Navigate(txtURL.Text)
+        WebBrowser1.Navigate(New Uri(txtURL.Text))
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
@@ -77,7 +77,6 @@
         TxtSearchName.Text = _searchName
         WebBrowser1.Navigate(_uri)
     End Sub
-
     Private Sub FrmBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.bwsrformpos)
     End Sub

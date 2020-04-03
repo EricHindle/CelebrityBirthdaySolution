@@ -82,7 +82,7 @@ Public Class FrmWordPress
         Dim lastYear As String = ""
         Dim newText As New StringBuilder()
         For Each oPerson As Person In personTable
-            setImageDate(oPerson.Id)
+            SetImageDate(oPerson.Id)
             If oPerson.BirthYear <> lastYear Then
                 Dim _birthYear As Integer = Math.Abs(CInt(oPerson.BirthYear))
                 newText.Append("<h3>").Append(CStr(_birthYear)).Append(If(oPerson.BirthYear < 0, " BCE", "")).Append("</h3>").Append(vbCrLf)
@@ -134,7 +134,7 @@ Public Class FrmWordPress
         Next
         txtCurrentText.Text = newText.ToString
     End Sub
-    Private Sub setImageDate(_personId As Integer)
+    Private Sub SetImageDate(_personId As Integer)
         Dim oImage As ImageIdentity = GetImageById(_personId)
         urlMonth = txtLoadMth.Text
         urlYear = txtLoadYr.Text
@@ -146,6 +146,7 @@ Public Class FrmWordPress
                 urlMonth = oImage.ImageLoadMonth
             End If
         End If
+        oImage.Dispose()
     End Sub
     Private Sub GenExcerpt()
         Dim bOK As Boolean = True

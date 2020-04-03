@@ -1,9 +1,10 @@
 ﻿
+Imports System.Data.Common
 ''' <summary>
 ''' Options and settings to be used by all users
 ''' </summary>
 ''' <remarks></remarks>
-Public Class GlobalSettings
+Public NotInheritable Class GlobalSettings
     Private Shared ReadOnly oTa As New CelebrityBirthdayDataSetTableAdapters.SettingsTableAdapter
     Private Shared ReadOnly oTable As New CelebrityBirthdayDataSet.SettingsDataTable
     ''' <summary>
@@ -21,7 +22,7 @@ Public Class GlobalSettings
                 Dim oRow As CelebrityBirthdayDataSet.SettingsRow = oTable.Rows(0)
                 Dim value As String = oRow.pValue
                 Try
-                    Select Case oRow.pType.ToLower
+                    Select Case oRow.pType.ToLower(myCultureInfo)
                         Case "string"
                             rtnValue = value
                         Case "integer"
@@ -35,7 +36,7 @@ Public Class GlobalSettings
                         Case "char"
                             rtnValue = CChar(value)
                     End Select
-                Catch ex As Exception
+                Catch ex As ArgumentNullException
 
                 End Try
             Else
@@ -52,7 +53,7 @@ Public Class GlobalSettings
         Dim rtnVal As Boolean = True
         Try
             oTa.UpdateSetting(settingValue, settingType, settingGroup, settingName)
-        Catch ex As Exception
+        Catch ex As DbException
             rtnVal = False
         End Try
         Return rtnVal
@@ -62,7 +63,7 @@ Public Class GlobalSettings
         Dim rtnVal As Boolean = True
         Try
             oTa.InsertSetting(settingName, settingValue, settingType, settingGroup)
-        Catch ex As Exception
+        Catch ex As DbException
             rtnVal = False
         End Try
         Return rtnVal

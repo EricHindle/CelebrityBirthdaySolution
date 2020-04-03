@@ -31,7 +31,7 @@ Partial Class FrmMenu2
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.BtnTapestry = New System.Windows.Forms.Button()
         Me.BtnImageEditing = New System.Windows.Forms.Button()
-        Me.txtBirthdateCheck = New System.Windows.Forms.Button()
+        Me.TxtBirthdateCheck = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -128,14 +128,14 @@ Partial Class FrmMenu2
         '
         'txtBirthdateCheck
         '
-        Me.txtBirthdateCheck.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.txtBirthdateCheck.Location = New System.Drawing.Point(186, 298)
-        Me.txtBirthdateCheck.Margin = New System.Windows.Forms.Padding(6)
-        Me.txtBirthdateCheck.Name = "txtBirthdateCheck"
-        Me.txtBirthdateCheck.Size = New System.Drawing.Size(151, 49)
-        Me.txtBirthdateCheck.TabIndex = 21
-        Me.txtBirthdateCheck.Text = "Check"
-        Me.txtBirthdateCheck.UseVisualStyleBackColor = True
+        Me.TxtBirthdateCheck.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.TxtBirthdateCheck.Location = New System.Drawing.Point(186, 298)
+        Me.TxtBirthdateCheck.Margin = New System.Windows.Forms.Padding(6)
+        Me.TxtBirthdateCheck.Name = "txtBirthdateCheck"
+        Me.TxtBirthdateCheck.Size = New System.Drawing.Size(151, 49)
+        Me.TxtBirthdateCheck.TabIndex = 21
+        Me.TxtBirthdateCheck.Text = "Check"
+        Me.TxtBirthdateCheck.UseVisualStyleBackColor = True
         '
         'FrmMenu2
         '
@@ -144,7 +144,7 @@ Partial Class FrmMenu2
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(352, 509)
         Me.ControlBox = False
-        Me.Controls.Add(Me.txtBirthdateCheck)
+        Me.Controls.Add(Me.TxtBirthdateCheck)
         Me.Controls.Add(Me.BtnImageEditing)
         Me.Controls.Add(Me.BtnTapestry)
         Me.Controls.Add(Me.BtnClose)
@@ -173,5 +173,5 @@ Partial Class FrmMenu2
     Friend WithEvents BtnClose As Button
     Friend WithEvents BtnTapestry As Button
     Friend WithEvents BtnImageEditing As Button
-    Friend WithEvents txtBirthdateCheck As Button
+    Friend WithEvents TxtBirthdateCheck As Button
 End Class

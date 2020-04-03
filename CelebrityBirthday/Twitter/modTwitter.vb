@@ -3,7 +3,6 @@ Imports System.IO
 Imports TweetSharp
 Module modTwitter
     Public Function PostMedia(pTwitterService As TwitterService, _filename As String) As TwitterUploadedMedia
-        Dim IdString As String = Nothing
         Dim _uploadOptions As New UploadMediaOptions
         Dim _mediaFile As New MediaFile With {
             .FileName = _filename
@@ -15,8 +14,6 @@ Module modTwitter
             _twitterUplMedia = pTwitterService.UploadMedia(_uploadOptions)
         End Using
         Return _twitterUplMedia
-
     End Function
-
 
 End Module

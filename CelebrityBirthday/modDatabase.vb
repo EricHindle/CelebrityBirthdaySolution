@@ -183,6 +183,7 @@ Module modDatabase
                 Else
                     Debug.Print("Excluding " & oPerson.Name)
                 End If
+                oPerson.Dispose()
             Next
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
@@ -230,6 +231,7 @@ Module modDatabase
                 Else
                     Debug.Print("Excluding " & oPerson.Name)
                 End If
+                oPerson.Dispose()
             Next
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
@@ -248,6 +250,7 @@ Module modDatabase
                 Else
                     Debug.Print("Excluding " & oPerson.Name)
                 End If
+                oPerson.Dispose()
             Next
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
@@ -269,7 +272,10 @@ Module modDatabase
         Return oImage
     End Function
     Public Function IsExistsImage(ByVal _id As Integer) As Boolean
-        Return GetImageById(_id).Id > -1
+        Dim oImage As ImageIdentity = GetImageById(_id)
+        Dim isExists As Boolean = oImage.Id > -1
+        oImage.Dispose()
+        Return isExists
     End Function
     Public Function GetAlternateImageDate(ByVal Id As Integer) As Date?
         Dim loadDate As Date? = Nothing
@@ -287,6 +293,7 @@ Module modDatabase
                 loadDate = New Date(sYear, sMonth, 1)
             End If
         End If
+        oImage.Dispose()
         Return loadDate
     End Function
     Public Function InsertImage(oId As Integer, imgFileName As String, imgFileType As String, loadMonth As String, loadYear As String) As Integer
@@ -383,10 +390,11 @@ Module modDatabase
         Try
             If oTwitterAuthTa.FillById(oTwitterAuthTable, pId) = 1 Then
                 Dim oRow As CelebrityBirthdayDataSet.TwitterAuthRow = oTwitterAuthTable.Rows(0)
-                oTwAuth = New TwitterOAuth
-                oTwAuth.Token = If(oRow.IsTokenNull, "", oRow.Token)
-                oTwAuth.TokenSecret = If(oRow.IsSecretNull, "", oRow.Secret)
-                oTwAuth.Verifier = If(oRow.IsVerifierNull, "", oRow.Verifier)
+                oTwAuth = New TwitterOAuth With {
+                    .Token = If(oRow.IsTokenNull, "", oRow.Token),
+                    .TokenSecret = If(oRow.IsSecretNull, "", oRow.Secret),
+                    .Verifier = If(oRow.IsVerifierNull, "", oRow.Verifier)
+                }
             End If
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")

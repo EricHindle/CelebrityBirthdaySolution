@@ -32,7 +32,7 @@ Friend Module modCbday
 
     Public Function ToSimpleCharacters(ByVal original As String) As String
         Dim rtnvalue As String = original
-        If original <> String.Empty Then
+        If Not String.IsNullOrEmpty(original) Then
             Dim stFormD As String = original.Normalize(NormalizationForm.FormD)
             Dim sb As New StringBuilder
             For ich As Integer = 0 To stFormD.Length - 1
@@ -147,11 +147,11 @@ Friend Module modCbday
         Return menuStrip.SourceControl
     End Function
 
-    Public Function SaveImage(ByVal url As String, ByVal strFName As String) As Boolean
+    Public Function SaveImage(ByVal pUri As Uri, ByVal strFName As String) As Boolean
         Dim rtnval As Boolean = True
         Dim b() As Byte '   Store picture bytes
         ' Create a request for the URL. 
-        Dim request As WebRequest = WebRequest.Create(url)
+        Dim request As WebRequest = WebRequest.Create(pUri)
         ' If required by the server, set the credentials.
         request.Credentials = CredentialCache.DefaultCredentials
         ' Get the response.
@@ -181,7 +181,10 @@ Friend Module modCbday
                         bw = New BinaryWriter(_fileStream)
                         bw.Write(b)
                     End If
-                Catch ex As Exception
+                Catch ex As IOException
+                    MsgBox("IO Error writing file" & vbCrLf & ex.Message)
+                    rtnval = False
+                Catch ex As ArgumentException
                     MsgBox("Error writing file" & vbCrLf & ex.Message)
                     rtnval = False
                 Finally
@@ -196,7 +199,7 @@ Friend Module modCbday
             response.Close()
             memorystream.Dispose()
             response = Nothing
-        Catch ex As Exception
+        Catch ex As notsupportedException
             rtnval = False
         End Try
         Return rtnval
@@ -206,7 +209,7 @@ Friend Module modCbday
         Return My.Settings.googleImageSearch & oText.Replace(" ", "+")
     End Function
     Public Function GetWordPressMonthUrl(oLoadYear As String, oLoadMonth As String, oLoadDay As String, oSelDay As String, oSelMonth As String) As String
-        Return My.Settings.WordPressMonthUrl.Replace("#m", oLoadMonth.ToLower).Replace("#y", oLoadYear).Replace("#d", oLoadDay).Replace("#D", oSelDay).Replace("#M", oSelMonth)
+        Return My.Settings.WordPressMonthUrl.Replace("#m", oLoadMonth.ToLower(myCultureInfo)).Replace("#y", oLoadYear).Replace("#d", oLoadDay).Replace("#D", oSelDay).Replace("#M", oSelMonth)
     End Function
     Public Function GetTwitterSearchString(oText As String) As String
         Return My.Settings.TwitterSearchUrl & oText.Replace(" ", "+")
@@ -266,17 +269,23 @@ Friend Module modCbday
     End Function
 
     Public Function NavigateToUrl(pSearchString As String) As WebResponse
-        Dim request As WebRequest
-        Dim _uri As New Uri(pSearchString)
-        ' Create a request for the URL. 
-        request = WebRequest.Create(_uri)
-        ' If required by the server, set the credentials.
-        request.Credentials = CredentialCache.DefaultCredentials
-        Return request.GetResponse()
+        Dim response As WebResponse = Nothing
+        Try
+            Dim request As WebRequest
+            Dim _uri As New Uri(pSearchString)
+            ' Create a request for the URL. 
+            request = WebRequest.Create(_uri)
+            ' If required by the server, set the credentials.
+            request.Credentials = CredentialCache.DefaultCredentials
+            response = request.GetResponse()
+        Catch ex As UriFormatException
+        Catch ex As ArgumentException
+        End Try
+        Return response
     End Function
     Public Function GetExtractFromResponse(pResponse As WebResponse) As String
         Dim _extract As String = ""
-        Dim wikipage As String = ""
+        Dim wikipage As String
         Try
             Dim sr As System.IO.StreamReader = New System.IO.StreamReader(pResponse.GetResponseStream())
             wikipage = sr.ReadToEnd

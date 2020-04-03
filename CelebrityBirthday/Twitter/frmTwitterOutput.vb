@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Security
 
 Public Class frmTwitterOutput
 #Region "variables"
@@ -103,14 +104,14 @@ Public Class frmTwitterOutput
         Loop
         DisplayMessage("Selection Complete")
     End Sub
-    Private Sub AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, newDateNode As TreeNode, _type As String)
+    Private Shared Sub AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, newDateNode As TreeNode, _type As String)
         Dim newBirthdayNode As TreeNode = newDateNode.Nodes.Add(Format(testDate, "MMMM dd") & _type, _type)
         newBirthdayNode.Checked = True
         For Each oPerson As Person In oBirthdayTable
             AddNameNode(newBirthdayNode, oPerson, _type)
         Next
     End Sub
-    Private Sub AddNameNode(newBirthdayNode As TreeNode, oPerson As Person, _type As String)
+    Private Shared Sub AddNameNode(newBirthdayNode As TreeNode, oPerson As Person, _type As String)
         Dim newNameNode As TreeNode = newBirthdayNode.Nodes.Add(oPerson.Name)
         If oPerson.Social IsNot Nothing Then
             If Not String.IsNullOrEmpty(oPerson.Social.TwitterHandle) Then
@@ -130,7 +131,7 @@ Public Class frmTwitterOutput
         Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
         _ageNode.Checked = (_type = "Birthday")
     End Sub
-    Private Function CalculateAgeNextBirthday(oPerson As Person) As Integer
+    Private Shared Function CalculateAgeNextBirthday(oPerson As Person) As Integer
         Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
         Dim _thisMonth As Integer = Today.Month
         Dim _thisDay As Integer = Today.Day
@@ -194,19 +195,19 @@ Public Class frmTwitterOutput
             End If
         Next
     End Sub
-    Private Sub LoadRtb(_rtbControl As RichTextBox, _filename As String)
+    Private Shared Sub LoadRtb(_rtbControl As RichTextBox, _filename As String)
         Using _input As New StreamReader(_filename)
             _rtbControl.Text = _input.ReadToEnd
         End Using
     End Sub
     Private Sub WriteTypes(_datenode As TreeNode, _outfile As StreamWriter)
         For Each _typeNode As TreeNode In _datenode.Nodes
-            If _typeNode.Checked AndAlso ((rbAnnivOnly.Checked And _typeNode.Text.StartsWith("A", StringComparison.CurrentCultureIgnoreCase)) Or (rbBirthdaysOnly.Checked And _typeNode.Text.StartsWith("B")) Or rbBoth.Checked) Then
+            If _typeNode.Checked AndAlso ((rbAnnivOnly.Checked And _typeNode.Text.StartsWith("A", StringComparison.CurrentCultureIgnoreCase)) Or (rbBirthdaysOnly.Checked And _typeNode.Text.StartsWith("B", StringComparison.CurrentCultureIgnoreCase)) Or rbBoth.Checked) Then
                 WritePersons(_outfile, _datenode.Text, _typeNode)
             End If
         Next
     End Sub
-    Private Function GetHeading(_typeNode As TreeNode) As String
+    Private Shared Function GetHeading(_typeNode As TreeNode) As String
         Dim _header As String = ""
         If _typeNode.Text.StartsWith("A", StringComparison.CurrentCultureIgnoreCase) Then
             _header = ANNIV_HDR
@@ -264,14 +265,14 @@ Public Class frmTwitterOutput
         Next
         WriteFooter(_outfile, _footer, _length)
     End Sub
-    Private Function WriteHeader(_outfile As StreamWriter, _date As String, _header As String) As Integer
+    Private Shared Function WriteHeader(_outfile As StreamWriter, _date As String, _header As String) As Integer
         _outfile.WriteLine("")
         _outfile.WriteLine(_date)
         _outfile.WriteLine("")
         _outfile.WriteLine(_header)
         Return _date.Length + _header.Length + 3
     End Function
-    Private Sub WriteFooter(_outfile As StreamWriter, _footer As String, _length As Integer)
+    Private Shared Sub WriteFooter(_outfile As StreamWriter, _footer As String, _length As Integer)
         _outfile.WriteLine("")
         If Not String.IsNullOrEmpty(_footer) Then
             _outfile.WriteLine(_footer)
@@ -315,7 +316,10 @@ Public Class frmTwitterOutput
                 End If
                 DisplayMessage("Deleted old file")
             End If
-        Catch ex As Exception
+        Catch ex As IOException
+        Catch ex As ArgumentException
+        Catch ex As SecurityException
+        Catch ex As UnauthorizedAccessException
         End Try
     End Sub
     Private Function SetTwitterFilename(TwitterFilenameA As String, TwitterFilenameB As String, currentDate As String) As String
@@ -334,7 +338,10 @@ Public Class frmTwitterOutput
             End If
             Try
                 My.Computer.FileSystem.DeleteFile(Path.Combine(My.Settings.TwitterFilePath, TwitterFilename))
-            Catch ex As Exception
+            Catch ex As IOException
+            Catch ex As ArgumentException
+            Catch ex As SecurityException
+            Catch ex As UnauthorizedAccessException
             End Try
         End If
         Return TwitterFilename
@@ -364,7 +371,7 @@ Public Class frmTwitterOutput
             .Location = New System.Drawing.Point(287, 397)
             .Name = BUTTON_CONTROL_NAME & _index
             .Size = New System.Drawing.Size(119, 23)
-            .Text = "Rewrite File"
+            .Text = My.Resources.REWRITE_FILE
         End With
         AddHandler _newButton.Click, AddressOf BtnRewrite_Click
         Return _newButton

@@ -134,7 +134,7 @@ Public Class FrmBotsd
         Else
             DisplayStatus("Updated failed")
         End If
-
+        _pickPerson1.Dispose()
     End Sub
     Private Sub BtnUpdate2_Click(sender As Object, e As EventArgs) Handles BtnUpdate2.Click
         Dim _pickPerson2 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
@@ -145,6 +145,7 @@ Public Class FrmBotsd
         Else
             DisplayStatus("Updated failed")
         End If
+        _pickPerson2.Dispose()
     End Sub
     Private Sub BtnUpdate3_Click(sender As Object, e As EventArgs) Handles BtnUpdate3.Click
         Dim _pickPerson3 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
@@ -155,6 +156,7 @@ Public Class FrmBotsd
         Else
             DisplayStatus("Updated failed")
         End If
+        _pickPerson3.Dispose()
     End Sub
     Private Sub BtnUpdate4_Click(sender As Object, e As EventArgs) Handles BtnUpdate4.Click
         Dim _pickPerson4 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
@@ -165,6 +167,7 @@ Public Class FrmBotsd
         Else
             DisplayStatus("Updated failed")
         End If
+        _pickPerson4.Dispose()
     End Sub
     Private Sub FrmBotsd_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.botsdformpos = SetFormPos(Me)
@@ -247,31 +250,26 @@ Public Class FrmBotsd
     Private Sub SendTweet(_filename As String)
         Dim isOkToSend As Boolean = True
         If cmbTwitterUsers.SelectedIndex >= 0 Then
-            Try
-                Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
-                If _auth IsNot Nothing Then
-                    If String.IsNullOrEmpty(_auth.Verifier) Then
-                        isOkToSend = False
-                    Else
-                        tw.Verifier = _auth.Verifier
-                    End If
-                    If String.IsNullOrEmpty(_auth.Token) Then
-                        isOkToSend = False
-                    Else
-                        tw.Token = _auth.Token
-                    End If
-                    If String.IsNullOrEmpty(_auth.TokenSecret) Then
-                        isOkToSend = False
-                    Else
-                        tw.TokenSecret = _auth.TokenSecret
-                    End If
-                Else
+            Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
+            If _auth IsNot Nothing Then
+                If String.IsNullOrEmpty(_auth.Verifier) Then
                     isOkToSend = False
+                Else
+                    tw.Verifier = _auth.Verifier
                 End If
-            Catch ex As Exception
-                WriteTrace(ex.Message)
+                If String.IsNullOrEmpty(_auth.Token) Then
+                    isOkToSend = False
+                Else
+                    tw.Token = _auth.Token
+                End If
+                If String.IsNullOrEmpty(_auth.TokenSecret) Then
+                    isOkToSend = False
+                Else
+                    tw.TokenSecret = _auth.TokenSecret
+                End If
+            Else
                 isOkToSend = False
-            End Try
+            End If
         End If
         WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
         If isOkToSend Then

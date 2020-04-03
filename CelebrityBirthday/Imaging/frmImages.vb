@@ -3,8 +3,6 @@ Imports System.Text
 
 Public Class FrmImages
 #Region "constants"
-    Private Const NO_LOAD_DATE As String = "No load date available"
-    Private Const ID_NOT_FOUND As String = "Id not found"
     Private Const SEP As String = "/"
 #End Region
 #Region "properties"
@@ -63,7 +61,7 @@ Public Class FrmImages
     Private Sub BirthDate_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         lblStatus.Text = String.Empty
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
-            lblStatus.Text = "Loading Table From Database"
+            lblStatus.Text = My.Resources.LOADING_TABLE
             Me.Refresh()
             personTable = New ArrayList
             ListBoxPeople.Items.Clear()
@@ -79,7 +77,7 @@ Public Class FrmImages
             Else
                 TxtWpLoadMth.Text = String.Empty
                 TxtWpLoadYear.Text = String.Empty
-                lblWpDateMsg.Text = NO_LOAD_DATE
+                lblWpDateMsg.Text = My.Resources.NO_LOAD_DATE
             End If
             lblStatus.Text += " - Complete"
         End If
@@ -134,7 +132,7 @@ Public Class FrmImages
     End Sub
     Private Sub BtnPicSave_Click(sender As Object, e As EventArgs) Handles BtnPicSave.Click
         Dim oFilename As String = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.SelectedItem)
-        SaveImage(TxtImageUrl.Text, oFilename)
+        SaveImage(New Uri(TxtImageUrl.Text), oFilename)
     End Sub
     Private Sub BtnLoadDateUpdate_Click(sender As Object, e As EventArgs) Handles BtnLoadDateUpdate.Click
         If String.IsNullOrEmpty(txtImgName.Text) Then
@@ -151,11 +149,13 @@ Public Class FrmImages
             InsertImage(_id, txtImgName.Text, cbImgType.SelectedItem, txtLoadMth.Text, txtLoadYr.Text)
         End If
         Dim oImage As ImageIdentity = GetImageById(_id)
-        Dim currentPerson = FindPersonById(_id)
+        Dim currentPerson As Person = FindPersonById(_id)
         If currentPerson IsNot Nothing Then
-            currentPerson.image = oImage
+            currentPerson.Image = oImage
         End If
         LoadScreenFromPerson(currentPerson)
+        oImage.Dispose()
+        currentPerson.Dispose()
     End Sub
     Private Sub BtnUrlCopy_Click(sender As Object, e As EventArgs) Handles BtnUrlCopy.Click
         Clipboard.SetText(TxtImageUrl.Text)
@@ -196,23 +196,19 @@ Public Class FrmImages
         cbImgType.SelectedIndex = -1
         lblImgDateMsg.Text = String.Empty
     End Sub
-    Private Function LoadScreenFromId(ByVal oId As Integer) As Person
-        Dim oPerson As Person = Nothing
-        Try
-            oPerson = GetFullPersonById(oId)
-            If oPerson IsNot Nothing Then
-                LoadScreenFromPerson(oPerson)
-                Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
-                cboDay.SelectedIndex = CStr(_dob.Day) - 1
-                cboMonth.SelectedIndex = cboMonth.FindString(Format(_dob, "MMMM"))
-            Else
-                lblStatus.Text = ID_NOT_FOUND
-            End If
-        Catch ex As Exception
-            lblStatus.Text = "Unable to load Person" & vbCrLf & ex.Message
-        End Try
-        Return oPerson
-    End Function
+    Private Sub LoadScreenFromId(ByVal oId As Integer)
+        Dim oPerson As Person = GetFullPersonById(oId)
+        If oPerson IsNot Nothing Then
+            LoadScreenFromPerson(oPerson)
+            Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
+            cboDay.SelectedIndex = CStr(_dob.Day) - 1
+            cboMonth.SelectedIndex = cboMonth.FindString(Format(_dob, "MMMM"))
+        Else
+            lblStatus.Text = My.Resources.ID_NOT_FOUND
+        End If
+        oPerson.Dispose()
+        Return
+    End Sub
     Private Sub LoadScreenFromPerson(ByRef oPerson As Person)
         ClearDetails()
         txtId.Text = oPerson.Id
@@ -235,16 +231,15 @@ Public Class FrmImages
                 PictureBox1.ImageLocation = My.Settings.WordPressUrl & sYear & SEP & sMth & SEP & oPerson.Image.FullFileName
                 TxtImageUrl.Text = PictureBox1.ImageLocation
                 If Not String.IsNullOrEmpty(oPerson.Image.ImageFileName.Trim) AndAlso Not My.Computer.FileSystem.FileExists(storedImageName) Then
-                    SaveImage(PictureBox1.ImageLocation, storedImageName)
+                    SaveImage(New Uri(PictureBox1.ImageLocation), storedImageName)
                 End If
                 PictureBox2.ImageLocation = storedImageName
-            Catch ex As Exception
+            Catch ex As ArgumentException
                 lblStatus.Text = ex.Message
             End Try
-
         End If
     End Sub
-    Private Function FindPersonById(_id As Integer)
+    Private Function FindPersonById(_id As Integer) As Person
         Dim thisPerson As Person = Nothing
         For Each oPerson As Person In personTable
             If oPerson.Id = _id Then
@@ -253,6 +248,15 @@ Public Class FrmImages
         Next
         Return thisPerson
     End Function
-
+    'Form overrides dispose to clean up the component list.
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
 #End Region
 End Class

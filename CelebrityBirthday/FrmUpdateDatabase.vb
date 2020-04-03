@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Net
 Imports CelebrityBirthday
+Imports System.Data.Common
 
 Public Class FrmUpdateDatabase
 #Region "variables"
@@ -152,7 +153,11 @@ Public Class FrmUpdateDatabase
                 End If
                 DisplayPersonList()
                 lbPeople.SelectedIndex = p
-            Catch ex As Exception
+                newPerson.Dispose()
+            Catch ex As DbException
+                MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
+                ShowStatus(ex.Message)
+            Catch ex As ArgumentException
                 MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
                 ShowStatus(ex.Message)
             End Try
@@ -190,6 +195,8 @@ Public Class FrmUpdateDatabase
                 DisplayPersonList()
                 lbPeople.SelectedIndex = ix - 1
             End If
+            prevPerson.Dispose()
+            thisperson.Dispose()
         End If
     End Sub
     Private Sub BtnDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDown.Click
@@ -209,6 +216,8 @@ Public Class FrmUpdateDatabase
                 DisplayPersonList()
                 lbPeople.SelectedIndex = ix + 1
             End If
+            nextPerson.Dispose()
+            thisperson.Dispose()
         End If
     End Sub
     Private Sub BtnUpdateAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateAll.Click
@@ -308,7 +317,7 @@ Public Class FrmUpdateDatabase
                 If oPerson.Id = id Then
                     oPerson.BirthYear = txtYear.Text
                     oPerson.DeathYear = 0
-                    Integer.TryParse(txtDied.Text, oPerson.DeathYear)
+                    If Not Integer.TryParse(txtDied.Text, oPerson.DeathYear) Then txtDied.Text = ""
                     oPerson.Description = txtDesc.Text.Trim
                     oPerson.ForeName = txtForename.Text.Trim
                     oPerson.Surname = txtSurname.Text.Trim
@@ -436,14 +445,14 @@ Public Class FrmUpdateDatabase
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
-            _textBox.SelectedText = _textBox.SelectedText.ToLower
+            _textBox.SelectedText = _textBox.SelectedText.ToLower(myCultureInfo)
         End If
     End Sub
     Private Sub UpperCaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles UpperCaseToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
-            _textBox.SelectedText = _textBox.SelectedText.ToUpper
+            _textBox.SelectedText = _textBox.SelectedText.ToUpper(myCultureInfo)
         End If
     End Sub
     Private Sub TitleCaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles TitleCaseToolStripMenuItem.Click
@@ -594,7 +603,7 @@ Public Class FrmUpdateDatabase
         isGotStageName = False
         Dim _parts As List(Of String) = TidyText()
         If _parts.Count > 0 Then
-            If _parts(0).IndexOf("""") > 0 Then
+            If _parts(0).IndexOf("""", StringComparison.CurrentCultureIgnoreCase) > 0 Then
                 _parts(0) = GetNickname(_parts(0))
             End If
         End If
@@ -605,7 +614,7 @@ Public Class FrmUpdateDatabase
                 IsUseAsBirthName(_knownAs(0))
             End If
             _datePart = _datePart.Replace("  ", " ")
-            If _datePart.ToLower.StartsWith("born ") And _datePart.Contains("-") Then
+            If _datePart.ToLower(myCultureInfo).StartsWith("born ", StringComparison.CurrentCultureIgnoreCase) And _datePart.Contains("-") Then
                 _datePart = _datePart.Remove(0, 5)
             End If
             txtDesc.Text = Trim(_parts(0)) & " (" & _datePart & ")" & _parts(2)
@@ -634,16 +643,16 @@ Public Class FrmUpdateDatabase
         Dim _foundNames As New List(Of String)(2)
         Dim _birthName As String = Trim(_parts(0))
         Dim _stageName As String = ""
-        If _parts(2).ToLower.Contains("known ") Then
-            Dim _knownString As String = _parts(2).Substring(_parts(2).IndexOf("known"))
-            If _knownString.ToLower.Contains(" as ") Then
+        If _parts(2).ToLower(myCultureInfo).Contains("known ") Then
+            Dim _knownString As String = _parts(2).Substring(_parts(2).IndexOf("known", StringComparison.CurrentCultureIgnoreCase))
+            If _knownString.ToLower(myCultureInfo).Contains(" as ") Then
                 Dim _knownParts As List(Of String) = ParseStringWithString(_knownString, " as ")
                 Dim _nameParts As List(Of String) = ParseStringWithChar(_knownParts(1), ",")
                 _stageName = Trim(_nameParts(0))
             End If
         End If
         If Not String.IsNullOrEmpty(_stageName) Then
-            If _stageName.ToLower <> _birthName.ToLower Then
+            If _stageName.ToLower(myCultureInfo) <> _birthName.ToLower(myCultureInfo) Then
                 If MsgBox("Replace " & _birthName & " with " & _stageName & "?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
                     _parts(0) = _stageName
                     _parts = RemoveKnownAs(_parts, _stageName)
@@ -671,7 +680,7 @@ Public Class FrmUpdateDatabase
         Dim charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c}
         If _parts.Count = 3 Then
             Dim _dates As String() = Split(_parts(1), " - ")
-            If _dates.Count = 2 Then
+            If _dates.Length = 2 Then
                 ExtractDeathDate(_dates(1))
             End If
         End If
@@ -698,9 +707,9 @@ Public Class FrmUpdateDatabase
     Private Sub ExtractDeathDate(_date As String)
         Dim _deathDate As String = _date.Trim.TrimEnd({"E"c})
         Dim isBC As Boolean = False
-        If _deathDate.EndsWith("AD") Then
+        If _deathDate.EndsWith("AD", StringComparison.CurrentCultureIgnoreCase) Then
             _deathDate = _date.TrimEnd({" "c, "A"c, "D"c})
-        ElseIf _deathDate.EndsWith("BC") Then
+        ElseIf _deathDate.EndsWith("BC", StringComparison.CurrentCultureIgnoreCase) Then
             _deathDate = _date.TrimEnd({" "c, "B"c, "C"c})
             isBC = True
         End If
@@ -720,27 +729,24 @@ Public Class FrmUpdateDatabase
             rtbDesc.Text = txtDesc.Text
             rtbDesc.Visible = True
             txtDesc.Visible = False
-            btnRTB.Text = "Text"
+            btnRTB.Text = My.Resources.TEXT
         Else
             txtDesc.Text = rtbDesc.Text
             rtbDesc.Visible = False
             txtDesc.Visible = True
-            btnRTB.Text = "RTB"
+            btnRTB.Text = My.Resources.RTB
         End If
     End Sub
     Private Sub LoadScreenFromId(ByVal oId As Integer)
-        Try
-            Dim oPerson As Person = GetFullPersonById(oId)
-            If oPerson IsNot Nothing Then
-                findPersonInList = oPerson.Id
-                cboDay.SelectedIndex = oPerson.BirthDay - 1
-                cboMonth.SelectedIndex = oPerson.BirthMonth - 1
-            Else
-                ShowStatus("Id not found")
-            End If
-        Catch ex As Exception
-            ShowStatus("Unable to load Person" & vbCrLf & ex.Message)
-        End Try
+        Dim oPerson As Person = GetFullPersonById(oId)
+        If oPerson IsNot Nothing Then
+            findPersonInList = oPerson.Id
+            cboDay.SelectedIndex = oPerson.BirthDay - 1
+            cboMonth.SelectedIndex = oPerson.BirthMonth - 1
+        Else
+            ShowStatus("Id not found")
+        End If
+        oPerson.Dispose()
     End Sub
     Private Sub LoadScreenFromPerson(oPerson As Person)
         bLoadingPerson = True
@@ -791,7 +797,7 @@ Public Class FrmUpdateDatabase
         Dim _dateString As String = ""
         _innerText = _innerText.Trim(New Char() {";", " "})
         Dim _phrases As String() = Split(_innerText, ";")
-        If _phrases.Count = 1 Then
+        If _phrases.Length = 1 Then
             Return _innerText
             Exit Function
         End If
@@ -809,7 +815,7 @@ Public Class FrmUpdateDatabase
             If isRemove = MsgBoxResult.No Then
                 _dateString &= _phrase & ";"
             Else
-                If _wordList.First.ToLower = "born" Then
+                If _wordList.First.ToLower(myCultureInfo) = "born" Then
                     _dateString &= "born "
                 End If
             End If
@@ -823,7 +829,7 @@ Public Class FrmUpdateDatabase
         Dim _name As String = ""
         Dim _place As String = ""
         For Each _word As String In _words
-            Select Case _word.ToLower
+            Select Case _word.ToLower(myCultureInfo)
                 Case "born"
                     isNamePart = True
                     isPlacePart = False

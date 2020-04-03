@@ -3,7 +3,7 @@ Imports System.IO
 Imports System.Net
 Imports System.Web.Script.Serialization
 
-Structure wikiBirthInfo
+Structure WikiBirthInfo
     Private _birthDate As Date?
     Private _errordesc As String
     Sub New(pBirthDate As Date?, pErrorDesc As String)
@@ -26,20 +26,12 @@ Structure wikiBirthInfo
             _birthDate = value
         End Set
     End Property
-
-
 End Structure
-
 Public Class FrmDateCheck
-
-
-
     Private personTable As List(Of Person)
-
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         DisplayMessage("Finding everybody")
         Try
@@ -57,7 +49,7 @@ Public Class FrmDateCheck
             DisplayMessage(CStr(_ct) & " of " & CStr(totalPeople))
             Try
                 Dim extract As String = ""
-                Dim _wikiBirthInfo As wikiBirthInfo = GetWikiBirthDate(_person.Name, extract)
+                Dim _wikiBirthInfo As WikiBirthInfo = GetWikiBirthDate(_person.Name, extract)
                 Dim _dateOfBirth As Date? = _wikiBirthInfo.BirthDate
                 Dim _desc As String = extract
                 If Not String.IsNullOrEmpty(_wikiBirthInfo.ErrorDesc) Then
@@ -70,17 +62,16 @@ Public Class FrmDateCheck
                     'Else
                     '    AddXRow(_person, "", "Can't find wiki Date of birth")
                 End If
-            Catch ex As Exception
+            Catch ex As ArgumentException
                 If MsgBox(_person.Name & vbCrLf & "Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
                     Exit Sub
                 End If
             End Try
-
         Next
     End Sub
 
-    Private Function GetWikiBirthDate(_searchName As String, ByRef extract As String) As wikiBirthInfo
-        Dim _wikiBirthInfo As New wikiBirthInfo(Nothing, "")
+    Private Function GetWikiBirthDate(_searchName As String, ByRef extract As String) As WikiBirthInfo
+        Dim _wikiBirthInfo As New WikiBirthInfo(Nothing, "")
         Dim _birthDate As Date? = Nothing
         Try
             Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
@@ -121,7 +112,9 @@ Public Class FrmDateCheck
                 _wikiBirthInfo.ErrorDesc = "may refer to"
             End If
 
-        Catch ex As Exception
+        Catch ex As ArgumentException
+            _wikiBirthInfo.ErrorDesc = ex.Message
+        Catch ex As System.Security.securityException
             _wikiBirthInfo.ErrorDesc = ex.Message
         End Try
         _wikiBirthInfo.BirthDate = _birthDate

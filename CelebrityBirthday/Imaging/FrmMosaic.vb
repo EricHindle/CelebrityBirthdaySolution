@@ -15,7 +15,7 @@ Public Class FrmMosaic
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
         Dim _fileName As String = Path.Combine(_path, cboMonth.SelectedItem & "_mosaic_" & CStr(nudSkip.Value + 1) & "-" & CStr(nudSkip.Value + NudHeight.Value) & ".jpg")
-        ImageUtil.saveImageFromPictureBox(PictureBox1, (NudWidth.Value * 60), (NudHeight.Value * 60), _fileName)
+        ImageUtil.SaveImageFromPictureBox(PictureBox1, (NudWidth.Value * 60), (NudHeight.Value * 60), _fileName)
         DisplayStatus("File saved")
     End Sub
 
@@ -44,7 +44,7 @@ Public Class FrmMosaic
                     _imgVPos += 1
                     _imgHPos = 0
                 End If
-                Dim oBitMap As Bitmap = ImageUtil.resizeImageToBitmap(_image, 60, 60)
+                Dim oBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(_image, 60, 60)
                 oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
             Else
                 _skip -= 1
@@ -75,10 +75,13 @@ Public Class FrmMosaic
                 Else
                     Debug.Print(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))
                 End If
+                _person.Dispose()
             Next
             lblImgCount.Text = CStr(_imageList.Count)
             lblImgCount.Refresh()
             GenerateImage(PictureBox1, _imageList, NudWidth.Value, NudHeight.Value)
+            _PersonTable.Dispose()
+            _PersonTa.Dispose()
         Else
             DisplayStatus("No month selected")
         End If
@@ -88,7 +91,7 @@ Public Class FrmMosaic
         If _imageList.Count > 0 And NudWidth.Value > 0 Then
             Try
                 NudHeight.Value = Int(_imageList.Count / NudWidth.Value)
-            Catch ex As Exception
+            Catch ex As ArithmeticException
                 NudHeight.Value = NudHeight.Maximum
             End Try
             GenerateImage(PictureBox1, _imageList, NudWidth.Value, NudHeight.Value)

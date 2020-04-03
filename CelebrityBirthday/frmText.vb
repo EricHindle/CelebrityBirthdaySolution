@@ -1,13 +1,13 @@
 ﻿Public Class FrmText
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
     End Sub
 
-    Private Sub frmText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FrmText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.botsdformpos)
     End Sub
 
-    Private Sub frmText_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub FrmText_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.textformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub

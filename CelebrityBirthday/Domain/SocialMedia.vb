@@ -42,9 +42,11 @@
     End Sub
     Public Sub New(pSocialMedia As SocialMedia)
         Initialise()
-        _id = pSocialMedia.Id
-        _twitterHandle = pSocialMedia.TwitterHandle
-        _noTweet = pSocialMedia.IsNoTweet
+        If pSocialMedia IsNot Nothing Then
+            _id = pSocialMedia.Id
+            _twitterHandle = pSocialMedia.TwitterHandle
+            _noTweet = pSocialMedia.IsNoTweet
+        End If
     End Sub
     Public Sub New(pSocialMedia As CelebrityBirthdayDataSet.SocialMediaRow)
         Initialise()

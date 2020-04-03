@@ -25,7 +25,7 @@ Partial Class FrmText
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmText))
         Me.rtbText = New System.Windows.Forms.RichTextBox()
-        Me.btnClose = New System.Windows.Forms.Button()
+        Me.BtnClose = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.UpperCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LowercaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,15 +55,15 @@ Partial Class FrmText
         '
         'btnClose
         '
-        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(685, 405)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(103, 33)
-        Me.btnClose.TabIndex = 35
-        Me.btnClose.Text = "Close"
-        Me.btnClose.UseVisualStyleBackColor = True
+        Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnClose.Location = New System.Drawing.Point(685, 405)
+        Me.BtnClose.Name = "btnClose"
+        Me.BtnClose.Size = New System.Drawing.Size(103, 33)
+        Me.BtnClose.TabIndex = 35
+        Me.BtnClose.Text = "Close"
+        Me.BtnClose.UseVisualStyleBackColor = True
         '
         'ContextMenuStrip1
         '
@@ -143,7 +143,7 @@ Partial Class FrmText
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.BtnCopyAll)
-        Me.Controls.Add(Me.btnClose)
+        Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.rtbText)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmText"
@@ -154,7 +154,7 @@ Partial Class FrmText
     End Sub
 
     Friend WithEvents rtbText As RichTextBox
-    Friend WithEvents btnClose As Button
+    Friend WithEvents BtnClose As Button
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents UpperCaseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LowercaseToolStripMenuItem As ToolStripMenuItem

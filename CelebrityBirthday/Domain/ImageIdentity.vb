@@ -1,6 +1,9 @@
 ﻿Imports System.IO
+Imports System.Reflection
 
 Public Class ImageIdentity
+    Implements IDisposable
+
     Private _id As Integer
     Private _imageFileName As String
     Private _imageFileType As String
@@ -109,8 +112,12 @@ Public Class ImageIdentity
             If My.Computer.FileSystem.FileExists(_Filename) Then
                 Try
                     _imageFromFile = Image.FromFile(_Filename)
-                Catch ex As Exception
-                    MsgBox(_Filename & " " & ex.Message, MsgBoxStyle.Exclamation, "Exception")
+                Catch ex As OutOfMemoryException
+                    DisplayException(MethodBase.GetCurrentMethod, ex, "Out of Memory")
+                Catch ex As FileNotFoundException
+                    DisplayException(MethodBase.GetCurrentMethod, ex, "File Not Found")
+                Catch ex As ArgumentException
+                    DisplayException(MethodBase.GetCurrentMethod, ex, "Argument")
                 End Try
             Else
                 Debug.Print(_Filename & " does not exist")
@@ -118,4 +125,13 @@ Public Class ImageIdentity
         End If
         Return _imageFromFile
     End Function
+    Protected Overridable Sub Dispose(disposing As Boolean)
+        If disposing Then
+            _imagePhoto.Dispose()
+        End If
+    End Sub
+    Public Sub Dispose() Implements IDisposable.Dispose
+        Dispose(True)
+        GC.SuppressFinalize(Me)
+    End Sub
 End Class

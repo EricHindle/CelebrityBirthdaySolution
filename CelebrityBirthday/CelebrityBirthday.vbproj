@@ -169,16 +169,16 @@
     <Compile Include="FrmDeathCheck.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGlobalSettings.designer.vb">
-      <DependentUpon>frmGlobalSettings.vb</DependentUpon>
+    <Compile Include="FrmGlobalSettings.designer.vb">
+      <DependentUpon>FrmGlobalSettings.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmGlobalSettings.vb">
+    <Compile Include="FrmGlobalSettings.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmText.Designer.vb">
-      <DependentUpon>frmText.vb</DependentUpon>
+    <Compile Include="FrmText.Designer.vb">
+      <DependentUpon>FrmText.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmText.vb">
+    <Compile Include="FrmText.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GlobalSuppressions.vb" />
@@ -309,11 +309,11 @@
     <EmbeddedResource Include="FrmDeathCheck.resx">
       <DependentUpon>FrmDeathCheck.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGlobalSettings.resx">
-      <DependentUpon>frmGlobalSettings.vb</DependentUpon>
+    <EmbeddedResource Include="FrmGlobalSettings.resx">
+      <DependentUpon>FrmGlobalSettings.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmText.resx">
-      <DependentUpon>frmText.vb</DependentUpon>
+    <EmbeddedResource Include="FrmText.resx">
+      <DependentUpon>FrmText.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Imaging\frmImageCapture.resx">
       <DependentUpon>frmImageCapture.vb</DependentUpon>

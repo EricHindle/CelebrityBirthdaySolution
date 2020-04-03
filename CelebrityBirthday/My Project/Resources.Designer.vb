@@ -91,6 +91,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Complete.
+        '''</summary>
+        Friend ReadOnly Property COMPLETE() As String
+            Get
+                Return ResourceManager.GetString("COMPLETE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property copyicon() As System.Drawing.Bitmap
@@ -101,12 +110,57 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Global Settings.
+        '''</summary>
+        Friend ReadOnly Property GLOBAL_SETTINGS() As String
+            Get
+                Return ResourceManager.GetString("GLOBAL_SETTINGS", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property id() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("id", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Id not found.
+        '''</summary>
+        Friend ReadOnly Property ID_NOT_FOUND() As String
+            Get
+                Return ResourceManager.GetString("ID_NOT_FOUND", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Loading Table From Database.
+        '''</summary>
+        Friend ReadOnly Property LOADING_TABLE() As String
+            Get
+                Return ResourceManager.GetString("LOADING_TABLE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to No load date available.
+        '''</summary>
+        Friend ReadOnly Property NO_LOAD_DATE() As String
+            Get
+                Return ResourceManager.GetString("NO_LOAD_DATE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Cannot identify a single record.
+        '''</summary>
+        Friend ReadOnly Property NO_SINGLE_RECORD() As String
+            Get
+                Return ResourceManager.GetString("NO_SINGLE_RECORD", resourceCulture)
             End Get
         End Property
         
@@ -131,12 +185,39 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Rewrite File.
+        '''</summary>
+        Friend ReadOnly Property REWRITE_FILE() As String
+            Get
+                Return ResourceManager.GetString("REWRITE_FILE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to RTB.
+        '''</summary>
+        Friend ReadOnly Property RTB() As String
+            Get
+                Return ResourceManager.GetString("RTB", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property StatusBar() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("StatusBar", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Text.
+        '''</summary>
+        Friend ReadOnly Property TEXT() As String
+            Get
+                Return ResourceManager.GetString("TEXT", resourceCulture)
             End Get
         End Property
     End Module

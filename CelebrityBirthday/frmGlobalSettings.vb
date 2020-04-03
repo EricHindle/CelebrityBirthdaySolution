@@ -1,13 +1,11 @@
-﻿''' <summary>
+﻿Imports System.Data.Common
+''' <summary>
 ''' Form to maintain Global Settings values
 ''' </summary>
 ''' <remarks>Global Settings are settings which must be the same for all system users.
 ''' The Keys for the settings are hardcoded so the records must not be deleted from the table.
 ''' New setting records are not needed unless the code changes, so they cannot be created here.</remarks>
 Public Class FrmGlobalSettings
-#Region "Constants"
-    Private Const FORM_NAME As String = "Global Settings"
-#End Region
 #Region "Private variable instances"
     Private ReadOnly oTa As New CelebrityBirthdayDataSetTableAdapters.SettingsTableAdapter
     Private ReadOnly oTable As New CelebrityBirthdayDataSet.SettingsDataTable
@@ -20,12 +18,12 @@ Public Class FrmGlobalSettings
     Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             oTa.Fill(oTable)
-        Catch ex As Exception
+        Catch ex As DbException
         End Try
         cbSelect.DataSource = oTable
         cbSelect.DisplayMember = "pKey"
         cbSelect.ValueMember = "pKey"
-        lblFormName.Text = FORM_NAME
+        lblFormName.Text = My.Resources.GLOBAL_SETTINGS
         ClearForm()
     End Sub
 
@@ -49,7 +47,7 @@ Public Class FrmGlobalSettings
             cbType.SelectedIndex = cbType.FindString(oRow.pType)
             TxtGroup.Text = oRow.pGroup
         Else
-            lblStatus.Text = "Cannot identify a single record"
+            lblStatus.Text = My.Resources.NO_SINGLE_RECORD
         End If
         _table.Dispose()
     End Sub

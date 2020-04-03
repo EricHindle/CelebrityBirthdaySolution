@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Data.Common
+Imports System.IO
 Imports System.Net
 Imports System.Web.Script.Serialization
 Public Class FrmDeathCheck
@@ -14,14 +15,7 @@ Public Class FrmDeathCheck
 
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         DisplayMessage("Finding the living")
-        Try
-            personTable = FindLivingPeople()
-        Catch ex As Exception
-            If MsgBox("Exception during list load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
-                Exit Sub
-            End If
-        End Try
-
+        personTable = FindLivingPeople()
         DisplayMessage("Found " & CStr(personTable.Count) & " people")
         For Each _person In personTable
             DisplayMessage(CStr(_person.Id) & " " & _person.Name)
@@ -31,7 +25,7 @@ Public Class FrmDeathCheck
                 If _dateOfDeath IsNot Nothing Then
                     AddXRow(_person, _dateOfDeath, "")
                 End If
-            Catch ex As Exception
+            Catch ex As DbException
                 If MsgBox(_person.Name & vbCrLf & "Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
                     Exit Sub
                 End If
@@ -43,7 +37,7 @@ Public Class FrmDeathCheck
     Private Function GetWikiDeathDate(_searchName As String) As String
         Dim _deathDate As Date? = Nothing
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
-        Dim extract As String = GetExtractFromResponse(_response)
+        Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
         Dim _desc As String = RemoveSquareBrackets(FixQuotes(extract))
         Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
         If _parts.Count = 3 Then
@@ -54,7 +48,7 @@ Public Class FrmDeathCheck
                     If IsDate(_dates(1)) Then
                         _deathDate = CDate(_dates(1))
                     End If
-                Catch ex As overflowException
+                Catch ex As OverflowException
                     Debug.Print(_searchName & " Not a date " & _dates(1))
                 End Try
             End If

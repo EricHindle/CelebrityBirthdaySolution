@@ -89,22 +89,18 @@ Public Class FrmSearch
     Private Sub CloseForm()
         Me.Close()
     End Sub
-    Private Function LoadScreenFromId(ByVal oId As Integer) As Person
-        Dim oPerson As Person = Nothing
-        Try
-            oPerson = GetFullPersonById(CInt(txtId.Text))
-            If oPerson IsNot Nothing Then
-                DgvPeople.Rows.Clear()
-                LoadScreenFromPerson(oPerson)
-                Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
-            Else
-                ShowStatus("Id not found")
-            End If
-        Catch ex As Exception
-            ShowStatus("Unable to load Person" & vbCrLf & ex.Message)
-        End Try
-        Return oPerson
-    End Function
+    Private Sub LoadScreenFromId(ByVal oId As Integer)
+        Dim oPerson As Person
+        oPerson = GetFullPersonById(oId)
+        If oPerson IsNot Nothing Then
+            DgvPeople.Rows.Clear()
+            LoadScreenFromPerson(oPerson)
+        Else
+            ShowStatus("Id not found")
+        End If
+        oPerson.Dispose()
+        Return
+    End Sub
     Private Sub LoadScreenFromPerson(oPerson As Person)
         AddTableRow(oPerson)
         txtId.Text = oPerson.Id
@@ -142,7 +138,7 @@ Public Class FrmSearch
         If DgvPeople.SelectedRows.Count = 1 Then
             ShowStatus("Tweeting")
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
-        Using _tweet As New FrmTweet
+            Using _tweet As New FrmTweet
                 _tweet.DaySelection = oRow.Cells(selPersonDay.Name).Value
                 _tweet.MonthSelection = oRow.Cells(selPersonMonth.Name).Value
                 _tweet.ShowDialog()
@@ -155,7 +151,7 @@ Public Class FrmSearch
         If DgvPeople.SelectedRows.Count = 1 Then
             ShowStatus("WordPress")
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
-        Using _wordpress As New FrmWordPress
+            Using _wordpress As New FrmWordPress
                 _wordpress.DaySelection = oRow.Cells(selPersonDay.Name).Value
                 _wordpress.MonthSelection = oRow.Cells(selPersonMonth.Name).Value
                 _wordpress.ShowDialog()
