@@ -528,6 +528,22 @@ Public Class FrmUpdateDatabase
     End Sub
 #End Region
 #Region "subroutines"
+
+    'Form overrides dispose to clean up the component list.
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+            If disposing AndAlso personTable IsNot Nothing Then
+                For Each oPerson In personTable
+                    oPerson.Dispose()
+                Next
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
     Private Sub CloseForm()
         Dim resp As MsgBoxResult = MsgBoxResult.No
         If CheckForChanges(personTable) Then
@@ -639,7 +655,7 @@ Public Class FrmUpdateDatabase
         End If
         Return isUsed
     End Function
-    Private Function KnownAs(ByRef _parts As List(Of String)) As List(Of String)
+    Private Shared Function KnownAs(ByRef _parts As List(Of String)) As List(Of String)
         Dim _foundNames As New List(Of String)(2)
         Dim _birthName As String = Trim(_parts(0))
         Dim _stageName As String = ""
@@ -776,7 +792,7 @@ Public Class FrmUpdateDatabase
     End Sub
 #End Region
 #Region "functions"
-    Private Function MakeFullName(pForename As String, pSurname As String) As String
+    Private Shared Function MakeFullName(pForename As String, pSurname As String) As String
         Return If(String.IsNullOrEmpty(pForename), "", pForename.Trim & " ") & pSurname.Trim
     End Function
     Private Function GetNickname(ByRef sName As String) As String

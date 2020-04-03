@@ -1,4 +1,5 @@
-﻿Imports System.Drawing
+﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Reflection
@@ -293,7 +294,7 @@ Public Class FrmTweet
         End With
         Return _splitContainer
     End Function
-    Private Function NewButton(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _buttonNameBase As String) As Button
+    Private Shared Function NewButton(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _buttonNameBase As String) As Button
         Dim _button As New Button
         With _button
             .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -307,7 +308,7 @@ Public Class FrmTweet
         End With
         Return _button
     End Function
-    Private Function NewLabel(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _labelNameBase As String) As Label
+    Private Shared Function NewLabel(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _labelNameBase As String) As Label
         Dim _label1 As New Label
         With _label1
             .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -319,7 +320,7 @@ Public Class FrmTweet
         End With
         Return _label1
     End Function
-    Private Function NewPictureBox(_index As String) As PictureBox
+    Private Shared Function NewPictureBox(_index As String) As PictureBox
         Dim _picBox As New PictureBox
         With _picBox
             .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -360,7 +361,7 @@ Public Class FrmTweet
         AddHandler _newRtb.TextChanged, AddressOf RtbTextChanged
         Return _newRtb
     End Function
-    Private Function GetPictureBoxFromPage(_tabpage As TabPage) As PictureBox
+    Private Shared Function GetPictureBoxFromPage(_tabpage As TabPage) As PictureBox
         Dim _index As Integer = _tabpage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
         Dim _controls As Control() = _sc.Panel1.Controls.Find(PICBOX_BASENAME & CStr(_index), False)
@@ -374,7 +375,7 @@ Public Class FrmTweet
         End If
         Return Nothing
     End Function
-    Private Function GetNudFromPage(_tabpage As TabPage) As NumericUpDown
+    Private Shared Function GetNudFromPage(_tabpage As TabPage) As NumericUpDown
         Dim _index As Integer = _tabpage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
         Dim _controls As Control() = _sc.Panel1.Controls.Find(NUD_BASENAME & CStr(_index), False)
@@ -388,7 +389,7 @@ Public Class FrmTweet
         End If
         Return Nothing
     End Function
-    Private Function GetRichTextBoxFromPage(_tabPage As TabPage) As RichTextBox
+    Private Shared Function GetRichTextBoxFromPage(_tabPage As TabPage) As RichTextBox
         Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabPage)
         Dim _controls As Control() = _sc.Panel2.Controls.Find(_tabName, False)
@@ -402,7 +403,7 @@ Public Class FrmTweet
         End If
         Return Nothing
     End Function
-    Private Function GetSplitContainerFromPage(_tabPage As TabPage) As SplitContainer
+    Private Shared Function GetSplitContainerFromPage(_tabPage As TabPage) As SplitContainer
         Dim _tabName As String = SC_BASENAME & CStr(_tabPage.TabIndex)
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
         If _controls.Any() Then
@@ -446,7 +447,7 @@ Public Class FrmTweet
         isBuildingTrees = False
         Return isBuiltOk
     End Function
-    Private Function AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, _treeView As TreeView, _type As String) As TreeNode
+    Private Shared Function AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, _treeView As TreeView, _type As String) As TreeNode
         Dim newBirthdayNode As TreeNode = _treeView.Nodes.Add(Format(testDate, "MMMM dd") & _type, _type)
         newBirthdayNode.Checked = True
         For Each oPerson As Person In oBirthdayTable
@@ -455,7 +456,7 @@ Public Class FrmTweet
         newBirthdayNode.Expand()
         Return newBirthdayNode
     End Function
-    Private Function AddNameNode(newBirthdayNode As TreeNode, oPerson As Person, _type As String) As TreeNode
+    Private Shared Function AddNameNode(newBirthdayNode As TreeNode, oPerson As Person, _type As String) As TreeNode
         Dim newNameNode As TreeNode = newBirthdayNode.Nodes.Add(oPerson.Name)
         If oPerson.Social IsNot Nothing Then
             If Not String.IsNullOrEmpty(oPerson.Social.TwitterHandle) Then
@@ -476,7 +477,7 @@ Public Class FrmTweet
         _ageNode.Checked = (_type = "Birthday")
         Return newNameNode
     End Function
-    Private Function CalculateAgeNextBirthday(oPerson As Person) As Integer
+    Private Shared Function CalculateAgeNextBirthday(oPerson As Person) As Integer
         Dim _years As Integer = 0
         If oPerson.BirthYear > 0 Then
             Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
@@ -733,7 +734,7 @@ Public Class FrmTweet
 
         Return _numberOfPersonsPerTweet
     End Function
-    Private Function BuildList(oPersonList As List(Of Person)) As List(Of Person)
+    Private Shared Function BuildList(oPersonList As List(Of Person)) As List(Of Person)
         Dim _tweetList As New List(Of Person)
         For Each oPerson As Person In oPersonList
             _tweetList.Add(oPerson)
@@ -760,7 +761,7 @@ Public Class FrmTweet
             + 1
         Return _length
     End Function
-    Private Function GetHeading(_typeNode As String) As String
+    Private Shared Function GetHeading(_typeNode As String) As String
         Dim _header As String = ""
         If _typeNode.StartsWith("A", True, myCultureInfo) Then
             _header = ANNIV_HDR
@@ -790,6 +791,34 @@ Public Class FrmTweet
     Private Sub DateSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         NudBirthdaysPerTweet.Value = 0
         NudAnnivsPerTweet.Value = 0
+    End Sub
+
+    'Form overrides dispose to clean up the component list.
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+            If disposing Then
+                If personTable IsNot Nothing Then
+                    For Each oPerson In personTable
+                        oPerson.Dispose()
+                    Next
+                End If
+                If oAnniversaryList IsNot Nothing Then
+                    For Each oPerson In oAnniversaryList
+                        oPerson.Dispose()
+                    Next
+                End If
+                If oBirthdayList IsNot Nothing Then
+                    For Each oPerson In oBirthdayList
+                        oPerson.Dispose()
+                    Next
+                End If
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
     End Sub
 
     'Private Sub TvBirthday_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck

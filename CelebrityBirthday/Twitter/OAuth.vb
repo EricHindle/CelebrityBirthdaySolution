@@ -87,7 +87,7 @@ Public Class OAuth
 
 
     End Function
-    Private Function GetQueryParameters(ByVal Parameters As String) As List(Of QueryParameter)
+    Private Shared Function GetQueryParameters(ByVal Parameters As String) As List(Of QueryParameter)
         If Parameters.StartsWith("?", StringComparison.CurrentCultureIgnoreCase) Then
             Parameters = Parameters.Remove(0, 1)
         End If
@@ -109,7 +109,7 @@ Public Class OAuth
         End If
         Return Result
     End Function
-    Public Shared Function OAuthUrlEncode(ByVal value As String) As String
+    Public Shared Function OAuthUrlEncode(ByVal value As String) As Uri
         Dim result As New StringBuilder()
         Dim unreservedchars As String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~"
         If value IsNot Nothing Then
@@ -125,7 +125,7 @@ Public Class OAuth
                 End If
             Next
         End If
-        Return result.ToString()
+        Return New Uri(result.ToString())
     End Function
     Protected Shared Function NormalizeRequestParameters(ByVal Parameters As IList(Of QueryParameter)) As String
         Dim sb As New StringBuilder
@@ -141,7 +141,8 @@ Public Class OAuth
         End If
         Return sb.ToString
     End Function
-    Public Function GenerateSignatureBase(ByVal URL As Uri, ByVal ConsumerKey As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByVal SignatureType As String, ByRef NormalizedURL As String, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As String, ByVal Verifier As String) As String
+    Public Shared Function GenerateSignatureBase(ByVal URL As Uri, ByVal ConsumerKey As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByVal SignatureType As String, ByRef pNormalizedURL As Uri, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As Uri, ByVal Verifier As String) As String
+        Dim NormalizedURL As String = If(pNormalizedURL IsNot Nothing, pNormalizedURL.ToString, "")
         If URL Is Nothing Then Throw New ArgumentNullException(NameOf(URL))
         If Token Is Nothing Then
             Token = String.Empty
@@ -179,8 +180,8 @@ Public Class OAuth
             Parameters.Add(New QueryParameter(OAuthTokenKey, Token))
         End If
 
-        If String.IsNullOrEmpty(CallbackUrl) = False Then
-            Parameters.Add(New QueryParameter(OAuthCallbackKey, OAuthUrlEncode(CallbackUrl)))
+        If Not CallbackUrl Is Nothing = False Then
+            Parameters.Add(New QueryParameter(OAuthCallbackKey, OAuthUrlEncode(CallbackUrl.ToString).ToString))
         End If
 
         If String.IsNullOrEmpty(Verifier) = False Then
@@ -199,8 +200,8 @@ Public Class OAuth
         Dim SignatureBase As New StringBuilder()
         With SignatureBase
             .AppendFormat(myStringFormatProvider, "{0}&", HTTPMethod.ToUpper(myCultureInfo))
-            .AppendFormat(myStringFormatProvider, "{0}&", OAuthUrlEncode(NormalizedURL))
-            .AppendFormat(myStringFormatProvider, "{0}", OAuthUrlEncode(NormalizedRequestParameters))
+            .AppendFormat(myStringFormatProvider, "{0}&", OAuthUrlEncode(NormalizedURL).ToString)
+            .AppendFormat(myStringFormatProvider, "{0}", OAuthUrlEncode(NormalizedRequestParameters).ToString)
         End With
 
         Return SignatureBase.ToString
@@ -208,10 +209,10 @@ Public Class OAuth
     Public Shared Function GenerateSignatureUsingHash(ByVal SignatureBase As String, ByVal Hash As HashAlgorithm) As String
         Return ComputeHash(Hash, SignatureBase)
     End Function
-    Public Function GenerateSignature(ByVal URL As Uri, ByVal ConsumerKey As String, ByVal ConsumerSecret As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByRef NormalizedUrl As String, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As String, ByVal Verifier As String) As String
+    Public Shared Function GenerateSignature(ByVal URL As Uri, ByVal ConsumerKey As String, ByVal ConsumerSecret As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByRef NormalizedUrl As Uri, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As Uri, ByVal Verifier As String) As String
         Return GenerateSignature(URL, ConsumerKey, ConsumerSecret, Token, TokenSecret, HTTPMethod, TimeStamp, Nonce, SignatureType.HMACSHA1, NormalizedUrl, NormalizedRequestParameters, CallbackUrl, Verifier)
     End Function
-    Public Function GenerateSignature(ByVal url As Uri, ByVal ConsumerKey As String, ByVal ConsumerSecret As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByVal SignatureType As SignatureType, ByRef NormalizedUrl As String, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As String, ByVal Verifier As String) As String
+    Public Shared Function GenerateSignature(ByVal url As Uri, ByVal ConsumerKey As String, ByVal ConsumerSecret As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByVal SignatureType As SignatureType, ByRef NormalizedUrl As Uri, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As Uri, ByVal Verifier As String) As String
         NormalizedUrl = Nothing
         NormalizedRequestParameters = Nothing
 
@@ -227,9 +228,9 @@ Public Class OAuth
                 If String.IsNullOrEmpty(TokenSecret) Then
                     ts = String.Empty
                 Else
-                    ts = OAuthUrlEncode(TokenSecret)
+                    ts = OAuthUrlEncode(TokenSecret).ToString
                 End If
-                hmacsha1.Key = Encoding.ASCII.GetBytes(String.Format(myStringFormatProvider, "{0}&{1}", OAuthUrlEncode(ConsumerSecret), ts))
+                hmacsha1.Key = Encoding.ASCII.GetBytes(String.Format(myStringFormatProvider, "{0}&{1}", OAuthUrlEncode(ConsumerSecret).ToString, ts))
                 Dim signature As String = GenerateSignatureUsingHash(SignatureBase, hmacsha1)
                 hmacsha1.Dispose()
                 Return signature
@@ -238,21 +239,21 @@ Public Class OAuth
                 Throw New NotImplementedException()
 
             Case Else
-                Throw New ArgumentException("Unknown signature type", "signatureType")
+                Throw New ArgumentException(My.Resources.UNKNOWN_SIG, NameOf(SignatureType))
         End Select
     End Function
     Public Overridable Function GenerateTimeStamp() As String
         ' Default implementation of UNIX time of the current UTC time
         Dim ts As TimeSpan = DateTime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0, 0)
-        Return Convert.ToInt64(ts.TotalSeconds).ToString()
+        Return Convert.ToInt64(ts.TotalSeconds).ToString(myStringFormatProvider)
     End Function
     Public Overridable Function GenerateNonce() As String
         Return (Guid.NewGuid).ToString.Replace("-", "")
     End Function
-    Public Function GenerateSignature_CB(ByVal URL As Uri, ByVal ConsumerKey As String, ByVal ConsumerSecret As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByRef NormalizedUrl As String, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As String, ByVal Verifier As String) As String
-        Return GenerateSignature_CB(URL, ConsumerKey, ConsumerSecret, Token, TokenSecret, HTTPMethod, TimeStamp, Nonce, SignatureType.HMACSHA1, NormalizedUrl, NormalizedRequestParameters, CallbackUrl, Verifier)
+    Public Shared Function GenerateSignatureCB(ByVal URL As Uri, ByVal ConsumerKey As String, ByVal ConsumerSecret As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByRef NormalizedUrl As Uri, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As Uri, ByVal Verifier As String) As String
+        Return GenerateSignatureCB(URL, ConsumerKey, ConsumerSecret, Token, TokenSecret, HTTPMethod, TimeStamp, Nonce, SignatureType.HMACSHA1, NormalizedUrl, NormalizedRequestParameters, CallbackUrl, Verifier)
     End Function
-    Public Function GenerateSignature_CB(ByVal url As Uri, ByVal ConsumerKey As String, ByVal ConsumerSecret As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByVal SignatureType As SignatureType, ByRef NormalizedUrl As String, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As String, ByVal Verifier As String) As String
+    Public Shared Function GenerateSignatureCB(ByVal url As Uri, ByVal ConsumerKey As String, ByVal ConsumerSecret As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByVal SignatureType As SignatureType, ByRef NormalizedUrl As Uri, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As Uri, ByVal Verifier As String) As String
         NormalizedUrl = Nothing
         NormalizedRequestParameters = Nothing
 
@@ -261,26 +262,27 @@ Public Class OAuth
                 Return HttpUtility.UrlEncode(String.Format(myStringFormatProvider, "{0}&{1}", ConsumerSecret, TokenSecret))
 
             Case SignatureType.HMACSHA1
-                Dim SignatureBase As String = GenerateSignatureBase_CB(url, ConsumerKey, Token, TokenSecret, HTTPMethod, TimeStamp, Nonce, HMACSHA1SignatureType, NormalizedUrl, NormalizedRequestParameters, CallbackUrl, Verifier)
+                Dim SignatureBase As String = GenerateSignatureBaseCB(url, ConsumerKey, Token, TokenSecret, HTTPMethod, TimeStamp, Nonce, HMACSHA1SignatureType, NormalizedUrl, NormalizedRequestParameters, CallbackUrl, Verifier)
 
                 Dim hmacsha1 As New HMACSHA1()
                 Dim ts As String = String.Empty
                 If String.IsNullOrEmpty(TokenSecret) Then
                     ts = String.Empty
                 Else
-                    ts = OAuthUrlEncode(TokenSecret)
+                    ts = OAuthUrlEncode(TokenSecret).ToString
                 End If
-                hmacsha1.Key = Encoding.ASCII.GetBytes(String.Format(myStringFormatProvider, "{0}&{1}", OAuthUrlEncode(ConsumerSecret), ts))
+                hmacsha1.Key = Encoding.ASCII.GetBytes(String.Format(myStringFormatProvider, "{0}&{1}", OAuthUrlEncode(ConsumerSecret).ToString, ts))
                 Return GenerateSignatureUsingHash(SignatureBase, hmacsha1)
 
             Case SignatureType.RSASHA1
                 Throw New NotImplementedException()
 
             Case Else
-                Throw New ArgumentException("Unknown signature type", "signatureType")
+                Throw New ArgumentException(My.Resources.UNKNOWN_SIG, NameOf(SignatureType))
         End Select
     End Function
-    Public Function GenerateSignatureBase_CB(ByVal URL As Uri, ByVal ConsumerKey As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByVal SignatureType As String, ByRef NormalizedURL As String, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As String, ByVal Verifier As String) As String
+    Public Shared Function GenerateSignatureBaseCB(ByVal URL As Uri, ByVal ConsumerKey As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByVal SignatureType As String, ByRef pNormalizedURL As Uri, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As Uri, ByVal Verifier As String) As String
+        Dim NormalizedURL As String = If(pNormalizedURL IsNot Nothing, pNormalizedURL.ToString, "")
         If Token Is Nothing Then
             Token = String.Empty
         End If
@@ -290,21 +292,21 @@ Public Class OAuth
         End If
 
         If String.IsNullOrEmpty(ConsumerKey) Then
-            Throw New ArgumentNullException("ConsumerKey")
+            Throw New ArgumentNullException(NameOf(ConsumerKey))
         End If
 
         If String.IsNullOrEmpty(HTTPMethod) Then
-            Throw New ArgumentNullException("HTTPMethod")
+            Throw New ArgumentNullException(NameOf(HTTPMethod))
         End If
 
         If String.IsNullOrEmpty(SignatureType) Then
-            Throw New ArgumentNullException("SignatureType")
+            Throw New ArgumentNullException(NameOf(SignatureType))
         End If
 
         NormalizedURL = Nothing
         NormalizedRequestParameters = Nothing
 
-        Dim Parameters As List(Of QueryParameter) = GetQueryParameters(URL.Query)
+        Dim Parameters As List(Of QueryParameter) = If(URL IsNot Nothing, GetQueryParameters(URL.Query), New List(Of QueryParameter))
         With Parameters
             Parameters.Add(New QueryParameter(OAuthConsumerKeyKey, ConsumerKey))
             Parameters.Add(New QueryParameter(OAuthNonceKey, Nonce))
@@ -317,8 +319,8 @@ Public Class OAuth
             Parameters.Add(New QueryParameter(OAuthTokenKey, Token))
         End If
 
-        If String.IsNullOrEmpty(CallbackUrl) = False Then
-            Parameters.Add(New QueryParameter(OAuthCallbackKey, OAuthUrlEncode(CallbackUrl)))
+        If Not CallbackUrl Is Nothing Then
+            Parameters.Add(New QueryParameter(OAuthCallbackKey, OAuthUrlEncode(CallbackUrl.ToString).ToString))
         End If
 
         If String.IsNullOrEmpty(Verifier) = False Then
@@ -326,33 +328,35 @@ Public Class OAuth
         End If
 
         Parameters.Sort(New QueryParameterComparer)
-
-        NormalizedURL = String.Format(myStringFormatProvider, "{0}://{1}", URL.Scheme, URL.Host)
-        If Not ((URL.Scheme = "http" And URL.Port = 80) Or (URL.Scheme = "https" And URL.Port = 443)) Then
-            NormalizedURL &= ":" + URL.Port.ToString(myStringFormatProvider)
+        If URL IsNot Nothing Then
+            NormalizedURL = String.Format(myStringFormatProvider, "{0}://{1}", URL.Scheme, URL.Host)
+            If Not ((URL.Scheme = "http" And URL.Port = 80) Or (URL.Scheme = "https" And URL.Port = 443)) Then
+                NormalizedURL &= ":" + URL.Port.ToString(myStringFormatProvider)
+            End If
+            NormalizedURL &= URL.AbsolutePath
         End If
-
-        NormalizedURL &= URL.AbsolutePath
-        NormalizedRequestParameters = NormalizeRequestParameters_CB(Parameters)
+        NormalizedRequestParameters = NormalizeRequestParametersCB(Parameters)
         Dim SignatureBase As New StringBuilder()
         With SignatureBase
-            .AppendFormat("{0}&", HTTPMethod.ToUpper())
-            .AppendFormat("{0}&", OAuthUrlEncode(NormalizedURL))
-            .AppendFormat("{0}", OAuthUrlEncode(NormalizedRequestParameters))
+            .AppendFormat(myStringFormatProvider, "{0}&", HTTPMethod.ToUpper(myCultureInfo))
+            .AppendFormat(myStringFormatProvider, "{0}&", OAuthUrlEncode(NormalizedURL).ToString)
+            .AppendFormat(myStringFormatProvider, "{0}", OAuthUrlEncode(NormalizedRequestParameters).ToString)
         End With
 
         Return SignatureBase.ToString
     End Function
-    Protected Function NormalizeRequestParameters_CB(ByVal Parameters As IList(Of QueryParameter)) As String
+    Protected Shared Function NormalizeRequestParametersCB(ByVal Parameters As IList(Of QueryParameter)) As String
         Dim sb As New StringBuilder
-        Dim p As QueryParameter = Nothing
-        For i As Integer = 0 To Parameters.Count - 1
-            p = Parameters(i)
-            sb.AppendFormat("{0}={1}", p.Name, """" & p.Value & """")
-            If i < Parameters.Count - 1 Then
-                sb.Append("&")
-            End If
-        Next
+        Dim p As QueryParameter
+        If Parameters IsNot Nothing Then
+            For i As Integer = 0 To Parameters.Count - 1
+                p = Parameters(i)
+                sb.AppendFormat(myStringFormatProvider, "{0}={1}", p.Name, """" & p.Value & """")
+                If i < Parameters.Count - 1 Then
+                    sb.Append("&")
+                End If
+            Next
+        End If
         Return sb.ToString
     End Function
 End Class

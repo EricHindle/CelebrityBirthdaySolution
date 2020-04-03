@@ -5,10 +5,8 @@ Imports System.Reflection
 
 Public Class FrmImageStore
 #Region "variables"
-    Dim b() As Byte '   Store picture bytes
     Dim sImagePath As String
     Dim sApplicationPath As String
-    Dim bLoadingPicture As Boolean = False
     Dim isSaved As Boolean = True
     Dim _latestSavedFile As String = ""
 #End Region

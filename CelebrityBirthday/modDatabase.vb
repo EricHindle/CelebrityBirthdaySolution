@@ -177,13 +177,10 @@ Module modDatabase
         Try
             oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
-                If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
-                    oPersonList.Add(oPerson)
-                Else
-                    Debug.Print("Excluding " & oPerson.Name)
+                Dim _socialMedia As SocialMedia = GetSocialMedia(oRow.id)
+                If Not isTweetsOnly Or Not _socialMedia.IsNoTweet Then
+                    oPersonList.Add(New Person(oRow, _socialMedia, GetImageById(oRow.id)))
                 End If
-                oPerson.Dispose()
             Next
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
@@ -225,13 +222,9 @@ Module modDatabase
             oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
 
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-                Dim oPerson As Person = New Person(oRow)
-                If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
-                    _List.Add(oPerson)
-                Else
-                    Debug.Print("Excluding " & oPerson.Name)
+                If Not isTweetsOnly Or Not oRow.noTweet Then
+                    _List.Add(New Person(oRow))
                 End If
-                oPerson.Dispose()
             Next
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
@@ -242,15 +235,10 @@ Module modDatabase
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByAnniversary(oFullPersonTable, oDay, oMonth)
-
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-                Dim oPerson As Person = New Person(oRow)
-                If Not isTweetsOnly Or Not oPerson.Social.IsNoTweet Then
-                    _List.Add(oPerson)
-                Else
-                    Debug.Print("Excluding " & oPerson.Name)
+                If Not isTweetsOnly Or Not oRow.noTweet Then
+                    _List.Add(New Person(oRow))
                 End If
-                oPerson.Dispose()
             Next
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")

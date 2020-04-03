@@ -169,4 +169,7 @@
   <data name="TEXT" xml:space="preserve">
     <value>Text</value>
   </data>
+  <data name="UNKNOWN_SIG" xml:space="preserve">
+    <value>Unknown signature type</value>
+  </data>
 </root>

@@ -27,7 +27,7 @@ Partial Class FrmSendTwitter
         Me.btnClose = New System.Windows.Forms.Button()
         Me.rtbTweetProgress = New System.Windows.Forms.RichTextBox()
         Me.BtnAuthenticate = New System.Windows.Forms.Button()
-        Me.rtbTweetText = New System.Windows.Forms.RichTextBox()
+        Me.RtbTweetText = New System.Windows.Forms.RichTextBox()
         Me.BtnSend = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
@@ -97,15 +97,15 @@ Partial Class FrmSendTwitter
         '
         'rtbTweetText
         '
-        Me.rtbTweetText.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.RtbTweetText.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.rtbTweetText.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rtbTweetText.Location = New System.Drawing.Point(23, 372)
-        Me.rtbTweetText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.rtbTweetText.Name = "rtbTweetText"
-        Me.rtbTweetText.Size = New System.Drawing.Size(420, 185)
-        Me.rtbTweetText.TabIndex = 26
-        Me.rtbTweetText.Text = ""
+        Me.RtbTweetText.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RtbTweetText.Location = New System.Drawing.Point(23, 372)
+        Me.RtbTweetText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.RtbTweetText.Name = "rtbTweetText"
+        Me.RtbTweetText.Size = New System.Drawing.Size(420, 185)
+        Me.RtbTweetText.TabIndex = 26
+        Me.RtbTweetText.Text = ""
         '
         'BtnSend
         '
@@ -359,7 +359,7 @@ Partial Class FrmSendTwitter
         Me.Controls.Add(Me.TxtForename)
         Me.Controls.Add(Me.TxtName)
         Me.Controls.Add(Me.BtnImage)
-        Me.Controls.Add(Me.rtbTweetText)
+        Me.Controls.Add(Me.RtbTweetText)
         Me.Controls.Add(Me.cmbTwitterUsers)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.StatusStrip1)
@@ -384,7 +384,7 @@ Partial Class FrmSendTwitter
     Friend WithEvents btnClose As Button
     Friend WithEvents rtbTweetProgress As RichTextBox
     Friend WithEvents BtnAuthenticate As Button
-    Friend WithEvents rtbTweetText As RichTextBox
+    Friend WithEvents RtbTweetText As RichTextBox
     Friend WithEvents BtnSend As Button
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblStatus As ToolStripStatusLabel

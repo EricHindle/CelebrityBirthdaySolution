@@ -85,8 +85,8 @@ Public Class frmTwitterOutput
 #Region "tree subroutines"
     Private Sub BuildTrees()
         DisplayMessage("Selecting...")
-        Dim oBirthdayList As List(Of Person)
-        Dim oAnniversaryList As List(Of Person)
+        Dim oBirthdayList As New List(Of Person)
+        Dim oAnniversaryList As New List(Of Person)
         tvBirthday.Nodes.Clear()
         Dim startDate As Date = dtpFrom.Value
         Dim endDate As Date = dtpTo.Value
@@ -102,6 +102,16 @@ Public Class frmTwitterOutput
             AddTypeNode(oBirthdayList, testDate, newDateNode, "Birthday")
             testDate = DateAdd(DateInterval.Day, 1, testDate)
         Loop
+        If oAnniversaryList IsNot Nothing Then
+            For Each oPerson In oAnniversaryList
+                oPerson.Dispose()
+            Next
+        End If
+        If oBirthdayList IsNot Nothing Then
+            For Each oPerson In oBirthdayList
+                oPerson.Dispose()
+            Next
+        End If
         DisplayMessage("Selection Complete")
     End Sub
     Private Shared Sub AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, newDateNode As TreeNode, _type As String)

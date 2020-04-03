@@ -125,7 +125,7 @@ Friend Module ImageUtil
                     oGraphics.DrawImage(oBitMap, targetRectangle, 0, 0, sourceImage.Width, sourceImage.Height, GraphicsUnit.Pixel)
                 End Using
             End If
-        Catch ex As ArgumentNullException
+        Catch ex As ArgumentException
             MsgBox("resizeImageToBitmap:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
         End Try
         Return targetBitmap

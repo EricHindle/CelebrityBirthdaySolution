@@ -156,7 +156,7 @@ Public Class frmImageCapture
         SaveImagePlain(PicCapture, PicCapture.Width, PicCapture.Height, False)
     End Sub
     Private Sub BtnSaveCroppedImage_Click(sender As Object, e As EventArgs) Handles BtnSaveCroppedImage.Click
-        _savedImage = SaveImagePlain(PreviewPictureBox, nudSaveSize.Value, nudSaveSize.Value, True)
+        _savedImage = SaveImagePlain(PreviewPictureBox, NudSaveSize.Value, NudSaveSize.Value, True)
     End Sub
     Private Sub BtnRotate_Click(sender As Object, e As EventArgs) Handles BtnRotate.Click
         If originalImage IsNot Nothing Then
@@ -393,12 +393,12 @@ Public Class frmImageCapture
            .DashStyle = DashStyle.DashDot
        }
     End Sub
-    Private Sub nudSaveSize_ValueChanged(sender As Object, e As EventArgs) Handles nudSaveSize.ValueChanged
+    Private Sub NudSaveSize_ValueChanged(sender As Object, e As EventArgs) Handles NudSaveSize.ValueChanged
         ResizeCroppedImage()
     End Sub
     Private Sub ResizeCroppedImage()
         Try
-            PreviewPictureBox.Size = New Size(nudSaveSize.Value, nudSaveSize.Value)
+            PreviewPictureBox.Size = New Size(NudSaveSize.Value, NudSaveSize.Value)
             PreviewPictureBox.Location = New Point(lblCroppedImage.Location.X + (lblCroppedImage.Size.Width - PreviewPictureBox.Size.Width) / 2, PreviewPictureBox.Location.Y)
             If cropWidth > 0 And cropHeight > 0 Then
                 CaptureCroppedArea()

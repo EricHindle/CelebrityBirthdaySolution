@@ -32,7 +32,6 @@ Public Class FrmSendTwitter
     Private isDone As Boolean
     Private ReadOnly tw As New TwitterOAuth
     Private ReadOnly oTweetTa As New CelebrityBirthdayDataSetTableAdapters.TweetsTableAdapter
-    Private _twitterImagePath As String = Path.Combine(My.Settings.TwitterFilePath, "Images")
 
 #End Region
 #Region "form handlers"
@@ -55,14 +54,14 @@ Public Class FrmSendTwitter
     Private Sub FrmSendTwitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.sndtwformpos)
         NudSentences.Value = My.Settings.wikiSentences
-        rtbTweetText.AllowDrop = True
+        RtbTweetText.AllowDrop = True
         WebBrowser1.Navigate(New Uri("about:blank"))
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
         FillTwitterUserList()
         cmbTwitterUsers.SelectedIndex = cmbTwitterUsers.FindStringExact(SendAs)
-        rtbTweetText.Text = TweetText
+        RtbTweetText.Text = TweetText
     End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         Dim isOkToSend As Boolean = True
@@ -228,7 +227,7 @@ Public Class FrmSendTwitter
             Dim _nonce As String = tw.GenerateNonce()
             Dim _oAuth As New Dictionary(Of String, String) From
                 {{"oauth_nonce", _nonce},
-                {"oauth_callback", tw.CallbackUrl},
+                {"oauth_callback", tw.CallbackUrl.ToString},
                 {"oauth_signature_method", "HMAC-SHA1"},
                 {"oauth_timestamp", Convert.ToInt64(timestamp.TotalSeconds)},
                 {"oauth_consumer_key", tw.ConsumerKey},
@@ -297,7 +296,7 @@ Public Class FrmSendTwitter
         ShowStatus("Sending Tweet")
         Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim sto = New SendTweetOptions
-        Dim msg = rtbTweetText.Text
+        Dim msg = RtbTweetText.Text
         sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
         Dim _mediaId As String = Nothing
         If chkImages.Checked Then
@@ -434,7 +433,7 @@ Public Class FrmSendTwitter
     End Sub
 
     Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
-        rtbTweetText.Text = GetWikiText(NudSentences.Value)
+        RtbTweetText.Text = GetWikiText(NudSentences.Value)
     End Sub
     Private Function GetWikiText(_sentences As Integer) As String
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(TxtName.Text, _sentences))
@@ -448,12 +447,12 @@ Public Class FrmSendTwitter
         If My.Computer.FileSystem.FileExists(thumbnailImage) Then
             PictureBox1.ImageLocation = thumbnailImage
             CreateTwitterImage(thumbnailImage)
-            rtbTweetText.Text = GetWikiText(NudSentences.Value)
+            RtbTweetText.Text = GetWikiText(NudSentences.Value)
         End If
     End Sub
 
-    Private Sub rtbTweetText_TextChanged(sender As Object, e As EventArgs) Handles rtbTweetText.TextChanged
-        Dim _tweetLength As Integer = rtbTweetText.Text.Replace(vbCr, "").Length
+    Private Sub RtbTweetText_TextChanged(sender As Object, e As EventArgs) Handles RtbTweetText.TextChanged
+        Dim _tweetLength As Integer = RtbTweetText.Text.Replace(vbCr, "").Length
         LblTweetLength.Text = If(_tweetLength > 280, "** ", "") & CStr(_tweetLength)
     End Sub
 
@@ -461,7 +460,7 @@ Public Class FrmSendTwitter
         TxtForename.Text = ""
         TxtSurname.Text = ""
         rtbTweetProgress.Text = ""
-        rtbTweetText.Text = ""
+        RtbTweetText.Text = ""
         PictureBox1.Image = My.Resources.NoImage
         PictureBox2.Image = Nothing
         LblTweetLength.Text = ""

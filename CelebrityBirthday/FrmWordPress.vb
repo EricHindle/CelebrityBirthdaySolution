@@ -227,5 +227,22 @@ Public Class FrmWordPress
         My.Settings.wprformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
+    'Form overrides dispose to clean up the component list.
+
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+            If disposing AndAlso personTable IsNot Nothing Then
+                For Each oPerson In personTable
+                    oPerson.Dispose()
+                Next
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
 #End Region
 End Class

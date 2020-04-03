@@ -33,7 +33,7 @@ Partial Class frmImageCapture
         Me.TbContrast = New System.Windows.Forms.TrackBar()
         Me.BtnResetAdjustments = New System.Windows.Forms.Button()
         Me.pnlAdjustImage = New System.Windows.Forms.Panel()
-        Me.nudSaveSize = New System.Windows.Forms.NumericUpDown()
+        Me.NudSaveSize = New System.Windows.Forms.NumericUpDown()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.nudPenSize = New System.Windows.Forms.NumericUpDown()
@@ -52,7 +52,7 @@ Partial Class frmImageCapture
         CType(Me.TbBrightness, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TbContrast, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAdjustImage.SuspendLayout()
-        CType(Me.nudSaveSize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NudSaveSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.nudPenSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -290,14 +290,14 @@ Partial Class frmImageCapture
         '
         'nudSaveSize
         '
-        Me.nudSaveSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nudSaveSize.Location = New System.Drawing.Point(833, 175)
-        Me.nudSaveSize.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
-        Me.nudSaveSize.Minimum = New Decimal(New Integer() {60, 0, 0, 0})
-        Me.nudSaveSize.Name = "nudSaveSize"
-        Me.nudSaveSize.Size = New System.Drawing.Size(58, 23)
-        Me.nudSaveSize.TabIndex = 42
-        Me.nudSaveSize.Value = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.NudSaveSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.NudSaveSize.Location = New System.Drawing.Point(833, 175)
+        Me.NudSaveSize.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
+        Me.NudSaveSize.Minimum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.NudSaveSize.Name = "nudSaveSize"
+        Me.NudSaveSize.Size = New System.Drawing.Size(58, 23)
+        Me.NudSaveSize.TabIndex = 42
+        Me.NudSaveSize.Value = New Decimal(New Integer() {60, 0, 0, 0})
         '
         'Label5
         '
@@ -442,7 +442,7 @@ Partial Class frmImageCapture
         Me.Controls.Add(Me.BtnSave)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.nudSaveSize)
+        Me.Controls.Add(Me.NudSaveSize)
         Me.Controls.Add(Me.BtnRotate)
         Me.Controls.Add(Me.pnlAdjustImage)
         Me.Controls.Add(Me.Label4)
@@ -473,7 +473,7 @@ Partial Class frmImageCapture
         CType(Me.TbContrast, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlAdjustImage.ResumeLayout(False)
         Me.pnlAdjustImage.PerformLayout()
-        CType(Me.nudSaveSize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NudSaveSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.nudPenSize, System.ComponentModel.ISupportInitialize).EndInit()
@@ -502,7 +502,7 @@ Partial Class frmImageCapture
     Friend WithEvents BtnResetAdjustments As System.Windows.Forms.Button
     Friend WithEvents pnlAdjustImage As System.Windows.Forms.Panel
     Friend WithEvents BtnRotate As System.Windows.Forms.Button
-    Friend WithEvents nudSaveSize As NumericUpDown
+    Friend WithEvents NudSaveSize As NumericUpDown
     Friend WithEvents Label5 As Label
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents rbYellow As RadioButton
