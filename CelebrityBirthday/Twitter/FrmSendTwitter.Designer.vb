@@ -23,11 +23,18 @@ Partial Class FrmSendTwitter
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSendTwitter))
         Me.btnClose = New System.Windows.Forms.Button()
         Me.rtbTweetProgress = New System.Windows.Forms.RichTextBox()
         Me.BtnAuthenticate = New System.Windows.Forms.Button()
         Me.RtbTweetText = New System.Windows.Forms.RichTextBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BtnSend = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
@@ -49,6 +56,7 @@ Partial Class FrmSendTwitter
         Me.LblTweetLength = New System.Windows.Forms.Label()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.BtnClear = New System.Windows.Forms.Button()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -95,17 +103,54 @@ Partial Class FrmSendTwitter
         Me.BtnAuthenticate.Text = "Authenticate"
         Me.BtnAuthenticate.UseVisualStyleBackColor = True
         '
-        'rtbTweetText
+        'RtbTweetText
         '
         Me.RtbTweetText.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.RtbTweetText.ContextMenuStrip = Me.ContextMenuStrip1
         Me.RtbTweetText.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RtbTweetText.Location = New System.Drawing.Point(23, 372)
         Me.RtbTweetText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.RtbTweetText.Name = "rtbTweetText"
+        Me.RtbTweetText.Name = "RtbTweetText"
         Me.RtbTweetText.Size = New System.Drawing.Size(420, 185)
         Me.RtbTweetText.TabIndex = 26
         Me.RtbTweetText.Text = ""
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem, Me.CutToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ClearToolStripMenuItem, Me.SelectAllToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(123, 114)
+        '
+        'CopyToolStripMenuItem
+        '
+        Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.CopyToolStripMenuItem.Text = "Copy"
+        '
+        'CutToolStripMenuItem
+        '
+        Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
+        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.CutToolStripMenuItem.Text = "Cut"
+        '
+        'PasteToolStripMenuItem
+        '
+        Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
+        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.PasteToolStripMenuItem.Text = "Paste"
+        '
+        'ClearToolStripMenuItem
+        '
+        Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.ClearToolStripMenuItem.Text = "Clear"
+        '
+        'SelectAllToolStripMenuItem
+        '
+        Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.SelectAllToolStripMenuItem.Text = "Select All"
         '
         'BtnSend
         '
@@ -219,8 +264,9 @@ Partial Class FrmSendTwitter
         Me.TxtName.AllowDrop = True
         Me.TxtName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtName.ContextMenuStrip = Me.ContextMenuStrip1
         Me.TxtName.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtName.Location = New System.Drawing.Point(72, 12)
+        Me.TxtName.Location = New System.Drawing.Point(70, 18)
         Me.TxtName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TxtName.Name = "TxtName"
         Me.TxtName.Size = New System.Drawing.Size(308, 26)
@@ -372,6 +418,7 @@ Partial Class FrmSendTwitter
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmSendTwitter"
         Me.Text = "FrmSendTwitter"
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -406,4 +453,10 @@ Partial Class FrmSendTwitter
     Friend WithEvents LblTweetLength As Label
     Friend WithEvents WebBrowser1 As WebBrowser
     Friend WithEvents BtnClear As Button
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents CopyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PasteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ClearToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
 End Class

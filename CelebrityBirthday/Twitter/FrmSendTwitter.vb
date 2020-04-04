@@ -94,19 +94,45 @@ Public Class FrmSendTwitter
         End If
         WriteTrace(isDone)
         WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
-
-
-
-
-
-
-
     End Sub
     Private Sub FrmSendTwitter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         oTweetTa.Dispose()
         My.Settings.sndtwformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
+    Private Sub CopyToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles CopyToolStripMenuItem.Click
+        GetSourceControl(menuItem).Copy()
+    End Sub
+    Private Sub CutToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles CutToolStripMenuItem.Click
+        GetSourceControl(menuItem).Cut()
+    End Sub
+    Private Sub SelectAllToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectAllToolStripMenuItem.Click
+        Dim sourceControl As Object = GetSourceControl(sender)
+
+        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            If _textBox IsNot Nothing Then
+                _textBox.SelectAll()
+            End If
+        End If
+
+    End Sub
+    Private Sub PasteToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem.Click
+        Dim sourceControl As Object = GetSourceControl(menuItem)
+        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            _textBox.Paste()
+        End If
+
+    End Sub
+    Private Sub ClearToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles ClearToolStripMenuItem.Click
+        Dim sourceControl As Object = GetSourceControl(menuItem)
+        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            _textBox.Text = ""
+        End If
+    End Sub
+
 #End Region
 #Region "subroutines"
     Private Sub Authenticate()
@@ -210,8 +236,6 @@ Public Class FrmSendTwitter
             rtbTweetProgress.Text &= vbCrLf & tw.Token
             rtbTweetProgress.Text &= vbCrLf & tw.TokenSecret
         End Using
-
-
         WriteTrace("Finished GetAccessToken " & Format(Now, "hh:MM:ss"))
         isDone = True
         Return isDone
@@ -345,7 +369,6 @@ Public Class FrmSendTwitter
             .Append("User=").Append(pStatus.User.ScreenName).Append("(").Append(pStatus.User.Name).Append(")").Append(vbCrLf)
         Return statusText.ToString
     End Function
-
     Private Sub BtnImage_Click(sender As Object, e As EventArgs) Handles BtnImage.Click
         If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
             LblImageName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
@@ -360,7 +383,6 @@ Public Class FrmSendTwitter
             MsgBox("No name supplied", MsgBoxStyle.Exclamation, "Name missing")
         End If
     End Sub
-
     Private Sub CreateTwitterImage(_image As String)
         LblImageFile.Text = _image
         Dim _imageidentity As New ImageIdentity(-1, _image, "", "", "")
@@ -368,11 +390,9 @@ Public Class FrmSendTwitter
         Dim _pictureList As New List(Of Person) From {_person}
         ImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, ImageUtil.AlignType.Centre)
     End Sub
-
     Private Sub BtnCreateFullName_Click(sender As Object, e As EventArgs) Handles BtnCreateFullName.Click
         TxtName.Text = If(String.IsNullOrEmpty(TxtForename.Text), "", TxtForename.Text.Trim & " ") & TxtSurname.Text.Trim
     End Sub
-
     Private Sub BtnSplitName_Click(sender As Object, e As EventArgs) Handles BtnSplitName.Click
         TxtName.Text = TxtName.Text.Trim
         Dim names As String() = Split(TxtName.Text, " ")
@@ -431,7 +451,6 @@ Public Class FrmSendTwitter
             End If
         End If
     End Sub
-
     Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
         RtbTweetText.Text = GetWikiText(NudSentences.Value)
     End Sub
@@ -440,7 +459,6 @@ Public Class FrmSendTwitter
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
-
     Private Sub TxtForename_TextChanged(sender As Object, e As EventArgs) Handles TxtForename.TextChanged, TxtSurname.TextChanged
         LblImageName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
         Dim thumbnailImage As String = Path.Combine(My.Settings.ImgPath, LblImageName.Text) & ".jpg"
@@ -450,12 +468,10 @@ Public Class FrmSendTwitter
             RtbTweetText.Text = GetWikiText(NudSentences.Value)
         End If
     End Sub
-
     Private Sub RtbTweetText_TextChanged(sender As Object, e As EventArgs) Handles RtbTweetText.TextChanged
         Dim _tweetLength As Integer = RtbTweetText.Text.Replace(vbCr, "").Length
         LblTweetLength.Text = If(_tweetLength > 280, "** ", "") & CStr(_tweetLength)
     End Sub
-
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
         TxtForename.Text = ""
         TxtSurname.Text = ""
