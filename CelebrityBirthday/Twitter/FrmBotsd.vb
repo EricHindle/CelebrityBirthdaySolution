@@ -1,4 +1,5 @@
-﻿Imports System.Data.Common
+﻿Imports System.Collections.ObjectModel
+Imports System.Data.Common
 Imports System.IO
 Imports System.Text
 Imports TweetSharp
@@ -216,9 +217,11 @@ Public Class FrmBotsd
         If Not My.Computer.FileSystem.DirectoryExists(_path) Then
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
-        Dim _add As String = "BOTSD"
-        Dim _fileName As String = Path.Combine(_path, _add.Replace("_", "_" & LblDay.Text & "_" & LblMonth.Text & "_mosaic_") & ".jpg")
-
+        Dim _add As String = My.Resources.BOTSD
+        Dim _fileName As String = Path.Combine(_path, _add.Replace("_", "_" & LblDay.Text & "_" & LblMonth.Text) & ".jpg")
+        If My.Computer.FileSystem.FileExists(_fileName) Then
+            _fileName = GetUniqueFname(_fileName)
+        End If
         ImageUtil.SaveImageFromPictureBox(PictureBox1, PictureBox1.Width, PictureBox1.Height, _fileName)
         DisplayStatus("File saved")
         Return _fileName
@@ -505,6 +508,22 @@ Public Class FrmBotsd
             oTextForm.rtbText.Text = sb.ToString
             oTextForm.ShowDialog()
         End Using
+    End Sub
+
+    Private Sub BtnClearImages_Click(sender As Object, e As EventArgs) Handles BtnClearImages.Click
+        If MsgBox("Confirm delete BOTSD images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.BOTSD & "*.*"})
+            For Each _imageFile As String In _imageList
+                My.Computer.FileSystem.DeleteFile(_imageFile)
+            Next
+        End If
+    End Sub
+
+    Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
+        Dim _imageFilename As String = Nothing
+        If PictureBox1.Image IsNot Nothing Then
+            _imageFilename = SaveImage()
+        End If
     End Sub
 #End Region
 End Class

@@ -172,4 +172,7 @@
   <data name="UNKNOWN_SIG" xml:space="preserve">
     <value>Unknown signature type</value>
   </data>
+  <data name="BOTSD" xml:space="preserve">
+    <value>BOTSD_</value>
+  </data>
 </root>

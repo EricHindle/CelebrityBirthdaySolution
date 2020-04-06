@@ -60,7 +60,6 @@ Public Class FrmImageStore
             Dim _Filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
             If String.IsNullOrEmpty(_Filename) = False Then
                 Dim strFName As String = Path.Combine(sImagePath, _Filename & ".jpg")
-                Me.Refresh()
                 If My.Computer.FileSystem.FileExists(strFName) Then
                     strFName = GetUniqueFname(strFName)
                 End If
@@ -168,20 +167,6 @@ Public Class FrmImageStore
             Process.Start(sUrl)
         End If
     End Sub
-    Private Function GetUniqueFname(ByVal filename As String) As String
-        Dim newfilename As String = filename
-        Try
-            For subs As Integer = 0 To 999
-                newfilename = Path.Combine(sImagePath, Path.GetFileNameWithoutExtension(filename) & "_" & CStr(subs) & Path.GetExtension(filename))
-                If My.Computer.FileSystem.FileExists(newfilename) = False Then
-                    Exit For
-                End If
-            Next
-        Catch ex As ArgumentException
-            DisplayException(ex)
-        End Try
-        Return newfilename
-    End Function
     Private Shared Function DisplayException(ByVal ex As Exception) As MsgBoxResult
         Return MsgBox("Exception: " & ex.Message & vbCrLf & If(ex.InnerException Is Nothing, "", ex.InnerException.Message) & vbCrLf & "OK to continue?", MsgBoxStyle.YesNo, "Excpetion")
     End Function

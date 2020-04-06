@@ -325,6 +325,21 @@ Friend Module modCbday
                       MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation,
                       pExceptionType)
     End Function
+    Public Function GetUniqueFname(ByVal filename As String, ByVal Optional pPath As String = Nothing) As String
+        Dim newfilename As String = filename
+        If pPath Is Nothing Then pPath = Path.GetDirectoryName(filename)
+        Try
+            For subs As Integer = 0 To 999
+                newfilename = Path.Combine(pPath, Path.GetFileNameWithoutExtension(filename) & "_" & CStr(subs) & Path.GetExtension(filename))
+                If My.Computer.FileSystem.FileExists(newfilename) = False Then
+                    Exit For
+                End If
+            Next
+        Catch ex As ArgumentException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Argument")
+        End Try
+        Return newfilename
+    End Function
 End Module
 
 

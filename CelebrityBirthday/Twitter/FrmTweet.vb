@@ -263,7 +263,10 @@ Public Class FrmTweet
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
         Dim _add As String = _page.Text
-        Dim _fileName As String = Path.Combine(_path, _add.Replace("_", "_" & cboDay.SelectedItem & "_" & cboMonth.SelectedItem & "_mosaic_") & ".jpg")
+        Dim _fileName As String = Path.Combine(_path, _add.Replace("_", "_" & cboDay.SelectedItem & "_" & cboMonth.SelectedItem & "_") & ".jpg")
+        If My.Computer.FileSystem.FileExists(_fileName) Then
+            _fileName = GetUniqueFname(_fileName)
+        End If
         Dim _pictureBox As PictureBox = GetPictureBoxFromPage(_page)
         ImageUtil.SaveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, _fileName)
         DisplayStatus("File saved")
