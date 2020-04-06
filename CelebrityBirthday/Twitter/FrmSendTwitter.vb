@@ -1,4 +1,5 @@
-﻿Imports System.Collections.Specialized
+﻿Imports System.Collections.ObjectModel
+Imports System.Collections.Specialized
 Imports System.IO
 Imports System.Net
 Imports System.Net.Http
@@ -32,7 +33,6 @@ Public Class FrmSendTwitter
     Private isDone As Boolean
     Private ReadOnly tw As New TwitterOAuth
     Private ReadOnly oTweetTa As New CelebrityBirthdayDataSetTableAdapters.TweetsTableAdapter
-
 #End Region
 #Region "form handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -95,7 +95,7 @@ Public Class FrmSendTwitter
         WriteTrace(isDone)
         WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
     End Sub
-    Private Sub FrmSendTwitter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub FrmSendTwitter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         oTweetTa.Dispose()
         My.Settings.sndtwformpos = SetFormPos(Me)
         My.Settings.Save()
@@ -132,7 +132,121 @@ Public Class FrmSendTwitter
             _textBox.Text = ""
         End If
     End Sub
+    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        TxtForename.Text = ""
+        TxtSurname.Text = ""
+        rtbTweetProgress.Text = ""
+        RtbTweetText.Text = ""
+        PictureBox1.Image = My.Resources.NoImage
+        PictureBox2.Image = Nothing
+        LblTweetLength.Text = ""
+        LblImageName.Text = ""
+        LblImageFile.Text = ""
+    End Sub
+    Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
+        Dim _path As String = My.Settings.twitterImageFolder
+        If Not My.Computer.FileSystem.DirectoryExists(_path) Then
+            My.Computer.FileSystem.CreateDirectory(_path)
+        End If
+        Dim _fileName As String = GetUniqueFname(Path.Combine(_path, My.Resources.SINGLE_TWEET) & ".jpg")
+        ImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
+    End Sub
+    Private Sub BtnClearImages_Click(sender As Object, e As EventArgs) Handles BtnClearImages.Click
+        If MsgBox("Confirm delete tweet images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.SINGLE_TWEET & "*.*"})
+            For Each _imageFile As String In _imageList
+                My.Computer.FileSystem.DeleteFile(_imageFile)
+            Next
+        End If
+    End Sub
+    Private Sub TxtForename_TextChanged(sender As Object, e As EventArgs) Handles TxtSurname.TextChanged, TxtForename.TextChanged
+        LblImageName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
+        Dim thumbnailImage As String = Path.Combine(My.Settings.ImgPath, LblImageName.Text) & ".jpg"
+        If My.Computer.FileSystem.FileExists(thumbnailImage) Then
+            PictureBox1.ImageLocation = thumbnailImage
+            CreateTwitterImage(thumbnailImage)
+            RtbTweetText.Text = GetWikiText(NudSentences.Value)
+        End If
+    End Sub
+    Private Sub RtbTweetText_TextChanged(sender As Object, e As EventArgs) Handles RtbTweetText.TextChanged
+        Dim _tweetLength As Integer = RtbTweetText.Text.Replace(vbCr, "").Length
+        LblTweetLength.Text = If(_tweetLength > 280, "** ", "") & CStr(_tweetLength)
+    End Sub
+    Private Sub BtnImage_Click(sender As Object, e As EventArgs) Handles BtnImage.Click
+        If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
+            LblImageName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
+            Using _imagestore As New FrmImageStore
+                _imagestore.Forename = TxtForename.Text.Trim
+                _imagestore.Surname = TxtSurname.Text.Trim
+                _imagestore.ShowDialog()
+                PictureBox1.ImageLocation = _imagestore.SavedImage
+                CreateTwitterImage(_imagestore.SavedImage)
+            End Using
+        Else
+            MsgBox("No name supplied", MsgBoxStyle.Exclamation, "Name missing")
+        End If
+    End Sub
+    Private Sub BtnCreateFullName_Click(sender As Object, e As EventArgs) Handles BtnCreateFullName.Click
+        TxtName.Text = If(String.IsNullOrEmpty(TxtForename.Text), "", TxtForename.Text.Trim & " ") & TxtSurname.Text.Trim
+    End Sub
+    Private Sub BtnSplitName_Click(sender As Object, e As EventArgs) Handles BtnSplitName.Click
+        TxtName.Text = TxtName.Text.Trim
+        Dim names As String() = Split(TxtName.Text, " ")
+        TxtSurname.Text = names(UBound(names))
+        If Not String.IsNullOrEmpty(TxtSurname.Text) Then
+            TxtForename.Text = TxtName.Text.Replace(TxtSurname.Text, "").Trim
+        End If
+    End Sub
+    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtName.DragDrop,
+                                                                                            TxtForename.DragDrop,
+                                                                                            TxtSurname.DragDrop
 
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim oBox As TextBox = CType(sender, TextBox)
+            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
+            Dim textlen As Integer = oBox.TextLength
+            Dim startpos As Integer = oBox.SelectionStart
+            If textlen = 0 Then
+                oBox.Text = item.Trim
+            Else
+                If startpos = 0 Then
+                    oBox.SelectedText = item.TrimStart
+                Else
+                    If oBox.Text.Substring(startpos - 1, 1) = "." Then
+                        oBox.SelectedText = " " & item.TrimStart
+                    Else
+                        oBox.SelectedText = item
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+    Private Sub TextBox_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtName.DragOver,
+                                                                                                                TxtForename.DragOver,
+                                                                                                                TxtSurname.DragOver
+
+        Try
+            If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+                Dim oBox As TextBox = CType(sender, TextBox)
+                oBox.Select(TextBoxCursorPos(oBox, e.X, e.Y), 0)
+            End If
+        Catch ex As InvalidCastException
+
+        End Try
+    End Sub
+    Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtForename.DragEnter,
+                                                                                                                TxtSurname.DragEnter,
+                                                                                                                TxtName.DragEnter
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            e.Effect = DragDropEffects.Copy
+        Else
+            If e.Data.GetDataPresent(DataFormats.Text) Then
+                e.Effect = DragDropEffects.Copy
+            Else
+                e.Effect = DragDropEffects.None
+            End If
+        End If
+    End Sub
 #End Region
 #Region "subroutines"
     Private Sub Authenticate()
@@ -330,7 +444,7 @@ Public Class FrmSendTwitter
                 If Not My.Computer.FileSystem.DirectoryExists(_path) Then
                     My.Computer.FileSystem.CreateDirectory(_path)
                 End If
-                Dim _fileName As String = Path.Combine(_path, "SingleTweetImage") & ".jpg"
+                Dim _fileName As String = GetUniqueFname(Path.Combine(_path, My.Resources.SINGLE_TWEET) & ".jpg")
                 Dim _imageFile As String = ImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
                 Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _imageFile)
                 If _twitterUplMedia IsNot Nothing Then
@@ -369,87 +483,12 @@ Public Class FrmSendTwitter
             .Append("User=").Append(pStatus.User.ScreenName).Append("(").Append(pStatus.User.Name).Append(")").Append(vbCrLf)
         Return statusText.ToString
     End Function
-    Private Sub BtnImage_Click(sender As Object, e As EventArgs) Handles BtnImage.Click
-        If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
-            LblImageName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
-            Using _imagestore As New FrmImageStore
-                _imagestore.Forename = TxtForename.Text.Trim
-                _imagestore.Surname = TxtSurname.Text.Trim
-                _imagestore.ShowDialog()
-                PictureBox1.ImageLocation = _imagestore.SavedImage
-                CreateTwitterImage(_imagestore.SavedImage)
-            End Using
-        Else
-            MsgBox("No name supplied", MsgBoxStyle.Exclamation, "Name missing")
-        End If
-    End Sub
     Private Sub CreateTwitterImage(_image As String)
         LblImageFile.Text = _image
         Dim _imageidentity As New ImageIdentity(-1, _image, "", "", "")
         Dim _person As New Person(TxtForename.Text, TxtSurname.Text, "", "", 0, 0, 0, 0, 0, 0, "", "", _imageidentity, Nothing)
         Dim _pictureList As New List(Of Person) From {_person}
         ImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, ImageUtil.AlignType.Centre)
-    End Sub
-    Private Sub BtnCreateFullName_Click(sender As Object, e As EventArgs) Handles BtnCreateFullName.Click
-        TxtName.Text = If(String.IsNullOrEmpty(TxtForename.Text), "", TxtForename.Text.Trim & " ") & TxtSurname.Text.Trim
-    End Sub
-    Private Sub BtnSplitName_Click(sender As Object, e As EventArgs) Handles BtnSplitName.Click
-        TxtName.Text = TxtName.Text.Trim
-        Dim names As String() = Split(TxtName.Text, " ")
-        TxtSurname.Text = names(UBound(names))
-        If Not String.IsNullOrEmpty(TxtSurname.Text) Then
-            TxtForename.Text = TxtName.Text.Replace(TxtSurname.Text, "").Trim
-        End If
-    End Sub
-    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtName.DragDrop,
-                                                                                            TxtForename.DragDrop,
-                                                                                            TxtSurname.DragDrop
-
-        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
-            Dim oBox As TextBox = CType(sender, TextBox)
-            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
-            Dim textlen As Integer = oBox.TextLength
-            Dim startpos As Integer = oBox.SelectionStart
-            If textlen = 0 Then
-                oBox.Text = item.Trim
-            Else
-                If startpos = 0 Then
-                    oBox.SelectedText = item.TrimStart
-                Else
-                    If oBox.Text.Substring(startpos - 1, 1) = "." Then
-                        oBox.SelectedText = " " & item.TrimStart
-                    Else
-                        oBox.SelectedText = item
-                    End If
-                End If
-            End If
-        End If
-    End Sub
-    Private Sub TextBox_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtName.DragOver,
-                                                                                                                    TxtForename.DragOver,
-                                                                                                                    TxtSurname.DragOver
-        Try
-            If e.Data.GetDataPresent(DataFormats.StringFormat) Then
-                Dim oBox As TextBox = CType(sender, TextBox)
-                oBox.Select(TextBoxCursorPos(oBox, e.X, e.Y), 0)
-            End If
-        Catch ex As InvalidCastException
-
-        End Try
-    End Sub
-    Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtName.DragEnter,
-                                                                                                                TxtForename.DragEnter,
-                                                                                                                TxtSurname.DragEnter
-
-        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
-            e.Effect = DragDropEffects.Copy
-        Else
-            If e.Data.GetDataPresent(DataFormats.Text) Then
-                e.Effect = DragDropEffects.Copy
-            Else
-                e.Effect = DragDropEffects.None
-            End If
-        End If
     End Sub
     Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
         RtbTweetText.Text = GetWikiText(NudSentences.Value)
@@ -459,29 +498,5 @@ Public Class FrmSendTwitter
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
-    Private Sub TxtForename_TextChanged(sender As Object, e As EventArgs) Handles TxtForename.TextChanged, TxtSurname.TextChanged
-        LblImageName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
-        Dim thumbnailImage As String = Path.Combine(My.Settings.ImgPath, LblImageName.Text) & ".jpg"
-        If My.Computer.FileSystem.FileExists(thumbnailImage) Then
-            PictureBox1.ImageLocation = thumbnailImage
-            CreateTwitterImage(thumbnailImage)
-            RtbTweetText.Text = GetWikiText(NudSentences.Value)
-        End If
-    End Sub
-    Private Sub RtbTweetText_TextChanged(sender As Object, e As EventArgs) Handles RtbTweetText.TextChanged
-        Dim _tweetLength As Integer = RtbTweetText.Text.Replace(vbCr, "").Length
-        LblTweetLength.Text = If(_tweetLength > 280, "** ", "") & CStr(_tweetLength)
-    End Sub
-    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
-        TxtForename.Text = ""
-        TxtSurname.Text = ""
-        rtbTweetProgress.Text = ""
-        RtbTweetText.Text = ""
-        PictureBox1.Image = My.Resources.NoImage
-        PictureBox2.Image = Nothing
-        LblTweetLength.Text = ""
-        LblImageName.Text = ""
-        LblImageFile.Text = ""
-    End Sub
 #End Region
 End Class

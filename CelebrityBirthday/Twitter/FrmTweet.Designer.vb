@@ -62,6 +62,7 @@ Partial Class FrmTweet
         Me.BtnBotsd = New System.Windows.Forms.Button()
         Me.BtnTotd = New System.Windows.Forms.Button()
         Me.BtnUncheck = New System.Windows.Forms.Button()
+        Me.BtnDeleteImages = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -135,7 +136,7 @@ Partial Class FrmTweet
         Me.BtnSaveImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSaveImage.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSaveImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSaveImage.Location = New System.Drawing.Point(1189, 132)
+        Me.BtnSaveImage.Location = New System.Drawing.Point(564, 680)
         Me.BtnSaveImage.Name = "BtnSaveImage"
         Me.BtnSaveImage.Size = New System.Drawing.Size(139, 33)
         Me.BtnSaveImage.TabIndex = 5
@@ -156,7 +157,7 @@ Partial Class FrmTweet
         'NudPic1Horizontal
         '
         Me.NudPic1Horizontal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.NudPic1Horizontal.Location = New System.Drawing.Point(58, 599)
+        Me.NudPic1Horizontal.Location = New System.Drawing.Point(58, 552)
         Me.NudPic1Horizontal.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudPic1Horizontal.Name = "NudPic1Horizontal"
         Me.NudPic1Horizontal.Size = New System.Drawing.Size(53, 22)
@@ -168,7 +169,7 @@ Partial Class FrmTweet
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 603)
+        Me.Label2.Location = New System.Drawing.Point(12, 556)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 14)
         Me.Label2.TabIndex = 10
@@ -179,7 +180,7 @@ Partial Class FrmTweet
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1189, 676)
+        Me.btnClose.Location = New System.Drawing.Point(1189, 681)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(139, 33)
         Me.btnClose.TabIndex = 12
@@ -232,7 +233,7 @@ Partial Class FrmTweet
         Me.TabControl1.Location = New System.Drawing.Point(471, 46)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(706, 671)
+        Me.TabControl1.Size = New System.Drawing.Size(706, 624)
         Me.TabControl1.TabIndex = 19
         '
         'TabPage1
@@ -241,7 +242,7 @@ Partial Class FrmTweet
         Me.TabPage1.Location = New System.Drawing.Point(4, 23)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(698, 644)
+        Me.TabPage1.Size = New System.Drawing.Size(698, 597)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Born On This Day"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -265,7 +266,7 @@ Partial Class FrmTweet
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.rtbFile1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(683, 632)
+        Me.SplitContainer1.Size = New System.Drawing.Size(683, 585)
         Me.SplitContainer1.SplitterDistance = 369
         Me.SplitContainer1.TabIndex = 23
         '
@@ -274,7 +275,7 @@ Partial Class FrmTweet
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(206, 588)
+        Me.BtnSend.Location = New System.Drawing.Point(206, 541)
         Me.BtnSend.Name = "BtnSend"
         Me.BtnSend.Size = New System.Drawing.Size(139, 33)
         Me.BtnSend.TabIndex = 34
@@ -289,7 +290,7 @@ Partial Class FrmTweet
         Me.rtbFile1.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbFile1.Location = New System.Drawing.Point(3, 3)
         Me.rtbFile1.Name = "rtbFile1"
-        Me.rtbFile1.Size = New System.Drawing.Size(297, 619)
+        Me.rtbFile1.Size = New System.Drawing.Size(297, 572)
         Me.rtbFile1.TabIndex = 14
         Me.rtbFile1.Text = ""
         '
@@ -648,12 +649,25 @@ Partial Class FrmTweet
         Me.BtnUncheck.Text = "Uncheck All"
         Me.BtnUncheck.UseVisualStyleBackColor = True
         '
+        'BtnDeleteImages
+        '
+        Me.BtnDeleteImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnDeleteImages.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDeleteImages.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnDeleteImages.Location = New System.Drawing.Point(790, 681)
+        Me.BtnDeleteImages.Name = "BtnDeleteImages"
+        Me.BtnDeleteImages.Size = New System.Drawing.Size(139, 33)
+        Me.BtnDeleteImages.TabIndex = 40
+        Me.BtnDeleteImages.Text = "Clear Images"
+        Me.BtnDeleteImages.UseVisualStyleBackColor = True
+        '
         'FrmTweet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1348, 752)
+        Me.Controls.Add(Me.BtnDeleteImages)
         Me.Controls.Add(Me.BtnUncheck)
         Me.Controls.Add(Me.BtnTotd)
         Me.Controls.Add(Me.BtnBotsd)
@@ -761,4 +775,5 @@ Partial Class FrmTweet
     Friend WithEvents rbImageRight As RadioButton
     Friend WithEvents rbImageLeft As RadioButton
     Friend WithEvents rbImageCentre As RadioButton
+    Friend WithEvents BtnDeleteImages As Button
 End Class

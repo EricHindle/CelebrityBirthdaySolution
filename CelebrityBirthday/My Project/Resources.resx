@@ -172,7 +172,19 @@
   <data name="UNKNOWN_SIG" xml:space="preserve">
     <value>Unknown signature type</value>
   </data>
+  <data name="ANNIVERSARY" xml:space="preserve">
+    <value>Anniv_</value>
+  </data>
+  <data name="BIRTHDAY" xml:space="preserve">
+    <value>Birthdays_</value>
+  </data>
   <data name="BOTSD" xml:space="preserve">
     <value>BOTSD_</value>
+  </data>
+  <data name="SINGLE_TWEET" xml:space="preserve">
+    <value>SingleTweetImage</value>
+  </data>
+  <data name="TOTD" xml:space="preserve">
+    <value>Tweet of the Day</value>
   </data>
 </root>

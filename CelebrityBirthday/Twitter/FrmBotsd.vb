@@ -509,7 +509,6 @@ Public Class FrmBotsd
             oTextForm.ShowDialog()
         End Using
     End Sub
-
     Private Sub BtnClearImages_Click(sender As Object, e As EventArgs) Handles BtnClearImages.Click
         If MsgBox("Confirm delete BOTSD images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
             Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.BOTSD & "*.*"})
@@ -518,7 +517,6 @@ Public Class FrmBotsd
             Next
         End If
     End Sub
-
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         Dim _imageFilename As String = Nothing
         If PictureBox1.Image IsNot Nothing Then

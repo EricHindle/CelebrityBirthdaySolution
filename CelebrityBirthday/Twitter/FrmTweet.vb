@@ -1,4 +1,5 @@
-﻿Imports System.ComponentModel
+﻿Imports System.Collections.ObjectModel
+Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Imaging
 Imports System.IO
@@ -26,8 +27,6 @@ Public Class FrmTweet
 #Region "properties"
     Private _daySelection As Integer
     Private _monthSelection As Integer
-
-
     Public Property MonthSelection() As Integer
         Get
             Return _monthSelection
@@ -166,7 +165,7 @@ Public Class FrmTweet
     Private Sub BtnTotd_Click(sender As Object, e As EventArgs) Handles BtnTotd.Click
         If CountOfCheckedNames() = 1 Then
             Dim newPageIndex As Integer = TabControl1.TabCount
-            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(newPageIndex, "Tweet of the Day")
+            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(newPageIndex, My.Resources.TOTD)
             Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
             Dim pbControl As PictureBox = GetPictureBoxFromPage(newTweetTabPage)
             For Each _topNode As TreeNode In tvBirthday.Nodes
@@ -187,7 +186,6 @@ Public Class FrmTweet
             RtbTextChanged(Nothing, Nothing)
         End If
     End Sub
-
     Private Shared Function BuildTweetText(ByRef _person As Person) As String
         Dim _text As New StringBuilder
         Dim _died As String = " (d. " & CStr(Math.Abs(_person.DeathYear)) & If(_person.DeathYear < 0, " BCE", "") & ")"
@@ -214,7 +212,6 @@ Public Class FrmTweet
         End If
         Return _text.ToString
     End Function
-
     Private Sub BtnUncheck_Click(sender As Object, e As EventArgs) Handles BtnUncheck.Click
         For Each _node As TreeNode In tvBirthday.Nodes
             _node.Checked = False
@@ -225,6 +222,19 @@ Public Class FrmTweet
             End If
         Next
     End Sub
+    Private Sub DateSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
+        NudBirthdaysPerTweet.Value = 0
+        NudAnnivsPerTweet.Value = 0
+    End Sub
+    Private Sub BtnDeleteImages_Click(sender As Object, e As EventArgs) Handles BtnDeleteImages.Click
+        If MsgBox("Confirm delete tweet images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.ANNIVERSARY & "*.*", My.Resources.BIRTHDAY & "*.*", My.Resources.TOTD & "*.*"})
+            For Each _imageFile As String In _imageList
+                My.Computer.FileSystem.DeleteFile(_imageFile)
+            Next
+        End If
+    End Sub
+
 #End Region
 #Region "Form subroutines"
     Private Sub DisplayStatus(_text As String, Optional _isAppend As Boolean = False)
@@ -419,6 +429,34 @@ Public Class FrmTweet
         End If
         Return Nothing
     End Function
+    'Form overrides dispose to clean up the component list.
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+            If disposing Then
+                If personTable IsNot Nothing Then
+                    For Each oPerson In personTable
+                        oPerson.Dispose()
+                    Next
+                End If
+                If oAnniversaryList IsNot Nothing Then
+                    For Each oPerson In oAnniversaryList
+                        oPerson.Dispose()
+                    Next
+                End If
+                If oBirthdayList IsNot Nothing Then
+                    For Each oPerson In oBirthdayList
+                        oPerson.Dispose()
+                    Next
+                End If
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
 #End Region
 #Region "Tree subroutines"
     Private Function BuildTrees() As Boolean
@@ -436,8 +474,8 @@ Public Class FrmTweet
                 oBirthdayList = FindBirthdays(_day, _mth, True)
                 oAnniversaryList = FindAnniversaries(_day, _mth, True)
                 LblImageCount.Text = CStr(personTable.Count) + " people selected"
-                AddTypeNode(oAnniversaryList, testDate, tvBirthday, "Anniversary")
-                AddTypeNode(oBirthdayList, testDate, tvBirthday, "Birthday")
+                AddTypeNode(oAnniversaryList, testDate, tvBirthday, My.Resources.ANNIVERSARY)
+                AddTypeNode(oBirthdayList, testDate, tvBirthday, My.Resources.BIRTHDAY)
                 DisplayStatus("Selection Complete")
                 isBuiltOk = True
             Else
@@ -535,12 +573,12 @@ Public Class FrmTweet
             Else
                 Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, "B")
                 oTweetLists.AddRange(_birthdayImageTweets)
-                tabTitle = "Birthdays_"
+                tabTitle = My.Resources.BIRTHDAY
                 GenerateTweets(oTweetLists, tabTitle, _imageStart)
                 _imageStart = oTweetLists.Count
                 Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, "A")
                 oTweetLists.AddRange(_annivImageTweets)
-                tabTitle = "Anniv_"
+                tabTitle = My.Resources.ANNIVERSARY
                 GenerateTweets(oTweetLists, tabTitle, _imageStart)
             End If
             DisplayStatus("Images Complete")
@@ -790,52 +828,5 @@ Public Class FrmTweet
         End With
         Return newTabpage
     End Function
-
-    Private Sub DateSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
-        NudBirthdaysPerTweet.Value = 0
-        NudAnnivsPerTweet.Value = 0
-    End Sub
-
-    'Form overrides dispose to clean up the component list.
-    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-        Try
-            If disposing AndAlso components IsNot Nothing Then
-                components.Dispose()
-            End If
-            If disposing Then
-                If personTable IsNot Nothing Then
-                    For Each oPerson In personTable
-                        oPerson.Dispose()
-                    Next
-                End If
-                If oAnniversaryList IsNot Nothing Then
-                    For Each oPerson In oAnniversaryList
-                        oPerson.Dispose()
-                    Next
-                End If
-                If oBirthdayList IsNot Nothing Then
-                    For Each oPerson In oBirthdayList
-                        oPerson.Dispose()
-                    Next
-                End If
-            End If
-        Finally
-            MyBase.Dispose(disposing)
-        End Try
-    End Sub
-
-    'Private Sub TvBirthday_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck
-    '    If Not isBuildingTrees Then
-    '        Dim node As TreeNode = e.Node
-    '        Dim ischecked As Boolean = node.Checked
-    '        Try
-
-    '        Catch sysex As System.StackOverflowException
-    '            Debug.Print(sysex.Message)
-    '        Catch ex As Exception
-    '            Debug.Print(ex.Message)
-    '        End Try
-    '    End If
-    'End Sub
 #End Region
 End Class

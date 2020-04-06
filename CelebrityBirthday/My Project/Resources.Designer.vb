@@ -61,6 +61,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Anniv_.
+        '''</summary>
+        Friend ReadOnly Property ANNIVERSARY() As String
+            Get
+                Return ResourceManager.GetString("ANNIVERSARY", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Birthdays_.
+        '''</summary>
+        Friend ReadOnly Property BIRTHDAY() As String
+            Get
+                Return ResourceManager.GetString("BIRTHDAY", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property blank() As System.Drawing.Bitmap
@@ -212,6 +230,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to SingleTweetImage.
+        '''</summary>
+        Friend ReadOnly Property SINGLE_TWEET() As String
+            Get
+                Return ResourceManager.GetString("SINGLE_TWEET", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property StatusBar() As System.Drawing.Bitmap
@@ -227,6 +254,15 @@ Namespace My.Resources
         Friend ReadOnly Property TEXT() As String
             Get
                 Return ResourceManager.GetString("TEXT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Tweet of the Day.
+        '''</summary>
+        Friend ReadOnly Property TOTD() As String
+            Get
+                Return ResourceManager.GetString("TOTD", resourceCulture)
             End Get
         End Property
         

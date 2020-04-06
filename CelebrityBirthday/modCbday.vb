@@ -155,14 +155,14 @@ Friend Module modCbday
         ' If required by the server, set the credentials.
         request.Credentials = CredentialCache.DefaultCredentials
         ' Get the response.
-        Dim response As WebResponse
+        Dim response As WebResponse = Nothing
+        Dim memorystream As New MemoryStream
         Try
             response = request.GetResponse()
             ' Get the stream containing content returned by the server.
             Dim dataStream As Stream = response.GetResponseStream()
             ' Read the content.
             Dim buffer(4096) As Byte
-            Dim memorystream As New MemoryStream
             Dim bct As Integer = -1
             Do While (bct <> 0)
                 bct = dataStream.Read(buffer, 0, buffer.Length)
@@ -194,13 +194,18 @@ Friend Module modCbday
                     bw = Nothing
                 End Try
             End If
-            ' Clean up the streams and the response.
-            memorystream.Close()
-            response.Close()
-            memorystream.Dispose()
-            response = Nothing
-        Catch ex As notsupportedException
+        Catch ex As WebException
             rtnval = False
+        Catch ex As NotSupportedException
+            rtnval = False
+        Finally
+            ' Clean up the streams and the response.
+            If response IsNot Nothing Then
+                response.Close()
+                response.Dispose()
+            End If
+            memorystream.Close()
+            memorystream.Dispose()
         End Try
         Return rtnval
     End Function
@@ -280,6 +285,7 @@ Friend Module modCbday
             response = request.GetResponse()
         Catch ex As UriFormatException
         Catch ex As ArgumentException
+        Catch ex As WebException
         End Try
         Return response
     End Function
@@ -314,6 +320,8 @@ Friend Module modCbday
             DisplayException(MethodBase.GetCurrentMethod, ex, "Out Of Memory")
         Catch ex As IOException
             DisplayException(MethodBase.GetCurrentMethod, ex, "IO")
+        Catch ex As NullReferenceException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "NullReference")
         End Try
         Return _extract
     End Function
