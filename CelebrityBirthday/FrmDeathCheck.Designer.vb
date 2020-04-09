@@ -24,21 +24,21 @@ Partial Class FrmDeathCheck
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDeathCheck))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.btnClose = New System.Windows.Forms.Button()
         Me.dgvAllPersons = New System.Windows.Forms.DataGridView()
-        Me.dgvWarnings = New System.Windows.Forms.DataGridView()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.allId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.allName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.allDob = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvWarnings = New System.Windows.Forms.DataGridView()
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.BtnStart = New System.Windows.Forms.Button()
+        Me.BtnWrite = New System.Windows.Forms.Button()
         Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xDeath = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.BtnStart = New System.Windows.Forms.Button()
-        Me.BtnWrite = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -64,21 +64,9 @@ Partial Class FrmDeathCheck
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.dgvWarnings)
-        Me.SplitContainer1.Size = New System.Drawing.Size(850, 482)
-        Me.SplitContainer1.SplitterDistance = 311
+        Me.SplitContainer1.Size = New System.Drawing.Size(1074, 482)
+        Me.SplitContainer1.SplitterDistance = 330
         Me.SplitContainer1.TabIndex = 0
-        '
-        'btnClose
-        '
-        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(723, 500)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(139, 33)
-        Me.btnClose.TabIndex = 9
-        Me.btnClose.Text = "Close"
-        Me.btnClose.UseVisualStyleBackColor = True
         '
         'dgvAllPersons
         '
@@ -95,37 +83,8 @@ Partial Class FrmDeathCheck
         Me.dgvAllPersons.ReadOnly = True
         Me.dgvAllPersons.RowHeadersVisible = False
         Me.dgvAllPersons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvAllPersons.Size = New System.Drawing.Size(300, 472)
+        Me.dgvAllPersons.Size = New System.Drawing.Size(319, 472)
         Me.dgvAllPersons.TabIndex = 0
-        '
-        'dgvWarnings
-        '
-        Me.dgvWarnings.AllowUserToAddRows = False
-        Me.dgvWarnings.AllowUserToDeleteRows = False
-        Me.dgvWarnings.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvWarnings.BackgroundColor = System.Drawing.Color.GhostWhite
-        Me.dgvWarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvWarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.xId, Me.xName, Me.xBirth, Me.xDeath, Me.xDesc})
-        Me.dgvWarnings.Location = New System.Drawing.Point(3, 3)
-        Me.dgvWarnings.Name = "dgvWarnings"
-        Me.dgvWarnings.ReadOnly = True
-        Me.dgvWarnings.RowHeadersVisible = False
-        Me.dgvWarnings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvWarnings.Size = New System.Drawing.Size(525, 472)
-        Me.dgvWarnings.TabIndex = 0
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
-        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 536)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(874, 22)
-        Me.StatusStrip1.TabIndex = 10
-        Me.StatusStrip1.Text = "StatusStrip1"
         '
         'allId
         '
@@ -149,6 +108,79 @@ Partial Class FrmDeathCheck
         Me.allDob.Name = "allDob"
         Me.allDob.ReadOnly = True
         '
+        'dgvWarnings
+        '
+        Me.dgvWarnings.AllowUserToAddRows = False
+        Me.dgvWarnings.AllowUserToDeleteRows = False
+        Me.dgvWarnings.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvWarnings.BackgroundColor = System.Drawing.Color.GhostWhite
+        Me.dgvWarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvWarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.xId, Me.xName, Me.xBirth, Me.xDeath, Me.xDesc})
+        Me.dgvWarnings.Location = New System.Drawing.Point(3, 3)
+        Me.dgvWarnings.Name = "dgvWarnings"
+        Me.dgvWarnings.ReadOnly = True
+        Me.dgvWarnings.RowHeadersVisible = False
+        Me.dgvWarnings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvWarnings.Size = New System.Drawing.Size(730, 472)
+        Me.dgvWarnings.TabIndex = 0
+        '
+        'btnClose
+        '
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnClose.Location = New System.Drawing.Point(947, 500)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(139, 33)
+        Me.btnClose.TabIndex = 9
+        Me.btnClose.Text = "Close"
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 536)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(1098, 22)
+        Me.StatusStrip1.TabIndex = 10
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'lblStatus
+        '
+        Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.lblStatus.Size = New System.Drawing.Size(3, 17)
+        '
+        'BtnStart
+        '
+        Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnStart.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnStart.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnStart.Location = New System.Drawing.Point(236, 500)
+        Me.BtnStart.Name = "BtnStart"
+        Me.BtnStart.Size = New System.Drawing.Size(139, 33)
+        Me.BtnStart.TabIndex = 11
+        Me.BtnStart.Text = "Start Check"
+        Me.BtnStart.UseVisualStyleBackColor = True
+        '
+        'BtnWrite
+        '
+        Me.BtnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnWrite.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWrite.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWrite.Location = New System.Drawing.Point(445, 500)
+        Me.BtnWrite.Name = "BtnWrite"
+        Me.BtnWrite.Size = New System.Drawing.Size(139, 33)
+        Me.BtnWrite.TabIndex = 12
+        Me.BtnWrite.Text = "Write File"
+        Me.BtnWrite.UseVisualStyleBackColor = True
+        '
         'xId
         '
         Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
@@ -159,10 +191,11 @@ Partial Class FrmDeathCheck
         '
         'xName
         '
-        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.xName.HeaderText = "Name"
         Me.xName.Name = "xName"
         Me.xName.ReadOnly = True
+        Me.xName.Width = 150
         '
         'xBirth
         '
@@ -180,49 +213,17 @@ Partial Class FrmDeathCheck
         '
         'xDesc
         '
-        Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.xDesc.HeaderText = "Description"
         Me.xDesc.Name = "xDesc"
         Me.xDesc.ReadOnly = True
-        '
-        'lblStatus
-        '
-        Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
-        Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(3, 17)
-        '
-        'BtnStart
-        '
-        Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnStart.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnStart.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnStart.Location = New System.Drawing.Point(12, 500)
-        Me.BtnStart.Name = "BtnStart"
-        Me.BtnStart.Size = New System.Drawing.Size(139, 33)
-        Me.BtnStart.TabIndex = 11
-        Me.BtnStart.Text = "Start Check"
-        Me.BtnStart.UseVisualStyleBackColor = True
-        '
-        'BtnWrite
-        '
-        Me.BtnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnWrite.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnWrite.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWrite.Location = New System.Drawing.Point(221, 500)
-        Me.BtnWrite.Name = "BtnWrite"
-        Me.BtnWrite.Size = New System.Drawing.Size(139, 33)
-        Me.BtnWrite.TabIndex = 12
-        Me.BtnWrite.Text = "Write File"
-        Me.BtnWrite.UseVisualStyleBackColor = True
         '
         'FrmDeathCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(874, 558)
+        Me.ClientSize = New System.Drawing.Size(1098, 558)
         Me.Controls.Add(Me.BtnWrite)
         Me.Controls.Add(Me.BtnStart)
         Me.Controls.Add(Me.StatusStrip1)
@@ -252,13 +253,13 @@ Partial Class FrmDeathCheck
     Friend WithEvents allName As DataGridViewTextBoxColumn
     Friend WithEvents allDob As DataGridViewTextBoxColumn
     Friend WithEvents dgvWarnings As DataGridView
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents lblStatus As ToolStripStatusLabel
+    Friend WithEvents BtnStart As Button
+    Friend WithEvents BtnWrite As Button
     Friend WithEvents xId As DataGridViewTextBoxColumn
     Friend WithEvents xName As DataGridViewTextBoxColumn
     Friend WithEvents xBirth As DataGridViewTextBoxColumn
     Friend WithEvents xDeath As DataGridViewTextBoxColumn
     Friend WithEvents xDesc As DataGridViewTextBoxColumn
-    Friend WithEvents StatusStrip1 As StatusStrip
-    Friend WithEvents lblStatus As ToolStripStatusLabel
-    Friend WithEvents BtnStart As Button
-    Friend WithEvents BtnWrite As Button
 End Class
