@@ -253,6 +253,10 @@ Friend Module modCbday
         If _firstOpen < 0 Then
             Return _return
         End If
+        If _string.IndexOf(_closeChar, _firstOpen + 1) < 0 Then
+            _return = Split(_string, _openChar, 2).ToList
+            Return _return
+        End If
         Dim _lastClose As Integer = 0
         Dim _closereq As Integer = 1
         Dim _closefound As Integer = 0
@@ -267,9 +271,18 @@ Friend Module modCbday
             End Select
             x += 1
         Loop
-        Dim _post As String = _string.Substring(_lastClose + 1)
-        Dim _pre As String = _string.Substring(0, _firstOpen)
-        Dim _inner As String = _string.Substring(_firstOpen + 1, _lastClose - _firstOpen - 1)
+        Dim _post As String
+        Dim _pre As String
+        Dim _inner As String
+        Try
+            _post = _string.Substring(_lastClose + 1)
+            _pre = _string.Substring(0, _firstOpen)
+            _inner = _string.Substring(_firstOpen + 1, _lastClose - _firstOpen - 1)
+        Catch ex As ArgumentException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Out of Range")
+            Return _return
+        End Try
+
         Return MakeList(_pre, _inner, _post)
     End Function
 

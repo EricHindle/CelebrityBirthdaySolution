@@ -174,11 +174,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to No close bracket.
+        '''</summary>
+        Friend ReadOnly Property NO_CLOSE_BRACKET() As String
+            Get
+                Return ResourceManager.GetString("NO_CLOSE_BRACKET", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to No load date available.
         '''</summary>
         Friend ReadOnly Property NO_LOAD_DATE() As String
             Get
                 Return ResourceManager.GetString("NO_LOAD_DATE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to No open bracket.
+        '''</summary>
+        Friend ReadOnly Property NO_OPEN_BRACKET() As String
+            Get
+                Return ResourceManager.GetString("NO_OPEN_BRACKET", resourceCulture)
             End Get
         End Property
         

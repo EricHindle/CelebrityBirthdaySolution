@@ -15,7 +15,8 @@ Public Class FrmDeathCheck
 
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         DisplayMessage("Finding the living")
-        personTable = FindLivingPeople()
+
+        personTable = FindLivingPeople(False)
         DisplayMessage("Found " & CStr(personTable.Count) & " people")
         For Each _person In personTable
             DisplayMessage(CStr(_person.Id) & " " & _person.Name)
@@ -23,7 +24,11 @@ Public Class FrmDeathCheck
                 AddAllRow(_person)
                 Dim _dateOfDeath As String = GetWikiDeathDate(_person.Name)
                 If _dateOfDeath IsNot Nothing Then
-                    AddXRow(_person, _dateOfDeath, "")
+                    If IsDate(_dateOfDeath) Then
+                        AddXRow(_person, _dateOfDeath, "")
+                    Else
+                        AddXRow(_person, "", _dateOfDeath)
+                    End If
                 End If
             Catch ex As DbException
                 If MsgBox(_person.Name & vbCrLf & "Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
@@ -40,20 +45,25 @@ Public Class FrmDeathCheck
         Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
         Dim _desc As String = RemoveSquareBrackets(FixQuotes(extract))
         Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
-        If _parts.Count = 3 Then
-            Dim datePart As String = _parts(1)
-            Dim _dates As String() = Split(datePart, " - ")
-            If _dates.Length = 2 Then
-                Try
-                    If IsDate(_dates(1)) Then
-                        _deathDate = CDate(_dates(1))
-                    End If
-                Catch ex As OverflowException
-                    Debug.Print(_searchName & " Not a date " & _dates(1))
-                End Try
-            End If
-        End If
-        Return If(_deathDate Is Nothing, Nothing, Format(_deathDate, "dd MMM yyyy"))
+        Dim _return As String = Nothing
+        Select Case _parts.Count
+            Case 3
+                Dim datePart As String = _parts(1)
+                Dim _dates As String() = Split(datePart, " - ")
+                If _dates.Length = 2 Then
+                    Try
+                        If IsDate(_dates(1)) Then
+                            _deathDate = CDate(_dates(1))
+                        End If
+                    Catch ex As OverflowException
+                        _return = _searchName & " Not a date " & _dates(1)
+                    End Try
+                End If
+                _return = If(_deathDate Is Nothing, Nothing, Format(_deathDate, "dd MMM yyyy"))
+            Case 2
+                _return = _searchName & " " & My.Resources.NO_CLOSE_BRACKET
+        End Select
+        Return _return
     End Function
 
     Private Sub DisplayMessage(oText As String)

@@ -188,14 +188,14 @@ Module modDatabase
 
         Return oPersonList
     End Function
-    Public Function FindLivingPeople() As List(Of Person)
+    Public Function FindLivingPeople(Optional isIncludeImage As Boolean = True) As List(Of Person)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.Fill(oFullPersonTable)
 
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
                 If oRow.deathyear = 0 Then
-                    _List.Add(New Person(oRow))
+                    _List.Add(New Person(oRow, isIncludeImage))
                 End If
             Next
         Catch dbEx As DbException

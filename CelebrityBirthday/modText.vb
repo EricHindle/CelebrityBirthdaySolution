@@ -14,6 +14,6 @@
         Return _return
     End Function
     Public Function FixQuotes(ByVal _text As String) As String
-        Return _text.Trim(vbCrLf).Replace("–", "-").Replace(Chr(147), """").Replace(Chr(148), """")
+        Return _text.Trim(vbCrLf).Replace(Chr(147), """").Replace(Chr(148), """").Replace(Chr(150), "-")
     End Function
 End Module

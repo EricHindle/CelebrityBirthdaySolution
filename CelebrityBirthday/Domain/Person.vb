@@ -298,7 +298,7 @@ Public Class Person
         End If
         _unsavedChanges = False
     End Sub
-    Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.FullPersonRow)
+    Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.FullPersonRow, Optional isIncludeImage As Boolean = True)
         InitialisePerson()
         If oRow IsNot Nothing Then
             _id = oRow.id
@@ -314,11 +314,15 @@ Public Class Person
             _deathday = oRow.deathday
             _birthPlace = oRow.birthplace
             _birthName = oRow.birthname
-            _image = New ImageIdentity(oRow.id, oRow.imgfilename, oRow.imgfiletype, oRow.imgloadmonth, oRow.imgloadyr)
+            If isIncludeImage Then
+                _image = New ImageIdentity(oRow.id, oRow.imgfilename, oRow.imgfiletype, oRow.imgloadmonth, oRow.imgloadyr)
+            Else
+                _image = New ImageIdentity()
+            End If
             _sortSeq = oRow.sortseq
-            _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet)
-        End If
-        _unsavedChanges = False
+                _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet)
+            End If
+            _unsavedChanges = False
     End Sub
     Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.PersonRow)
         InitialisePerson()

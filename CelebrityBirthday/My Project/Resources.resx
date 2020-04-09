@@ -187,4 +187,10 @@
   <data name="TOTD" xml:space="preserve">
     <value>Tweet of the Day</value>
   </data>
+  <data name="NO_CLOSE_BRACKET" xml:space="preserve">
+    <value>No close bracket</value>
+  </data>
+  <data name="NO_OPEN_BRACKET" xml:space="preserve">
+    <value>No open bracket</value>
+  </data>
 </root>
