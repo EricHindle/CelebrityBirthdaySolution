@@ -276,6 +276,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Today.
+        '''</summary>
+        Friend ReadOnly Property TODAY() As String
+            Get
+                Return ResourceManager.GetString("TODAY", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Tweet of the Day.
         '''</summary>
         Friend ReadOnly Property TOTD() As String

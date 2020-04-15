@@ -193,4 +193,7 @@
   <data name="NO_OPEN_BRACKET" xml:space="preserve">
     <value>No open bracket</value>
   </data>
+  <data name="TODAY" xml:space="preserve">
+    <value>Today</value>
+  </data>
 </root>

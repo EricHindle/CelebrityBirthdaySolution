@@ -9,10 +9,10 @@ Public Class FrmBotsd
     Private _imageList As New List(Of Person)
     Private IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
-    Private _day As Integer
-    Private _month As Integer
 #End Region
 #Region "properites"
+    Private _day As Integer
+    Private _month As Integer
     Public Property ThisMonth() As Integer
         Get
             Return _month
@@ -42,8 +42,13 @@ Public Class FrmBotsd
     Private Sub FrmBotsd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.botsdformpos)
         IsNoGenerate = True
-        LblMonth.Text = Format(New Date(2000, _month, 1), "MMMM")
-        LblDay.Text = CStr(_day)
+        Try
+            LblMonth.Text = Format(New Date(2000, ThisMonth, 1), "MMMM")
+            LblDay.Text = CStr(ThisDay)
+        Catch ex As ArgumentOutOfRangeException
+            MsgBox("No date selected", MsgBoxStyle.Exclamation, "Error")
+            Me.Close()
+        End Try
         GetAuthData()
         FillTwitterUserList()
         IsNoGenerate = False
@@ -300,12 +305,12 @@ Public Class FrmBotsd
             End If
         End If
         If Not String.IsNullOrEmpty(_mediaId) Then
-            InsertTweet("", _month, _day, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
+            InsertTweet("", _month, ThisDay, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
             sto.MediaIds = {_mediaId}
         End If
         Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
         If _twitterStatus IsNot Nothing Then
-            InsertTweet(sto.Status, _month, _day, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
+            InsertTweet(sto.Status, _month, ThisDay, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
             WriteTrace("OK: " & _twitterStatus.Id, True)
         Else
             ' tweet failed
@@ -468,8 +473,8 @@ Public Class FrmBotsd
     End Sub
     Private Sub GenerateWordpress()
         Dim sb As New StringBuilder
-        sb.Append("<strong>").Append(CStr(_day))
-        Select Case _day
+        sb.Append("<strong>").Append(CStr(ThisDay))
+        Select Case ThisDay
             Case 1, 21, 31
                 sb.Append("st")
             Case 2, 22

@@ -490,7 +490,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:CelebrityBirthday"
         "ProductCode" = "8:{DEABBB2D-CD93-42AF-844B-7EB46EF9E7A1}"
-        "PackageCode" = "8:{8EC53A8B-B87F-4ADA-BAF4-D22846E870FA}"
+        "PackageCode" = "8:{843A5E34-5F35-4CA3-9BD3-C7E6CF9E75E8}"
         "UpgradeCode" = "8:{468C0A34-5E55-4989-9007-4D7F24BE0298}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
