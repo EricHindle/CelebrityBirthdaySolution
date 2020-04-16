@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -387,6 +387,19 @@ Namespace My
             End Get
             Set
                 Me("textformpos") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://en.wikipedia.org/w/api.php?action=query&list=allpages&redirects=&formatve"& _ 
+            "rsion=2&format=json&apfrom=#f&apto=#t")>  _
+        Public Property wikiTitleSearch() As String
+            Get
+                Return CType(Me("wikiTitleSearch"),String)
+            End Get
+            Set
+                Me("wikiTitleSearch") = value
             End Set
         End Property
     End Class

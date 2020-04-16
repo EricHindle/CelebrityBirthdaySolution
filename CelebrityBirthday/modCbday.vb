@@ -226,7 +226,9 @@ Friend Module modCbday
     Public Function GetWikiExtractString(oText As String, Optional sentences As Integer = 2) As String
         Return My.Settings.wikiExtractSearch.Replace("#", CStr(sentences)) & oText.Replace(" ", "+")
     End Function
-
+    Public Function GetWikiTitleString(oSearchName As String) As String
+        Return My.Settings.wikiTitleSearch.Replace("#f", oSearchName).Replace("#t", oSearchName & " (z)")
+    End Function
     Public Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
         Dim _rtb As New RichTextBox
         Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)

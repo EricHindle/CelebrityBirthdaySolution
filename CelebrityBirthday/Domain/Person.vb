@@ -320,8 +320,8 @@ Public Class Person
                 _image = New ImageIdentity()
             End If
             _sortSeq = oRow.sortseq
-                _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet)
-            End If
+            _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet, oRow.wikiId, oRow.botsd)
+        End If
             _unsavedChanges = False
     End Sub
     Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.PersonRow)

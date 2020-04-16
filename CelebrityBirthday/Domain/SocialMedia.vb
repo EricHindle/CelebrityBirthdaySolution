@@ -2,6 +2,24 @@
     Private _id As Integer
     Private _twitterHandle As String
     Private _noTweet As Boolean
+    Private _wikiId As String
+    Private _botsd As Integer
+    Public Property Botsd() As Integer
+        Get
+            Return _botsd
+        End Get
+        Set(ByVal value As Integer)
+            _botsd = value
+        End Set
+    End Property
+    Public Property WikiId() As String
+        Get
+            Return _wikiId
+        End Get
+        Set(ByVal value As String)
+            _wikiId = value
+        End Set
+    End Property
     Public Property IsNoTweet() As Boolean
         Get
             Return _noTweet
@@ -30,15 +48,19 @@
         _id = -1
         _twitterHandle = ""
         _noTweet = False
+        _wikiId = ""
+        _botsd = 0
     End Sub
     Public Sub New()
         Initialise()
     End Sub
-    Public Sub New(pId As Integer, pTwitterHandle As String, pNoTweet As Boolean)
+    Public Sub New(pId As Integer, pTwitterHandle As String, pNoTweet As Boolean, pWikiId As String, pBotsd As Integer)
         Initialise()
         _id = pId
         _twitterHandle = pTwitterHandle
         _noTweet = pNoTweet
+        _wikiId = pWikiId
+        _botsd = pBotsd
     End Sub
     Public Sub New(pSocialMedia As SocialMedia)
         Initialise()
@@ -46,6 +68,8 @@
             _id = pSocialMedia.Id
             _twitterHandle = pSocialMedia.TwitterHandle
             _noTweet = pSocialMedia.IsNoTweet
+            _wikiId = pSocialMedia.WikiId
+            _botsd = pSocialMedia.Botsd
         End If
     End Sub
     Public Sub New(pSocialMedia As CelebrityBirthdayDataSet.SocialMediaRow)
@@ -54,6 +78,9 @@
             _id = pSocialMedia.personId
             _twitterHandle = pSocialMedia.twitterHandle
             _noTweet = pSocialMedia.noTweet
+            _wikiId = If(pSocialMedia.IswikiIdNull, "", pSocialMedia.wikiId)
+            _botsd = If(pSocialMedia.IsbotsdNull, 0, pSocialMedia.botsd)
         End If
     End Sub
+
 End Class

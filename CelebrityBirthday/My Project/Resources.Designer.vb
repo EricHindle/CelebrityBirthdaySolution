@@ -301,5 +301,14 @@ Namespace My.Resources
                 Return ResourceManager.GetString("UNKNOWN_SIG", resourceCulture)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to https://en.wikipedia.org/wiki/.
+        '''</summary>
+        Friend ReadOnly Property WIKIURL() As String
+            Get
+                Return ResourceManager.GetString("WIKIURL", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

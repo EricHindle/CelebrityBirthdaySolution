@@ -100,6 +100,8 @@ Partial Class FrmUpdateDatabase
         Me.BtnTitleName = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.BtnToday = New System.Windows.Forms.Button()
+        Me.TxtWikiId = New System.Windows.Forms.TextBox()
+        Me.BtnGetWikiId = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -113,7 +115,7 @@ Partial Class FrmUpdateDatabase
         Me.cbNoTweet.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbNoTweet.AutoSize = True
         Me.cbNoTweet.ForeColor = System.Drawing.Color.Black
-        Me.cbNoTweet.Location = New System.Drawing.Point(389, 616)
+        Me.cbNoTweet.Location = New System.Drawing.Point(389, 633)
         Me.cbNoTweet.Name = "cbNoTweet"
         Me.cbNoTweet.Size = New System.Drawing.Size(94, 18)
         Me.cbNoTweet.TabIndex = 47
@@ -125,7 +127,7 @@ Partial Class FrmUpdateDatabase
         Me.btnTwitter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnTwitter.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnTwitter.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnTwitter.Location = New System.Drawing.Point(35, 609)
+        Me.btnTwitter.Location = New System.Drawing.Point(35, 626)
         Me.btnTwitter.Name = "btnTwitter"
         Me.btnTwitter.Size = New System.Drawing.Size(87, 37)
         Me.btnTwitter.TabIndex = 45
@@ -138,7 +140,7 @@ Partial Class FrmUpdateDatabase
         Me.txtTwitter.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTwitter.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTwitter.Location = New System.Drawing.Point(162, 613)
+        Me.txtTwitter.Location = New System.Drawing.Point(162, 630)
         Me.txtTwitter.Name = "txtTwitter"
         Me.txtTwitter.Size = New System.Drawing.Size(217, 26)
         Me.txtTwitter.TabIndex = 11
@@ -148,7 +150,7 @@ Partial Class FrmUpdateDatabase
         Me.Label16.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label16.AutoSize = True
         Me.Label16.ForeColor = System.Drawing.Color.Black
-        Me.Label16.Location = New System.Drawing.Point(129, 617)
+        Me.Label16.Location = New System.Drawing.Point(129, 634)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(18, 14)
         Me.Label16.TabIndex = 46
@@ -171,7 +173,7 @@ Partial Class FrmUpdateDatabase
         Me.btnRTB.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnRTB.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRTB.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnRTB.Location = New System.Drawing.Point(120, 424)
+        Me.btnRTB.Location = New System.Drawing.Point(119, 447)
         Me.btnRTB.Name = "btnRTB"
         Me.btnRTB.Size = New System.Drawing.Size(36, 29)
         Me.btnRTB.TabIndex = 18
@@ -190,7 +192,7 @@ Partial Class FrmUpdateDatabase
         Me.txtDesc.Multiline = True
         Me.txtDesc.Name = "txtDesc"
         Me.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDesc.Size = New System.Drawing.Size(672, 288)
+        Me.txtDesc.Size = New System.Drawing.Size(672, 313)
         Me.txtDesc.TabIndex = 7
         '
         'ContextMenuStrip1
@@ -312,7 +314,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.btnCopyBirthName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCopyBirthName.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCopyBirthName.Location = New System.Drawing.Point(848, 563)
+        Me.btnCopyBirthName.Location = New System.Drawing.Point(848, 580)
         Me.btnCopyBirthName.Name = "btnCopyBirthName"
         Me.btnCopyBirthName.Size = New System.Drawing.Size(35, 26)
         Me.btnCopyBirthName.TabIndex = 41
@@ -343,7 +345,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.btnCopyBirthPlace.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCopyBirthPlace.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCopyBirthPlace.Location = New System.Drawing.Point(848, 520)
+        Me.btnCopyBirthPlace.Location = New System.Drawing.Point(848, 537)
         Me.btnCopyBirthPlace.Name = "btnCopyBirthPlace"
         Me.btnCopyBirthPlace.Size = New System.Drawing.Size(35, 26)
         Me.btnCopyBirthPlace.TabIndex = 40
@@ -356,7 +358,7 @@ Partial Class FrmUpdateDatabase
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(35, 567)
+        Me.Label15.Location = New System.Drawing.Point(35, 584)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(67, 14)
         Me.Label15.TabIndex = 44
@@ -368,7 +370,7 @@ Partial Class FrmUpdateDatabase
         Me.txtBirthName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtBirthName.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBirthName.Location = New System.Drawing.Point(162, 563)
+        Me.txtBirthName.Location = New System.Drawing.Point(162, 580)
         Me.txtBirthName.Name = "txtBirthName"
         Me.txtBirthName.Size = New System.Drawing.Size(672, 26)
         Me.txtBirthName.TabIndex = 10
@@ -379,7 +381,7 @@ Partial Class FrmUpdateDatabase
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.Black
-        Me.Label14.Location = New System.Drawing.Point(35, 524)
+        Me.Label14.Location = New System.Drawing.Point(35, 541)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(60, 14)
         Me.Label14.TabIndex = 43
@@ -391,7 +393,7 @@ Partial Class FrmUpdateDatabase
         Me.txtBirthPlace.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtBirthPlace.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBirthPlace.Location = New System.Drawing.Point(162, 520)
+        Me.txtBirthPlace.Location = New System.Drawing.Point(162, 537)
         Me.txtBirthPlace.Name = "txtBirthPlace"
         Me.txtBirthPlace.Size = New System.Drawing.Size(672, 26)
         Me.txtBirthPlace.TabIndex = 9
@@ -428,7 +430,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.btnCreateShortDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCreateShortDesc.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCreateShortDesc.Location = New System.Drawing.Point(848, 477)
+        Me.btnCreateShortDesc.Location = New System.Drawing.Point(848, 494)
         Me.btnCreateShortDesc.Name = "btnCreateShortDesc"
         Me.btnCreateShortDesc.Size = New System.Drawing.Size(35, 26)
         Me.btnCreateShortDesc.TabIndex = 39
@@ -471,7 +473,7 @@ Partial Class FrmUpdateDatabase
         Me.txtShortDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtShortDesc.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtShortDesc.Location = New System.Drawing.Point(162, 477)
+        Me.txtShortDesc.Location = New System.Drawing.Point(162, 494)
         Me.txtShortDesc.Name = "txtShortDesc"
         Me.txtShortDesc.Size = New System.Drawing.Size(672, 26)
         Me.txtShortDesc.TabIndex = 8
@@ -482,7 +484,7 @@ Partial Class FrmUpdateDatabase
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Black
-        Me.Label10.Location = New System.Drawing.Point(35, 480)
+        Me.Label10.Location = New System.Drawing.Point(35, 497)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(66, 14)
         Me.Label10.TabIndex = 42
@@ -615,7 +617,7 @@ Partial Class FrmUpdateDatabase
         Me.rtbDesc.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbDesc.Location = New System.Drawing.Point(162, 165)
         Me.rtbDesc.Name = "rtbDesc"
-        Me.rtbDesc.Size = New System.Drawing.Size(672, 288)
+        Me.rtbDesc.Size = New System.Drawing.Size(672, 313)
         Me.rtbDesc.TabIndex = 33
         Me.rtbDesc.Text = ""
         Me.rtbDesc.Visible = False
@@ -633,7 +635,7 @@ Partial Class FrmUpdateDatabase
         Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnUpdate.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnUpdate.Location = New System.Drawing.Point(659, 613)
+        Me.btnUpdate.Location = New System.Drawing.Point(659, 630)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(100, 43)
         Me.btnUpdate.TabIndex = 28
@@ -645,7 +647,7 @@ Partial Class FrmUpdateDatabase
         Me.btnInsert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnInsert.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnInsert.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnInsert.Location = New System.Drawing.Point(534, 613)
+        Me.btnInsert.Location = New System.Drawing.Point(534, 630)
         Me.btnInsert.Name = "btnInsert"
         Me.btnInsert.Size = New System.Drawing.Size(100, 43)
         Me.btnInsert.TabIndex = 27
@@ -657,7 +659,7 @@ Partial Class FrmUpdateDatabase
         Me.btnClrNew.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClrNew.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClrNew.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClrNew.Location = New System.Drawing.Point(784, 613)
+        Me.btnClrNew.Location = New System.Drawing.Point(784, 630)
         Me.btnClrNew.Name = "btnClrNew"
         Me.btnClrNew.Size = New System.Drawing.Size(99, 43)
         Me.btnClrNew.TabIndex = 29
@@ -673,7 +675,7 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox1.Controls.Add(Me.btnUpdateSel)
         Me.GroupBox1.Controls.Add(Me.btnUpdateAll)
         Me.GroupBox1.Controls.Add(Me.btnDelete)
-        Me.GroupBox1.Location = New System.Drawing.Point(534, 680)
+        Me.GroupBox1.Location = New System.Drawing.Point(534, 689)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(353, 144)
         Me.GroupBox1.TabIndex = 30
@@ -751,7 +753,7 @@ Partial Class FrmUpdateDatabase
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1136, 781)
+        Me.btnClose.Location = New System.Drawing.Point(1136, 845)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(100, 43)
         Me.btnClose.TabIndex = 32
@@ -815,7 +817,7 @@ Partial Class FrmUpdateDatabase
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.Black
-        Me.Label11.Location = New System.Drawing.Point(12, 810)
+        Me.Label11.Location = New System.Drawing.Point(12, 874)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(49, 14)
         Me.Label11.TabIndex = 50
@@ -835,7 +837,7 @@ Partial Class FrmUpdateDatabase
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 837)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 901)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(1271, 22)
@@ -846,7 +848,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.BtnGetWikiText.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGetWikiText.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGetWikiText.Location = New System.Drawing.Point(36, 219)
+        Me.BtnGetWikiText.Location = New System.Drawing.Point(36, 231)
         Me.BtnGetWikiText.Name = "BtnGetWikiText"
         Me.BtnGetWikiText.Size = New System.Drawing.Size(69, 47)
         Me.BtnGetWikiText.TabIndex = 15
@@ -855,7 +857,7 @@ Partial Class FrmUpdateDatabase
         '
         'NudSentences
         '
-        Me.NudSentences.Location = New System.Drawing.Point(109, 231)
+        Me.NudSentences.Location = New System.Drawing.Point(110, 244)
         Me.NudSentences.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudSentences.Name = "NudSentences"
@@ -889,7 +891,7 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox2.Controls.Add(Me.TxtImageLoadMth)
         Me.GroupBox2.Controls.Add(Me.TxtImageLoadDay)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Location = New System.Drawing.Point(917, 502)
+        Me.GroupBox2.Location = New System.Drawing.Point(917, 494)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(319, 233)
         Me.GroupBox2.TabIndex = 31
@@ -963,11 +965,11 @@ Partial Class FrmUpdateDatabase
         Me.txtWiki.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtWiki.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtWiki.Location = New System.Drawing.Point(38, 703)
+        Me.txtWiki.Location = New System.Drawing.Point(38, 731)
         Me.txtWiki.Multiline = True
         Me.txtWiki.Name = "txtWiki"
         Me.txtWiki.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtWiki.Size = New System.Drawing.Size(411, 87)
+        Me.txtWiki.Size = New System.Drawing.Size(411, 123)
         Me.txtWiki.TabIndex = 49
         Me.txtWiki.Text = "xxxxxx"
         '
@@ -975,9 +977,10 @@ Partial Class FrmUpdateDatabase
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(35, 679)
+        Me.Label4.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(32, 695)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(29, 14)
+        Me.Label4.Size = New System.Drawing.Size(34, 19)
         Me.Label4.TabIndex = 48
         Me.Label4.Text = "Wiki"
         '
@@ -1011,12 +1014,35 @@ Partial Class FrmUpdateDatabase
         Me.BtnToday.Text = "Today"
         Me.BtnToday.UseVisualStyleBackColor = True
         '
+        'TxtWikiId
+        '
+        Me.TxtWikiId.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TxtWikiId.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtWikiId.Location = New System.Drawing.Point(82, 692)
+        Me.TxtWikiId.Name = "TxtWikiId"
+        Me.TxtWikiId.Size = New System.Drawing.Size(326, 24)
+        Me.TxtWikiId.TabIndex = 134
+        '
+        'BtnGetWikiId
+        '
+        Me.BtnGetWikiId.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnGetWikiId.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnGetWikiId.Location = New System.Drawing.Point(414, 690)
+        Me.BtnGetWikiId.Name = "BtnGetWikiId"
+        Me.BtnGetWikiId.Size = New System.Drawing.Size(35, 26)
+        Me.BtnGetWikiId.TabIndex = 135
+        Me.BtnGetWikiId.Text = "<"
+        Me.BtnGetWikiId.UseVisualStyleBackColor = True
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
-        Me.ClientSize = New System.Drawing.Size(1271, 859)
+        Me.ClientSize = New System.Drawing.Size(1271, 923)
+        Me.Controls.Add(Me.BtnGetWikiId)
+        Me.Controls.Add(Me.TxtWikiId)
         Me.Controls.Add(Me.BtnToday)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.BtnTitleName)
@@ -1181,4 +1207,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents BtnTitleName As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents BtnToday As Button
+    Friend WithEvents TxtWikiId As TextBox
+    Friend WithEvents BtnGetWikiId As Button
 End Class

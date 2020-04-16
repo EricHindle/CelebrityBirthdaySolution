@@ -51,4 +51,11 @@
         End Using
         Me.Show()
     End Sub
+    Private Sub BtnWikiIds_Click(sender As Object, e As EventArgs) Handles BtnWikiIds.Click
+        Me.Hide()
+        Using _check As New FrmAddWikiIds
+            _check.ShowDialog()
+        End Using
+        Me.Show()
+    End Sub
 End Class

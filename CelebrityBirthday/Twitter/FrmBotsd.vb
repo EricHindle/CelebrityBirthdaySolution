@@ -523,10 +523,56 @@ Public Class FrmBotsd
         End If
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
-        Dim _imageFilename As String = Nothing
+        Dim _imageFilename As String
         If PictureBox1.Image IsNot Nothing Then
             _imageFilename = SaveImage()
         End If
     End Sub
+    Private Sub BtnWpPost_Click(sender As Object, e As EventArgs) Handles BtnWpPost.Click
+        GenerateWpPost()
+    End Sub
+    Private Sub GenerateWpPost()
+        Dim sb As New StringBuilder
+        sb.Append("<strong>").Append(CStr(ThisDay))
+        Select Case ThisDay
+            Case 1, 21, 31
+                sb.Append("st")
+            Case 2, 22
+                sb.Append("nd")
+            Case 3, 23
+                sb.Append("rd")
+            Case Else
+                sb.Append("th")
+        End Select
+        sb.Append("</strong>").Append(vbCrLf)
+        For Each oRow As DataGridViewRow In DgvPairs.Rows
+            If Not String.IsNullOrEmpty(oRow.Cells(pairYear.Name).Value) Then
+                sb.Append(oRow.Cells(pairYear.Name).Value)
+                sb.Append("&nbsp;&nbsp;")
+                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson1.Name).Value) Then
+                    sb.Append(oRow.Cells(pairPerson1.Name).Value)
+                End If
+                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson2.Name).Value) Then
+                    sb.Append("&nbsp;/&nbsp;")
+                    sb.Append(oRow.Cells(pairPerson2.Name).Value)
+                End If
+                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson3.Name).Value) Then
+                    sb.Append("&nbsp;/&nbsp;")
+                    sb.Append(oRow.Cells(pairPerson3.Name).Value)
+                End If
+                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson4.Name).Value) Then
+                    sb.Append("&nbsp;/&nbsp;")
+                    sb.Append(oRow.Cells(pairPerson4.Name).Value)
+                End If
+                sb.Append("&nbsp;&nbsp;")
+                sb.Append(vbCrLf)
+            End If
+        Next
+        Using oTextForm As New FrmText
+            oTextForm.rtbText.Text = sb.ToString
+            oTextForm.ShowDialog()
+        End Using
+    End Sub
+
 #End Region
 End Class

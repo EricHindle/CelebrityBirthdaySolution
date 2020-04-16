@@ -91,5 +91,8 @@
     <Setting Name="textformpos" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="wikiTitleSearch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://en.wikipedia.org/w/api.php?action=query&amp;list=allpages&amp;redirects=&amp;formatversion=2&amp;format=json&amp;apfrom=#f&amp;apto=#t</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

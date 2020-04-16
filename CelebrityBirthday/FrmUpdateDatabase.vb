@@ -133,7 +133,7 @@ Public Class FrmUpdateDatabase
                                             txtBirthName.Text.Trim,
                                             txtBirthPlace.Text.Trim,
                                             New ImageIdentity(),
-                                            New SocialMedia(-1, txtTwitter.Text, cbNoTweet.Checked)) With {
+                                            New SocialMedia(-1, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, 0)) With {
                                             .UnsavedChanges = True
                                             }
                 Dim bInserted As Boolean = False
@@ -170,7 +170,7 @@ Public Class FrmUpdateDatabase
         If lbPeople.SelectedIndex >= 0 Then
             oPerson = personTable(lbPeople.SelectedIndex)
             If oPerson.Id > 0 Then
-                DeleteTwitterHandle(oPerson.Id)
+                DeleteSocialMedia(oPerson.Id)
                 DeleteImage(oPerson.Id)
                 DeletePerson(oPerson.Id)
             End If
@@ -315,6 +315,7 @@ Public Class FrmUpdateDatabase
             Dim id As Integer = CInt(lblID.Text)
             For Each oPerson As Person In personTable
                 If oPerson.Id = id Then
+                    Dim CurrentSocialMedia As SocialMedia = oPerson.Social
                     oPerson.BirthYear = txtYear.Text
                     oPerson.DeathYear = 0
                     If Not Integer.TryParse(txtDied.Text, oPerson.DeathYear) Then txtDied.Text = ""
@@ -327,7 +328,7 @@ Public Class FrmUpdateDatabase
                     oPerson.BirthPlace = txtBirthPlace.Text.Trim
                     oPerson.BirthName = txtBirthName.Text.Trim
                     oPerson.UnsavedChanges = True
-                    oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked)
+                    oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd)
                     Dim p As Integer = lbPeople.SelectedIndex
                     DisplayPersonList()
                     lbPeople.SelectedIndex = p
@@ -409,8 +410,6 @@ Public Class FrmUpdateDatabase
         Browser.SearchName = Join(item, " ").Trim
         Browser.FindinWiki()
         Browser.Show()
-
-
     End Sub
     Private Sub TxtDthDay_click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDthDay.Click, txtDthMth.Click, txtDied.Click
         Dim fld As TextBox = CType(sender, TextBox)
@@ -787,6 +786,7 @@ Public Class FrmUpdateDatabase
         If oPerson.Social IsNot Nothing Then
             txtTwitter.Text = If(oPerson.Social.TwitterHandle, "")
             cbNoTweet.Checked = oPerson.Social.IsNoTweet
+            TxtWikiId.Text = oPerson.Social.WikiId
         End If
         bLoadingPerson = False
     End Sub
@@ -988,5 +988,13 @@ Public Class FrmUpdateDatabase
     Private Sub NudSentences_ValueChanged(sender As Object, e As EventArgs) Handles NudSentences.ValueChanged
 
     End Sub
+
+    Private Sub BtnGetWikiId_Click(sender As Object, e As EventArgs) Handles BtnGetWikiId.Click
+        If Browser IsNot Nothing AndAlso Not Browser.IsDisposed Then
+            TxtWikiId.Text = Browser.txtURL.Text.Replace(My.Resources.WikiUrl, "")
+        End If
+    End Sub
+
+
 #End Region
 End Class

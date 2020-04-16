@@ -17,20 +17,21 @@ Module modDatabase
     Private ReadOnly oTwitterAuthTa As New CelebrityBirthdayDataSetTableAdapters.TwitterAuthTableAdapter
     Private ReadOnly oTwitterAuthTable As New CelebrityBirthdayDataSet.TwitterAuthDataTable
     Private ReadOnly oTweetTa As New CelebrityBirthdayDataSetTableAdapters.TweetsTableAdapter
-
+    Private ReadOnly oBotsdTa As New CelebrityBirthdayDataSetTableAdapters.BotSDTableAdapter
+    Private ReadOnly oBotsdTable As New CelebrityBirthdayDataSet.BotSDDataTable
 #End Region
 #Region "person"
     Public Function DeletePerson(ByVal _id As Integer)
         Return oPersonTa.DeletePerson(_id)
     End Function
-    Public Function DeleteTwitterHandle(ByVal _id As Integer) As Integer
+    Public Function DeleteSocialMedia(ByVal _id As Integer) As Integer
         Return oTwta.DeleteTwitter(_id)
     End Function
     Public Function CountPeople() As Integer
         Dim iCt As Integer = 0
         Try
             iCt = oPersonTa.CountPeople
-        Catch ex As dbexception
+        Catch ex As DbException
             DisplayException(MethodBase.GetCurrentMethod, ex, "dB")
         End Try
         Return iCt
@@ -207,9 +208,11 @@ Module modDatabase
         Dim _List As New List(Of Person)
         Try
             oPersonTa.Fill(oPersonTable)
-
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-                _List.Add(New Person(oRow))
+                Dim newPerson As New Person(oRow) With {
+                    .Social = GetSocialMedia(oRow.id)
+                }
+                _List.Add(newPerson)
             Next
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
@@ -321,11 +324,18 @@ Module modDatabase
         End If
         Return oSocial
     End Function
+    Public Sub InsertSocialMedia(_id As Integer, _twitterHandle As String, _isNoTweet As Boolean, _wikiId As String, _botsd As Integer)
+        oTwta.InsertTwitter(_id, _twitterHandle, _isNoTweet, _wikiId, _botsd)
+    End Sub
     Public Sub UpdateSocialMedia(ByRef _person As Person)
-        DeleteTwitterHandle(_person.Id)
-        If _person.Social IsNot Nothing Then
-            oTwta.InsertTwitter(_person.Id, _person.Social.TwitterHandle, _person.Social.IsNoTweet)
+        DeleteSocialMedia(_person.Id)
+        Dim _social As SocialMedia = _person.Social
+        If _social IsNot Nothing Then
+            InsertSocialMedia(_person.Id, _social.TwitterHandle, _social.IsNoTweet, _social.WikiId, _social.Botsd)
         End If
+    End Sub
+    Public Sub UpdateWikiId(pPersonId As Integer, pWikiId As String)
+        Dim updCt As Integer = oTwta.UpdateWikiId(pWikiId, pPersonId)
     End Sub
 #End Region
 #Region "dates"
@@ -422,6 +432,11 @@ Module modDatabase
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
         End Try
         Return isOK
+    End Function
+#End Region
+#Region "BornOnTheSameDay"
+    Public Function InsertBotsd() As Integer
+
     End Function
 #End Region
 End Module

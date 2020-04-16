@@ -95,6 +95,7 @@ Partial Class FrmBotsd
         Me.BtnGenWp = New System.Windows.Forms.Button()
         Me.BtnClearImages = New System.Windows.Forms.Button()
         Me.BtnSaveImage = New System.Windows.Forms.Button()
+        Me.BtnWpPost = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -798,9 +799,9 @@ Partial Class FrmBotsd
         Me.BtnGenWp.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnGenWp.Location = New System.Drawing.Point(12, 411)
         Me.BtnGenWp.Name = "BtnGenWp"
-        Me.BtnGenWp.Size = New System.Drawing.Size(94, 52)
+        Me.BtnGenWp.Size = New System.Drawing.Size(94, 58)
         Me.BtnGenWp.TabIndex = 50
-        Me.BtnGenWp.Text = "WordPress"
+        Me.BtnGenWp.Text = "WordPress List"
         Me.BtnGenWp.UseVisualStyleBackColor = True
         '
         'BtnClearImages
@@ -808,7 +809,7 @@ Partial Class FrmBotsd
         Me.BtnClearImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnClearImages.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClearImages.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClearImages.Location = New System.Drawing.Point(12, 487)
+        Me.BtnClearImages.Location = New System.Drawing.Point(12, 540)
         Me.BtnClearImages.Name = "BtnClearImages"
         Me.BtnClearImages.Size = New System.Drawing.Size(94, 59)
         Me.BtnClearImages.TabIndex = 51
@@ -827,12 +828,25 @@ Partial Class FrmBotsd
         Me.BtnSaveImage.Text = "Save Image"
         Me.BtnSaveImage.UseVisualStyleBackColor = True
         '
+        'BtnWpPost
+        '
+        Me.BtnWpPost.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnWpPost.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWpPost.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWpPost.Location = New System.Drawing.Point(12, 475)
+        Me.BtnWpPost.Name = "BtnWpPost"
+        Me.BtnWpPost.Size = New System.Drawing.Size(94, 58)
+        Me.BtnWpPost.TabIndex = 53
+        Me.BtnWpPost.Text = "WordPress Post"
+        Me.BtnWpPost.UseVisualStyleBackColor = True
+        '
         'FrmBotsd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1265, 636)
+        Me.Controls.Add(Me.BtnWpPost)
         Me.Controls.Add(Me.BtnSaveImage)
         Me.Controls.Add(Me.BtnClearImages)
         Me.Controls.Add(Me.BtnGenWp)
@@ -955,4 +969,5 @@ Partial Class FrmBotsd
     Friend WithEvents BtnGenWp As Button
     Friend WithEvents BtnClearImages As Button
     Friend WithEvents BtnSaveImage As Button
+    Friend WithEvents BtnWpPost As Button
 End Class

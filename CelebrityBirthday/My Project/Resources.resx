@@ -196,4 +196,7 @@
   <data name="TODAY" xml:space="preserve">
     <value>Today</value>
   </data>
+  <data name="WIKIURL" xml:space="preserve">
+    <value>https://en.wikipedia.org/wiki/</value>
+  </data>
 </root>

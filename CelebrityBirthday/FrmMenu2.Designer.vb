@@ -32,6 +32,7 @@ Partial Class FrmMenu2
         Me.BtnTapestry = New System.Windows.Forms.Button()
         Me.BtnImageEditing = New System.Windows.Forms.Button()
         Me.TxtBirthdateCheck = New System.Windows.Forms.Button()
+        Me.BtnWikiIds = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -126,16 +127,27 @@ Partial Class FrmMenu2
         Me.BtnImageEditing.Text = "Image Editing"
         Me.BtnImageEditing.UseVisualStyleBackColor = True
         '
-        'txtBirthdateCheck
+        'TxtBirthdateCheck
         '
         Me.TxtBirthdateCheck.ForeColor = System.Drawing.Color.RoyalBlue
         Me.TxtBirthdateCheck.Location = New System.Drawing.Point(186, 298)
         Me.TxtBirthdateCheck.Margin = New System.Windows.Forms.Padding(6)
-        Me.TxtBirthdateCheck.Name = "txtBirthdateCheck"
+        Me.TxtBirthdateCheck.Name = "TxtBirthdateCheck"
         Me.TxtBirthdateCheck.Size = New System.Drawing.Size(151, 49)
         Me.TxtBirthdateCheck.TabIndex = 21
         Me.TxtBirthdateCheck.Text = "Check"
         Me.TxtBirthdateCheck.UseVisualStyleBackColor = True
+        '
+        'BtnWikiIds
+        '
+        Me.BtnWikiIds.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWikiIds.Location = New System.Drawing.Point(185, 359)
+        Me.BtnWikiIds.Margin = New System.Windows.Forms.Padding(6)
+        Me.BtnWikiIds.Name = "BtnWikiIds"
+        Me.BtnWikiIds.Size = New System.Drawing.Size(151, 49)
+        Me.BtnWikiIds.TabIndex = 22
+        Me.BtnWikiIds.Text = "Wiki Ids"
+        Me.BtnWikiIds.UseVisualStyleBackColor = True
         '
         'FrmMenu2
         '
@@ -144,6 +156,7 @@ Partial Class FrmMenu2
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(352, 509)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnWikiIds)
         Me.Controls.Add(Me.TxtBirthdateCheck)
         Me.Controls.Add(Me.BtnImageEditing)
         Me.Controls.Add(Me.BtnTapestry)
@@ -174,4 +187,5 @@ Partial Class FrmMenu2
     Friend WithEvents BtnTapestry As Button
     Friend WithEvents BtnImageEditing As Button
     Friend WithEvents TxtBirthdateCheck As Button
+    Friend WithEvents BtnWikiIds As Button
 End Class
