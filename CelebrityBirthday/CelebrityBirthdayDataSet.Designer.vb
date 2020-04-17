@@ -5440,26 +5440,26 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property wikiId() As String
             Get
-                Try 
-                    Return CType(Me(Me.tableFullPerson.wikiIdColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'wikiId' in table 'FullPerson' is DBNull.", e)
-                End Try
+                If Me.IswikiIdNull Then
+                    Return String.Empty
+                Else
+                    Return CType(Me(Me.tableFullPerson.wikiIdColumn), String)
+                End If
             End Get
             Set
-                Me(Me.tableFullPerson.wikiIdColumn) = value
+                Me(Me.tableFullPerson.wikiIdColumn) = Value
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public Property botsd() As Integer
             Get
-                Try 
-                    Return CType(Me(Me.tableFullPerson.botsdColumn),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'botsd' in table 'FullPerson' is DBNull.", e)
-                End Try
+                If Me.IsbotsdNull Then
+                    Return 0
+                Else
+                    Return CType(Me(Me.tableFullPerson.botsdColumn), Integer)
+                End If
             End Get
             Set
                 Me(Me.tableFullPerson.botsdColumn) = value

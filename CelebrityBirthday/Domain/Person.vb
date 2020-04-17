@@ -322,7 +322,7 @@ Public Class Person
             _sortSeq = oRow.sortseq
             _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet, oRow.wikiId, oRow.botsd)
         End If
-            _unsavedChanges = False
+        _unsavedChanges = False
     End Sub
     Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.PersonRow)
         InitialisePerson()

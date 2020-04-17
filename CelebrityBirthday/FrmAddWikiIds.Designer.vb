@@ -24,15 +24,15 @@ Partial Class FrmAddWikiIds
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmAddWikiIds))
         Me.dgvWikiIds = New System.Windows.Forms.DataGridView()
+        Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xExclude = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.BtnWrite = New System.Windows.Forms.Button()
         Me.BtnStart = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xExclude = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.nudSelectCount = New System.Windows.Forms.NumericUpDown()
         CType(Me.dgvWikiIds, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -56,6 +56,34 @@ Partial Class FrmAddWikiIds
         Me.dgvWikiIds.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvWikiIds.Size = New System.Drawing.Size(840, 409)
         Me.dgvWikiIds.TabIndex = 18
+        '
+        'xId
+        '
+        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xId.HeaderText = "Id"
+        Me.xId.Name = "xId"
+        Me.xId.ReadOnly = True
+        Me.xId.Width = 50
+        '
+        'xName
+        '
+        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xName.HeaderText = "Name"
+        Me.xName.Name = "xName"
+        Me.xName.ReadOnly = True
+        Me.xName.Width = 250
+        '
+        'xDesc
+        '
+        Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.xDesc.HeaderText = "WikiId"
+        Me.xDesc.Name = "xDesc"
+        '
+        'xExclude
+        '
+        Me.xExclude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xExclude.HeaderText = "Exclude"
+        Me.xExclude.Name = "xExclude"
         '
         'btnClose
         '
@@ -116,39 +144,12 @@ Partial Class FrmAddWikiIds
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
         Me.lblStatus.Size = New System.Drawing.Size(5, 17)
         '
-        'xId
-        '
-        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xId.HeaderText = "Id"
-        Me.xId.Name = "xId"
-        Me.xId.ReadOnly = True
-        Me.xId.Width = 50
-        '
-        'xName
-        '
-        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xName.HeaderText = "Name"
-        Me.xName.Name = "xName"
-        Me.xName.ReadOnly = True
-        Me.xName.Width = 250
-        '
-        'xDesc
-        '
-        Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.xDesc.HeaderText = "WikiId"
-        Me.xDesc.Name = "xDesc"
-        '
-        'xExclude
-        '
-        Me.xExclude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xExclude.HeaderText = "Exclude"
-        Me.xExclude.Name = "xExclude"
-        '
         'nudSelectCount
         '
         Me.nudSelectCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.nudSelectCount.Location = New System.Drawing.Point(479, 469)
         Me.nudSelectCount.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.nudSelectCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudSelectCount.Name = "nudSelectCount"
         Me.nudSelectCount.Size = New System.Drawing.Size(140, 24)
         Me.nudSelectCount.TabIndex = 23
@@ -169,7 +170,7 @@ Partial Class FrmAddWikiIds
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmAddWikiIds"
-        Me.Text = "FrmAddWikiIds"
+        Me.Text = "Add Wiki Ids"
         CType(Me.dgvWikiIds, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()

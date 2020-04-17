@@ -223,7 +223,6 @@ Module modDatabase
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
-
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
                 If Not isTweetsOnly Or Not oRow.noTweet Then
                     _List.Add(New Person(oRow))
