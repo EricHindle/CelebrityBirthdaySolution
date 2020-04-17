@@ -693,6 +693,7 @@ Public Class FrmUpdateDatabase
         Dim newText As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
         Dim _parts As List(Of String) = ParseStringWithBrackets(newText)
         Dim charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c}
+        Dim charsToTrim2() As Char = {" "c, ","c, ";"c, "["c}
         If _parts.Count = 3 Then
             Dim _dates As String() = Split(_parts(1), " - ")
             If _dates.Length = 2 Then
@@ -709,7 +710,7 @@ Public Class FrmUpdateDatabase
         Loop
         txtDesc.Text = trimmedTextAfter & If(trimmedTextAfter.Length > 0, ".", "")
         txtName.Text = txtName.Text.Trim(charsToTrim)
-        txtForename.Text = txtForename.Text.Trim(charsToTrim)
+        txtForename.Text = txtForename.Text.Trim(charsToTrim2)
         txtSurname.Text = txtSurname.Text.Trim(charsToTrim)
         Dim newShortText = RemoveSquareBrackets(FixQuotes(txtShortDesc.Text)).Trim(charsToTrim)
         txtShortDesc.Text = newShortText & If(newShortText.Length > 0, ".", "")

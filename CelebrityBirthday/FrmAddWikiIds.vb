@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Net
 Imports System.Reflection
+Imports System.Text
 Imports System.Web.Script.Serialization
 
 Public Class FrmAddWikiIds
@@ -37,8 +38,13 @@ Public Class FrmAddWikiIds
                 If nudSelectCount.Value > 0 AndAlso _addedCt = nudSelectCount.Value Then
                     Exit For
                 End If
-                dgvWikiIds.Refresh()
+                Dim remainder As Integer
+                Math.DivRem(_ct, 20, remainder)
+                If remainder = 0 Then
+                    dgvWikiIds.Refresh()
+                End If
             End If
+            _person.Dispose()
         Next
     End Sub
     Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
@@ -66,11 +72,14 @@ Public Class FrmAddWikiIds
             oRow.Cells(xId.Name).Value = pPerson.Id
             oRow.Cells(xName.Name).Value = pPerson.Name
             If pageTitles.Count > 0 Then
+                Dim alts As New StringBuilder()
+                For Each _title As String In pageTitles
+                    alts.Append(_title).Append("|")
+                Next
+                oRow.Cells(xAlternates.Name).Value = alts.ToString
                 oRow.Cells(xDesc.Name).Value = pageTitles(0)
-                If pageTitles.Count = 1 Then
-                    oRow.Cells(xExclude.Name).Value = False
-                    isAdded = 1
-                End If
+                oRow.Cells(xExclude.Name).Value = False
+                isAdded = 1
             End If
         End If
         Return isAdded

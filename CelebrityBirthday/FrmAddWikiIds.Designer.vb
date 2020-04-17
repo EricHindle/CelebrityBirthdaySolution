@@ -24,16 +24,18 @@ Partial Class FrmAddWikiIds
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmAddWikiIds))
         Me.dgvWikiIds = New System.Windows.Forms.DataGridView()
-        Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xExclude = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.BtnWrite = New System.Windows.Forms.Button()
         Me.BtnStart = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.nudSelectCount = New System.Windows.Forms.NumericUpDown()
+        Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xPageNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xExclude = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.xAlternates = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvWikiIds, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.nudSelectCount, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,49 +50,21 @@ Partial Class FrmAddWikiIds
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvWikiIds.BackgroundColor = System.Drawing.Color.GhostWhite
         Me.dgvWikiIds.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvWikiIds.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.xId, Me.xName, Me.xDesc, Me.xExclude})
+        Me.dgvWikiIds.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.xId, Me.xName, Me.xDesc, Me.xPageNo, Me.xExclude, Me.xAlternates})
         Me.dgvWikiIds.Location = New System.Drawing.Point(14, 15)
         Me.dgvWikiIds.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.dgvWikiIds.Name = "dgvWikiIds"
         Me.dgvWikiIds.RowHeadersVisible = False
         Me.dgvWikiIds.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvWikiIds.Size = New System.Drawing.Size(840, 409)
+        Me.dgvWikiIds.Size = New System.Drawing.Size(1198, 409)
         Me.dgvWikiIds.TabIndex = 18
-        '
-        'xId
-        '
-        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xId.HeaderText = "Id"
-        Me.xId.Name = "xId"
-        Me.xId.ReadOnly = True
-        Me.xId.Width = 50
-        '
-        'xName
-        '
-        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xName.HeaderText = "Name"
-        Me.xName.Name = "xName"
-        Me.xName.ReadOnly = True
-        Me.xName.Width = 250
-        '
-        'xDesc
-        '
-        Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.xDesc.HeaderText = "WikiId"
-        Me.xDesc.Name = "xDesc"
-        '
-        'xExclude
-        '
-        Me.xExclude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xExclude.HeaderText = "Exclude"
-        Me.xExclude.Name = "xExclude"
         '
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(692, 460)
+        Me.btnClose.Location = New System.Drawing.Point(1050, 460)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(162, 41)
@@ -132,7 +106,7 @@ Partial Class FrmAddWikiIds
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 532)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
-        Me.StatusStrip1.Size = New System.Drawing.Size(868, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1226, 22)
         Me.StatusStrip1.TabIndex = 22
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -154,12 +128,55 @@ Partial Class FrmAddWikiIds
         Me.nudSelectCount.Size = New System.Drawing.Size(140, 24)
         Me.nudSelectCount.TabIndex = 23
         '
+        'xId
+        '
+        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xId.HeaderText = "Id"
+        Me.xId.Name = "xId"
+        Me.xId.ReadOnly = True
+        Me.xId.Width = 50
+        '
+        'xName
+        '
+        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xName.HeaderText = "Name"
+        Me.xName.Name = "xName"
+        Me.xName.ReadOnly = True
+        Me.xName.Width = 200
+        '
+        'xDesc
+        '
+        Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xDesc.HeaderText = "WikiId"
+        Me.xDesc.Name = "xDesc"
+        Me.xDesc.Width = 200
+        '
+        'xPageNo
+        '
+        Me.xPageNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xPageNo.HeaderText = "PageNo"
+        Me.xPageNo.Name = "xPageNo"
+        Me.xPageNo.ReadOnly = True
+        '
+        'xExclude
+        '
+        Me.xExclude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xExclude.HeaderText = "Exclude"
+        Me.xExclude.Name = "xExclude"
+        '
+        'xAlternates
+        '
+        Me.xAlternates.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.xAlternates.HeaderText = "Alternates"
+        Me.xAlternates.Name = "xAlternates"
+        Me.xAlternates.ReadOnly = True
+        '
         'FrmAddWikiIds
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(868, 554)
+        Me.ClientSize = New System.Drawing.Size(1226, 554)
         Me.Controls.Add(Me.nudSelectCount)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.dgvWikiIds)
@@ -186,9 +203,11 @@ Partial Class FrmAddWikiIds
     Friend WithEvents BtnStart As Button
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblStatus As ToolStripStatusLabel
+    Friend WithEvents nudSelectCount As NumericUpDown
     Friend WithEvents xId As DataGridViewTextBoxColumn
     Friend WithEvents xName As DataGridViewTextBoxColumn
     Friend WithEvents xDesc As DataGridViewTextBoxColumn
+    Friend WithEvents xPageNo As DataGridViewTextBoxColumn
     Friend WithEvents xExclude As DataGridViewCheckBoxColumn
-    Friend WithEvents nudSelectCount As NumericUpDown
+    Friend WithEvents xAlternates As DataGridViewTextBoxColumn
 End Class
