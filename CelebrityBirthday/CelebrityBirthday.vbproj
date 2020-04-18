@@ -238,6 +238,12 @@
     <Compile Include="Twitter\FrmBotsd.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Twitter\FrmBotsdPost.Designer.vb">
+      <DependentUpon>FrmBotsdPost.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Twitter\FrmBotsdPost.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Twitter\modTwitter.vb" />
     <Compile Include="Twitter\FrmSendTwitter.Designer.vb">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>
@@ -349,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\FrmBotsd.resx">
       <DependentUpon>FrmBotsd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Twitter\FrmBotsdPost.resx">
+      <DependentUpon>FrmBotsdPost.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\FrmSendTwitter.resx">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>

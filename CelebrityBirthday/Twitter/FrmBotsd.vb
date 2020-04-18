@@ -1,6 +1,7 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Data.Common
 Imports System.IO
+Imports System.Reflection
 Imports System.Text
 Imports TweetSharp
 
@@ -9,6 +10,13 @@ Public Class FrmBotsd
     Private _imageList As New List(Of Person)
     Private IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
+    Private urlDay As String
+    Private urlMonth As String
+    Private urlYear As String
+    Private imageLoadMonth As String
+    Private imageLoadYear As String
+    Private WpNumber As Integer
+
 #End Region
 #Region "properites"
     Private _day As Integer
@@ -42,9 +50,16 @@ Public Class FrmBotsd
     Private Sub FrmBotsd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.botsdformpos)
         IsNoGenerate = True
+        WpNumber = GlobalSettings.GetSetting(My.Resources.NEXTWPNO)
         Try
             LblMonth.Text = Format(New Date(2000, ThisMonth, 1), "MMMM")
             LblDay.Text = CStr(ThisDay)
+            Dim _wpDate As Date? = GetWordPressLoadDate(ThisDay, ThisMonth, "P")
+            urlDay = If(_wpDate Is Nothing, "", Format(_wpDate, "dd"))
+            urlMonth = If(_wpDate Is Nothing, "", Format(_wpDate, "MM"))
+            urlYear = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
+            imageLoadMonth = urlMonth
+            imageLoadYear = urlYear
         Catch ex As ArgumentOutOfRangeException
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Error")
             Me.Close()
@@ -334,6 +349,15 @@ Public Class FrmBotsd
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
     End Sub
+    Private Function GetBotsdPostNo(botsdId As Integer) As Integer
+        Dim oBotsdPostNo As Integer = -1
+        Dim oRow As CelebrityBirthdayDataSet.BotSDRow = GetBotsd(botsdId)
+        If oRow IsNot Nothing Then
+            oBotsdPostNo = oRow.btsdPostNo
+        End If
+        Return oBotsdPostNo
+    End Function
+
     Public Sub AddList(ByRef personsList As List(Of Person))
         Dim _pairRow As DataGridViewRow = DgvPairs.Rows(DgvPairs.Rows.Add())
         If personsList IsNot Nothing Then
@@ -341,6 +365,8 @@ Public Class FrmBotsd
                 _pairRow.Cells(pairYear.Name).Value = personsList(0).BirthYear
                 _pairRow.Cells(pairId1.Name).Value = personsList(0).Id
                 _pairRow.Cells(pairPerson1.Name).Value = personsList(0).Name
+                Dim postNo As Integer = GetBotsdPostNo(personsList(0).Social.Botsd)
+                _pairRow.Cells(pairWpNo.Name).Value = If(postNo > -1, CStr(postNo), "")
             End If
             If personsList.Count > 1 Then
                 _pairRow.Cells(pairId2.Name).Value = personsList(1).Id
@@ -531,47 +557,159 @@ Public Class FrmBotsd
     Private Sub BtnWpPost_Click(sender As Object, e As EventArgs) Handles BtnWpPost.Click
         GenerateWpPost()
     End Sub
+
+    Private Function GetImageLink(oPerson As Person) As String
+        Dim oImage As ImageIdentity = oPerson.Image
+        If oImage IsNot Nothing Then
+            If oImage.ImageLoadYear IsNot Nothing AndAlso IsNumeric(oImage.ImageLoadYear) Then
+                imageLoadYear = oImage.ImageLoadYear
+            End If
+            If oImage.ImageLoadMonth IsNot Nothing AndAlso IsNumeric(oImage.ImageLoadMonth) Then
+                imageLoadMonth = oImage.ImageLoadMonth
+            End If
+        End If
+
+        Dim lowername As String = oImage.ImageFileName
+        If lowername.Length = 0 Then
+            lowername = oPerson.Name.ToLower(myCultureInfo).Replace(" ", "-").Replace(".", "")
+        End If
+        oImage.Dispose()
+        Dim ImageSb As New StringBuilder
+        With ImageSb
+            .Append("<a href=""")
+            .Append(My.Resources.WPPAGEURL)
+            .Append(urlYear)
+            .Append(My.Resources.SLASH)
+            .Append(urlMonth)
+            .Append(My.Resources.SLASH)
+            .Append(urlDay)
+            .Append(My.Resources.SLASH)
+            .Append(CStr(ThisDay))
+            .Append("-")
+            .Append(Format(New Date(2000, ThisMonth, 1), "MMMM").ToLower(myCultureInfo))
+            .Append(My.Resources.SLASH)
+            .Append(lowername)
+            .Append(My.Resources.SLASH)
+            .Append("""><img src=""")
+            .Append(My.Resources.WPFILESURL)
+            .Append(My.Resources.SLASH)
+            .Append(imageLoadYear)
+            .Append(My.Resources.SLASH)
+            .Append(imageLoadMonth)
+            .Append(My.Resources.SLASH)
+            .Append(lowername)
+            .Append(oPerson.Image.ImageFileType)
+            .Append("?w=150&amp;h=150"" alt="""">")
+            .Append("</a>")
+            .Append(vbCrLf)
+        End With
+
+        Return ImageSb.ToString
+    End Function
+    Private Function GetPersonText(oPerson As Person) As String
+        Dim oPersonText As New StringBuilder
+        Dim sBorn As String = ""
+        If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
+            sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
+        End If
+        Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+
+        oPersonText.Append("<h1 id=""firstHeading"">").Append(oPerson.Name).Append("</h1>").Append(vbCrLf)
+        oPersonText.Append(GetImageLink(oPerson)).Append(vbCrLf)
+        oPersonText.Append(oPerson.Description).Append(sBorn).Append(If(oPerson.DeathYear = 0, "", sDied)).Append(vbCrLf)
+        Return oPersonText.ToString
+    End Function
+    Private Function GetImageText(oPerson As Person) As String
+        Dim oImageText As New StringBuilder
+        oImageText.Append("<a href=""").Append(My.Resources.WIKIURL).Append(oPerson.Social.WikiId).Append(""" target=""_blank"" rel=""noopener"">") _
+            .Append(My.Resources.WIKIURL).Append(oPerson.Social.WikiId).Append("</a><br>").Append(vbCrLf)
+        Return oImageText.ToString
+    End Function
     Private Sub GenerateWpPost()
         Dim sb As New StringBuilder
-        sb.Append("<strong>").Append(CStr(ThisDay))
-        Select Case ThisDay
-            Case 1, 21, 31
-                sb.Append("st")
-            Case 2, 22
-                sb.Append("nd")
-            Case 3, 23
-                sb.Append("rd")
-            Case Else
-                sb.Append("th")
-        End Select
-        sb.Append("</strong>").Append(vbCrLf)
-        For Each oRow As DataGridViewRow In DgvPairs.Rows
-            If Not String.IsNullOrEmpty(oRow.Cells(pairYear.Name).Value) Then
-                sb.Append(oRow.Cells(pairYear.Name).Value)
-                sb.Append("&nbsp;&nbsp;")
-                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson1.Name).Value) Then
-                    sb.Append(oRow.Cells(pairPerson1.Name).Value)
-                End If
-                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson2.Name).Value) Then
-                    sb.Append("&nbsp;/&nbsp;")
-                    sb.Append(oRow.Cells(pairPerson2.Name).Value)
-                End If
-                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson3.Name).Value) Then
-                    sb.Append("&nbsp;/&nbsp;")
-                    sb.Append(oRow.Cells(pairPerson3.Name).Value)
-                End If
-                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson4.Name).Value) Then
-                    sb.Append("&nbsp;/&nbsp;")
-                    sb.Append(oRow.Cells(pairPerson4.Name).Value)
-                End If
-                sb.Append("&nbsp;&nbsp;")
-                sb.Append(vbCrLf)
+        Dim titleSb As New StringBuilder
+        Try
+            titleSb.Append("#").Append(CStr(WpNumber)).Append(" ")
+            Dim titleDate As String = ""
+            Dim _pickPerson1 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
+            Dim _pickPerson2 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
+            Dim _pickPerson3 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
+            Dim _pickPerson4 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
+            Dim _sep As String = ""
+            If _pickPerson1 IsNot Nothing Then
+                sb.Append(GetPersonText(_pickPerson1))
+                titleSb.Append(_pickPerson1.Name)
+                _sep = " / "
+                titleDate = Format(_pickPerson1.DateOfBirth, "dd MMMM yyyy")
             End If
-        Next
-        Using oTextForm As New FrmText
-            oTextForm.rtbText.Text = sb.ToString
-            oTextForm.ShowDialog()
-        End Using
+            If _pickPerson2 IsNot Nothing Then
+                sb.Append(GetPersonText(_pickPerson2))
+                titleSb.Append(_sep).Append(_pickPerson2.Name)
+                _sep = " / "
+                titleDate = Format(_pickPerson2.DateOfBirth, "dd MMMM yyyy")
+            End If
+            If _pickPerson3 IsNot Nothing Then
+                sb.Append(GetPersonText(_pickPerson3))
+                titleSb.Append(_sep).Append(_pickPerson3.Name)
+                _sep = " / "
+                titleDate = Format(_pickPerson3.DateOfBirth, "dd MMMM yyyy")
+            End If
+            If _pickPerson4 IsNot Nothing Then
+                sb.Append(GetPersonText(_pickPerson4))
+                titleSb.Append(_sep).Append(_pickPerson4.Name)
+                titleDate = Format(_pickPerson4.DateOfBirth, "dd MMMM yyyy")
+            End If
+            titleSb.Append(" - ").Append(titleDate)
+            sb.Append(My.Resources.BREAK).Append("Links:").Append(My.Resources.BREAK).Append(vbCrLf)
+            If _pickPerson1 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson1.Social.WikiId) Then
+                sb.Append(GetImageText(_pickPerson1))
+            End If
+            If _pickPerson2 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson2.Social.WikiId) Then
+                sb.Append(GetImageText(_pickPerson2))
+            End If
+            If _pickPerson3 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson3.Social.WikiId) Then
+                sb.Append(GetImageText(_pickPerson3))
+            End If
+            If _pickPerson4 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson4.Social.WikiId) Then
+                sb.Append(GetImageText(_pickPerson4))
+            End If
+            sb.Append(vbCrLf).Append("<br><!--more Also born on this day >> --><br>Also born on this day:").Append(vbCrLf)
+            Using oTextForm As New FrmBotsdPost
+                oTextForm.TxtTitle.Text = titleSb.ToString
+                oTextForm.RtbText.Text = sb.ToString
+                oTextForm.LblWpPostNo.Text = CStr(WpNumber)
+                oTextForm.ShowDialog()
+                If oTextForm.DialogResult = DialogResult.OK Then
+                    DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value = CStr(WpNumber)
+                    Dim botsdNo As Integer = InsertBotsd(ThisDay, ThisMonth, DgvPairs.SelectedRows(0).Cells(pairYear.Name).Value, WpNumber, oTextForm.TxtUrl.Text)
+                    If _pickPerson1 IsNot Nothing Then
+                        _pickPerson1.Social.Botsd = botsdNo
+                        UpdateBotsdId(_pickPerson1.Social)
+                    End If
+                    If _pickPerson2 IsNot Nothing Then
+                        _pickPerson2.Social.Botsd = botsdNo
+                        UpdateBotsdId(_pickPerson2.Social)
+                    End If
+                    If _pickPerson3 IsNot Nothing Then
+                        _pickPerson3.Social.Botsd = botsdNo
+                        UpdateBotsdId(_pickPerson3.Social)
+                    End If
+                    If _pickPerson4 IsNot Nothing Then
+                        _pickPerson4.Social.Botsd = botsdNo
+                        UpdateBotsdId(_pickPerson4.Social)
+                    End If
+                    WpNumber += 1
+                    GlobalSettings.SetSetting(My.Resources.NEXTWPNO, "integer", CStr(WpNumber))
+                End If
+            End Using
+            If _pickPerson1 IsNot Nothing Then _pickPerson1.Dispose()
+            If _pickPerson2 IsNot Nothing Then _pickPerson2.Dispose()
+            If _pickPerson3 IsNot Nothing Then _pickPerson3.Dispose()
+            If _pickPerson4 IsNot Nothing Then _pickPerson4.Dispose()
+
+        Catch ex As DbException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Db")
+        End Try
     End Sub
 
 #End Region

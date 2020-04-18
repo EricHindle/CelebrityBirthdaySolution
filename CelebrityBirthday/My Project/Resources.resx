@@ -199,4 +199,19 @@
   <data name="WIKIURL" xml:space="preserve">
     <value>https://en.wikipedia.org/wiki/</value>
   </data>
+  <data name="NEXTWPNO" xml:space="preserve">
+    <value>Next WP Number</value>
+  </data>
+  <data name="BREAK" xml:space="preserve">
+    <value>&lt;br&gt;</value>
+  </data>
+  <data name="SLASH" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="WPFILESURL" xml:space="preserve">
+    <value>https://celebritybirthday.files.wordpress.com/</value>
+  </data>
+  <data name="WPPAGEURL" xml:space="preserve">
+    <value>https://celebritybirthday.wordpress.com/</value>
+  </data>
 </root>

@@ -3,10 +3,10 @@
 Public Class FrmWordPress
 #Region "constants"
     Private Const DOUBLE_QUOTES As String = """"
-    Private Const A_TAG_START As String = "<a href=""http://celebritybirthday.files.wordpress.com/"
+    Private ReadOnly A_TAG_START As String = "<a href=""" & My.Resources.WPFILESURL
     Private Const A_TAG_END As String = ">"
     Private Const IMG_TAG_START As String = "<img title="
-    Private Const IMG_TAG_MIDDLE As String = " src=""http://celebritybirthday.files.wordpress.com/"
+    Private ReadOnly IMG_TAG_MIDDLE As String = " src=""" & My.Resources.WPFILESURL
     Private Const IMG_TAG_ALT As String = " alt="
     Private Const IMG_TAG_SIZE As String = " width=""60"" height=""60"" />"
     Private Const STRONG_TAG_START As String = "</a> <strong>"
@@ -14,8 +14,7 @@ Public Class FrmWordPress
     Private Const EXCERPT_START As String = "Today's Birthdays:<br />"
     Private Const EXCERPT_DIV As String = "<div style=""width:200px;float:left;font-family:arial;font-size:12px;"">"
     Private Const EXCERPT_DIV_END As String = "</div>"
-    Private Const BREAK As String = "<br>"
-    Private Const SLASH As String = "/"
+
 #End Region
 #Region "variables"
     Dim personTable As List(Of Person)
@@ -100,9 +99,9 @@ Public Class FrmWordPress
             With newText
                 .Append(A_TAG_START)
                 .Append(urlYear)
-                .Append(SLASH)
+                .Append(MY.resources.SLASH)
                 .Append(urlMonth)
-                .Append(SLASH)
+                .Append(MY.resources.SLASH)
                 .Append(lowername)
                 .Append(oPerson.Image.ImageFileType)
                 .Append(DOUBLE_QUOTES)
@@ -111,9 +110,9 @@ Public Class FrmWordPress
                 .Append(AddQuotes(oPerson.Name))
                 .Append(IMG_TAG_MIDDLE)
                 .Append(urlYear)
-                .Append(SLASH)
+                .Append(MY.resources.SLASH)
                 .Append(urlMonth)
-                .Append(SLASH)
+                .Append(MY.resources.SLASH)
                 .Append(lowername)
                 .Append(oPerson.Image.ImageFileType)
                 .Append(DOUBLE_QUOTES)
@@ -128,7 +127,7 @@ Public Class FrmWordPress
                 .Append(sBorn)
                 .Append(If(oPerson.DeathYear = 0, "", sDied))
                 .Append(vbCrLf)
-                .Append(BREAK)
+                .Append(MY.resources.break)
                 .Append(vbCrLf)
             End With
         Next

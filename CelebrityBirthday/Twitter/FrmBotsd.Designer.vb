@@ -40,15 +40,6 @@ Partial Class FrmBotsd
         Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DgvPairs = New System.Windows.Forms.DataGridView()
-        Me.pairYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TxtForename1 = New System.Windows.Forms.TextBox()
         Me.TxtSurname1 = New System.Windows.Forms.TextBox()
         Me.TxtShortDesc1 = New System.Windows.Forms.TextBox()
@@ -96,6 +87,16 @@ Partial Class FrmBotsd
         Me.BtnClearImages = New System.Windows.Forms.Button()
         Me.BtnSaveImage = New System.Windows.Forms.Button()
         Me.BtnWpPost = New System.Windows.Forms.Button()
+        Me.pairYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairWpNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -253,91 +254,15 @@ Partial Class FrmBotsd
         Me.DgvPairs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DgvPairs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pairYear, Me.pairPerson1, Me.pairPerson2, Me.pairPerson3, Me.pairPerson4, Me.pairId1, Me.pairId2, Me.pairId3, Me.pairId4})
+        Me.DgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pairYear, Me.pairPerson1, Me.pairPerson2, Me.pairPerson3, Me.pairPerson4, Me.pairWpNo, Me.pairId1, Me.pairId2, Me.pairId3, Me.pairId4})
         Me.DgvPairs.Location = New System.Drawing.Point(12, 74)
         Me.DgvPairs.MultiSelect = False
         Me.DgvPairs.Name = "DgvPairs"
         Me.DgvPairs.ReadOnly = True
         Me.DgvPairs.RowHeadersVisible = False
         Me.DgvPairs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvPairs.Size = New System.Drawing.Size(663, 329)
+        Me.DgvPairs.Size = New System.Drawing.Size(653, 329)
         Me.DgvPairs.TabIndex = 36
-        '
-        'pairYear
-        '
-        Me.pairYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairYear.HeaderText = "Year"
-        Me.pairYear.Name = "pairYear"
-        Me.pairYear.ReadOnly = True
-        Me.pairYear.Width = 60
-        '
-        'pairPerson1
-        '
-        Me.pairPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson1.HeaderText = "Person1"
-        Me.pairPerson1.Name = "pairPerson1"
-        Me.pairPerson1.ReadOnly = True
-        Me.pairPerson1.Width = 150
-        '
-        'pairPerson2
-        '
-        Me.pairPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson2.HeaderText = "Person2"
-        Me.pairPerson2.Name = "pairPerson2"
-        Me.pairPerson2.ReadOnly = True
-        Me.pairPerson2.Width = 150
-        '
-        'pairPerson3
-        '
-        Me.pairPerson3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson3.HeaderText = "Person3"
-        Me.pairPerson3.Name = "pairPerson3"
-        Me.pairPerson3.ReadOnly = True
-        Me.pairPerson3.Width = 150
-        '
-        'pairPerson4
-        '
-        Me.pairPerson4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson4.HeaderText = "Person4"
-        Me.pairPerson4.Name = "pairPerson4"
-        Me.pairPerson4.ReadOnly = True
-        Me.pairPerson4.Width = 150
-        '
-        'pairId1
-        '
-        Me.pairId1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId1.HeaderText = "Id1"
-        Me.pairId1.Name = "pairId1"
-        Me.pairId1.ReadOnly = True
-        Me.pairId1.Visible = False
-        Me.pairId1.Width = 30
-        '
-        'pairId2
-        '
-        Me.pairId2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId2.HeaderText = "Id2"
-        Me.pairId2.Name = "pairId2"
-        Me.pairId2.ReadOnly = True
-        Me.pairId2.Visible = False
-        Me.pairId2.Width = 30
-        '
-        'pairId3
-        '
-        Me.pairId3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId3.HeaderText = "Id3"
-        Me.pairId3.Name = "pairId3"
-        Me.pairId3.ReadOnly = True
-        Me.pairId3.Visible = False
-        Me.pairId3.Width = 30
-        '
-        'pairId4
-        '
-        Me.pairId4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId4.HeaderText = "Id4"
-        Me.pairId4.Name = "pairId4"
-        Me.pairId4.ReadOnly = True
-        Me.pairId4.Visible = False
-        Me.pairId4.Width = 30
         '
         'TxtForename1
         '
@@ -840,6 +765,90 @@ Partial Class FrmBotsd
         Me.BtnWpPost.Text = "WordPress Post"
         Me.BtnWpPost.UseVisualStyleBackColor = True
         '
+        'pairYear
+        '
+        Me.pairYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairYear.HeaderText = "Year"
+        Me.pairYear.Name = "pairYear"
+        Me.pairYear.ReadOnly = True
+        Me.pairYear.Width = 60
+        '
+        'pairPerson1
+        '
+        Me.pairPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson1.HeaderText = "Person1"
+        Me.pairPerson1.Name = "pairPerson1"
+        Me.pairPerson1.ReadOnly = True
+        Me.pairPerson1.Width = 130
+        '
+        'pairPerson2
+        '
+        Me.pairPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson2.HeaderText = "Person2"
+        Me.pairPerson2.Name = "pairPerson2"
+        Me.pairPerson2.ReadOnly = True
+        Me.pairPerson2.Width = 130
+        '
+        'pairPerson3
+        '
+        Me.pairPerson3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson3.HeaderText = "Person3"
+        Me.pairPerson3.Name = "pairPerson3"
+        Me.pairPerson3.ReadOnly = True
+        Me.pairPerson3.Width = 130
+        '
+        'pairPerson4
+        '
+        Me.pairPerson4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson4.HeaderText = "Person4"
+        Me.pairPerson4.Name = "pairPerson4"
+        Me.pairPerson4.ReadOnly = True
+        Me.pairPerson4.Width = 130
+        '
+        'pairWpNo
+        '
+        Me.pairWpNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairWpNo.HeaderText = "WP No"
+        Me.pairWpNo.Name = "pairWpNo"
+        Me.pairWpNo.ReadOnly = True
+        Me.pairWpNo.Width = 70
+        '
+        'pairId1
+        '
+        Me.pairId1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId1.HeaderText = "Id1"
+        Me.pairId1.Name = "pairId1"
+        Me.pairId1.ReadOnly = True
+        Me.pairId1.Visible = False
+        Me.pairId1.Width = 30
+        '
+        'pairId2
+        '
+        Me.pairId2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId2.HeaderText = "Id2"
+        Me.pairId2.Name = "pairId2"
+        Me.pairId2.ReadOnly = True
+        Me.pairId2.Visible = False
+        Me.pairId2.Width = 30
+        '
+        'pairId3
+        '
+        Me.pairId3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId3.HeaderText = "Id3"
+        Me.pairId3.Name = "pairId3"
+        Me.pairId3.ReadOnly = True
+        Me.pairId3.Visible = False
+        Me.pairId3.Width = 30
+        '
+        'pairId4
+        '
+        Me.pairId4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId4.HeaderText = "Id4"
+        Me.pairId4.Name = "pairId4"
+        Me.pairId4.ReadOnly = True
+        Me.pairId4.Visible = False
+        Me.pairId4.Width = 30
+        '
         'FrmBotsd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
@@ -957,17 +966,18 @@ Partial Class FrmBotsd
     Friend WithEvents PasteToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClearToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BtnGenWp As Button
+    Friend WithEvents BtnClearImages As Button
+    Friend WithEvents BtnSaveImage As Button
+    Friend WithEvents BtnWpPost As Button
     Friend WithEvents pairYear As DataGridViewTextBoxColumn
     Friend WithEvents pairPerson1 As DataGridViewTextBoxColumn
     Friend WithEvents pairPerson2 As DataGridViewTextBoxColumn
     Friend WithEvents pairPerson3 As DataGridViewTextBoxColumn
     Friend WithEvents pairPerson4 As DataGridViewTextBoxColumn
+    Friend WithEvents pairWpNo As DataGridViewTextBoxColumn
     Friend WithEvents pairId1 As DataGridViewTextBoxColumn
     Friend WithEvents pairId2 As DataGridViewTextBoxColumn
     Friend WithEvents pairId3 As DataGridViewTextBoxColumn
     Friend WithEvents pairId4 As DataGridViewTextBoxColumn
-    Friend WithEvents BtnGenWp As Button
-    Friend WithEvents BtnClearImages As Button
-    Friend WithEvents BtnSaveImage As Button
-    Friend WithEvents BtnWpPost As Button
 End Class

@@ -120,6 +120,7 @@ Module modDatabase
         End Try
         Return iCt
     End Function
+
     Public Function GetPeopleByDate(oDay As Integer, oMonth As Integer) As ArrayList
         Dim oPersonTable As New ArrayList
         Try
@@ -336,6 +337,15 @@ Module modDatabase
     Public Sub UpdateWikiId(pPersonId As Integer, pWikiId As String)
         Dim updCt As Integer = oTwta.UpdateWikiId(pWikiId, pPersonId)
     End Sub
+    Public Function UpdateBotsdId(ByVal oSocial As SocialMedia) As Integer
+        Dim iCt As Integer = -1
+        Try
+            iCt = oTwta.UpdateBotsd(oSocial.Botsd, oSocial.Id)
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
+        Return iCt
+    End Function
 #End Region
 #Region "dates"
     Public Function UpdateImageDate(LoadYr As String, LoadMth As String, isDateAmend As Boolean, LoadDay As String, DayIndex As Decimal?, MonthIndex As Decimal?) As Integer
@@ -434,8 +444,15 @@ Module modDatabase
     End Function
 #End Region
 #Region "BornOnTheSameDay"
-    Public Function InsertBotsd() As Integer
-
+    Public Function InsertBotsd(btsdDay As Integer, btsdMonth As Integer, btsdYear As Integer, btsdPostNo As Integer, btsdUrl As String) As Integer
+        Return oBotsdTa.InsertBotsd(btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl)
+    End Function
+    Public Function GetBotsd(btsdId As Integer) As CelebrityBirthdayDataSet.BotSDRow
+        Dim oRow As CelebrityBirthdayDataSet.BotSDRow = Nothing
+        If oBotsdTa.FillById(oBotsdTable, btsdId) = 1 Then
+            oRow = oBotsdTable.Rows(0)
+        End If
+        Return oRow
     End Function
 #End Region
 End Module

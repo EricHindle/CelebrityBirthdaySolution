@@ -98,6 +98,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &lt;br&gt;.
+        '''</summary>
+        Friend ReadOnly Property BREAK() As String
+            Get
+                Return ResourceManager.GetString("BREAK", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
         Friend ReadOnly Property cake() As System.Drawing.Icon
@@ -170,6 +179,15 @@ Namespace My.Resources
         Friend ReadOnly Property LOADING_TABLE() As String
             Get
                 Return ResourceManager.GetString("LOADING_TABLE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Next WP Number.
+        '''</summary>
+        Friend ReadOnly Property NEXTWPNO() As String
+            Get
+                Return ResourceManager.GetString("NEXTWPNO", resourceCulture)
             End Get
         End Property
         
@@ -257,6 +275,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to /.
+        '''</summary>
+        Friend ReadOnly Property SLASH() As String
+            Get
+                Return ResourceManager.GetString("SLASH", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property StatusBar() As System.Drawing.Bitmap
@@ -308,6 +335,24 @@ Namespace My.Resources
         Friend ReadOnly Property WIKIURL() As String
             Get
                 Return ResourceManager.GetString("WIKIURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to https://celebritybirthday.files.wordpress.com/.
+        '''</summary>
+        Friend ReadOnly Property WPFILESURL() As String
+            Get
+                Return ResourceManager.GetString("WPFILESURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to https://celebritybirthday.wordpress.com/.
+        '''</summary>
+        Friend ReadOnly Property WPPAGEURL() As String
+            Get
+                Return ResourceManager.GetString("WPPAGEURL", resourceCulture)
             End Get
         End Property
     End Module
