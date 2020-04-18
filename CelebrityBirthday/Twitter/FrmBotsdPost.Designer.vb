@@ -43,7 +43,7 @@ Partial Class FrmBotsdPost
         Me.TxtUrl = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnPosted = New System.Windows.Forms.Button()
-        Me.btnPasteUrl = New System.Windows.Forms.Button()
+        Me.BtnPasteUrl = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -215,14 +215,14 @@ Partial Class FrmBotsdPost
         '
         'btnPasteUrl
         '
-        Me.btnPasteUrl.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnPasteUrl.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnPasteUrl.Location = New System.Drawing.Point(883, 427)
-        Me.btnPasteUrl.Name = "btnPasteUrl"
-        Me.btnPasteUrl.Size = New System.Drawing.Size(35, 26)
-        Me.btnPasteUrl.TabIndex = 46
-        Me.btnPasteUrl.Text = "<"
-        Me.btnPasteUrl.UseVisualStyleBackColor = True
+        Me.BtnPasteUrl.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPasteUrl.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnPasteUrl.Location = New System.Drawing.Point(883, 427)
+        Me.BtnPasteUrl.Name = "btnPasteUrl"
+        Me.BtnPasteUrl.Size = New System.Drawing.Size(35, 26)
+        Me.BtnPasteUrl.TabIndex = 46
+        Me.BtnPasteUrl.Text = "<"
+        Me.BtnPasteUrl.UseVisualStyleBackColor = True
         '
         'FrmBotsdPost
         '
@@ -230,7 +230,7 @@ Partial Class FrmBotsdPost
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(933, 554)
-        Me.Controls.Add(Me.btnPasteUrl)
+        Me.Controls.Add(Me.BtnPasteUrl)
         Me.Controls.Add(Me.BtnPosted)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtUrl)
@@ -270,5 +270,5 @@ Partial Class FrmBotsdPost
     Friend WithEvents TxtUrl As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents BtnPosted As Button
-    Friend WithEvents btnPasteUrl As Button
+    Friend WithEvents BtnPasteUrl As Button
 End Class

@@ -90,7 +90,7 @@
         Me.Close()
     End Sub
 
-    Private Sub btnPasteUrl_Click(sender As Object, e As EventArgs) Handles btnPasteUrl.Click
+    Private Sub BtnPasteUrl_Click(sender As Object, e As EventArgs) Handles BtnPasteUrl.Click
         TxtUrl.Text = Clipboard.GetText
     End Sub
 End Class

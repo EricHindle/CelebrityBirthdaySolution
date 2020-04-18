@@ -146,6 +146,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &quot;.
+        '''</summary>
+        Friend ReadOnly Property DOUBLEQUOTES() As String
+            Get
+                Return ResourceManager.GetString("DOUBLEQUOTES", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Global Settings.
         '''</summary>
         Friend ReadOnly Property GLOBAL_SETTINGS() As String

@@ -229,6 +229,23 @@ Public Class FrmBotsd
     Private Sub BtnGenWp_Click(sender As Object, e As EventArgs) Handles BtnGenWp.Click
         GenerateWordpress()
     End Sub
+    Private Sub BtnClearImages_Click(sender As Object, e As EventArgs) Handles BtnClearImages.Click
+        If MsgBox("Confirm delete BOTSD images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.BOTSD & "*.*"})
+            For Each _imageFile As String In _imageList
+                My.Computer.FileSystem.DeleteFile(_imageFile)
+            Next
+        End If
+    End Sub
+    Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
+        Dim _imageFilename As String
+        If PictureBox1.Image IsNot Nothing Then
+            _imageFilename = SaveImage()
+        End If
+    End Sub
+    Private Sub BtnWpPost_Click(sender As Object, e As EventArgs) Handles BtnWpPost.Click
+        GenerateWpPost()
+    End Sub
 #End Region
 #Region "subroutines"
     Private Function SaveImage() As String
@@ -349,15 +366,15 @@ Public Class FrmBotsd
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
     End Sub
-    Private Function GetBotsdPostNo(botsdId As Integer) As Integer
+    Private Shared Function GetBotsdPostNo(botsdId As Integer, ByRef botsdUrl As String) As Integer
         Dim oBotsdPostNo As Integer = -1
         Dim oRow As CelebrityBirthdayDataSet.BotSDRow = GetBotsd(botsdId)
         If oRow IsNot Nothing Then
             oBotsdPostNo = oRow.btsdPostNo
+            botsdUrl = oRow.btsdUrl
         End If
         Return oBotsdPostNo
     End Function
-
     Public Sub AddList(ByRef personsList As List(Of Person))
         Dim _pairRow As DataGridViewRow = DgvPairs.Rows(DgvPairs.Rows.Add())
         If personsList IsNot Nothing Then
@@ -365,7 +382,7 @@ Public Class FrmBotsd
                 _pairRow.Cells(pairYear.Name).Value = personsList(0).BirthYear
                 _pairRow.Cells(pairId1.Name).Value = personsList(0).Id
                 _pairRow.Cells(pairPerson1.Name).Value = personsList(0).Name
-                Dim postNo As Integer = GetBotsdPostNo(personsList(0).Social.Botsd)
+                Dim postNo As Integer = GetBotsdPostNo(personsList(0).Social.Botsd, "")
                 _pairRow.Cells(pairWpNo.Name).Value = If(postNo > -1, CStr(postNo), "")
             End If
             If personsList.Count > 1 Then
@@ -510,29 +527,52 @@ Public Class FrmBotsd
             Case Else
                 sb.Append("th")
         End Select
-
         sb.Append("</strong>").Append(vbCrLf)
         For Each oRow As DataGridViewRow In DgvPairs.Rows
             If Not String.IsNullOrEmpty(oRow.Cells(pairYear.Name).Value) Then
-                sb.Append(oRow.Cells(pairYear.Name).Value)
-                sb.Append("&nbsp;&nbsp;")
-                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson1.Name).Value) Then
-                    sb.Append(oRow.Cells(pairPerson1.Name).Value)
-                End If
-                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson2.Name).Value) Then
-                    sb.Append("&nbsp;/&nbsp;")
-                    sb.Append(oRow.Cells(pairPerson2.Name).Value)
-                End If
-                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson3.Name).Value) Then
-                    sb.Append("&nbsp;/&nbsp;")
-                    sb.Append(oRow.Cells(pairPerson3.Name).Value)
-                End If
-                If Not String.IsNullOrEmpty(oRow.Cells(pairPerson4.Name).Value) Then
-                    sb.Append("&nbsp;/&nbsp;")
-                    sb.Append(oRow.Cells(pairPerson4.Name).Value)
-                End If
-                sb.Append("&nbsp;&nbsp;")
-                sb.Append(vbCrLf)
+                Dim _pickPerson1 As Person = GetFullPersonById(oRow.Cells(pairId1.Name).Value)
+                Dim btsdUrl As String = ""
+                Dim postNo As Integer = GetBotsdPostNo(_pickPerson1.Social.Botsd, btsdUrl)
+                With sb
+                    .Append(oRow.Cells(pairYear.Name).Value)
+                    .Append("&nbsp;&nbsp;")
+                    If Not String.IsNullOrEmpty(oRow.Cells(pairPerson1.Name).Value) Then
+                        .Append(oRow.Cells(pairPerson1.Name).Value)
+                    End If
+                    If Not String.IsNullOrEmpty(oRow.Cells(pairPerson2.Name).Value) Then
+                        .Append("&nbsp;/&nbsp;")
+                        .Append(oRow.Cells(pairPerson2.Name).Value)
+                    End If
+                    If Not String.IsNullOrEmpty(oRow.Cells(pairPerson3.Name).Value) Then
+                        .Append("&nbsp;/&nbsp;")
+                        .Append(oRow.Cells(pairPerson3.Name).Value)
+                    End If
+                    If Not String.IsNullOrEmpty(oRow.Cells(pairPerson4.Name).Value) Then
+                        .Append("&nbsp;/&nbsp;")
+                        .Append(oRow.Cells(pairPerson4.Name).Value)
+                    End If
+                    .Append("&nbsp;&nbsp;")
+                    If postNo > -1 Then
+
+                        .Append("<a href=")
+                        .Append(My.Resources.DOUBLEQUOTES)
+                        .Append(btsdUrl)
+                        .Append(My.Resources.DOUBLEQUOTES)
+                        .Append(" target=")
+                        .Append(My.Resources.DOUBLEQUOTES)
+                        .Append("_blank")
+                        .Append(My.Resources.DOUBLEQUOTES)
+                        .Append(" rel=")
+                        .Append(My.Resources.DOUBLEQUOTES)
+                        .Append("noopener")
+                        .Append(My.Resources.DOUBLEQUOTES)
+                        .Append(">#")
+                        .Append(CStr(postNo))
+                        .Append("</a>")
+                    End If
+                    sb.Append(vbCrLf)
+                End With
+                _pickPerson1.Dispose()
             End If
         Next
         Using oTextForm As New FrmText
@@ -540,24 +580,6 @@ Public Class FrmBotsd
             oTextForm.ShowDialog()
         End Using
     End Sub
-    Private Sub BtnClearImages_Click(sender As Object, e As EventArgs) Handles BtnClearImages.Click
-        If MsgBox("Confirm delete BOTSD images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.BOTSD & "*.*"})
-            For Each _imageFile As String In _imageList
-                My.Computer.FileSystem.DeleteFile(_imageFile)
-            Next
-        End If
-    End Sub
-    Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
-        Dim _imageFilename As String
-        If PictureBox1.Image IsNot Nothing Then
-            _imageFilename = SaveImage()
-        End If
-    End Sub
-    Private Sub BtnWpPost_Click(sender As Object, e As EventArgs) Handles BtnWpPost.Click
-        GenerateWpPost()
-    End Sub
-
     Private Function GetImageLink(oPerson As Person) As String
         Dim oImage As ImageIdentity = oPerson.Image
         If oImage IsNot Nothing Then
@@ -568,7 +590,6 @@ Public Class FrmBotsd
                 imageLoadMonth = oImage.ImageLoadMonth
             End If
         End If
-
         Dim lowername As String = oImage.ImageFileName
         If lowername.Length = 0 Then
             lowername = oPerson.Name.ToLower(myCultureInfo).Replace(" ", "-").Replace(".", "")
@@ -576,7 +597,8 @@ Public Class FrmBotsd
         oImage.Dispose()
         Dim ImageSb As New StringBuilder
         With ImageSb
-            .Append("<a href=""")
+            .Append("<a href=")
+            .Append(My.Resources.DOUBLEQUOTES)
             .Append(My.Resources.WPPAGEURL)
             .Append(urlYear)
             .Append(My.Resources.SLASH)
@@ -590,7 +612,9 @@ Public Class FrmBotsd
             .Append(My.Resources.SLASH)
             .Append(lowername)
             .Append(My.Resources.SLASH)
-            .Append("""><img src=""")
+            .Append(My.Resources.DOUBLEQUOTES)
+            .Append("><img src=")
+            .Append(My.Resources.DOUBLEQUOTES)
             .Append(My.Resources.WPFILESURL)
             .Append(My.Resources.SLASH)
             .Append(imageLoadYear)
@@ -603,7 +627,6 @@ Public Class FrmBotsd
             .Append("</a>")
             .Append(vbCrLf)
         End With
-
         Return ImageSb.ToString
     End Function
     Private Function GetPersonText(oPerson As Person) As String
@@ -613,23 +636,46 @@ Public Class FrmBotsd
             sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
         End If
         Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
-
-        oPersonText.Append("<h1 id=""firstHeading"">").Append(oPerson.Name).Append("</h1>").Append(vbCrLf)
-        oPersonText.Append(GetImageLink(oPerson)).Append(vbCrLf)
-        oPersonText.Append(oPerson.Description).Append(sBorn).Append(If(oPerson.DeathYear = 0, "", sDied)).Append(vbCrLf)
+        With oPersonText
+            .Append("<h1 id=""firstHeading"">")
+            .Append(oPerson.Name)
+            .Append("</h1>")
+            .Append(vbCrLf)
+            .Append(GetImageLink(oPerson))
+            .Append(vbCrLf)
+            .Append(oPerson.Description)
+            .Append(sBorn)
+            .Append(If(oPerson.DeathYear = 0, "", sDied))
+            .Append(vbCrLf)
+        End With
         Return oPersonText.ToString
     End Function
-    Private Function GetImageText(oPerson As Person) As String
+    Private Shared Function GetWikiLinkText(oPerson As Person) As String
         Dim oImageText As New StringBuilder
-        oImageText.Append("<a href=""").Append(My.Resources.WIKIURL).Append(oPerson.Social.WikiId).Append(""" target=""_blank"" rel=""noopener"">") _
-            .Append(My.Resources.WIKIURL).Append(oPerson.Social.WikiId).Append("</a><br>").Append(vbCrLf)
+        With oImageText
+            .Append("<a href=")
+            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(My.Resources.WIKIURL)
+            .Append(oPerson.Social.WikiId)
+            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(" target=""_blank"" rel=""noopener"">")
+            .Append(My.Resources.WIKIURL)
+            .Append(oPerson.Social.WikiId)
+            .Append("</a>")
+            .Append(My.Resources.BREAK)
+            .Append(vbCrLf)
+        End With
         Return oImageText.ToString
     End Function
     Private Sub GenerateWpPost()
         Dim sb As New StringBuilder
         Dim titleSb As New StringBuilder
+        Dim thisWpNumber As String = DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value
+        If String.IsNullOrEmpty(thisWpNumber) Then
+            thisWpNumber = CStr(WpNumber)
+        End If
         Try
-            titleSb.Append("#").Append(CStr(WpNumber)).Append(" ")
+            titleSb.Append("#").Append(thisWpNumber).Append(" ")
             Dim titleDate As String = ""
             Dim _pickPerson1 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
             Dim _pickPerson2 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
@@ -662,26 +708,26 @@ Public Class FrmBotsd
             titleSb.Append(" - ").Append(titleDate)
             sb.Append(My.Resources.BREAK).Append("Links:").Append(My.Resources.BREAK).Append(vbCrLf)
             If _pickPerson1 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson1.Social.WikiId) Then
-                sb.Append(GetImageText(_pickPerson1))
+                sb.Append(GetWikiLinkText(_pickPerson1))
             End If
             If _pickPerson2 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson2.Social.WikiId) Then
-                sb.Append(GetImageText(_pickPerson2))
+                sb.Append(GetWikiLinkText(_pickPerson2))
             End If
             If _pickPerson3 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson3.Social.WikiId) Then
-                sb.Append(GetImageText(_pickPerson3))
+                sb.Append(GetWikiLinkText(_pickPerson3))
             End If
             If _pickPerson4 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson4.Social.WikiId) Then
-                sb.Append(GetImageText(_pickPerson4))
+                sb.Append(GetWikiLinkText(_pickPerson4))
             End If
             sb.Append(vbCrLf).Append("<br><!--more Also born on this day >> --><br>Also born on this day:").Append(vbCrLf)
             Using oTextForm As New FrmBotsdPost
                 oTextForm.TxtTitle.Text = titleSb.ToString
                 oTextForm.RtbText.Text = sb.ToString
-                oTextForm.LblWpPostNo.Text = CStr(WpNumber)
+                oTextForm.LblWpPostNo.Text = thisWpNumber
                 oTextForm.ShowDialog()
                 If oTextForm.DialogResult = DialogResult.OK Then
-                    DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value = CStr(WpNumber)
-                    Dim botsdNo As Integer = InsertBotsd(ThisDay, ThisMonth, DgvPairs.SelectedRows(0).Cells(pairYear.Name).Value, WpNumber, oTextForm.TxtUrl.Text)
+                    DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value = thisWpNumber
+                    Dim botsdNo As Integer = UpdateBotsd(ThisDay, ThisMonth, DgvPairs.SelectedRows(0).Cells(pairYear.Name).Value, CInt(thisWpNumber), oTextForm.TxtUrl.Text)
                     If _pickPerson1 IsNot Nothing Then
                         _pickPerson1.Social.Botsd = botsdNo
                         UpdateBotsdId(_pickPerson1.Social)
