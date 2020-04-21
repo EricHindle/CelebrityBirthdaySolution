@@ -744,19 +744,19 @@ Public Class FrmBotsd
                         _pickPerson4.Social.Botsd = botsdNo
                         UpdateBotsdId(_pickPerson4.Social)
                     End If
-                    WpNumber += 1
-                    GlobalSettings.SetSetting(My.Resources.NEXTWPNO, "integer", CStr(WpNumber))
+                    If CInt(thisWpNumber) = WpNumber Then
+                        WpNumber += 1
+                        GlobalSettings.SetSetting(My.Resources.NEXTWPNO, "integer", CStr(WpNumber))
+                    End If
                 End If
             End Using
             If _pickPerson1 IsNot Nothing Then _pickPerson1.Dispose()
             If _pickPerson2 IsNot Nothing Then _pickPerson2.Dispose()
             If _pickPerson3 IsNot Nothing Then _pickPerson3.Dispose()
             If _pickPerson4 IsNot Nothing Then _pickPerson4.Dispose()
-
         Catch ex As DbException
             DisplayException(MethodBase.GetCurrentMethod, ex, "Db")
         End Try
     End Sub
-
 #End Region
 End Class

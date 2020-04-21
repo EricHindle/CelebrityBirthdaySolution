@@ -136,7 +136,7 @@ Partial Class FrmTweet
         Me.BtnSaveImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSaveImage.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSaveImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSaveImage.Location = New System.Drawing.Point(564, 680)
+        Me.BtnSaveImage.Location = New System.Drawing.Point(1189, 140)
         Me.BtnSaveImage.Name = "BtnSaveImage"
         Me.BtnSaveImage.Size = New System.Drawing.Size(139, 33)
         Me.BtnSaveImage.TabIndex = 5
@@ -654,7 +654,7 @@ Partial Class FrmTweet
         Me.BtnDeleteImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnDeleteImages.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDeleteImages.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnDeleteImages.Location = New System.Drawing.Point(790, 681)
+        Me.BtnDeleteImages.Location = New System.Drawing.Point(951, 681)
         Me.BtnDeleteImages.Name = "BtnDeleteImages"
         Me.BtnDeleteImages.Size = New System.Drawing.Size(139, 33)
         Me.BtnDeleteImages.TabIndex = 40

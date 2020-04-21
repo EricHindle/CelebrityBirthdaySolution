@@ -445,7 +445,7 @@ Module modDatabase
 #End Region
 #Region "BornOnTheSameDay"
     Public Function UpdateBotsd(btsdDay As Integer, btsdMonth As Integer, btsdYear As Integer, btsdPostNo As Integer, btsdUrl As String) As Integer
-        Dim rtnValue As Integer = 0
+        Dim rtnValue As Integer
         oBotsdTa.FillByPostNo(oBotsdTable, btsdPostNo)
         If oBotsdTable.Rows.Count > 0 Then
             Dim oRow As CelebrityBirthdayDataSet.BotSDRow = oBotsdTable.Rows(0)
