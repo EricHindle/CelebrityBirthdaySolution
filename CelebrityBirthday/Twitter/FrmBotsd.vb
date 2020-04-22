@@ -1,4 +1,5 @@
 ﻿Imports System.Collections.ObjectModel
+Imports System.ComponentModel
 Imports System.Data.Common
 Imports System.IO
 Imports System.Reflection
@@ -401,7 +402,7 @@ Public Class FrmBotsd
                 _pairRow.Cells(pairPerson4.Name).Value = personsList(3).Name
             End If
         End If
-
+        DgvPairs.Sort(DgvPairs.Columns(0), ListSortDirection.Ascending)
     End Sub
     Private Sub GeneratePair()
         If DgvPairs.SelectedRows.Count = 1 Then
