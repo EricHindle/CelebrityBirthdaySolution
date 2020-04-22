@@ -95,8 +95,11 @@ Public Class FrmBotsd
         If DgvPairs.SelectedRows.Count = 1 Then
             Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked)
             If _selCount <> -2 Then
-                MsgBox("Select two persons", MsgBoxStyle.Exclamation, "Error")
-                Exit Sub
+                chkSel1.Checked = True
+                _selCount = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked)
+                If _selCount <> -2 Then
+                    ChkSel2.Checked = True
+                End If
             End If
             Dim _row As DataGridViewRow = DgvPairs.SelectedRows(0)
             Dim sel1IdCol As String
@@ -757,6 +760,11 @@ Public Class FrmBotsd
         Catch ex As DbException
             DisplayException(MethodBase.GetCurrentMethod, ex, "Db")
         End Try
+    End Sub
+
+    Private Sub BtnCopyAll_Click(sender As Object, e As EventArgs) Handles BtnCopyAll.Click
+        rtbFile1.SelectAll()
+        rtbFile1.Copy()
     End Sub
 #End Region
 End Class
