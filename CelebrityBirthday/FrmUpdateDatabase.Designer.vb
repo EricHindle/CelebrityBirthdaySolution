@@ -971,7 +971,6 @@ Partial Class FrmUpdateDatabase
         Me.txtWiki.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtWiki.Size = New System.Drawing.Size(411, 123)
         Me.txtWiki.TabIndex = 49
-        Me.txtWiki.Text = "xxxxxx"
         '
         'Label4
         '

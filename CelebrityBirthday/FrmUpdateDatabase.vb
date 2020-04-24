@@ -576,6 +576,7 @@ Public Class FrmUpdateDatabase
         txtDthMth.Text = ""
         txtTwitter.Text = ""
         cbNoTweet.Checked = False
+        TxtWikiId.Text = ""
     End Sub
     Private Sub DisplayPersonList()
         lbPeople.Items.Clear()
