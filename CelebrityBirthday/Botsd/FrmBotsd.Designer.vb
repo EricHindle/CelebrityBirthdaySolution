@@ -98,6 +98,10 @@ Partial Class FrmBotsd
         Me.BtnSaveImage = New System.Windows.Forms.Button()
         Me.BtnWpPost = New System.Windows.Forms.Button()
         Me.BtnCopyAll = New System.Windows.Forms.Button()
+        Me.BtnToday = New System.Windows.Forms.Button()
+        Me.cboDay = New System.Windows.Forms.ComboBox()
+        Me.cboMonth = New System.Windows.Forms.ComboBox()
+        Me.BtnSelect = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -256,12 +260,12 @@ Partial Class FrmBotsd
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DgvPairs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pairYear, Me.pairPerson1, Me.pairPerson2, Me.pairPerson3, Me.pairPerson4, Me.pairWpNo, Me.pairId1, Me.pairId2, Me.pairId3, Me.pairId4})
-        Me.DgvPairs.Location = New System.Drawing.Point(12, 74)
+        Me.DgvPairs.Location = New System.Drawing.Point(12, 98)
         Me.DgvPairs.MultiSelect = False
         Me.DgvPairs.Name = "DgvPairs"
         Me.DgvPairs.RowHeadersVisible = False
         Me.DgvPairs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvPairs.Size = New System.Drawing.Size(653, 329)
+        Me.DgvPairs.Size = New System.Drawing.Size(653, 305)
         Me.DgvPairs.TabIndex = 36
         '
         'pairYear
@@ -564,7 +568,7 @@ Partial Class FrmBotsd
         Me.LblDay.AutoSize = True
         Me.LblDay.Font = New System.Drawing.Font("Papyrus", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblDay.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.LblDay.Location = New System.Drawing.Point(45, 15)
+        Me.LblDay.Location = New System.Drawing.Point(501, 16)
         Me.LblDay.Name = "LblDay"
         Me.LblDay.Size = New System.Drawing.Size(24, 30)
         Me.LblDay.TabIndex = 47
@@ -575,7 +579,7 @@ Partial Class FrmBotsd
         Me.LblMonth.AutoSize = True
         Me.LblMonth.Font = New System.Drawing.Font("Papyrus", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblMonth.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.LblMonth.Location = New System.Drawing.Point(114, 15)
+        Me.LblMonth.Location = New System.Drawing.Point(570, 16)
         Me.LblMonth.Name = "LblMonth"
         Me.LblMonth.Size = New System.Drawing.Size(80, 30)
         Me.LblMonth.TabIndex = 48
@@ -756,26 +760,26 @@ Partial Class FrmBotsd
         'rbImageCentre
         '
         Me.rbImageCentre.AutoSize = True
+        Me.rbImageCentre.Checked = True
         Me.rbImageCentre.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbImageCentre.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbImageCentre.Location = New System.Drawing.Point(23, 77)
         Me.rbImageCentre.Name = "rbImageCentre"
         Me.rbImageCentre.Size = New System.Drawing.Size(92, 22)
         Me.rbImageCentre.TabIndex = 2
+        Me.rbImageCentre.TabStop = True
         Me.rbImageCentre.Text = "ImageCentre"
         Me.rbImageCentre.UseVisualStyleBackColor = True
         '
         'rbImageRight
         '
         Me.rbImageRight.AutoSize = True
-        Me.rbImageRight.Checked = True
         Me.rbImageRight.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbImageRight.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbImageRight.Location = New System.Drawing.Point(23, 49)
         Me.rbImageRight.Name = "rbImageRight"
         Me.rbImageRight.Size = New System.Drawing.Size(84, 22)
         Me.rbImageRight.TabIndex = 1
-        Me.rbImageRight.TabStop = True
         Me.rbImageRight.Text = "Image Right"
         Me.rbImageRight.UseVisualStyleBackColor = True
         '
@@ -851,12 +855,58 @@ Partial Class FrmBotsd
         Me.BtnCopyAll.Text = "Copy All"
         Me.BtnCopyAll.UseVisualStyleBackColor = True
         '
+        'BtnToday
+        '
+        Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnToday.Location = New System.Drawing.Point(16, 16)
+        Me.BtnToday.Name = "BtnToday"
+        Me.BtnToday.Size = New System.Drawing.Size(75, 30)
+        Me.BtnToday.TabIndex = 57
+        Me.BtnToday.Text = "Today"
+        Me.BtnToday.UseVisualStyleBackColor = True
+        '
+        'cboDay
+        '
+        Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboDay.FormattingEnabled = True
+        Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
+        Me.cboDay.Location = New System.Drawing.Point(16, 57)
+        Me.cboDay.Name = "cboDay"
+        Me.cboDay.Size = New System.Drawing.Size(95, 27)
+        Me.cboDay.TabIndex = 55
+        '
+        'cboMonth
+        '
+        Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboMonth.FormattingEnabled = True
+        Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
+        Me.cboMonth.Location = New System.Drawing.Point(119, 57)
+        Me.cboMonth.Name = "cboMonth"
+        Me.cboMonth.Size = New System.Drawing.Size(240, 27)
+        Me.cboMonth.TabIndex = 56
+        '
+        'BtnSelect
+        '
+        Me.BtnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSelect.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSelect.Location = New System.Drawing.Point(365, 54)
+        Me.BtnSelect.Name = "BtnSelect"
+        Me.BtnSelect.Size = New System.Drawing.Size(101, 33)
+        Me.BtnSelect.TabIndex = 58
+        Me.BtnSelect.Text = "Select"
+        Me.BtnSelect.UseVisualStyleBackColor = True
+        '
         'FrmBotsd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1403, 636)
+        Me.Controls.Add(Me.BtnSelect)
+        Me.Controls.Add(Me.BtnToday)
+        Me.Controls.Add(Me.cboDay)
+        Me.Controls.Add(Me.cboMonth)
         Me.Controls.Add(Me.BtnCopyAll)
         Me.Controls.Add(Me.BtnWpPost)
         Me.Controls.Add(Me.BtnSaveImage)
@@ -984,4 +1034,8 @@ Partial Class FrmBotsd
     Friend WithEvents pairId3 As DataGridViewTextBoxColumn
     Friend WithEvents pairId4 As DataGridViewTextBoxColumn
     Friend WithEvents BtnCopyAll As Button
+    Friend WithEvents BtnToday As Button
+    Friend WithEvents cboDay As ComboBox
+    Friend WithEvents cboMonth As ComboBox
+    Friend WithEvents BtnSelect As Button
 End Class

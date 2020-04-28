@@ -37,13 +37,14 @@ Partial Class FrmMenu
         Me.BtnMore = New System.Windows.Forms.Button()
         Me.Version = New System.Windows.Forms.Label()
         Me.LblCelebrities = New System.Windows.Forms.Label()
+        Me.BtnBotsdWP = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtnDatabase
         '
         Me.BtnDatabase.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnDatabase.Location = New System.Drawing.Point(21, 266)
+        Me.BtnDatabase.Location = New System.Drawing.Point(21, 263)
         Me.BtnDatabase.Name = "BtnDatabase"
         Me.BtnDatabase.Size = New System.Drawing.Size(151, 49)
         Me.BtnDatabase.TabIndex = 0
@@ -53,7 +54,7 @@ Partial Class FrmMenu
         'BtnImages
         '
         Me.BtnImages.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnImages.Location = New System.Drawing.Point(202, 266)
+        Me.BtnImages.Location = New System.Drawing.Point(202, 263)
         Me.BtnImages.Name = "BtnImages"
         Me.BtnImages.Size = New System.Drawing.Size(151, 49)
         Me.BtnImages.TabIndex = 1
@@ -63,7 +64,7 @@ Partial Class FrmMenu
         'BtnPictures
         '
         Me.BtnPictures.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPictures.Location = New System.Drawing.Point(202, 418)
+        Me.BtnPictures.Location = New System.Drawing.Point(202, 409)
         Me.BtnPictures.Name = "BtnPictures"
         Me.BtnPictures.Size = New System.Drawing.Size(151, 49)
         Me.BtnPictures.TabIndex = 6
@@ -73,7 +74,7 @@ Partial Class FrmMenu
         'BtnOptions
         '
         Me.BtnOptions.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnOptions.Location = New System.Drawing.Point(21, 494)
+        Me.BtnOptions.Location = New System.Drawing.Point(202, 482)
         Me.BtnOptions.Name = "BtnOptions"
         Me.BtnOptions.Size = New System.Drawing.Size(151, 49)
         Me.BtnOptions.TabIndex = 7
@@ -92,8 +93,9 @@ Partial Class FrmMenu
         '
         'BtnClose
         '
+        Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(108, 570)
+        Me.BtnClose.Location = New System.Drawing.Point(202, 628)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(151, 49)
         Me.BtnClose.TabIndex = 9
@@ -117,7 +119,7 @@ Partial Class FrmMenu
         'BtnBrowser
         '
         Me.BtnBrowser.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnBrowser.Location = New System.Drawing.Point(21, 418)
+        Me.BtnBrowser.Location = New System.Drawing.Point(21, 482)
         Me.BtnBrowser.Name = "BtnBrowser"
         Me.BtnBrowser.Size = New System.Drawing.Size(151, 49)
         Me.BtnBrowser.TabIndex = 5
@@ -127,7 +129,7 @@ Partial Class FrmMenu
         'BtnWordPress
         '
         Me.BtnWordPress.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWordPress.Location = New System.Drawing.Point(202, 342)
+        Me.BtnWordPress.Location = New System.Drawing.Point(202, 336)
         Me.BtnWordPress.Name = "BtnWordPress"
         Me.BtnWordPress.Size = New System.Drawing.Size(151, 49)
         Me.BtnWordPress.TabIndex = 4
@@ -137,7 +139,7 @@ Partial Class FrmMenu
         'BtnTweet
         '
         Me.BtnTweet.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTweet.Location = New System.Drawing.Point(21, 342)
+        Me.BtnTweet.Location = New System.Drawing.Point(21, 336)
         Me.BtnTweet.Name = "BtnTweet"
         Me.BtnTweet.Size = New System.Drawing.Size(151, 49)
         Me.BtnTweet.TabIndex = 3
@@ -158,7 +160,7 @@ Partial Class FrmMenu
         'BtnMore
         '
         Me.BtnMore.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnMore.Location = New System.Drawing.Point(202, 494)
+        Me.BtnMore.Location = New System.Drawing.Point(21, 555)
         Me.BtnMore.Name = "BtnMore"
         Me.BtnMore.Size = New System.Drawing.Size(151, 49)
         Me.BtnMore.TabIndex = 8
@@ -172,7 +174,7 @@ Partial Class FrmMenu
         Me.Version.BackColor = System.Drawing.Color.Transparent
         Me.Version.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Version.Location = New System.Drawing.Point(12, 692)
+        Me.Version.Location = New System.Drawing.Point(17, 697)
         Me.Version.Name = "Version"
         Me.Version.Size = New System.Drawing.Size(152, 22)
         Me.Version.TabIndex = 12
@@ -181,20 +183,32 @@ Partial Class FrmMenu
         '
         'LblCelebrities
         '
-        Me.LblCelebrities.Location = New System.Drawing.Point(21, 638)
+        Me.LblCelebrities.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.LblCelebrities.Location = New System.Drawing.Point(148, 134)
         Me.LblCelebrities.Name = "LblCelebrities"
-        Me.LblCelebrities.Size = New System.Drawing.Size(332, 32)
+        Me.LblCelebrities.Size = New System.Drawing.Size(205, 32)
         Me.LblCelebrities.TabIndex = 13
         Me.LblCelebrities.Text = "{0} Celebrities"
         Me.LblCelebrities.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'BtnBotsdWP
+        '
+        Me.BtnBotsdWP.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnBotsdWP.Location = New System.Drawing.Point(21, 409)
+        Me.BtnBotsdWP.Name = "BtnBotsdWP"
+        Me.BtnBotsdWP.Size = New System.Drawing.Size(151, 49)
+        Me.BtnBotsdWP.TabIndex = 14
+        Me.BtnBotsdWP.Text = "Born o t Same Day"
+        Me.BtnBotsdWP.UseVisualStyleBackColor = True
         '
         'FrmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(377, 723)
+        Me.ClientSize = New System.Drawing.Size(377, 728)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnBotsdWP)
         Me.Controls.Add(Me.LblCelebrities)
         Me.Controls.Add(Me.Version)
         Me.Controls.Add(Me.BtnMore)
@@ -234,4 +248,5 @@ Partial Class FrmMenu
     Friend WithEvents BtnMore As Button
     Friend WithEvents Version As Label
     Friend WithEvents LblCelebrities As Label
+    Friend WithEvents BtnBotsdWP As Button
 End Class

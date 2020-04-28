@@ -22,7 +22,6 @@ Public Class FrmTweet
     Private IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
     Private isBuildingTrees As Boolean
-
 #End Region
 #Region "properties"
     Private _daySelection As Integer
@@ -124,43 +123,6 @@ Public Class FrmTweet
     End Sub
     Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
         GenerateAllTweets()
-    End Sub
-    Private Sub BtnBotsd_Click(sender As Object, e As EventArgs) Handles BtnBotsd.Click
-        Using _botsd As New FrmBotsd
-            _botsd.ThisDay = cboDay.SelectedIndex + 1
-            _botsd.ThisMonth = cboMonth.SelectedIndex + 1
-            Dim _fullList As New List(Of Person)
-            _fullList.AddRange(oBirthdayList)
-            _fullList.AddRange(oAnniversaryList)
-            Do Until _fullList.Count = 0
-                Dim _sameYearList As New List(Of Person)
-                Dim _person1 As Person = _fullList(0)
-                _fullList.RemoveAt(0)
-                For Each _person2 In _fullList
-                    If _person1.DateOfBirth = _person2.DateOfBirth Then
-                        _sameYearList.Add(_person2)
-                    End If
-                Next
-                For Each _matchedPerson As Person In _sameYearList
-                    _fullList.Remove(_matchedPerson)
-                Next
-                If _sameYearList.Count > 0 Then
-                    _sameYearList.Add(_person1)
-                    _botsd.AddList(_sameYearList)
-                End If
-            Loop
-            Select Case True
-                Case rbImageRight.Checked
-                    _botsd.rbImageRight.Checked = True
-                Case rbImageLeft.Checked
-                    _botsd.rbImageLeft.Checked = True
-                Case rbImageCentre.Checked
-                    _botsd.rbImageCentre.Checked = True
-            End Select
-
-            _botsd.ShowDialog()
-        End Using
-
     End Sub
     Private Sub BtnTotd_Click(sender As Object, e As EventArgs) Handles BtnTotd.Click
         If CountOfCheckedNames() = 1 Then
@@ -487,49 +449,6 @@ Public Class FrmTweet
         End Try
         isBuildingTrees = False
         Return isBuiltOk
-    End Function
-    Private Shared Function AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, _treeView As TreeView, _type As String) As TreeNode
-        Dim newBirthdayNode As TreeNode = _treeView.Nodes.Add(Format(testDate, "MMMM dd") & _type, _type)
-        newBirthdayNode.Checked = True
-        For Each oPerson As Person In oBirthdayTable
-            AddNameNode(newBirthdayNode, oPerson, _type)
-        Next
-        newBirthdayNode.Expand()
-        Return newBirthdayNode
-    End Function
-    Private Shared Function AddNameNode(newBirthdayNode As TreeNode, oPerson As Person, _type As String) As TreeNode
-        Dim newNameNode As TreeNode = newBirthdayNode.Nodes.Add(oPerson.Name)
-        If oPerson.Social IsNot Nothing Then
-            If Not String.IsNullOrEmpty(oPerson.Social.TwitterHandle) Then
-                Dim _twitterNode As TreeNode = newNameNode.Nodes.Add("twitter", oPerson.Social.TwitterHandle)
-                _twitterNode.Checked = True
-            End If
-            newNameNode.Checked = True
-            If oPerson.Social.IsNoTweet = True Then
-                newNameNode.Checked = False
-            End If
-        End If
-        newNameNode.Nodes.Add("id", oPerson.Id)
-        newNameNode.Nodes.Add("desc", oPerson.ShortDesc)
-        newNameNode.Nodes.Add("length", oPerson.Name.Length)
-        newNameNode.Nodes.Add("year", oPerson.BirthYear)
-        Dim _age As Integer = CalculateAgeNextBirthday(oPerson)
-        Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
-        _ageNode.Checked = (_type = "Birthday")
-        Return newNameNode
-    End Function
-    Private Shared Function CalculateAgeNextBirthday(oPerson As Person) As Integer
-        Dim _years As Integer = 0
-        If oPerson.BirthYear > 0 Then
-            Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
-            Dim _thisMonth As Integer = Today.Month
-            Dim _thisDay As Integer = Today.Day
-            _years = DateDiff(DateInterval.Year, _dob, Today)
-            If _thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay) Then
-                _years += 1
-            End If
-        End If
-        Return _years
     End Function
     Private Function CountOfCheckedNames() As Integer
         Dim _count As Integer = 0

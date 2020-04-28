@@ -77,4 +77,11 @@
         Me.Show()
     End Sub
 
+    Private Sub BtnBotsdWP_Click(sender As Object, e As EventArgs) Handles BtnBotsdWP.Click
+        Me.Hide()
+        Using _botsd As New FrmBotsd
+            _botsd.ShowDialog()
+        End Using
+        Me.Show()
+    End Sub
 End Class

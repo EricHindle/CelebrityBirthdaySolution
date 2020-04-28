@@ -9902,7 +9902,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(4) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(5) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
@@ -9932,20 +9932,30 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
-                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
-                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
-                " wikiId FROM FullPerson WHERE (id = @personId)"
+            Me._commandCollection(3).CommandText = "SELECT        longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, su"& _ 
+                "rname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deat"& _ 
+                "hday, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         imgfiletype, imgloadyr, imgloadmonth, twitterHa"& _ 
+                "ndle, noTweet, imgfilename, botsd, wikiId"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            FullPerson"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE    "& _ 
+                "    (birthday = @day) AND (birthmonth = @month)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@personId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
             Me._commandCollection(4).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
                 "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
                 "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
-                " wikiId FROM FullPerson WHERE (birthmonth = @month)"
+                " wikiId FROM FullPerson WHERE (id = @personId)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@personId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(5).Connection = Me.Connection
+            Me._commandCollection(5).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
+                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
+                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
+                " wikiId FROM FullPerson WHERE (birthmonth = @month)"
+            Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10006,8 +10016,23 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
-        Public Overloads Overridable Function FillById(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal personId As Integer) As Integer
+        Public Overloads Overridable Function FillByDayAndMonth(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal day As Integer, ByVal month As Integer) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(3)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(day,Integer)
+            Me.Adapter.SelectCommand.Parameters(1).Value = CType(month,Integer)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillById(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal personId As Integer) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(4)
             Me.Adapter.SelectCommand.Parameters(0).Value = CType(personId,Integer)
             If (Me.ClearBeforeFill = true) Then
                 dataTable.Clear
@@ -10021,7 +10046,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
         Public Overloads Overridable Function FillByMonth(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal month As Integer) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(4)
+            Me.Adapter.SelectCommand = Me.CommandCollection(5)
             Me.Adapter.SelectCommand.Parameters(0).Value = CType(month,Integer)
             If (Me.ClearBeforeFill = true) Then
                 dataTable.Clear

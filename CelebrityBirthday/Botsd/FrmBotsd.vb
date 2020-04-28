@@ -17,11 +17,14 @@ Public Class FrmBotsd
     Private imageLoadMonth As String
     Private imageLoadYear As String
     Private WpNumber As Integer
-
+    Private isBuildingPairs As Boolean
+    Private ReadOnly tvBirthday As New TreeView
 #End Region
 #Region "properites"
     Private _day As Integer
     Private _month As Integer
+
+
     Public Property ThisMonth() As Integer
         Get
             Return _month
@@ -52,25 +55,14 @@ Public Class FrmBotsd
         GetFormPos(Me, My.Settings.botsdformpos)
         IsNoGenerate = True
         WpNumber = GlobalSettings.GetSetting(My.Resources.NEXTWPNO)
-        Try
-            LblMonth.Text = Format(New Date(2000, ThisMonth, 1), "MMMM")
-            LblDay.Text = CStr(ThisDay)
-            Dim _wpDate As Date? = GetWordPressLoadDate(ThisDay, ThisMonth, "P")
-            urlDay = If(_wpDate Is Nothing, "", Format(_wpDate, "dd"))
-            urlMonth = If(_wpDate Is Nothing, "", Format(_wpDate, "MM"))
-            urlYear = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
-            imageLoadMonth = urlMonth
-            imageLoadYear = urlYear
-        Catch ex As ArgumentOutOfRangeException
-            MsgBox("No date selected", MsgBoxStyle.Exclamation, "Error")
-            Me.Close()
-        End Try
+        LblMonth.Text = ""
+        LblDay.Text = ""
         GetAuthData()
         FillTwitterUserList()
         IsNoGenerate = False
     End Sub
     Private Sub DgvPairs_SelectionChanged(sender As Object, e As EventArgs) Handles DgvPairs.SelectionChanged
-        GeneratePair()
+        If Not isBuildingPairs Then GeneratePair()
     End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         Dim _imageFilename As String = Nothing
@@ -235,7 +227,7 @@ Public Class FrmBotsd
     End Sub
     Private Sub BtnClearImages_Click(sender As Object, e As EventArgs) Handles BtnClearImages.Click
         If MsgBox("Confirm delete BOTSD images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.BOTSD & "*.*"})
+            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.botsdFilePath, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.BOTSD & "*.*"})
             For Each _imageFile As String In _imageList
                 My.Computer.FileSystem.DeleteFile(_imageFile)
             Next
@@ -250,11 +242,68 @@ Public Class FrmBotsd
     Private Sub BtnWpPost_Click(sender As Object, e As EventArgs) Handles BtnWpPost.Click
         GenerateWpPost()
     End Sub
+    Private Sub BtnCopyAll_Click(sender As Object, e As EventArgs) Handles BtnCopyAll.Click
+        rtbFile1.SelectAll()
+        rtbFile1.Copy()
+    End Sub
+    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
+        cboDay.SelectedIndex = Today.Day - 1
+        cboMonth.SelectedIndex = Today.Month - 1
+    End Sub
+    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
+        rtbFile1.Text = ""
+        isBuildingPairs = True
+        Try
+            ThisDay = cboDay.SelectedIndex + 1
+            ThisMonth = cboMonth.SelectedIndex + 1
+            LblMonth.Text = Format(New Date(2000, ThisMonth, 1), "MMMM")
+            LblDay.Text = CStr(ThisDay)
+            Dim _wpDate As Date? = GetWordPressLoadDate(ThisDay, ThisMonth, "P")
+            urlDay = If(_wpDate Is Nothing, "", Format(_wpDate, "dd"))
+            urlMonth = If(_wpDate Is Nothing, "", Format(_wpDate, "MM"))
+            urlYear = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
+            imageLoadMonth = urlMonth
+            imageLoadYear = urlYear
+            Dim _fullList As List(Of Person) = FindTodays(ThisDay, ThisMonth, False)
+            DgvPairs.Rows.Clear()
+            Do Until _fullList.Count = 0
+                Dim _sameYearList As New List(Of Person)
+                Dim _person1 As Person = _fullList(0)
+                _fullList.RemoveAt(0)
+                For Each _person2 As Person In _fullList
+                    If _person1.DateOfBirth = _person2.DateOfBirth Then
+                        _sameYearList.Add(_person2)
+                    End If
+                Next
+                For Each _matchedPerson As Person In _sameYearList
+                    _fullList.Remove(_matchedPerson)
+                Next
+                If _sameYearList.Count > 0 Then
+                    _sameYearList.Add(_person1)
+                    AddList(_sameYearList)
+                End If
+            Loop
+            Select Case True
+                Case rbImageRight.Checked
+                    rbImageRight.Checked = True
+                Case rbImageLeft.Checked
+                    rbImageLeft.Checked = True
+                Case rbImageCentre.Checked
+                    rbImageCentre.Checked = True
+            End Select
+            DgvPairs.ClearSelection()
+        Catch ex As ArgumentOutOfRangeException
+            MsgBox("No date selected", MsgBoxStyle.Exclamation, "Error")
+            Me.Close()
+        End Try
+        isBuildingPairs = False
+    End Sub
+
 #End Region
 #Region "subroutines"
     Private Function SaveImage() As String
         DisplayStatus("Saving File")
-        Dim _path As String = My.Settings.twitterImageFolder
+        Dim _path As String = My.Settings.botsdFilePath
         If Not My.Computer.FileSystem.DirectoryExists(_path) Then
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
@@ -769,9 +818,5 @@ Public Class FrmBotsd
         End Try
     End Sub
 
-    Private Sub BtnCopyAll_Click(sender As Object, e As EventArgs) Handles BtnCopyAll.Click
-        rtbFile1.SelectAll()
-        rtbFile1.Copy()
-    End Sub
 #End Region
 End Class

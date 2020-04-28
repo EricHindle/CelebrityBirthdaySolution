@@ -363,6 +363,49 @@ Friend Module modCbday
         End Try
         Return newfilename
     End Function
+    Public Function AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, _treeView As TreeView, _type As String) As TreeNode
+        Dim newBirthdayNode As TreeNode = _treeView.Nodes.Add(Format(testDate, "MMMM dd") & _type, _type)
+        newBirthdayNode.Checked = True
+        For Each oPerson As Person In oBirthdayTable
+            AddNameNode(newBirthdayNode, oPerson, _type)
+        Next
+        newBirthdayNode.Expand()
+        Return newBirthdayNode
+    End Function
+    Public Function AddNameNode(newBirthdayNode As TreeNode, oPerson As Person, _type As String) As TreeNode
+        Dim newNameNode As TreeNode = newBirthdayNode.Nodes.Add(oPerson.Name)
+        If oPerson.Social IsNot Nothing Then
+            If Not String.IsNullOrEmpty(oPerson.Social.TwitterHandle) Then
+                Dim _twitterNode As TreeNode = newNameNode.Nodes.Add("twitter", oPerson.Social.TwitterHandle)
+                _twitterNode.Checked = True
+            End If
+            newNameNode.Checked = True
+            If oPerson.Social.IsNoTweet = True Then
+                newNameNode.Checked = False
+            End If
+        End If
+        newNameNode.Nodes.Add("id", oPerson.Id)
+        newNameNode.Nodes.Add("desc", oPerson.ShortDesc)
+        newNameNode.Nodes.Add("length", oPerson.Name.Length)
+        newNameNode.Nodes.Add("year", oPerson.BirthYear)
+        Dim _age As Integer = CalculateAgeNextBirthday(oPerson)
+        Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
+        _ageNode.Checked = (_type = "Birthday")
+        Return newNameNode
+    End Function
+    Public Function CalculateAgeNextBirthday(oPerson As Person) As Integer
+        Dim _years As Integer = 0
+        If oPerson.BirthYear > 0 Then
+            Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
+            Dim _thisMonth As Integer = Today.Month
+            Dim _thisDay As Integer = Today.Day
+            _years = DateDiff(DateInterval.Year, _dob, Today)
+            If _thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay) Then
+                _years += 1
+            End If
+        End If
+        Return _years
+    End Function
 End Module
 
 

@@ -232,16 +232,16 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GlobalSettings.vb" />
-    <Compile Include="Twitter\FrmBotsd.Designer.vb">
+    <Compile Include="Botsd\FrmBotsd.Designer.vb">
       <DependentUpon>FrmBotsd.vb</DependentUpon>
     </Compile>
-    <Compile Include="Twitter\FrmBotsd.vb">
+    <Compile Include="Botsd\FrmBotsd.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Twitter\FrmBotsdPost.Designer.vb">
+    <Compile Include="Botsd\FrmBotsdPost.Designer.vb">
       <DependentUpon>FrmBotsdPost.vb</DependentUpon>
     </Compile>
-    <Compile Include="Twitter\FrmBotsdPost.vb">
+    <Compile Include="Botsd\FrmBotsdPost.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Twitter\modTwitter.vb" />
@@ -353,10 +353,10 @@
     <EmbeddedResource Include="Imaging\FrmMosaic.resx">
       <DependentUpon>FrmMosaic.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Twitter\FrmBotsd.resx">
+    <EmbeddedResource Include="Botsd\FrmBotsd.resx">
       <DependentUpon>FrmBotsd.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Twitter\FrmBotsdPost.resx">
+    <EmbeddedResource Include="Botsd\FrmBotsdPost.resx">
       <DependentUpon>FrmBotsdPost.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\FrmSendTwitter.resx">

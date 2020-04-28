@@ -59,7 +59,6 @@ Partial Class FrmTweet
         Me.NudAnnivsPerTweet = New System.Windows.Forms.NumericUpDown()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.BtnBotsd = New System.Windows.Forms.Button()
         Me.BtnTotd = New System.Windows.Forms.Button()
         Me.BtnUncheck = New System.Windows.Forms.Button()
         Me.BtnDeleteImages = New System.Windows.Forms.Button()
@@ -565,7 +564,7 @@ Partial Class FrmTweet
         '
         Me.BtnReGen.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnReGen.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnReGen.Location = New System.Drawing.Point(280, 101)
+        Me.BtnReGen.Location = New System.Drawing.Point(280, 112)
         Me.BtnReGen.Name = "BtnReGen"
         Me.BtnReGen.Size = New System.Drawing.Size(139, 33)
         Me.BtnReGen.TabIndex = 32
@@ -615,17 +614,6 @@ Partial Class FrmTweet
         Me.Label6.TabIndex = 36
         Me.Label6.Text = "Anniversaries"
         '
-        'BtnBotsd
-        '
-        Me.BtnBotsd.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnBotsd.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnBotsd.Location = New System.Drawing.Point(260, 140)
-        Me.BtnBotsd.Name = "BtnBotsd"
-        Me.BtnBotsd.Size = New System.Drawing.Size(178, 33)
-        Me.BtnBotsd.TabIndex = 37
-        Me.BtnBotsd.Text = "Born on the Same Day"
-        Me.BtnBotsd.UseVisualStyleBackColor = True
-        '
         'BtnTotd
         '
         Me.BtnTotd.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -670,7 +658,6 @@ Partial Class FrmTweet
         Me.Controls.Add(Me.BtnDeleteImages)
         Me.Controls.Add(Me.BtnUncheck)
         Me.Controls.Add(Me.BtnTotd)
-        Me.Controls.Add(Me.BtnBotsd)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
@@ -768,7 +755,6 @@ Partial Class FrmTweet
     Friend WithEvents NudAnnivsPerTweet As NumericUpDown
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents BtnBotsd As Button
     Friend WithEvents BtnTotd As Button
     Friend WithEvents BtnUncheck As Button
     Friend WithEvents GroupBox4 As GroupBox
