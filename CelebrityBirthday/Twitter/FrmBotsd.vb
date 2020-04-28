@@ -675,6 +675,7 @@ Public Class FrmBotsd
         Dim sb As New StringBuilder
         Dim titleSb As New StringBuilder
         Dim thisWpNumber As String = DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value
+        Dim thisYear As String = DgvPairs.SelectedRows(0).Cells(pairYear.Name).Value
         If String.IsNullOrEmpty(thisWpNumber) Then
             thisWpNumber = CStr(WpNumber)
         End If
@@ -725,34 +726,39 @@ Public Class FrmBotsd
             End If
             sb.Append(vbCrLf).Append("<br><!--more Also born on this day >> --><br>Also born on this day:").Append(vbCrLf)
             Using oTextForm As New FrmBotsdPost
-                oTextForm.TxtTitle.Text = titleSb.ToString
-                oTextForm.RtbText.Text = sb.ToString
-                oTextForm.LblWpPostNo.Text = thisWpNumber
-                oTextForm.ShowDialog()
-                If oTextForm.DialogResult = DialogResult.OK Then
-                    DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value = thisWpNumber
-                    Dim botsdNo As Integer = UpdateBotsd(ThisDay, ThisMonth, DgvPairs.SelectedRows(0).Cells(pairYear.Name).Value, CInt(thisWpNumber), oTextForm.TxtUrl.Text)
-                    If _pickPerson1 IsNot Nothing Then
-                        _pickPerson1.Social.Botsd = botsdNo
-                        UpdateBotsdId(_pickPerson1.Social)
+                With oTextForm
+                    .TxtTitle.Text = titleSb.ToString
+                    .PostText = sb.ToString
+                    .LblWpPostNo.Text = thisWpNumber
+                    .LblDay.Text = CStr(ThisDay)
+                    .LblMonth.Text = Format(New Date(2000, ThisMonth, 1), "MMMM")
+                    .LblYear.Text = thisYear
+                    .ShowDialog()
+                    If .DialogResult = DialogResult.OK Then
+                        DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value = thisWpNumber
+                        Dim botsdNo As Integer = UpdateBotsd(ThisDay, ThisMonth, DgvPairs.SelectedRows(0).Cells(pairYear.Name).Value, CInt(thisWpNumber), oTextForm.TxtUrl.Text)
+                        If _pickPerson1 IsNot Nothing Then
+                            _pickPerson1.Social.Botsd = botsdNo
+                            UpdateBotsdId(_pickPerson1.Social)
+                        End If
+                        If _pickPerson2 IsNot Nothing Then
+                            _pickPerson2.Social.Botsd = botsdNo
+                            UpdateBotsdId(_pickPerson2.Social)
+                        End If
+                        If _pickPerson3 IsNot Nothing Then
+                            _pickPerson3.Social.Botsd = botsdNo
+                            UpdateBotsdId(_pickPerson3.Social)
+                        End If
+                        If _pickPerson4 IsNot Nothing Then
+                            _pickPerson4.Social.Botsd = botsdNo
+                            UpdateBotsdId(_pickPerson4.Social)
+                        End If
+                        If CInt(thisWpNumber) = WpNumber Then
+                            WpNumber += 1
+                            GlobalSettings.SetSetting(My.Resources.NEXTWPNO, "integer", CStr(WpNumber))
+                        End If
                     End If
-                    If _pickPerson2 IsNot Nothing Then
-                        _pickPerson2.Social.Botsd = botsdNo
-                        UpdateBotsdId(_pickPerson2.Social)
-                    End If
-                    If _pickPerson3 IsNot Nothing Then
-                        _pickPerson3.Social.Botsd = botsdNo
-                        UpdateBotsdId(_pickPerson3.Social)
-                    End If
-                    If _pickPerson4 IsNot Nothing Then
-                        _pickPerson4.Social.Botsd = botsdNo
-                        UpdateBotsdId(_pickPerson4.Social)
-                    End If
-                    If CInt(thisWpNumber) = WpNumber Then
-                        WpNumber += 1
-                        GlobalSettings.SetSetting(My.Resources.NEXTWPNO, "integer", CStr(WpNumber))
-                    End If
-                End If
+                End With
             End Using
             If _pickPerson1 IsNot Nothing Then _pickPerson1.Dispose()
             If _pickPerson2 IsNot Nothing Then _pickPerson2.Dispose()

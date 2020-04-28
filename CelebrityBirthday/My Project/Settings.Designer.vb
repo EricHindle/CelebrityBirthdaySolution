@@ -402,6 +402,18 @@ Namespace My
                 Me("wikiTitleSearch") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\BOTSD")>  _
+        Public Property botsdFilePath() As String
+            Get
+                Return CType(Me("botsdFilePath"),String)
+            End Get
+            Set
+                Me("botsdFilePath") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
