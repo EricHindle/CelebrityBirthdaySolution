@@ -18,7 +18,6 @@ Public Class FrmBotsd
     Private imageLoadYear As String
     Private WpNumber As Integer
     Private isBuildingPairs As Boolean
-    Private ReadOnly tvBirthday As New TreeView
 #End Region
 #Region "properites"
     Private _day As Integer

@@ -120,13 +120,16 @@ Public Class FrmBotsdPost
         TxtDesc.Text = Clipboard.GetText
     End Sub
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
-        Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
-        oRow.Cells(alsoName.Name).Value = TxtName.Text
-        oRow.Cells(alsoWiki.Name).Value = TxtWiki.Text
-        oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text
-        TxtName.Text = ""
-        TxtWiki.Text = ""
-        TxtDesc.Text = ""
+        If Not String.IsNullOrEmpty(TxtName.Text) Then
+            Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
+            oRow.Cells(alsoName.Name).Value = TxtName.Text
+            oRow.Cells(alsoWiki.Name).Value = TxtWiki.Text
+            oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text
+            TxtName.Text = ""
+            TxtWiki.Text = ""
+            TxtDesc.Text = ""
+            SaveList()
+        End If
     End Sub
     Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtDesc.DragDrop,
                                                                                             TxtName.DragDrop,
@@ -234,6 +237,10 @@ Public Class FrmBotsdPost
         Return _fileName
     End Function
     Private Sub BtnSaveList_Click(sender As Object, e As EventArgs) Handles BtnSaveList.Click
+        SaveList()
+    End Sub
+
+    Private Sub SaveList()
         DisplayStatus("Saving List")
         Using _outputfile As New StreamWriter(oAlsoFileName, False)
             For Each oRow As DataGridViewRow In DgvAlso.Rows
@@ -248,6 +255,7 @@ Public Class FrmBotsdPost
         End Using
         DisplayStatus("Saved List")
     End Sub
+
     Private Sub BtnLoadList_Click(sender As Object, e As EventArgs) Handles BtnLoadList.Click
         If My.Computer.FileSystem.FileExists(oAlsoFileName) Then
             DisplayStatus("Loading List")
