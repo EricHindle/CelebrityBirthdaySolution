@@ -31,13 +31,13 @@ Public Class FrmBotsdPost
         Me.Close()
     End Sub
     Private Sub FrmText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        GetFormPos(Me, My.Settings.botsdformpos)
+        GetFormPos(Me, My.Settings.botsdpostpos)
         Dim alsosText As String = GenerateAlsos()
         RtbText.Text = oPostText & alsosText
         oAlsoFileName = GenAlsoFileName()
     End Sub
     Private Sub FrmText_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        My.Settings.textformpos = SetFormPos(Me)
+        My.Settings.botsdpostpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
     Private Sub CopyToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles CopyToolStripMenuItem.Click
@@ -120,6 +120,10 @@ Public Class FrmBotsdPost
         TxtDesc.Text = Clipboard.GetText
     End Sub
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
+        AddToList()
+    End Sub
+
+    Private Sub AddToList()
         If Not String.IsNullOrEmpty(TxtName.Text) Then
             Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
             oRow.Cells(alsoName.Name).Value = TxtName.Text
@@ -131,6 +135,7 @@ Public Class FrmBotsdPost
             SaveList()
         End If
     End Sub
+
     Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtDesc.DragDrop,
                                                                                             TxtName.DragDrop,
                                                                                             TxtUrl.DragDrop,
@@ -186,6 +191,10 @@ Public Class FrmBotsdPost
         End If
     End Sub
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        ClearForm()
+    End Sub
+
+    Private Sub ClearForm()
         TxtName.Text = ""
         TxtWiki.Text = ""
         TxtDesc.Text = ""
@@ -281,6 +290,21 @@ Public Class FrmBotsdPost
     Private Sub DisplayStatus(pText As String, Optional isAppend As Boolean = False)
         lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
         StatusStrip1.Refresh()
+    End Sub
+
+    Private Sub BtnImportList_Click(sender As Object, e As EventArgs) Handles BtnImportList.Click
+        Dim alsoList As String() = Split(Clipboard.GetText, vbCrLf)
+        For Each _also As String In alsoList
+            Dim parts As String() = Split(_also, My.Resources.DOUBLEQUOTES)
+            If parts.Length = 9 Then
+                Dim _lastpart As String() = Split(parts(8), "</a>")
+                TxtName.Text = parts(1)
+                TxtWiki.Text = parts(3)
+                TxtDesc.Text = If(_lastpart.Length = 2, _lastpart(1).Trim, "")
+                AddToList()
+            End If
+        Next
+        ClearForm()
     End Sub
 #End Region
 End Class

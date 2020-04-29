@@ -97,5 +97,8 @@
     <Setting Name="botsdFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\CelebrityBirthday\BOTSD</Value>
     </Setting>
+    <Setting Name="botsdpostpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
