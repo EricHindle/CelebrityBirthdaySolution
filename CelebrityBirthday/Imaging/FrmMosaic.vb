@@ -38,14 +38,16 @@ Public Class FrmMosaic
         Dim _skip As Integer = nudSkip.Value * NudWidth.Value
         For Each _person As Person In _imageTable
             If _skip = 0 Then
-                Dim _image As Image = _person.Image.Photo
-                _imgHPos += 1
-                If _imgHPos = _width Then
-                    _imgVPos += 1
-                    _imgHPos = 0
+                If _person.Image IsNot Nothing AndAlso _person.Image.Photo IsNot Nothing Then
+                    Dim _image As Image = _person.Image.Photo
+                    _imgHPos += 1
+                    If _imgHPos = _width Then
+                        _imgVPos += 1
+                        _imgHPos = 0
+                    End If
+                    Dim oBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(_image, 60, 60)
+                    oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
                 End If
-                Dim oBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(_image, 60, 60)
-                oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
             Else
                 _skip -= 1
             End If
@@ -66,16 +68,10 @@ Public Class FrmMosaic
             _PersonTa.FillByMonth(_PersonTable, cboMonth.SelectedIndex + 1)
             For Each _personRow As CelebrityBirthdayDataSet.FullPersonRow In _PersonTable
                 ct += 1
-                Dim _person As New Person(_personRow)
                 'If ct > 850 Then
                 '    Debug.Print(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))
                 'End If
-                If _person.Image.Photo IsNot Nothing Then
-                    _imageList.Add(_person)
-                Else
-                    Debug.Print(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))
-                End If
-                _person.Dispose()
+                _imageList.Add(New Person(_personRow))
             Next
             lblImgCount.Text = CStr(_imageList.Count)
             lblImgCount.Refresh()
@@ -104,5 +100,9 @@ Public Class FrmMosaic
         End If
     End Sub
 
-
+    Private Sub FrmMosaic_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        For Each _person As Person In _imageList
+            _person.Dispose()
+        Next
+    End Sub
 End Class
