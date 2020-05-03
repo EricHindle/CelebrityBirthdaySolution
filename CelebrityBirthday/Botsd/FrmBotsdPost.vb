@@ -296,8 +296,8 @@ Public Class FrmBotsdPost
         Dim alsoList As String() = Split(Clipboard.GetText, vbCrLf)
         For Each _also As String In alsoList
             Dim parts As String() = Split(_also, My.Resources.DOUBLEQUOTES)
-            If parts.Length = 9 Then
-                Dim _lastpart As String() = Split(parts(8), "</a>")
+            If parts.Length > 4 Then
+                Dim _lastpart As String() = Split(parts(parts.Length - 1), "</a>")
                 TxtName.Text = parts(1)
                 TxtWiki.Text = parts(3)
                 TxtDesc.Text = If(_lastpart.Length = 2, _lastpart(1).Trim, "")
