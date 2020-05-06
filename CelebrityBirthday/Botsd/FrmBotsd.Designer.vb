@@ -102,6 +102,7 @@ Partial Class FrmBotsd
         Me.cboDay = New System.Windows.Forms.ComboBox()
         Me.cboMonth = New System.Windows.Forms.ComboBox()
         Me.BtnSelect = New System.Windows.Forms.Button()
+        Me.BtnAtoZ = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -800,7 +801,7 @@ Partial Class FrmBotsd
         Me.BtnGenWp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnGenWp.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGenWp.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGenWp.Location = New System.Drawing.Point(12, 427)
+        Me.BtnGenWp.Location = New System.Drawing.Point(12, 418)
         Me.BtnGenWp.Name = "BtnGenWp"
         Me.BtnGenWp.Size = New System.Drawing.Size(94, 58)
         Me.BtnGenWp.TabIndex = 50
@@ -836,7 +837,7 @@ Partial Class FrmBotsd
         Me.BtnWpPost.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnWpPost.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWpPost.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWpPost.Location = New System.Drawing.Point(12, 504)
+        Me.BtnWpPost.Location = New System.Drawing.Point(12, 487)
         Me.BtnWpPost.Name = "BtnWpPost"
         Me.BtnWpPost.Size = New System.Drawing.Size(94, 58)
         Me.BtnWpPost.TabIndex = 53
@@ -897,12 +898,25 @@ Partial Class FrmBotsd
         Me.BtnSelect.Text = "Select"
         Me.BtnSelect.UseVisualStyleBackColor = True
         '
+        'BtnAtoZ
+        '
+        Me.BtnAtoZ.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnAtoZ.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAtoZ.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnAtoZ.Location = New System.Drawing.Point(12, 555)
+        Me.BtnAtoZ.Name = "BtnAtoZ"
+        Me.BtnAtoZ.Size = New System.Drawing.Size(94, 40)
+        Me.BtnAtoZ.TabIndex = 59
+        Me.BtnAtoZ.Text = "A - Z"
+        Me.BtnAtoZ.UseVisualStyleBackColor = True
+        '
         'FrmBotsd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1403, 636)
+        Me.Controls.Add(Me.BtnAtoZ)
         Me.Controls.Add(Me.BtnSelect)
         Me.Controls.Add(Me.BtnToday)
         Me.Controls.Add(Me.cboDay)
@@ -1038,4 +1052,5 @@ Partial Class FrmBotsd
     Friend WithEvents cboDay As ComboBox
     Friend WithEvents cboMonth As ComboBox
     Friend WithEvents BtnSelect As Button
+    Friend WithEvents BtnAtoZ As Button
 End Class

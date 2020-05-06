@@ -642,9 +642,10 @@ Public Class FrmBotsd
                 imageLoadMonth = oImage.ImageLoadMonth
             End If
         End If
-        Dim lowername As String = oImage.ImageFileName
-        If lowername.Length = 0 Then
-            lowername = oPerson.Name.ToLower(myCultureInfo).Replace(" ", "-").Replace(".", "")
+        Dim imagename As String = oImage.ImageFileName
+        Dim lowername As String = oPerson.Name.ToLower(myCultureInfo).Replace(" ", "-").Replace(".", "")
+        If String.IsNullOrEmpty(imagename) Then
+            imagename = lowername
         End If
         oImage.Dispose()
         Dim ImageSb As New StringBuilder
@@ -673,7 +674,7 @@ Public Class FrmBotsd
             .Append(My.Resources.SLASH)
             .Append(imageLoadMonth)
             .Append(My.Resources.SLASH)
-            .Append(lowername)
+            .Append(imagename)
             .Append(oPerson.Image.ImageFileType)
             .Append("?w=150&amp;h=150"" alt="""">")
             .Append("</a>")
@@ -817,5 +818,72 @@ Public Class FrmBotsd
         End Try
     End Sub
 
+    Private Sub BtnAtoZ_Click(sender As Object, e As EventArgs) Handles BtnAtoZ.Click
+        Dim oRows As DataRowCollection = GetBotsdIndex()
+        Dim currentLetter As String = String.Empty
+        Dim indexText As New StringBuilder
+        For Each oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In oRows
+            Dim surnameInitial As String = oRow.surname.Substring(0, 1)
+            If surnameInitial <> currentLetter Then
+                If Not String.IsNullOrEmpty(currentLetter) Then
+                    indexText.Append(GetLetterFoot(surnameInitial.ToUpper(myCultureInfo)))
+                End If
+                indexText.Append(GetLetterHead(surnameInitial.ToUpper(myCultureInfo)))
+                currentLetter = surnameInitial
+            End If
+            indexText.Append(GetIndexEntry(oRow))
+        Next
+        Using _text As New FrmText
+            _text.rtbText.Text = indexText.ToString
+            _text.ShowDialog()
+        End Using
+    End Sub
+
+    Private Function GetIndexEntry(oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow) As String
+        Dim entry As New StringBuilder
+        With entry
+            .Append(oRow.surname)
+            .Append(", ")
+            .Append(oRow.forename)
+            .Append(" (")
+            .Append(CStr(oRow.birthyear))
+            .Append(")&nbsp;&nbsp;<a href=")
+            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(oRow.btsdUrl)
+            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(">#")
+            .Append(CStr(oRow.btsdPostNo))
+            .Append("</a>")
+            .Append(vbCrLf)
+        End With
+        Return entry.ToString
+    End Function
+
+    Private Function GetLetterHead(surnameInitial As String) As String
+        Dim heading As New StringBuilder
+        With heading
+            .Append("<h1><a name=")
+            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(surnameInitial)
+            .Append(My.Resources.DOUBLEQUOTES)
+            .Append("></a>")
+            .Append(surnameInitial)
+            .Append("</h1>")
+            .Append(vbCrLf)
+        End With
+        Return heading.ToString
+    End Function
+    Private Function GetLetterFoot(surnameInitial As String) As String
+        Dim footing As New StringBuilder
+        With footing
+            .Append("<h6><a href=")
+            .Append(My.Resources.DOUBLEQUOTES)
+            .Append("#Top")
+            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(">Back to top</a></h6>")
+            .Append(vbCrLf)
+        End With
+        Return footing.ToString
+    End Function
 #End Region
 End Class

@@ -19,6 +19,8 @@ Module modDatabase
     Private ReadOnly oTweetTa As New CelebrityBirthdayDataSetTableAdapters.TweetsTableAdapter
     Private ReadOnly oBotsdTa As New CelebrityBirthdayDataSetTableAdapters.BotSDTableAdapter
     Private ReadOnly oBotsdTable As New CelebrityBirthdayDataSet.BotSDDataTable
+    Private ReadOnly oBotsdViewTa As New CelebrityBirthdayDataSetTableAdapters.BornOnTheSameDayTableAdapter
+    Private ReadOnly oBotsdViewTable As New CelebrityBirthdayDataSet.BornOnTheSameDayDataTable
 #End Region
 #Region "person"
     Public Function DeletePerson(ByVal _id As Integer)
@@ -480,6 +482,10 @@ Module modDatabase
             oRow = oBotsdTable.Rows(0)
         End If
         Return oRow
+    End Function
+    Public Function GetBotsdIndex() As DataRowCollection
+        oBotsdViewTa.FillByAtoZ(oBotsdViewTable)
+        Return oBotsdViewTable.Rows
     End Function
 #End Region
 End Module
