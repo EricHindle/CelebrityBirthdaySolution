@@ -434,8 +434,10 @@ Public Class FrmBotsd
                 _pairRow.Cells(pairYear.Name).Value = personsList(0).BirthYear
                 _pairRow.Cells(pairId1.Name).Value = personsList(0).Id
                 _pairRow.Cells(pairPerson1.Name).Value = personsList(0).Name
-                Dim postNo As Integer = GetBotsdPostNo(personsList(0).Social.Botsd, "")
+                Dim postUrl As String = ""
+                Dim postNo As Integer = GetBotsdPostNo(personsList(0).Social.Botsd, postUrl)
                 _pairRow.Cells(pairWpNo.Name).Value = If(postNo > -1, CStr(postNo), "")
+                _pairRow.Cells(pairUrl.Name).Value = postUrl
             End If
             If personsList.Count > 1 Then
                 _pairRow.Cells(pairId2.Name).Value = personsList(1).Id
@@ -724,6 +726,7 @@ Public Class FrmBotsd
         Dim sb As New StringBuilder
         Dim titleSb As New StringBuilder
         Dim thisWpNumber As String = DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value
+        Dim thisUrl As String = DgvPairs.SelectedRows(0).Cells(pairUrl.Name).Value
         Dim thisYear As String = DgvPairs.SelectedRows(0).Cells(pairYear.Name).Value
         If String.IsNullOrEmpty(thisWpNumber) Then
             thisWpNumber = CStr(WpNumber)
@@ -779,6 +782,7 @@ Public Class FrmBotsd
                     .TxtTitle.Text = titleSb.ToString
                     .PostText = sb.ToString
                     .LblWpPostNo.Text = thisWpNumber
+                    .TxtUrl.Text = thisUrl
                     .LblDay.Text = CStr(ThisDay)
                     .LblMonth.Text = Format(New Date(2000, ThisMonth, 1), "MMMM")
                     .LblYear.Text = thisYear
