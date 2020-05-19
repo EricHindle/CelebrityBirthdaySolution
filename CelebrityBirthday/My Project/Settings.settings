@@ -50,7 +50,7 @@
       <Value Profile="(Default)">http://en.wikipedia.org/w/index.php?search=</Value>
     </Setting>
     <Setting Name="TwitterSearchUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://twitter.com/search?f=users&amp;src=typd&amp;q=</Value>
+      <Value Profile="(Default)">https://twitter.com/search?f=user&amp;src=typed_query&amp;q=</Value>
     </Setting>
     <Setting Name="twitterfilespos" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

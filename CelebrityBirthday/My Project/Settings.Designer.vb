@@ -223,7 +223,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("https://twitter.com/search?f=users&src=typd&q=")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://twitter.com/search?f=user&src=typed_query&q=")>  _
         Public Property TwitterSearchUrl() As String
             Get
                 Return CType(Me("TwitterSearchUrl"),String)

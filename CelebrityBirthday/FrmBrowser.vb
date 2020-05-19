@@ -1,4 +1,5 @@
 ﻿Public Class FrmBrowser
+
 #Region "properties"
     Private _searchName As String
     Private _url As Uri

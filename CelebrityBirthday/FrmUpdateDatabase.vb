@@ -517,12 +517,9 @@ Public Class FrmUpdateDatabase
                 ShowStatus("Dead")
                 Exit Sub
             End If
-            If Search Is Nothing OrElse Search.IsDisposed Then
-                Search = New FrmBrowser
-            End If
-            Search.Show()
-            Search.SearchName = oPerson.ForeName.Trim & " " & oPerson.Surname.Trim
-            Search.FindInTwitter()
+
+            Dim sUrl As String = My.Settings.TwitterSearchUrl & oPerson.Name.Replace(" ", "+")
+            Process.Start(sUrl)
         End If
     End Sub
 #End Region
