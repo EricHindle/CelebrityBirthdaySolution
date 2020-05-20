@@ -877,7 +877,7 @@ Public Class FrmBotsd
         End With
         Return heading.ToString
     End Function
-    Private Function GetLetterFoot(surnameInitial As String) As String
+    Private Function GetLetterFoot() As String
         Dim footing As New StringBuilder
         With footing
             .Append("<h6><a href=")

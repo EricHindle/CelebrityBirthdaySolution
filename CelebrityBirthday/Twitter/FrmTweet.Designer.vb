@@ -370,7 +370,7 @@ Partial Class FrmTweet
         '
         Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnToday.Location = New System.Drawing.Point(363, 9)
+        Me.BtnToday.Location = New System.Drawing.Point(310, 157)
         Me.BtnToday.Name = "BtnToday"
         Me.BtnToday.Size = New System.Drawing.Size(75, 30)
         Me.BtnToday.TabIndex = 27
@@ -391,7 +391,7 @@ Partial Class FrmTweet
         '
         Me.btnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSelect.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnSelect.Location = New System.Drawing.Point(280, 62)
+        Me.btnSelect.Location = New System.Drawing.Point(280, 49)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(139, 33)
         Me.btnSelect.TabIndex = 29
@@ -564,7 +564,7 @@ Partial Class FrmTweet
         '
         Me.BtnReGen.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnReGen.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnReGen.Location = New System.Drawing.Point(280, 112)
+        Me.BtnReGen.Location = New System.Drawing.Point(280, 105)
         Me.BtnReGen.Name = "BtnReGen"
         Me.BtnReGen.Size = New System.Drawing.Size(139, 33)
         Me.BtnReGen.TabIndex = 32
@@ -618,7 +618,7 @@ Partial Class FrmTweet
         '
         Me.BtnTotd.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnTotd.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTotd.Location = New System.Drawing.Point(260, 197)
+        Me.BtnTotd.Location = New System.Drawing.Point(259, 205)
         Me.BtnTotd.Name = "BtnTotd"
         Me.BtnTotd.Size = New System.Drawing.Size(178, 33)
         Me.BtnTotd.TabIndex = 38
@@ -639,7 +639,7 @@ Partial Class FrmTweet
         '
         'BtnDeleteImages
         '
-        Me.BtnDeleteImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnDeleteImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnDeleteImages.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDeleteImages.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnDeleteImages.Location = New System.Drawing.Point(951, 681)
