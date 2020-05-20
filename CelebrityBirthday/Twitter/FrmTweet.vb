@@ -9,7 +9,6 @@ Imports TweetSharp
 
 Public Class FrmTweet
 #Region "constants"
-    Private Const DEFAULT_WIDTH As Integer = 5
     Private Const NUD_BASENAME As String = "NudHorizontal"
     Private Const PICBOX_BASENAME As String = "pictureBox"
     Private Const SC_BASENAME As String = "SplitContainer"
@@ -529,8 +528,19 @@ Public Class FrmTweet
             Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
             IsNoGenerate = True
             TabControl1.TabPages.Add(newTweetTabPage)
-            GetNudFromPage(newTweetTabPage).Value = DEFAULT_WIDTH
-            Dim _width As Integer = DEFAULT_WIDTH
+            Dim personCt As Integer = _personList.Count
+            Dim colCt As Integer
+            If personCt <= 12 Then
+                colCt = Math.Ceiling(personCt / 2)
+            Else
+                colCt = 6
+                Dim list5 As New List(Of Integer)({13, 14, 15, 18, 19, 20})
+                If list5.Contains(personCt) Then
+                    colCt = 5
+                End If
+            End If
+            GetNudFromPage(newTweetTabPage).Value = colCt
+            Dim _width As Integer = colCt
             GeneratePicture(pbControl, _personList, _width)
             GenerateText(rtbControl, _personList, _tabTitle.Substring(0, 1), _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
             IsNoGenerate = False
