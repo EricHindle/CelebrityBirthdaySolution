@@ -62,6 +62,7 @@ Partial Class FrmTweet
         Me.BtnTotd = New System.Windows.Forms.Button()
         Me.BtnUncheck = New System.Windows.Forms.Button()
         Me.BtnDeleteImages = New System.Windows.Forms.Button()
+        Me.BtnNext = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -115,7 +116,7 @@ Partial Class FrmTweet
         Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(14, 11)
+        Me.cboDay.Location = New System.Drawing.Point(103, 7)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(95, 27)
         Me.cboDay.TabIndex = 2
@@ -125,7 +126,7 @@ Partial Class FrmTweet
         Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
-        Me.cboMonth.Location = New System.Drawing.Point(117, 11)
+        Me.cboMonth.Location = New System.Drawing.Point(206, 7)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(240, 27)
         Me.cboMonth.TabIndex = 3
@@ -339,7 +340,7 @@ Partial Class FrmTweet
         '
         Me.NudBirthdaysPerTweet.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NudBirthdaysPerTweet.ForeColor = System.Drawing.Color.Black
-        Me.NudBirthdaysPerTweet.Location = New System.Drawing.Point(564, 11)
+        Me.NudBirthdaysPerTweet.Location = New System.Drawing.Point(692, 9)
         Me.NudBirthdaysPerTweet.Name = "NudBirthdaysPerTweet"
         Me.NudBirthdaysPerTweet.Size = New System.Drawing.Size(56, 24)
         Me.NudBirthdaysPerTweet.TabIndex = 23
@@ -350,7 +351,7 @@ Partial Class FrmTweet
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label1.Location = New System.Drawing.Point(626, 12)
+        Me.Label1.Location = New System.Drawing.Point(754, 10)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(78, 22)
         Me.Label1.TabIndex = 24
@@ -370,7 +371,7 @@ Partial Class FrmTweet
         '
         Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnToday.Location = New System.Drawing.Point(310, 157)
+        Me.BtnToday.Location = New System.Drawing.Point(14, 7)
         Me.BtnToday.Name = "BtnToday"
         Me.BtnToday.Size = New System.Drawing.Size(75, 30)
         Me.BtnToday.TabIndex = 27
@@ -391,7 +392,7 @@ Partial Class FrmTweet
         '
         Me.btnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSelect.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnSelect.Location = New System.Drawing.Point(280, 49)
+        Me.btnSelect.Location = New System.Drawing.Point(280, 67)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(139, 33)
         Me.btnSelect.TabIndex = 29
@@ -564,7 +565,7 @@ Partial Class FrmTweet
         '
         Me.BtnReGen.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnReGen.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnReGen.Location = New System.Drawing.Point(280, 105)
+        Me.BtnReGen.Location = New System.Drawing.Point(280, 123)
         Me.BtnReGen.Name = "BtnReGen"
         Me.BtnReGen.Size = New System.Drawing.Size(139, 33)
         Me.BtnReGen.TabIndex = 32
@@ -576,7 +577,7 @@ Partial Class FrmTweet
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label4.Location = New System.Drawing.Point(935, 13)
+        Me.Label4.Location = New System.Drawing.Point(1063, 11)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(78, 22)
         Me.Label4.TabIndex = 34
@@ -586,7 +587,7 @@ Partial Class FrmTweet
         '
         Me.NudAnnivsPerTweet.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NudAnnivsPerTweet.ForeColor = System.Drawing.Color.Black
-        Me.NudAnnivsPerTweet.Location = New System.Drawing.Point(873, 12)
+        Me.NudAnnivsPerTweet.Location = New System.Drawing.Point(1001, 10)
         Me.NudAnnivsPerTweet.Name = "NudAnnivsPerTweet"
         Me.NudAnnivsPerTweet.Size = New System.Drawing.Size(56, 24)
         Me.NudAnnivsPerTweet.TabIndex = 33
@@ -597,7 +598,7 @@ Partial Class FrmTweet
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label5.Location = New System.Drawing.Point(485, 13)
+        Me.Label5.Location = New System.Drawing.Point(613, 11)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(73, 22)
         Me.Label5.TabIndex = 35
@@ -608,7 +609,7 @@ Partial Class FrmTweet
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label6.Location = New System.Drawing.Point(771, 14)
+        Me.Label6.Location = New System.Drawing.Point(899, 12)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(96, 22)
         Me.Label6.TabIndex = 36
@@ -649,12 +650,24 @@ Partial Class FrmTweet
         Me.BtnDeleteImages.Text = "Clear Images"
         Me.BtnDeleteImages.UseVisualStyleBackColor = True
         '
+        'BtnNext
+        '
+        Me.BtnNext.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNext.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnNext.Location = New System.Drawing.Point(452, 7)
+        Me.BtnNext.Name = "BtnNext"
+        Me.BtnNext.Size = New System.Drawing.Size(75, 30)
+        Me.BtnNext.TabIndex = 41
+        Me.BtnNext.Text = "Next"
+        Me.BtnNext.UseVisualStyleBackColor = True
+        '
         'FrmTweet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1348, 752)
+        Me.Controls.Add(Me.BtnNext)
         Me.Controls.Add(Me.BtnDeleteImages)
         Me.Controls.Add(Me.BtnUncheck)
         Me.Controls.Add(Me.BtnTotd)
@@ -762,4 +775,5 @@ Partial Class FrmTweet
     Friend WithEvents rbImageLeft As RadioButton
     Friend WithEvents rbImageCentre As RadioButton
     Friend WithEvents BtnDeleteImages As Button
+    Friend WithEvents BtnNext As Button
 End Class

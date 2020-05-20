@@ -285,7 +285,7 @@ Public Class FrmSendTwitter
         End Try
         WriteTrace("Browser finished")
     End Sub
-    Private Function GetTwitterName(_innerHtml As String) As String
+    Private Shared Function GetTwitterName(_innerHtml As String) As String
         Dim _pos1 As Integer = _innerHtml.IndexOf("span class=""name""", StringComparison.CurrentCultureIgnoreCase) + 18
         Dim _pos2 As Integer = _innerHtml.IndexOf("/span", _pos1, StringComparison.CurrentCultureIgnoreCase)
         Dim _twitterName As String = "Unknown"
@@ -474,7 +474,7 @@ Public Class FrmSendTwitter
         lblStatus.Text = pText
         StatusStrip1.Refresh()
     End Sub
-    Private Function StatusToString(pStatus As TweetSharp.TwitterStatus) As String
+    Private Shared Function StatusToString(pStatus As TweetSharp.TwitterStatus) As String
         Dim statusText As New StringBuilder()
         statusText _
             .Append("Id=").Append(pStatus.IdStr).Append(vbCrLf) _

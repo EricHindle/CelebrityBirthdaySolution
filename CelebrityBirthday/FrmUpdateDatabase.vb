@@ -581,7 +581,7 @@ Public Class FrmUpdateDatabase
             lbPeople.Items.Add(oPerson.BirthYear & " " & oPerson.Name)
         Next
     End Sub
-    Private Sub Splitname(ByVal sName As String, ByRef sForename As String, ByRef sSurname As String)
+    Private Shared Sub Splitname(ByVal sName As String, ByRef sForename As String, ByRef sSurname As String)
         Dim sWords As List(Of String) = Split(sName, " ").ToList
         If sWords.Count > 0 Then
             sSurname = sWords(sWords.Count - 1)

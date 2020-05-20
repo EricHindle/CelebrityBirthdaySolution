@@ -843,7 +843,7 @@ Public Class FrmBotsd
         End Using
     End Sub
 
-    Private Function GetIndexEntry(oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow) As String
+    Private Shared Function GetIndexEntry(oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow) As String
         Dim entry As New StringBuilder
         With entry
             .Append(oRow.surname)
@@ -863,7 +863,7 @@ Public Class FrmBotsd
         Return entry.ToString
     End Function
 
-    Private Function GetLetterHead(surnameInitial As String) As String
+    Private Shared Function GetLetterHead(surnameInitial As String) As String
         Dim heading As New StringBuilder
         With heading
             .Append("<h1><a name=")
@@ -877,7 +877,7 @@ Public Class FrmBotsd
         End With
         Return heading.ToString
     End Function
-    Private Function GetLetterFoot() As String
+    Private Shared Function GetLetterFoot() As String
         Dim footing As New StringBuilder
         With footing
             .Append("<h6><a href=")

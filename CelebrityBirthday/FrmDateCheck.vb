@@ -70,7 +70,7 @@ Public Class FrmDateCheck
         Next
     End Sub
 
-    Private Function GetWikiBirthDate(_searchName As String, ByRef extract As String) As WikiBirthInfo
+    Private Shared Function GetWikiBirthDate(_searchName As String, ByRef extract As String) As WikiBirthInfo
         Dim _wikiBirthInfo As New WikiBirthInfo(Nothing, "")
         Dim _birthDate As Date? = Nothing
         Try
@@ -114,7 +114,7 @@ Public Class FrmDateCheck
 
         Catch ex As ArgumentException
             _wikiBirthInfo.ErrorDesc = ex.Message
-        Catch ex As System.Security.securityException
+        Catch ex As System.Security.SecurityException
             _wikiBirthInfo.ErrorDesc = ex.Message
         End Try
         _wikiBirthInfo.BirthDate = _birthDate

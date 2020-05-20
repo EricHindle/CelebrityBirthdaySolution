@@ -72,10 +72,16 @@ Public Class FrmTweet
         Next
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
+        ClearImages(False)
+        SaveImages()
+    End Sub
+
+    Private Sub SaveImages()
         For Each _page As TabPage In TabControl1.TabPages
             SaveImage(_page)
         Next
     End Sub
+
     Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.twitterimagepos)
         GetAuthData()
@@ -115,12 +121,17 @@ Public Class FrmTweet
         cboMonth.SelectedIndex = Today.Month - 1
     End Sub
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
+        SelectPeople()
+    End Sub
+
+    Private Sub SelectPeople()
         If BuildTrees() Then
             GenerateAllTweets()
         Else
             DisplayStatus("No people selected")
         End If
     End Sub
+
     Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
         GenerateAllTweets()
     End Sub
@@ -189,7 +200,11 @@ Public Class FrmTweet
         NudAnnivsPerTweet.Value = 0
     End Sub
     Private Sub BtnDeleteImages_Click(sender As Object, e As EventArgs) Handles BtnDeleteImages.Click
-        If MsgBox("Confirm delete tweet images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+        ClearImages()
+    End Sub
+
+    Private Shared Sub ClearImages(Optional isConfirm As Boolean = True)
+        If Not isConfirm OrElse MsgBox("Confirm delete tweet images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
             Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.ANNIVERSARY & "*.*", My.Resources.BIRTHDAY & "*.*", My.Resources.TOTD & "*.*"})
             For Each _imageFile As String In _imageList
                 My.Computer.FileSystem.DeleteFile(_imageFile)
@@ -743,9 +758,24 @@ Public Class FrmTweet
             .Size = New System.Drawing.Size(698, 574)
             .BackColor = Color.AliceBlue
             .Controls.Add(NewSplitContainer(newTabpage.TabIndex, newTabpage.Size.Width - 10, newTabpage.Size.Height - 10))
-
         End With
         Return newTabpage
     End Function
+
+    Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles BtnNext.Click
+        If cboDay.SelectedIndex = cboDay.Items.Count - 1 Then
+            cboDay.SelectedIndex = 0
+            If cboMonth.SelectedIndex = cboMonth.Items.Count - 1 Then
+                cboMonth.SelectedIndex = 0
+            Else
+                cboMonth.SelectedIndex += 1
+            End If
+        Else
+                cboDay.SelectedIndex += 1
+        End If
+        SelectPeople()
+        ClearImages(False)
+        SaveImages()
+    End Sub
 #End Region
 End Class

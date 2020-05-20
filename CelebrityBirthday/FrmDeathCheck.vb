@@ -39,7 +39,7 @@ Public Class FrmDeathCheck
         Next
     End Sub
 
-    Private Function GetWikiDeathDate(_searchName As String) As String
+    Private Shared Function GetWikiDeathDate(_searchName As String) As String
         Dim _deathDate As Date? = Nothing
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
         Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")

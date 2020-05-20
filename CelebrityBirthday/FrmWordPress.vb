@@ -195,7 +195,7 @@ Public Class FrmWordPress
         cboMonth.SelectedIndex = -1
         personTable = New List(Of Person)
     End Sub
-    Private Function TextToHtml(pText As String) As String
+    Private Shared Function TextToHtml(pText As String) As String
         Dim HtmlString As New StringBuilder
         Dim _html As String = HtmlString.Append("<html>") _
             .Append("<font ") _
