@@ -1,6 +1,8 @@
 ﻿Imports System.Data.Common
 Imports System.Data.SqlClient
 Imports System.Reflection
+Imports System.Threading
+Imports TweetSharp
 
 Module modDatabase
 #Region "data"
@@ -34,10 +36,32 @@ Module modDatabase
         Try
             iCt = oPersonTa.CountPeople
         Catch ex As DbException
-            DisplayException(MethodBase.GetCurrentMethod, ex, "dB")
+            StartSqlService()
+            Try
+                iCt = oPersonTa.CountPeople
+            Catch ex1 As DbException
+                DisplayException(MethodBase.GetCurrentMethod, ex1, "dB")
+            End Try
         End Try
         Return iCt
     End Function
+    Private Sub StartSqlService()
+        Try
+            Dim procStartInfo As New ProcessStartInfo
+            With procStartInfo
+                .UseShellExecute = True
+                .FileName = "net.exe"
+                .Arguments = " start ""SQL Server (SQLEXPRESS)"""
+                .WindowStyle = ProcessWindowStyle.Normal
+                .Verb = "runas"
+            End With
+            Dim thisProcess As Process = Process.Start(procStartInfo)
+            thisProcess.WaitForExit(30000)
+        Catch ex As System.ComponentModel.Win32Exception
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Win32")
+        End Try
+
+    End Sub
     Public Function GetPersonById(ByVal _id As Integer) As Person
         Dim newPerson As Person = Nothing
         Try
