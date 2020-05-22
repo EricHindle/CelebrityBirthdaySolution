@@ -252,6 +252,7 @@ Public Class FrmBotsd
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
         rtbFile1.Text = ""
         isBuildingPairs = True
+        clearPersonDetails
         Try
             ThisDay = cboDay.SelectedIndex + 1
             ThisMonth = cboMonth.SelectedIndex + 1
@@ -455,6 +456,8 @@ Public Class FrmBotsd
         DgvPairs.Sort(DgvPairs.Columns(0), ListSortDirection.Ascending)
     End Sub
     Private Sub GeneratePair()
+        ClearPersonDetails()
+
         If DgvPairs.SelectedRows.Count = 1 Then
             Try
                 Dim _pickPerson1 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
@@ -474,13 +477,6 @@ Public Class FrmBotsd
                     LblId1.Text = CStr(_pickPerson1.Id)
                     _imageList.Add(_pickPerson1)
                     GroupBox1.Enabled = True
-                Else
-                    TxtForename1.Text = ""
-                    TxtSurname1.Text = ""
-                    DtpDob1.Value = Today
-                    TxtShortDesc1.Text = ""
-                    LblId1.Text = ""
-                    GroupBox1.Enabled = False
                 End If
                 If _pickPerson2 IsNot Nothing Then
                     TxtForename2.Text = _pickPerson2.ForeName
@@ -490,13 +486,6 @@ Public Class FrmBotsd
                     LblId2.Text = CStr(_pickPerson2.Id)
                     _imageList.Add(_pickPerson2)
                     GroupBox2.Enabled = True
-                Else
-                    TxtForename2.Text = ""
-                    TxtSurname2.Text = ""
-                    DtpDob2.Value = Today
-                    TxtShortDesc2.Text = ""
-                    LblId2.Text = ""
-                    GroupBox2.Enabled = False
                 End If
                 If _pickPerson3 IsNot Nothing Then
                     TxtForename3.Text = _pickPerson3.ForeName
@@ -506,13 +495,6 @@ Public Class FrmBotsd
                     LblId3.Text = CStr(_pickPerson3.Id)
                     _imageList.Add(_pickPerson3)
                     GroupBox3.Enabled = True
-                Else
-                    TxtForename3.Text = ""
-                    TxtSurname3.Text = ""
-                    DtpDob3.Value = Today
-                    TxtShortDesc3.Text = ""
-                    LblId3.Text = ""
-                    GroupBox3.Enabled = False
                 End If
                 If _pickPerson4 IsNot Nothing Then
                     TxtForename4.Text = _pickPerson4.ForeName
@@ -522,13 +504,6 @@ Public Class FrmBotsd
                     LblId4.Text = CStr(_pickPerson4.Id)
                     _imageList.Add(_pickPerson4)
                     GroupBox4.Enabled = True
-                Else
-                    TxtForename4.Text = ""
-                    TxtSurname4.Text = ""
-                    DtpDob4.Value = Today
-                    TxtShortDesc4.Text = ""
-                    LblId4.Text = ""
-                    GroupBox4.Enabled = False
                 End If
                 GeneratePicture(PictureBox1, _imageList, NudPic1Horizontal.Value)
                 GenerateText(_imageList)
@@ -926,5 +901,34 @@ Public Class FrmBotsd
         End With
         Return footing.ToString
     End Function
+
+    Private Sub ClearPersonDetails()
+        LblId1.Text = ""
+        LblId2.Text = ""
+        LblId3.Text = ""
+        LblId4.Text = ""
+        DtpDob1.Value = Today
+        GroupBox1.Enabled = False
+        DtpDob2.Value = Today
+        GroupBox2.Enabled = False
+        DtpDob3.Value = Today
+        GroupBox3.Enabled = False
+        DtpDob4.Value = Today
+        GroupBox4.Enabled = False
+        TxtForename1.Text = ""
+        TxtSurname1.Text = ""
+        TxtShortDesc1.Text = ""
+        TxtForename2.Text = ""
+        TxtSurname2.Text = ""
+        TxtShortDesc2.Text = ""
+        TxtForename3.Text = ""
+        TxtSurname3.Text = ""
+        TxtShortDesc3.Text = ""
+        TxtForename4.Text = ""
+        TxtSurname4.Text = ""
+        TxtShortDesc4.Text = ""
+        rtbFile1.Text = ""
+        PictureBox1.Image = Nothing
+    End Sub
 #End Region
 End Class
