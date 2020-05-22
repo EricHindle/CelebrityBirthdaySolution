@@ -570,65 +570,74 @@ Public Class FrmBotsd
     End Sub
     Private Sub GenerateWordpress()
         Dim sb As New StringBuilder
-        sb.Append("<strong>").Append(CStr(ThisDay))
-        Select Case ThisDay
-            Case 1, 21, 31
-                sb.Append("st")
-            Case 2, 22
-                sb.Append("nd")
-            Case 3, 23
-                sb.Append("rd")
-            Case Else
-                sb.Append("th")
-        End Select
-        sb.Append("</strong>").Append(vbCrLf)
-        For Each oRow As DataGridViewRow In DgvPairs.Rows
-            If Not String.IsNullOrEmpty(oRow.Cells(pairYear.Name).Value) Then
-                Dim _pickPerson1 As Person = GetFullPersonById(oRow.Cells(pairId1.Name).Value)
-                Dim btsdUrl As String = ""
-                Dim postNo As Integer = GetBotsdPostNo(_pickPerson1.Social.Botsd, btsdUrl)
-                With sb
-                    .Append(oRow.Cells(pairYear.Name).Value)
-                    .Append(My.Resources.TWO_SPACES)
-                    If Not String.IsNullOrEmpty(oRow.Cells(pairPerson1.Name).Value) Then
-                        .Append(oRow.Cells(pairPerson1.Name).Value)
-                    End If
-                    If Not String.IsNullOrEmpty(oRow.Cells(pairPerson2.Name).Value) Then
+        With sb
+            .Append(My.Resources.WP_PARA).Append(vbCrLf)
+            .Append("<strong>").Append(CStr(ThisDay))
+            Select Case ThisDay
+                Case 1, 21, 31
+                    .Append("st")
+                Case 2, 22
+                    .Append("nd")
+                Case 3, 23
+                    .Append("rd")
+                Case Else
+                    .Append("th")
+            End Select
+            .Append("</strong>").Append(vbCrLf)
+            .Append(My.Resources.BREAK).Append(vbCrLf)
+        End With
+        With sb
+            For Each oRow As DataGridViewRow In DgvPairs.Rows
+                If Not String.IsNullOrEmpty(oRow.Cells(pairYear.Name).Value) Then
+                    Dim _pickPerson1 As Person = GetFullPersonById(oRow.Cells(pairId1.Name).Value)
+                    Dim btsdUrl As String = ""
+                    Dim postNo As Integer = GetBotsdPostNo(_pickPerson1.Social.Botsd, btsdUrl)
+                    With sb
+                        .Append(oRow.Cells(pairYear.Name).Value)
                         .Append(My.Resources.TWO_SPACES)
-                        .Append(oRow.Cells(pairPerson2.Name).Value)
-                    End If
-                    If Not String.IsNullOrEmpty(oRow.Cells(pairPerson3.Name).Value) Then
+                        If Not String.IsNullOrEmpty(oRow.Cells(pairPerson1.Name).Value) Then
+                            .Append(oRow.Cells(pairPerson1.Name).Value)
+                        End If
+                        If Not String.IsNullOrEmpty(oRow.Cells(pairPerson2.Name).Value) Then
+                            .Append(My.Resources.TWO_SPACES)
+                            .Append(oRow.Cells(pairPerson2.Name).Value)
+                        End If
+                        If Not String.IsNullOrEmpty(oRow.Cells(pairPerson3.Name).Value) Then
+                            .Append(My.Resources.TWO_SPACES)
+                            .Append(oRow.Cells(pairPerson3.Name).Value)
+                        End If
+                        If Not String.IsNullOrEmpty(oRow.Cells(pairPerson4.Name).Value) Then
+                            .Append(My.Resources.TWO_SPACES)
+                            .Append(oRow.Cells(pairPerson4.Name).Value)
+                        End If
                         .Append(My.Resources.TWO_SPACES)
-                        .Append(oRow.Cells(pairPerson3.Name).Value)
-                    End If
-                    If Not String.IsNullOrEmpty(oRow.Cells(pairPerson4.Name).Value) Then
-                        .Append(My.Resources.TWO_SPACES)
-                        .Append(oRow.Cells(pairPerson4.Name).Value)
-                    End If
-                    .Append(My.Resources.TWO_SPACES)
-                    If postNo > -1 Then
+                        If postNo > -1 Then
 
-                        .Append(My.Resources.WP_A_HREF)
-                        .Append(My.Resources.DOUBLEQUOTES)
-                        .Append(btsdUrl)
-                        .Append(My.Resources.DOUBLEQUOTES)
-                        .Append(" target=")
-                        .Append(My.Resources.DOUBLEQUOTES)
-                        .Append("_blank")
-                        .Append(My.Resources.DOUBLEQUOTES)
-                        .Append(" rel=")
-                        .Append(My.Resources.DOUBLEQUOTES)
-                        .Append("noreferrer noopener")
-                        .Append(My.Resources.DOUBLEQUOTES)
-                        .Append(">#")
-                        .Append(CStr(postNo))
-                        .Append(My.Resources.WP_END_A)
-                    End If
-                    sb.Append(vbCrLf)
-                End With
-                _pickPerson1.Dispose()
-            End If
-        Next
+                            .Append(My.Resources.WP_A_HREF)
+                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append(btsdUrl)
+                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append(" target=")
+                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append("_blank")
+                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append(" rel=")
+                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append("noreferrer noopener")
+                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append(">#")
+                            .Append(CStr(postNo))
+                            .Append(My.Resources.WP_END_A)
+                        End If
+                        .Append(My.Resources.BREAK)
+                        .Append(vbCrLf)
+
+                    End With
+                    _pickPerson1.Dispose()
+                End If
+            Next
+            .Append(My.Resources.WP_END_PARA).Append(vbCrLf)
+        End With
         Using oTextForm As New FrmText
             oTextForm.rtbText.Text = sb.ToString
             oTextForm.ShowDialog()
