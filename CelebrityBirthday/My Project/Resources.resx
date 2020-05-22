@@ -203,7 +203,7 @@
     <value>Next WP Number</value>
   </data>
   <data name="BREAK" xml:space="preserve">
-    <value>&lt;br&gt;</value>
+    <value>&lt;br /&gt;</value>
   </data>
   <data name="DOUBLEQUOTES" xml:space="preserve">
     <value>"</value>
@@ -216,5 +216,20 @@
   </data>
   <data name="WPPAGEURL" xml:space="preserve">
     <value>https://celebritybirthday.wordpress.com/</value>
+  </data>
+  <data name="TWO_SPACES" xml:space="preserve">
+    <value>&amp;nbsp;&amp;nbsp;</value>
+  </data>
+  <data name="WP_A_HREF" xml:space="preserve">
+    <value>&lt;a href=</value>
+  </data>
+  <data name="WP_END_A" xml:space="preserve">
+    <value>&lt;/a&gt;</value>
+  </data>
+  <data name="WP_END_PARA" xml:space="preserve">
+    <value>&lt;!-- /wp:paragraph --&gt;</value>
+  </data>
+  <data name="WP_PARA" xml:space="preserve">
+    <value>&lt;!-- wp:paragraph --&gt;</value>
   </data>
 </root>

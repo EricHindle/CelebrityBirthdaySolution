@@ -203,6 +203,8 @@ Public Class FrmBotsdPost
 #Region "subroutines"
     Private Function GenerateAlsos() As String
         Dim sb As New StringBuilder
+        sb.Append(vbCrLf)
+        sb.Append(My.Resources.WP_PARA)
         For Each oRow As DataGridViewRow In DgvAlso.Rows
             If Not String.IsNullOrEmpty(oRow.Cells(alsoName.Name).Value) Then
                 Dim oName As String = oRow.Cells(alsoName.Name).Value
@@ -210,30 +212,23 @@ Public Class FrmBotsdPost
                 Dim oDesc As String = oRow.Cells(alsoDesc.Name).Value
                 With sb
                     .Append("<a title=")
-                    .Append(My.Resources.DOUBLEQUOTES)
-                    .Append(oName.Trim)
-                    .Append(My.Resources.DOUBLEQUOTES)
+                    .Append(My.Resources.DOUBLEQUOTES).Append(oName.Trim).Append(My.Resources.DOUBLEQUOTES)
                     .Append(" href=")
-                    .Append(My.Resources.DOUBLEQUOTES)
-                    .Append(oWiki.Trim)
-                    .Append(My.Resources.DOUBLEQUOTES)
+                    .Append(My.Resources.DOUBLEQUOTES).Append(oWiki.Trim).Append(My.Resources.DOUBLEQUOTES)
                     .Append(" target=")
-                    .Append(My.Resources.DOUBLEQUOTES)
-                    .Append(" _blank")
-                    .Append(My.Resources.DOUBLEQUOTES)
+                    .Append(My.Resources.DOUBLEQUOTES).Append(" _blank").Append(My.Resources.DOUBLEQUOTES)
                     .Append(" rel=")
-                    .Append(My.Resources.DOUBLEQUOTES)
-                    .Append("noreferrer noopener")
-                    .Append(My.Resources.DOUBLEQUOTES)
+                    .Append(My.Resources.DOUBLEQUOTES).Append("noreferrer noopener").Append(My.Resources.DOUBLEQUOTES)
                     .Append(">")
                     .Append(oName.Trim)
-                    .Append("</a> ")
+                    .Append(My.Resources.WP_END_A).Append(" ")
                     .Append(oDesc.Trim({" "c, ","c, ";"c, "."c, "["c}))
-                    .Append(".")
+                    .Append(".").Append(My.Resources.BREAK)
                     .Append(vbCrLf)
                 End With
             End If
         Next
+sb.Append(My.Resources.WP_end_PARA)
         Return sb.ToString
     End Function
     Private Function GenAlsoFileName() As String
@@ -297,10 +292,10 @@ Public Class FrmBotsdPost
         For Each _also As String In alsoList
             Dim parts As String() = Split(_also, My.Resources.DOUBLEQUOTES)
             If parts.Length > 4 Then
-                Dim _lastpart As String() = Split(parts(parts.Length - 1), "</a>")
+                Dim _lastpart As String() = Split(parts(parts.Length - 1), My.Resources.WP_END_A)
                 TxtName.Text = parts(1)
                 TxtWiki.Text = parts(3)
-                TxtDesc.Text = If(_lastpart.Length = 2, _lastpart(1).Trim, "")
+                TxtDesc.Text = If(_lastpart.Length = 2, _lastpart(1).Trim.Replace(My.Resources.BREAK, ""), "")
                 AddToList()
             End If
         Next

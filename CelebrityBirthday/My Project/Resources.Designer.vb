@@ -98,7 +98,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to &lt;br&gt;.
+        '''  Looks up a localized string similar to &lt;br /&gt;.
         '''</summary>
         Friend ReadOnly Property BREAK() As String
             Get
@@ -330,6 +330,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &amp;nbsp;&amp;nbsp;.
+        '''</summary>
+        Friend ReadOnly Property TWO_SPACES() As String
+            Get
+                Return ResourceManager.GetString("TWO_SPACES", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Unknown signature type.
         '''</summary>
         Friend ReadOnly Property UNKNOWN_SIG() As String
@@ -344,6 +353,42 @@ Namespace My.Resources
         Friend ReadOnly Property WIKIURL() As String
             Get
                 Return ResourceManager.GetString("WIKIURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;a href=.
+        '''</summary>
+        Friend ReadOnly Property WP_A_HREF() As String
+            Get
+                Return ResourceManager.GetString("WP_A_HREF", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;/a&gt;.
+        '''</summary>
+        Friend ReadOnly Property WP_END_A() As String
+            Get
+                Return ResourceManager.GetString("WP_END_A", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;!-- /wp:paragraph --&gt;.
+        '''</summary>
+        Friend ReadOnly Property WP_END_PARA() As String
+            Get
+                Return ResourceManager.GetString("WP_END_PARA", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;!-- wp:paragraph --&gt;.
+        '''</summary>
+        Friend ReadOnly Property WP_PARA() As String
+            Get
+                Return ResourceManager.GetString("WP_PARA", resourceCulture)
             End Get
         End Property
         

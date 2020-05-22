@@ -589,26 +589,26 @@ Public Class FrmBotsd
                 Dim postNo As Integer = GetBotsdPostNo(_pickPerson1.Social.Botsd, btsdUrl)
                 With sb
                     .Append(oRow.Cells(pairYear.Name).Value)
-                    .Append("&nbsp;&nbsp;")
+                    .Append(My.Resources.TWO_SPACES)
                     If Not String.IsNullOrEmpty(oRow.Cells(pairPerson1.Name).Value) Then
                         .Append(oRow.Cells(pairPerson1.Name).Value)
                     End If
                     If Not String.IsNullOrEmpty(oRow.Cells(pairPerson2.Name).Value) Then
-                        .Append("&nbsp;/&nbsp;")
+                        .Append(My.Resources.TWO_SPACES)
                         .Append(oRow.Cells(pairPerson2.Name).Value)
                     End If
                     If Not String.IsNullOrEmpty(oRow.Cells(pairPerson3.Name).Value) Then
-                        .Append("&nbsp;/&nbsp;")
+                        .Append(My.Resources.TWO_SPACES)
                         .Append(oRow.Cells(pairPerson3.Name).Value)
                     End If
                     If Not String.IsNullOrEmpty(oRow.Cells(pairPerson4.Name).Value) Then
-                        .Append("&nbsp;/&nbsp;")
+                        .Append(My.Resources.TWO_SPACES)
                         .Append(oRow.Cells(pairPerson4.Name).Value)
                     End If
-                    .Append("&nbsp;&nbsp;")
+                    .Append(My.Resources.TWO_SPACES)
                     If postNo > -1 Then
 
-                        .Append("<a href=")
+                        .Append(My.Resources.WP_A_HREF)
                         .Append(My.Resources.DOUBLEQUOTES)
                         .Append(btsdUrl)
                         .Append(My.Resources.DOUBLEQUOTES)
@@ -622,7 +622,7 @@ Public Class FrmBotsd
                         .Append(My.Resources.DOUBLEQUOTES)
                         .Append(">#")
                         .Append(CStr(postNo))
-                        .Append("</a>")
+                        .Append(My.Resources.WP_END_A)
                     End If
                     sb.Append(vbCrLf)
                 End With
@@ -652,7 +652,10 @@ Public Class FrmBotsd
         oImage.Dispose()
         Dim ImageSb As New StringBuilder
         With ImageSb
-            .Append("<a href=")
+            .Append("<!-- wp:image {""linkDestination"":""custom""} -->")
+            .Append(vbCrLf)
+            .Append("<figure class=""wp-block-image"">")
+            .Append(My.Resources.WP_A_HREF)
             .Append(My.Resources.DOUBLEQUOTES)
             .Append(My.Resources.WPPAGEURL)
             .Append(urlYear)
@@ -678,8 +681,13 @@ Public Class FrmBotsd
             .Append(My.Resources.SLASH)
             .Append(imagename)
             .Append(oPerson.Image.ImageFileType)
-            .Append("?w=150&amp;h=150"" alt="""">")
-            .Append("</a>")
+            .Append("?w=150&amp;h=150"" alt=")
+            .Append(My.Resources.DOUBLEQUOTES).Append(imagename).Append(My.Resources.DOUBLEQUOTES)
+            .Append(">")
+            .Append(My.Resources.WP_END_A)
+            .Append("</figure>")
+            .Append(vbCrLf)
+            .Append("<!-- /wp:image -->")
             .Append(vbCrLf)
         End With
         Return ImageSb.ToString
@@ -692,37 +700,39 @@ Public Class FrmBotsd
         End If
         Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
         With oPersonText
-            .Append("<h1 id=""firstHeading"">")
-            .Append(oPerson.Name)
-            .Append("</h1>")
+            .Append("<!-- wp:heading {""level"":1} -->").Append(vbCrLf)
+            .Append("<h1 id=""firstHeading"">").Append(oPerson.Name)
+            .Append("</h1>").Append(vbCrLf)
+            .Append("<!-- /wp:heading -->").Append(vbCrLf)
             .Append(vbCrLf)
-            .Append(GetImageLink(oPerson))
-            .Append(vbCrLf)
-            .Append(oPerson.Description)
-            .Append(sBorn)
+            .Append(GetImageLink(oPerson)).Append(vbCrLf)
+            .Append(My.Resources.WP_PARA).Append(vbCrLf)
+            .Append(oPerson.Description).Append(sBorn)
             .Append(If(oPerson.DeathYear = 0, "", sDied))
-            .Append(vbCrLf)
+            .Append(My.Resources.WP_END_PARA).Append(vbCrLf)
         End With
         Return oPersonText.ToString
     End Function
     Private Shared Function GetWikiLinkText(oPerson As Person) As String
         Dim oImageText As New StringBuilder
         With oImageText
-            .Append("<a href=")
+            .Append(My.Resources.WP_A_HREF)
             .Append(My.Resources.DOUBLEQUOTES)
             .Append(My.Resources.WIKIURL)
             .Append(oPerson.Social.WikiId)
             .Append(My.Resources.DOUBLEQUOTES)
-            .Append(" target=""_blank"" rel=""noreferrer noopener"">")
+            .Append(" target="" _blank"" rel="" noreferrer noopener"">")
             .Append(My.Resources.WIKIURL)
             .Append(oPerson.Social.WikiId)
-            .Append("</a>")
-            .Append(My.Resources.BREAK)
+            .Append(My.Resources.WP_END_A).Append(My.Resources.BREAK)
             .Append(vbCrLf)
         End With
         Return oImageText.ToString
     End Function
     Private Sub GenerateWpPost()
+        If DgvPairs.SelectedRows.Count = 0 Then
+            Exit Sub
+        End If
         Dim sb As New StringBuilder
         Dim titleSb As New StringBuilder
         Dim thisWpNumber As String = DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value
@@ -763,7 +773,9 @@ Public Class FrmBotsd
                 titleDate = Format(_pickPerson4.DateOfBirth, "dd MMMM yyyy")
             End If
             titleSb.Append(" - ").Append(titleDate)
-            sb.Append(My.Resources.BREAK).Append("Links:").Append(My.Resources.BREAK).Append(vbCrLf)
+            sb.Append(My.Resources.WP_PARA).Append(vbCrLf)
+            sb.Append("Links:").Append(My.Resources.BREAK)
+
             If _pickPerson1 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson1.Social.WikiId) Then
                 sb.Append(GetWikiLinkText(_pickPerson1))
             End If
@@ -776,7 +788,17 @@ Public Class FrmBotsd
             If _pickPerson4 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson4.Social.WikiId) Then
                 sb.Append(GetWikiLinkText(_pickPerson4))
             End If
-            sb.Append(vbCrLf).Append("<br><!--more Also born on this day >> --><br>Also born on this day:").Append(vbCrLf)
+            sb.Append(My.Resources.WP_END_PARA).Append(vbCrLf)
+            sb.Append(vbCrLf)
+            With sb
+                .Append("<!-- wp:more {""customText"":""Also born on this day...""} -->").Append(vbCrLf)
+                .Append("<!--more Also born on this day...-->").Append(vbCrLf)
+                .Append("<!-- /wp:more -->").Append(vbCrLf)
+                .Append(vbCrLf)
+                .Append(My.Resources.WP_PARA).Append(vbCrLf)
+                .Append("Also born on this day:").Append(vbCrLf)
+                .Append(My.Resources.WP_END_PARA).Append(vbCrLf)
+            End With
             Using oTextForm As New FrmBotsdPost
                 With oTextForm
                     .TxtTitle.Text = titleSb.ToString
@@ -851,13 +873,15 @@ Public Class FrmBotsd
             .Append(oRow.forename)
             .Append(" (")
             .Append(CStr(oRow.birthyear))
-            .Append(")&nbsp;&nbsp;<a href=")
+            .Append(")")
+            .Append(My.Resources.TWO_SPACES)
+            .Append(My.Resources.WP_A_HREF)
             .Append(My.Resources.DOUBLEQUOTES)
             .Append(oRow.btsdUrl)
             .Append(My.Resources.DOUBLEQUOTES)
             .Append(">#")
             .Append(CStr(oRow.btsdPostNo))
-            .Append("</a>")
+            .Append(My.Resources.WP_END_A)
             .Append(vbCrLf)
         End With
         Return entry.ToString
@@ -870,7 +894,8 @@ Public Class FrmBotsd
             .Append(My.Resources.DOUBLEQUOTES)
             .Append(surnameInitial)
             .Append(My.Resources.DOUBLEQUOTES)
-            .Append("></a>")
+            .Append(">")
+            .Append(My.Resources.WP_END_A)
             .Append(surnameInitial)
             .Append("</h1>")
             .Append(vbCrLf)
@@ -880,11 +905,14 @@ Public Class FrmBotsd
     Private Shared Function GetLetterFoot() As String
         Dim footing As New StringBuilder
         With footing
-            .Append("<h6><a href=")
+            .Append("<h6>")
+            .Append(My.Resources.WP_A_HREF)
             .Append(My.Resources.DOUBLEQUOTES)
             .Append("#Top")
             .Append(My.Resources.DOUBLEQUOTES)
-            .Append(">Back to top</a></h6>")
+            .Append(">Back to top")
+            .Append(My.Resources.WP_END_A)
+            .Append("</h6>")
             .Append(vbCrLf)
         End With
         Return footing.ToString
