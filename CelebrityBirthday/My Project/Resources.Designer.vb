@@ -98,7 +98,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to &lt;br /&gt;.
+        '''  Looks up a localized string similar to &lt;br&gt;.
         '''</summary>
         Friend ReadOnly Property BREAK() As String
             Get

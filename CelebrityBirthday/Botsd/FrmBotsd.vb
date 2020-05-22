@@ -583,7 +583,7 @@ Public Class FrmBotsd
                 Case Else
                     .Append("th")
             End Select
-            .Append("</strong>").Append(vbCrLf)
+            .Append("</strong>")
             .Append(My.Resources.BREAK).Append(vbCrLf)
         End With
         With sb
@@ -599,15 +599,15 @@ Public Class FrmBotsd
                             .Append(oRow.Cells(pairPerson1.Name).Value)
                         End If
                         If Not String.IsNullOrEmpty(oRow.Cells(pairPerson2.Name).Value) Then
-                            .Append(My.Resources.TWO_SPACES)
+                            .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
                             .Append(oRow.Cells(pairPerson2.Name).Value)
                         End If
                         If Not String.IsNullOrEmpty(oRow.Cells(pairPerson3.Name).Value) Then
-                            .Append(My.Resources.TWO_SPACES)
+                            .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
                             .Append(oRow.Cells(pairPerson3.Name).Value)
                         End If
                         If Not String.IsNullOrEmpty(oRow.Cells(pairPerson4.Name).Value) Then
-                            .Append(My.Resources.TWO_SPACES)
+                            .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
                             .Append(oRow.Cells(pairPerson4.Name).Value)
                         End If
                         .Append(My.Resources.TWO_SPACES)

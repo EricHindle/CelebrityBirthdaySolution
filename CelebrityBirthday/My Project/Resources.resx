@@ -203,7 +203,7 @@
     <value>Next WP Number</value>
   </data>
   <data name="BREAK" xml:space="preserve">
-    <value>&lt;br /&gt;</value>
+    <value>&lt;br&gt;</value>
   </data>
   <data name="DOUBLEQUOTES" xml:space="preserve">
     <value>"</value>
