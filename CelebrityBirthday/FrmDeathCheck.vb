@@ -22,7 +22,14 @@ Public Class FrmDeathCheck
             DisplayMessage(CStr(_person.Id) & " " & _person.Name)
             Try
                 AddAllRow(_person)
-                Dim _dateOfDeath As String = GetWikiDeathDate(_person.Name)
+                Dim searchString As String = ""
+                If _person.Social IsNot Nothing Then
+                    searchString = _person.Social.WikiId
+                End If
+                If String.IsNullOrEmpty(searchString) Then
+                    searchString = _person.Name
+                End If
+                Dim _dateOfDeath As String = GetWikiDeathDate(searchString)
                 If _dateOfDeath IsNot Nothing Then
                     If IsDate(_dateOfDeath) Then
                         AddXRow(_person, _dateOfDeath, "")
