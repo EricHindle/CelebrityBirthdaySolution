@@ -51,7 +51,8 @@ Public Class FrmUpdateDatabase
                                                                                             txtBirthName.DragDrop,
                                                                                             txtBirthPlace.DragDrop,
                                                                                             txtShortDesc.DragDrop,
-                                                                                            txtTwitter.DragDrop
+                                                                                            txtTwitter.DragDrop,
+                                                                                            TxtWikiId.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             Dim item As String = e.Data.GetData(DataFormats.StringFormat)
@@ -81,7 +82,8 @@ Public Class FrmUpdateDatabase
                                                                                                                             txtBirthName.DragOver,
                                                                                                                             txtBirthPlace.DragOver,
                                                                                                                             txtShortDesc.DragOver,
-                                                                                                                            txtTwitter.DragOver
+                                                                                                                            txtTwitter.DragOver,
+                                                                                                                            TxtWikiId.DragOver
 
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
@@ -97,7 +99,8 @@ Public Class FrmUpdateDatabase
                                                                                                                             txtBirthName.DragEnter,
                                                                                                                             txtBirthPlace.DragEnter,
                                                                                                                             txtShortDesc.DragEnter,
-                                                                                                                            txtTwitter.DragEnter
+                                                                                                                            txtTwitter.DragEnter,
+                                                                                                                            TxtWikiId.dragenter
 
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             e.Effect = DragDropEffects.Copy
