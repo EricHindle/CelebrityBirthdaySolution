@@ -126,15 +126,20 @@ Public Class FrmBotsdPost
     Private Sub AddToList()
         If Not String.IsNullOrEmpty(TxtName.Text) Then
             Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
-            oRow.Cells(alsoName.Name).Value = TxtName.Text
-            oRow.Cells(alsoWiki.Name).Value = TxtWiki.Text
-            oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text
-            TxtName.Text = ""
-            TxtWiki.Text = ""
-            TxtDesc.Text = ""
-            SaveList()
+            ReplaceRowValues(oRow)
         End If
     End Sub
+
+    Private Function ReplaceRowValues(oRow As DataGridViewRow) As DataGridViewRow
+        oRow.Cells(alsoName.Name).Value = TxtName.Text
+        oRow.Cells(alsoWiki.Name).Value = TxtWiki.Text
+        oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text
+        TxtName.Text = ""
+        TxtWiki.Text = ""
+        TxtDesc.Text = ""
+        SaveList()
+        Return oRow
+    End Function
 
     Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtDesc.DragDrop,
                                                                                             TxtName.DragDrop,
@@ -295,11 +300,19 @@ sb.Append(My.Resources.WP_end_PARA)
                 Dim _lastpart As String() = Split(parts(parts.Length - 1), My.Resources.WP_END_A)
                 TxtName.Text = parts(1)
                 TxtWiki.Text = parts(3)
-                TxtDesc.Text = If(_lastpart.Length = 2, _lastpart(1).Trim.Replace(My.Resources.BREAK, ""), "")
+                Dim newDesc As String = If(_lastpart.Length = 2, _lastpart(1), "")
+                TxtDesc.Text = newDesc.Trim.Replace(My.Resources.BREAK, "").Replace(My.Resources.NON_BREAKING_SPACE, " ")
                 AddToList()
             End If
         Next
         ClearForm()
+    End Sub
+
+    Private Sub BtnReplace_Click(sender As Object, e As EventArgs) Handles BtnReplace.Click
+        If DgvAlso.SelectedRows.Count = 1 Then
+            Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
+            ReplaceRowValues(oRow)
+        End If
     End Sub
 #End Region
 End Class

@@ -67,6 +67,7 @@ Partial Class FrmBotsdPost
         Me.BtnImportList = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BtnReplace = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.DgvAlso, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -265,7 +266,7 @@ Partial Class FrmBotsdPost
         Me.DgvAlso.Location = New System.Drawing.Point(3, 3)
         Me.DgvAlso.Name = "DgvAlso"
         Me.DgvAlso.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvAlso.Size = New System.Drawing.Size(616, 268)
+        Me.DgvAlso.Size = New System.Drawing.Size(616, 257)
         Me.DgvAlso.TabIndex = 47
         '
         'alsoName
@@ -374,9 +375,9 @@ Partial Class FrmBotsdPost
         '
         Me.BtnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnAdd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnAdd.Location = New System.Drawing.Point(551, 277)
+        Me.BtnAdd.Location = New System.Drawing.Point(547, 266)
         Me.BtnAdd.Name = "BtnAdd"
-        Me.BtnAdd.Size = New System.Drawing.Size(59, 47)
+        Me.BtnAdd.Size = New System.Drawing.Size(64, 47)
         Me.BtnAdd.TabIndex = 58
         Me.BtnAdd.Text = "Add to list"
         Me.BtnAdd.UseVisualStyleBackColor = True
@@ -386,9 +387,9 @@ Partial Class FrmBotsdPost
         Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClear.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClear.Location = New System.Drawing.Point(551, 330)
+        Me.BtnClear.Location = New System.Drawing.Point(547, 372)
         Me.BtnClear.Name = "BtnClear"
-        Me.BtnClear.Size = New System.Drawing.Size(59, 25)
+        Me.BtnClear.Size = New System.Drawing.Size(64, 25)
         Me.BtnClear.TabIndex = 59
         Me.BtnClear.Text = "Clear"
         Me.BtnClear.UseVisualStyleBackColor = True
@@ -503,6 +504,7 @@ Partial Class FrmBotsdPost
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.BtnReplace)
         Me.Panel1.Controls.Add(Me.DgvAlso)
         Me.Panel1.Controls.Add(Me.BtnImportList)
         Me.Panel1.Controls.Add(Me.BtnClear)
@@ -520,6 +522,17 @@ Partial Class FrmBotsdPost
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(622, 407)
         Me.Panel1.TabIndex = 68
+        '
+        'BtnReplace
+        '
+        Me.BtnReplace.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnReplace.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReplace.Location = New System.Drawing.Point(547, 319)
+        Me.BtnReplace.Name = "BtnReplace"
+        Me.BtnReplace.Size = New System.Drawing.Size(64, 47)
+        Me.BtnReplace.TabIndex = 67
+        Me.BtnReplace.Text = "Replace"
+        Me.BtnReplace.UseVisualStyleBackColor = True
         '
         'FrmBotsdPost
         '
@@ -606,4 +619,5 @@ Partial Class FrmBotsdPost
     Friend WithEvents BtnImportList As Button
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents BtnReplace As Button
 End Class

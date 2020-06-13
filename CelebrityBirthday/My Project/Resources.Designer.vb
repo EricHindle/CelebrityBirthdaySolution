@@ -247,6 +247,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &amp;nbsp;.
+        '''</summary>
+        Friend ReadOnly Property NON_BREAKING_SPACE() As String
+            Get
+                Return ResourceManager.GetString("NON_BREAKING_SPACE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property refresh() As System.Drawing.Bitmap
