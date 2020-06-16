@@ -525,9 +525,91 @@ Public Class FrmUpdateDatabase
             Process.Start(sUrl)
         End If
     End Sub
+    Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
+        txtDesc.Text = GetWikiText(NudSentences.Value)
+    End Sub
+    Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
+        ShowStatus("WordPress")
+
+        Using _wordpress As New FrmWordPress
+            _wordpress.DaySelection = cboDay.SelectedIndex + 1
+            _wordpress.MonthSelection = cboMonth.SelectedIndex + 1
+            _wordpress.ShowDialog()
+        End Using
+
+        ClearStatus()
+    End Sub
+    Private Sub BtnImageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnImageLoadUpd.Click
+        UpdateImageDate(TxtImageLoadYr.Text, TxtImageLoadMth.Text, True, TxtImageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+    End Sub
+    Private Sub BtnPageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnPageLoadUpd.Click
+        UpdatePageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+    End Sub
+    Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
+        Try
+            If CInt(lblID.Text) > -1 Then
+                ShowStatus("Images")
+                Using _update As New FrmImages
+                    _update.PersonId = CInt(lblID.Text)
+                    _update.ShowDialog()
+                End Using
+                ShowStatus("")
+            Else
+                ShowStatus("No person selected")
+            End If
+        Catch ex As InvalidCastException
+            ShowStatus("No person selected")
+        End Try
+
+    End Sub
+    Private Sub BtnTitleName_Click(sender As Object, e As EventArgs) Handles BtnTitleName.Click
+        Dim _parts As New List(Of String)
+        _parts = ParseStringWithBrackets(txtDesc.Text)
+        If _parts.Count > 1 Then
+            txtDesc.SelectionStart = 0
+            txtDesc.SelectionLength = _parts(0).Trim.Length
+            UseTitleName()
+        End If
+    End Sub
+    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
+        cboDay.SelectedIndex = Today.Day - 1
+        cboMonth.SelectedIndex = Today.Month - 1
+    End Sub
+    Private Sub BtnGetWikiId_Click(sender As Object, e As EventArgs) Handles BtnGetWikiId.Click
+        If Browser IsNot Nothing AndAlso Not Browser.IsDisposed Then
+            TxtWikiId.Text = Browser.txtURL.Text.Replace(My.Resources.WIKIURL, "")
+        End If
+    End Sub
+    Private Sub BtnPasteWikiId_Click(sender As Object, e As EventArgs) Handles BtnPasteWikiId.Click
+        TxtWikiId.Paste()
+    End Sub
+    Private Sub BtnPasteName_Click(sender As Object, e As EventArgs) Handles BtnPasteName.Click
+        txtName.Paste()
+    End Sub
+    Private Sub BtnPasteDesc_Click(sender As Object, e As EventArgs) Handles BtnPasteDesc.Click
+        txtDesc.Paste()
+    End Sub
+    Private Sub BtnPasteShort_Click(sender As Object, e As EventArgs) Handles BtnPasteShort.Click
+        txtShortDesc.Paste()
+    End Sub
+    Private Sub BtnPasteBirthplace_Click(sender As Object, e As EventArgs) Handles BtnPasteBirthplace.Click
+        txtBirthPlace.Paste()
+    End Sub
+    Private Sub BtnPasteBirthname_Click(sender As Object, e As EventArgs) Handles BtnPasteBirthname.Click
+        txtBirthName.Paste()
+    End Sub
+    Private Sub UseNameTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseNameTextToolStripMenuItem.Click
+        UseTitleName()
+    End Sub
+    Private Sub ShortenNameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShortenNameToolStripMenuItem.Click
+        If txtDesc.SelectionLength > 0 Then
+            txtBirthName.Text = txtDesc.SelectedText
+            RemoveMiddleNames()
+        End If
+    End Sub
+
 #End Region
 #Region "subroutines"
-
     'Form overrides dispose to clean up the component list.
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -638,89 +720,6 @@ Public Class FrmUpdateDatabase
         rtbDesc.Text = txtDesc.Text
 
     End Sub
-    Private Function IsUseAsBirthName(_birthName As String) As Boolean
-        Dim isUsed As Boolean = False
-        If MsgBox("Use " & _birthName & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth name") = MsgBoxResult.Yes Then
-            txtBirthName.Text = _birthName
-            isGotBirthName = True
-            isUsed = True
-        End If
-        Return isUsed
-    End Function
-    Private Function IsUseAsBirthPlace(_birthPlace As String) As Boolean
-        Dim isUsed As Boolean = False
-        If MsgBox("Use " & _birthPlace & " as birthplace?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth place") = MsgBoxResult.Yes Then
-            txtBirthPlace.Text = _birthPlace
-            isUsed = True
-        End If
-        Return isUsed
-    End Function
-    Private Shared Function KnownAs(ByRef _parts As List(Of String)) As List(Of String)
-        Dim _foundNames As New List(Of String)(2)
-        Dim _birthName As String = Trim(_parts(0))
-        Dim _stageName As String = ""
-        If _parts(2).ToLower(myCultureInfo).Contains("known ") Then
-            Dim _knownString As String = _parts(2).Substring(_parts(2).IndexOf("known", StringComparison.CurrentCultureIgnoreCase))
-            If _knownString.ToLower(myCultureInfo).Contains(" as ") Then
-                Dim _knownParts As List(Of String) = ParseStringWithString(_knownString, " as ")
-                Dim _nameParts As List(Of String) = ParseStringWithChar(_knownParts(1), ",")
-                _stageName = Trim(_nameParts(0))
-            End If
-        End If
-        If Not String.IsNullOrEmpty(_stageName) Then
-            If _stageName.ToLower(myCultureInfo) <> _birthName.ToLower(myCultureInfo) Then
-                If MsgBox("Replace " & _birthName & " with " & _stageName & "?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
-                    _parts(0) = _stageName
-                    _parts = RemoveKnownAs(_parts, _stageName)
-                    'txtDesc.Text = Join(_parts.ToArray, "(")
-                    _foundNames.Add(_birthName)
-                    _foundNames.Add(_stageName)
-                Else
-                    If MsgBox("Remove known as ?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
-                        _parts = RemoveKnownAs(_parts, _stageName)
-                    End If
-                End If
-            Else
-                _parts = RemoveKnownAs(_parts, _stageName)
-            End If
-        End If
-        Return _foundNames
-    End Function
-    Private Shared Function RemoveKnownAs(_parts As List(Of String), _stageName As String) As List(Of String)
-        _parts(2) = _parts(2).Replace(_stageName & ",", "").Replace("commonly ", "").Replace("professionally ", "").Replace("better ", "").Replace("also ", "").Replace(", known as ", "")
-        Return _parts
-    End Function
-    Private Function TidyText() As List(Of String)
-        Dim newText As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
-        Dim _parts As List(Of String) = ParseStringWithBrackets(newText)
-        Dim charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c}
-        Dim charsToTrim2() As Char = {" "c, ","c, ";"c, "["c}
-        If _parts.Count = 3 Then
-            Dim _dates As String() = Split(_parts(1), " - ")
-            If _dates.Length = 2 Then
-                ExtractDeathDate(_dates(1))
-            End If
-        End If
-        Dim trimmedTextBefore As String = ""
-        Dim trimmedTextAfter As String = newText
-        Do Until trimmedTextBefore = trimmedTextAfter
-            trimmedTextBefore = trimmedTextAfter
-            trimmedTextAfter = trimmedTextBefore.Trim(charsToTrim)
-            trimmedTextAfter = trimmedTextAfter.Trim(vbCrLf)
-            trimmedTextAfter = trimmedTextAfter.Trim(vbLf)
-        Loop
-        txtDesc.Text = trimmedTextAfter & If(trimmedTextAfter.Length > 0, ".", "")
-        txtName.Text = txtName.Text.Trim(charsToTrim)
-        txtForename.Text = txtForename.Text.Trim(charsToTrim2)
-        txtSurname.Text = txtSurname.Text.Trim(charsToTrim)
-        Dim newShortText = RemoveSquareBrackets(FixQuotes(txtShortDesc.Text)).Trim(charsToTrim)
-        txtShortDesc.Text = newShortText & If(newShortText.Length > 0, ".", "")
-        txtBirthName.Text = RemoveSquareBrackets(FixQuotes(txtBirthName.Text).Replace(",", "").Replace(".", "").Replace(";", "")).Trim(charsToTrim)
-        txtBirthPlace.Text = RemoveSquareBrackets(FixQuotes(txtBirthPlace.Text).Replace(".", "").Replace(";", "")).Trim(charsToTrim)
-        txtTwitter.Text = RemoveBadCharacters(txtTwitter.Text, {8207}).Trim
-        rtbDesc.Text = txtDesc.Text
-        Return _parts
-    End Function
     Private Sub ExtractDeathDate(_date As String)
         Dim _deathDate As String = _date.Trim.TrimEnd({"E"c})
         Dim isBC As Boolean = False
@@ -792,6 +791,44 @@ Public Class FrmUpdateDatabase
         End If
         bLoadingPerson = False
     End Sub
+    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False)
+        lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
+        StatusStrip1.Refresh()
+    End Sub
+    Private Sub AppendStatus(pText As String)
+        ShowStatus(pText, True)
+    End Sub
+    Private Sub ClearStatus()
+        ShowStatus("", False)
+    End Sub
+    Private Sub RemoveMiddleWordsToolStripMenuItem1_Click(sender As Object, e As EventArgs)
+        If txtDesc.SelectionLength > 0 Then
+            RemoveMiddleNames()
+        End If
+    End Sub
+    Private Sub RemoveMiddleNames()
+        Dim _selStart As Integer = txtDesc.SelectionStart
+        Dim _selLength As Integer = txtDesc.SelectionLength
+        Dim _words As List(Of String) = Split(txtDesc.SelectedText.Trim(), " ").ToList
+        Dim sShortname As String = _words.First & If(_words.Count > 1, " " & _words.Last, "")
+        txtDesc.SelectionStart = _selStart
+        txtDesc.SelectionLength = _selLength
+        txtDesc.Cut()
+        txtDesc.Paste(sShortname)
+    End Sub
+    Private Sub UseTitleName()
+        If txtDesc.SelectionLength > 0 Then
+            Dim _selStart As Integer = txtDesc.SelectionStart
+            Dim _selLength As Integer = txtDesc.SelectionLength
+            Dim sShortname As String = txtName.Text
+            txtBirthName.Text = txtDesc.SelectedText
+            txtDesc.SelectionStart = _selStart
+            txtDesc.SelectionLength = _selLength
+            txtDesc.Cut()
+            txtDesc.Paste(sShortname)
+        End If
+    End Sub
+
 #End Region
 #Region "functions"
     Private Shared Function MakeFullName(pForename As String, pSurname As String) As String
@@ -884,118 +921,95 @@ Public Class FrmUpdateDatabase
         End If
         Return isExtract
     End Function
-    Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
-        txtDesc.Text = GetWikiText(NudSentences.Value)
-    End Sub
     Private Function GetWikiText(_sentences As Integer) As String
         Dim _searchName As String = MakeFullName(txtForename.Text, txtSurname.Text)
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _sentences))
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
-    Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
-        ShowStatus("WordPress")
-
-        Using _wordpress As New FrmWordPress
-            _wordpress.DaySelection = cboDay.SelectedIndex + 1
-            _wordpress.MonthSelection = cboMonth.SelectedIndex + 1
-            _wordpress.ShowDialog()
-        End Using
-
-        ClearStatus()
-    End Sub
-    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False)
-        lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
-        StatusStrip1.Refresh()
-    End Sub
-    Private Sub AppendStatus(pText As String)
-        ShowStatus(pText, True)
-    End Sub
-    Private Sub ClearStatus()
-        ShowStatus("", False)
-    End Sub
-    Private Sub BtnImageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnImageLoadUpd.Click
-        UpdateImageDate(TxtImageLoadYr.Text, TxtImageLoadMth.Text, True, TxtImageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-    End Sub
-    Private Sub BtnPageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnPageLoadUpd.Click
-        UpdatePageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
-    End Sub
-    Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
-        Try
-            If CInt(lblID.Text) > -1 Then
-                ShowStatus("Images")
-                Using _update As New FrmImages
-                    _update.PersonId = CInt(lblID.Text)
-                    _update.ShowDialog()
-                End Using
-                ShowStatus("")
-            Else
-                ShowStatus("No person selected")
+    Private Function TidyText() As List(Of String)
+        Dim newText As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
+        Dim _parts As List(Of String) = ParseStringWithBrackets(newText)
+        Dim charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c}
+        Dim charsToTrim2() As Char = {" "c, ","c, ";"c, "["c}
+        If _parts.Count = 3 Then
+            Dim _dates As String() = Split(_parts(1), " - ")
+            If _dates.Length = 2 Then
+                ExtractDeathDate(_dates(1))
             End If
-        Catch ex As InvalidCastException
-            ShowStatus("No person selected")
-        End Try
-
-    End Sub
-    Private Sub RemoveMiddleWordsToolStripMenuItem1_Click(sender As Object, e As EventArgs)
-        If txtDesc.SelectionLength > 0 Then
-            RemoveMiddleNames()
         End If
-    End Sub
-    Private Sub RemoveMiddleNames()
-        Dim _selStart As Integer = txtDesc.SelectionStart
-        Dim _selLength As Integer = txtDesc.SelectionLength
-        Dim _words As List(Of String) = Split(txtDesc.SelectedText.Trim(), " ").ToList
-        Dim sShortname As String = _words.First & If(_words.Count > 1, " " & _words.Last, "")
-        txtDesc.SelectionStart = _selStart
-        txtDesc.SelectionLength = _selLength
-        txtDesc.Cut()
-        txtDesc.Paste(sShortname)
-    End Sub
-    Private Sub UseNameTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseNameTextToolStripMenuItem.Click
-        UseTitleName()
-    End Sub
-    Private Sub UseTitleName()
-        If txtDesc.SelectionLength > 0 Then
-            Dim _selStart As Integer = txtDesc.SelectionStart
-            Dim _selLength As Integer = txtDesc.SelectionLength
-            Dim sShortname As String = txtName.Text
-            txtBirthName.Text = txtDesc.SelectedText
-            txtDesc.SelectionStart = _selStart
-            txtDesc.SelectionLength = _selLength
-            txtDesc.Cut()
-            txtDesc.Paste(sShortname)
+        Dim trimmedTextBefore As String = ""
+        Dim trimmedTextAfter As String = newText
+        Do Until trimmedTextBefore = trimmedTextAfter
+            trimmedTextBefore = trimmedTextAfter
+            trimmedTextAfter = trimmedTextBefore.Trim(charsToTrim)
+            trimmedTextAfter = trimmedTextAfter.Trim(vbCrLf)
+            trimmedTextAfter = trimmedTextAfter.Trim(vbLf)
+        Loop
+        txtDesc.Text = trimmedTextAfter & If(trimmedTextAfter.Length > 0, ".", "")
+        txtName.Text = txtName.Text.Trim(charsToTrim)
+        txtForename.Text = txtForename.Text.Trim(charsToTrim2)
+        txtSurname.Text = txtSurname.Text.Trim(charsToTrim)
+        Dim newShortText = RemoveSquareBrackets(FixQuotes(txtShortDesc.Text)).Trim(charsToTrim)
+        txtShortDesc.Text = newShortText & If(newShortText.Length > 0, ".", "")
+        txtBirthName.Text = RemoveSquareBrackets(FixQuotes(txtBirthName.Text).Replace(",", "").Replace(".", "").Replace(";", "")).Trim(charsToTrim)
+        txtBirthPlace.Text = RemoveSquareBrackets(FixQuotes(txtBirthPlace.Text).Replace(".", "").Replace(";", "")).Trim(charsToTrim)
+        txtTwitter.Text = RemoveBadCharacters(txtTwitter.Text, {8207}).Trim
+        rtbDesc.Text = txtDesc.Text
+        Return _parts
+    End Function
+    Private Function IsUseAsBirthName(_birthName As String) As Boolean
+        Dim isUsed As Boolean = False
+        If MsgBox("Use " & _birthName & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth name") = MsgBoxResult.Yes Then
+            txtBirthName.Text = _birthName
+            isGotBirthName = True
+            isUsed = True
         End If
-    End Sub
-    Private Sub ShortenNameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShortenNameToolStripMenuItem.Click
-        If txtDesc.SelectionLength > 0 Then
-            txtBirthName.Text = txtDesc.SelectedText
-            RemoveMiddleNames()
+        Return isUsed
+    End Function
+    Private Function IsUseAsBirthPlace(_birthPlace As String) As Boolean
+        Dim isUsed As Boolean = False
+        If MsgBox("Use " & _birthPlace & " as birthplace?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth place") = MsgBoxResult.Yes Then
+            txtBirthPlace.Text = _birthPlace
+            isUsed = True
         End If
-    End Sub
-    Private Sub BtnTitleName_Click(sender As Object, e As EventArgs) Handles BtnTitleName.Click
-        Dim _parts As New List(Of String)
-        ParseStringWithBrackets(txtDesc.Text)
-        If _parts.Count > 1 Then
-            txtDesc.SelectionStart = 0
-            txtDesc.SelectionLength = _parts(0).Trim.Length
-            UseTitleName()
+        Return isUsed
+    End Function
+    Private Shared Function KnownAs(ByRef _parts As List(Of String)) As List(Of String)
+        Dim _foundNames As New List(Of String)(2)
+        Dim _birthName As String = Trim(_parts(0))
+        Dim _stageName As String = ""
+        If _parts(2).ToLower(myCultureInfo).Contains("known ") Then
+            Dim _knownString As String = _parts(2).Substring(_parts(2).IndexOf("known", StringComparison.CurrentCultureIgnoreCase))
+            If _knownString.ToLower(myCultureInfo).Contains(" as ") Then
+                Dim _knownParts As List(Of String) = ParseStringWithString(_knownString, " as ")
+                Dim _nameParts As List(Of String) = ParseStringWithChar(_knownParts(1), ",")
+                _stageName = Trim(_nameParts(0))
+            End If
         End If
-    End Sub
-    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
-        cboDay.SelectedIndex = Today.Day - 1
-        cboMonth.SelectedIndex = Today.Month - 1
-    End Sub
-
-    Private Sub NudSentences_ValueChanged(sender As Object, e As EventArgs) Handles NudSentences.ValueChanged
-
-    End Sub
-
-    Private Sub BtnGetWikiId_Click(sender As Object, e As EventArgs) Handles BtnGetWikiId.Click
-        If Browser IsNot Nothing AndAlso Not Browser.IsDisposed Then
-            TxtWikiId.Text = Browser.txtURL.Text.Replace(My.Resources.WikiUrl, "")
+        If Not String.IsNullOrEmpty(_stageName) Then
+            If _stageName.ToLower(myCultureInfo) <> _birthName.ToLower(myCultureInfo) Then
+                If MsgBox("Replace " & _birthName & " with " & _stageName & "?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
+                    _parts(0) = _stageName
+                    _parts = RemoveKnownAs(_parts, _stageName)
+                    'txtDesc.Text = Join(_parts.ToArray, "(")
+                    _foundNames.Add(_birthName)
+                    _foundNames.Add(_stageName)
+                Else
+                    If MsgBox("Remove known as ?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Known as") = MsgBoxResult.Yes Then
+                        _parts = RemoveKnownAs(_parts, _stageName)
+                    End If
+                End If
+            Else
+                _parts = RemoveKnownAs(_parts, _stageName)
+            End If
         End If
-    End Sub
+        Return _foundNames
+    End Function
+    Private Shared Function RemoveKnownAs(_parts As List(Of String), _stageName As String) As List(Of String)
+        _parts(2) = _parts(2).Replace(_stageName & ",", "").Replace("commonly ", "").Replace("professionally ", "").Replace("better ", "").Replace("also ", "").Replace(", known as ", "")
+        Return _parts
+    End Function
 
 #End Region
 End Class

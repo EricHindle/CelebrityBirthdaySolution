@@ -417,6 +417,7 @@
   <ItemGroup>
     <Content Include="bcake.ico" />
     <Content Include="cake.ico" />
+    <None Include="images\pasteicon.png" />
     <None Include="images\NoImage.png" />
     <None Include="images\id.jpg" />
     <None Include="images\blank.jpg" />
