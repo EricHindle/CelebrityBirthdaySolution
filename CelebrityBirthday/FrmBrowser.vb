@@ -3,6 +3,15 @@
 #Region "properties"
     Private _searchName As String
     Private _url As Uri
+    Private _wikiId As String
+    Public Property WikiId() As String
+        Get
+            Return _wikiId
+        End Get
+        Set(ByVal value As String)
+            _wikiId = value
+        End Set
+    End Property
     Public Property Url() As Uri
         Get
             Return _url
@@ -65,6 +74,12 @@
 #Region "subroutines"
     Public Sub FindinWiki()
         NavigateToUrl(GetWikiSearchString(_searchName))
+    End Sub
+    Public Sub FindByWikiId()
+        txtURL.Text = My.Resources.WIKIURL & _wikiId
+        TxtSearchName.Text = _searchName
+        Dim _uri As New Uri(txtURL.Text)
+        WebBrowser1.Navigate(_uri)
     End Sub
     Public Sub FindImages()
         NavigateToUrl(GetGoogleSearchString(_searchName))

@@ -398,6 +398,9 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub BtnWiki_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWiki.Click
         Dim item As String() = {""}
+        If Browser Is Nothing OrElse Browser.IsDisposed Then
+            Browser = New FrmBrowser
+        End If
         If lblID.Text.Length > 0 And lbPeople.SelectedIndex >= 0 Then
             item = Split(lbPeople.SelectedItem, " ")
             item(0) = ""
@@ -407,11 +410,13 @@ Public Class FrmUpdateDatabase
         ElseIf txtName.TextLength > 0 Then
             item = Split(txtName.Text, " ")
         End If
-        If Browser Is Nothing OrElse Browser.IsDisposed Then
-            Browser = New FrmBrowser
-        End If
         Browser.SearchName = Join(item, " ").Trim
-        Browser.FindinWiki()
+        If Not String.IsNullOrEmpty(TxtWikiId.Text) Then
+            Browser.WikiId = TxtWikiId.Text
+            Browser.FindByWikiId()
+        Else
+            Browser.FindinWiki()
+        End If
         Browser.Show()
     End Sub
     Private Sub TxtDthDay_click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDthDay.Click, txtDthMth.Click, txtDied.Click
