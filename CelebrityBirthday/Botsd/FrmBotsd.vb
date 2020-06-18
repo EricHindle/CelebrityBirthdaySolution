@@ -834,9 +834,11 @@ Public Class FrmBotsd
         Dim indexText As New StringBuilder
         For Each oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In oRows
             Dim surnameInitial As String = oRow.surname.Substring(0, 1)
+            Dim tempBytes As Byte() = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(surnameInitial)
+            surnameInitial = System.Text.Encoding.UTF8.GetString(tempBytes)
             If surnameInitial <> currentLetter Then
                 If Not String.IsNullOrEmpty(currentLetter) Then
-                    indexText.Append(GetLetterFoot(surnameInitial.ToUpper(myCultureInfo)))
+                    indexText.Append(GetLetterFoot())
                 End If
                 indexText.Append(GetLetterHead(surnameInitial.ToUpper(myCultureInfo)))
                 currentLetter = surnameInitial
