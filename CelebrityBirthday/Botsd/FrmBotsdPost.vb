@@ -3,7 +3,8 @@ Imports System.Text
 
 Public Class FrmBotsdPost
 #Region "variables"
-    Dim oAlsoFileName As String
+    Private oAlsoFileName As String
+    Private ReadOnly charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c, "("c}
 #End Region
 #Region "properties"
     Private oNewPostNo As Integer
@@ -117,7 +118,7 @@ Public Class FrmBotsdPost
         TxtWiki.Text = Clipboard.GetText
     End Sub
     Private Sub BtnDesc_Click(sender As Object, e As EventArgs) Handles BtnDesc.Click
-        TxtDesc.Text = Clipboard.GetText
+        TxtDesc.Text = TidyDescription(Clipboard.GetText)
     End Sub
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         AddToList()
@@ -141,30 +142,41 @@ Public Class FrmBotsdPost
         Return oRow
     End Function
 
-    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtDesc.DragDrop,
-                                                                                            TxtName.DragDrop,
+    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtName.DragDrop,
                                                                                             TxtUrl.DragDrop,
                                                                                             TxtWiki.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
-            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
-            Dim textlen As Integer = oBox.TextLength
-            Dim startpos As Integer = oBox.SelectionStart
-            If textlen = 0 Then
-                oBox.Text = item.Trim
+            Dim item As String = TidyDescription(e.Data.GetData(DataFormats.StringFormat))
+            DropText(oBox, item)
+        End If
+    End Sub
+    Private Sub TxtDesc_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtDesc.DragDrop
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim oBox As TextBox = CType(sender, TextBox)
+            Dim item As String = TidyDescription(e.Data.GetData(DataFormats.StringFormat)) & "."
+            DropText(oBox, item)
+        End If
+    End Sub
+    Private Shared Sub DropText(oBox As TextBox, item As String)
+        Dim textlen As Integer = oBox.TextLength
+        Dim startpos As Integer = oBox.SelectionStart
+        If textlen = 0 Then
+            oBox.Text = item.Trim
+        Else
+            If startpos = 0 Then
+                oBox.SelectedText = item.TrimStart
             Else
-                If startpos = 0 Then
-                    oBox.SelectedText = item.TrimStart
+                If oBox.Text.Substring(startpos - 1, 1) = "." Then
+                    oBox.SelectedText = " " & item.TrimStart
                 Else
-                    If oBox.Text.Substring(startpos - 1, 1) = "." Then
-                        oBox.SelectedText = " " & item.TrimStart
-                    Else
-                        oBox.SelectedText = item
-                    End If
+                    oBox.SelectedText = item
                 End If
             End If
         End If
+
     End Sub
+
     Private Sub TextBox_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtDesc.DragOver,
                                                                                                                 TxtName.DragOver,
                                                                                                                 TxtUrl.DragOver,
@@ -297,11 +309,11 @@ sb.Append(My.Resources.WP_end_PARA)
         For Each _also As String In alsoList
             Dim parts As String() = Split(_also, My.Resources.DOUBLEQUOTES)
             If parts.Length > 4 Then
-                Dim _lastpart As String() = Split(parts(parts.Length - 1), My.Resources.WP_END_A)
-                TxtName.Text = parts(1)
+                Dim _lastpart As String() = Split(_also, My.Resources.WP_END_A)
+                TxtName.Text = ParseStringWithBrackets(parts(1))(0)
                 TxtWiki.Text = parts(3)
                 Dim newDesc As String = If(_lastpart.Length = 2, _lastpart(1), "")
-                TxtDesc.Text = newDesc.Trim.Replace(My.Resources.BREAK, "").Replace(My.Resources.NON_BREAKING_SPACE, " ")
+                TxtDesc.Text = TidyDescription(newDesc)
                 AddToList()
             End If
         Next
@@ -314,5 +326,8 @@ sb.Append(My.Resources.WP_end_PARA)
             ReplaceRowValues(oRow)
         End If
     End Sub
+    Private Function TidyDescription(_string As String) As String
+        Return _string.Replace(My.Resources.BREAK, "").Replace(My.Resources.NON_BREAKING_SPACE, " ").Replace("  ", " ").Trim(charsToTrim)
+    End Function
 #End Region
 End Class

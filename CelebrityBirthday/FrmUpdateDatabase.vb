@@ -568,7 +568,7 @@ Public Class FrmUpdateDatabase
 
     End Sub
     Private Sub BtnTitleName_Click(sender As Object, e As EventArgs) Handles BtnTitleName.Click
-        Dim _parts As New List(Of String)
+        Dim _parts As List(Of String)
         _parts = ParseStringWithBrackets(txtDesc.Text)
         If _parts.Count > 1 Then
             txtDesc.SelectionStart = 0
