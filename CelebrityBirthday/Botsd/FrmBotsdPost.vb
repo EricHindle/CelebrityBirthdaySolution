@@ -126,11 +126,24 @@ Public Class FrmBotsdPost
 
     Private Sub AddToList()
         If Not String.IsNullOrEmpty(TxtName.Text) Then
-            Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
-            ReplaceRowValues(oRow)
+            If Not String.IsNullOrEmpty(TxtWiki.Text) AndAlso isOKToAddAlso(TxtWiki.Text) Then
+                Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
+                ReplaceRowValues(oRow)
+            End If
         End If
     End Sub
-
+    Private Function IsOkToAddAlso(wikiUri As String) As Boolean
+        Dim isOK As Boolean = True
+        For Each oRow As DataGridViewRow In DgvAlso.Rows
+            Dim rowUri As String = If(oRow.Cells(alsoWiki.Name).Value Is Nothing, "", oRow.Cells(alsoWiki.Name).Value)
+            If wikiUri = rowUri Then
+                If MsgBox(wikiUri & vbCrLf & "already in list. OK to add duplicate?", MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation, "Duplicate") = MsgBoxResult.No Then
+                    isOK = False
+                End If
+            End If
+        Next
+        Return isOK
+    End Function
     Private Function ReplaceRowValues(oRow As DataGridViewRow) As DataGridViewRow
         oRow.Cells(alsoName.Name).Value = TxtName.Text
         oRow.Cells(alsoWiki.Name).Value = TxtWiki.Text
@@ -329,5 +342,9 @@ sb.Append(My.Resources.WP_end_PARA)
     Private Function TidyDescription(_string As String) As String
         Return _string.Replace(My.Resources.BREAK, "").Replace(My.Resources.NON_BREAKING_SPACE, " ").Replace("  ", " ").Trim(charsToTrim)
     End Function
+
+    Private Sub BtnClearList_Click(sender As Object, e As EventArgs) Handles BtnClearList.Click
+        DgvAlso.Rows.Clear()
+    End Sub
 #End Region
 End Class
