@@ -154,8 +154,8 @@ Public Class FrmBotsdPost
         SaveList()
         Return oRow
     End Function
-    Private Shared Function RetrieveWikiDesc(_searchName As String) As String
-        Dim _response As System.Net.WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 1))
+    Private Function RetrieveWikiDesc(_searchName As String) As String
+        Dim _response As System.Net.WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, NudSentences.Value))
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
@@ -172,11 +172,12 @@ Public Class FrmBotsdPost
             Dim oBox As TextBox = CType(sender, TextBox)
             Dim item As String = e.Data.GetData(DataFormats.StringFormat)
             DropText(oBox, item)
-            Dim wikiId As String = TxtWiki.Text.Split("/").Last
+            Dim _uri As Uri = New Uri(TxtWiki.Text)
+            Dim wikiId As String = _uri.LocalPath.Split("/").Last
             TxtName.Text = ParseStringWithBrackets(wikiId.Replace("_", " "))(0)
             Dim descExtract As String() = RetrieveWikiDesc(wikiId).Split(")")
             If descExtract.Length > 1 Then
-                TxtDesc.Text = TidyDescription(descExtract(1))
+                TxtDesc.Text = TidyDescription(descExtract(1)) & "."
             End If
         End If
     End Sub
