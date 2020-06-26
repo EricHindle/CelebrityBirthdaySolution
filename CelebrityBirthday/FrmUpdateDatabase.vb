@@ -15,8 +15,6 @@ Public Class FrmUpdateDatabase
 #End Region
 #Region "properties"
     Private _personId As Integer
-
-
     Public Property PersonId() As Integer
         Get
             Return _personId

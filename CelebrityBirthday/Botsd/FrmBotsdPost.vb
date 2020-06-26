@@ -154,16 +154,33 @@ Public Class FrmBotsdPost
         SaveList()
         Return oRow
     End Function
-
-    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtName.DragDrop,
-                                                                                            TxtUrl.DragDrop,
-                                                                                            TxtWiki.DragDrop
+    Private Shared Function RetrieveWikiDesc(_searchName As String) As String
+        Dim _response As System.Net.WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 1))
+        Dim extract As String = GetExtractFromResponse(_response)
+        Return extract
+    End Function
+    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtName.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             Dim item As String = TidyDescription(e.Data.GetData(DataFormats.StringFormat))
             DropText(oBox, item)
         End If
     End Sub
+
+    Private Sub TxtWiki_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtWiki.DragDrop
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim oBox As TextBox = CType(sender, TextBox)
+            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
+            DropText(oBox, item)
+            Dim wikiId As String = TxtWiki.Text.Split("/").Last
+            TxtName.Text = ParseStringWithBrackets(wikiId.Replace("_", " "))(0)
+            Dim descExtract As String() = RetrieveWikiDesc(wikiId).Split(")")
+            If descExtract.Length > 1 Then
+                TxtDesc.Text = TidyDescription(descExtract(1))
+            End If
+        End If
+    End Sub
+
     Private Sub TxtDesc_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtDesc.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
