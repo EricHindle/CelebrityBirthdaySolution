@@ -135,7 +135,7 @@ Public Class FrmBotsdPost
     Private Function IsOkToAddAlso(wikiUri As String) As Boolean
         Dim isOK As Boolean = True
         For Each oRow As DataGridViewRow In DgvAlso.Rows
-            Dim rowUri As String = If(oRow.Cells(alsoWiki.Name).Value Is Nothing, "", oRow.Cells(alsoWiki.Name).Value)
+            Dim rowUri As String = If(oRow.Cells(alsoWiki.Name).Value, "")
             If wikiUri = rowUri Then
                 If MsgBox(wikiUri & vbCrLf & "already in list. OK to add duplicate?", MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation, "Duplicate") = MsgBoxResult.No Then
                     isOK = False
@@ -154,8 +154,8 @@ Public Class FrmBotsdPost
         SaveList()
         Return oRow
     End Function
-    Private Function RetrieveWikiDesc(_searchName As String) As String
-        Dim _response As System.Net.WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, NudSentences.Value))
+    Private Function RetrieveWikiDesc(_searchName As String, _count As Integer) As String
+        Dim _response As System.Net.WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _count))
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
@@ -167,18 +167,34 @@ Public Class FrmBotsdPost
         End If
     End Sub
 
+    Private Sub DgvAlso_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles DgvAlso.DragDrop
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
+            ClearForm()
+            DropText(TxtWiki, item)
+            ExtractAlsoValues()
+            AddToList()
+            DgvAlso.ClearSelection()
+        End If
+    End Sub
+
+    Private Sub ExtractAlsoValues()
+        Dim _uri As Uri = New Uri(TxtWiki.Text)
+        Dim wikiId As String = _uri.LocalPath.Split("/").Last
+        TxtName.Text = ParseStringWithBrackets(wikiId.Replace("_", " "))(0)
+        Dim wikiDesc As String = RetrieveWikiDesc(wikiId, NudSentences.Value)
+        Dim descExtract As String() = Split(wikiDesc, ")", 2)
+        If descExtract.Length > 1 Then
+            TxtDesc.Text = TidyDescription(descExtract(1)) & "."
+        End If
+    End Sub
+
     Private Sub TxtWiki_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtWiki.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             Dim item As String = e.Data.GetData(DataFormats.StringFormat)
             DropText(oBox, item)
-            Dim _uri As Uri = New Uri(TxtWiki.Text)
-            Dim wikiId As String = _uri.LocalPath.Split("/").Last
-            TxtName.Text = ParseStringWithBrackets(wikiId.Replace("_", " "))(0)
-            Dim descExtract As String() = RetrieveWikiDesc(wikiId).Split(")")
-            If descExtract.Length > 1 Then
-                TxtDesc.Text = TidyDescription(descExtract(1)) & "."
-            End If
+            ExtractAlsoValues()
         End If
     End Sub
 
@@ -220,15 +236,12 @@ Public Class FrmBotsdPost
     Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtDesc.DragEnter,
                                                                                                                 TxtName.DragEnter,
                                                                                                                 TxtUrl.DragEnter,
-                                                                                                                TxtWiki.DragEnter
-        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+                                                                                                                TxtWiki.DragEnter,
+                                                                                                                DgvAlso.DragEnter
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Or e.Data.GetDataPresent(DataFormats.Text) Then
             e.Effect = DragDropEffects.Copy
         Else
-            If e.Data.GetDataPresent(DataFormats.Text) Then
-                e.Effect = DragDropEffects.Copy
-            Else
-                e.Effect = DragDropEffects.None
-            End If
+            e.Effect = DragDropEffects.None
         End If
     End Sub
     Private Sub DgvAlso_SelectionChanged(sender As Object, e As EventArgs) Handles DgvAlso.SelectionChanged
@@ -246,6 +259,7 @@ Public Class FrmBotsdPost
         TxtName.Text = ""
         TxtWiki.Text = ""
         TxtDesc.Text = ""
+        NudSentences.Value = 1
     End Sub
 #End Region
 #Region "subroutines"
@@ -363,6 +377,14 @@ sb.Append(My.Resources.WP_end_PARA)
 
     Private Sub BtnClearList_Click(sender As Object, e As EventArgs) Handles BtnClearList.Click
         DgvAlso.Rows.Clear()
+    End Sub
+
+    Private Sub NudSentences_ValueChanged(sender As Object, e As EventArgs) Handles NudSentences.ValueChanged
+        If DgvAlso.SelectedRows.Count = 1 AndAlso Not String.IsNullOrEmpty(TxtWiki.Text) Then
+            ExtractAlsoValues()
+            Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
+            ReplaceRowValues(oRow)
+        End If
     End Sub
 #End Region
 End Class

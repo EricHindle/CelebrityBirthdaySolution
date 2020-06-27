@@ -67,9 +67,9 @@ Partial Class FrmBotsdPost
         Me.BtnImportList = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.NudSentences = New System.Windows.Forms.NumericUpDown()
         Me.BtnClearList = New System.Windows.Forms.Button()
         Me.BtnReplace = New System.Windows.Forms.Button()
-        Me.NudSentences = New System.Windows.Forms.NumericUpDown()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.DgvAlso, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -259,6 +259,7 @@ Partial Class FrmBotsdPost
         '
         'DgvAlso
         '
+        Me.DgvAlso.AllowDrop = True
         Me.DgvAlso.AllowUserToResizeRows = False
         Me.DgvAlso.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
@@ -323,11 +324,10 @@ Partial Class FrmBotsdPost
         Me.TxtWiki.AllowDrop = True
         Me.TxtWiki.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtWiki.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtWiki.Location = New System.Drawing.Point(79, 326)
-        Me.TxtWiki.Multiline = True
+        Me.TxtWiki.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtWiki.Location = New System.Drawing.Point(77, 326)
         Me.TxtWiki.Name = "TxtWiki"
-        Me.TxtWiki.Size = New System.Drawing.Size(453, 39)
+        Me.TxtWiki.Size = New System.Drawing.Size(453, 30)
         Me.TxtWiki.TabIndex = 50
         '
         'TxtDesc
@@ -531,6 +531,17 @@ Partial Class FrmBotsdPost
         Me.Panel1.Size = New System.Drawing.Size(622, 469)
         Me.Panel1.TabIndex = 68
         '
+        'NudSentences
+        '
+        Me.NudSentences.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.NudSentences.Location = New System.Drawing.Point(498, 372)
+        Me.NudSentences.Maximum = New Decimal(New Integer() {3, 0, 0, 0})
+        Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NudSentences.Name = "NudSentences"
+        Me.NudSentences.Size = New System.Drawing.Size(33, 24)
+        Me.NudSentences.TabIndex = 69
+        Me.NudSentences.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'BtnClearList
         '
         Me.BtnClearList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -554,17 +565,6 @@ Partial Class FrmBotsdPost
         Me.BtnReplace.TabIndex = 67
         Me.BtnReplace.Text = "Replace"
         Me.BtnReplace.UseVisualStyleBackColor = True
-        '
-        'NudSentences
-        '
-        Me.NudSentences.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.NudSentences.Location = New System.Drawing.Point(498, 372)
-        Me.NudSentences.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.NudSentences.Name = "NudSentences"
-        Me.NudSentences.Size = New System.Drawing.Size(33, 24)
-        Me.NudSentences.TabIndex = 69
-        Me.NudSentences.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'FrmBotsdPost
         '
