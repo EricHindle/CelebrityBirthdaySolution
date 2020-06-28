@@ -238,4 +238,7 @@
   <data name="pasteicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\pasteicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="WIKI_SEARCH" xml:space="preserve">
+    <value>https://en.wikipedia.org/w/index.php?title=Special:Search&amp;limit=500&amp;offset=0&amp;profile=default&amp;advancedSearch-current={}&amp;ns0=1&amp;search=%22~date%22</value>
+  </data>
 </root>

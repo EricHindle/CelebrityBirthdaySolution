@@ -399,5 +399,15 @@ sb.Append(My.Resources.WP_end_PARA)
             ReplaceRowValues(oRow)
         End If
     End Sub
+
+    Private Sub BtnSearch1_Click(sender As Object, e As EventArgs) Handles BtnSearch1.Click
+        Dim sUrl As String = My.Resources.WIKI_SEARCH.Replace("~date", LblDay.Text & "+" & LblMonth.Text & "+" & LblYear.Text)
+        Process.Start(sUrl)
+    End Sub
+
+    Private Sub BtnSearch2_Click(sender As Object, e As EventArgs) Handles BtnSearch2.Click
+        Dim sUrl As String = My.Resources.WIKI_SEARCH.Replace("~date", LblMonth.Text & "+" & LblDay.Text & "%2C+" & LblYear.Text)
+        Process.Start(sUrl)
+    End Sub
 #End Region
 End Class

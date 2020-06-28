@@ -70,6 +70,8 @@ Partial Class FrmBotsdPost
         Me.NudSentences = New System.Windows.Forms.NumericUpDown()
         Me.BtnClearList = New System.Windows.Forms.Button()
         Me.BtnReplace = New System.Windows.Forms.Button()
+        Me.BtnSearch1 = New System.Windows.Forms.Button()
+        Me.BtnSearch2 = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.DgvAlso, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -566,12 +568,40 @@ Partial Class FrmBotsdPost
         Me.BtnReplace.Text = "Replace"
         Me.BtnReplace.UseVisualStyleBackColor = True
         '
+        'BtnSearch1
+        '
+        Me.BtnSearch1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSearch1.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSearch1.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSearch1.Location = New System.Drawing.Point(599, 604)
+        Me.BtnSearch1.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.BtnSearch1.Name = "BtnSearch1"
+        Me.BtnSearch1.Size = New System.Drawing.Size(120, 28)
+        Me.BtnSearch1.TabIndex = 68
+        Me.BtnSearch1.Text = "Wiki Search 1"
+        Me.BtnSearch1.UseVisualStyleBackColor = True
+        '
+        'BtnSearch2
+        '
+        Me.BtnSearch2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSearch2.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSearch2.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSearch2.Location = New System.Drawing.Point(726, 604)
+        Me.BtnSearch2.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.BtnSearch2.Name = "BtnSearch2"
+        Me.BtnSearch2.Size = New System.Drawing.Size(120, 28)
+        Me.BtnSearch2.TabIndex = 69
+        Me.BtnSearch2.Text = "Wiki Search 2"
+        Me.BtnSearch2.UseVisualStyleBackColor = True
+        '
         'FrmBotsdPost
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1257, 666)
+        Me.Controls.Add(Me.BtnSearch2)
+        Me.Controls.Add(Me.BtnSearch1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.LblYear)
@@ -655,4 +685,6 @@ Partial Class FrmBotsdPost
     Friend WithEvents BtnReplace As Button
     Friend WithEvents BtnClearList As Button
     Friend WithEvents NudSentences As NumericUpDown
+    Friend WithEvents BtnSearch1 As Button
+    Friend WithEvents BtnSearch2 As Button
 End Class

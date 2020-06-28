@@ -367,6 +367,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to https://en.wikipedia.org/w/index.php?title=Special:Search&amp;limit=500&amp;offset=0&amp;profile=default&amp;advancedSearch-current={}&amp;ns0=1&amp;search=%22~date%22.
+        '''</summary>
+        Friend ReadOnly Property WIKI_SEARCH() As String
+            Get
+                Return ResourceManager.GetString("WIKI_SEARCH", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to https://en.wikipedia.org/wiki/.
         '''</summary>
         Friend ReadOnly Property WIKIURL() As String
