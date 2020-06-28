@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Text
+' Imports System.Web.UI.WebControls
 
 Public Class FrmBotsdPost
 #Region "variables"
@@ -126,7 +127,7 @@ Public Class FrmBotsdPost
 
     Private Sub AddToList()
         If Not String.IsNullOrEmpty(TxtName.Text) Then
-            If Not String.IsNullOrEmpty(TxtWiki.Text) AndAlso isOKToAddAlso(TxtWiki.Text) Then
+            If Not String.IsNullOrEmpty(TxtWiki.Text) AndAlso IsOkToAddAlso(TxtWiki.Text) Then
                 Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
                 ReplaceRowValues(oRow)
             End If
@@ -148,13 +149,21 @@ Public Class FrmBotsdPost
         oRow.Cells(alsoName.Name).Value = TxtName.Text
         oRow.Cells(alsoWiki.Name).Value = TxtWiki.Text
         oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text
+        If TxtDesc.TextLength > 160 Then
+            oRow.Cells(alsoDesc.Name).Style.ForeColor = Color.Red
+            oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text.Substring(0, 160)
+        ElseIf TxtDesc.TextLength > 80 Then
+            oRow.Cells(alsoDesc.Name).Style.ForeColor = Color.Blue
+        Else
+            oRow.Cells(alsoDesc.Name).Style.ForeColor = Color.Black
+        End If
         TxtName.Text = ""
         TxtWiki.Text = ""
         TxtDesc.Text = ""
         SaveList()
         Return oRow
     End Function
-    Private Function RetrieveWikiDesc(_searchName As String, _count As Integer) As String
+    Private Shared Function RetrieveWikiDesc(_searchName As String, _count As Integer) As String
         Dim _response As System.Net.WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _count))
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
@@ -179,13 +188,17 @@ Public Class FrmBotsdPost
     End Sub
 
     Private Sub ExtractAlsoValues()
-        Dim _uri As Uri = New Uri(TxtWiki.Text)
-        Dim wikiId As String = _uri.LocalPath.Split("/").Last
-        TxtName.Text = ParseStringWithBrackets(wikiId.Replace("_", " "))(0)
-        Dim wikiDesc As String = RetrieveWikiDesc(wikiId, NudSentences.Value)
-        Dim descExtract As String() = Split(wikiDesc, ")", 2)
-        If descExtract.Length > 1 Then
-            TxtDesc.Text = TidyDescription(descExtract(1)) & "."
+        If TxtWiki.Text.StartsWith("http", True, myCultureInfo) Then
+            Dim _uri As Uri = New Uri(TxtWiki.Text)
+            Dim wikiId As String = _uri.LocalPath.Split("/").Last
+            TxtName.Text = ParseStringWithBrackets(wikiId.Replace("_", " "))(0)
+            Dim wikiDesc As String = RetrieveWikiDesc(wikiId, NudSentences.Value)
+            Dim descExtract As String() = Split(wikiDesc, ")", 2)
+            If descExtract.Length > 1 Then
+                TxtDesc.Text = TidyDescription(descExtract(1)) & "."
+            End If
+        Else
+            MsgBox("Link not selected correctly", MsgBoxStyle.Exclamation, "Link error")
         End If
     End Sub
 
@@ -206,7 +219,7 @@ Public Class FrmBotsdPost
         End If
     End Sub
     Private Shared Sub DropText(oBox As TextBox, item As String)
-        Dim textlen As Integer = oBox.TextLength
+        Dim textlen As Integer = oBox.Text.Length
         Dim startpos As Integer = oBox.SelectionStart
         If textlen = 0 Then
             oBox.Text = item.Trim
