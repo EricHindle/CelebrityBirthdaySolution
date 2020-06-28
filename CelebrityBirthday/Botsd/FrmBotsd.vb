@@ -22,8 +22,6 @@ Public Class FrmBotsd
 #Region "properites"
     Private _day As Integer
     Private _month As Integer
-
-
     Public Property ThisMonth() As Integer
         Get
             Return _month
@@ -298,7 +296,70 @@ Public Class FrmBotsd
         End Try
         isBuildingPairs = False
     End Sub
-
+    Private Sub BtnRemove_Click(sender As Object, e As EventArgs) Handles BtnRemove.Click
+        If DgvPairs.SelectedRows.Count = 1 Then
+            Dim _row As DataGridViewRow = DgvPairs.SelectedRows(0)
+            Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked)
+            If _selCount < 0 Then
+                If ChkSel4.Checked Then
+                    _row.Cells(pairId4.Name).Value = Nothing
+                    _row.Cells(pairPerson4.Name).Value = ""
+                End If
+                If ChkSel3.Checked Then
+                    _row.Cells(pairId3.Name).Value = _row.Cells(pairId4.Name).Value
+                    _row.Cells(pairPerson3.Name).Value = _row.Cells(pairPerson4.Name).Value
+                    _row.Cells(pairId4.Name).Value = Nothing
+                    _row.Cells(pairPerson4.Name).Value = ""
+                End If
+                If ChkSel2.Checked Then
+                    _row.Cells(pairId2.Name).Value = _row.Cells(pairId3.Name).Value
+                    _row.Cells(pairPerson2.Name).Value = _row.Cells(pairPerson3.Name).Value
+                    _row.Cells(pairId3.Name).Value = _row.Cells(pairId4.Name).Value
+                    _row.Cells(pairPerson3.Name).Value = _row.Cells(pairPerson4.Name).Value
+                    _row.Cells(pairId4.Name).Value = Nothing
+                    _row.Cells(pairPerson4.Name).Value = ""
+                End If
+                If chkSel1.Checked Then
+                    _row.Cells(pairId1.Name).Value = _row.Cells(pairId2.Name).Value
+                    _row.Cells(pairPerson1.Name).Value = _row.Cells(pairPerson2.Name).Value
+                    _row.Cells(pairId2.Name).Value = _row.Cells(pairId3.Name).Value
+                    _row.Cells(pairPerson2.Name).Value = _row.Cells(pairPerson3.Name).Value
+                    _row.Cells(pairId3.Name).Value = _row.Cells(pairId4.Name).Value
+                    _row.Cells(pairPerson3.Name).Value = _row.Cells(pairPerson4.Name).Value
+                    _row.Cells(pairId4.Name).Value = Nothing
+                    _row.Cells(pairPerson4.Name).Value = ""
+                End If
+                GeneratePair()
+                If _row.Cells(pairId2.Name).Value Is Nothing Then
+                    DgvPairs.Rows.Remove(_row)
+                End If
+            Else
+                DgvPairs.Rows.Remove(_row)
+            End If
+        End If
+    End Sub
+    Private Sub BtnAtoZ_Click(sender As Object, e As EventArgs) Handles BtnAtoZ.Click
+        Dim oRows As DataRowCollection = GetBotsdIndex()
+        Dim currentLetter As String = String.Empty
+        Dim indexText As New StringBuilder
+        For Each oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In oRows
+            Dim surnameInitial As String = oRow.surname.Substring(0, 1)
+            Dim tempBytes As Byte() = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(surnameInitial)
+            surnameInitial = System.Text.Encoding.UTF8.GetString(tempBytes)
+            If surnameInitial <> currentLetter Then
+                If Not String.IsNullOrEmpty(currentLetter) Then
+                    indexText.Append(GetLetterFoot())
+                End If
+                indexText.Append(GetLetterHead(surnameInitial.ToUpper(myCultureInfo)))
+                currentLetter = surnameInitial
+            End If
+            indexText.Append(GetIndexEntry(oRow))
+        Next
+        Using _text As New FrmText
+            _text.rtbText.Text = indexText.ToString
+            _text.ShowDialog()
+        End Using
+    End Sub
 #End Region
 #Region "subroutines"
     Private Function SaveImage() As String
@@ -457,7 +518,6 @@ Public Class FrmBotsd
     End Sub
     Private Sub GeneratePair()
         ClearPersonDetails()
-
         If DgvPairs.SelectedRows.Count = 1 Then
             Try
                 Dim _pickPerson1 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
@@ -827,30 +887,6 @@ Public Class FrmBotsd
             DisplayException(MethodBase.GetCurrentMethod, ex, "Db")
         End Try
     End Sub
-
-    Private Sub BtnAtoZ_Click(sender As Object, e As EventArgs) Handles BtnAtoZ.Click
-        Dim oRows As DataRowCollection = GetBotsdIndex()
-        Dim currentLetter As String = String.Empty
-        Dim indexText As New StringBuilder
-        For Each oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In oRows
-            Dim surnameInitial As String = oRow.surname.Substring(0, 1)
-            Dim tempBytes As Byte() = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(surnameInitial)
-            surnameInitial = System.Text.Encoding.UTF8.GetString(tempBytes)
-            If surnameInitial <> currentLetter Then
-                If Not String.IsNullOrEmpty(currentLetter) Then
-                    indexText.Append(GetLetterFoot())
-                End If
-                indexText.Append(GetLetterHead(surnameInitial.ToUpper(myCultureInfo)))
-                currentLetter = surnameInitial
-            End If
-            indexText.Append(GetIndexEntry(oRow))
-        Next
-        Using _text As New FrmText
-            _text.rtbText.Text = indexText.ToString
-            _text.ShowDialog()
-        End Using
-    End Sub
-
     Private Shared Function GetIndexEntry(oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow) As String
         Dim entry As New StringBuilder
         With entry
@@ -872,7 +908,6 @@ Public Class FrmBotsd
         End With
         Return entry.ToString
     End Function
-
     Private Shared Function GetLetterHead(surnameInitial As String) As String
         Dim heading As New StringBuilder
         With heading
@@ -903,7 +938,6 @@ Public Class FrmBotsd
         End With
         Return footing.ToString
     End Function
-
     Private Sub ClearPersonDetails()
         LblId1.Text = ""
         LblId2.Text = ""
@@ -932,5 +966,6 @@ Public Class FrmBotsd
         rtbFile1.Text = ""
         PictureBox1.Image = Nothing
     End Sub
+
 #End Region
 End Class
