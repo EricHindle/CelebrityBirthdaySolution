@@ -124,50 +124,6 @@ Public Class FrmBotsdPost
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         AddToList()
     End Sub
-
-    Private Sub AddToList()
-        If Not String.IsNullOrEmpty(TxtName.Text) Then
-            If Not String.IsNullOrEmpty(TxtWiki.Text) AndAlso IsOkToAddAlso(TxtWiki.Text) Then
-                Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
-                ReplaceRowValues(oRow)
-            End If
-        End If
-    End Sub
-    Private Function IsOkToAddAlso(wikiUri As String) As Boolean
-        Dim isOK As Boolean = True
-        For Each oRow As DataGridViewRow In DgvAlso.Rows
-            Dim rowUri As String = If(oRow.Cells(alsoWiki.Name).Value, "")
-            If wikiUri = rowUri Then
-                If MsgBox(wikiUri & vbCrLf & "already in list. OK to add duplicate?", MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation, "Duplicate") = MsgBoxResult.No Then
-                    isOK = False
-                End If
-            End If
-        Next
-        Return isOK
-    End Function
-    Private Function ReplaceRowValues(oRow As DataGridViewRow) As DataGridViewRow
-        oRow.Cells(alsoName.Name).Value = TxtName.Text
-        oRow.Cells(alsoWiki.Name).Value = TxtWiki.Text
-        oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text
-        If TxtDesc.TextLength > 160 Then
-            oRow.Cells(alsoDesc.Name).Style.ForeColor = Color.Red
-            oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text.Substring(0, 160)
-        ElseIf TxtDesc.TextLength > 80 Then
-            oRow.Cells(alsoDesc.Name).Style.ForeColor = Color.Blue
-        Else
-            oRow.Cells(alsoDesc.Name).Style.ForeColor = Color.Black
-        End If
-        TxtName.Text = ""
-        TxtWiki.Text = ""
-        TxtDesc.Text = ""
-        SaveList()
-        Return oRow
-    End Function
-    Private Shared Function RetrieveWikiDesc(_searchName As String, _count As Integer) As String
-        Dim _response As System.Net.WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _count))
-        Dim extract As String = GetExtractFromResponse(_response)
-        Return extract
-    End Function
     Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtName.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
@@ -175,7 +131,6 @@ Public Class FrmBotsdPost
             DropText(oBox, item)
         End If
     End Sub
-
     Private Sub DgvAlso_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles DgvAlso.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim item As String = e.Data.GetData(DataFormats.StringFormat)
@@ -186,22 +141,6 @@ Public Class FrmBotsdPost
             DgvAlso.ClearSelection()
         End If
     End Sub
-
-    Private Sub ExtractAlsoValues()
-        If TxtWiki.Text.StartsWith("http", True, myCultureInfo) Then
-            Dim _uri As Uri = New Uri(TxtWiki.Text)
-            Dim wikiId As String = _uri.LocalPath.Split("/").Last
-            TxtName.Text = ParseStringWithBrackets(wikiId.Replace("_", " "))(0)
-            Dim wikiDesc As String = RetrieveWikiDesc(wikiId, NudSentences.Value)
-            Dim descExtract As String() = Split(wikiDesc, ")", 2)
-            If descExtract.Length > 1 Then
-                TxtDesc.Text = TidyDescription(descExtract(1)) & "."
-            End If
-        Else
-            MsgBox("Link not selected correctly", MsgBoxStyle.Exclamation, "Link error")
-        End If
-    End Sub
-
     Private Sub TxtWiki_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtWiki.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
@@ -210,7 +149,6 @@ Public Class FrmBotsdPost
             ExtractAlsoValues()
         End If
     End Sub
-
     Private Sub TxtDesc_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtDesc.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
@@ -218,25 +156,6 @@ Public Class FrmBotsdPost
             DropText(oBox, item)
         End If
     End Sub
-    Private Shared Sub DropText(oBox As TextBox, item As String)
-        Dim textlen As Integer = oBox.Text.Length
-        Dim startpos As Integer = oBox.SelectionStart
-        If textlen = 0 Then
-            oBox.Text = item.Trim
-        Else
-            If startpos = 0 Then
-                oBox.SelectedText = item.TrimStart
-            Else
-                If oBox.Text.Substring(startpos - 1, 1) = "." Then
-                    oBox.SelectedText = " " & item.TrimStart
-                Else
-                    oBox.SelectedText = item
-                End If
-            End If
-        End If
-
-    End Sub
-
     Private Sub TextBox_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtDesc.DragOver,
                                                                                                                 TxtName.DragOver,
                                                                                                                 TxtUrl.DragOver,
@@ -267,13 +186,67 @@ Public Class FrmBotsdPost
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
         ClearForm()
     End Sub
-
-    Private Sub ClearForm()
-        TxtName.Text = ""
-        TxtWiki.Text = ""
-        TxtDesc.Text = ""
-        NudSentences.Value = 1
+    Private Sub NudSentences_ValueChanged(sender As Object, e As EventArgs) Handles NudSentences.ValueChanged
+        If DgvAlso.SelectedRows.Count = 1 AndAlso Not String.IsNullOrEmpty(TxtWiki.Text) Then
+            ExtractAlsoValues()
+            Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
+            ReplaceRowValues(oRow)
+        End If
     End Sub
+    Private Sub BtnSearch1_Click(sender As Object, e As EventArgs) Handles BtnSearch1.Click
+        Dim sUrl As String = My.Resources.WIKI_SEARCH.Replace("~date", LblDay.Text & "+" & LblMonth.Text & "+" & LblYear.Text)
+        Process.Start(sUrl)
+    End Sub
+    Private Sub BtnSearch2_Click(sender As Object, e As EventArgs) Handles BtnSearch2.Click
+        Dim sUrl As String = My.Resources.WIKI_SEARCH.Replace("~date", LblMonth.Text & "+" & LblDay.Text & "%2C+" & LblYear.Text)
+        Process.Start(sUrl)
+    End Sub
+    Private Sub BtnImportList_Click(sender As Object, e As EventArgs) Handles BtnImportList.Click
+        Dim alsoList As String() = Split(Clipboard.GetText, vbCrLf)
+        For Each _also As String In alsoList
+            Dim parts As String() = Split(_also, My.Resources.DOUBLEQUOTES)
+            If parts.Length > 4 Then
+                Dim _lastpart As String() = Split(_also, My.Resources.WP_END_A)
+                TxtName.Text = ParseStringWithBrackets(parts(1))(0)
+                TxtWiki.Text = parts(3)
+                Dim newDesc As String = If(_lastpart.Length = 2, _lastpart(1), "")
+                TxtDesc.Text = TidyDescription(newDesc)
+                AddToList()
+            End If
+        Next
+        ClearForm()
+    End Sub
+    Private Sub BtnReplace_Click(sender As Object, e As EventArgs) Handles BtnReplace.Click
+        If DgvAlso.SelectedRows.Count = 1 Then
+            Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
+            ReplaceRowValues(oRow)
+        End If
+    End Sub
+    Private Sub BtnLoadList_Click(sender As Object, e As EventArgs) Handles BtnLoadList.Click
+        If My.Computer.FileSystem.FileExists(oAlsoFileName) Then
+            DisplayStatus("Loading List")
+            Using _inputFile As New StreamReader(oAlsoFileName)
+                Dim _inputline As String = _inputFile.ReadLine
+                Do While _inputline IsNot Nothing
+                    Dim _parts As String() = Split(_inputline, "|")
+                    If _parts.Length = 3 Then
+                        Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
+                        oRow.Cells(alsoName.Name).Value = _parts(0)
+                        oRow.Cells(alsoWiki.Name).Value = _parts(1)
+                        oRow.Cells(alsoDesc.Name).Value = _parts(2)
+                    End If
+                    _inputline = _inputFile.ReadLine
+                Loop
+            End Using
+            DisplayStatus("Loaded List")
+        Else
+            DisplayStatus(oAlsoFileName & " not found")
+        End If
+    End Sub
+    Private Sub BtnSaveList_Click(sender As Object, e As EventArgs) Handles BtnSaveList.Click
+        SaveList()
+    End Sub
+
 #End Region
 #Region "subroutines"
     Private Function GenerateAlsos() As String
@@ -315,10 +288,6 @@ sb.Append(My.Resources.WP_end_PARA)
         Dim _fileName As String = Path.Combine(_path, _add.Replace("_", "_" & LblDay.Text & "_" & LblMonth.Text & "_" & LblYear.Text) & ".txt")
         Return _fileName
     End Function
-    Private Sub BtnSaveList_Click(sender As Object, e As EventArgs) Handles BtnSaveList.Click
-        SaveList()
-    End Sub
-
     Private Sub SaveList()
         DisplayStatus("Saving List")
         Using _outputfile As New StreamWriter(oAlsoFileName, False)
@@ -334,80 +303,98 @@ sb.Append(My.Resources.WP_end_PARA)
         End Using
         DisplayStatus("Saved List")
     End Sub
-
-    Private Sub BtnLoadList_Click(sender As Object, e As EventArgs) Handles BtnLoadList.Click
-        If My.Computer.FileSystem.FileExists(oAlsoFileName) Then
-            DisplayStatus("Loading List")
-            Using _inputFile As New StreamReader(oAlsoFileName)
-                Dim _inputline As String = _inputFile.ReadLine
-                Do While _inputline IsNot Nothing
-                    Dim _parts As String() = Split(_inputline, "|")
-                    If _parts.Length = 3 Then
-                        Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
-                        oRow.Cells(alsoName.Name).Value = _parts(0)
-                        oRow.Cells(alsoWiki.Name).Value = _parts(1)
-                        oRow.Cells(alsoDesc.Name).Value = _parts(2)
-                    End If
-                    _inputline = _inputFile.ReadLine
-                Loop
-            End Using
-            DisplayStatus("Loaded List")
-        Else
-            DisplayStatus(oAlsoFileName & " not found")
-        End If
-    End Sub
-
     Private Sub DisplayStatus(pText As String, Optional isAppend As Boolean = False)
         lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
         StatusStrip1.Refresh()
     End Sub
-
-    Private Sub BtnImportList_Click(sender As Object, e As EventArgs) Handles BtnImportList.Click
-        Dim alsoList As String() = Split(Clipboard.GetText, vbCrLf)
-        For Each _also As String In alsoList
-            Dim parts As String() = Split(_also, My.Resources.DOUBLEQUOTES)
-            If parts.Length > 4 Then
-                Dim _lastpart As String() = Split(_also, My.Resources.WP_END_A)
-                TxtName.Text = ParseStringWithBrackets(parts(1))(0)
-                TxtWiki.Text = parts(3)
-                Dim newDesc As String = If(_lastpart.Length = 2, _lastpart(1), "")
-                TxtDesc.Text = TidyDescription(newDesc)
-                AddToList()
-            End If
-        Next
-        ClearForm()
-    End Sub
-
-    Private Sub BtnReplace_Click(sender As Object, e As EventArgs) Handles BtnReplace.Click
-        If DgvAlso.SelectedRows.Count = 1 Then
-            Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
-            ReplaceRowValues(oRow)
-        End If
-    End Sub
     Private Function TidyDescription(_string As String) As String
         Return _string.Replace(My.Resources.BREAK, "").Replace(My.Resources.NON_BREAKING_SPACE, " ").Replace("  ", " ").Trim(charsToTrim)
     End Function
-
     Private Sub BtnClearList_Click(sender As Object, e As EventArgs) Handles BtnClearList.Click
         DgvAlso.Rows.Clear()
     End Sub
-
-    Private Sub NudSentences_ValueChanged(sender As Object, e As EventArgs) Handles NudSentences.ValueChanged
-        If DgvAlso.SelectedRows.Count = 1 AndAlso Not String.IsNullOrEmpty(TxtWiki.Text) Then
-            ExtractAlsoValues()
-            Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
-            ReplaceRowValues(oRow)
+    Private Sub ClearForm()
+        TxtName.Text = ""
+        TxtWiki.Text = ""
+        TxtDesc.Text = ""
+        NudSentences.Value = 1
+    End Sub
+    Private Shared Sub DropText(oBox As TextBox, item As String)
+        Dim textlen As Integer = oBox.Text.Length
+        Dim startpos As Integer = oBox.SelectionStart
+        If textlen = 0 Then
+            oBox.Text = item.Trim
+        Else
+            If startpos = 0 Then
+                oBox.SelectedText = item.TrimStart
+            Else
+                If oBox.Text.Substring(startpos - 1, 1) = "." Then
+                    oBox.SelectedText = " " & item.TrimStart
+                Else
+                    oBox.SelectedText = item
+                End If
+            End If
         End If
     End Sub
-
-    Private Sub BtnSearch1_Click(sender As Object, e As EventArgs) Handles BtnSearch1.Click
-        Dim sUrl As String = My.Resources.WIKI_SEARCH.Replace("~date", LblDay.Text & "+" & LblMonth.Text & "+" & LblYear.Text)
-        Process.Start(sUrl)
+    Private Sub ExtractAlsoValues()
+        If TxtWiki.Text.StartsWith("http", True, myCultureInfo) Then
+            Dim _uri As Uri = New Uri(TxtWiki.Text)
+            Dim wikiId As String = _uri.LocalPath.Split("/").Last
+            TxtName.Text = ParseStringWithBrackets(wikiId.Replace("_", " "))(0)
+            Dim wikiDesc As String = RetrieveWikiDesc(wikiId, NudSentences.Value)
+            Dim descExtract As String() = Split(wikiDesc, ")", 2)
+            If descExtract.Length > 1 Then
+                TxtDesc.Text = TidyDescription(descExtract(1)) & "."
+            End If
+        Else
+            MsgBox("Link not selected correctly", MsgBoxStyle.Exclamation, "Link error")
+        End If
     End Sub
-
-    Private Sub BtnSearch2_Click(sender As Object, e As EventArgs) Handles BtnSearch2.Click
-        Dim sUrl As String = My.Resources.WIKI_SEARCH.Replace("~date", LblMonth.Text & "+" & LblDay.Text & "%2C+" & LblYear.Text)
-        Process.Start(sUrl)
+    Private Sub AddToList()
+        If Not String.IsNullOrEmpty(TxtName.Text) Then
+            If Not String.IsNullOrEmpty(TxtWiki.Text) Then
+                TxtWiki.Text = TxtWiki.Text.Replace("http:", "https:")
+                If IsOkToAddAlso(TxtWiki.Text) Then
+                    Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
+                    ReplaceRowValues(oRow)
+                End If
+            End If
+        End If
     End Sub
+    Private Function IsOkToAddAlso(wikiUri As String) As Boolean
+        Dim isOK As Boolean = True
+        For Each oRow As DataGridViewRow In DgvAlso.Rows
+            Dim rowUri As String = If(oRow.Cells(alsoWiki.Name).Value, "")
+            If wikiUri = rowUri Then
+                If MsgBox(wikiUri & vbCrLf & "already in list. OK to add duplicate?", MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation, "Duplicate") = MsgBoxResult.No Then
+                    isOK = False
+                End If
+            End If
+        Next
+        Return isOK
+    End Function
+    Private Function ReplaceRowValues(oRow As DataGridViewRow) As DataGridViewRow
+        oRow.Cells(alsoName.Name).Value = TxtName.Text
+        oRow.Cells(alsoWiki.Name).Value = TxtWiki.Text
+        oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text
+        If TxtDesc.TextLength > 160 Then
+            oRow.Cells(alsoDesc.Name).Style.ForeColor = Color.Red
+            oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text.Substring(0, 160)
+        ElseIf TxtDesc.TextLength > 80 Then
+            oRow.Cells(alsoDesc.Name).Style.ForeColor = Color.Blue
+        Else
+            oRow.Cells(alsoDesc.Name).Style.ForeColor = Color.Black
+        End If
+        TxtName.Text = ""
+        TxtWiki.Text = ""
+        TxtDesc.Text = ""
+        SaveList()
+        Return oRow
+    End Function
+    Private Shared Function RetrieveWikiDesc(_searchName As String, _count As Integer) As String
+        Dim _response As System.Net.WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _count))
+        Dim extract As String = GetExtractFromResponse(_response)
+        Return extract
+    End Function
 #End Region
 End Class
