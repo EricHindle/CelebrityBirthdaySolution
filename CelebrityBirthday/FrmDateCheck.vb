@@ -49,7 +49,14 @@ Public Class FrmDateCheck
             DisplayMessage(CStr(_ct) & " of " & CStr(totalPeople))
             Try
                 Dim extract As String = ""
-                Dim _wikiBirthInfo As WikiBirthInfo = GetWikiBirthDate(_person.Name, extract)
+                Dim searchString As String = ""
+                If _person.Social IsNot Nothing Then
+                    searchString = _person.Social.WikiId
+                End If
+                If String.IsNullOrEmpty(searchString) Then
+                    searchString = _person.Name
+                End If
+                Dim _wikiBirthInfo As WikiBirthInfo = GetWikiBirthDate(searchString, extract)
                 Dim _dateOfBirth As Date? = _wikiBirthInfo.BirthDate
                 Dim _desc As String = extract
                 If Not String.IsNullOrEmpty(_wikiBirthInfo.ErrorDesc) Then
@@ -81,10 +88,10 @@ Public Class FrmDateCheck
                 Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
                 If _parts.Count = 3 Then
                     Dim datePart As String = _parts(1)
-                    Dim _dates As String() = Split(datePart, " - ")
+                    Dim _dates As String() = Split(datePart, "-")
                     If _dates.Length > 0 Then
                         Try
-                            Dim firstPart As String = _dates(0)
+                            Dim firstPart As String = _dates(0).Trim
                             firstPart = firstPart.Replace("N.", "").Replace("S.", "").Replace("(", "").Replace(")", "").Replace("O.", "").Replace(";", "").Replace("  ", " ")
                             Dim DateParts As String() = Split(firstPart, " ")
                             Dim DatePartsList As List(Of String) = DateParts.ToList
