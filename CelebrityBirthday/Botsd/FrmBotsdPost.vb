@@ -5,7 +5,7 @@ Imports System.Text
 Public Class FrmBotsdPost
 #Region "variables"
     Private oAlsoFileName As String
-    Private ReadOnly charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c, "("c}
+    Private ReadOnly charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c, "("c, "."c}
 #End Region
 #Region "properties"
     Private oNewPostNo As Integer
@@ -210,7 +210,7 @@ Public Class FrmBotsdPost
                 TxtName.Text = ParseStringWithBrackets(parts(1))(0)
                 TxtWiki.Text = parts(3)
                 Dim newDesc As String = If(_lastpart.Length = 2, _lastpart(1), "")
-                TxtDesc.Text = TidyDescription(newDesc)
+                TxtDesc.Text = TidyDescription(newDesc) & "."
                 AddToList()
             End If
         Next
@@ -396,5 +396,9 @@ sb.Append(My.Resources.WP_end_PARA)
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
+
+    Private Sub BtnWikiOpen_Click(sender As Object, e As EventArgs) Handles BtnWikiOpen.Click
+        Process.Start(TxtWiki.Text)
+    End Sub
 #End Region
 End Class
