@@ -343,17 +343,22 @@ Public Class FrmBotsd
         Dim currentLetter As String = String.Empty
         Dim indexText As New StringBuilder
         For Each oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In oRows
-            Dim surnameInitial As String = oRow.surname.Substring(0, 1)
-            Dim tempBytes As Byte() = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(surnameInitial)
-            surnameInitial = System.Text.Encoding.UTF8.GetString(tempBytes)
-            If surnameInitial <> currentLetter Then
-                If Not String.IsNullOrEmpty(currentLetter) Then
-                    indexText.Append(GetLetterFoot())
+            Try
+                Dim surnameInitial As String = oRow.surname.Substring(0, 1)
+                Dim tempBytes As Byte() = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(surnameInitial)
+                surnameInitial = System.Text.Encoding.UTF8.GetString(tempBytes)
+                If surnameInitial <> currentLetter Then
+                    If Not String.IsNullOrEmpty(currentLetter) Then
+                        indexText.Append(GetLetterFoot())
+                    End If
+                    indexText.Append(GetLetterHead(surnameInitial.ToUpper(myCultureInfo)))
+                    currentLetter = surnameInitial
                 End If
-                indexText.Append(GetLetterHead(surnameInitial.ToUpper(myCultureInfo)))
-                currentLetter = surnameInitial
-            End If
-            indexText.Append(GetIndexEntry(oRow))
+                indexText.Append(GetIndexEntry(oRow))
+
+            Catch ex As Exception
+                Debug.Print("Null row")
+            End Try
         Next
         Using _text As New FrmText
             _text.rtbText.Text = indexText.ToString
@@ -965,6 +970,12 @@ Public Class FrmBotsd
         TxtShortDesc4.Text = ""
         rtbFile1.Text = ""
         PictureBox1.Image = Nothing
+    End Sub
+
+    Private Sub BtnAlterPostNo_Click(sender As Object, e As EventArgs) Handles BtnAlterPostNo.Click
+        Using _alterPost As New FrmAlterPostNo
+            _alterPost.ShowDialog()
+        End Using
     End Sub
 
 #End Region

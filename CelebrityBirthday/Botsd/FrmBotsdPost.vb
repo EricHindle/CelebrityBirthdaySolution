@@ -398,7 +398,9 @@ sb.Append(My.Resources.WP_end_PARA)
     End Function
 
     Private Sub BtnWikiOpen_Click(sender As Object, e As EventArgs) Handles BtnWikiOpen.Click
-        Process.Start(TxtWiki.Text)
+        If Not String.IsNullOrEmpty(TxtWiki.Text) Then
+            Process.Start(TxtWiki.Text)
+        End If
     End Sub
 #End Region
 End Class

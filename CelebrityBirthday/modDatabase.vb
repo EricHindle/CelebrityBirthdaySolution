@@ -497,6 +497,23 @@ Module modDatabase
         End If
         Return rtnValue
     End Function
+    Public Function UpdateBotsd(btsdPostNo As Integer, btsdNewPostNo As Integer) As Integer
+        Dim rtnValue As Integer
+        oBotsdTa.FillByPostNo(oBotsdTable, btsdPostNo)
+        If oBotsdTable.Rows.Count > 0 Then
+            Dim oRow As CelebrityBirthdayDataSet.BotSDRow = oBotsdTable.Rows(0)
+            Dim btsdId As Integer = oRow.btsdId
+            Dim btsdDay As Integer = oRow.btsdDay
+            Dim btsdMonth As Integer = oRow.btsdMonth
+            Dim btsdYear As Integer = oRow.btsdYear
+            Dim btsdUrl As String = oRow.btsdUrl
+            oBotsdTa.UpdateBotsd(btsdDay, btsdMonth, btsdYear, btsdNewPostNo, btsdUrl, btsdId)
+            rtnValue = btsdId
+        Else
+            rtnValue = -1
+        End If
+        Return rtnValue
+    End Function
     Public Function InsertBotsd(btsdDay As Integer, btsdMonth As Integer, btsdYear As Integer, btsdPostNo As Integer, btsdUrl As String) As Integer
         Return oBotsdTa.InsertBotsd(btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl)
     End Function

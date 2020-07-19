@@ -141,6 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Botsd\FrmAlterPostNo.Designer.vb">
+      <DependentUpon>FrmAlterPostNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Botsd\FrmAlterPostNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CelebrityBirthdayDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -313,6 +319,9 @@
     <Compile Include="Twitter\TwitterOAuth.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Botsd\FrmAlterPostNo.resx">
+      <DependentUpon>FrmAlterPostNo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAddWikiIds.resx">
       <DependentUpon>FrmAddWikiIds.vb</DependentUpon>
     </EmbeddedResource>
