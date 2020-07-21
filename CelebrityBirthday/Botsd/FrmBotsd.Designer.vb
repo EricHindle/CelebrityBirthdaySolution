@@ -125,7 +125,7 @@ Partial Class FrmBotsd
         Me.rtbTweet.BackColor = System.Drawing.Color.Black
         Me.rtbTweet.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbTweet.ForeColor = System.Drawing.Color.White
-        Me.rtbTweet.Location = New System.Drawing.Point(1191, 6)
+        Me.rtbTweet.Location = New System.Drawing.Point(1142, 6)
         Me.rtbTweet.Name = "rtbTweet"
         Me.rtbTweet.Size = New System.Drawing.Size(200, 461)
         Me.rtbTweet.TabIndex = 32
@@ -138,7 +138,7 @@ Partial Class FrmBotsd
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 655)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1403, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1354, 22)
         Me.StatusStrip1.TabIndex = 33
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -155,7 +155,7 @@ Partial Class FrmBotsd
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1209, 607)
+        Me.btnClose.Location = New System.Drawing.Point(1173, 607)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(139, 33)
         Me.btnClose.TabIndex = 34
@@ -167,9 +167,9 @@ Partial Class FrmBotsd
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(1042, 408)
+        Me.BtnSend.Location = New System.Drawing.Point(1017, 407)
         Me.BtnSend.Name = "BtnSend"
-        Me.BtnSend.Size = New System.Drawing.Size(111, 33)
+        Me.BtnSend.Size = New System.Drawing.Size(111, 34)
         Me.BtnSend.TabIndex = 34
         Me.BtnSend.Text = "Send"
         Me.BtnSend.UseVisualStyleBackColor = True
@@ -177,7 +177,7 @@ Partial Class FrmBotsd
         'NudPic1Horizontal
         '
         Me.NudPic1Horizontal.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.NudPic1Horizontal.Location = New System.Drawing.Point(750, 35)
+        Me.NudPic1Horizontal.Location = New System.Drawing.Point(681, 44)
         Me.NudPic1Horizontal.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
         Me.NudPic1Horizontal.Name = "NudPic1Horizontal"
         Me.NudPic1Horizontal.Size = New System.Drawing.Size(53, 23)
@@ -189,7 +189,7 @@ Partial Class FrmBotsd
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(762, 16)
+        Me.Label2.Location = New System.Drawing.Point(693, 25)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(41, 16)
         Me.Label2.TabIndex = 10
@@ -199,7 +199,7 @@ Partial Class FrmBotsd
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Location = New System.Drawing.Point(819, 6)
+        Me.PictureBox1.Location = New System.Drawing.Point(762, 6)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(366, 86)
         Me.PictureBox1.TabIndex = 1
@@ -214,7 +214,7 @@ Partial Class FrmBotsd
         Me.rtbFile1.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbFile1.Location = New System.Drawing.Point(681, 98)
         Me.rtbFile1.Name = "rtbFile1"
-        Me.rtbFile1.Size = New System.Drawing.Size(504, 226)
+        Me.rtbFile1.Size = New System.Drawing.Size(447, 226)
         Me.rtbFile1.TabIndex = 14
         Me.rtbFile1.Text = ""
         '
@@ -388,7 +388,7 @@ Partial Class FrmBotsd
         Me.GroupBox1.Controls.Add(Me.TxtShortDesc1)
         Me.GroupBox1.Controls.Add(Me.TxtForename1)
         Me.GroupBox1.Controls.Add(Me.TxtSurname1)
-        Me.GroupBox1.Location = New System.Drawing.Point(216, 459)
+        Me.GroupBox1.Location = New System.Drawing.Point(130, 459)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(474, 84)
         Me.GroupBox1.TabIndex = 40
@@ -443,7 +443,7 @@ Partial Class FrmBotsd
         Me.GroupBox2.Controls.Add(Me.TxtShortDesc2)
         Me.GroupBox2.Controls.Add(Me.TxtForename2)
         Me.GroupBox2.Controls.Add(Me.TxtSurname2)
-        Me.GroupBox2.Location = New System.Drawing.Point(216, 549)
+        Me.GroupBox2.Location = New System.Drawing.Point(130, 549)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(474, 84)
         Me.GroupBox2.TabIndex = 41
@@ -518,7 +518,7 @@ Partial Class FrmBotsd
         Me.BtnGenerate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnGenerate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGenerate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGenerate.Location = New System.Drawing.Point(898, 346)
+        Me.BtnGenerate.Location = New System.Drawing.Point(851, 359)
         Me.BtnGenerate.Name = "BtnGenerate"
         Me.BtnGenerate.Size = New System.Drawing.Size(111, 33)
         Me.BtnGenerate.TabIndex = 42
@@ -530,9 +530,9 @@ Partial Class FrmBotsd
         Me.BtnSwap.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSwap.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSwap.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSwap.Location = New System.Drawing.Point(119, 415)
+        Me.BtnSwap.Location = New System.Drawing.Point(259, 407)
         Me.BtnSwap.Name = "BtnSwap"
-        Me.BtnSwap.Size = New System.Drawing.Size(77, 33)
+        Me.BtnSwap.Size = New System.Drawing.Size(77, 34)
         Me.BtnSwap.TabIndex = 43
         Me.BtnSwap.Text = "Swap"
         Me.BtnSwap.UseVisualStyleBackColor = True
@@ -542,7 +542,7 @@ Partial Class FrmBotsd
         Me.cmbTwitterUsers.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmbTwitterUsers.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbTwitterUsers.FormattingEnabled = True
-        Me.cmbTwitterUsers.Location = New System.Drawing.Point(898, 412)
+        Me.cmbTwitterUsers.Location = New System.Drawing.Point(873, 412)
         Me.cmbTwitterUsers.Name = "cmbTwitterUsers"
         Me.cmbTwitterUsers.Size = New System.Drawing.Size(127, 24)
         Me.cmbTwitterUsers.TabIndex = 45
@@ -553,7 +553,7 @@ Partial Class FrmBotsd
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label3.Location = New System.Drawing.Point(830, 415)
+        Me.Label3.Location = New System.Drawing.Point(805, 415)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(62, 19)
         Me.Label3.TabIndex = 44
@@ -579,7 +579,7 @@ Partial Class FrmBotsd
         Me.LblDay.AutoSize = True
         Me.LblDay.Font = New System.Drawing.Font("Papyrus", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblDay.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.LblDay.Location = New System.Drawing.Point(501, 16)
+        Me.LblDay.Location = New System.Drawing.Point(412, 15)
         Me.LblDay.Name = "LblDay"
         Me.LblDay.Size = New System.Drawing.Size(24, 30)
         Me.LblDay.TabIndex = 47
@@ -590,7 +590,7 @@ Partial Class FrmBotsd
         Me.LblMonth.AutoSize = True
         Me.LblMonth.Font = New System.Drawing.Font("Papyrus", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblMonth.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.LblMonth.Location = New System.Drawing.Point(570, 16)
+        Me.LblMonth.Location = New System.Drawing.Point(481, 15)
         Me.LblMonth.Name = "LblMonth"
         Me.LblMonth.Size = New System.Drawing.Size(80, 30)
         Me.LblMonth.TabIndex = 48
@@ -606,7 +606,7 @@ Partial Class FrmBotsd
         Me.GroupBox3.Controls.Add(Me.TxtShortDesc3)
         Me.GroupBox3.Controls.Add(Me.TxtForename3)
         Me.GroupBox3.Controls.Add(Me.TxtSurname3)
-        Me.GroupBox3.Location = New System.Drawing.Point(706, 459)
+        Me.GroupBox3.Location = New System.Drawing.Point(620, 459)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(462, 84)
         Me.GroupBox3.TabIndex = 44
@@ -686,7 +686,7 @@ Partial Class FrmBotsd
         Me.GroupBox4.Controls.Add(Me.TxtShortDesc4)
         Me.GroupBox4.Controls.Add(Me.TxtForename4)
         Me.GroupBox4.Controls.Add(Me.TxtSurname4)
-        Me.GroupBox4.Location = New System.Drawing.Point(706, 549)
+        Me.GroupBox4.Location = New System.Drawing.Point(620, 549)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(462, 84)
         Me.GroupBox4.TabIndex = 44
@@ -762,7 +762,7 @@ Partial Class FrmBotsd
         Me.GroupBox5.Controls.Add(Me.rbImageCentre)
         Me.GroupBox5.Controls.Add(Me.rbImageRight)
         Me.GroupBox5.Controls.Add(Me.rbImageLeft)
-        Me.GroupBox5.Location = New System.Drawing.Point(1209, 472)
+        Me.GroupBox5.Location = New System.Drawing.Point(1173, 479)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(139, 112)
         Me.GroupBox5.TabIndex = 49
@@ -856,10 +856,10 @@ Partial Class FrmBotsd
         '
         'BtnCopyAll
         '
-        Me.BtnCopyAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnCopyAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnCopyAll.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyAll.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnCopyAll.Location = New System.Drawing.Point(1042, 346)
+        Me.BtnCopyAll.Location = New System.Drawing.Point(1017, 359)
         Me.BtnCopyAll.Name = "BtnCopyAll"
         Me.BtnCopyAll.Size = New System.Drawing.Size(111, 33)
         Me.BtnCopyAll.TabIndex = 54
@@ -925,9 +925,9 @@ Partial Class FrmBotsd
         Me.BtnRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnRemove.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRemove.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRemove.Location = New System.Drawing.Point(119, 461)
+        Me.BtnRemove.Location = New System.Drawing.Point(375, 407)
         Me.BtnRemove.Name = "BtnRemove"
-        Me.BtnRemove.Size = New System.Drawing.Size(77, 33)
+        Me.BtnRemove.Size = New System.Drawing.Size(77, 34)
         Me.BtnRemove.TabIndex = 60
         Me.BtnRemove.Text = "Remove"
         Me.BtnRemove.UseVisualStyleBackColor = True
@@ -949,7 +949,7 @@ Partial Class FrmBotsd
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1403, 677)
+        Me.ClientSize = New System.Drawing.Size(1354, 677)
         Me.Controls.Add(Me.BtnAlterPostNo)
         Me.Controls.Add(Me.BtnRemove)
         Me.Controls.Add(Me.BtnAtoZ)
@@ -986,7 +986,7 @@ Partial Class FrmBotsd
         Me.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.MinimumSize = New System.Drawing.Size(1230, 500)
+        Me.MinimumSize = New System.Drawing.Size(1370, 600)
         Me.Name = "FrmBotsd"
         Me.Text = "Born On The Same Day"
         Me.StatusStrip1.ResumeLayout(False)

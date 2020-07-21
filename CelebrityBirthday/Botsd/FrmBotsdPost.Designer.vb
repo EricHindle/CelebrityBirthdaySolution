@@ -67,12 +67,12 @@ Partial Class FrmBotsdPost
         Me.BtnImportList = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BtnWikiOpen = New System.Windows.Forms.Button()
         Me.NudSentences = New System.Windows.Forms.NumericUpDown()
         Me.BtnClearList = New System.Windows.Forms.Button()
         Me.BtnReplace = New System.Windows.Forms.Button()
         Me.BtnSearch1 = New System.Windows.Forms.Button()
         Me.BtnSearch2 = New System.Windows.Forms.Button()
-        Me.BtnWikiOpen = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.DgvAlso, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -407,7 +407,7 @@ Partial Class FrmBotsdPost
         '
         Me.LblDay.AutoSize = True
         Me.LblDay.Font = New System.Drawing.Font("Papyrus", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblDay.Location = New System.Drawing.Point(416, 18)
+        Me.LblDay.Location = New System.Drawing.Point(297, 16)
         Me.LblDay.Name = "LblDay"
         Me.LblDay.Size = New System.Drawing.Size(60, 34)
         Me.LblDay.TabIndex = 60
@@ -415,9 +415,11 @@ Partial Class FrmBotsdPost
         '
         'LblMonth
         '
+        Me.LblMonth.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblMonth.AutoSize = True
         Me.LblMonth.Font = New System.Drawing.Font("Papyrus", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblMonth.Location = New System.Drawing.Point(481, 18)
+        Me.LblMonth.Location = New System.Drawing.Point(375, 16)
         Me.LblMonth.Name = "LblMonth"
         Me.LblMonth.Size = New System.Drawing.Size(80, 34)
         Me.LblMonth.TabIndex = 61
@@ -425,9 +427,10 @@ Partial Class FrmBotsdPost
         '
         'LblYear
         '
+        Me.LblYear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblYear.AutoSize = True
         Me.LblYear.Font = New System.Drawing.Font("Papyrus", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblYear.Location = New System.Drawing.Point(567, 18)
+        Me.LblYear.Location = New System.Drawing.Point(524, 16)
         Me.LblYear.Name = "LblYear"
         Me.LblYear.Size = New System.Drawing.Size(63, 34)
         Me.LblYear.TabIndex = 62
@@ -535,6 +538,18 @@ Partial Class FrmBotsdPost
         Me.Panel1.Size = New System.Drawing.Size(650, 469)
         Me.Panel1.TabIndex = 68
         '
+        'BtnWikiOpen
+        '
+        Me.BtnWikiOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnWikiOpen.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWikiOpen.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWikiOpen.Location = New System.Drawing.Point(500, 331)
+        Me.BtnWikiOpen.Name = "BtnWikiOpen"
+        Me.BtnWikiOpen.Size = New System.Drawing.Size(59, 25)
+        Me.BtnWikiOpen.TabIndex = 70
+        Me.BtnWikiOpen.Text = "Open"
+        Me.BtnWikiOpen.UseVisualStyleBackColor = True
+        '
         'NudSentences
         '
         Me.NudSentences.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -595,18 +610,6 @@ Partial Class FrmBotsdPost
         Me.BtnSearch2.TabIndex = 69
         Me.BtnSearch2.Text = "Wiki Search 2"
         Me.BtnSearch2.UseVisualStyleBackColor = True
-        '
-        'BtnWikiOpen
-        '
-        Me.BtnWikiOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnWikiOpen.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnWikiOpen.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWikiOpen.Location = New System.Drawing.Point(500, 331)
-        Me.BtnWikiOpen.Name = "BtnWikiOpen"
-        Me.BtnWikiOpen.Size = New System.Drawing.Size(59, 25)
-        Me.BtnWikiOpen.TabIndex = 70
-        Me.BtnWikiOpen.Text = "Open"
-        Me.BtnWikiOpen.UseVisualStyleBackColor = True
         '
         'FrmBotsdPost
         '

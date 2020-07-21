@@ -355,9 +355,12 @@ Public Class FrmBotsd
                     currentLetter = surnameInitial
                 End If
                 indexText.Append(GetIndexEntry(oRow))
-
-            Catch ex As Exception
-                Debug.Print("Null row")
+            Catch ex1 As DecoderFallbackException
+                DisplayException(MethodBase.GetCurrentMethod(), ex1, "Decoder")
+            Catch ex2 As EncoderFallbackException
+                DisplayException(MethodBase.GetCurrentMethod(), ex2, "Encoder")
+            Catch ex3 As ArgumentException
+                DisplayException(MethodBase.GetCurrentMethod(), ex3, "Record value")
             End Try
         Next
         Using _text As New FrmText
