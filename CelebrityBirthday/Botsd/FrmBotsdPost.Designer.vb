@@ -73,6 +73,7 @@ Partial Class FrmBotsdPost
         Me.BtnReplace = New System.Windows.Forms.Button()
         Me.BtnSearch1 = New System.Windows.Forms.Button()
         Me.BtnSearch2 = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.DgvAlso, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -82,6 +83,7 @@ Partial Class FrmBotsdPost
         Me.SplitContainer1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'RtbText
@@ -92,7 +94,7 @@ Partial Class FrmBotsdPost
         Me.RtbText.Location = New System.Drawing.Point(0, 0)
         Me.RtbText.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.RtbText.Name = "RtbText"
-        Me.RtbText.Size = New System.Drawing.Size(615, 469)
+        Me.RtbText.Size = New System.Drawing.Size(514, 487)
         Me.RtbText.TabIndex = 37
         Me.RtbText.Text = ""
         '
@@ -160,7 +162,7 @@ Partial Class FrmBotsdPost
         Me.BtnCopyText.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnCopyText.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyText.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnCopyText.Location = New System.Drawing.Point(408, 598)
+        Me.BtnCopyText.Location = New System.Drawing.Point(408, 616)
         Me.BtnCopyText.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnCopyText.Name = "BtnCopyText"
         Me.BtnCopyText.Size = New System.Drawing.Size(120, 41)
@@ -173,7 +175,7 @@ Partial Class FrmBotsdPost
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(1175, 598)
+        Me.BtnClose.Location = New System.Drawing.Point(1131, 616)
         Me.BtnClose.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(120, 41)
@@ -188,7 +190,7 @@ Partial Class FrmBotsdPost
         Me.TxtTitle.Location = New System.Drawing.Point(18, 55)
         Me.TxtTitle.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.TxtTitle.Name = "TxtTitle"
-        Me.TxtTitle.Size = New System.Drawing.Size(1277, 24)
+        Me.TxtTitle.Size = New System.Drawing.Size(1233, 24)
         Me.TxtTitle.TabIndex = 40
         '
         'BtnCopyTitle
@@ -196,7 +198,7 @@ Partial Class FrmBotsdPost
         Me.BtnCopyTitle.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnCopyTitle.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyTitle.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnCopyTitle.Location = New System.Drawing.Point(264, 598)
+        Me.BtnCopyTitle.Location = New System.Drawing.Point(264, 616)
         Me.BtnCopyTitle.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnCopyTitle.Name = "BtnCopyTitle"
         Me.BtnCopyTitle.Size = New System.Drawing.Size(120, 41)
@@ -219,9 +221,9 @@ Partial Class FrmBotsdPost
         Me.TxtUrl.AllowDrop = True
         Me.TxtUrl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtUrl.Location = New System.Drawing.Point(94, 566)
+        Me.TxtUrl.Location = New System.Drawing.Point(94, 584)
         Me.TxtUrl.Name = "TxtUrl"
-        Me.TxtUrl.Size = New System.Drawing.Size(1144, 24)
+        Me.TxtUrl.Size = New System.Drawing.Size(1100, 24)
         Me.TxtUrl.TabIndex = 43
         '
         'Label1
@@ -230,7 +232,7 @@ Partial Class FrmBotsdPost
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label1.Location = New System.Drawing.Point(25, 568)
+        Me.Label1.Location = New System.Drawing.Point(25, 586)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(47, 22)
         Me.Label1.TabIndex = 44
@@ -241,7 +243,7 @@ Partial Class FrmBotsdPost
         Me.BtnPosted.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPosted.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPosted.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPosted.Location = New System.Drawing.Point(977, 598)
+        Me.BtnPosted.Location = New System.Drawing.Point(933, 616)
         Me.BtnPosted.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnPosted.Name = "BtnPosted"
         Me.BtnPosted.Size = New System.Drawing.Size(120, 41)
@@ -253,7 +255,7 @@ Partial Class FrmBotsdPost
         '
         Me.BtnPasteUrl.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPasteUrl.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPasteUrl.Location = New System.Drawing.Point(1259, 566)
+        Me.BtnPasteUrl.Location = New System.Drawing.Point(1215, 584)
         Me.BtnPasteUrl.Name = "BtnPasteUrl"
         Me.BtnPasteUrl.Size = New System.Drawing.Size(35, 26)
         Me.BtnPasteUrl.TabIndex = 46
@@ -273,7 +275,7 @@ Partial Class FrmBotsdPost
         Me.DgvAlso.Location = New System.Drawing.Point(3, 3)
         Me.DgvAlso.Name = "DgvAlso"
         Me.DgvAlso.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvAlso.Size = New System.Drawing.Size(644, 276)
+        Me.DgvAlso.Size = New System.Drawing.Size(701, 294)
         Me.DgvAlso.TabIndex = 47
         '
         'alsoName
@@ -304,7 +306,7 @@ Partial Class FrmBotsdPost
         Me.BtnGenerate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnGenerate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGenerate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGenerate.Location = New System.Drawing.Point(44, 598)
+        Me.BtnGenerate.Location = New System.Drawing.Point(44, 616)
         Me.BtnGenerate.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnGenerate.Name = "BtnGenerate"
         Me.BtnGenerate.Size = New System.Drawing.Size(120, 41)
@@ -317,9 +319,9 @@ Partial Class FrmBotsdPost
         Me.TxtName.AllowDrop = True
         Me.TxtName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtName.Location = New System.Drawing.Point(78, 295)
+        Me.TxtName.Location = New System.Drawing.Point(78, 313)
         Me.TxtName.Name = "TxtName"
-        Me.TxtName.Size = New System.Drawing.Size(481, 24)
+        Me.TxtName.Size = New System.Drawing.Size(556, 24)
         Me.TxtName.TabIndex = 49
         '
         'TxtWiki
@@ -328,9 +330,9 @@ Partial Class FrmBotsdPost
         Me.TxtWiki.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWiki.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtWiki.Location = New System.Drawing.Point(77, 331)
+        Me.TxtWiki.Location = New System.Drawing.Point(77, 349)
         Me.TxtWiki.Name = "TxtWiki"
-        Me.TxtWiki.Size = New System.Drawing.Size(417, 27)
+        Me.TxtWiki.Size = New System.Drawing.Size(492, 27)
         Me.TxtWiki.TabIndex = 50
         '
         'TxtDesc
@@ -338,10 +340,10 @@ Partial Class FrmBotsdPost
         Me.TxtDesc.AllowDrop = True
         Me.TxtDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtDesc.Location = New System.Drawing.Point(77, 370)
+        Me.TxtDesc.Location = New System.Drawing.Point(77, 388)
         Me.TxtDesc.Multiline = True
         Me.TxtDesc.Name = "TxtDesc"
-        Me.TxtDesc.Size = New System.Drawing.Size(441, 43)
+        Me.TxtDesc.Size = New System.Drawing.Size(492, 43)
         Me.TxtDesc.TabIndex = 51
         '
         'BtnName
@@ -349,7 +351,7 @@ Partial Class FrmBotsdPost
         Me.BtnName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnName.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnName.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnName.Location = New System.Drawing.Point(8, 296)
+        Me.BtnName.Location = New System.Drawing.Point(8, 314)
         Me.BtnName.Name = "BtnName"
         Me.BtnName.Size = New System.Drawing.Size(63, 25)
         Me.BtnName.TabIndex = 55
@@ -361,7 +363,7 @@ Partial Class FrmBotsdPost
         Me.BtnWiki.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnWiki.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWiki.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWiki.Location = New System.Drawing.Point(8, 334)
+        Me.BtnWiki.Location = New System.Drawing.Point(8, 352)
         Me.BtnWiki.Name = "BtnWiki"
         Me.BtnWiki.Size = New System.Drawing.Size(63, 25)
         Me.BtnWiki.TabIndex = 56
@@ -373,7 +375,7 @@ Partial Class FrmBotsdPost
         Me.BtnDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnDesc.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDesc.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnDesc.Location = New System.Drawing.Point(8, 370)
+        Me.BtnDesc.Location = New System.Drawing.Point(8, 388)
         Me.BtnDesc.Name = "BtnDesc"
         Me.BtnDesc.Size = New System.Drawing.Size(63, 25)
         Me.BtnDesc.TabIndex = 57
@@ -384,7 +386,7 @@ Partial Class FrmBotsdPost
         '
         Me.BtnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnAdd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnAdd.Location = New System.Drawing.Point(573, 285)
+        Me.BtnAdd.Location = New System.Drawing.Point(640, 313)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(64, 47)
         Me.BtnAdd.TabIndex = 58
@@ -396,7 +398,7 @@ Partial Class FrmBotsdPost
         Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClear.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClear.Location = New System.Drawing.Point(573, 378)
+        Me.BtnClear.Location = New System.Drawing.Point(640, 406)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(64, 47)
         Me.BtnClear.TabIndex = 59
@@ -406,33 +408,38 @@ Partial Class FrmBotsdPost
         'LblDay
         '
         Me.LblDay.AutoSize = True
+        Me.LblDay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LblDay.Font = New System.Drawing.Font("Papyrus", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblDay.Location = New System.Drawing.Point(297, 16)
+        Me.LblDay.Location = New System.Drawing.Point(3, 3)
+        Me.LblDay.Margin = New System.Windows.Forms.Padding(3)
         Me.LblDay.Name = "LblDay"
-        Me.LblDay.Size = New System.Drawing.Size(60, 34)
+        Me.LblDay.Size = New System.Drawing.Size(128, 37)
         Me.LblDay.TabIndex = 60
         Me.LblDay.Text = "Day"
+        Me.LblDay.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'LblMonth
         '
-        Me.LblMonth.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblMonth.AutoSize = True
+        Me.LblMonth.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LblMonth.Font = New System.Drawing.Font("Papyrus", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblMonth.Location = New System.Drawing.Point(375, 16)
+        Me.LblMonth.Location = New System.Drawing.Point(137, 3)
+        Me.LblMonth.Margin = New System.Windows.Forms.Padding(3)
         Me.LblMonth.Name = "LblMonth"
-        Me.LblMonth.Size = New System.Drawing.Size(80, 34)
+        Me.LblMonth.Size = New System.Drawing.Size(262, 37)
         Me.LblMonth.TabIndex = 61
         Me.LblMonth.Text = "Month"
+        Me.LblMonth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblYear
         '
-        Me.LblYear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblYear.AutoSize = True
+        Me.LblYear.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LblYear.Font = New System.Drawing.Font("Papyrus", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblYear.Location = New System.Drawing.Point(524, 16)
+        Me.LblYear.Location = New System.Drawing.Point(405, 3)
+        Me.LblYear.Margin = New System.Windows.Forms.Padding(3)
         Me.LblYear.Name = "LblYear"
-        Me.LblYear.Size = New System.Drawing.Size(63, 34)
+        Me.LblYear.Size = New System.Drawing.Size(129, 37)
         Me.LblYear.TabIndex = 62
         Me.LblYear.Text = "Year"
         '
@@ -441,7 +448,7 @@ Partial Class FrmBotsdPost
         Me.BtnSaveList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSaveList.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSaveList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSaveList.Location = New System.Drawing.Point(197, 426)
+        Me.BtnSaveList.Location = New System.Drawing.Point(197, 444)
         Me.BtnSaveList.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnSaveList.Name = "BtnSaveList"
         Me.BtnSaveList.Size = New System.Drawing.Size(95, 29)
@@ -454,7 +461,7 @@ Partial Class FrmBotsdPost
         Me.BtnLoadList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnLoadList.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLoadList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnLoadList.Location = New System.Drawing.Point(316, 426)
+        Me.BtnLoadList.Location = New System.Drawing.Point(316, 444)
         Me.BtnLoadList.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnLoadList.Name = "BtnLoadList"
         Me.BtnLoadList.Size = New System.Drawing.Size(95, 30)
@@ -467,9 +474,9 @@ Partial Class FrmBotsdPost
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 644)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 662)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1311, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1267, 22)
         Me.StatusStrip1.TabIndex = 65
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -486,7 +493,7 @@ Partial Class FrmBotsdPost
         Me.BtnImportList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnImportList.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnImportList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnImportList.Location = New System.Drawing.Point(78, 427)
+        Me.BtnImportList.Location = New System.Drawing.Point(78, 445)
         Me.BtnImportList.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnImportList.Name = "BtnImportList"
         Me.BtnImportList.Size = New System.Drawing.Size(95, 29)
@@ -510,8 +517,8 @@ Partial Class FrmBotsdPost
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.Panel1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1277, 473)
-        Me.SplitContainer1.SplitterDistance = 619
+        Me.SplitContainer1.Size = New System.Drawing.Size(1233, 491)
+        Me.SplitContainer1.SplitterDistance = 518
         Me.SplitContainer1.TabIndex = 67
         '
         'Panel1
@@ -535,7 +542,7 @@ Partial Class FrmBotsdPost
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(650, 469)
+        Me.Panel1.Size = New System.Drawing.Size(707, 487)
         Me.Panel1.TabIndex = 68
         '
         'BtnWikiOpen
@@ -543,7 +550,7 @@ Partial Class FrmBotsdPost
         Me.BtnWikiOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnWikiOpen.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWikiOpen.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWikiOpen.Location = New System.Drawing.Point(500, 331)
+        Me.BtnWikiOpen.Location = New System.Drawing.Point(575, 349)
         Me.BtnWikiOpen.Name = "BtnWikiOpen"
         Me.BtnWikiOpen.Size = New System.Drawing.Size(59, 25)
         Me.BtnWikiOpen.TabIndex = 70
@@ -553,7 +560,7 @@ Partial Class FrmBotsdPost
         'NudSentences
         '
         Me.NudSentences.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.NudSentences.Location = New System.Drawing.Point(526, 371)
+        Me.NudSentences.Location = New System.Drawing.Point(589, 388)
         Me.NudSentences.Maximum = New Decimal(New Integer() {3, 0, 0, 0})
         Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudSentences.Name = "NudSentences"
@@ -566,7 +573,7 @@ Partial Class FrmBotsdPost
         Me.BtnClearList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnClearList.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClearList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClearList.Location = New System.Drawing.Point(435, 425)
+        Me.BtnClearList.Location = New System.Drawing.Point(435, 443)
         Me.BtnClearList.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnClearList.Name = "BtnClearList"
         Me.BtnClearList.Size = New System.Drawing.Size(95, 29)
@@ -578,7 +585,7 @@ Partial Class FrmBotsdPost
         '
         Me.BtnReplace.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnReplace.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnReplace.Location = New System.Drawing.Point(573, 338)
+        Me.BtnReplace.Location = New System.Drawing.Point(640, 366)
         Me.BtnReplace.Name = "BtnReplace"
         Me.BtnReplace.Size = New System.Drawing.Size(64, 34)
         Me.BtnReplace.TabIndex = 67
@@ -590,7 +597,7 @@ Partial Class FrmBotsdPost
         Me.BtnSearch1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSearch1.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearch1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSearch1.Location = New System.Drawing.Point(653, 604)
+        Me.BtnSearch1.Location = New System.Drawing.Point(609, 622)
         Me.BtnSearch1.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnSearch1.Name = "BtnSearch1"
         Me.BtnSearch1.Size = New System.Drawing.Size(120, 28)
@@ -603,7 +610,7 @@ Partial Class FrmBotsdPost
         Me.BtnSearch2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSearch2.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearch2.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSearch2.Location = New System.Drawing.Point(780, 604)
+        Me.BtnSearch2.Location = New System.Drawing.Point(736, 622)
         Me.BtnSearch2.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnSearch2.Name = "BtnSearch2"
         Me.BtnSearch2.Size = New System.Drawing.Size(120, 28)
@@ -611,19 +618,33 @@ Partial Class FrmBotsdPost
         Me.BtnSearch2.Text = "Wiki Search 2"
         Me.BtnSearch2.UseVisualStyleBackColor = True
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 3
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.LblDay, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblMonth, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.LblYear, 2, 0)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(279, 4)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(537, 43)
+        Me.TableLayoutPanel1.TabIndex = 70
+        '
         'FrmBotsdPost
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1311, 666)
+        Me.ClientSize = New System.Drawing.Size(1267, 684)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.BtnSearch2)
         Me.Controls.Add(Me.BtnSearch1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.StatusStrip1)
-        Me.Controls.Add(Me.LblYear)
-        Me.Controls.Add(Me.LblMonth)
-        Me.Controls.Add(Me.LblDay)
         Me.Controls.Add(Me.BtnGenerate)
         Me.Controls.Add(Me.BtnPasteUrl)
         Me.Controls.Add(Me.BtnPosted)
@@ -638,6 +659,7 @@ Partial Class FrmBotsdPost
         Me.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.MinimumSize = New System.Drawing.Size(1204, 565)
         Me.Name = "FrmBotsdPost"
         Me.Text = "FrmBotsdPost"
         Me.ContextMenuStrip1.ResumeLayout(False)
@@ -651,6 +673,8 @@ Partial Class FrmBotsdPost
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -705,4 +729,5 @@ Partial Class FrmBotsdPost
     Friend WithEvents BtnSearch1 As Button
     Friend WithEvents BtnSearch2 As Button
     Friend WithEvents BtnWikiOpen As Button
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
 End Class

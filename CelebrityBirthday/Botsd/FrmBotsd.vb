@@ -248,9 +248,14 @@ Public Class FrmBotsd
         cboMonth.SelectedIndex = Today.Month - 1
     End Sub
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
+        SelectPairs()
+    End Sub
+
+    Private Sub SelectPairs()
         rtbFile1.Text = ""
         isBuildingPairs = True
-        clearPersonDetails
+        ClearPersonDetails()
+
         Try
             ThisDay = cboDay.SelectedIndex + 1
             ThisMonth = cboMonth.SelectedIndex + 1
@@ -296,6 +301,7 @@ Public Class FrmBotsd
         End Try
         isBuildingPairs = False
     End Sub
+
     Private Sub BtnRemove_Click(sender As Object, e As EventArgs) Handles BtnRemove.Click
         If DgvPairs.SelectedRows.Count = 1 Then
             Dim _row As DataGridViewRow = DgvPairs.SelectedRows(0)
@@ -978,7 +984,28 @@ Public Class FrmBotsd
     Private Sub BtnAlterPostNo_Click(sender As Object, e As EventArgs) Handles BtnAlterPostNo.Click
         Using _alterPost As New FrmAlterPostNo
             _alterPost.ShowDialog()
+            UpdatePostNumbers
         End Using
+    End Sub
+    Private Sub UpdatePostNumbers()
+        For Each oRow As DataGridViewRow In DgvPairs.Rows
+            Try
+                If oRow.Cells(pairId1.Name).Value IsNot Nothing Then
+                    Dim _personId As Integer = CInt(oRow.Cells(pairId1.Name).Value)
+                    Dim _firstPerson As Person = GetFullPersonById(_personId)
+                    If _firstPerson IsNot Nothing Then
+                        Dim botsdUrl As String = ""
+                        If _firstPerson.Social IsNot Nothing AndAlso _firstPerson.Social.Botsd > 0 Then
+                            Dim postNo As Integer = GetBotsdPostNo(_firstPerson.Social.Botsd, botsdUrl)
+                            oRow.Cells(pairWpNo.Name).Value = postNo
+                        End If
+                        _firstPerson.Dispose()
+                    End If
+                End If
+            Catch ex As OverflowException
+                DisplayException(MethodBase.GetCurrentMethod(), ex, "Conversion")
+            End Try
+        Next
     End Sub
 
 #End Region
