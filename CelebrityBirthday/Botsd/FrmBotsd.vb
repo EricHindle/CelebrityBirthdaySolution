@@ -238,6 +238,7 @@ Public Class FrmBotsd
     End Sub
     Private Sub BtnWpPost_Click(sender As Object, e As EventArgs) Handles BtnWpPost.Click
         GenerateWpPost()
+        UpdatePostNumbers()
     End Sub
     Private Sub BtnCopyAll_Click(sender As Object, e As EventArgs) Handles BtnCopyAll.Click
         rtbFile1.SelectAll()
@@ -998,6 +999,7 @@ Public Class FrmBotsd
                         If _firstPerson.Social IsNot Nothing AndAlso _firstPerson.Social.Botsd > 0 Then
                             Dim postNo As Integer = GetBotsdPostNo(_firstPerson.Social.Botsd, botsdUrl)
                             oRow.Cells(pairWpNo.Name).Value = postNo
+                            oRow.Cells(pairUrl.Name).Value = botsdUrl
                         End If
                         _firstPerson.Dispose()
                     End If
