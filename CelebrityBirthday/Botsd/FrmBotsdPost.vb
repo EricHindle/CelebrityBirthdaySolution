@@ -138,7 +138,7 @@ Public Class FrmBotsdPost
             DropText(TxtWiki, item)
             ExtractAlsoValues()
             AddToList()
-            DgvAlso.ClearSelection()
+            '  DgvAlso.ClearSelection()
         End If
     End Sub
     Private Sub TxtWiki_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtWiki.DragDrop
@@ -217,11 +217,16 @@ Public Class FrmBotsdPost
         ClearForm()
     End Sub
     Private Sub BtnReplace_Click(sender As Object, e As EventArgs) Handles BtnReplace.Click
+        ReplaceRow()
+    End Sub
+
+    Private Sub ReplaceRow()
         If DgvAlso.SelectedRows.Count = 1 Then
             Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
             ReplaceRowValues(oRow)
         End If
     End Sub
+
     Private Sub BtnLoadList_Click(sender As Object, e As EventArgs) Handles BtnLoadList.Click
         If My.Computer.FileSystem.FileExists(oAlsoFileName) Then
             DisplayStatus("Loading List")
@@ -344,7 +349,9 @@ sb.Append(My.Resources.WP_end_PARA)
             Dim wikiDesc As String = RetrieveWikiDesc(wikiId, NudSentences.Value)
             Dim descExtract As String() = Split(wikiDesc, ")", 2)
             If descExtract.Length > 1 Then
-                TxtDesc.Text = TidyDescription(descExtract(1)) & "."
+                Dim textAfterDates As String = descExtract(1)
+                Dim relevantText As String = Split(textAfterDates, "who", 2)(0)
+                TxtDesc.Text = TidyDescription(relevantText) & "."
             End If
         Else
             MsgBox("Link not selected correctly", MsgBoxStyle.Exclamation, "Link error")
@@ -357,6 +364,8 @@ sb.Append(My.Resources.WP_end_PARA)
                 If IsOkToAddAlso(TxtWiki.Text) Then
                     Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
                     ReplaceRowValues(oRow)
+                    DgvAlso.ClearSelection()
+                    oRow.Selected = True
                 End If
             End If
         End If
@@ -385,9 +394,6 @@ sb.Append(My.Resources.WP_end_PARA)
         Else
             oRow.Cells(alsoDesc.Name).Style.ForeColor = Color.Black
         End If
-        TxtName.Text = ""
-        TxtWiki.Text = ""
-        TxtDesc.Text = ""
         SaveList()
         Return oRow
     End Function
@@ -401,6 +407,30 @@ sb.Append(My.Resources.WP_end_PARA)
         If Not String.IsNullOrEmpty(TxtWiki.Text) Then
             Process.Start(TxtWiki.Text)
         End If
+    End Sub
+
+    Private Sub BtnSplit_Click(sender As Object, e As EventArgs) Handles BtnSplit.Click
+        Dim splitOn As String = "who"
+        Select Case True
+            Case RbWho.Checked
+                splitOn = " who"
+            Case RbAnd.Checked
+                splitOn = " and "
+            Case RbComma.Checked
+                splitOn = ","
+            Case RbFor.Checked
+                splitOn = " for "
+            Case RbFullStop.Checked
+                splitOn = "."
+            Case RbOf.Checked
+                splitOn = " of "
+            Case RbIn.Checked
+                splitOn = " in "
+
+        End Select
+        Dim descPart1 As String = Split(TxtDesc.Text, splitOn, 2)(0).Trim & "."
+        TxtDesc.Text = descPart1
+        ReplaceRow()
     End Sub
 #End Region
 End Class
