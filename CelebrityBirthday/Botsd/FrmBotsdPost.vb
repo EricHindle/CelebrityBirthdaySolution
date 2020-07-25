@@ -410,24 +410,12 @@ sb.Append(My.Resources.WP_end_PARA)
     End Sub
 
     Private Sub BtnSplit_Click(sender As Object, e As EventArgs) Handles BtnSplit.Click
-        Dim splitOn As String = "who"
-        Select Case True
-            Case RbWho.Checked
-                splitOn = " who"
-            Case RbAnd.Checked
-                splitOn = " and "
-            Case RbComma.Checked
-                splitOn = ","
-            Case RbFor.Checked
-                splitOn = " for "
-            Case RbFullStop.Checked
-                splitOn = "."
-            Case RbOf.Checked
-                splitOn = " of "
-            Case RbIn.Checked
-                splitOn = " in "
-
-        End Select
+        Dim splitOn As String
+        If CbSplit.SelectedIndex > -1 Then
+            splitOn = CbSplit.SelectedItem
+        Else
+            splitOn = CbSplit.Text
+        End If
         Dim descPart1 As String = Split(TxtDesc.Text, splitOn, 2)(0).Trim & "."
         TxtDesc.Text = descPart1
         ReplaceRow()
