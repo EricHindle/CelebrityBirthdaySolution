@@ -1,12 +1,20 @@
 ﻿Imports System.IO
 Imports System.Text
+Imports TweetSharp
 ' Imports System.Web.UI.WebControls
 
 Public Class FrmBotsdPost
 #Region "variables"
     Private oAlsoFileName As String
     Private ReadOnly charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c, "("c, "."c}
-    Private originalDesc As String
+    Private Structure UndoData
+        Public undoName As String
+        Public undoWikiUrl As String
+        Public undoDesc As String
+        Public undoList As List(Of DataGridViewRow)
+    End Structure
+
+    Private UndoDataList As New List(Of UndoData)
 #End Region
 #Region "properties"
     Private oNewPostNo As Integer
@@ -140,11 +148,11 @@ Public Class FrmBotsdPost
     Private Sub DgvAlso_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles DgvAlso.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim item As String = e.Data.GetData(DataFormats.StringFormat)
+            AddUndo()
             ClearForm()
             DropText(TxtWiki, item)
             ExtractAlsoValues()
             AddToList()
-            '  DgvAlso.ClearSelection()
         End If
     End Sub
     Private Sub TxtWiki_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtWiki.DragDrop
@@ -225,14 +233,6 @@ Public Class FrmBotsdPost
     Private Sub BtnReplace_Click(sender As Object, e As EventArgs) Handles BtnReplace.Click
         ReplaceRow()
     End Sub
-
-    Private Sub ReplaceRow()
-        If DgvAlso.SelectedRows.Count = 1 Then
-            Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
-            ReplaceRowValues(oRow)
-        End If
-    End Sub
-
     Private Sub BtnLoadList_Click(sender As Object, e As EventArgs) Handles BtnLoadList.Click
         If My.Computer.FileSystem.FileExists(oAlsoFileName) Then
             DisplayStatus("Loading List")
@@ -256,6 +256,41 @@ Public Class FrmBotsdPost
     End Sub
     Private Sub BtnSaveList_Click(sender As Object, e As EventArgs) Handles BtnSaveList.Click
         SaveList()
+    End Sub
+    Private Sub BtnUndoSplit_Click(sender As Object, e As EventArgs) Handles BtnUndoSplit.Click
+        If UndoDataList.Count > 0 Then
+            Dim undoSnapshot As UndoData = UndoDataList.Last
+            With undoSnapshot
+                TxtName.Text = .undoName
+                TxtWiki.Text = .undoWikiUrl
+                TxtDesc.Text = .undoDesc
+                DgvAlso.Rows.Clear()
+                For Each oRow As DataGridViewRow In .undoList
+                    Dim clonedRow As DataGridViewRow = oRow.Clone()
+                    For i = 0 To oRow.Cells.Count - 1
+                        clonedRow.Cells(i).Value = oRow.Cells(i).Value
+                    Next
+                    DgvAlso.Rows.Add(clonedRow)
+                Next
+            End With
+            UndoDataList.Remove(undoSnapshot)
+        End If
+    End Sub
+    Private Sub BtnWikiOpen_Click(sender As Object, e As EventArgs) Handles BtnWikiOpen.Click
+        If Not String.IsNullOrEmpty(TxtWiki.Text) Then
+            Process.Start(TxtWiki.Text)
+        End If
+    End Sub
+    Private Sub BtnSplit_Click(sender As Object, e As EventArgs) Handles BtnSplit.Click
+        If chkBack.Checked Then
+            GetSplitPart(1)
+        Else
+            GetSplitPart(0)
+        End If
+        chkBack.Checked = False
+    End Sub
+    Private Sub BtnClearList_Click(sender As Object, e As EventArgs) Handles BtnClearList.Click
+        DgvAlso.Rows.Clear()
     End Sub
 
 #End Region
@@ -287,7 +322,7 @@ Public Class FrmBotsdPost
                 End With
             End If
         Next
-sb.Append(My.Resources.WP_end_PARA)
+        sb.Append(My.Resources.WP_END_PARA)
         Return sb.ToString
     End Function
     Private Function GenAlsoFileName() As String
@@ -321,9 +356,6 @@ sb.Append(My.Resources.WP_end_PARA)
     Private Function TidyDescription(_string As String) As String
         Return _string.Replace(My.Resources.BREAK, "").Replace(My.Resources.NON_BREAKING_SPACE, " ").Replace("  ", " ").Trim(charsToTrim)
     End Function
-    Private Sub BtnClearList_Click(sender As Object, e As EventArgs) Handles BtnClearList.Click
-        DgvAlso.Rows.Clear()
-    End Sub
     Private Sub ClearForm()
         TxtName.Text = ""
         TxtWiki.Text = ""
@@ -389,7 +421,6 @@ sb.Append(My.Resources.WP_end_PARA)
         Return isOK
     End Function
     Private Function ReplaceRowValues(oRow As DataGridViewRow) As DataGridViewRow
-        originalDesc = oRow.Cells(alsoDesc.Name).Value
         oRow.Cells(alsoName.Name).Value = TxtName.Text
         oRow.Cells(alsoWiki.Name).Value = TxtWiki.Text
         oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text
@@ -409,22 +440,6 @@ sb.Append(My.Resources.WP_end_PARA)
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
-
-    Private Sub BtnWikiOpen_Click(sender As Object, e As EventArgs) Handles BtnWikiOpen.Click
-        If Not String.IsNullOrEmpty(TxtWiki.Text) Then
-            Process.Start(TxtWiki.Text)
-        End If
-    End Sub
-
-    Private Sub BtnSplit_Click(sender As Object, e As EventArgs) Handles BtnSplit.Click
-        If chkBack.Checked Then
-            GetSplitPart(1)
-        Else
-            GetSplitPart(0)
-        End If
-        chkBack.Checked = False
-    End Sub
-
     Private Sub GetSplitPart(partNumber As Integer)
         Dim splitOn As String
         If CbSplit.SelectedIndex > -1 Then
@@ -438,9 +453,30 @@ sb.Append(My.Resources.WP_end_PARA)
             ReplaceRow()
         End If
     End Sub
-
-    Private Sub BtnUndoSplit_Click(sender As Object, e As EventArgs) Handles BtnUndoSplit.Click
-        TxtDesc.Text = originalDesc
+    Private Sub AddUndo()
+        Dim undoSnapshot As New UndoData With {
+        .undoName = TxtName.Text,
+        .undoWikiUrl = TxtWiki.Text,
+        .undoDesc = TxtDesc.Text,
+        .undoList = New List(Of DataGridViewRow)}
+        For Each oRow As DataGridViewRow In DgvAlso.Rows
+            If oRow.Cells(alsoName.Name).Value IsNot Nothing Then
+                Dim clonedRow As DataGridViewRow = oRow.Clone()
+                For Each oCell As DataGridViewCell In oRow.Cells
+                    clonedRow.Cells(oCell.ColumnIndex).Value = oCell.Value
+                Next
+                undoSnapshot.undoList.Add(clonedRow)
+            End If
+        Next
+        UndoDataList.Add(undoSnapshot)
     End Sub
+    Private Sub ReplaceRow()
+        If DgvAlso.SelectedRows.Count = 1 Then
+            AddUndo()
+            Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
+            ReplaceRowValues(oRow)
+        End If
+    End Sub
+
 #End Region
 End Class
