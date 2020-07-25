@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmBotsdPost
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmBotsdPost
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmBotsdPost))
@@ -67,15 +67,16 @@ Partial Class FrmBotsdPost
         Me.BtnImportList = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.BtnSplit = New System.Windows.Forms.Button()
+        Me.CbSplit = New System.Windows.Forms.ComboBox()
         Me.BtnClearList = New System.Windows.Forms.Button()
         Me.BtnWikiOpen = New System.Windows.Forms.Button()
+        Me.BtnSplit = New System.Windows.Forms.Button()
         Me.NudSentences = New System.Windows.Forms.NumericUpDown()
         Me.BtnReplace = New System.Windows.Forms.Button()
         Me.BtnSearch1 = New System.Windows.Forms.Button()
         Me.BtnSearch2 = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.CbSplit = New System.Windows.Forms.ComboBox()
+        Me.chkBack = New System.Windows.Forms.CheckBox()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.DgvAlso, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -525,6 +526,7 @@ Partial Class FrmBotsdPost
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.chkBack)
         Me.Panel1.Controls.Add(Me.CbSplit)
         Me.Panel1.Controls.Add(Me.BtnImportList)
         Me.Panel1.Controls.Add(Me.BtnSaveList)
@@ -549,17 +551,15 @@ Partial Class FrmBotsdPost
         Me.Panel1.Size = New System.Drawing.Size(707, 496)
         Me.Panel1.TabIndex = 68
         '
-        'BtnSplit
+        'CbSplit
         '
-        Me.BtnSplit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnSplit.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSplit.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSplit.Location = New System.Drawing.Point(556, 441)
-        Me.BtnSplit.Name = "BtnSplit"
-        Me.BtnSplit.Size = New System.Drawing.Size(63, 25)
-        Me.BtnSplit.TabIndex = 71
-        Me.BtnSplit.Text = "Split"
-        Me.BtnSplit.UseVisualStyleBackColor = True
+        Me.CbSplit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CbSplit.FormattingEnabled = True
+        Me.CbSplit.Items.AddRange(New Object() {" for ", " and ", " from ", " who", " of ", " in ", ".", ",", " best "})
+        Me.CbSplit.Location = New System.Drawing.Point(554, 397)
+        Me.CbSplit.Name = "CbSplit"
+        Me.CbSplit.Size = New System.Drawing.Size(63, 24)
+        Me.CbSplit.TabIndex = 73
         '
         'BtnClearList
         '
@@ -579,12 +579,24 @@ Partial Class FrmBotsdPost
         Me.BtnWikiOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnWikiOpen.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWikiOpen.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWikiOpen.Location = New System.Drawing.Point(556, 372)
+        Me.BtnWikiOpen.Location = New System.Drawing.Point(556, 358)
         Me.BtnWikiOpen.Name = "BtnWikiOpen"
         Me.BtnWikiOpen.Size = New System.Drawing.Size(59, 25)
         Me.BtnWikiOpen.TabIndex = 70
         Me.BtnWikiOpen.Text = "Open"
         Me.BtnWikiOpen.UseVisualStyleBackColor = True
+        '
+        'BtnSplit
+        '
+        Me.BtnSplit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSplit.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSplit.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSplit.Location = New System.Drawing.Point(554, 427)
+        Me.BtnSplit.Name = "BtnSplit"
+        Me.BtnSplit.Size = New System.Drawing.Size(63, 25)
+        Me.BtnSplit.TabIndex = 71
+        Me.BtnSplit.Text = "Split"
+        Me.BtnSplit.UseVisualStyleBackColor = True
         '
         'NudSentences
         '
@@ -650,15 +662,18 @@ Partial Class FrmBotsdPost
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(537, 43)
         Me.TableLayoutPanel1.TabIndex = 70
         '
-        'CbSplit
+        'chkBack
         '
-        Me.CbSplit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CbSplit.FormattingEnabled = True
-        Me.CbSplit.Items.AddRange(New Object() {" for ", " and ", " from ", " who", " of ", " in ", ".", ","})
-        Me.CbSplit.Location = New System.Drawing.Point(556, 411)
-        Me.CbSplit.Name = "CbSplit"
-        Me.CbSplit.Size = New System.Drawing.Size(63, 24)
-        Me.CbSplit.TabIndex = 73
+        Me.chkBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkBack.AutoSize = True
+        Me.chkBack.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkBack.Location = New System.Drawing.Point(562, 455)
+        Me.chkBack.Margin = New System.Windows.Forms.Padding(0)
+        Me.chkBack.Name = "chkBack"
+        Me.chkBack.Size = New System.Drawing.Size(46, 22)
+        Me.chkBack.TabIndex = 74
+        Me.chkBack.Text = "end"
+        Me.chkBack.UseVisualStyleBackColor = True
         '
         'FrmBotsdPost
         '
@@ -758,4 +773,5 @@ Partial Class FrmBotsdPost
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents BtnSplit As Button
     Friend WithEvents CbSplit As ComboBox
+    Friend WithEvents chkBack As CheckBox
 End Class

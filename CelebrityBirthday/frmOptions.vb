@@ -21,6 +21,7 @@
         My.Settings.wikiExtractSearch = TxtWikiExtract.Text
         My.Settings.wikiSentences = NudSentences.Value
         My.Settings.WordPressMonthUrl = TxtWordPressDate.Text
+        My.Settings.SplitWords = Replace(TxtSplitWords.Text, vbCrLf, "~")
         My.Settings.Save()
     End Sub
 
@@ -30,6 +31,7 @@
     End Sub
 
     Private Sub LoadOptions()
+        TxtSplitWords.Text = Replace(My.Settings.SplitWords, "~", vbCrLf)
         txtNewImagePath.Text = My.Settings.NewImagePath
         txtImagePath.Text = My.Settings.ImgPath
         txtTwitterFilePath.Text = My.Settings.TwitterFilePath

@@ -100,5 +100,8 @@
     <Setting Name="botsdpostpos" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="SplitWords" Type="System.String" Scope="User">
+      <Value Profile="(Default)"> for ~ and ~ from ~ who~ of~ in~ . ~ , ~ best ~aff </Value>
+    </Setting>
   </Settings>
 </SettingsFile>

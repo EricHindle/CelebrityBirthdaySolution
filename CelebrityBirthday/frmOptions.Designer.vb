@@ -45,16 +45,19 @@ Partial Class FrmOptions
         Me.TxtTwitterImagePath = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TxtWordPressDate = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtWikiExtract = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.BtnGlobalSettings = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.NudSentences = New System.Windows.Forms.NumericUpDown()
-        Me.TxtWordPressDate = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.TxtSplitWords = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnCancel
@@ -135,7 +138,7 @@ Partial Class FrmOptions
         Me.Version.BackColor = System.Drawing.Color.Transparent
         Me.Version.Font = New System.Drawing.Font("Papyrus", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Version.Location = New System.Drawing.Point(12, 585)
+        Me.Version.Location = New System.Drawing.Point(12, 591)
         Me.Version.Name = "Version"
         Me.Version.Size = New System.Drawing.Size(214, 28)
         Me.Version.TabIndex = 8
@@ -143,11 +146,12 @@ Partial Class FrmOptions
         '
         'BtnResetForms
         '
+        Me.BtnResetForms.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnResetForms.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnResetForms.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnResetForms.Location = New System.Drawing.Point(16, 515)
         Me.BtnResetForms.Name = "BtnResetForms"
-        Me.BtnResetForms.Size = New System.Drawing.Size(86, 73)
+        Me.BtnResetForms.Size = New System.Drawing.Size(86, 60)
         Me.BtnResetForms.TabIndex = 9
         Me.BtnResetForms.Text = "Reset Form Positions"
         Me.BtnResetForms.UseVisualStyleBackColor = True
@@ -194,7 +198,7 @@ Partial Class FrmOptions
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtImageSearch.Location = New System.Drawing.Point(172, 29)
         Me.TxtImageSearch.Name = "TxtImageSearch"
-        Me.TxtImageSearch.Size = New System.Drawing.Size(333, 22)
+        Me.TxtImageSearch.Size = New System.Drawing.Size(231, 22)
         Me.TxtImageSearch.TabIndex = 14
         '
         'TxtWordPress
@@ -203,7 +207,7 @@ Partial Class FrmOptions
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWordPress.Location = New System.Drawing.Point(172, 68)
         Me.TxtWordPress.Name = "TxtWordPress"
-        Me.TxtWordPress.Size = New System.Drawing.Size(333, 22)
+        Me.TxtWordPress.Size = New System.Drawing.Size(231, 22)
         Me.TxtWordPress.TabIndex = 15
         '
         'TxtWikiSearch
@@ -212,7 +216,7 @@ Partial Class FrmOptions
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWikiSearch.Location = New System.Drawing.Point(172, 107)
         Me.TxtWikiSearch.Name = "TxtWikiSearch"
-        Me.TxtWikiSearch.Size = New System.Drawing.Size(333, 22)
+        Me.TxtWikiSearch.Size = New System.Drawing.Size(231, 22)
         Me.TxtWikiSearch.TabIndex = 16
         '
         'txtTwitterSearch
@@ -221,7 +225,7 @@ Partial Class FrmOptions
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTwitterSearch.Location = New System.Drawing.Point(172, 146)
         Me.txtTwitterSearch.Name = "txtTwitterSearch"
-        Me.txtTwitterSearch.Size = New System.Drawing.Size(333, 22)
+        Me.txtTwitterSearch.Size = New System.Drawing.Size(231, 22)
         Me.txtTwitterSearch.TabIndex = 17
         '
         'GroupBox1
@@ -273,12 +277,31 @@ Partial Class FrmOptions
         Me.GroupBox2.Controls.Add(Me.TxtWordPress)
         Me.GroupBox2.Controls.Add(Me.Label7)
         Me.GroupBox2.Controls.Add(Me.TxtImageSearch)
-        Me.GroupBox2.Location = New System.Drawing.Point(16, 200)
+        Me.GroupBox2.Location = New System.Drawing.Point(118, 200)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(521, 300)
+        Me.GroupBox2.Size = New System.Drawing.Size(419, 300)
         Me.GroupBox2.TabIndex = 19
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "URLs"
+        '
+        'TxtWordPressDate
+        '
+        Me.TxtWordPressDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtWordPressDate.Location = New System.Drawing.Point(172, 182)
+        Me.TxtWordPressDate.Multiline = True
+        Me.TxtWordPressDate.Name = "TxtWordPressDate"
+        Me.TxtWordPressDate.Size = New System.Drawing.Size(231, 36)
+        Me.TxtWordPressDate.TabIndex = 21
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(13, 185)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(151, 14)
+        Me.Label11.TabIndex = 20
+        Me.Label11.Text = "WordPress Date Page URL"
         '
         'TxtWikiExtract
         '
@@ -287,7 +310,7 @@ Partial Class FrmOptions
         Me.TxtWikiExtract.Location = New System.Drawing.Point(172, 233)
         Me.TxtWikiExtract.Multiline = True
         Me.TxtWikiExtract.Name = "TxtWikiExtract"
-        Me.TxtWikiExtract.Size = New System.Drawing.Size(333, 61)
+        Me.TxtWikiExtract.Size = New System.Drawing.Size(231, 61)
         Me.TxtWikiExtract.TabIndex = 19
         '
         'Label8
@@ -301,17 +324,19 @@ Partial Class FrmOptions
         '
         'BtnGlobalSettings
         '
+        Me.BtnGlobalSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnGlobalSettings.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGlobalSettings.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 515)
         Me.BtnGlobalSettings.Name = "BtnGlobalSettings"
-        Me.BtnGlobalSettings.Size = New System.Drawing.Size(86, 73)
+        Me.BtnGlobalSettings.Size = New System.Drawing.Size(86, 60)
         Me.BtnGlobalSettings.TabIndex = 20
         Me.BtnGlobalSettings.Text = "Global Settings"
         Me.BtnGlobalSettings.UseVisualStyleBackColor = True
         '
         'Label9
         '
+        Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(225, 515)
         Me.Label9.Name = "Label9"
@@ -321,6 +346,7 @@ Partial Class FrmOptions
         '
         'NudSentences
         '
+        Me.NudSentences.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.NudSentences.Location = New System.Drawing.Point(329, 513)
         Me.NudSentences.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -329,24 +355,25 @@ Partial Class FrmOptions
         Me.NudSentences.TabIndex = 22
         Me.NudSentences.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'TxtWordPressDate
+        'GroupBox3
         '
-        Me.TxtWordPressDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtWordPressDate.Location = New System.Drawing.Point(172, 182)
-        Me.TxtWordPressDate.Multiline = True
-        Me.TxtWordPressDate.Name = "TxtWordPressDate"
-        Me.TxtWordPressDate.Size = New System.Drawing.Size(333, 36)
-        Me.TxtWordPressDate.TabIndex = 21
+        Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox3.Controls.Add(Me.TxtSplitWords)
+        Me.GroupBox3.Location = New System.Drawing.Point(16, 200)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(96, 300)
+        Me.GroupBox3.TabIndex = 23
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Split words"
         '
-        'Label11
+        'TxtSplitWords
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(13, 185)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(151, 14)
-        Me.Label11.TabIndex = 20
-        Me.Label11.Text = "WordPress Date Page URL"
+        Me.TxtSplitWords.Location = New System.Drawing.Point(11, 21)
+        Me.TxtSplitWords.Multiline = True
+        Me.TxtSplitWords.Name = "TxtSplitWords"
+        Me.TxtSplitWords.Size = New System.Drawing.Size(72, 273)
+        Me.TxtSplitWords.TabIndex = 0
         '
         'FrmOptions
         '
@@ -354,6 +381,7 @@ Partial Class FrmOptions
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(549, 622)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.NudSentences)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.BtnGlobalSettings)
@@ -372,6 +400,8 @@ Partial Class FrmOptions
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -405,4 +435,6 @@ Partial Class FrmOptions
     Friend WithEvents Label10 As Label
     Friend WithEvents TxtWordPressDate As TextBox
     Friend WithEvents Label11 As Label
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents TxtSplitWords As TextBox
 End Class

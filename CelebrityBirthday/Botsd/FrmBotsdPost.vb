@@ -34,6 +34,11 @@ Public Class FrmBotsdPost
     End Sub
     Private Sub FrmText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.botsdpostpos)
+        Dim splitWords As String() = Split(My.Settings.SplitWords, "~")
+        CbSplit.Items.Clear()
+        For Each splitword As String In splitWords
+            CbSplit.Items.Add(splitword)
+        Next
         Dim alsosText As String = GenerateAlsos()
         RtbText.Text = oPostText & alsosText
         oAlsoFileName = GenAlsoFileName()
@@ -410,15 +415,26 @@ sb.Append(My.Resources.WP_end_PARA)
     End Sub
 
     Private Sub BtnSplit_Click(sender As Object, e As EventArgs) Handles BtnSplit.Click
+        If chkBack.Checked Then
+            GetSplitPart(1)
+        Else
+            GetSplitPart(0)
+        End If
+        chkBack.Checked = False
+    End Sub
+
+    Private Sub GetSplitPart(partNumber As Integer)
         Dim splitOn As String
         If CbSplit.SelectedIndex > -1 Then
             splitOn = CbSplit.SelectedItem
         Else
             splitOn = CbSplit.Text
         End If
-        Dim descPart1 As String = Split(TxtDesc.Text, splitOn, 2)(0).Trim & "."
-        TxtDesc.Text = descPart1
-        ReplaceRow()
+        Dim descParts As String() = Split(TxtDesc.Text, splitOn, 2)
+        If descParts.Length > partNumber Then
+            TxtDesc.Text = descParts(partNumber).Trim({" "c, ","c, ";"c, "."c}) & "."
+            ReplaceRow()
+        End If
     End Sub
 #End Region
 End Class
