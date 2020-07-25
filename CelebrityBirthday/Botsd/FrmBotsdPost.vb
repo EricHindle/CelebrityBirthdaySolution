@@ -6,6 +6,7 @@ Public Class FrmBotsdPost
 #Region "variables"
     Private oAlsoFileName As String
     Private ReadOnly charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c, "("c, "."c}
+    Private originalDesc As String
 #End Region
 #Region "properties"
     Private oNewPostNo As Integer
@@ -388,6 +389,7 @@ sb.Append(My.Resources.WP_end_PARA)
         Return isOK
     End Function
     Private Function ReplaceRowValues(oRow As DataGridViewRow) As DataGridViewRow
+        originalDesc = oRow.Cells(alsoDesc.Name).Value
         oRow.Cells(alsoName.Name).Value = TxtName.Text
         oRow.Cells(alsoWiki.Name).Value = TxtWiki.Text
         oRow.Cells(alsoDesc.Name).Value = TxtDesc.Text
@@ -435,6 +437,10 @@ sb.Append(My.Resources.WP_end_PARA)
             TxtDesc.Text = descParts(partNumber).Trim({" "c, ","c, ";"c, "."c}) & "."
             ReplaceRow()
         End If
+    End Sub
+
+    Private Sub BtnUndoSplit_Click(sender As Object, e As EventArgs) Handles BtnUndoSplit.Click
+        TxtDesc.Text = originalDesc
     End Sub
 #End Region
 End Class
