@@ -141,7 +141,8 @@ Public Class FrmUpdateDatabase
                 Dim p As Integer = -1
                 For ix As Integer = 0 To personTable.Count - 1
                     Dim aPerson As Person = personTable(ix)
-                    If aPerson.BirthYear > newPerson.BirthYear Then
+                    If aPerson.IBirthYear > newPerson.IBirthYear Then
+                        newPerson = UpdateSortSeq(newPerson, ix)
                         personTable.Insert(ix, newPerson)
                         bInserted = True
                         p = ix
@@ -150,6 +151,7 @@ Public Class FrmUpdateDatabase
                 Next
                 If Not bInserted Then
                     p = personTable.Count
+                    newPerson = UpdateSortSeq(newPerson, p)
                     personTable.Add(newPerson)
                 End If
                 DisplayPersonList()
@@ -166,6 +168,16 @@ Public Class FrmUpdateDatabase
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
         End If
     End Sub
+
+    Private Function UpdateSortSeq(newPerson As Person, p As Integer) As Person
+        Dim prevPerson As Person = If(p = 0, Nothing, personTable(p - 1))
+        If prevPerson IsNot Nothing AndAlso prevPerson.IBirthYear = newPerson.IBirthYear Then
+            newPerson.Sortseq = prevPerson.Sortseq + 1
+            prevPerson.Dispose()
+        End If
+        Return newPerson
+    End Function
+
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         Dim oPerson As Person
         If lbPeople.SelectedIndex >= 0 Then
