@@ -9936,7 +9936,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                 "rname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deat"& _ 
                 "hday, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         imgfiletype, imgloadyr, imgloadmonth, twitterHa"& _ 
                 "ndle, noTweet, imgfilename, botsd, wikiId"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            FullPerson"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE    "& _ 
-                "    (birthday = @day) AND (birthmonth = @month)"
+                "    (birthday = @day) AND (birthmonth = @month)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY birthyear, sortseq"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))

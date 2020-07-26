@@ -1137,23 +1137,23 @@ Public Class FrmBotsd
             imageLoadYear = urlYear
             Dim _fullList As List(Of Person) = FindTodays(ThisDay, ThisMonth, False)
             DgvPairs.Rows.Clear()
-            Do Until _fullList.Count = 0
-                Dim _sameYearList As New List(Of Person)
-                Dim _person1 As Person = _fullList(0)
-                _fullList.RemoveAt(0)
-                For Each _person2 As Person In _fullList
-                    If _person1.DateOfBirth = _person2.DateOfBirth Then
-                        _sameYearList.Add(_person2)
+
+            Dim lastYear As String = ""
+            Dim _sameYearList As New List(Of Person)
+            For Each oPerson As Person In _fullList
+                If Not oPerson.BirthYear.Equals(lastYear, Global.System.StringComparison.Ordinal) Then
+                    If _sameYearList.Count > 1 Then
+                        AddList(_sameYearList)
                     End If
-                Next
-                For Each _matchedPerson As Person In _sameYearList
-                    _fullList.Remove(_matchedPerson)
-                Next
-                If _sameYearList.Count > 0 Then
-                    _sameYearList.Add(_person1)
-                    AddList(_sameYearList)
+                    _sameYearList = New List(Of Person)
+                    lastYear = oPerson.BirthYear
                 End If
-            Loop
+                _sameYearList.Add(oPerson)
+            Next
+            If _sameYearList.Count > 1 Then
+                AddList(_sameYearList)
+            End If
+
             Select Case True
                 Case rbImageRight.Checked
                     rbImageRight.Checked = True

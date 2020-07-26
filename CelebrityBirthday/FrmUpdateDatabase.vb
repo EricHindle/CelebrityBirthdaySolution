@@ -239,7 +239,16 @@ Public Class FrmUpdateDatabase
             Dim selectedIndex As Integer = -1
             personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
             If personTable.Count > 0 Then
+                Dim lastYear As String = ""
+                Dim sortSeq As Integer = 0
                 For Each operson As Person In personTable
+                    If operson.BirthYear.Equals(lastYear, Global.System.StringComparison.Ordinal) Then
+                        sortSeq += 1
+                    Else
+                        sortSeq = 0
+                        lastYear = operson.BirthYear
+                    End If
+                    operson.Sortseq = sortSeq
                     lbPeople.Items.Add(operson.BirthYear & " " & operson.Name)
                     If findPersonInList > -1 AndAlso findPersonInList = operson.Id Then
                         selectedIndex = lbPeople.Items.Count - 1
