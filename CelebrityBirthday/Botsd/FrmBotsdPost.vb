@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 Imports System.Text
 Imports TweetSharp
-' Imports System.Web.UI.WebControls
 
 Public Class FrmBotsdPost
 #Region "variables"
@@ -14,7 +13,7 @@ Public Class FrmBotsdPost
         Public undoList As List(Of DataGridViewRow)
     End Structure
 
-    Private UndoDataList As New List(Of UndoData)
+    Private ReadOnly UndoDataList As New List(Of UndoData)
 #End Region
 #Region "properties"
     Private oNewPostNo As Integer

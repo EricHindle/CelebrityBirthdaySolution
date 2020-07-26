@@ -83,10 +83,10 @@ Public Class FrmBotsd
     End Sub
     Private Sub BtnSwap_Click(sender As Object, e As EventArgs) Handles BtnSwap.Click
         If DgvPairs.SelectedRows.Count = 1 Then
-            Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked)
+            Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked) + CInt(ChkSel5.Checked) + CInt(ChkSel6.Checked)
             If _selCount <> -2 Then
                 chkSel1.Checked = True
-                _selCount = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked)
+                _selCount = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked) + CInt(ChkSel5.Checked) + CInt(ChkSel6.Checked)
                 If _selCount <> -2 Then
                     ChkSel2.Checked = True
                 End If
@@ -108,8 +108,18 @@ Public Class FrmBotsd
                         sel2IdCol = pairId3.Name
                         sel2NameCol = pairPerson3.Name
                     Else
-                        sel2IdCol = pairId4.Name
-                        sel2NameCol = pairPerson4.Name
+                        If ChkSel4.Checked Then
+                            sel2IdCol = pairId4.Name
+                            sel2NameCol = pairPerson4.Name
+                        Else
+                            If ChkSel5.Checked Then
+                                sel2IdCol = pairId5.Name
+                                sel2NameCol = pairPerson5.Name
+                            Else
+                                sel2IdCol = pairId6.Name
+                                sel2NameCol = pairPerson6.Name
+                            End If
+                        End If
                     End If
                 End If
             ElseIf ChkSel2.Checked Then
@@ -119,14 +129,49 @@ Public Class FrmBotsd
                     sel2IdCol = pairId3.Name
                     sel2NameCol = pairPerson3.Name
                 Else
-                    sel2IdCol = pairId4.Name
-                    sel2NameCol = pairPerson4.Name
+                    If ChkSel4.Checked Then
+                        sel2IdCol = pairId4.Name
+                        sel2NameCol = pairPerson4.Name
+                    Else
+                        If ChkSel5.Checked Then
+                            sel2IdCol = pairId5.Name
+                            sel2NameCol = pairPerson5.Name
+                        Else
+                            sel2IdCol = pairId6.Name
+                            sel2NameCol = pairPerson6.Name
+                        End If
+                    End If
                 End If
-            Else
+            ElseIf ChkSel3.Checked Then
                 sel1IdCol = pairId3.Name
                 sel1NameCol = pairPerson3.Name
-                sel2IdCol = pairId4.Name
-                sel2NameCol = pairPerson4.Name
+                If ChkSel4.Checked Then
+                    sel2IdCol = pairId4.Name
+                    sel2NameCol = pairPerson4.Name
+                Else
+                    If ChkSel5.Checked Then
+                        sel2IdCol = pairId5.Name
+                        sel2NameCol = pairPerson5.Name
+                    Else
+                        sel2IdCol = pairId6.Name
+                        sel2NameCol = pairPerson6.Name
+                    End If
+                End If
+            ElseIf ChkSel4.Checked Then
+                sel1IdCol = pairId4.Name
+                sel1NameCol = pairPerson4.Name
+                If ChkSel5.Checked Then
+                    sel2IdCol = pairId5.Name
+                    sel2NameCol = pairPerson5.Name
+                Else
+                    sel2IdCol = pairId6.Name
+                    sel2NameCol = pairPerson6.Name
+                End If
+            Else
+                sel1IdCol = pairId5.Name
+                sel1NameCol = pairPerson5.Name
+                sel2IdCol = pairId6.Name
+                sel2NameCol = pairPerson6.Name
             End If
             Dim _saveId As Integer = _row.Cells(sel1IdCol).Value
             Dim _saveName As String = _row.Cells(sel1NameCol).Value
@@ -182,6 +227,28 @@ Public Class FrmBotsd
             DisplayStatus("Updated failed")
         End If
         _pickPerson4.Dispose()
+    End Sub
+    Private Sub BtnUpdate5_Click(sender As Object, e As EventArgs) Handles BtnUpdate5.Click
+        Dim _pickPerson5 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId5.Name).Value)
+        _pickPerson5.ShortDesc = TxtShortDesc5.Text
+
+        If UpdateShortDesc(_pickPerson5) = 1 Then
+            DisplayStatus("Updated person 5")
+        Else
+            DisplayStatus("Updated failed")
+        End If
+        _pickPerson5.Dispose()
+    End Sub
+    Private Sub BtnUpdate6_Click(sender As Object, e As EventArgs) Handles BtnUpdate6.Click
+        Dim _pickPerson6 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId6.Name).Value)
+        _pickPerson6.ShortDesc = TxtShortDesc6.Text
+
+        If UpdateShortDesc(_pickPerson6) = 1 Then
+            DisplayStatus("Updated person 6")
+        Else
+            DisplayStatus("Updated failed")
+        End If
+        _pickPerson6.Dispose()
     End Sub
     Private Sub FrmBotsd_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.botsdformpos = SetFormPos(Me)
@@ -251,80 +318,57 @@ Public Class FrmBotsd
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
         SelectPairs()
     End Sub
-
-    Private Sub SelectPairs()
-        rtbFile1.Text = ""
-        isBuildingPairs = True
-        ClearPersonDetails()
-
-        Try
-            ThisDay = cboDay.SelectedIndex + 1
-            ThisMonth = cboMonth.SelectedIndex + 1
-            LblMonth.Text = Format(New Date(2000, ThisMonth, 1), "MMMM")
-            LblDay.Text = CStr(ThisDay)
-            Dim _wpDate As Date? = GetWordPressLoadDate(ThisDay, ThisMonth, "P")
-            urlDay = If(_wpDate Is Nothing, "", Format(_wpDate, "dd"))
-            urlMonth = If(_wpDate Is Nothing, "", Format(_wpDate, "MM"))
-            urlYear = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
-            imageLoadMonth = urlMonth
-            imageLoadYear = urlYear
-            Dim _fullList As List(Of Person) = FindTodays(ThisDay, ThisMonth, False)
-            DgvPairs.Rows.Clear()
-            Do Until _fullList.Count = 0
-                Dim _sameYearList As New List(Of Person)
-                Dim _person1 As Person = _fullList(0)
-                _fullList.RemoveAt(0)
-                For Each _person2 As Person In _fullList
-                    If _person1.DateOfBirth = _person2.DateOfBirth Then
-                        _sameYearList.Add(_person2)
-                    End If
-                Next
-                For Each _matchedPerson As Person In _sameYearList
-                    _fullList.Remove(_matchedPerson)
-                Next
-                If _sameYearList.Count > 0 Then
-                    _sameYearList.Add(_person1)
-                    AddList(_sameYearList)
-                End If
-            Loop
-            Select Case True
-                Case rbImageRight.Checked
-                    rbImageRight.Checked = True
-                Case rbImageLeft.Checked
-                    rbImageLeft.Checked = True
-                Case rbImageCentre.Checked
-                    rbImageCentre.Checked = True
-            End Select
-            DgvPairs.ClearSelection()
-        Catch ex As ArgumentOutOfRangeException
-            MsgBox("No date selected", MsgBoxStyle.Exclamation, "Error")
-            Me.Close()
-        End Try
-        isBuildingPairs = False
+    Private Sub BtnAlterPostNo_Click(sender As Object, e As EventArgs) Handles BtnAlterPostNo.Click
+        Using _alterPost As New FrmAlterPostNo
+            _alterPost.ShowDialog()
+            UpdatePostNumbers()
+        End Using
     End Sub
-
     Private Sub BtnRemove_Click(sender As Object, e As EventArgs) Handles BtnRemove.Click
         If DgvPairs.SelectedRows.Count = 1 Then
             Dim _row As DataGridViewRow = DgvPairs.SelectedRows(0)
-            Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked)
+            Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked) + CInt(ChkSel5.Checked) + CInt(ChkSel6.Checked)
             If _selCount < 0 Then
+                If ChkSel6.Checked Then
+                    _row.Cells(pairId6.Name).Value = Nothing
+                    _row.Cells(pairPerson6.Name).Value = ""
+                End If
+                If ChkSel5.Checked Then
+                    _row.Cells(pairId5.Name).Value = _row.Cells(pairId6.Name).Value
+                    _row.Cells(pairPerson5.Name).Value = _row.Cells(pairPerson6.Name).Value
+                    _row.Cells(pairId6.Name).Value = Nothing
+                    _row.Cells(pairPerson6.Name).Value = ""
+                End If
+
                 If ChkSel4.Checked Then
-                    _row.Cells(pairId4.Name).Value = Nothing
-                    _row.Cells(pairPerson4.Name).Value = ""
+                    _row.Cells(pairId4.Name).Value = _row.Cells(pairId5.Name).Value
+                    _row.Cells(pairPerson4.Name).Value = _row.Cells(pairPerson5.Name).Value
+                    _row.Cells(pairId5.Name).Value = _row.Cells(pairId6.Name).Value
+                    _row.Cells(pairPerson5.Name).Value = _row.Cells(pairPerson6.Name).Value
+                    _row.Cells(pairId6.Name).Value = Nothing
+                    _row.Cells(pairPerson6.Name).Value = ""
                 End If
                 If ChkSel3.Checked Then
                     _row.Cells(pairId3.Name).Value = _row.Cells(pairId4.Name).Value
                     _row.Cells(pairPerson3.Name).Value = _row.Cells(pairPerson4.Name).Value
-                    _row.Cells(pairId4.Name).Value = Nothing
-                    _row.Cells(pairPerson4.Name).Value = ""
+                    _row.Cells(pairId4.Name).Value = _row.Cells(pairId5.Name).Value
+                    _row.Cells(pairPerson4.Name).Value = _row.Cells(pairPerson5.Name).Value
+                    _row.Cells(pairId5.Name).Value = _row.Cells(pairId6.Name).Value
+                    _row.Cells(pairPerson5.Name).Value = _row.Cells(pairPerson6.Name).Value
+                    _row.Cells(pairId6.Name).Value = Nothing
+                    _row.Cells(pairPerson6.Name).Value = ""
                 End If
                 If ChkSel2.Checked Then
                     _row.Cells(pairId2.Name).Value = _row.Cells(pairId3.Name).Value
                     _row.Cells(pairPerson2.Name).Value = _row.Cells(pairPerson3.Name).Value
                     _row.Cells(pairId3.Name).Value = _row.Cells(pairId4.Name).Value
                     _row.Cells(pairPerson3.Name).Value = _row.Cells(pairPerson4.Name).Value
-                    _row.Cells(pairId4.Name).Value = Nothing
-                    _row.Cells(pairPerson4.Name).Value = ""
+                    _row.Cells(pairId4.Name).Value = _row.Cells(pairId5.Name).Value
+                    _row.Cells(pairPerson4.Name).Value = _row.Cells(pairPerson5.Name).Value
+                    _row.Cells(pairId5.Name).Value = _row.Cells(pairId6.Name).Value
+                    _row.Cells(pairPerson5.Name).Value = _row.Cells(pairPerson6.Name).Value
+                    _row.Cells(pairId6.Name).Value = Nothing
+                    _row.Cells(pairPerson6.Name).Value = ""
                 End If
                 If chkSel1.Checked Then
                     _row.Cells(pairId1.Name).Value = _row.Cells(pairId2.Name).Value
@@ -333,8 +377,12 @@ Public Class FrmBotsd
                     _row.Cells(pairPerson2.Name).Value = _row.Cells(pairPerson3.Name).Value
                     _row.Cells(pairId3.Name).Value = _row.Cells(pairId4.Name).Value
                     _row.Cells(pairPerson3.Name).Value = _row.Cells(pairPerson4.Name).Value
-                    _row.Cells(pairId4.Name).Value = Nothing
-                    _row.Cells(pairPerson4.Name).Value = ""
+                    _row.Cells(pairId4.Name).Value = _row.Cells(pairId5.Name).Value
+                    _row.Cells(pairPerson4.Name).Value = _row.Cells(pairPerson5.Name).Value
+                    _row.Cells(pairId5.Name).Value = _row.Cells(pairId6.Name).Value
+                    _row.Cells(pairPerson5.Name).Value = _row.Cells(pairPerson6.Name).Value
+                    _row.Cells(pairId6.Name).Value = Nothing
+                    _row.Cells(pairPerson6.Name).Value = ""
                 End If
                 GeneratePair()
                 If _row.Cells(pairId2.Name).Value Is Nothing Then
@@ -528,6 +576,14 @@ Public Class FrmBotsd
                 _pairRow.Cells(pairId4.Name).Value = personsList(3).Id
                 _pairRow.Cells(pairPerson4.Name).Value = personsList(3).Name
             End If
+            If personsList.Count > 4 Then
+                _pairRow.Cells(pairId5.Name).Value = personsList(4).Id
+                _pairRow.Cells(pairPerson5.Name).Value = personsList(4).Name
+            End If
+            If personsList.Count > 5 Then
+                _pairRow.Cells(pairId6.Name).Value = personsList(5).Id
+                _pairRow.Cells(pairPerson6.Name).Value = personsList(5).Name
+            End If
         End If
         DgvPairs.Sort(DgvPairs.Columns(0), ListSortDirection.Ascending)
     End Sub
@@ -539,15 +595,18 @@ Public Class FrmBotsd
                 Dim _pickPerson2 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
                 Dim _pickPerson3 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
                 Dim _pickPerson4 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
+                Dim _pickPerson5 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId5.Name).Value)
+                Dim _pickPerson6 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId6.Name).Value)
                 _imageList = New List(Of Person)
                 chkSel1.Checked = False
                 ChkSel2.Checked = False
                 ChkSel3.Checked = False
                 ChkSel4.Checked = False
+                ChkSel5.Checked = False
+                ChkSel6.Checked = False
                 If _pickPerson1 IsNot Nothing Then
                     TxtForename1.Text = _pickPerson1.ForeName
                     TxtSurname1.Text = _pickPerson1.Surname
-                    DtpDob1.Value = _pickPerson1.DateOfBirth.Value
                     TxtShortDesc1.Text = _pickPerson1.ShortDesc
                     LblId1.Text = CStr(_pickPerson1.Id)
                     _imageList.Add(_pickPerson1)
@@ -556,7 +615,6 @@ Public Class FrmBotsd
                 If _pickPerson2 IsNot Nothing Then
                     TxtForename2.Text = _pickPerson2.ForeName
                     TxtSurname2.Text = _pickPerson2.Surname
-                    DtpDob2.Value = _pickPerson2.DateOfBirth.Value
                     TxtShortDesc2.Text = _pickPerson2.ShortDesc
                     LblId2.Text = CStr(_pickPerson2.Id)
                     _imageList.Add(_pickPerson2)
@@ -565,7 +623,6 @@ Public Class FrmBotsd
                 If _pickPerson3 IsNot Nothing Then
                     TxtForename3.Text = _pickPerson3.ForeName
                     TxtSurname3.Text = _pickPerson3.Surname
-                    DtpDob3.Value = _pickPerson3.DateOfBirth.Value
                     TxtShortDesc3.Text = _pickPerson3.ShortDesc
                     LblId3.Text = CStr(_pickPerson3.Id)
                     _imageList.Add(_pickPerson3)
@@ -574,11 +631,26 @@ Public Class FrmBotsd
                 If _pickPerson4 IsNot Nothing Then
                     TxtForename4.Text = _pickPerson4.ForeName
                     TxtSurname4.Text = _pickPerson4.Surname
-                    DtpDob4.Value = _pickPerson4.DateOfBirth.Value
                     TxtShortDesc4.Text = _pickPerson4.ShortDesc
                     LblId4.Text = CStr(_pickPerson4.Id)
                     _imageList.Add(_pickPerson4)
                     GroupBox4.Enabled = True
+                End If
+                If _pickPerson5 IsNot Nothing Then
+                    TxtForename5.Text = _pickPerson5.ForeName
+                    TxtSurname5.Text = _pickPerson5.Surname
+                    TxtShortDesc5.Text = _pickPerson5.ShortDesc
+                    LblId5.Text = CStr(_pickPerson5.Id)
+                    _imageList.Add(_pickPerson5)
+                    GroupBox5.Enabled = True
+                End If
+                If _pickPerson6 IsNot Nothing Then
+                    TxtForename6.Text = _pickPerson6.ForeName
+                    TxtSurname6.Text = _pickPerson6.Surname
+                    TxtShortDesc6.Text = _pickPerson6.ShortDesc
+                    LblId6.Text = CStr(_pickPerson6.Id)
+                    _imageList.Add(_pickPerson6)
+                    GroupBox6.Enabled = True
                 End If
                 GeneratePicture(PictureBox1, _imageList, NudPic1Horizontal.Value)
                 GenerateText(_imageList)
@@ -660,6 +732,15 @@ Public Class FrmBotsd
                             .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
                             .Append(oRow.Cells(pairPerson4.Name).Value)
                         End If
+                        If Not String.IsNullOrEmpty(oRow.Cells(pairPerson5.Name).Value) Then
+                            .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
+                            .Append(oRow.Cells(pairPerson5.Name).Value)
+                        End If
+                        If Not String.IsNullOrEmpty(oRow.Cells(pairPerson6.Name).Value) Then
+                            .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
+                            .Append(oRow.Cells(pairPerson6.Name).Value)
+                        End If
+
                         .Append(My.Resources.TWO_SPACES)
                         If postNo > -1 Then
 
@@ -807,6 +888,8 @@ Public Class FrmBotsd
             Dim _pickPerson2 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
             Dim _pickPerson3 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
             Dim _pickPerson4 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
+            Dim _pickPerson5 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId5.Name).Value)
+            Dim _pickPerson6 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId6.Name).Value)
             Dim _sep As String = ""
             If _pickPerson1 IsNot Nothing Then
                 sb.Append(GetPersonText(_pickPerson1))
@@ -831,6 +914,17 @@ Public Class FrmBotsd
                 titleSb.Append(_sep).Append(_pickPerson4.Name)
                 titleDate = Format(_pickPerson4.DateOfBirth, "dd MMMM yyyy")
             End If
+            If _pickPerson5 IsNot Nothing Then
+                sb.Append(GetPersonText(_pickPerson5))
+                titleSb.Append(_sep).Append(_pickPerson5.Name)
+                titleDate = Format(_pickPerson5.DateOfBirth, "dd MMMM yyyy")
+            End If
+            If _pickPerson6 IsNot Nothing Then
+                sb.Append(GetPersonText(_pickPerson6))
+                titleSb.Append(_sep).Append(_pickPerson6.Name)
+                titleDate = Format(_pickPerson6.DateOfBirth, "dd MMMM yyyy")
+            End If
+
             titleSb.Append(" - ").Append(titleDate)
             sb.Append(My.Resources.WP_PARA).Append(vbCrLf)
             sb.Append("Links:").Append(My.Resources.BREAK)
@@ -846,6 +940,12 @@ Public Class FrmBotsd
             End If
             If _pickPerson4 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson4.Social.WikiId) Then
                 sb.Append(GetWikiLinkText(_pickPerson4))
+            End If
+            If _pickPerson5 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson5.Social.WikiId) Then
+                sb.Append(GetWikiLinkText(_pickPerson5))
+            End If
+            If _pickPerson6 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson6.Social.WikiId) Then
+                sb.Append(GetWikiLinkText(_pickPerson6))
             End If
             sb.Append(My.Resources.WP_END_PARA).Append(vbCrLf)
             sb.Append(vbCrLf)
@@ -887,6 +987,14 @@ Public Class FrmBotsd
                             _pickPerson4.Social.Botsd = botsdNo
                             UpdateBotsdId(_pickPerson4.Social)
                         End If
+                        If _pickPerson5 IsNot Nothing Then
+                            _pickPerson5.Social.Botsd = botsdNo
+                            UpdateBotsdId(_pickPerson5.Social)
+                        End If
+                        If _pickPerson6 IsNot Nothing Then
+                            _pickPerson6.Social.Botsd = botsdNo
+                            UpdateBotsdId(_pickPerson6.Social)
+                        End If
                         If CInt(thisWpNumber) = WpNumber Then
                             WpNumber += 1
                             GlobalSettings.SetSetting(My.Resources.NEXTWPNO, "integer", CStr(WpNumber))
@@ -898,6 +1006,9 @@ Public Class FrmBotsd
             If _pickPerson2 IsNot Nothing Then _pickPerson2.Dispose()
             If _pickPerson3 IsNot Nothing Then _pickPerson3.Dispose()
             If _pickPerson4 IsNot Nothing Then _pickPerson4.Dispose()
+            If _pickPerson5 IsNot Nothing Then _pickPerson5.Dispose()
+            If _pickPerson6 IsNot Nothing Then _pickPerson6.Dispose()
+
         Catch ex As DbException
             DisplayException(MethodBase.GetCurrentMethod, ex, "Db")
         End Try
@@ -958,14 +1069,14 @@ Public Class FrmBotsd
         LblId2.Text = ""
         LblId3.Text = ""
         LblId4.Text = ""
-        DtpDob1.Value = Today
+        LblId5.Text = ""
+        LblId6.Text = ""
         GroupBox1.Enabled = False
-        DtpDob2.Value = Today
         GroupBox2.Enabled = False
-        DtpDob3.Value = Today
         GroupBox3.Enabled = False
-        DtpDob4.Value = Today
         GroupBox4.Enabled = False
+        GroupBox5.Enabled = False
+        GroupBox6.Enabled = False
         TxtForename1.Text = ""
         TxtSurname1.Text = ""
         TxtShortDesc1.Text = ""
@@ -978,15 +1089,14 @@ Public Class FrmBotsd
         TxtForename4.Text = ""
         TxtSurname4.Text = ""
         TxtShortDesc4.Text = ""
+        TxtForename5.Text = ""
+        TxtSurname5.Text = ""
+        TxtShortDesc5.Text = ""
+        TxtForename6.Text = ""
+        TxtSurname6.Text = ""
+        TxtShortDesc6.Text = ""
         rtbFile1.Text = ""
         PictureBox1.Image = Nothing
-    End Sub
-
-    Private Sub BtnAlterPostNo_Click(sender As Object, e As EventArgs) Handles BtnAlterPostNo.Click
-        Using _alterPost As New FrmAlterPostNo
-            _alterPost.ShowDialog()
-            UpdatePostNumbers
-        End Using
     End Sub
     Private Sub UpdatePostNumbers()
         For Each oRow As DataGridViewRow In DgvPairs.Rows
@@ -1009,6 +1119,55 @@ Public Class FrmBotsd
             End Try
         Next
     End Sub
+    Private Sub SelectPairs()
+        rtbFile1.Text = ""
+        isBuildingPairs = True
+        ClearPersonDetails()
 
+        Try
+            ThisDay = cboDay.SelectedIndex + 1
+            ThisMonth = cboMonth.SelectedIndex + 1
+            LblMonth.Text = Format(New Date(2000, ThisMonth, 1), "MMMM")
+            LblDay.Text = CStr(ThisDay)
+            Dim _wpDate As Date? = GetWordPressLoadDate(ThisDay, ThisMonth, "P")
+            urlDay = If(_wpDate Is Nothing, "", Format(_wpDate, "dd"))
+            urlMonth = If(_wpDate Is Nothing, "", Format(_wpDate, "MM"))
+            urlYear = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
+            imageLoadMonth = urlMonth
+            imageLoadYear = urlYear
+            Dim _fullList As List(Of Person) = FindTodays(ThisDay, ThisMonth, False)
+            DgvPairs.Rows.Clear()
+            Do Until _fullList.Count = 0
+                Dim _sameYearList As New List(Of Person)
+                Dim _person1 As Person = _fullList(0)
+                _fullList.RemoveAt(0)
+                For Each _person2 As Person In _fullList
+                    If _person1.DateOfBirth = _person2.DateOfBirth Then
+                        _sameYearList.Add(_person2)
+                    End If
+                Next
+                For Each _matchedPerson As Person In _sameYearList
+                    _fullList.Remove(_matchedPerson)
+                Next
+                If _sameYearList.Count > 0 Then
+                    _sameYearList.Add(_person1)
+                    AddList(_sameYearList)
+                End If
+            Loop
+            Select Case True
+                Case rbImageRight.Checked
+                    rbImageRight.Checked = True
+                Case rbImageLeft.Checked
+                    rbImageLeft.Checked = True
+                Case rbImageCentre.Checked
+                    rbImageCentre.Checked = True
+            End Select
+            DgvPairs.ClearSelection()
+        Catch ex As ArgumentOutOfRangeException
+            MsgBox("No date selected", MsgBoxStyle.Exclamation, "Error")
+            Me.Close()
+        End Try
+        isBuildingPairs = False
+    End Sub
 #End Region
 End Class

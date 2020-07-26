@@ -45,12 +45,16 @@ Partial Class FrmBotsd
         Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairPerson3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairPerson4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairWpNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairUrl = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairId1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairId2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairId3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pairId4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TxtForename1 = New System.Windows.Forms.TextBox()
         Me.TxtSurname1 = New System.Windows.Forms.TextBox()
         Me.TxtShortDesc1 = New System.Windows.Forms.TextBox()
@@ -58,12 +62,10 @@ Partial Class FrmBotsd
         Me.chkSel1 = New System.Windows.Forms.CheckBox()
         Me.BtnUpdate1 = New System.Windows.Forms.Button()
         Me.LblId1 = New System.Windows.Forms.Label()
-        Me.DtpDob1 = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.ChkSel2 = New System.Windows.Forms.CheckBox()
         Me.BtnUpdate2 = New System.Windows.Forms.Button()
         Me.LblId2 = New System.Windows.Forms.Label()
-        Me.DtpDob2 = New System.Windows.Forms.DateTimePicker()
         Me.TxtShortDesc2 = New System.Windows.Forms.TextBox()
         Me.TxtForename2 = New System.Windows.Forms.TextBox()
         Me.TxtSurname2 = New System.Windows.Forms.TextBox()
@@ -78,7 +80,6 @@ Partial Class FrmBotsd
         Me.ChkSel3 = New System.Windows.Forms.CheckBox()
         Me.BtnUpdate3 = New System.Windows.Forms.Button()
         Me.LblId3 = New System.Windows.Forms.Label()
-        Me.DtpDob3 = New System.Windows.Forms.DateTimePicker()
         Me.TxtShortDesc3 = New System.Windows.Forms.TextBox()
         Me.TxtForename3 = New System.Windows.Forms.TextBox()
         Me.TxtSurname3 = New System.Windows.Forms.TextBox()
@@ -86,7 +87,6 @@ Partial Class FrmBotsd
         Me.ChkSel4 = New System.Windows.Forms.CheckBox()
         Me.BtnUpdate4 = New System.Windows.Forms.Button()
         Me.LblId4 = New System.Windows.Forms.Label()
-        Me.DtpDob4 = New System.Windows.Forms.DateTimePicker()
         Me.TxtShortDesc4 = New System.Windows.Forms.TextBox()
         Me.TxtForename4 = New System.Windows.Forms.TextBox()
         Me.TxtSurname4 = New System.Windows.Forms.TextBox()
@@ -106,6 +106,20 @@ Partial Class FrmBotsd
         Me.BtnAtoZ = New System.Windows.Forms.Button()
         Me.BtnRemove = New System.Windows.Forms.Button()
         Me.BtnAlterPostNo = New System.Windows.Forms.Button()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.ChkSel6 = New System.Windows.Forms.CheckBox()
+        Me.BtnUpdate6 = New System.Windows.Forms.Button()
+        Me.LblId6 = New System.Windows.Forms.Label()
+        Me.TxtShortDesc6 = New System.Windows.Forms.TextBox()
+        Me.TxtForename6 = New System.Windows.Forms.TextBox()
+        Me.TxtSurname6 = New System.Windows.Forms.TextBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.ChkSel5 = New System.Windows.Forms.CheckBox()
+        Me.BtnUpdate5 = New System.Windows.Forms.Button()
+        Me.LblId5 = New System.Windows.Forms.Label()
+        Me.TxtShortDesc5 = New System.Windows.Forms.TextBox()
+        Me.TxtForename5 = New System.Windows.Forms.TextBox()
+        Me.TxtSurname5 = New System.Windows.Forms.TextBox()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -116,6 +130,8 @@ Partial Class FrmBotsd
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'rtbTweet
@@ -263,7 +279,7 @@ Partial Class FrmBotsd
         Me.DgvPairs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DgvPairs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pairYear, Me.pairPerson1, Me.pairPerson2, Me.pairPerson3, Me.pairPerson4, Me.pairWpNo, Me.pairUrl, Me.pairId1, Me.pairId2, Me.pairId3, Me.pairId4})
+        Me.DgvPairs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pairYear, Me.pairPerson1, Me.pairPerson2, Me.pairPerson3, Me.pairPerson4, Me.pairPerson5, Me.pairPerson6, Me.pairWpNo, Me.pairUrl, Me.pairId1, Me.pairId2, Me.pairId3, Me.pairId4, Me.pairId5, Me.pairId6})
         Me.DgvPairs.Location = New System.Drawing.Point(12, 98)
         Me.DgvPairs.MultiSelect = False
         Me.DgvPairs.Name = "DgvPairs"
@@ -277,35 +293,49 @@ Partial Class FrmBotsd
         Me.pairYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.pairYear.HeaderText = "Year"
         Me.pairYear.Name = "pairYear"
-        Me.pairYear.Width = 60
+        Me.pairYear.Width = 50
         '
         'pairPerson1
         '
         Me.pairPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.pairPerson1.HeaderText = "Person1"
         Me.pairPerson1.Name = "pairPerson1"
-        Me.pairPerson1.Width = 130
+        Me.pairPerson1.Width = 90
         '
         'pairPerson2
         '
         Me.pairPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.pairPerson2.HeaderText = "Person2"
         Me.pairPerson2.Name = "pairPerson2"
-        Me.pairPerson2.Width = 130
+        Me.pairPerson2.Width = 90
         '
         'pairPerson3
         '
         Me.pairPerson3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.pairPerson3.HeaderText = "Person3"
         Me.pairPerson3.Name = "pairPerson3"
-        Me.pairPerson3.Width = 130
+        Me.pairPerson3.Width = 90
         '
         'pairPerson4
         '
         Me.pairPerson4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.pairPerson4.HeaderText = "Person4"
         Me.pairPerson4.Name = "pairPerson4"
-        Me.pairPerson4.Width = 130
+        Me.pairPerson4.Width = 90
+        '
+        'pairPerson5
+        '
+        Me.pairPerson5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson5.HeaderText = "Person5"
+        Me.pairPerson5.Name = "pairPerson5"
+        Me.pairPerson5.Width = 90
+        '
+        'pairPerson6
+        '
+        Me.pairPerson6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson6.HeaderText = "Person6"
+        Me.pairPerson6.Name = "pairPerson6"
+        Me.pairPerson6.Width = 90
         '
         'pairWpNo
         '
@@ -353,29 +383,41 @@ Partial Class FrmBotsd
         Me.pairId4.Visible = False
         Me.pairId4.Width = 30
         '
+        'pairId5
+        '
+        Me.pairId5.HeaderText = "Id5"
+        Me.pairId5.Name = "pairId5"
+        Me.pairId5.Visible = False
+        '
+        'pairId6
+        '
+        Me.pairId6.HeaderText = "Id6"
+        Me.pairId6.Name = "pairId6"
+        Me.pairId6.Visible = False
+        '
         'TxtForename1
         '
-        Me.TxtForename1.Location = New System.Drawing.Point(77, 21)
+        Me.TxtForename1.Location = New System.Drawing.Point(57, 21)
         Me.TxtForename1.Name = "TxtForename1"
-        Me.TxtForename1.Size = New System.Drawing.Size(148, 23)
+        Me.TxtForename1.Size = New System.Drawing.Size(83, 23)
         Me.TxtForename1.TabIndex = 37
         '
         'TxtSurname1
         '
         Me.TxtSurname1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtSurname1.Location = New System.Drawing.Point(231, 21)
+        Me.TxtSurname1.Location = New System.Drawing.Point(146, 21)
         Me.TxtSurname1.Name = "TxtSurname1"
-        Me.TxtSurname1.Size = New System.Drawing.Size(91, 23)
+        Me.TxtSurname1.Size = New System.Drawing.Size(87, 23)
         Me.TxtSurname1.TabIndex = 38
         '
         'TxtShortDesc1
         '
         Me.TxtShortDesc1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtShortDesc1.Location = New System.Drawing.Point(47, 52)
+        Me.TxtShortDesc1.Location = New System.Drawing.Point(57, 54)
         Me.TxtShortDesc1.Name = "TxtShortDesc1"
-        Me.TxtShortDesc1.Size = New System.Drawing.Size(335, 23)
+        Me.TxtShortDesc1.Size = New System.Drawing.Size(259, 23)
         Me.TxtShortDesc1.TabIndex = 39
         '
         'GroupBox1
@@ -384,13 +426,12 @@ Partial Class FrmBotsd
         Me.GroupBox1.Controls.Add(Me.chkSel1)
         Me.GroupBox1.Controls.Add(Me.BtnUpdate1)
         Me.GroupBox1.Controls.Add(Me.LblId1)
-        Me.GroupBox1.Controls.Add(Me.DtpDob1)
         Me.GroupBox1.Controls.Add(Me.TxtShortDesc1)
         Me.GroupBox1.Controls.Add(Me.TxtForename1)
         Me.GroupBox1.Controls.Add(Me.TxtSurname1)
         Me.GroupBox1.Location = New System.Drawing.Point(130, 459)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(474, 84)
+        Me.GroupBox1.Size = New System.Drawing.Size(322, 84)
         Me.GroupBox1.TabIndex = 40
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Person 1"
@@ -398,7 +439,7 @@ Partial Class FrmBotsd
         'chkSel1
         '
         Me.chkSel1.AutoSize = True
-        Me.chkSel1.Location = New System.Drawing.Point(6, 56)
+        Me.chkSel1.Location = New System.Drawing.Point(9, 56)
         Me.chkSel1.Name = "chkSel1"
         Me.chkSel1.Size = New System.Drawing.Size(15, 14)
         Me.chkSel1.TabIndex = 45
@@ -409,7 +450,7 @@ Partial Class FrmBotsd
         Me.BtnUpdate1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnUpdate1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdate1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdate1.Location = New System.Drawing.Point(388, 50)
+        Me.BtnUpdate1.Location = New System.Drawing.Point(239, 21)
         Me.BtnUpdate1.Name = "BtnUpdate1"
         Me.BtnUpdate1.Size = New System.Drawing.Size(77, 27)
         Me.BtnUpdate1.TabIndex = 42
@@ -419,19 +460,11 @@ Partial Class FrmBotsd
         'LblId1
         '
         Me.LblId1.AutoSize = True
-        Me.LblId1.Location = New System.Drawing.Point(26, 24)
+        Me.LblId1.Location = New System.Drawing.Point(6, 24)
         Me.LblId1.Name = "LblId1"
         Me.LblId1.Size = New System.Drawing.Size(45, 16)
         Me.LblId1.TabIndex = 41
         Me.LblId1.Text = "Label1"
-        '
-        'DtpDob1
-        '
-        Me.DtpDob1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DtpDob1.Location = New System.Drawing.Point(329, 22)
-        Me.DtpDob1.Name = "DtpDob1"
-        Me.DtpDob1.Size = New System.Drawing.Size(136, 23)
-        Me.DtpDob1.TabIndex = 40
         '
         'GroupBox2
         '
@@ -439,13 +472,12 @@ Partial Class FrmBotsd
         Me.GroupBox2.Controls.Add(Me.ChkSel2)
         Me.GroupBox2.Controls.Add(Me.BtnUpdate2)
         Me.GroupBox2.Controls.Add(Me.LblId2)
-        Me.GroupBox2.Controls.Add(Me.DtpDob2)
         Me.GroupBox2.Controls.Add(Me.TxtShortDesc2)
         Me.GroupBox2.Controls.Add(Me.TxtForename2)
         Me.GroupBox2.Controls.Add(Me.TxtSurname2)
         Me.GroupBox2.Location = New System.Drawing.Point(130, 549)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(474, 84)
+        Me.GroupBox2.Size = New System.Drawing.Size(322, 84)
         Me.GroupBox2.TabIndex = 41
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Person 2"
@@ -453,7 +485,7 @@ Partial Class FrmBotsd
         'ChkSel2
         '
         Me.ChkSel2.AutoSize = True
-        Me.ChkSel2.Location = New System.Drawing.Point(6, 58)
+        Me.ChkSel2.Location = New System.Drawing.Point(9, 58)
         Me.ChkSel2.Name = "ChkSel2"
         Me.ChkSel2.Size = New System.Drawing.Size(15, 14)
         Me.ChkSel2.TabIndex = 44
@@ -464,7 +496,7 @@ Partial Class FrmBotsd
         Me.BtnUpdate2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnUpdate2.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdate2.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdate2.Location = New System.Drawing.Point(387, 51)
+        Me.BtnUpdate2.Location = New System.Drawing.Point(239, 22)
         Me.BtnUpdate2.Name = "BtnUpdate2"
         Me.BtnUpdate2.Size = New System.Drawing.Size(77, 27)
         Me.BtnUpdate2.TabIndex = 43
@@ -474,43 +506,35 @@ Partial Class FrmBotsd
         'LblId2
         '
         Me.LblId2.AutoSize = True
-        Me.LblId2.Location = New System.Drawing.Point(26, 26)
+        Me.LblId2.Location = New System.Drawing.Point(6, 25)
         Me.LblId2.Name = "LblId2"
         Me.LblId2.Size = New System.Drawing.Size(45, 16)
         Me.LblId2.TabIndex = 42
-        Me.LblId2.Text = "Label3"
-        '
-        'DtpDob2
-        '
-        Me.DtpDob2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DtpDob2.Location = New System.Drawing.Point(328, 23)
-        Me.DtpDob2.Name = "DtpDob2"
-        Me.DtpDob2.Size = New System.Drawing.Size(136, 23)
-        Me.DtpDob2.TabIndex = 40
+        Me.LblId2.Text = "Label2"
         '
         'TxtShortDesc2
         '
         Me.TxtShortDesc2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtShortDesc2.Location = New System.Drawing.Point(47, 53)
+        Me.TxtShortDesc2.Location = New System.Drawing.Point(57, 52)
         Me.TxtShortDesc2.Name = "TxtShortDesc2"
-        Me.TxtShortDesc2.Size = New System.Drawing.Size(335, 23)
+        Me.TxtShortDesc2.Size = New System.Drawing.Size(259, 23)
         Me.TxtShortDesc2.TabIndex = 39
         '
         'TxtForename2
         '
-        Me.TxtForename2.Location = New System.Drawing.Point(77, 23)
+        Me.TxtForename2.Location = New System.Drawing.Point(57, 22)
         Me.TxtForename2.Name = "TxtForename2"
-        Me.TxtForename2.Size = New System.Drawing.Size(148, 23)
+        Me.TxtForename2.Size = New System.Drawing.Size(83, 23)
         Me.TxtForename2.TabIndex = 37
         '
         'TxtSurname2
         '
         Me.TxtSurname2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtSurname2.Location = New System.Drawing.Point(231, 23)
+        Me.TxtSurname2.Location = New System.Drawing.Point(146, 22)
         Me.TxtSurname2.Name = "TxtSurname2"
-        Me.TxtSurname2.Size = New System.Drawing.Size(91, 23)
+        Me.TxtSurname2.Size = New System.Drawing.Size(87, 23)
         Me.TxtSurname2.TabIndex = 38
         '
         'BtnGenerate
@@ -602,13 +626,12 @@ Partial Class FrmBotsd
         Me.GroupBox3.Controls.Add(Me.ChkSel3)
         Me.GroupBox3.Controls.Add(Me.BtnUpdate3)
         Me.GroupBox3.Controls.Add(Me.LblId3)
-        Me.GroupBox3.Controls.Add(Me.DtpDob3)
         Me.GroupBox3.Controls.Add(Me.TxtShortDesc3)
         Me.GroupBox3.Controls.Add(Me.TxtForename3)
         Me.GroupBox3.Controls.Add(Me.TxtSurname3)
-        Me.GroupBox3.Location = New System.Drawing.Point(620, 459)
+        Me.GroupBox3.Location = New System.Drawing.Point(458, 459)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(462, 84)
+        Me.GroupBox3.Size = New System.Drawing.Size(322, 84)
         Me.GroupBox3.TabIndex = 44
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Person 3"
@@ -616,7 +639,7 @@ Partial Class FrmBotsd
         'ChkSel3
         '
         Me.ChkSel3.AutoSize = True
-        Me.ChkSel3.Location = New System.Drawing.Point(6, 56)
+        Me.ChkSel3.Location = New System.Drawing.Point(9, 56)
         Me.ChkSel3.Name = "ChkSel3"
         Me.ChkSel3.Size = New System.Drawing.Size(15, 14)
         Me.ChkSel3.TabIndex = 45
@@ -627,7 +650,7 @@ Partial Class FrmBotsd
         Me.BtnUpdate3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnUpdate3.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdate3.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdate3.Location = New System.Drawing.Point(379, 49)
+        Me.BtnUpdate3.Location = New System.Drawing.Point(239, 21)
         Me.BtnUpdate3.Name = "BtnUpdate3"
         Me.BtnUpdate3.Size = New System.Drawing.Size(77, 27)
         Me.BtnUpdate3.TabIndex = 43
@@ -637,43 +660,35 @@ Partial Class FrmBotsd
         'LblId3
         '
         Me.LblId3.AutoSize = True
-        Me.LblId3.Location = New System.Drawing.Point(26, 25)
+        Me.LblId3.Location = New System.Drawing.Point(6, 24)
         Me.LblId3.Name = "LblId3"
         Me.LblId3.Size = New System.Drawing.Size(45, 16)
         Me.LblId3.TabIndex = 42
         Me.LblId3.Text = "Label3"
         '
-        'DtpDob3
-        '
-        Me.DtpDob3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DtpDob3.Location = New System.Drawing.Point(320, 21)
-        Me.DtpDob3.Name = "DtpDob3"
-        Me.DtpDob3.Size = New System.Drawing.Size(136, 23)
-        Me.DtpDob3.TabIndex = 40
-        '
         'TxtShortDesc3
         '
         Me.TxtShortDesc3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtShortDesc3.Location = New System.Drawing.Point(47, 51)
+        Me.TxtShortDesc3.Location = New System.Drawing.Point(57, 54)
         Me.TxtShortDesc3.Name = "TxtShortDesc3"
-        Me.TxtShortDesc3.Size = New System.Drawing.Size(323, 23)
+        Me.TxtShortDesc3.Size = New System.Drawing.Size(259, 23)
         Me.TxtShortDesc3.TabIndex = 39
         '
         'TxtForename3
         '
-        Me.TxtForename3.Location = New System.Drawing.Point(77, 22)
+        Me.TxtForename3.Location = New System.Drawing.Point(57, 21)
         Me.TxtForename3.Name = "TxtForename3"
-        Me.TxtForename3.Size = New System.Drawing.Size(148, 23)
+        Me.TxtForename3.Size = New System.Drawing.Size(83, 23)
         Me.TxtForename3.TabIndex = 37
         '
         'TxtSurname3
         '
         Me.TxtSurname3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtSurname3.Location = New System.Drawing.Point(231, 22)
+        Me.TxtSurname3.Location = New System.Drawing.Point(146, 21)
         Me.TxtSurname3.Name = "TxtSurname3"
-        Me.TxtSurname3.Size = New System.Drawing.Size(79, 23)
+        Me.TxtSurname3.Size = New System.Drawing.Size(87, 23)
         Me.TxtSurname3.TabIndex = 38
         '
         'GroupBox4
@@ -682,13 +697,12 @@ Partial Class FrmBotsd
         Me.GroupBox4.Controls.Add(Me.ChkSel4)
         Me.GroupBox4.Controls.Add(Me.BtnUpdate4)
         Me.GroupBox4.Controls.Add(Me.LblId4)
-        Me.GroupBox4.Controls.Add(Me.DtpDob4)
         Me.GroupBox4.Controls.Add(Me.TxtShortDesc4)
         Me.GroupBox4.Controls.Add(Me.TxtForename4)
         Me.GroupBox4.Controls.Add(Me.TxtSurname4)
-        Me.GroupBox4.Location = New System.Drawing.Point(620, 549)
+        Me.GroupBox4.Location = New System.Drawing.Point(458, 549)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(462, 84)
+        Me.GroupBox4.Size = New System.Drawing.Size(322, 84)
         Me.GroupBox4.TabIndex = 44
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Person 4"
@@ -696,7 +710,7 @@ Partial Class FrmBotsd
         'ChkSel4
         '
         Me.ChkSel4.AutoSize = True
-        Me.ChkSel4.Location = New System.Drawing.Point(6, 56)
+        Me.ChkSel4.Location = New System.Drawing.Point(9, 57)
         Me.ChkSel4.Name = "ChkSel4"
         Me.ChkSel4.Size = New System.Drawing.Size(15, 14)
         Me.ChkSel4.TabIndex = 46
@@ -707,7 +721,7 @@ Partial Class FrmBotsd
         Me.BtnUpdate4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnUpdate4.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdate4.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdate4.Location = New System.Drawing.Point(379, 52)
+        Me.BtnUpdate4.Location = New System.Drawing.Point(239, 22)
         Me.BtnUpdate4.Name = "BtnUpdate4"
         Me.BtnUpdate4.Size = New System.Drawing.Size(77, 27)
         Me.BtnUpdate4.TabIndex = 43
@@ -717,43 +731,35 @@ Partial Class FrmBotsd
         'LblId4
         '
         Me.LblId4.AutoSize = True
-        Me.LblId4.Location = New System.Drawing.Point(26, 25)
+        Me.LblId4.Location = New System.Drawing.Point(6, 25)
         Me.LblId4.Name = "LblId4"
         Me.LblId4.Size = New System.Drawing.Size(45, 16)
         Me.LblId4.TabIndex = 42
-        Me.LblId4.Text = "Label3"
-        '
-        'DtpDob4
-        '
-        Me.DtpDob4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DtpDob4.Location = New System.Drawing.Point(320, 22)
-        Me.DtpDob4.Name = "DtpDob4"
-        Me.DtpDob4.Size = New System.Drawing.Size(136, 23)
-        Me.DtpDob4.TabIndex = 40
+        Me.LblId4.Text = "Label4"
         '
         'TxtShortDesc4
         '
         Me.TxtShortDesc4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtShortDesc4.Location = New System.Drawing.Point(47, 51)
+        Me.TxtShortDesc4.Location = New System.Drawing.Point(57, 52)
         Me.TxtShortDesc4.Name = "TxtShortDesc4"
-        Me.TxtShortDesc4.Size = New System.Drawing.Size(323, 23)
+        Me.TxtShortDesc4.Size = New System.Drawing.Size(259, 23)
         Me.TxtShortDesc4.TabIndex = 39
         '
         'TxtForename4
         '
-        Me.TxtForename4.Location = New System.Drawing.Point(77, 22)
+        Me.TxtForename4.Location = New System.Drawing.Point(57, 22)
         Me.TxtForename4.Name = "TxtForename4"
-        Me.TxtForename4.Size = New System.Drawing.Size(148, 23)
+        Me.TxtForename4.Size = New System.Drawing.Size(83, 23)
         Me.TxtForename4.TabIndex = 37
         '
         'TxtSurname4
         '
         Me.TxtSurname4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtSurname4.Location = New System.Drawing.Point(231, 22)
+        Me.TxtSurname4.Location = New System.Drawing.Point(146, 22)
         Me.TxtSurname4.Name = "TxtSurname4"
-        Me.TxtSurname4.Size = New System.Drawing.Size(79, 23)
+        Me.TxtSurname4.Size = New System.Drawing.Size(87, 23)
         Me.TxtSurname4.TabIndex = 38
         '
         'GroupBox5
@@ -944,12 +950,156 @@ Partial Class FrmBotsd
         Me.BtnAlterPostNo.Text = "Alter Post #"
         Me.BtnAlterPostNo.UseVisualStyleBackColor = True
         '
+        'GroupBox6
+        '
+        Me.GroupBox6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox6.Controls.Add(Me.ChkSel6)
+        Me.GroupBox6.Controls.Add(Me.BtnUpdate6)
+        Me.GroupBox6.Controls.Add(Me.LblId6)
+        Me.GroupBox6.Controls.Add(Me.TxtShortDesc6)
+        Me.GroupBox6.Controls.Add(Me.TxtForename6)
+        Me.GroupBox6.Controls.Add(Me.TxtSurname6)
+        Me.GroupBox6.Location = New System.Drawing.Point(786, 549)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(322, 84)
+        Me.GroupBox6.TabIndex = 47
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Person 6"
+        '
+        'ChkSel6
+        '
+        Me.ChkSel6.AutoSize = True
+        Me.ChkSel6.Location = New System.Drawing.Point(9, 56)
+        Me.ChkSel6.Name = "ChkSel6"
+        Me.ChkSel6.Size = New System.Drawing.Size(15, 14)
+        Me.ChkSel6.TabIndex = 46
+        Me.ChkSel6.UseVisualStyleBackColor = True
+        '
+        'BtnUpdate6
+        '
+        Me.BtnUpdate6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnUpdate6.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate6.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdate6.Location = New System.Drawing.Point(239, 21)
+        Me.BtnUpdate6.Name = "BtnUpdate6"
+        Me.BtnUpdate6.Size = New System.Drawing.Size(77, 27)
+        Me.BtnUpdate6.TabIndex = 43
+        Me.BtnUpdate6.Text = "Update"
+        Me.BtnUpdate6.UseVisualStyleBackColor = True
+        '
+        'LblId6
+        '
+        Me.LblId6.AutoSize = True
+        Me.LblId6.Location = New System.Drawing.Point(6, 25)
+        Me.LblId6.Name = "LblId6"
+        Me.LblId6.Size = New System.Drawing.Size(45, 16)
+        Me.LblId6.TabIndex = 42
+        Me.LblId6.Text = "Label6"
+        '
+        'TxtShortDesc6
+        '
+        Me.TxtShortDesc6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtShortDesc6.Location = New System.Drawing.Point(57, 52)
+        Me.TxtShortDesc6.Name = "TxtShortDesc6"
+        Me.TxtShortDesc6.Size = New System.Drawing.Size(259, 23)
+        Me.TxtShortDesc6.TabIndex = 39
+        '
+        'TxtForename6
+        '
+        Me.TxtForename6.Location = New System.Drawing.Point(57, 22)
+        Me.TxtForename6.Name = "TxtForename6"
+        Me.TxtForename6.Size = New System.Drawing.Size(83, 23)
+        Me.TxtForename6.TabIndex = 37
+        '
+        'TxtSurname6
+        '
+        Me.TxtSurname6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtSurname6.Location = New System.Drawing.Point(146, 22)
+        Me.TxtSurname6.Name = "TxtSurname6"
+        Me.TxtSurname6.Size = New System.Drawing.Size(87, 23)
+        Me.TxtSurname6.TabIndex = 38
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox7.Controls.Add(Me.ChkSel5)
+        Me.GroupBox7.Controls.Add(Me.BtnUpdate5)
+        Me.GroupBox7.Controls.Add(Me.LblId5)
+        Me.GroupBox7.Controls.Add(Me.TxtShortDesc5)
+        Me.GroupBox7.Controls.Add(Me.TxtForename5)
+        Me.GroupBox7.Controls.Add(Me.TxtSurname5)
+        Me.GroupBox7.Location = New System.Drawing.Point(786, 459)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(322, 84)
+        Me.GroupBox7.TabIndex = 48
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Person 5"
+        '
+        'ChkSel5
+        '
+        Me.ChkSel5.AutoSize = True
+        Me.ChkSel5.Location = New System.Drawing.Point(9, 59)
+        Me.ChkSel5.Name = "ChkSel5"
+        Me.ChkSel5.Size = New System.Drawing.Size(15, 14)
+        Me.ChkSel5.TabIndex = 45
+        Me.ChkSel5.UseVisualStyleBackColor = True
+        '
+        'BtnUpdate5
+        '
+        Me.BtnUpdate5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnUpdate5.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate5.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdate5.Location = New System.Drawing.Point(239, 20)
+        Me.BtnUpdate5.Name = "BtnUpdate5"
+        Me.BtnUpdate5.Size = New System.Drawing.Size(77, 27)
+        Me.BtnUpdate5.TabIndex = 43
+        Me.BtnUpdate5.Text = "Update"
+        Me.BtnUpdate5.UseVisualStyleBackColor = True
+        '
+        'LblId5
+        '
+        Me.LblId5.AutoSize = True
+        Me.LblId5.Location = New System.Drawing.Point(6, 24)
+        Me.LblId5.Name = "LblId5"
+        Me.LblId5.Size = New System.Drawing.Size(45, 16)
+        Me.LblId5.TabIndex = 42
+        Me.LblId5.Text = "Label5"
+        '
+        'TxtShortDesc5
+        '
+        Me.TxtShortDesc5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtShortDesc5.Location = New System.Drawing.Point(57, 54)
+        Me.TxtShortDesc5.Name = "TxtShortDesc5"
+        Me.TxtShortDesc5.Size = New System.Drawing.Size(259, 23)
+        Me.TxtShortDesc5.TabIndex = 39
+        '
+        'TxtForename5
+        '
+        Me.TxtForename5.Location = New System.Drawing.Point(57, 21)
+        Me.TxtForename5.Name = "TxtForename5"
+        Me.TxtForename5.Size = New System.Drawing.Size(83, 23)
+        Me.TxtForename5.TabIndex = 37
+        '
+        'TxtSurname5
+        '
+        Me.TxtSurname5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtSurname5.Location = New System.Drawing.Point(146, 21)
+        Me.TxtSurname5.Name = "TxtSurname5"
+        Me.TxtSurname5.Size = New System.Drawing.Size(87, 23)
+        Me.TxtSurname5.TabIndex = 38
+        '
         'FrmBotsd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1354, 677)
+        Me.Controls.Add(Me.GroupBox6)
+        Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.BtnAlterPostNo)
         Me.Controls.Add(Me.BtnRemove)
         Me.Controls.Add(Me.BtnAtoZ)
@@ -1005,6 +1155,10 @@ Partial Class FrmBotsd
         Me.GroupBox4.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1024,10 +1178,8 @@ Partial Class FrmBotsd
     Friend WithEvents TxtShortDesc1 As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents LblId1 As Label
-    Friend WithEvents DtpDob1 As DateTimePicker
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents LblId2 As Label
-    Friend WithEvents DtpDob2 As DateTimePicker
     Friend WithEvents TxtShortDesc2 As TextBox
     Friend WithEvents TxtForename2 As TextBox
     Friend WithEvents TxtSurname2 As TextBox
@@ -1044,14 +1196,12 @@ Partial Class FrmBotsd
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents BtnUpdate3 As Button
     Friend WithEvents LblId3 As Label
-    Friend WithEvents DtpDob3 As DateTimePicker
     Friend WithEvents TxtShortDesc3 As TextBox
     Friend WithEvents TxtForename3 As TextBox
     Friend WithEvents TxtSurname3 As TextBox
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents BtnUpdate4 As Button
     Friend WithEvents LblId4 As Label
-    Friend WithEvents DtpDob4 As DateTimePicker
     Friend WithEvents TxtShortDesc4 As TextBox
     Friend WithEvents TxtForename4 As TextBox
     Friend WithEvents TxtSurname4 As TextBox
@@ -1079,17 +1229,35 @@ Partial Class FrmBotsd
     Friend WithEvents cboMonth As ComboBox
     Friend WithEvents BtnSelect As Button
     Friend WithEvents BtnAtoZ As Button
+    Friend WithEvents BtnRemove As Button
+    Friend WithEvents BtnAlterPostNo As Button
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents ChkSel6 As CheckBox
+    Friend WithEvents BtnUpdate6 As Button
+    Friend WithEvents LblId6 As Label
+    Friend WithEvents TxtShortDesc6 As TextBox
+    Friend WithEvents TxtForename6 As TextBox
+    Friend WithEvents TxtSurname6 As TextBox
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents ChkSel5 As CheckBox
+    Friend WithEvents BtnUpdate5 As Button
+    Friend WithEvents LblId5 As Label
+    Friend WithEvents TxtShortDesc5 As TextBox
+    Friend WithEvents TxtForename5 As TextBox
+    Friend WithEvents TxtSurname5 As TextBox
     Friend WithEvents pairYear As DataGridViewTextBoxColumn
     Friend WithEvents pairPerson1 As DataGridViewTextBoxColumn
     Friend WithEvents pairPerson2 As DataGridViewTextBoxColumn
     Friend WithEvents pairPerson3 As DataGridViewTextBoxColumn
     Friend WithEvents pairPerson4 As DataGridViewTextBoxColumn
+    Friend WithEvents pairPerson5 As DataGridViewTextBoxColumn
+    Friend WithEvents pairPerson6 As DataGridViewTextBoxColumn
     Friend WithEvents pairWpNo As DataGridViewTextBoxColumn
     Friend WithEvents pairUrl As DataGridViewTextBoxColumn
     Friend WithEvents pairId1 As DataGridViewTextBoxColumn
     Friend WithEvents pairId2 As DataGridViewTextBoxColumn
     Friend WithEvents pairId3 As DataGridViewTextBoxColumn
     Friend WithEvents pairId4 As DataGridViewTextBoxColumn
-    Friend WithEvents BtnRemove As Button
-    Friend WithEvents BtnAlterPostNo As Button
+    Friend WithEvents pairId5 As DataGridViewTextBoxColumn
+    Friend WithEvents pairId6 As DataGridViewTextBoxColumn
 End Class
