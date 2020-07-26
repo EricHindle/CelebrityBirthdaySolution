@@ -156,6 +156,7 @@ Public Class FrmUpdateDatabase
                 End If
                 DisplayPersonList()
                 lbPeople.SelectedIndex = p
+                LblSortSeq.Text = CStr(newPerson.Sortseq)
                 newPerson.Dispose()
             Catch ex As DbException
                 MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
@@ -679,6 +680,7 @@ Public Class FrmUpdateDatabase
         txtForename.Text = ""
         txtSurname.Text = ""
         txtYear.Text = ""
+        LblSortSeq.Text = 0
         PictureBox1.ImageLocation = ""
         txtBirthName.Text = ""
         txtBirthPlace.Text = ""
@@ -800,6 +802,7 @@ Public Class FrmUpdateDatabase
         txtDesc.Text = oPerson.Description
         txtShortDesc.Text = oPerson.ShortDesc
         txtYear.Text = CStr(oPerson.BirthYear)
+        LblSortSeq.Text = CStr(oPerson.Sortseq)
         txtDied.Text = CStr(oPerson.DeathYear)
         txtDthDay.Text = CStr(oPerson.DeathDay)
         txtDthMth.Text = CStr(oPerson.DeathMonth)

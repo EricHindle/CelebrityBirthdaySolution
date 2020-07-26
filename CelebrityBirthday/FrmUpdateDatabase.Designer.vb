@@ -107,6 +107,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnPasteBirthname = New System.Windows.Forms.Button()
         Me.BtnPasteBirthplace = New System.Windows.Forms.Button()
         Me.BtnPasteShort = New System.Windows.Forms.Button()
+        Me.LblSortSeq = New System.Windows.Forms.Label()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -204,82 +205,82 @@ Partial Class FrmUpdateDatabase
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UseNicknameToolStripMenuItem, Me.ShortenNameToolStripMenuItem, Me.UseNameTextToolStripMenuItem, Me.ToolStripSeparator3, Me.UpperCaseToolStripMenuItem, Me.LowercaseToolStripMenuItem, Me.TitleCaseToolStripMenuItem, Me.ToolStripSeparator2, Me.CopyToolStripMenuItem, Me.CutToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ClearToolStripMenuItem, Me.SelectAllToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 280)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(155, 258)
         '
         'UseNicknameToolStripMenuItem
         '
         Me.UseNicknameToolStripMenuItem.Name = "UseNicknameToolStripMenuItem"
-        Me.UseNicknameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UseNicknameToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.UseNicknameToolStripMenuItem.Text = "Use Nickname"
         '
         'ShortenNameToolStripMenuItem
         '
         Me.ShortenNameToolStripMenuItem.Name = "ShortenNameToolStripMenuItem"
-        Me.ShortenNameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ShortenNameToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.ShortenNameToolStripMenuItem.Text = "Shorten Name"
         '
         'UseNameTextToolStripMenuItem
         '
         Me.UseNameTextToolStripMenuItem.Name = "UseNameTextToolStripMenuItem"
-        Me.UseNameTextToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UseNameTextToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.UseNameTextToolStripMenuItem.Text = "Use Title Name"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(151, 6)
         '
         'UpperCaseToolStripMenuItem
         '
         Me.UpperCaseToolStripMenuItem.Name = "UpperCaseToolStripMenuItem"
-        Me.UpperCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UpperCaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.UpperCaseToolStripMenuItem.Text = "UPPERCASE"
         '
         'LowercaseToolStripMenuItem
         '
         Me.LowercaseToolStripMenuItem.Name = "LowercaseToolStripMenuItem"
-        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.LowercaseToolStripMenuItem.Text = "lowercase"
         '
         'TitleCaseToolStripMenuItem
         '
         Me.TitleCaseToolStripMenuItem.Name = "TitleCaseToolStripMenuItem"
-        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.TitleCaseToolStripMenuItem.Text = "Title Case"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(151, 6)
         '
         'CopyToolStripMenuItem
         '
         Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.CopyToolStripMenuItem.Text = "Copy"
         '
         'CutToolStripMenuItem
         '
         Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
-        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.CutToolStripMenuItem.Text = "Cut"
         '
         'PasteToolStripMenuItem
         '
         Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
-        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.PasteToolStripMenuItem.Text = "Paste"
         '
         'ClearToolStripMenuItem
         '
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.ClearToolStripMenuItem.Text = "Clear"
         '
         'SelectAllToolStripMenuItem
         '
         Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
-        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.SelectAllToolStripMenuItem.Text = "Select All"
         '
         'btnClearDesc
@@ -298,7 +299,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.txtDthMth.AllowDrop = True
         Me.txtDthMth.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDthMth.Location = New System.Drawing.Point(387, 97)
+        Me.txtDthMth.Location = New System.Drawing.Point(448, 98)
         Me.txtDthMth.Name = "txtDthMth"
         Me.txtDthMth.Size = New System.Drawing.Size(34, 24)
         Me.txtDthMth.TabIndex = 5
@@ -341,7 +342,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.txtDthDay.AllowDrop = True
         Me.txtDthDay.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDthDay.Location = New System.Drawing.Point(346, 97)
+        Me.txtDthDay.Location = New System.Drawing.Point(407, 98)
         Me.txtDthDay.Name = "txtDthDay"
         Me.txtDthDay.Size = New System.Drawing.Size(33, 24)
         Me.txtDthDay.TabIndex = 4
@@ -545,7 +546,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.txtDied.AllowDrop = True
         Me.txtDied.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDied.Location = New System.Drawing.Point(429, 97)
+        Me.txtDied.Location = New System.Drawing.Point(490, 98)
         Me.txtDied.Name = "txtDied"
         Me.txtDied.Size = New System.Drawing.Size(61, 24)
         Me.txtDied.TabIndex = 6
@@ -555,7 +556,7 @@ Partial Class FrmUpdateDatabase
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(271, 102)
+        Me.Label7.Location = New System.Drawing.Point(332, 103)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(40, 14)
         Me.Label7.TabIndex = 37
@@ -1096,12 +1097,23 @@ Partial Class FrmUpdateDatabase
         Me.BtnPasteShort.TabIndex = 140
         Me.BtnPasteShort.UseVisualStyleBackColor = True
         '
+        'LblSortSeq
+        '
+        Me.LblSortSeq.AutoSize = True
+        Me.LblSortSeq.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblSortSeq.Location = New System.Drawing.Point(247, 98)
+        Me.LblSortSeq.Name = "LblSortSeq"
+        Me.LblSortSeq.Size = New System.Drawing.Size(18, 19)
+        Me.LblSortSeq.TabIndex = 141
+        Me.LblSortSeq.Text = "0"
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1293, 923)
+        Me.Controls.Add(Me.LblSortSeq)
         Me.Controls.Add(Me.BtnPasteShort)
         Me.Controls.Add(Me.BtnPasteBirthplace)
         Me.Controls.Add(Me.BtnPasteBirthname)
@@ -1280,4 +1292,5 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents BtnPasteBirthname As Button
     Friend WithEvents BtnPasteBirthplace As Button
     Friend WithEvents BtnPasteShort As Button
+    Friend WithEvents LblSortSeq As Label
 End Class
