@@ -554,8 +554,12 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
         ShowStatus("WordPress")
-
-        Using _wordpress As New FrmWordPress
+        If CheckForChanges(personTable) Then
+            If MsgBox("Save unsaved changes now?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Unsaved Changes") = MsgBoxResult.Yes Then
+                UpdateAll()
+            End If
+        End If
+            Using _wordpress As New FrmWordPress
             _wordpress.DaySelection = cboDay.SelectedIndex + 1
             _wordpress.MonthSelection = cboMonth.SelectedIndex + 1
             _wordpress.ShowDialog()
