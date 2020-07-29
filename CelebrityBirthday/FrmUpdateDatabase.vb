@@ -193,45 +193,17 @@ Public Class FrmUpdateDatabase
         DisplayPersonList()
     End Sub
     Private Sub BtnUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUp.Click
-        Dim ix As Integer
+        Dim ix As Integer = lbPeople.SelectedIndex
+        Dim prevIx As Integer = ix - 1
         If lbPeople.SelectedIndex > 0 Then
-            ix = lbPeople.SelectedIndex
-            Dim prevPerson As New Person(personTable(ix - 1))
-            Dim thisperson As New Person(personTable(ix))
-            Dim isseq As Integer = prevPerson.Sortseq
-            If prevPerson.IBirthYear >= thisperson.IBirthYear Then
-                prevPerson.Sortseq = thisperson.Sortseq
-                thisperson.Sortseq = isseq
-                prevPerson.UnsavedChanges = True
-                thisperson.UnsavedChanges = True
-                personTable(ix - 1) = thisperson
-                personTable(ix) = prevPerson
-                DisplayPersonList()
-                lbPeople.SelectedIndex = ix - 1
-            End If
-            prevPerson.Dispose()
-            thisperson.Dispose()
+            SwapPersons(ix, prevIx)
         End If
     End Sub
     Private Sub BtnDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDown.Click
-        Dim ix As Integer
+        Dim ix As Integer = lbPeople.SelectedIndex
+        Dim nextIx As Integer = ix + 1
         If lbPeople.SelectedIndex >= 0 And lbPeople.SelectedIndex < lbPeople.Items.Count - 1 Then
-            ix = lbPeople.SelectedIndex
-            Dim nextPerson As New Person(personTable(ix + 1))
-            Dim thisperson As New Person(personTable(ix))
-            Dim isseq As Integer = nextPerson.Sortseq
-            If nextPerson.IBirthYear <= thisperson.IBirthYear Then
-                nextPerson.Sortseq = thisperson.Sortseq
-                thisperson.Sortseq = isseq
-                nextPerson.UnsavedChanges = True
-                thisperson.UnsavedChanges = True
-                personTable(ix + 1) = thisperson
-                personTable(ix) = nextPerson
-                DisplayPersonList()
-                lbPeople.SelectedIndex = ix + 1
-            End If
-            nextPerson.Dispose()
-            thisperson.Dispose()
+            SwapPersons(ix, nextIx)
         End If
     End Sub
     Private Sub BtnUpdateAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateAll.Click
@@ -1041,6 +1013,23 @@ Public Class FrmUpdateDatabase
         _parts(2) = _parts(2).Replace(_stageName & ",", "").Replace("commonly ", "").Replace("professionally ", "").Replace("better ", "").Replace("also ", "").Replace(", known as ", "")
         Return _parts
     End Function
-
+    Private Sub SwapPersons(fromIx As Integer, toIx As Integer)
+        Dim thisperson As New Person(personTable(fromIx))
+        Dim thatPerson As New Person(personTable(toIx))
+        Dim isseq As Integer = thatPerson.Sortseq
+        If thatPerson.IBirthYear = thisperson.IBirthYear Then
+            thatPerson.Sortseq = thisperson.Sortseq
+            thisperson.Sortseq = isseq
+            thatPerson.UnsavedChanges = True
+            thisperson.UnsavedChanges = True
+            personTable(toIx) = thisperson
+            personTable(fromIx) = thatPerson
+            DisplayPersonList()
+            lbPeople.SelectedIndex = toIx
+            LblSortSeq.Text = CStr(thisperson.Sortseq)
+        End If
+        thatPerson.Dispose()
+        thisperson.Dispose()
+    End Sub
 #End Region
 End Class
