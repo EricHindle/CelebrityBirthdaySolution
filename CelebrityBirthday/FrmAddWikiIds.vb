@@ -90,8 +90,13 @@ Public Class FrmAddWikiIds
     End Sub
     Private Sub BtnSingleUpdate_Click(sender As Object, e As EventArgs) Handles BtnSingleUpdate.Click
         Dim pPersonId As Integer = CInt(LblId.Text)
-        If pPersonId > 0 AndAlso lbWikiIds.SelectedIndex >= 0 Then
-            Dim pWikiId As String = lbWikiIds.SelectedItem
+        Dim pWikiId As String = ""
+        If pPersonId > 0 Then
+            If Not String.IsNullOrEmpty(TxtUseThis.Text) Then
+                pWikiId = TxtUseThis.Text.Trim
+            ElseIf lbWikiIds.SelectedIndex >= 0 Then
+                pWikiId = lbWikiIds.SelectedItem
+            End If
             If Not String.IsNullOrEmpty(pWikiId) Then
                 UpdateWikiId(pPersonId, pWikiId)
                 DisplayMessage("Updated " & pWikiId)
@@ -99,7 +104,7 @@ Public Class FrmAddWikiIds
             End If
         End If
     End Sub
-    Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
+    Private Sub BtnWrite_Click(sender As Object, e As EventArgs)
         Dim ict As Integer = 0
         For Each oRow As DataGridViewRow In dgvWikiIds.Rows
             ict += 1
@@ -199,6 +204,7 @@ Public Class FrmAddWikiIds
         txtShortDesc.Text = ""
         LblId.Text = -1
         txtWiki.Text = ""
+        TxtUseThis.Text = ""
     End Sub
 
     Private Sub LbWikiIds_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lbWikiIds.SelectedIndexChanged

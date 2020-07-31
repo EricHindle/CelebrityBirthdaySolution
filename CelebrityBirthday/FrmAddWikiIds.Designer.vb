@@ -32,7 +32,6 @@ Partial Class FrmAddWikiIds
         Me.xExclude = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.xAlternates = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.BtnWrite = New System.Windows.Forms.Button()
         Me.BtnStart = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
@@ -45,6 +44,8 @@ Partial Class FrmAddWikiIds
         Me.LblId = New System.Windows.Forms.Label()
         Me.lbWikiIds = New System.Windows.Forms.ListBox()
         Me.txtWiki = New System.Windows.Forms.TextBox()
+        Me.TxtUseThis = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         CType(Me.dgvWikiIds, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.nudSelectCount, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,19 +130,6 @@ Partial Class FrmAddWikiIds
         Me.btnClose.TabIndex = 19
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
-        '
-        'BtnWrite
-        '
-        Me.BtnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnWrite.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnWrite.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWrite.Location = New System.Drawing.Point(1022, 412)
-        Me.BtnWrite.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.BtnWrite.Name = "BtnWrite"
-        Me.BtnWrite.Size = New System.Drawing.Size(162, 41)
-        Me.BtnWrite.TabIndex = 21
-        Me.BtnWrite.Text = "Auto Update"
-        Me.BtnWrite.UseVisualStyleBackColor = True
         '
         'BtnStart
         '
@@ -232,7 +220,7 @@ Partial Class FrmAddWikiIds
         Me.BtnSingleUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSingleUpdate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSingleUpdate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSingleUpdate.Location = New System.Drawing.Point(773, 476)
+        Me.BtnSingleUpdate.Location = New System.Drawing.Point(1022, 353)
         Me.BtnSingleUpdate.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnSingleUpdate.Name = "BtnSingleUpdate"
         Me.BtnSingleUpdate.Size = New System.Drawing.Size(162, 41)
@@ -274,12 +262,34 @@ Partial Class FrmAddWikiIds
         Me.txtWiki.Size = New System.Drawing.Size(269, 132)
         Me.txtWiki.TabIndex = 50
         '
+        'TxtUseThis
+        '
+        Me.TxtUseThis.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TxtUseThis.Location = New System.Drawing.Point(804, 487)
+        Me.TxtUseThis.Name = "TxtUseThis"
+        Me.TxtUseThis.Size = New System.Drawing.Size(186, 24)
+        Me.TxtUseThis.TabIndex = 51
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Label2.Location = New System.Drawing.Point(721, 489)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(65, 22)
+        Me.Label2.TabIndex = 52
+        Me.Label2.Text = "Use this"
+        '
         'FrmAddWikiIds
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1196, 554)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.TxtUseThis)
         Me.Controls.Add(Me.txtWiki)
         Me.Controls.Add(Me.lbWikiIds)
         Me.Controls.Add(Me.LblId)
@@ -292,7 +302,6 @@ Partial Class FrmAddWikiIds
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.dgvWikiIds)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.BtnWrite)
         Me.Controls.Add(Me.BtnStart)
         Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -310,7 +319,6 @@ Partial Class FrmAddWikiIds
 
     Friend WithEvents dgvWikiIds As DataGridView
     Friend WithEvents btnClose As Button
-    Friend WithEvents BtnWrite As Button
     Friend WithEvents BtnStart As Button
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblStatus As ToolStripStatusLabel
@@ -330,4 +338,6 @@ Partial Class FrmAddWikiIds
     Friend WithEvents LblId As Label
     Friend WithEvents lbWikiIds As ListBox
     Friend WithEvents txtWiki As TextBox
+    Friend WithEvents TxtUseThis As TextBox
+    Friend WithEvents Label2 As Label
 End Class
