@@ -8,13 +8,16 @@ Imports System.Web.Script.Serialization
 Public Class FrmAddWikiIds
 #Region "variables"
     Private personTable As List(Of Person)
+    Private isLoadingTable As Boolean
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+        isLoadingTable = True
         dgvWikiIds.Rows.Clear()
+        ClearPersonDetails()
         DisplayMessage("Finding everybody")
         Try
             personTable = FindEverybody()
@@ -31,21 +34,70 @@ Public Class FrmAddWikiIds
             _ct += 1
             DisplayMessage(CStr(_ct) & " of " & CStr(totalPeople))
             If String.IsNullOrEmpty(_person.Social.WikiId) Then
-                Dim _searchName As String = If(String.IsNullOrEmpty(_person.ForeName), "", _person.ForeName.Trim & " ") & _person.Surname.Trim
-                Dim _response As WebResponse = NavigateToUrl(GetWikiTitleString(_searchName))
-                Dim pageTitle As List(Of String) = GetDataFromResponse(_response)
-                _addedCt += AddWikiIdRow(_person, pageTitle)
+                Dim searchName As String = If(String.IsNullOrEmpty(_person.ForeName), "", _person.ForeName.Trim & " ") & _person.Surname.Trim
+                FindPossibleWikiIds(_addedCt, _person, searchName)
                 If nudSelectCount.Value > 0 AndAlso _addedCt = nudSelectCount.Value Then
                     Exit For
                 End If
-                Dim remainder As Integer
-                Math.DivRem(_ct, 20, remainder)
-                If remainder = 0 Then
-                    dgvWikiIds.Refresh()
+            Else
+                Dim wikiText As String = GetWikiText(2, _person.ForeName, _person.Surname, _person.Social.WikiId)
+                If wikiText.Contains("may refer to") Then
+                    Dim searchName As String = _person.Social.WikiId
+                    FindPossibleWikiIds(_addedCt, _person, searchName)
+                    If nudSelectCount.Value > 0 AndAlso _addedCt = nudSelectCount.Value Then
+                        Exit For
+                    End If
                 End If
             End If
             _person.Dispose()
         Next
+        DisplayMessage("Find Complete")
+        dgvWikiIds.ClearSelection()
+        isLoadingTable = False
+    End Sub
+    Private Sub FindPossibleWikiIds(ByRef _addedCt As Integer, _person As Person, ByRef searchName As String)
+        Dim pageTitle As New List(Of String)
+        Dim allDone As Boolean = False
+        Do Until allDone
+            Dim searchstring As String = GetWikiTitleString(searchName)
+            Dim _response As WebResponse = NavigateToUrl(searchstring)
+            Dim _continue As String = ""
+            Dim addList As List(Of String) = GetDataFromResponse(_response, _continue)
+            pageTitle.AddRange(addList)
+            If String.IsNullOrEmpty(_continue) Then
+                allDone = True
+            Else
+                searchName = _continue
+            End If
+        Loop
+        _addedCt += AddWikiIdRow(_person, pageTitle, False)
+    End Sub
+    Private Sub DgvWikiIds_SelectionChanged(sender As Object, e As EventArgs) Handles dgvWikiIds.SelectionChanged
+        If Not isLoadingTable Then
+            ClearPersonDetails()
+            If dgvWikiIds.SelectedRows.Count = 1 Then
+                Dim oRow As DataGridViewRow = dgvWikiIds.SelectedRows(0)
+                LblId.Text = oRow.Cells(xId.Name).Value
+                TxtFullName.Text = oRow.Cells(xName.Name).Value
+                TxtDob.Text = oRow.Cells(xDob.Name).Value
+                txtShortDesc.Text = oRow.Cells(xShortDesc.Name).Value
+                Dim _wikiIds As List(Of String) = Split(oRow.Cells(xAlternates.Name).Value, "|").ToList
+                For Each _wikiId As String In _wikiIds
+                    lbWikiIds.Items.Add(_wikiId)
+                Next
+            End If
+        End If
+    End Sub
+    Private Sub BtnSingleUpdate_Click(sender As Object, e As EventArgs) Handles BtnSingleUpdate.Click
+        Dim pPersonId As Integer = CInt(LblId.Text)
+        If pPersonId > 0 AndAlso lbWikiIds.SelectedIndex >= 0 Then
+            Dim pWikiId As String = lbWikiIds.SelectedItem
+            If Not String.IsNullOrEmpty(pWikiId) Then
+                UpdateWikiId(pPersonId, pWikiId)
+                DisplayMessage("Updated " & pWikiId)
+                ClearPersonDetails()
+            End If
+        End If
     End Sub
     Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
         Dim ict As Integer = 0
@@ -58,19 +110,20 @@ Public Class FrmAddWikiIds
                 Else
                     UpdateWikiId(oRow.Cells(xId.Name).Value, oRow.Cells(xDesc.Name).Value)
                 End If
-
             End If
         Next
     End Sub
 #End Region
 #Region "subroutines"
-    Private Function AddWikiIdRow(pPerson As Person, pageTitles As List(Of String)) As Integer
+    Private Function AddWikiIdRow(pPerson As Person, pageTitles As List(Of String), Optional isAutoUpdate As Boolean = False) As Integer
         Dim isAdded As Integer = 0
         If pPerson IsNot Nothing And pageTitles IsNot Nothing Then
             Dim oRow As DataGridViewRow = dgvWikiIds.Rows(dgvWikiIds.Rows.Add())
             oRow.Cells(xExclude.Name).Value = True
             oRow.Cells(xId.Name).Value = pPerson.Id
             oRow.Cells(xName.Name).Value = pPerson.Name
+            oRow.Cells(xDob.Name).Value = Format(pPerson.DateOfBirth, "dd-MMM-yyyy")
+            oRow.Cells(xShortDesc.Name).Value = pPerson.ShortDesc.Substring(0, Math.Min(30, pPerson.ShortDesc.Length))
             If pageTitles.Count > 0 Then
                 Dim alts As New StringBuilder()
                 For Each _title As String In pageTitles
@@ -78,8 +131,9 @@ Public Class FrmAddWikiIds
                 Next
                 oRow.Cells(xAlternates.Name).Value = alts.ToString
                 oRow.Cells(xDesc.Name).Value = pageTitles(0)
-                oRow.Cells(xExclude.Name).Value = False
+                oRow.Cells(xExclude.Name).Value = Not isAutoUpdate
                 isAdded = 1
+                dgvWikiIds.Refresh()
             End If
         End If
         Return isAdded
@@ -88,7 +142,7 @@ Public Class FrmAddWikiIds
         lblStatus.Text = oText
         StatusStrip1.Refresh()
     End Sub
-    Public Shared Function GetDataFromResponse(pResponse As WebResponse) As List(Of String)
+    Public Shared Function GetDataFromResponse(ByRef pResponse As WebResponse, ByRef pContinue As String) As List(Of String)
         Dim oExtract As String
         Dim wikipage As String
         Dim titleList As New List(Of String)
@@ -98,6 +152,12 @@ Public Class FrmAddWikiIds
                 wikipage = sr.ReadToEnd
                 Dim jss As New JavaScriptSerializer()
                 Dim extractDictionary As Dictionary(Of String, Object) = jss.Deserialize(Of Dictionary(Of String, Object))(wikipage)
+                If extractDictionary.ContainsKey("continue") Then
+                    Dim contDictionary As Dictionary(Of String, Object) = extractDictionary("continue")
+                    If contDictionary.ContainsKey("apcontinue") Then
+                        pContinue = TryCast(contDictionary("apcontinue"), String)
+                    End If
+                End If
                 If extractDictionary.ContainsKey("query") Then
                     Dim queryDictionary As Dictionary(Of String, Object) = extractDictionary("query")
                     If queryDictionary.ContainsKey("allpages") Then
@@ -132,5 +192,21 @@ Public Class FrmAddWikiIds
         End If
         Return titleList
     End Function
+    Private Sub ClearPersonDetails()
+        lbWikiIds.Items.Clear()
+        TxtFullName.Text = ""
+        TxtDob.Text = ""
+        txtShortDesc.Text = ""
+        LblId.Text = -1
+        txtWiki.Text = ""
+    End Sub
+
+    Private Sub LbWikiIds_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lbWikiIds.SelectedIndexChanged
+        If lbWikiIds.SelectedIndex >= 0 Then
+            txtWiki.Text = GetWikiText(2, "", "", lbWikiIds.SelectedItem)
+        Else
+            txtWiki.Text = ""
+        End If
+    End Sub
 #End Region
 End Class

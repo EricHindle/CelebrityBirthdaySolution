@@ -523,7 +523,7 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
-        txtDesc.Text = GetWikiText(NudSentences.Value)
+        txtDesc.Text = GetWikiText(NudSentences.Value, txtForename.Text, txtSurname.Text, TxtWikiId.Text)
     End Sub
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
         ShowStatus("WordPress")
@@ -781,7 +781,6 @@ Public Class FrmUpdateDatabase
         txtBirthName.Text = oPerson.BirthName
         txtBirthPlace.Text = oPerson.BirthPlace
         txtName.Text = MakeFullName(oPerson.ForeName, oPerson.Surname)
-        txtWiki.Text = GetWikiText(2)
         Dim sYear As String = TxtImageLoadYr.Text
         Dim sMth As String = TxtImageLoadMth.Text
         If oPerson.Image IsNot Nothing Then
@@ -792,6 +791,7 @@ Public Class FrmUpdateDatabase
             cbNoTweet.Checked = oPerson.Social.IsNoTweet
             TxtWikiId.Text = oPerson.Social.WikiId
         End If
+        txtWiki.Text = GetWikiText(NudSentences.Value, oPerson.ForeName, oPerson.Surname, TxtWikiId.Text)
         bLoadingPerson = False
     End Sub
     Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False)
@@ -924,12 +924,12 @@ Public Class FrmUpdateDatabase
         End If
         Return isExtract
     End Function
-    Private Function GetWikiText(_sentences As Integer) As String
-        Dim _searchName As String = MakeFullName(txtForename.Text, txtSurname.Text)
-        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _sentences))
-        Dim extract As String = GetExtractFromResponse(_response)
-        Return extract
-    End Function
+    'Private Function GetWikiText(_sentences As Integer, Optional wikiId As String = "") As String
+    '    Dim _searchName As String = If(String.IsNullOrEmpty(wikiId), MakeFullName(txtForename.Text, txtSurname.Text), wikiId)
+    '    Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _sentences))
+    '    Dim extract As String = GetExtractFromResponse(_response)
+    '    Return extract
+    'End Function
     Private Function TidyText() As List(Of String)
         Dim newText As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
         Dim _parts As List(Of String) = ParseStringWithBrackets(newText)

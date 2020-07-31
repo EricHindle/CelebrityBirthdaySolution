@@ -227,7 +227,8 @@ Friend Module modCbday
         Return My.Settings.wikiExtractSearch.Replace("#", CStr(sentences)) & oText.Replace(" ", "+")
     End Function
     Public Function GetWikiTitleString(oSearchName As String) As String
-        Return My.Settings.wikiTitleSearch.Replace("#f", oSearchName).Replace("#t", oSearchName & " (z)")
+        Dim endName As String() = Split(oSearchName, "_(", 2)
+        Return My.Settings.wikiTitleSearch.Replace("#f", oSearchName).Replace("#t", endName(0) & "_(zzzzzzzz)")
     End Function
     Public Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
         Dim _rtb As New RichTextBox
@@ -367,6 +368,14 @@ Friend Module modCbday
         End If
         Return _years
     End Function
+    Public Function GetWikiText(_sentences As Integer, _forename As String, _surname As String, Optional wikiId As String = "") As String
+        Dim fullName As String = If(String.IsNullOrEmpty(_forename), "", _forename.Trim & " ") & _surname.Trim
+        Dim _searchName As String = If(String.IsNullOrEmpty(wikiId), fullName, wikiId)
+        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _sentences))
+        Dim extract As String = GetExtractFromResponse(_response)
+        Return extract
+    End Function
+
 End Module
 
 
