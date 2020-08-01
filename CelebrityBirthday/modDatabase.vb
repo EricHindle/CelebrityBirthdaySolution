@@ -146,6 +146,15 @@ Module modDatabase
         End Try
         Return iCt
     End Function
+    Public Function UpdateDateOfBirth(ByVal oPersonId As Integer, oDay As Integer, oMonth As Integer, oYear As Integer) As Integer
+        Dim iCt As Integer = -1
+        Try
+            iCt = oPersonTa.UpdateDoB(oYear, oMonth, oDay, oPersonId)
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
+        Return iCt
+    End Function
 
     Public Function GetPeopleByDate(oDay As Integer, oMonth As Integer) As ArrayList
         Dim oPersonTable As New ArrayList

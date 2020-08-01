@@ -135,7 +135,7 @@ Partial Class FrmMenu2
         Me.TxtBirthdateCheck.Name = "TxtBirthdateCheck"
         Me.TxtBirthdateCheck.Size = New System.Drawing.Size(151, 49)
         Me.TxtBirthdateCheck.TabIndex = 21
-        Me.TxtBirthdateCheck.Text = "Check"
+        Me.TxtBirthdateCheck.Text = "DoB Check"
         Me.TxtBirthdateCheck.UseVisualStyleBackColor = True
         '
         'BtnWikiIds

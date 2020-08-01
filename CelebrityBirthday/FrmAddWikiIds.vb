@@ -214,5 +214,41 @@ Public Class FrmAddWikiIds
             txtWiki.Text = ""
         End If
     End Sub
+
+    Private Sub TxtUseThis_TextChanged(sender As Object, e As EventArgs) Handles TxtUseThis.TextChanged
+
+    End Sub
+
+    Private Sub txtWiki_TextChanged(sender As Object, e As EventArgs) Handles txtWiki.TextChanged
+
+    End Sub
+
+    Private Sub LblId_Click(sender As Object, e As EventArgs) Handles LblId.Click
+
+    End Sub
+
+    Private Sub txtShortDesc_TextChanged(sender As Object, e As EventArgs) Handles txtShortDesc.TextChanged
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub TxtFullName_TextChanged(sender As Object, e As EventArgs) Handles TxtFullName.TextChanged
+
+    End Sub
+
+    Private Sub TxtDob_TextChanged(sender As Object, e As EventArgs) Handles TxtDob.TextChanged
+
+    End Sub
+
+    Private Sub nudSelectCount_ValueChanged(sender As Object, e As EventArgs) Handles nudSelectCount.ValueChanged
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
 #End Region
 End Class
