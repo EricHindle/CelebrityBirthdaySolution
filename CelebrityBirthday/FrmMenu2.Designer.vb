@@ -33,7 +33,9 @@ Partial Class FrmMenu2
         Me.BtnImageEditing = New System.Windows.Forms.Button()
         Me.TxtBirthdateCheck = New System.Windows.Forms.Button()
         Me.BtnWikiIds = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -51,7 +53,7 @@ Partial Class FrmMenu2
         'BtnSendTweet
         '
         Me.BtnSendTweet.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSendTweet.Location = New System.Drawing.Point(186, 237)
+        Me.BtnSendTweet.Location = New System.Drawing.Point(185, 176)
         Me.BtnSendTweet.Margin = New System.Windows.Forms.Padding(6)
         Me.BtnSendTweet.Name = "BtnSendTweet"
         Me.BtnSendTweet.Size = New System.Drawing.Size(151, 49)
@@ -62,7 +64,7 @@ Partial Class FrmMenu2
         'BtnBrownBread
         '
         Me.BtnBrownBread.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnBrownBread.Location = New System.Drawing.Point(185, 176)
+        Me.BtnBrownBread.Location = New System.Drawing.Point(8, 96)
         Me.BtnBrownBread.Margin = New System.Windows.Forms.Padding(6)
         Me.BtnBrownBread.Name = "BtnBrownBread"
         Me.BtnBrownBread.Size = New System.Drawing.Size(151, 49)
@@ -98,7 +100,7 @@ Partial Class FrmMenu2
         'BtnClose
         '
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(86, 432)
+        Me.BtnClose.Location = New System.Drawing.Point(95, 491)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(151, 49)
         Me.BtnClose.TabIndex = 18
@@ -119,7 +121,7 @@ Partial Class FrmMenu2
         'BtnImageEditing
         '
         Me.BtnImageEditing.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnImageEditing.Location = New System.Drawing.Point(15, 298)
+        Me.BtnImageEditing.Location = New System.Drawing.Point(185, 237)
         Me.BtnImageEditing.Margin = New System.Windows.Forms.Padding(6)
         Me.BtnImageEditing.Name = "BtnImageEditing"
         Me.BtnImageEditing.Size = New System.Drawing.Size(151, 49)
@@ -130,7 +132,7 @@ Partial Class FrmMenu2
         'TxtBirthdateCheck
         '
         Me.TxtBirthdateCheck.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TxtBirthdateCheck.Location = New System.Drawing.Point(186, 298)
+        Me.TxtBirthdateCheck.Location = New System.Drawing.Point(8, 35)
         Me.TxtBirthdateCheck.Margin = New System.Windows.Forms.Padding(6)
         Me.TxtBirthdateCheck.Name = "TxtBirthdateCheck"
         Me.TxtBirthdateCheck.Size = New System.Drawing.Size(151, 49)
@@ -141,7 +143,7 @@ Partial Class FrmMenu2
         'BtnWikiIds
         '
         Me.BtnWikiIds.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWikiIds.Location = New System.Drawing.Point(185, 359)
+        Me.BtnWikiIds.Location = New System.Drawing.Point(178, 35)
         Me.BtnWikiIds.Margin = New System.Windows.Forms.Padding(6)
         Me.BtnWikiIds.Name = "BtnWikiIds"
         Me.BtnWikiIds.Size = New System.Drawing.Size(151, 49)
@@ -149,21 +151,32 @@ Partial Class FrmMenu2
         Me.BtnWikiIds.Text = "Wiki Ids"
         Me.BtnWikiIds.UseVisualStyleBackColor = True
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.TxtBirthdateCheck)
+        Me.GroupBox1.Controls.Add(Me.BtnWikiIds)
+        Me.GroupBox1.Controls.Add(Me.BtnBrownBread)
+        Me.GroupBox1.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.GroupBox1.Location = New System.Drawing.Point(7, 305)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(336, 166)
+        Me.GroupBox1.TabIndex = 23
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Checks"
+        '
         'FrmMenu2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(352, 509)
+        Me.ClientSize = New System.Drawing.Size(352, 556)
         Me.ControlBox = False
-        Me.Controls.Add(Me.BtnWikiIds)
-        Me.Controls.Add(Me.TxtBirthdateCheck)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.BtnImageEditing)
         Me.Controls.Add(Me.BtnTapestry)
         Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnSendTweet)
-        Me.Controls.Add(Me.BtnBrownBread)
         Me.Controls.Add(Me.BtnTwitter)
         Me.Controls.Add(Me.PictureBox1)
         Me.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -173,6 +186,7 @@ Partial Class FrmMenu2
         Me.Name = "FrmMenu2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -188,4 +202,5 @@ Partial Class FrmMenu2
     Friend WithEvents BtnImageEditing As Button
     Friend WithEvents TxtBirthdateCheck As Button
     Friend WithEvents BtnWikiIds As Button
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

@@ -28,17 +28,27 @@ Structure WikiBirthInfo
     End Property
 End Structure
 Public Class FrmDateCheck
+#Region "variables"
     Private personTable As List(Of Person)
     Private isLoadingTable As Boolean
+#End Region
+#Region "form event handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         DisplayMessage("Finding everybody")
+        ClearPersonDetails()
         isLoadingTable = True
-        dgvWarnings.Rows.Clear()
+        DgvWarnings.Rows.Clear()
+        DgvWarnings.Refresh()
+
         Try
-            personTable = FindEverybody()
+            If cboDay.SelectedIndex < 0 Or cboMonth.SelectedIndex < 0 Then
+                personTable = FindEverybody()
+            Else
+                personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
+            End If
         Catch ex As DbException
             If MsgBox("Exception during list load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
                 Exit Sub
@@ -53,14 +63,11 @@ Public Class FrmDateCheck
             DisplayMessage(CStr(_ct) & " of " & CStr(totalPeople))
             Try
                 Dim extract As String = ""
-                Dim searchString As String = ""
+                Dim wikiId As String = ""
                 If _person.Social IsNot Nothing Then
-                    searchString = _person.Social.WikiId
+                    wikiId = _person.Social.WikiId
                 End If
-                If String.IsNullOrEmpty(searchString) Then
-                    searchString = _person.Name
-                End If
-                Dim _wikiBirthInfo As WikiBirthInfo = GetWikiBirthDate(searchString, extract)
+                Dim _wikiBirthInfo As WikiBirthInfo = GetWikiBirthDate(extract, _person.ForeName, _person.Surname, wikiId)
                 Dim _dateOfBirth As Date? = _wikiBirthInfo.BirthDate
                 Dim _desc As String = extract
                 If Not String.IsNullOrEmpty(_wikiBirthInfo.ErrorDesc) Then
@@ -68,7 +75,7 @@ Public Class FrmDateCheck
                 End If
                 If _dateOfBirth IsNot Nothing Then
                     If _dateOfBirth.Value <> _person.DateOfBirth Then
-                        AddXRow(_person, Format(_dateOfBirth.Value, "dd MMM yyyy"), _desc, searchString)
+                        AddXRow(_person, Format(_dateOfBirth.Value, "dd MMM yyyy"), _desc)
                         _addedct += 1
                         If nudSelectCount.Value > 0 AndAlso _addedct = nudSelectCount.Value Then
                             Exit For
@@ -83,17 +90,94 @@ Public Class FrmDateCheck
                 End If
             End Try
         Next
-        dgvWarnings.ClearSelection()
+        DgvWarnings.ClearSelection()
         DisplayMessage("Selection complete")
         isLoadingTable = False
     End Sub
+    Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
+        Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "wrongdates.csv")
+        Using _outfile As New StreamWriter(_filename, True)
+            For Each _row As DataGridViewRow In DgvWarnings.Rows
+                _outfile.WriteLine(_row.Cells(xId.Name).Value & "," & _row.Cells(xName.Name).Value & "," & _row.Cells(xBirth.Name).Value & "," & _row.Cells(xWikiBirth.Name).Value)
+            Next
+        End Using
+    End Sub
+    Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvWarnings.CellDoubleClick
+        If e.RowIndex >= 0 And e.RowIndex < DgvWarnings.Rows.Count Then
+            Dim tRow As DataGridViewRow = DgvWarnings.Rows(e.RowIndex)
+            Dim _index As Integer = tRow.Cells(xId.Name).Value
+            Using _update As New FrmUpdateDatabase
+                _update.PersonId = _index
+                _update.ShowDialog()
+            End Using
+        End If
 
-    Private Shared Function GetWikiBirthDate(_searchName As String, ByRef extract As String) As WikiBirthInfo
+    End Sub
+    Private Sub DgvWarnings_SelectionChanged(sender As Object, e As EventArgs) Handles DgvWarnings.SelectionChanged
+        If Not isLoadingTable Then
+            ClearPersonDetails()
+            If DgvWarnings.SelectedRows.Count = 1 Then
+                Dim oRow As DataGridViewRow = DgvWarnings.SelectedRows(0)
+                LblId.Text = oRow.Cells(xId.Name).Value
+                TxtFullName.Text = oRow.Cells(xName.Name).Value
+                TxtDob.Text = oRow.Cells(xBirth.Name).Value
+                TxtFullDesc.Text = oRow.Cells(xPersonDescription.Name).Value
+                TxtWiki.Text = oRow.Cells(xWikiExtract.Name).Value
+                Dim FromDt As Date = CDate(oRow.Cells(xBirth.Name).Value)
+                Dim ToDt As Date = CDate(oRow.Cells(xWikiBirth.Name).Value)
+                TxtToDay.Text = Format(ToDt, "dd")
+                TxtToMonth.Text = Format(ToDt, "MM")
+                TxtToYear.Text = Format(ToDt, "yyyy")
+                TxtFromDay.Text = Format(FromDt, "dd")
+                TxtFromMonth.Text = Format(FromDt, "MM")
+                TxtFromYear.Text = Format(FromDt, "yyyy")
+
+            End If
+        End If
+    End Sub
+    Private Sub BtnSingleUpdate_Click(sender As Object, e As EventArgs) Handles BtnSingleUpdate.Click
+        Dim pPersonId As Integer = CInt(LblId.Text)
+        If pPersonId > 0 Then
+            If Not String.IsNullOrEmpty(TxtToYear.Text) And
+                Not String.IsNullOrEmpty(TxtToMonth.Text) And
+                Not String.IsNullOrEmpty(TxtToDay.Text) And
+                IsDate(TxtToDay.Text & "/" & TxtToMonth.Text & "/" & TxtToYear.Text) Then
+                Dim pYear As Integer = CInt(TxtToYear.Text)
+                Dim pMonth As Integer = CInt(TxtToMonth.Text)
+                Dim pDay As Integer = CInt(TxtToDay.Text)
+                UpdateDateOfBirth(pPersonId, pDay, pMonth, pYear, TxtFullDesc.Text)
+                DisplayMessage("Updated " & CStr(pPersonId))
+            End If
+        End If
+    End Sub
+    Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnFromWordPress.Click
+        OpenWordPress(CInt(TxtFromDay.Text), CInt(TxtFromMonth.Text))
+    End Sub
+    Private Sub BtnToWordPress_Click(sender As Object, e As EventArgs) Handles BtnToWordPress.Click
+        OpenWordPress(CInt(TxtToDay.Text), CInt(TxtToMonth.Text))
+    End Sub
+    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
+        cboDay.SelectedIndex = Today.Day - 1
+        cboMonth.SelectedIndex = Today.Month - 1
+    End Sub
+    Private Sub BtnAll_Click(sender As Object, e As EventArgs) Handles BtnAll.Click
+        cboDay.SelectedIndex = -1
+        cboMonth.SelectedIndex = -1
+    End Sub
+    Private Sub BtnCopyText_Click(sender As Object, e As EventArgs) Handles BtnCopyDate.Click
+        Dim personStringList As List(Of String) = ParseStringWithBrackets(TxtFullDesc.Text)
+        Dim wikiStringList As List(Of String) = ParseStringWithBrackets(TxtWiki.Text)
+        If personStringList.Count = 3 And wikiStringList.Count = 3 Then
+            TxtFullDesc.Text = personStringList(0) & "(" & wikiStringList(1) & ")" & personStringList(2)
+        End If
+    End Sub
+#End Region
+#Region "subroutines"
+    Private Shared Function GetWikiBirthDate(ByRef extract As String, _forename As String, _surname As String, Optional wikiId As String = "") As WikiBirthInfo
         Dim _wikiBirthInfo As New WikiBirthInfo(Nothing, "")
         Dim _birthDate As Date? = Nothing
         Try
-            Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
-            extract = GetExtractFromResponse(_response)
+            extract = GetWikiText(3, _forename, _surname, wikiId)
             If extract.Contains("may refer to:") = False Then
                 Dim _desc As String = RemoveSquareBrackets(FixQuotes(extract))
                 Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
@@ -138,89 +222,43 @@ Public Class FrmDateCheck
         _wikiBirthInfo.BirthDate = _birthDate
         Return _wikiBirthInfo
     End Function
-
     Private Sub DisplayMessage(oText As String)
         lblStatus.Text = oText
         StatusStrip1.Refresh()
     End Sub
-
-    Private Function AddXRow(oPerson As Person, oDateOfBirth As String, oDesc As String, oWikiId As String) As DataGridViewRow
-        Dim _newRow As DataGridViewRow = dgvWarnings.Rows(dgvWarnings.Rows.Add())
+    Private Function AddXRow(oPerson As Person, oDateOfBirth As String, oDesc As String) As DataGridViewRow
+        Dim _newRow As DataGridViewRow = DgvWarnings.Rows(DgvWarnings.Rows.Add())
         _newRow.Cells(xId.Name).Value = oPerson.Id
         _newRow.Cells(xName.Name).Value = oPerson.Name
         _newRow.Cells(xBirth.Name).Value = If(oPerson.DateOfBirth Is Nothing, "", Format(oPerson.DateOfBirth, "dd MMM yyyy"))
         _newRow.Cells(xWikiBirth.Name).Value = oDateOfBirth
-        _newRow.Cells(xDesc.Name).Value = If(String.IsNullOrEmpty(oDesc), "", oDesc)
-        _newRow.Cells(xWikiId.Name).Value = If(String.IsNullOrEmpty(oWikiId), "", oWikiId)
-        dgvWarnings.Refresh()
+        _newRow.Cells(xWikiExtract.Name).Value = If(String.IsNullOrEmpty(oDesc), "", oDesc)
+        _newRow.Cells(xPersonDescription.Name).Value = oPerson.Description
+        '       _newRow.Cells(xWikiId.Name).Value = If(String.IsNullOrEmpty(oWikiId), "", oWikiId)
+        DgvWarnings.Refresh()
         Return _newRow
     End Function
-
-    Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
-        Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "wrongdates.csv")
-        Using _outfile As New StreamWriter(_filename, True)
-            For Each _row As DataGridViewRow In dgvWarnings.Rows
-                _outfile.WriteLine(_row.Cells(xId.Name).Value & "," & _row.Cells(xName.Name).Value & "," & _row.Cells(xBirth.Name).Value & "," & _row.Cells(xWikiBirth.Name).Value)
-            Next
-        End Using
-    End Sub
-
-    Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvWarnings.CellDoubleClick
-        If e.RowIndex >= 0 And e.RowIndex < dgvWarnings.Rows.Count Then
-            Dim tRow As DataGridViewRow = dgvWarnings.Rows(e.RowIndex)
-            Dim _index As Integer = tRow.Cells(xId.Name).Value
-            Using _update As New FrmUpdateDatabase
-                _update.PersonId = _index
-                _update.ShowDialog()
-            End Using
-        End If
-
-    End Sub
-
-    Private Sub dgvWarnings_SelectionChanged(sender As Object, e As EventArgs) Handles dgvWarnings.SelectionChanged
-        If Not isLoadingTable Then
-            ClearPersonDetails()
-            If dgvWarnings.SelectedRows.Count = 1 Then
-                Dim oRow As DataGridViewRow = dgvWarnings.SelectedRows(0)
-                LblId.Text = oRow.Cells(xId.Name).Value
-                TxtFullName.Text = oRow.Cells(xName.Name).Value
-                TxtDob.Text = oRow.Cells(xBirth.Name).Value
-                TxtShortDesc.Text = oRow.Cells(xDesc.Name).Value
-                If oRow.Cells(xWikiId.Name).Value IsNot Nothing Then
-                    TxtWiki.Text = GetWikiText(2, "", "", oRow.Cells(xWikiId.Name).Value)
-                End If
-                Dim dt As Date = CDate(oRow.Cells(xWikiBirth.Name).Value)
-                TxtDay.Text = Format(dt, "dd")
-                TxtMonth.Text = Format(dt, "MM")
-                TxtYear.Text = Format(dt, "yyyy")
-            End If
-        End If
-    End Sub
     Private Sub ClearPersonDetails()
         TxtFullName.Text = ""
         TxtDob.Text = ""
-        TxtShortDesc.Text = ""
+        TxtFullDesc.Text = ""
         LblId.Text = -1
         TxtWiki.Text = ""
-        TxtDay.Text = ""
-        TxtMonth.Text = ""
-        TxtYear.Text = ""
+        TxtToDay.Text = ""
+        TxtToMonth.Text = ""
+        TxtToYear.Text = ""
+        TxtFromDay.Text = ""
+        TxtFromMonth.Text = ""
+        TxtFromYear.Text = ""
     End Sub
-
-    Private Sub BtnSingleUpdate_Click(sender As Object, e As EventArgs) Handles BtnSingleUpdate.Click
-        Dim pPersonId As Integer = CInt(LblId.Text)
-        If pPersonId > 0 Then
-            If Not String.IsNullOrEmpty(TxtYear.Text) And
-                Not String.IsNullOrEmpty(TxtMonth.Text) And
-                Not String.IsNullOrEmpty(TxtDay.Text) And
-                IsDate(TxtDay.Text & "/" & TxtMonth.Text & "/" & TxtYear.Text) Then
-                Dim pYear As Integer = CInt(TxtYear.Text)
-                Dim pMonth As Integer = CInt(TxtMonth.Text)
-                Dim pDay As Integer = CInt(TxtDay.Text)
-                UpdateDateOfBirth(pPersonId, pDay, pMonth, pYear)
-                DisplayMessage("Updated " & CStr(pPersonId))
-                ClearPersonDetails()
-            End If
-        End If
+    Private Sub OpenWordPress(pDay As Integer, pMonth As Integer)
+        DisplayMessage("WordPress")
+        Using _wordpress As New FrmWordPress
+            _wordpress.DaySelection = pDay
+            _wordpress.MonthSelection = pMonth
+            _wordpress.ShowDialog()
+        End Using
+        DisplayMessage("")
     End Sub
+#End Region
 End Class

@@ -35,7 +35,7 @@ Partial Class FrmAddWikiIds
         Me.BtnStart = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.nudSelectCount = New System.Windows.Forms.NumericUpDown()
+        Me.NudSelectCount = New System.Windows.Forms.NumericUpDown()
         Me.TxtFullName = New System.Windows.Forms.TextBox()
         Me.TxtDob = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -48,7 +48,7 @@ Partial Class FrmAddWikiIds
         Me.Label2 = New System.Windows.Forms.Label()
         CType(Me.dgvWikiIds, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
-        CType(Me.nudSelectCount, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NudSelectCount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dgvWikiIds
@@ -166,13 +166,13 @@ Partial Class FrmAddWikiIds
         '
         'nudSelectCount
         '
-        Me.nudSelectCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.nudSelectCount.Location = New System.Drawing.Point(275, 496)
-        Me.nudSelectCount.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.nudSelectCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
-        Me.nudSelectCount.Name = "nudSelectCount"
-        Me.nudSelectCount.Size = New System.Drawing.Size(65, 24)
-        Me.nudSelectCount.TabIndex = 23
+        Me.NudSelectCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.NudSelectCount.Location = New System.Drawing.Point(275, 496)
+        Me.NudSelectCount.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.NudSelectCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.NudSelectCount.Name = "nudSelectCount"
+        Me.NudSelectCount.Size = New System.Drawing.Size(65, 24)
+        Me.NudSelectCount.TabIndex = 23
         '
         'TxtFullName
         '
@@ -298,7 +298,7 @@ Partial Class FrmAddWikiIds
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtFullName)
         Me.Controls.Add(Me.TxtDob)
-        Me.Controls.Add(Me.nudSelectCount)
+        Me.Controls.Add(Me.NudSelectCount)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.dgvWikiIds)
         Me.Controls.Add(Me.btnClose)
@@ -311,7 +311,7 @@ Partial Class FrmAddWikiIds
         CType(Me.dgvWikiIds, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
-        CType(Me.nudSelectCount, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NudSelectCount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -322,7 +322,7 @@ Partial Class FrmAddWikiIds
     Friend WithEvents BtnStart As Button
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblStatus As ToolStripStatusLabel
-    Friend WithEvents nudSelectCount As NumericUpDown
+    Friend WithEvents NudSelectCount As NumericUpDown
     Friend WithEvents TxtFullName As TextBox
     Friend WithEvents TxtDob As TextBox
     Friend WithEvents Label1 As Label

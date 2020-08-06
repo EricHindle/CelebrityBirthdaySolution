@@ -36,7 +36,7 @@ Public Class FrmAddWikiIds
             If String.IsNullOrEmpty(_person.Social.WikiId) Then
                 Dim searchName As String = If(String.IsNullOrEmpty(_person.ForeName), "", _person.ForeName.Trim & " ") & _person.Surname.Trim
                 FindPossibleWikiIds(_addedCt, _person, searchName)
-                If nudSelectCount.Value > 0 AndAlso _addedCt = nudSelectCount.Value Then
+                If NudSelectCount.Value > 0 AndAlso _addedCt = NudSelectCount.Value Then
                     Exit For
                 End If
             Else
@@ -44,7 +44,7 @@ Public Class FrmAddWikiIds
                 If wikiText.Contains("may refer to") Then
                     Dim searchName As String = _person.Social.WikiId
                     FindPossibleWikiIds(_addedCt, _person, searchName)
-                    If nudSelectCount.Value > 0 AndAlso _addedCt = nudSelectCount.Value Then
+                    If NudSelectCount.Value > 0 AndAlso _addedCt = NudSelectCount.Value Then
                         Exit For
                     End If
                 End If
@@ -219,7 +219,7 @@ Public Class FrmAddWikiIds
 
     End Sub
 
-    Private Sub txtWiki_TextChanged(sender As Object, e As EventArgs) Handles txtWiki.TextChanged
+    Private Sub TxtWiki_TextChanged(sender As Object, e As EventArgs) Handles txtWiki.TextChanged
 
     End Sub
 
@@ -227,7 +227,7 @@ Public Class FrmAddWikiIds
 
     End Sub
 
-    Private Sub txtShortDesc_TextChanged(sender As Object, e As EventArgs) Handles txtShortDesc.TextChanged
+    Private Sub TxtShortDesc_TextChanged(sender As Object, e As EventArgs) Handles txtShortDesc.TextChanged
 
     End Sub
 
@@ -243,7 +243,7 @@ Public Class FrmAddWikiIds
 
     End Sub
 
-    Private Sub nudSelectCount_ValueChanged(sender As Object, e As EventArgs) Handles nudSelectCount.ValueChanged
+    Private Sub NudSelectCount_ValueChanged(sender As Object, e As EventArgs) Handles NudSelectCount.ValueChanged
 
     End Sub
 

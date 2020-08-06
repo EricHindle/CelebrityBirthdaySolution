@@ -642,7 +642,7 @@ Public Class FrmBotsd
                     TxtShortDesc5.Text = _pickPerson5.ShortDesc
                     LblId5.Text = CStr(_pickPerson5.Id)
                     _imageList.Add(_pickPerson5)
-                    GroupBox5.Enabled = True
+                    GroupBox7.Enabled = True
                 End If
                 If _pickPerson6 IsNot Nothing Then
                     TxtForename6.Text = _pickPerson6.ForeName
@@ -1075,7 +1075,7 @@ Public Class FrmBotsd
         GroupBox2.Enabled = False
         GroupBox3.Enabled = False
         GroupBox4.Enabled = False
-        GroupBox5.Enabled = False
+        GroupBox7.Enabled = False
         GroupBox6.Enabled = False
         TxtForename1.Text = ""
         TxtSurname1.Text = ""
