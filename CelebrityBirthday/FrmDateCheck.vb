@@ -31,6 +31,7 @@ Public Class FrmDateCheck
 #Region "variables"
     Private personTable As List(Of Person)
     Private isLoadingTable As Boolean
+    Private isWikiIdChanged As Boolean = False
 #End Region
 #Region "form event handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -41,8 +42,7 @@ Public Class FrmDateCheck
         ClearPersonDetails()
         isLoadingTable = True
         DgvWarnings.Rows.Clear()
-        DgvWarnings.Refresh()
-
+        Me.Refresh()
         Try
             If cboDay.SelectedIndex < 0 Or cboMonth.SelectedIndex < 0 Then
                 personTable = FindEverybody()
@@ -75,7 +75,7 @@ Public Class FrmDateCheck
                 End If
                 If _dateOfBirth IsNot Nothing Then
                     If _dateOfBirth.Value <> _person.DateOfBirth Then
-                        AddXRow(_person, Format(_dateOfBirth.Value, "dd MMM yyyy"), _desc)
+                        AddXRow(_person, Format(_dateOfBirth.Value, "dd MMM yyyy"), _desc, wikiId)
                         _addedct += 1
                         If nudSelectCount.Value > 0 AndAlso _addedct = nudSelectCount.Value Then
                             Exit For
@@ -93,14 +93,6 @@ Public Class FrmDateCheck
         DgvWarnings.ClearSelection()
         DisplayMessage("Selection complete")
         isLoadingTable = False
-    End Sub
-    Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
-        Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "wrongdates.csv")
-        Using _outfile As New StreamWriter(_filename, True)
-            For Each _row As DataGridViewRow In DgvWarnings.Rows
-                _outfile.WriteLine(_row.Cells(xId.Name).Value & "," & _row.Cells(xName.Name).Value & "," & _row.Cells(xBirth.Name).Value & "," & _row.Cells(xWikiBirth.Name).Value)
-            Next
-        End Using
     End Sub
     Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvWarnings.CellDoubleClick
         If e.RowIndex >= 0 And e.RowIndex < DgvWarnings.Rows.Count Then
@@ -120,7 +112,6 @@ Public Class FrmDateCheck
                 Dim oRow As DataGridViewRow = DgvWarnings.SelectedRows(0)
                 LblId.Text = oRow.Cells(xId.Name).Value
                 TxtFullName.Text = oRow.Cells(xName.Name).Value
-                TxtDob.Text = oRow.Cells(xBirth.Name).Value
                 TxtFullDesc.Text = oRow.Cells(xPersonDescription.Name).Value
                 TxtWiki.Text = oRow.Cells(xWikiExtract.Name).Value
                 Dim FromDt As Date = CDate(oRow.Cells(xBirth.Name).Value)
@@ -131,7 +122,8 @@ Public Class FrmDateCheck
                 TxtFromDay.Text = Format(FromDt, "dd")
                 TxtFromMonth.Text = Format(FromDt, "MM")
                 TxtFromYear.Text = Format(FromDt, "yyyy")
-
+                TxtWikiId.Text = oRow.Cells(xWikiId.Name).Value
+                isWikiIdChanged = False
             End If
         End If
     End Sub
@@ -166,10 +158,23 @@ Public Class FrmDateCheck
     End Sub
     Private Sub BtnCopyText_Click(sender As Object, e As EventArgs) Handles BtnCopyDate.Click
         Dim personStringList As List(Of String) = ParseStringWithBrackets(TxtFullDesc.Text)
-        Dim wikiStringList As List(Of String) = ParseStringWithBrackets(TxtWiki.Text)
-        If personStringList.Count = 3 And wikiStringList.Count = 3 Then
-            TxtFullDesc.Text = personStringList(0) & "(" & wikiStringList(1) & ")" & personStringList(2)
+        If TxtWiki.SelectionLength > 0 Then
+            TxtFullDesc.Text = personStringList(0) & "(" & TxtWiki.SelectedText & ")" & personStringList(2)
+        Else
+            Dim wikiStringList As List(Of String) = ParseStringWithBrackets(TxtWiki.Text)
+            If personStringList.Count = 3 And wikiStringList.Count = 3 Then
+                TxtFullDesc.Text = personStringList(0) & "(" & wikiStringList(1) & ")" & personStringList(2)
+            End If
         End If
+    End Sub
+    Private Sub BtnClearDetails_Click(sender As Object, e As EventArgs) Handles BtnClearDetails.Click
+        ClearPersonDetails()
+    End Sub
+    Private Sub TxtWikiId_TextChanged(sender As Object, e As EventArgs) Handles TxtWikiId.TextChanged
+        isWikiIdChanged = True
+    End Sub
+    Private Sub BtnWikiUpdate_Click(sender As Object, e As EventArgs) Handles BtnWikiUpdate.Click
+        If isWikiIdChanged Then UpdateWikiId(CInt(LblId.Text), TxtWikiId.Text)
     End Sub
 #End Region
 #Region "subroutines"
@@ -226,7 +231,7 @@ Public Class FrmDateCheck
         lblStatus.Text = oText
         StatusStrip1.Refresh()
     End Sub
-    Private Function AddXRow(oPerson As Person, oDateOfBirth As String, oDesc As String) As DataGridViewRow
+    Private Function AddXRow(oPerson As Person, oDateOfBirth As String, oDesc As String, oWikiId As String) As DataGridViewRow
         Dim _newRow As DataGridViewRow = DgvWarnings.Rows(DgvWarnings.Rows.Add())
         _newRow.Cells(xId.Name).Value = oPerson.Id
         _newRow.Cells(xName.Name).Value = oPerson.Name
@@ -234,13 +239,12 @@ Public Class FrmDateCheck
         _newRow.Cells(xWikiBirth.Name).Value = oDateOfBirth
         _newRow.Cells(xWikiExtract.Name).Value = If(String.IsNullOrEmpty(oDesc), "", oDesc)
         _newRow.Cells(xPersonDescription.Name).Value = oPerson.Description
-        '       _newRow.Cells(xWikiId.Name).Value = If(String.IsNullOrEmpty(oWikiId), "", oWikiId)
+        _newRow.Cells(xWikiId.Name).Value = If(String.IsNullOrEmpty(oWikiId), "", oWikiId)
         DgvWarnings.Refresh()
         Return _newRow
     End Function
     Private Sub ClearPersonDetails()
         TxtFullName.Text = ""
-        TxtDob.Text = ""
         TxtFullDesc.Text = ""
         LblId.Text = -1
         TxtWiki.Text = ""
@@ -250,6 +254,8 @@ Public Class FrmDateCheck
         TxtFromDay.Text = ""
         TxtFromMonth.Text = ""
         TxtFromYear.Text = ""
+        TxtWikiId.Text = ""
+        isWikiIdChanged = False
     End Sub
     Private Sub OpenWordPress(pDay As Integer, pMonth As Integer)
         DisplayMessage("WordPress")
@@ -260,5 +266,6 @@ Public Class FrmDateCheck
         End Using
         DisplayMessage("")
     End Sub
+
 #End Region
 End Class
