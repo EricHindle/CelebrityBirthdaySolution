@@ -174,7 +174,14 @@ Public Class FrmDateCheck
         isWikiIdChanged = True
     End Sub
     Private Sub BtnWikiUpdate_Click(sender As Object, e As EventArgs) Handles BtnWikiUpdate.Click
-        If isWikiIdChanged Then UpdateWikiId(CInt(LblId.Text), TxtWikiId.Text)
+        If isWikiIdChanged Then
+            UpdateWikiId(CInt(LblId.Text), TxtWikiId.Text)
+            DisplayMessage(LblId.Text & "Wiki Id Updated to " & TxtWikiId.Text)
+        End If
+    End Sub
+    Private Sub Date_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
+        ClearPersonDetails()
+        DisplayMessage("")
     End Sub
 #End Region
 #Region "subroutines"
@@ -266,6 +273,5 @@ Public Class FrmDateCheck
         End Using
         DisplayMessage("")
     End Sub
-
 #End Region
 End Class

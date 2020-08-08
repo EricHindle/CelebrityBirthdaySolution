@@ -53,7 +53,7 @@ Public Class FrmImages
     Private Sub ReplaceImageFile(savedFile As String)
         If MsgBox("Use new saved file?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "New image") = MsgBoxResult.Yes Then
             txtImgName.Text = Path.GetFileNameWithoutExtension(savedFile)
-            TxtImageFilename.Text = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.SelectedItem)
+            TxtImageFilename.Text = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.Text)
             PictureBox2.ImageLocation = TxtImageFilename.Text
         End If
     End Sub
@@ -131,7 +131,7 @@ Public Class FrmImages
         LoadScreenFromId(txtId.Text)
     End Sub
     Private Sub BtnPicSave_Click(sender As Object, e As EventArgs) Handles BtnPicSave.Click
-        Dim oFilename As String = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.SelectedItem)
+        Dim oFilename As String = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.Text)
         SaveImage(New Uri(TxtImageUrl.Text), oFilename)
     End Sub
     Private Sub BtnLoadDateUpdate_Click(sender As Object, e As EventArgs) Handles BtnLoadDateUpdate.Click
@@ -144,9 +144,9 @@ Public Class FrmImages
         End If
         Dim _id As Integer = CInt(txtId.Text)
         If IsExistsImage(_id) Then
-            UpdateImage(_id, txtImgName.Text, cbImgType.SelectedItem, txtLoadMth.Text, txtLoadYr.Text)
+            UpdateImage(_id, txtImgName.Text, cbImgType.Text, txtLoadMth.Text, txtLoadYr.Text)
         Else
-            InsertImage(_id, txtImgName.Text, cbImgType.SelectedItem, txtLoadMth.Text, txtLoadYr.Text)
+            InsertImage(_id, txtImgName.Text, cbImgType.Text, txtLoadMth.Text, txtLoadYr.Text)
         End If
         Dim oImage As ImageIdentity = GetImageById(_id)
         Dim currentPerson As Person = FindPersonById(_id)
@@ -170,10 +170,10 @@ Public Class FrmImages
         PictureBox2.ImageLocation = TxtImageFilename.Text
     End Sub
     Private Sub BtnFileImgGen_Click(sender As Object, e As EventArgs) Handles BtnFileImgGen.Click
-        TxtImageFilename.Text = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.SelectedItem)
+        TxtImageFilename.Text = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.Text)
     End Sub
     Private Sub BtnWpImgGen_Click(sender As Object, e As EventArgs) Handles BtnWpImgGen.Click
-        TxtImageUrl.Text = My.Settings.WordPressUrl & txtLoadYr.Text & SEP & txtLoadMth.Text & SEP & txtImgName.Text & cbImgType.SelectedItem
+        TxtImageUrl.Text = My.Settings.WordPressUrl & txtLoadYr.Text & SEP & txtLoadMth.Text & SEP & txtImgName.Text & cbImgType.Text
     End Sub
     Private Sub BtnCopyLoadDate_Click(sender As Object, e As EventArgs) Handles BtnCopyLoadDate.Click
         txtLoadMth.Text = TxtWpLoadMth.Text
@@ -223,8 +223,8 @@ Public Class FrmImages
             txtLoadYr.Text = sYear
             Try
                 Dim sSimplename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
-                Dim generatedImageName As String = Path.Combine(My.Settings.ImgPath, sSimplename & cbImgType.SelectedItem)
-                Dim storedImageName As String = Path.Combine(My.Settings.ImgPath, oPerson.Image.ImageFileName.Trim & cbImgType.SelectedItem)
+                Dim generatedImageName As String = Path.Combine(My.Settings.ImgPath, sSimplename & cbImgType.Text)
+                Dim storedImageName As String = Path.Combine(My.Settings.ImgPath, oPerson.Image.ImageFileName.Trim & cbImgType.Text)
                 TxtImageFilename.Text = storedImageName
                 PictureBox1.ImageLocation = String.Empty
                 PictureBox2.ImageLocation = String.Empty

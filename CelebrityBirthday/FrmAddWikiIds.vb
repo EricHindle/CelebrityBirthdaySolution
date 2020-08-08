@@ -206,49 +206,12 @@ Public Class FrmAddWikiIds
         txtWiki.Text = ""
         TxtUseThis.Text = ""
     End Sub
-
     Private Sub LbWikiIds_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lbWikiIds.SelectedIndexChanged
         If lbWikiIds.SelectedIndex >= 0 Then
             txtWiki.Text = GetWikiText(2, "", "", lbWikiIds.SelectedItem)
         Else
             txtWiki.Text = ""
         End If
-    End Sub
-
-    Private Sub TxtUseThis_TextChanged(sender As Object, e As EventArgs) Handles TxtUseThis.TextChanged
-
-    End Sub
-
-    Private Sub TxtWiki_TextChanged(sender As Object, e As EventArgs) Handles txtWiki.TextChanged
-
-    End Sub
-
-    Private Sub LblId_Click(sender As Object, e As EventArgs) Handles LblId.Click
-
-    End Sub
-
-    Private Sub TxtShortDesc_TextChanged(sender As Object, e As EventArgs) Handles txtShortDesc.TextChanged
-
-    End Sub
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
-    End Sub
-
-    Private Sub TxtFullName_TextChanged(sender As Object, e As EventArgs) Handles TxtFullName.TextChanged
-
-    End Sub
-
-    Private Sub TxtDob_TextChanged(sender As Object, e As EventArgs) Handles TxtDob.TextChanged
-
-    End Sub
-
-    Private Sub NudSelectCount_ValueChanged(sender As Object, e As EventArgs) Handles NudSelectCount.ValueChanged
-
-    End Sub
-
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
-
     End Sub
 #End Region
 End Class
