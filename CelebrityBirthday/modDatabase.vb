@@ -395,6 +395,16 @@ Module modDatabase
         End Try
         Return iCt
     End Function
+    Public Function UpdateBotsdId(ByVal _personId As Integer, ByVal _btsdId As Integer) As Integer
+        Dim iCt As Integer = -1
+        Try
+            iCt = oTwta.UpdateBotsd(_btsdId, _personId)
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            iCt = 0
+        End Try
+        Return iCt
+    End Function
 #End Region
 #Region "dates"
     Public Function UpdateImageDate(LoadYr As String, LoadMth As String, isDateAmend As Boolean, LoadDay As String, DayIndex As Decimal?, MonthIndex As Decimal?) As Integer
@@ -534,8 +544,26 @@ Module modDatabase
         Return oRow
     End Function
     Public Function GetBotsdIndex() As DataRowCollection
-        oBotsdViewTa.FillByAtoZ(oBotsdViewTable)
+        Try
+            oBotsdViewTa.FillByAtoZ(oBotsdViewTable)
+        Catch ex As dbException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "dB")
+            oBotsdViewTable.Rows.Clear()
+        End Try
+
         Return oBotsdViewTable.Rows
+    End Function
+    Public Function GetBotsdViewByPostNo(postNo As Integer) As DataRowCollection
+        Try
+            oBotsdViewTa.FillByPostNo(oBotsdViewTable, postNo)
+        Catch ex As dbException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "dB")
+            oBotsdViewTable.Rows.Clear()
+        End Try
+        Return oBotsdViewTable.Rows
+    End Function
+    Public Function DeleteBotsdByPostNo(ByVal _postNo As Integer) As Integer
+        Return oBotsdTa.DeleteByPostNo(_postNo)
     End Function
 #End Region
 End Module

@@ -40,6 +40,21 @@ Partial Class FrmBotsd
         Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DgvPairs = New System.Windows.Forms.DataGridView()
+        Me.pairYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairPerson6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairWpNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairUrl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pairId6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TxtForename1 = New System.Windows.Forms.TextBox()
         Me.TxtSurname1 = New System.Windows.Forms.TextBox()
         Me.TxtShortDesc1 = New System.Windows.Forms.TextBox()
@@ -105,21 +120,7 @@ Partial Class FrmBotsd
         Me.TxtShortDesc5 = New System.Windows.Forms.TextBox()
         Me.TxtForename5 = New System.Windows.Forms.TextBox()
         Me.TxtSurname5 = New System.Windows.Forms.TextBox()
-        Me.pairYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairPerson6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairWpNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairUrl = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pairId6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BtnRmvPostDetails = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -290,6 +291,112 @@ Partial Class FrmBotsd
         Me.DgvPairs.Size = New System.Drawing.Size(704, 295)
         Me.DgvPairs.TabIndex = 36
         '
+        'pairYear
+        '
+        Me.pairYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairYear.HeaderText = "Year"
+        Me.pairYear.Name = "pairYear"
+        Me.pairYear.Width = 50
+        '
+        'pairPerson1
+        '
+        Me.pairPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson1.HeaderText = "Person1"
+        Me.pairPerson1.Name = "pairPerson1"
+        Me.pairPerson1.Width = 150
+        '
+        'pairPerson2
+        '
+        Me.pairPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson2.HeaderText = "Person2"
+        Me.pairPerson2.Name = "pairPerson2"
+        Me.pairPerson2.Width = 150
+        '
+        'pairPerson3
+        '
+        Me.pairPerson3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson3.HeaderText = "Person3"
+        Me.pairPerson3.Name = "pairPerson3"
+        '
+        'pairPerson4
+        '
+        Me.pairPerson4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson4.HeaderText = "Person4"
+        Me.pairPerson4.Name = "pairPerson4"
+        Me.pairPerson4.Width = 60
+        '
+        'pairPerson5
+        '
+        Me.pairPerson5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson5.HeaderText = "Person5"
+        Me.pairPerson5.Name = "pairPerson5"
+        Me.pairPerson5.Width = 60
+        '
+        'pairPerson6
+        '
+        Me.pairPerson6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairPerson6.HeaderText = "Person6"
+        Me.pairPerson6.Name = "pairPerson6"
+        Me.pairPerson6.Width = 60
+        '
+        'pairWpNo
+        '
+        Me.pairWpNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairWpNo.HeaderText = "WP No"
+        Me.pairWpNo.Name = "pairWpNo"
+        Me.pairWpNo.Width = 70
+        '
+        'pairUrl
+        '
+        Me.pairUrl.HeaderText = "Url"
+        Me.pairUrl.Name = "pairUrl"
+        Me.pairUrl.ReadOnly = True
+        Me.pairUrl.Visible = False
+        '
+        'pairId1
+        '
+        Me.pairId1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId1.HeaderText = "Id1"
+        Me.pairId1.Name = "pairId1"
+        Me.pairId1.Visible = False
+        Me.pairId1.Width = 30
+        '
+        'pairId2
+        '
+        Me.pairId2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId2.HeaderText = "Id2"
+        Me.pairId2.Name = "pairId2"
+        Me.pairId2.Visible = False
+        Me.pairId2.Width = 30
+        '
+        'pairId3
+        '
+        Me.pairId3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId3.HeaderText = "Id3"
+        Me.pairId3.Name = "pairId3"
+        Me.pairId3.Visible = False
+        Me.pairId3.Width = 30
+        '
+        'pairId4
+        '
+        Me.pairId4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.pairId4.HeaderText = "Id4"
+        Me.pairId4.Name = "pairId4"
+        Me.pairId4.Visible = False
+        Me.pairId4.Width = 30
+        '
+        'pairId5
+        '
+        Me.pairId5.HeaderText = "Id5"
+        Me.pairId5.Name = "pairId5"
+        Me.pairId5.Visible = False
+        '
+        'pairId6
+        '
+        Me.pairId6.HeaderText = "Id6"
+        Me.pairId6.Name = "pairId6"
+        Me.pairId6.Visible = False
+        '
         'TxtForename1
         '
         Me.TxtForename1.Location = New System.Drawing.Point(57, 21)
@@ -324,7 +431,7 @@ Partial Class FrmBotsd
         Me.GroupBox1.Controls.Add(Me.TxtShortDesc1)
         Me.GroupBox1.Controls.Add(Me.TxtForename1)
         Me.GroupBox1.Controls.Add(Me.TxtSurname1)
-        Me.GroupBox1.Location = New System.Drawing.Point(130, 459)
+        Me.GroupBox1.Location = New System.Drawing.Point(166, 465)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(322, 84)
         Me.GroupBox1.TabIndex = 40
@@ -370,7 +477,7 @@ Partial Class FrmBotsd
         Me.GroupBox2.Controls.Add(Me.TxtShortDesc2)
         Me.GroupBox2.Controls.Add(Me.TxtForename2)
         Me.GroupBox2.Controls.Add(Me.TxtSurname2)
-        Me.GroupBox2.Location = New System.Drawing.Point(130, 549)
+        Me.GroupBox2.Location = New System.Drawing.Point(166, 555)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(322, 84)
         Me.GroupBox2.TabIndex = 41
@@ -524,7 +631,7 @@ Partial Class FrmBotsd
         Me.GroupBox3.Controls.Add(Me.TxtShortDesc3)
         Me.GroupBox3.Controls.Add(Me.TxtForename3)
         Me.GroupBox3.Controls.Add(Me.TxtSurname3)
-        Me.GroupBox3.Location = New System.Drawing.Point(458, 459)
+        Me.GroupBox3.Location = New System.Drawing.Point(494, 465)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(322, 84)
         Me.GroupBox3.TabIndex = 44
@@ -595,7 +702,7 @@ Partial Class FrmBotsd
         Me.GroupBox4.Controls.Add(Me.TxtShortDesc4)
         Me.GroupBox4.Controls.Add(Me.TxtForename4)
         Me.GroupBox4.Controls.Add(Me.TxtSurname4)
-        Me.GroupBox4.Location = New System.Drawing.Point(458, 549)
+        Me.GroupBox4.Location = New System.Drawing.Point(494, 555)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(322, 84)
         Me.GroupBox4.TabIndex = 44
@@ -714,7 +821,7 @@ Partial Class FrmBotsd
         Me.BtnGenWp.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnGenWp.Location = New System.Drawing.Point(12, 409)
         Me.BtnGenWp.Name = "BtnGenWp"
-        Me.BtnGenWp.Size = New System.Drawing.Size(94, 58)
+        Me.BtnGenWp.Size = New System.Drawing.Size(138, 41)
         Me.BtnGenWp.TabIndex = 50
         Me.BtnGenWp.Text = "WordPress List"
         Me.BtnGenWp.UseVisualStyleBackColor = True
@@ -748,9 +855,9 @@ Partial Class FrmBotsd
         Me.BtnWpPost.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnWpPost.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWpPost.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWpPost.Location = New System.Drawing.Point(12, 478)
+        Me.BtnWpPost.Location = New System.Drawing.Point(12, 457)
         Me.BtnWpPost.Name = "BtnWpPost"
-        Me.BtnWpPost.Size = New System.Drawing.Size(94, 58)
+        Me.BtnWpPost.Size = New System.Drawing.Size(138, 41)
         Me.BtnWpPost.TabIndex = 53
         Me.BtnWpPost.Text = "WordPress Post"
         Me.BtnWpPost.UseVisualStyleBackColor = True
@@ -814,9 +921,9 @@ Partial Class FrmBotsd
         Me.BtnAtoZ.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnAtoZ.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAtoZ.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAtoZ.Location = New System.Drawing.Point(12, 546)
+        Me.BtnAtoZ.Location = New System.Drawing.Point(12, 505)
         Me.BtnAtoZ.Name = "BtnAtoZ"
-        Me.BtnAtoZ.Size = New System.Drawing.Size(94, 40)
+        Me.BtnAtoZ.Size = New System.Drawing.Size(138, 40)
         Me.BtnAtoZ.TabIndex = 59
         Me.BtnAtoZ.Text = "A - Z"
         Me.BtnAtoZ.UseVisualStyleBackColor = True
@@ -838,9 +945,9 @@ Partial Class FrmBotsd
         Me.BtnAlterPostNo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnAlterPostNo.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAlterPostNo.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAlterPostNo.Location = New System.Drawing.Point(12, 592)
+        Me.BtnAlterPostNo.Location = New System.Drawing.Point(12, 552)
         Me.BtnAlterPostNo.Name = "BtnAlterPostNo"
-        Me.BtnAlterPostNo.Size = New System.Drawing.Size(94, 40)
+        Me.BtnAlterPostNo.Size = New System.Drawing.Size(138, 40)
         Me.BtnAlterPostNo.TabIndex = 61
         Me.BtnAlterPostNo.Text = "Alter Post #"
         Me.BtnAlterPostNo.UseVisualStyleBackColor = True
@@ -854,7 +961,7 @@ Partial Class FrmBotsd
         Me.GroupBox6.Controls.Add(Me.TxtShortDesc6)
         Me.GroupBox6.Controls.Add(Me.TxtForename6)
         Me.GroupBox6.Controls.Add(Me.TxtSurname6)
-        Me.GroupBox6.Location = New System.Drawing.Point(786, 549)
+        Me.GroupBox6.Location = New System.Drawing.Point(822, 555)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(322, 84)
         Me.GroupBox6.TabIndex = 47
@@ -925,7 +1032,7 @@ Partial Class FrmBotsd
         Me.GroupBox7.Controls.Add(Me.TxtShortDesc5)
         Me.GroupBox7.Controls.Add(Me.TxtForename5)
         Me.GroupBox7.Controls.Add(Me.TxtSurname5)
-        Me.GroupBox7.Location = New System.Drawing.Point(786, 459)
+        Me.GroupBox7.Location = New System.Drawing.Point(822, 465)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(322, 84)
         Me.GroupBox7.TabIndex = 48
@@ -987,111 +1094,17 @@ Partial Class FrmBotsd
         Me.TxtSurname5.Size = New System.Drawing.Size(87, 23)
         Me.TxtSurname5.TabIndex = 38
         '
-        'pairYear
+        'BtnRmvPostDetails
         '
-        Me.pairYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairYear.HeaderText = "Year"
-        Me.pairYear.Name = "pairYear"
-        Me.pairYear.Width = 50
-        '
-        'pairPerson1
-        '
-        Me.pairPerson1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson1.HeaderText = "Person1"
-        Me.pairPerson1.Name = "pairPerson1"
-        Me.pairPerson1.Width = 150
-        '
-        'pairPerson2
-        '
-        Me.pairPerson2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson2.HeaderText = "Person2"
-        Me.pairPerson2.Name = "pairPerson2"
-        Me.pairPerson2.Width = 150
-        '
-        'pairPerson3
-        '
-        Me.pairPerson3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson3.HeaderText = "Person3"
-        Me.pairPerson3.Name = "pairPerson3"
-        '
-        'pairPerson4
-        '
-        Me.pairPerson4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson4.HeaderText = "Person4"
-        Me.pairPerson4.Name = "pairPerson4"
-        Me.pairPerson4.Width = 60
-        '
-        'pairPerson5
-        '
-        Me.pairPerson5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson5.HeaderText = "Person5"
-        Me.pairPerson5.Name = "pairPerson5"
-        Me.pairPerson5.Width = 60
-        '
-        'pairPerson6
-        '
-        Me.pairPerson6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairPerson6.HeaderText = "Person6"
-        Me.pairPerson6.Name = "pairPerson6"
-        Me.pairPerson6.Width = 60
-        '
-        'pairWpNo
-        '
-        Me.pairWpNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairWpNo.HeaderText = "WP No"
-        Me.pairWpNo.Name = "pairWpNo"
-        Me.pairWpNo.Width = 70
-        '
-        'pairUrl
-        '
-        Me.pairUrl.HeaderText = "Url"
-        Me.pairUrl.Name = "pairUrl"
-        Me.pairUrl.ReadOnly = True
-        Me.pairUrl.Visible = False
-        '
-        'pairId1
-        '
-        Me.pairId1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId1.HeaderText = "Id1"
-        Me.pairId1.Name = "pairId1"
-        Me.pairId1.Visible = False
-        Me.pairId1.Width = 30
-        '
-        'pairId2
-        '
-        Me.pairId2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId2.HeaderText = "Id2"
-        Me.pairId2.Name = "pairId2"
-        Me.pairId2.Visible = False
-        Me.pairId2.Width = 30
-        '
-        'pairId3
-        '
-        Me.pairId3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId3.HeaderText = "Id3"
-        Me.pairId3.Name = "pairId3"
-        Me.pairId3.Visible = False
-        Me.pairId3.Width = 30
-        '
-        'pairId4
-        '
-        Me.pairId4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.pairId4.HeaderText = "Id4"
-        Me.pairId4.Name = "pairId4"
-        Me.pairId4.Visible = False
-        Me.pairId4.Width = 30
-        '
-        'pairId5
-        '
-        Me.pairId5.HeaderText = "Id5"
-        Me.pairId5.Name = "pairId5"
-        Me.pairId5.Visible = False
-        '
-        'pairId6
-        '
-        Me.pairId6.HeaderText = "Id6"
-        Me.pairId6.Name = "pairId6"
-        Me.pairId6.Visible = False
+        Me.BtnRmvPostDetails.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnRmvPostDetails.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvPostDetails.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnRmvPostDetails.Location = New System.Drawing.Point(12, 599)
+        Me.BtnRmvPostDetails.Name = "BtnRmvPostDetails"
+        Me.BtnRmvPostDetails.Size = New System.Drawing.Size(138, 40)
+        Me.BtnRmvPostDetails.TabIndex = 62
+        Me.BtnRmvPostDetails.Text = "Remove Post Details"
+        Me.BtnRmvPostDetails.UseVisualStyleBackColor = True
         '
         'FrmBotsd
         '
@@ -1099,6 +1112,7 @@ Partial Class FrmBotsd
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1392, 677)
+        Me.Controls.Add(Me.BtnRmvPostDetails)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.BtnAlterPostNo)
@@ -1261,4 +1275,5 @@ Partial Class FrmBotsd
     Friend WithEvents pairId4 As DataGridViewTextBoxColumn
     Friend WithEvents pairId5 As DataGridViewTextBoxColumn
     Friend WithEvents pairId6 As DataGridViewTextBoxColumn
+    Friend WithEvents BtnRmvPostDetails As Button
 End Class

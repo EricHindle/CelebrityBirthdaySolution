@@ -1169,5 +1169,11 @@ Public Class FrmBotsd
         End Try
         isBuildingPairs = False
     End Sub
+
+    Private Sub BtnRmvPostDetails_Click(sender As Object, e As EventArgs) Handles BtnRmvPostDetails.Click
+        Using _rmvPost As New FrmRmvPost
+            _rmvPost.ShowDialog()
+        End Using
+    End Sub
 #End Region
 End Class

@@ -61,6 +61,7 @@ Partial Class FrmAlterPostNo
         Me.OK_Button.Size = New System.Drawing.Size(78, 28)
         Me.OK_Button.TabIndex = 0
         Me.OK_Button.Text = "OK"
+        Me.OK_Button.UseVisualStyleBackColor = True
         '
         'Cancel_Button
         '
@@ -74,6 +75,7 @@ Partial Class FrmAlterPostNo
         Me.Cancel_Button.Size = New System.Drawing.Size(78, 28)
         Me.Cancel_Button.TabIndex = 1
         Me.Cancel_Button.Text = "Cancel"
+        Me.Cancel_Button.UseVisualStyleBackColor = True
         '
         'Label1
         '
