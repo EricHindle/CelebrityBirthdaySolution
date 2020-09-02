@@ -55,28 +55,32 @@ Public Class FrmImageStore
         isSaved = True
     End Sub
     Private Sub BtnSavepic_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSavepic.Click
-        sImagePath = My.Settings.NewImagePath.Replace("<applicationpath>", sApplicationPath)
-        Try
-            Dim _Filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
-            If String.IsNullOrEmpty(_Filename) = False Then
-                Dim strFName As String = Path.Combine(sImagePath, _Filename & ".jpg")
-                If My.Computer.FileSystem.FileExists(strFName) Then
-                    strFName = GetUniqueFname(strFName)
+        If PictureBox1.Image IsNot Nothing Then
+            sImagePath = My.Settings.NewImagePath.Replace("<applicationpath>", sApplicationPath)
+            Try
+                Dim _Filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
+                If String.IsNullOrEmpty(_Filename) = False Then
+                    Dim strFName As String = Path.Combine(sImagePath, _Filename & ".jpg")
+                    If My.Computer.FileSystem.FileExists(strFName) Then
+                        strFName = GetUniqueFname(strFName)
+                    End If
+                    _latestSavedFile = strFName
+                    lblImageFile.Text = strFName
+                    PicStatus.Text = "Saving " & strFName
+                    Me.Refresh()
+                    PictureBox1.Image.Save(strFName, Imaging.ImageFormat.Jpeg)
+                    PicStatus.Text = "Saved " & strFName
+                    isSaved = True
+                Else
+                    MsgBox("No name entered. Cannot save to file.", MsgBoxStyle.Exclamation, "Missing name")
                 End If
-                _latestSavedFile = strFName
-                lblImageFile.Text = strFName
-                PicStatus.Text = "Saving " & strFName
-                Me.Refresh()
-                PictureBox1.Image.Save(strFName, Imaging.ImageFormat.Jpeg)
-                PicStatus.Text = "Saved " & strFName
-                isSaved = True
-            Else
-                MsgBox("No name entered. Cannot save to file.", MsgBoxStyle.Exclamation, "Missing name")
-            End If
-        Catch ex As ArgumentException
-            If DisplayException(ex) = MsgBoxResult.No Then Exit Sub
-            PicStatus.Text = ex.Message
-        End Try
+            Catch ex As ArgumentException
+                If DisplayException(ex) = MsgBoxResult.No Then Exit Sub
+                PicStatus.Text = ex.Message
+            End Try
+        Else
+            MsgBox("No image. Cannot save to file.", MsgBoxStyle.Exclamation, "Missing image")
+        End If
     End Sub
     Private Sub BtnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         My.Settings.imgselectpos = SetFormPos(Me)
