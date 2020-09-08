@@ -67,6 +67,8 @@ Partial Class FrmBotsdPost
         Me.BtnImportList = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BtnUndoSplit = New System.Windows.Forms.Button()
+        Me.chkBack = New System.Windows.Forms.CheckBox()
         Me.CbSplit = New System.Windows.Forms.ComboBox()
         Me.BtnClearList = New System.Windows.Forms.Button()
         Me.BtnWikiOpen = New System.Windows.Forms.Button()
@@ -76,8 +78,7 @@ Partial Class FrmBotsdPost
         Me.BtnSearch1 = New System.Windows.Forms.Button()
         Me.BtnSearch2 = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.chkBack = New System.Windows.Forms.CheckBox()
-        Me.BtnUndoSplit = New System.Windows.Forms.Button()
+        Me.CbRejectDuplicates = New System.Windows.Forms.CheckBox()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.DgvAlso, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -452,7 +453,7 @@ Partial Class FrmBotsdPost
         Me.BtnSaveList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSaveList.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSaveList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSaveList.Location = New System.Drawing.Point(178, 485)
+        Me.BtnSaveList.Location = New System.Drawing.Point(146, 478)
         Me.BtnSaveList.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnSaveList.Name = "BtnSaveList"
         Me.BtnSaveList.Size = New System.Drawing.Size(95, 29)
@@ -465,7 +466,7 @@ Partial Class FrmBotsdPost
         Me.BtnLoadList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnLoadList.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLoadList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnLoadList.Location = New System.Drawing.Point(297, 485)
+        Me.BtnLoadList.Location = New System.Drawing.Point(265, 477)
         Me.BtnLoadList.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnLoadList.Name = "BtnLoadList"
         Me.BtnLoadList.Size = New System.Drawing.Size(95, 30)
@@ -497,7 +498,7 @@ Partial Class FrmBotsdPost
         Me.BtnImportList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnImportList.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnImportList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnImportList.Location = New System.Drawing.Point(59, 486)
+        Me.BtnImportList.Location = New System.Drawing.Point(27, 478)
         Me.BtnImportList.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnImportList.Name = "BtnImportList"
         Me.BtnImportList.Size = New System.Drawing.Size(95, 29)
@@ -527,6 +528,7 @@ Partial Class FrmBotsdPost
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.CbRejectDuplicates)
         Me.Panel1.Controls.Add(Me.BtnUndoSplit)
         Me.Panel1.Controls.Add(Me.chkBack)
         Me.Panel1.Controls.Add(Me.CbSplit)
@@ -553,6 +555,31 @@ Partial Class FrmBotsdPost
         Me.Panel1.Size = New System.Drawing.Size(707, 520)
         Me.Panel1.TabIndex = 68
         '
+        'BtnUndoSplit
+        '
+        Me.BtnUndoSplit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnUndoSplit.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUndoSplit.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUndoSplit.Location = New System.Drawing.Point(633, 429)
+        Me.BtnUndoSplit.Name = "BtnUndoSplit"
+        Me.BtnUndoSplit.Size = New System.Drawing.Size(63, 25)
+        Me.BtnUndoSplit.TabIndex = 75
+        Me.BtnUndoSplit.Text = "Undo"
+        Me.BtnUndoSplit.UseVisualStyleBackColor = True
+        '
+        'chkBack
+        '
+        Me.chkBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkBack.AutoSize = True
+        Me.chkBack.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkBack.Location = New System.Drawing.Point(563, 457)
+        Me.chkBack.Margin = New System.Windows.Forms.Padding(0)
+        Me.chkBack.Name = "chkBack"
+        Me.chkBack.Size = New System.Drawing.Size(46, 22)
+        Me.chkBack.TabIndex = 74
+        Me.chkBack.Text = "end"
+        Me.chkBack.UseVisualStyleBackColor = True
+        '
         'CbSplit
         '
         Me.CbSplit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -568,7 +595,7 @@ Partial Class FrmBotsdPost
         Me.BtnClearList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnClearList.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClearList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClearList.Location = New System.Drawing.Point(416, 484)
+        Me.BtnClearList.Location = New System.Drawing.Point(384, 478)
         Me.BtnClearList.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.BtnClearList.Name = "BtnClearList"
         Me.BtnClearList.Size = New System.Drawing.Size(95, 29)
@@ -583,7 +610,7 @@ Partial Class FrmBotsdPost
         Me.BtnWikiOpen.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnWikiOpen.Location = New System.Drawing.Point(557, 350)
         Me.BtnWikiOpen.Name = "BtnWikiOpen"
-        Me.BtnWikiOpen.Size = New System.Drawing.Size(59, 25)
+        Me.BtnWikiOpen.Size = New System.Drawing.Size(59, 33)
         Me.BtnWikiOpen.TabIndex = 70
         Me.BtnWikiOpen.Text = "Open"
         Me.BtnWikiOpen.UseVisualStyleBackColor = True
@@ -664,30 +691,19 @@ Partial Class FrmBotsdPost
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(537, 43)
         Me.TableLayoutPanel1.TabIndex = 70
         '
-        'chkBack
+        'CbRejectDuplicates
         '
-        Me.chkBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkBack.AutoSize = True
-        Me.chkBack.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkBack.Location = New System.Drawing.Point(563, 457)
-        Me.chkBack.Margin = New System.Windows.Forms.Padding(0)
-        Me.chkBack.Name = "chkBack"
-        Me.chkBack.Size = New System.Drawing.Size(46, 22)
-        Me.chkBack.TabIndex = 74
-        Me.chkBack.Text = "end"
-        Me.chkBack.UseVisualStyleBackColor = True
-        '
-        'BtnUndoSplit
-        '
-        Me.BtnUndoSplit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnUndoSplit.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUndoSplit.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUndoSplit.Location = New System.Drawing.Point(633, 429)
-        Me.BtnUndoSplit.Name = "BtnUndoSplit"
-        Me.BtnUndoSplit.Size = New System.Drawing.Size(63, 25)
-        Me.BtnUndoSplit.TabIndex = 75
-        Me.BtnUndoSplit.Text = "Undo"
-        Me.BtnUndoSplit.UseVisualStyleBackColor = True
+        Me.CbRejectDuplicates.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.CbRejectDuplicates.AutoSize = True
+        Me.CbRejectDuplicates.Checked = True
+        Me.CbRejectDuplicates.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CbRejectDuplicates.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CbRejectDuplicates.Location = New System.Drawing.Point(506, 485)
+        Me.CbRejectDuplicates.Name = "CbRejectDuplicates"
+        Me.CbRejectDuplicates.Size = New System.Drawing.Size(112, 22)
+        Me.CbRejectDuplicates.TabIndex = 76
+        Me.CbRejectDuplicates.Text = "Reject duplicates"
+        Me.CbRejectDuplicates.UseVisualStyleBackColor = True
         '
         'FrmBotsdPost
         '
@@ -789,4 +805,5 @@ Partial Class FrmBotsdPost
     Friend WithEvents CbSplit As ComboBox
     Friend WithEvents chkBack As CheckBox
     Friend WithEvents BtnUndoSplit As Button
+    Friend WithEvents CbRejectDuplicates As CheckBox
 End Class

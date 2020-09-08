@@ -258,6 +258,10 @@ Public Class FrmBotsdPost
     End Sub
     Private Sub BtnUndoSplit_Click(sender As Object, e As EventArgs) Handles BtnUndoSplit.Click
         If UndoDataList.Count > 0 Then
+            Dim selectedRow As Integer = -1
+            If DgvAlso.SelectedRows.Count = 1 Then
+                selectedRow = DgvAlso.SelectedRows(0).Index
+            End If
             Dim undoSnapshot As UndoData = UndoDataList.Last
             With undoSnapshot
                 TxtName.Text = .undoName
@@ -273,6 +277,10 @@ Public Class FrmBotsdPost
                 Next
             End With
             UndoDataList.Remove(undoSnapshot)
+            DgvAlso.ClearSelection()
+            If selectedRow >= 0 AndAlso selectedRow < DgvAlso.Rows.Count Then
+                DgvAlso.Rows(selectedRow).Selected = True
+            End If
         End If
     End Sub
     Private Sub BtnWikiOpen_Click(sender As Object, e As EventArgs) Handles BtnWikiOpen.Click
@@ -403,6 +411,9 @@ Public Class FrmBotsdPost
                     ReplaceRowValues(oRow)
                     DgvAlso.ClearSelection()
                     oRow.Selected = True
+                    DisplayStatus("Person added")
+                Else
+                    DisplayStatus("Person not added")
                 End If
             End If
         End If
@@ -412,7 +423,7 @@ Public Class FrmBotsdPost
         For Each oRow As DataGridViewRow In DgvAlso.Rows
             Dim rowUri As String = If(oRow.Cells(alsoWiki.Name).Value, "")
             If wikiUri = rowUri Then
-                If MsgBox(wikiUri & vbCrLf & "already in list. OK to add duplicate?", MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation, "Duplicate") = MsgBoxResult.No Then
+                If CbRejectDuplicates.Checked OrElse MsgBox(wikiUri & vbCrLf & "already in list. OK to add duplicate?", MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation, "Duplicate") = MsgBoxResult.No Then
                     isOK = False
                 End If
             End If
