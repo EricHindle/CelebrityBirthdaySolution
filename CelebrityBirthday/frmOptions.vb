@@ -1,4 +1,6 @@
-﻿Public Class FrmOptions
+﻿Imports System.Text
+
+Public Class FrmOptions
 
     Private Sub BtnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -21,7 +23,11 @@
         My.Settings.wikiExtractSearch = TxtWikiExtract.Text
         My.Settings.wikiSentences = NudSentences.Value
         My.Settings.WordPressMonthUrl = TxtWordPressDate.Text
-        My.Settings.SplitWords = Replace(TxtSplitWords.Text, vbCrLf, "~")
+        Dim sb As New StringBuilder
+        For Each splitword As String In LbSplitWords.Items
+            sb.Append(splitword).Append("~")
+        Next
+        My.Settings.SplitWords = sb.ToString.TrimEnd("~")
         My.Settings.Save()
     End Sub
 
@@ -31,7 +37,9 @@
     End Sub
 
     Private Sub LoadOptions()
-        TxtSplitWords.Text = Replace(My.Settings.SplitWords, "~", vbCrLf)
+        For Each splitWord As String In Split(My.Settings.SplitWords, "~")
+            LbSplitWords.Items.Add(splitWord)
+        Next
         txtNewImagePath.Text = My.Settings.NewImagePath
         txtImagePath.Text = My.Settings.ImgPath
         txtTwitterFilePath.Text = My.Settings.TwitterFilePath
@@ -70,5 +78,15 @@
             _settings.ShowDialog()
         End Using
         Me.Show()
+    End Sub
+
+    Private Sub BtnAddWord_Click(sender As Object, e As EventArgs) Handles BtnAddWord.Click
+        LbSplitWords.Items.Add(TxtSplitWords.Text)
+    End Sub
+
+    Private Sub BtnRmvWord_Click(sender As Object, e As EventArgs) Handles BtnRmvWord.Click
+        If LbSplitWords.SelectedItems.Count = 1 Then
+            LbSplitWords.Items.Remove(LbSplitWords.SelectedItem)
+        End If
     End Sub
 End Class

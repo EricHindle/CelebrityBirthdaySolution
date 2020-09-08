@@ -53,6 +53,9 @@ Partial Class FrmOptions
         Me.Label9 = New System.Windows.Forms.Label()
         Me.NudSentences = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.BtnRmvWord = New System.Windows.Forms.Button()
+        Me.BtnAddWord = New System.Windows.Forms.Button()
+        Me.LbSplitWords = New System.Windows.Forms.ListBox()
         Me.TxtSplitWords = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -359,6 +362,9 @@ Partial Class FrmOptions
         '
         Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox3.Controls.Add(Me.BtnRmvWord)
+        Me.GroupBox3.Controls.Add(Me.BtnAddWord)
+        Me.GroupBox3.Controls.Add(Me.LbSplitWords)
         Me.GroupBox3.Controls.Add(Me.TxtSplitWords)
         Me.GroupBox3.Location = New System.Drawing.Point(16, 200)
         Me.GroupBox3.Name = "GroupBox3"
@@ -367,12 +373,51 @@ Partial Class FrmOptions
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Split words"
         '
+        'BtnRmvWord
+        '
+        Me.BtnRmvWord.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnRmvWord.Font = New System.Drawing.Font("Wide Latin", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvWord.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnRmvWord.Location = New System.Drawing.Point(54, 271)
+        Me.BtnRmvWord.Margin = New System.Windows.Forms.Padding(0)
+        Me.BtnRmvWord.Name = "BtnRmvWord"
+        Me.BtnRmvWord.Size = New System.Drawing.Size(32, 22)
+        Me.BtnRmvWord.TabIndex = 3
+        Me.BtnRmvWord.Text = "-"
+        Me.BtnRmvWord.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.BtnRmvWord.UseVisualStyleBackColor = True
+        '
+        'BtnAddWord
+        '
+        Me.BtnAddWord.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnAddWord.Font = New System.Drawing.Font("Wide Latin", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAddWord.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnAddWord.Location = New System.Drawing.Point(6, 271)
+        Me.BtnAddWord.Margin = New System.Windows.Forms.Padding(0)
+        Me.BtnAddWord.Name = "BtnAddWord"
+        Me.BtnAddWord.Size = New System.Drawing.Size(32, 22)
+        Me.BtnAddWord.TabIndex = 2
+        Me.BtnAddWord.Text = "+"
+        Me.BtnAddWord.UseVisualStyleBackColor = True
+        '
+        'LbSplitWords
+        '
+        Me.LbSplitWords.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.LbSplitWords.FormattingEnabled = True
+        Me.LbSplitWords.ItemHeight = 14
+        Me.LbSplitWords.Location = New System.Drawing.Point(6, 17)
+        Me.LbSplitWords.Name = "LbSplitWords"
+        Me.LbSplitWords.Size = New System.Drawing.Size(84, 228)
+        Me.LbSplitWords.Sorted = True
+        Me.LbSplitWords.TabIndex = 1
+        '
         'TxtSplitWords
         '
-        Me.TxtSplitWords.Location = New System.Drawing.Point(11, 21)
-        Me.TxtSplitWords.Multiline = True
+        Me.TxtSplitWords.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TxtSplitWords.Location = New System.Drawing.Point(6, 247)
         Me.TxtSplitWords.Name = "TxtSplitWords"
-        Me.TxtSplitWords.Size = New System.Drawing.Size(72, 273)
+        Me.TxtSplitWords.Size = New System.Drawing.Size(84, 22)
         Me.TxtSplitWords.TabIndex = 0
         '
         'FrmOptions
@@ -437,4 +482,7 @@ Partial Class FrmOptions
     Friend WithEvents Label11 As Label
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents TxtSplitWords As TextBox
+    Friend WithEvents BtnAddWord As Button
+    Friend WithEvents LbSplitWords As ListBox
+    Friend WithEvents BtnRmvWord As Button
 End Class
