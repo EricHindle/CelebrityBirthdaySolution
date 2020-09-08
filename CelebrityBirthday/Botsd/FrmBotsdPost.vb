@@ -403,26 +403,36 @@ Public Class FrmBotsdPost
         End If
     End Sub
     Private Sub AddToList()
+        Dim selectedRow As Integer = -1
+        If DgvAlso.SelectedRows.Count = 1 Then
+            selectedRow = DgvAlso.SelectedRows(0).Index
+        End If
         If Not String.IsNullOrEmpty(TxtName.Text) Then
             If Not String.IsNullOrEmpty(TxtWiki.Text) Then
                 TxtWiki.Text = TxtWiki.Text.Replace("http:", "https:")
-                If IsOkToAddAlso(TxtWiki.Text) Then
-                    Dim oRow As DataGridViewRow = DgvAlso.Rows(DgvAlso.Rows.Add())
+                If IsOkToAddAlso(TxtWiki.Text, selectedRow) Then
+                    selectedRow = DgvAlso.Rows.Add()
+                    Dim oRow As DataGridViewRow = DgvAlso.Rows(selectedRow)
                     ReplaceRowValues(oRow)
                     DgvAlso.ClearSelection()
                     oRow.Selected = True
                     DisplayStatus("Person added")
                 Else
+                    DgvAlso.ClearSelection()
+                    If selectedRow >= 0 AndAlso selectedRow < DgvAlso.Rows.Count Then
+                        DgvAlso.Rows(selectedRow).Selected = True
+                    End If
                     DisplayStatus("Person not added")
+                    End If
                 End If
-            End If
         End If
     End Sub
-    Private Function IsOkToAddAlso(wikiUri As String) As Boolean
+    Private Function IsOkToAddAlso(wikiUri As String, ByRef selectedRow As Integer) As Boolean
         Dim isOK As Boolean = True
         For Each oRow As DataGridViewRow In DgvAlso.Rows
             Dim rowUri As String = If(oRow.Cells(alsoWiki.Name).Value, "")
             If wikiUri = rowUri Then
+                selectedRow = oRow.Index
                 If CbRejectDuplicates.Checked OrElse MsgBox(wikiUri & vbCrLf & "already in list. OK to add duplicate?", MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation, "Duplicate") = MsgBoxResult.No Then
                     isOK = False
                 End If
