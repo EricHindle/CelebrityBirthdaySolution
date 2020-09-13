@@ -771,21 +771,22 @@ Public Class FrmTweet
         End With
         Return newTabpage
     End Function
-
     Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles BtnNext.Click
-        If cboDay.SelectedIndex = cboDay.Items.Count - 1 Then
-            cboDay.SelectedIndex = 0
-            If cboMonth.SelectedIndex = cboMonth.Items.Count - 1 Then
-                cboMonth.SelectedIndex = 0
-            Else
-                cboMonth.SelectedIndex += 1
-            End If
-        Else
-                cboDay.SelectedIndex += 1
+        If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
+            SetFormDate(GetDateFromForm().AddDays(1))
+            SelectPeople()
+            ClearImages(False)
+            SaveImages()
         End If
-        SelectPeople()
-        ClearImages(False)
-        SaveImages()
     End Sub
+
+    Private Sub SetFormDate(selDate As Date)
+        cboDay.SelectedIndex = selDate.Day - 1
+        cboMonth.SelectedIndex = selDate.Month - 1
+    End Sub
+
+    Private Function GetDateFromForm() As Date
+        Return New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
+    End Function
 #End Region
 End Class
