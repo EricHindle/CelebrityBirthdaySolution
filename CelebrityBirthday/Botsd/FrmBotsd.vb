@@ -423,6 +423,14 @@ Public Class FrmBotsd
             _text.ShowDialog()
         End Using
     End Sub
+    Private Sub BtnRmvPostDetails_Click(sender As Object, e As EventArgs) Handles BtnRmvPostDetails.Click
+        Using _rmvPost As New FrmRmvPost
+            _rmvPost.ShowDialog()
+        End Using
+    End Sub
+    Private Sub ChkHandles_CheckedChanged(sender As Object, e As EventArgs) Handles ChkHandles.CheckedChanged
+        GeneratePair()
+    End Sub
 #End Region
 #Region "subroutines"
     Private Function SaveImage() As String
@@ -688,6 +696,17 @@ Public Class FrmBotsd
         End If
         _outString.Append(" born on ")
         _outString.Append(_dob)
+        If ChkHandles.Checked Then
+            Dim handleString As New StringBuilder
+            For Each _person As Person In _imageTable
+                If _person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle) Then
+                    handleString.Append(" @").Append(_person.Social.TwitterHandle)
+                End If
+            Next
+            If Not String.IsNullOrEmpty(handleString.ToString.Trim) Then
+                _outString.Append(vbCrLf).Append(vbCrLf).Append("[").Append(handleString.ToString).Append(" ]")
+            End If
+        End If
         rtbFile1.Text = _outString.ToString
     End Sub
     Private Sub GenerateWordpress()
@@ -1168,12 +1187,6 @@ Public Class FrmBotsd
             Me.Close()
         End Try
         isBuildingPairs = False
-    End Sub
-
-    Private Sub BtnRmvPostDetails_Click(sender As Object, e As EventArgs) Handles BtnRmvPostDetails.Click
-        Using _rmvPost As New FrmRmvPost
-            _rmvPost.ShowDialog()
-        End Using
     End Sub
 #End Region
 End Class

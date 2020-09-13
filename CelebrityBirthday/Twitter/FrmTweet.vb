@@ -74,13 +74,6 @@ Public Class FrmTweet
         ClearImages(False)
         SaveImages()
     End Sub
-
-    Private Sub SaveImages()
-        For Each _page As TabPage In TabControl1.TabPages
-            SaveImage(_page)
-        Next
-    End Sub
-
     Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.twitterimagepos)
         GetAuthData()
@@ -122,15 +115,6 @@ Public Class FrmTweet
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
         SelectPeople()
     End Sub
-
-    Private Sub SelectPeople()
-        If BuildTrees() Then
-            GenerateAllTweets()
-        Else
-            DisplayStatus("No people selected")
-        End If
-    End Sub
-
     Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
         GenerateAllTweets()
     End Sub
@@ -158,32 +142,6 @@ Public Class FrmTweet
             RtbTextChanged(Nothing, Nothing)
         End If
     End Sub
-    Private Shared Function BuildTweetText(ByRef _person As Person) As String
-        Dim _text As New StringBuilder
-        Dim _died As String = " (d. " & CStr(Math.Abs(_person.DeathYear)) & If(_person.DeathYear < 0, " BCE", "") & ")"
-        _text.Append("Born on ").Append(Format(_person.DateOfBirth, "d MMMM yyyy")) _
-            .Append(vbCrLf) _
-            .Append(vbCrLf) _
-            .Append(_person.Description)
-        If _person.BirthName.Length > 0 Or _person.BirthPlace.Length > 0 Then
-            _text.Append(vbCrLf) _
-            .Append(vbCrLf) _
-            .Append("Born")
-            If _person.BirthName.Length > 0 Then
-                _text.Append(" ") _
-                    .Append(_person.BirthName)
-            End If
-            If _person.BirthPlace.Length > 0 Then
-                _text.Append(" in ") _
-                    .Append(_person.BirthPlace)
-            End If
-            _text.Append(".")
-        End If
-        If _person.DeathYear <> 0 Then
-            _text.Append(_died)
-        End If
-        Return _text.ToString
-    End Function
     Private Sub BtnUncheck_Click(sender As Object, e As EventArgs) Handles BtnUncheck.Click
         For Each _node As TreeNode In tvBirthday.Nodes
             _node.Checked = False
@@ -201,18 +159,28 @@ Public Class FrmTweet
     Private Sub BtnDeleteImages_Click(sender As Object, e As EventArgs) Handles BtnDeleteImages.Click
         ClearImages()
     End Sub
-
-    Private Shared Sub ClearImages(Optional isConfirm As Boolean = True)
-        If Not isConfirm OrElse MsgBox("Confirm delete tweet images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.ANNIVERSARY & "*.*", My.Resources.BIRTHDAY & "*.*", My.Resources.TOTD & "*.*"})
-            For Each _imageFile As String In _imageList
-                My.Computer.FileSystem.DeleteFile(_imageFile)
-            Next
+    Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles BtnNext.Click
+        If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
+            SetFormDate(GetDateFromForm().AddDays(1))
+            SelectPeople()
+            ClearImages(False)
+            SaveImages()
         End If
     End Sub
-
 #End Region
 #Region "Form subroutines"
+    Private Sub SelectPeople()
+        If BuildTrees() Then
+            GenerateAllTweets()
+        Else
+            DisplayStatus("No people selected")
+        End If
+    End Sub
+    Private Sub SaveImages()
+        For Each _page As TabPage In TabControl1.TabPages
+            SaveImage(_page)
+        Next
+    End Sub
     Private Sub DisplayStatus(_text As String, Optional _isAppend As Boolean = False)
         If _isAppend Then
             LblStatus.Text &= _text
@@ -405,6 +373,21 @@ Public Class FrmTweet
         End If
         Return Nothing
     End Function
+    Private Shared Sub ClearImages(Optional isConfirm As Boolean = True)
+        If Not isConfirm OrElse MsgBox("Confirm delete tweet images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.ANNIVERSARY & "*.*", My.Resources.BIRTHDAY & "*.*", My.Resources.TOTD & "*.*"})
+            For Each _imageFile As String In _imageList
+                My.Computer.FileSystem.DeleteFile(_imageFile)
+            Next
+        End If
+    End Sub
+    Private Sub SetFormDate(selDate As Date)
+        cboDay.SelectedIndex = selDate.Day - 1
+        cboMonth.SelectedIndex = selDate.Month - 1
+    End Sub
+    Private Function GetDateFromForm() As Date
+        Return New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
+    End Function
     'Form overrides dispose to clean up the component list.
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -432,7 +415,6 @@ Public Class FrmTweet
             MyBase.Dispose(disposing)
         End Try
     End Sub
-
 #End Region
 #Region "Tree subroutines"
     Private Function BuildTrees() As Boolean
@@ -477,6 +459,32 @@ Public Class FrmTweet
     End Function
 #End Region
 #Region "Tweet subroutines"
+    Private Shared Function BuildTweetText(ByRef _person As Person) As String
+        Dim _text As New StringBuilder
+        Dim _died As String = " (d. " & CStr(Math.Abs(_person.DeathYear)) & If(_person.DeathYear < 0, " BCE", "") & ")"
+        _text.Append("Born on ").Append(Format(_person.DateOfBirth, "d MMMM yyyy")) _
+            .Append(vbCrLf) _
+            .Append(vbCrLf) _
+            .Append(_person.Description)
+        If _person.BirthName.Length > 0 Or _person.BirthPlace.Length > 0 Then
+            _text.Append(vbCrLf) _
+            .Append(vbCrLf) _
+            .Append("Born")
+            If _person.BirthName.Length > 0 Then
+                _text.Append(" ") _
+                    .Append(_person.BirthName)
+            End If
+            If _person.BirthPlace.Length > 0 Then
+                _text.Append(" in ") _
+                    .Append(_person.BirthPlace)
+            End If
+            _text.Append(".")
+        End If
+        If _person.DeathYear <> 0 Then
+            _text.Append(_died)
+        End If
+        Return _text.ToString
+    End Function
     Private Sub GenerateAllTweets()
         DisplayStatus("Generating tweets")
         TxtStats.Text = ""
@@ -770,23 +778,6 @@ Public Class FrmTweet
             .Controls.Add(NewSplitContainer(newTabpage.TabIndex, newTabpage.Size.Width - 10, newTabpage.Size.Height - 10))
         End With
         Return newTabpage
-    End Function
-    Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles BtnNext.Click
-        If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
-            SetFormDate(GetDateFromForm().AddDays(1))
-            SelectPeople()
-            ClearImages(False)
-            SaveImages()
-        End If
-    End Sub
-
-    Private Sub SetFormDate(selDate As Date)
-        cboDay.SelectedIndex = selDate.Day - 1
-        cboMonth.SelectedIndex = selDate.Month - 1
-    End Sub
-
-    Private Function GetDateFromForm() As Date
-        Return New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
     End Function
 #End Region
 End Class

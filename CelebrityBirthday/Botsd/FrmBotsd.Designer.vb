@@ -121,6 +121,7 @@ Partial Class FrmBotsd
         Me.TxtForename5 = New System.Windows.Forms.TextBox()
         Me.TxtSurname5 = New System.Windows.Forms.TextBox()
         Me.BtnRmvPostDetails = New System.Windows.Forms.Button()
+        Me.ChkHandles = New System.Windows.Forms.CheckBox()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1106,12 +1107,26 @@ Partial Class FrmBotsd
         Me.BtnRmvPostDetails.Text = "Remove Post Details"
         Me.BtnRmvPostDetails.UseVisualStyleBackColor = True
         '
+        'ChkHandles
+        '
+        Me.ChkHandles.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ChkHandles.AutoSize = True
+        Me.ChkHandles.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkHandles.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.ChkHandles.Location = New System.Drawing.Point(867, 330)
+        Me.ChkHandles.Name = "ChkHandles"
+        Me.ChkHandles.Size = New System.Drawing.Size(117, 23)
+        Me.ChkHandles.TabIndex = 63
+        Me.ChkHandles.Text = "Include Handles"
+        Me.ChkHandles.UseVisualStyleBackColor = True
+        '
         'FrmBotsd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1392, 677)
+        Me.Controls.Add(Me.ChkHandles)
         Me.Controls.Add(Me.BtnRmvPostDetails)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox7)
@@ -1276,4 +1291,5 @@ Partial Class FrmBotsd
     Friend WithEvents pairId5 As DataGridViewTextBoxColumn
     Friend WithEvents pairId6 As DataGridViewTextBoxColumn
     Friend WithEvents BtnRmvPostDetails As Button
+    Friend WithEvents ChkHandles As CheckBox
 End Class
