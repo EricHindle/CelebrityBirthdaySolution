@@ -111,7 +111,7 @@ Partial Class FrmMenu
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label1.Location = New System.Drawing.Point(152, 57)
         Me.Label1.Name = "Label1"
-        Me.Label1.Padding = New System.Windows.Forms.Padding(10)
+        Me.Label1.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
         Me.Label1.Size = New System.Drawing.Size(201, 52)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "Celebrity Birthdays"
@@ -193,12 +193,13 @@ Partial Class FrmMenu
         '
         'BtnBotsdWP
         '
+        Me.BtnBotsdWP.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBotsdWP.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnBotsdWP.Location = New System.Drawing.Point(21, 409)
         Me.BtnBotsdWP.Name = "BtnBotsdWP"
         Me.BtnBotsdWP.Size = New System.Drawing.Size(151, 49)
         Me.BtnBotsdWP.TabIndex = 14
-        Me.BtnBotsdWP.Text = "Born o t Same Day"
+        Me.BtnBotsdWP.Text = "Born on the Same Day"
         Me.BtnBotsdWP.UseVisualStyleBackColor = True
         '
         'FrmMenu
@@ -223,7 +224,7 @@ Partial Class FrmMenu
         Me.Controls.Add(Me.BtnPictures)
         Me.Controls.Add(Me.BtnImages)
         Me.Controls.Add(Me.BtnDatabase)
-        Me.Font = New System.Drawing.Font("Papyrus", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)

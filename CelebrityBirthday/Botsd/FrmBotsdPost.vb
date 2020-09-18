@@ -294,7 +294,11 @@ Public Class FrmBotsdPost
         Else
             GetSplitPart(0)
         End If
+        If chkAnd.Checked And CbSplit.Text.Trim = "and" And Not chkBack.Checked Then
+            MoveAnd()
+        End If
         chkBack.Checked = False
+        chkAnd.Checked = False
     End Sub
     Private Sub BtnClearList_Click(sender As Object, e As EventArgs) Handles BtnClearList.Click
         DgvAlso.Rows.Clear()
@@ -470,6 +474,13 @@ Public Class FrmBotsdPost
         Dim descParts As String() = Split(TxtDesc.Text, splitOn, 2)
         If descParts.Length > partNumber Then
             TxtDesc.Text = descParts(partNumber).Trim({" "c, ","c, ";"c, "."c}) & "."
+            ReplaceRow()
+        End If
+    End Sub
+    Private Sub MoveAnd()
+        Dim commaPos As Integer = TxtDesc.Text.LastIndexOf(",")
+        If commaPos > 0 And commaPos < TxtDesc.TextLength Then
+            TxtDesc.Text = TxtDesc.Text.Substring(0, commaPos) & " and" & TxtDesc.Text.Substring(commaPos + 1)
             ReplaceRow()
         End If
     End Sub
