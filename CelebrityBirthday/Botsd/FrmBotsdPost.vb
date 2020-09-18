@@ -292,13 +292,17 @@ Public Class FrmBotsdPost
         End If
     End Sub
     Private Sub BtnSplit_Click(sender As Object, e As EventArgs) Handles BtnSplit.Click
-        If chkBack.Checked Then
-            GetSplitPart(1)
+        If TxtDesc.SelectedText.Length > 0 Then
+            RemoveSelectedText
         Else
-            GetSplitPart(0)
-        End If
-        If chkAnd.Checked And CbSplit.Text.Trim = "and" And Not chkBack.Checked Then
-            MoveAnd()
+            If chkBack.Checked Then
+                GetSplitPart(1)
+            Else
+                GetSplitPart(0)
+            End If
+            If chkAnd.Checked And CbSplit.Text.Trim = "and" And Not chkBack.Checked Then
+                MoveAnd()
+            End If
         End If
         chkBack.Checked = False
         chkAnd.Checked = False
@@ -476,9 +480,17 @@ Public Class FrmBotsdPost
         End If
         Dim descParts As String() = Split(TxtDesc.Text, splitOn, 2)
         If descParts.Length > partNumber Then
-            TxtDesc.Text = descParts(partNumber).Trim({" "c, ","c, ";"c, "."c}) & "."
+            TxtDesc.Text = descParts(partNumber).Trim(charsToTrim) & "."
             ReplaceRow()
         End If
+    End Sub
+    Private Sub RemoveSelectedText()
+        If chkBack.Checked Then
+            TxtDesc.Text = TxtDesc.SelectedText.Trim(charsToTrim) & "."
+        Else
+            TxtDesc.Text = TxtDesc.Text.Replace(TxtDesc.SelectedText, "").Trim(charsToTrim) & "."
+        End If
+        ReplaceRow()
     End Sub
     Private Sub MoveAnd()
         Dim commaPos As Integer = TxtDesc.Text.LastIndexOf(",")
