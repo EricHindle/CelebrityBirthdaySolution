@@ -221,7 +221,10 @@ Public Class FrmBotsdPost
             If parts.Length > 4 Then
                 Dim _lastpart As String() = Split(_also, My.Resources.WP_END_A)
                 TxtName.Text = ParseStringWithBrackets(parts(1))(0)
-                TxtWiki.Text = parts(3)
+                If String.IsNullOrEmpty(TxtName.Text) Then
+                    TxtName.Text = Split(_lastpart(0), ">")(1)
+                End If
+                TxtWiki.Text = formatUrl(parts(3))
                 Dim newDesc As String = If(_lastpart.Length = 2, _lastpart(1), "")
                 TxtDesc.Text = TidyDescription(newDesc) & "."
                 AddToList()
@@ -508,6 +511,10 @@ Public Class FrmBotsdPost
             ReplaceRowValues(oRow)
         End If
     End Sub
-
+    Private Function FormatUrl(_url As String) As String
+        Dim splitUrl As String() = Split(_url, "//", 2)
+        Dim returnUrl As String = "https://" & If(splitUrl.Length < 2, splitUrl(0), splitUrl(1))
+        Return returnUrl
+    End Function
 #End Region
 End Class
