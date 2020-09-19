@@ -401,7 +401,7 @@ Public Class FrmBotsd
             Try
                 Dim surnameInitial As String = oRow.surname.Substring(0, 1)
                 Dim tempBytes As Byte() = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(surnameInitial)
-                surnameInitial = System.Text.Encoding.UTF8.GetString(tempBytes)
+                surnameInitial = System.Text.Encoding.UTF8.GetString(tempBytes).ToLower
                 If surnameInitial <> currentLetter Then
                     If Not String.IsNullOrEmpty(currentLetter) Then
                         indexText.Append(GetLetterFoot())
