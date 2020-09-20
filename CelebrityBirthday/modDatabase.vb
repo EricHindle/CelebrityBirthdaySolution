@@ -56,7 +56,7 @@ Module modDatabase
                 .Verb = "runas"
             End With
             Dim thisProcess As Process = Process.Start(procStartInfo)
-            thisProcess.WaitForExit(30000)
+            thisProcess.WaitForExit(120000)
         Catch ex As System.ComponentModel.Win32Exception
             DisplayException(MethodBase.GetCurrentMethod, ex, "Win32")
         End Try
@@ -401,7 +401,6 @@ Module modDatabase
             iCt = oTwta.UpdateBotsd(_btsdId, _personId)
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
-            iCt = 0
         End Try
         Return iCt
     End Function
