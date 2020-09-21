@@ -1,27 +1,22 @@
 ﻿Imports System.Data.Common
 Imports System.IO
 Imports System.Net
-Imports System.Web.Script.Serialization
 Public Class FrmDeathCheck
     Private personTable As List(Of Person)
-
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-
-    Private Sub FrmDeathCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         DisplayMessage("Finding the living")
-
         personTable = FindLivingPeople(False)
         DisplayMessage("Found " & CStr(personTable.Count) & " people")
+        Dim countText As String = "{0} of " & CStr(personTable.Count)
+        Dim iCt As Integer = 0
         For Each _person In personTable
+            iCt += 1
+            lblCount.Text = String.Format(myStringFormatProvider, countText, iCt)
             DisplayMessage(CStr(_person.Id) & " " & _person.Name)
             Try
-                AddAllRow(_person)
                 Dim searchString As String = ""
                 If _person.Social IsNot Nothing Then
                     searchString = _person.Social.WikiId
@@ -42,10 +37,8 @@ Public Class FrmDeathCheck
                     Exit Sub
                 End If
             End Try
-
         Next
     End Sub
-
     Private Shared Function GetWikiDeathDate(_searchName As String) As String
         Dim _deathDate As Date? = Nothing
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
@@ -72,21 +65,10 @@ Public Class FrmDeathCheck
         End Select
         Return _return
     End Function
-
     Private Sub DisplayMessage(oText As String)
         lblStatus.Text = oText
         StatusStrip1.Refresh()
     End Sub
-
-    Private Function AddAllRow(oPerson As Person) As DataGridViewRow
-        Dim _newRow As DataGridViewRow = dgvAllPersons.Rows(dgvAllPersons.Rows.Add())
-        _newRow.Cells(allId.Name).Value = oPerson.Id
-        _newRow.Cells(allName.Name).Value = oPerson.Name
-        _newRow.Cells(allDob.Name).Value = If(oPerson.DateOfBirth Is Nothing, "", Format(oPerson.DateOfBirth.Value, "dd MMM yyyy"))
-        dgvAllPersons.Refresh()
-        Return _newRow
-    End Function
-
     Private Function AddXRow(oPerson As Person, oDateOfDeath As String, oDesc As String) As DataGridViewRow
         Dim _newRow As DataGridViewRow = dgvWarnings.Rows(dgvWarnings.Rows.Add())
         _newRow.Cells(xId.Name).Value = oPerson.Id
@@ -97,7 +79,6 @@ Public Class FrmDeathCheck
         dgvWarnings.Refresh()
         Return _newRow
     End Function
-
     Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
         Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "deadpeople.csv")
         Using _outfile As New StreamWriter(_filename, True)
@@ -106,7 +87,6 @@ Public Class FrmDeathCheck
             Next
         End Using
     End Sub
-
     Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvWarnings.CellDoubleClick
         If e.RowIndex >= 0 And e.RowIndex < dgvWarnings.Rows.Count Then
             Dim tRow As DataGridViewRow = dgvWarnings.Rows(e.RowIndex)
@@ -116,6 +96,5 @@ Public Class FrmDeathCheck
                 _update.ShowDialog()
             End Using
         End If
-
     End Sub
 End Class

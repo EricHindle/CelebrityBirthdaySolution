@@ -23,90 +23,22 @@ Partial Class FrmDeathCheck
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDeathCheck))
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.dgvAllPersons = New System.Windows.Forms.DataGridView()
-        Me.allId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.allName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.allDob = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvWarnings = New System.Windows.Forms.DataGridView()
-        Me.btnClose = New System.Windows.Forms.Button()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.BtnStart = New System.Windows.Forms.Button()
-        Me.BtnWrite = New System.Windows.Forms.Button()
         Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xDeath = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer1.Panel1.SuspendLayout()
-        Me.SplitContainer1.Panel2.SuspendLayout()
-        Me.SplitContainer1.SuspendLayout()
-        CType(Me.dgvAllPersons, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.BtnStart = New System.Windows.Forms.Button()
+        Me.BtnWrite = New System.Windows.Forms.Button()
+        Me.lblCount = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.dgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'SplitContainer1
-        '
-        Me.SplitContainer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.SplitContainer1.Location = New System.Drawing.Point(12, 12)
-        Me.SplitContainer1.Name = "SplitContainer1"
-        '
-        'SplitContainer1.Panel1
-        '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.dgvAllPersons)
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.dgvWarnings)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1074, 482)
-        Me.SplitContainer1.SplitterDistance = 330
-        Me.SplitContainer1.TabIndex = 0
-        '
-        'dgvAllPersons
-        '
-        Me.dgvAllPersons.AllowUserToAddRows = False
-        Me.dgvAllPersons.AllowUserToDeleteRows = False
-        Me.dgvAllPersons.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvAllPersons.BackgroundColor = System.Drawing.Color.GhostWhite
-        Me.dgvAllPersons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvAllPersons.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.allId, Me.allName, Me.allDob})
-        Me.dgvAllPersons.Location = New System.Drawing.Point(3, 3)
-        Me.dgvAllPersons.Name = "dgvAllPersons"
-        Me.dgvAllPersons.ReadOnly = True
-        Me.dgvAllPersons.RowHeadersVisible = False
-        Me.dgvAllPersons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvAllPersons.Size = New System.Drawing.Size(319, 472)
-        Me.dgvAllPersons.TabIndex = 0
-        '
-        'allId
-        '
-        Me.allId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.allId.HeaderText = "Id"
-        Me.allId.Name = "allId"
-        Me.allId.ReadOnly = True
-        Me.allId.Width = 50
-        '
-        'allName
-        '
-        Me.allName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.allName.HeaderText = "Name"
-        Me.allName.Name = "allName"
-        Me.allName.ReadOnly = True
-        '
-        'allDob
-        '
-        Me.allDob.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.allDob.HeaderText = "Birth"
-        Me.allDob.Name = "allDob"
-        Me.allDob.ReadOnly = True
         '
         'dgvWarnings
         '
@@ -118,68 +50,13 @@ Partial Class FrmDeathCheck
         Me.dgvWarnings.BackgroundColor = System.Drawing.Color.GhostWhite
         Me.dgvWarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvWarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.xId, Me.xName, Me.xBirth, Me.xDeath, Me.xDesc})
-        Me.dgvWarnings.Location = New System.Drawing.Point(3, 3)
+        Me.dgvWarnings.Location = New System.Drawing.Point(12, 12)
         Me.dgvWarnings.Name = "dgvWarnings"
         Me.dgvWarnings.ReadOnly = True
         Me.dgvWarnings.RowHeadersVisible = False
         Me.dgvWarnings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvWarnings.Size = New System.Drawing.Size(730, 472)
+        Me.dgvWarnings.Size = New System.Drawing.Size(1074, 469)
         Me.dgvWarnings.TabIndex = 0
-        '
-        'btnClose
-        '
-        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(947, 500)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(139, 33)
-        Me.btnClose.TabIndex = 9
-        Me.btnClose.Text = "Close"
-        Me.btnClose.UseVisualStyleBackColor = True
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
-        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 536)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1098, 22)
-        Me.StatusStrip1.TabIndex = 10
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'lblStatus
-        '
-        Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
-        Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(3, 17)
-        '
-        'BtnStart
-        '
-        Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnStart.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnStart.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnStart.Location = New System.Drawing.Point(236, 500)
-        Me.BtnStart.Name = "BtnStart"
-        Me.BtnStart.Size = New System.Drawing.Size(139, 33)
-        Me.BtnStart.TabIndex = 11
-        Me.BtnStart.Text = "Start Check"
-        Me.BtnStart.UseVisualStyleBackColor = True
-        '
-        'BtnWrite
-        '
-        Me.BtnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnWrite.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnWrite.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWrite.Location = New System.Drawing.Point(445, 500)
-        Me.BtnWrite.Name = "BtnWrite"
-        Me.BtnWrite.Size = New System.Drawing.Size(139, 33)
-        Me.BtnWrite.TabIndex = 12
-        Me.BtnWrite.Text = "Write File"
-        Me.BtnWrite.UseVisualStyleBackColor = True
         '
         'xId
         '
@@ -218,26 +95,92 @@ Partial Class FrmDeathCheck
         Me.xDesc.Name = "xDesc"
         Me.xDesc.ReadOnly = True
         '
+        'btnClose
+        '
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.btnClose.Location = New System.Drawing.Point(947, 500)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(139, 33)
+        Me.btnClose.TabIndex = 9
+        Me.btnClose.Text = "Close"
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblCount, Me.ToolStripStatusLabel1, Me.lblStatus})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 536)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(1098, 22)
+        Me.StatusStrip1.TabIndex = 10
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'lblStatus
+        '
+        Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.lblStatus.Size = New System.Drawing.Size(3, 17)
+        '
+        'BtnStart
+        '
+        Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnStart.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnStart.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnStart.Location = New System.Drawing.Point(236, 500)
+        Me.BtnStart.Name = "BtnStart"
+        Me.BtnStart.Size = New System.Drawing.Size(139, 33)
+        Me.BtnStart.TabIndex = 11
+        Me.BtnStart.Text = "Start Check"
+        Me.BtnStart.UseVisualStyleBackColor = True
+        '
+        'BtnWrite
+        '
+        Me.BtnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnWrite.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWrite.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWrite.Location = New System.Drawing.Point(445, 500)
+        Me.BtnWrite.Name = "BtnWrite"
+        Me.BtnWrite.Size = New System.Drawing.Size(139, 33)
+        Me.BtnWrite.TabIndex = 12
+        Me.BtnWrite.Text = "Write File"
+        Me.BtnWrite.UseVisualStyleBackColor = True
+        '
+        'lblCount
+        '
+        Me.lblCount.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.lblCount.Name = "lblCount"
+        Me.lblCount.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.lblCount.Size = New System.Drawing.Size(39, 17)
+        Me.lblCount.Text = "0 of 0"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(13, 17)
+        Me.ToolStripStatusLabel1.Text = "|"
+        '
         'FrmDeathCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1098, 558)
+        Me.Controls.Add(Me.dgvWarnings)
         Me.Controls.Add(Me.BtnWrite)
         Me.Controls.Add(Me.BtnStart)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.SplitContainer1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmDeathCheck"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
         Me.Text = "Who's Brown Bread"
-        Me.SplitContainer1.Panel1.ResumeLayout(False)
-        Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainer1.ResumeLayout(False)
-        CType(Me.dgvAllPersons, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvWarnings, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
@@ -245,13 +188,7 @@ Partial Class FrmDeathCheck
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents btnClose As Button
-    Friend WithEvents dgvAllPersons As DataGridView
-    Friend WithEvents allId As DataGridViewTextBoxColumn
-    Friend WithEvents allName As DataGridViewTextBoxColumn
-    Friend WithEvents allDob As DataGridViewTextBoxColumn
     Friend WithEvents dgvWarnings As DataGridView
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblStatus As ToolStripStatusLabel
@@ -262,4 +199,6 @@ Partial Class FrmDeathCheck
     Friend WithEvents xBirth As DataGridViewTextBoxColumn
     Friend WithEvents xDeath As DataGridViewTextBoxColumn
     Friend WithEvents xDesc As DataGridViewTextBoxColumn
+    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
+    Friend WithEvents lblCount As ToolStripStatusLabel
 End Class
