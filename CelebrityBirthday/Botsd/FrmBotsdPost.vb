@@ -315,8 +315,7 @@ Public Class FrmBotsdPost
 #Region "subroutines"
     Private Function GenerateAlsos() As String
         Dim sb As New StringBuilder
-        sb.Append(vbCrLf)
-        sb.Append(My.Resources.WP_PARA)
+        sb.Append(vbCrLf).Append(My.Resources.WP_PARA).Append(vbCrLf)
         For Each oRow As DataGridViewRow In DgvAlso.Rows
             If Not String.IsNullOrEmpty(oRow.Cells(alsoName.Name).Value) Then
                 Dim oName As String = oRow.Cells(alsoName.Name).Value

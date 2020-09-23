@@ -867,8 +867,8 @@ Public Class FrmBotsd
             .Append(GetImageLink(oPerson)).Append(vbCrLf)
             .Append(My.Resources.WP_PARA).Append(vbCrLf)
             .Append(oPerson.Description).Append(sBorn)
-            .Append(If(oPerson.DeathYear = 0, "", sDied))
-            .Append(My.Resources.WP_END_PARA).Append(vbCrLf)
+            .Append(If(oPerson.DeathYear = 0, "", sDied)).Append(vbCrLf)
+            .Append(My.Resources.WP_END_PARA).Append(vbCrLf).Append(vbCrLf)
         End With
         Return oPersonText.ToString
     End Function
