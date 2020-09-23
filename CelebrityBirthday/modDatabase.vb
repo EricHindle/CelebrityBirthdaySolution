@@ -146,6 +146,15 @@ Module modDatabase
         End Try
         Return iCt
     End Function
+    Public Function UpdateSortSeq(ByVal personId As Integer, ByVal newSortSeq As Integer) As Integer
+        Dim iCt As Integer = -1
+        Try
+            iCt = oPersonTa.UpdateSortSeq(newSortSeq, personId)
+        Catch dbEx As DbException
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+        End Try
+        Return iCt
+    End Function
     Public Function UpdateDateOfBirth(ByVal oPersonId As Integer, oDay As Integer, oMonth As Integer, oYear As Integer, oDesc As String) As Integer
         Dim iCt As Integer = -1
         Try
@@ -155,7 +164,6 @@ Module modDatabase
         End Try
         Return iCt
     End Function
-
     Public Function GetPeopleByDate(oDay As Integer, oMonth As Integer) As ArrayList
         Dim oPersonTable As New ArrayList
         Try
@@ -169,7 +177,6 @@ Module modDatabase
         End Try
         Return oPersonTable
     End Function
-
     Public Function GetPeopleByName(oForename As String, oSurname As String) As ArrayList
         Dim oPersonList As New ArrayList
         Try

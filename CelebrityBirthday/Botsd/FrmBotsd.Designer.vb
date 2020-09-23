@@ -122,6 +122,12 @@ Partial Class FrmBotsd
         Me.TxtSurname5 = New System.Windows.Forms.TextBox()
         Me.BtnRmvPostDetails = New System.Windows.Forms.Button()
         Me.ChkHandles = New System.Windows.Forms.CheckBox()
+        Me.LblSeq1 = New System.Windows.Forms.Label()
+        Me.LblSeq2 = New System.Windows.Forms.Label()
+        Me.LblSeq3 = New System.Windows.Forms.Label()
+        Me.LblSeq4 = New System.Windows.Forms.Label()
+        Me.LblSeq5 = New System.Windows.Forms.Label()
+        Me.LblSeq6 = New System.Windows.Forms.Label()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -420,12 +426,13 @@ Partial Class FrmBotsd
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtShortDesc1.Location = New System.Drawing.Point(57, 54)
         Me.TxtShortDesc1.Name = "TxtShortDesc1"
-        Me.TxtShortDesc1.Size = New System.Drawing.Size(259, 23)
+        Me.TxtShortDesc1.Size = New System.Drawing.Size(229, 23)
         Me.TxtShortDesc1.TabIndex = 39
         '
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.LblSeq1)
         Me.GroupBox1.Controls.Add(Me.chkSel1)
         Me.GroupBox1.Controls.Add(Me.BtnUpdate1)
         Me.GroupBox1.Controls.Add(Me.LblId1)
@@ -442,7 +449,7 @@ Partial Class FrmBotsd
         'chkSel1
         '
         Me.chkSel1.AutoSize = True
-        Me.chkSel1.Location = New System.Drawing.Point(9, 56)
+        Me.chkSel1.Location = New System.Drawing.Point(9, 58)
         Me.chkSel1.Name = "chkSel1"
         Me.chkSel1.Size = New System.Drawing.Size(15, 14)
         Me.chkSel1.TabIndex = 45
@@ -472,6 +479,7 @@ Partial Class FrmBotsd
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.LblSeq2)
         Me.GroupBox2.Controls.Add(Me.ChkSel2)
         Me.GroupBox2.Controls.Add(Me.BtnUpdate2)
         Me.GroupBox2.Controls.Add(Me.LblId2)
@@ -488,7 +496,7 @@ Partial Class FrmBotsd
         'ChkSel2
         '
         Me.ChkSel2.AutoSize = True
-        Me.ChkSel2.Location = New System.Drawing.Point(9, 58)
+        Me.ChkSel2.Location = New System.Drawing.Point(9, 56)
         Me.ChkSel2.Name = "ChkSel2"
         Me.ChkSel2.Size = New System.Drawing.Size(15, 14)
         Me.ChkSel2.TabIndex = 44
@@ -521,7 +529,7 @@ Partial Class FrmBotsd
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtShortDesc2.Location = New System.Drawing.Point(57, 52)
         Me.TxtShortDesc2.Name = "TxtShortDesc2"
-        Me.TxtShortDesc2.Size = New System.Drawing.Size(259, 23)
+        Me.TxtShortDesc2.Size = New System.Drawing.Size(229, 23)
         Me.TxtShortDesc2.TabIndex = 39
         '
         'TxtForename2
@@ -626,6 +634,7 @@ Partial Class FrmBotsd
         'GroupBox3
         '
         Me.GroupBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox3.Controls.Add(Me.LblSeq3)
         Me.GroupBox3.Controls.Add(Me.ChkSel3)
         Me.GroupBox3.Controls.Add(Me.BtnUpdate3)
         Me.GroupBox3.Controls.Add(Me.LblId3)
@@ -642,7 +651,7 @@ Partial Class FrmBotsd
         'ChkSel3
         '
         Me.ChkSel3.AutoSize = True
-        Me.ChkSel3.Location = New System.Drawing.Point(9, 56)
+        Me.ChkSel3.Location = New System.Drawing.Point(9, 58)
         Me.ChkSel3.Name = "ChkSel3"
         Me.ChkSel3.Size = New System.Drawing.Size(15, 14)
         Me.ChkSel3.TabIndex = 45
@@ -675,7 +684,7 @@ Partial Class FrmBotsd
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtShortDesc3.Location = New System.Drawing.Point(57, 54)
         Me.TxtShortDesc3.Name = "TxtShortDesc3"
-        Me.TxtShortDesc3.Size = New System.Drawing.Size(259, 23)
+        Me.TxtShortDesc3.Size = New System.Drawing.Size(229, 23)
         Me.TxtShortDesc3.TabIndex = 39
         '
         'TxtForename3
@@ -697,6 +706,7 @@ Partial Class FrmBotsd
         'GroupBox4
         '
         Me.GroupBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox4.Controls.Add(Me.LblSeq4)
         Me.GroupBox4.Controls.Add(Me.ChkSel4)
         Me.GroupBox4.Controls.Add(Me.BtnUpdate4)
         Me.GroupBox4.Controls.Add(Me.LblId4)
@@ -713,7 +723,7 @@ Partial Class FrmBotsd
         'ChkSel4
         '
         Me.ChkSel4.AutoSize = True
-        Me.ChkSel4.Location = New System.Drawing.Point(9, 57)
+        Me.ChkSel4.Location = New System.Drawing.Point(9, 56)
         Me.ChkSel4.Name = "ChkSel4"
         Me.ChkSel4.Size = New System.Drawing.Size(15, 14)
         Me.ChkSel4.TabIndex = 46
@@ -746,7 +756,7 @@ Partial Class FrmBotsd
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtShortDesc4.Location = New System.Drawing.Point(57, 52)
         Me.TxtShortDesc4.Name = "TxtShortDesc4"
-        Me.TxtShortDesc4.Size = New System.Drawing.Size(259, 23)
+        Me.TxtShortDesc4.Size = New System.Drawing.Size(229, 23)
         Me.TxtShortDesc4.TabIndex = 39
         '
         'TxtForename4
@@ -956,6 +966,7 @@ Partial Class FrmBotsd
         'GroupBox6
         '
         Me.GroupBox6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox6.Controls.Add(Me.LblSeq6)
         Me.GroupBox6.Controls.Add(Me.ChkSel6)
         Me.GroupBox6.Controls.Add(Me.BtnUpdate6)
         Me.GroupBox6.Controls.Add(Me.LblId6)
@@ -1005,7 +1016,7 @@ Partial Class FrmBotsd
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtShortDesc6.Location = New System.Drawing.Point(57, 52)
         Me.TxtShortDesc6.Name = "TxtShortDesc6"
-        Me.TxtShortDesc6.Size = New System.Drawing.Size(259, 23)
+        Me.TxtShortDesc6.Size = New System.Drawing.Size(229, 23)
         Me.TxtShortDesc6.TabIndex = 39
         '
         'TxtForename6
@@ -1027,6 +1038,7 @@ Partial Class FrmBotsd
         'GroupBox7
         '
         Me.GroupBox7.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox7.Controls.Add(Me.LblSeq5)
         Me.GroupBox7.Controls.Add(Me.ChkSel5)
         Me.GroupBox7.Controls.Add(Me.BtnUpdate5)
         Me.GroupBox7.Controls.Add(Me.LblId5)
@@ -1043,7 +1055,7 @@ Partial Class FrmBotsd
         'ChkSel5
         '
         Me.ChkSel5.AutoSize = True
-        Me.ChkSel5.Location = New System.Drawing.Point(9, 59)
+        Me.ChkSel5.Location = New System.Drawing.Point(9, 58)
         Me.ChkSel5.Name = "ChkSel5"
         Me.ChkSel5.Size = New System.Drawing.Size(15, 14)
         Me.ChkSel5.TabIndex = 45
@@ -1076,7 +1088,7 @@ Partial Class FrmBotsd
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtShortDesc5.Location = New System.Drawing.Point(57, 54)
         Me.TxtShortDesc5.Name = "TxtShortDesc5"
-        Me.TxtShortDesc5.Size = New System.Drawing.Size(259, 23)
+        Me.TxtShortDesc5.Size = New System.Drawing.Size(229, 23)
         Me.TxtShortDesc5.TabIndex = 39
         '
         'TxtForename5
@@ -1119,6 +1131,72 @@ Partial Class FrmBotsd
         Me.ChkHandles.TabIndex = 63
         Me.ChkHandles.Text = "Include Handles"
         Me.ChkHandles.UseVisualStyleBackColor = True
+        '
+        'LblSeq1
+        '
+        Me.LblSeq1.AutoSize = True
+        Me.LblSeq1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblSeq1.Location = New System.Drawing.Point(294, 57)
+        Me.LblSeq1.Name = "LblSeq1"
+        Me.LblSeq1.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.LblSeq1.Size = New System.Drawing.Size(22, 17)
+        Me.LblSeq1.TabIndex = 46
+        Me.LblSeq1.Text = "0"
+        '
+        'LblSeq2
+        '
+        Me.LblSeq2.AutoSize = True
+        Me.LblSeq2.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblSeq2.Location = New System.Drawing.Point(294, 55)
+        Me.LblSeq2.Name = "LblSeq2"
+        Me.LblSeq2.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.LblSeq2.Size = New System.Drawing.Size(22, 17)
+        Me.LblSeq2.TabIndex = 47
+        Me.LblSeq2.Text = "0"
+        '
+        'LblSeq3
+        '
+        Me.LblSeq3.AutoSize = True
+        Me.LblSeq3.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblSeq3.Location = New System.Drawing.Point(292, 57)
+        Me.LblSeq3.Name = "LblSeq3"
+        Me.LblSeq3.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.LblSeq3.Size = New System.Drawing.Size(22, 17)
+        Me.LblSeq3.TabIndex = 47
+        Me.LblSeq3.Text = "0"
+        '
+        'LblSeq4
+        '
+        Me.LblSeq4.AutoSize = True
+        Me.LblSeq4.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblSeq4.Location = New System.Drawing.Point(292, 55)
+        Me.LblSeq4.Name = "LblSeq4"
+        Me.LblSeq4.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.LblSeq4.Size = New System.Drawing.Size(22, 17)
+        Me.LblSeq4.TabIndex = 47
+        Me.LblSeq4.Text = "0"
+        '
+        'LblSeq5
+        '
+        Me.LblSeq5.AutoSize = True
+        Me.LblSeq5.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblSeq5.Location = New System.Drawing.Point(292, 57)
+        Me.LblSeq5.Name = "LblSeq5"
+        Me.LblSeq5.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.LblSeq5.Size = New System.Drawing.Size(22, 17)
+        Me.LblSeq5.TabIndex = 47
+        Me.LblSeq5.Text = "0"
+        '
+        'LblSeq6
+        '
+        Me.LblSeq6.AutoSize = True
+        Me.LblSeq6.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblSeq6.Location = New System.Drawing.Point(292, 55)
+        Me.LblSeq6.Name = "LblSeq6"
+        Me.LblSeq6.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.LblSeq6.Size = New System.Drawing.Size(22, 17)
+        Me.LblSeq6.TabIndex = 47
+        Me.LblSeq6.Text = "0"
         '
         'FrmBotsd
         '
@@ -1292,4 +1370,10 @@ Partial Class FrmBotsd
     Friend WithEvents pairId6 As DataGridViewTextBoxColumn
     Friend WithEvents BtnRmvPostDetails As Button
     Friend WithEvents ChkHandles As CheckBox
+    Friend WithEvents LblSeq1 As Label
+    Friend WithEvents LblSeq2 As Label
+    Friend WithEvents LblSeq3 As Label
+    Friend WithEvents LblSeq4 As Label
+    Friend WithEvents LblSeq6 As Label
+    Friend WithEvents LblSeq5 As Label
 End Class

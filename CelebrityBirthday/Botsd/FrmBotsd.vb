@@ -83,6 +83,7 @@ Public Class FrmBotsd
     End Sub
     Private Sub BtnSwap_Click(sender As Object, e As EventArgs) Handles BtnSwap.Click
         If DgvPairs.SelectedRows.Count = 1 Then
+            Dim selectedRow As Integer = DgvPairs.SelectedRows(0).Index
             Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked) + CInt(ChkSel5.Checked) + CInt(ChkSel6.Checked)
             If _selCount <> -2 Then
                 chkSel1.Checked = True
@@ -91,96 +92,60 @@ Public Class FrmBotsd
                     ChkSel2.Checked = True
                 End If
             End If
-            Dim _row As DataGridViewRow = DgvPairs.SelectedRows(0)
-            Dim sel1IdCol As String
-            Dim sel2IdCol As String
-            Dim sel1NameCol As String
-            Dim sel2NameCol As String
-
+            Dim selSortSeq1 As Integer = -1
+            Dim selSortSeq2 As Integer
+            Dim sel1Id As Integer
+            Dim sel2Id As Integer
             If chkSel1.Checked Then
-                sel1IdCol = pairId1.Name
-                sel1NameCol = pairPerson1.Name
-                If ChkSel2.Checked Then
-                    sel2IdCol = pairId2.Name
-                    sel2NameCol = pairPerson2.Name
-                Else
-                    If ChkSel3.Checked Then
-                        sel2IdCol = pairId3.Name
-                        sel2NameCol = pairPerson3.Name
-                    Else
-                        If ChkSel4.Checked Then
-                            sel2IdCol = pairId4.Name
-                            sel2NameCol = pairPerson4.Name
-                        Else
-                            If ChkSel5.Checked Then
-                                sel2IdCol = pairId5.Name
-                                sel2NameCol = pairPerson5.Name
-                            Else
-                                sel2IdCol = pairId6.Name
-                                sel2NameCol = pairPerson6.Name
-                            End If
-                        End If
-                    End If
-                End If
-            ElseIf ChkSel2.Checked Then
-                sel1IdCol = pairId2.Name
-                sel1NameCol = pairPerson2.Name
-                If ChkSel3.Checked Then
-                    sel2IdCol = pairId3.Name
-                    sel2NameCol = pairPerson3.Name
-                Else
-                    If ChkSel4.Checked Then
-                        sel2IdCol = pairId4.Name
-                        sel2NameCol = pairPerson4.Name
-                    Else
-                        If ChkSel5.Checked Then
-                            sel2IdCol = pairId5.Name
-                            sel2NameCol = pairPerson5.Name
-                        Else
-                            sel2IdCol = pairId6.Name
-                            sel2NameCol = pairPerson6.Name
-                        End If
-                    End If
-                End If
-            ElseIf ChkSel3.Checked Then
-                sel1IdCol = pairId3.Name
-                sel1NameCol = pairPerson3.Name
-                If ChkSel4.Checked Then
-                    sel2IdCol = pairId4.Name
-                    sel2NameCol = pairPerson4.Name
-                Else
-                    If ChkSel5.Checked Then
-                        sel2IdCol = pairId5.Name
-                        sel2NameCol = pairPerson5.Name
-                    Else
-                        sel2IdCol = pairId6.Name
-                        sel2NameCol = pairPerson6.Name
-                    End If
-                End If
-            ElseIf ChkSel4.Checked Then
-                sel1IdCol = pairId4.Name
-                sel1NameCol = pairPerson4.Name
-                If ChkSel5.Checked Then
-                    sel2IdCol = pairId5.Name
-                    sel2NameCol = pairPerson5.Name
-                Else
-                    sel2IdCol = pairId6.Name
-                    sel2NameCol = pairPerson6.Name
-                End If
-            Else
-                sel1IdCol = pairId5.Name
-                sel1NameCol = pairPerson5.Name
-                sel2IdCol = pairId6.Name
-                sel2NameCol = pairPerson6.Name
+                selSortSeq1 = CInt(LblSeq1.Text)
+                sel1Id = CInt(LblId1.Text)
             End If
-            Dim _saveId As Integer = _row.Cells(sel1IdCol).Value
-            Dim _saveName As String = _row.Cells(sel1NameCol).Value
-            _row.Cells(sel1IdCol).Value = _row.Cells(sel2IdCol).Value
-            _row.Cells(sel1NameCol).Value = _row.Cells(sel2NameCol).Value
-            _row.Cells(sel2IdCol).Value = _saveId
-            _row.Cells(sel2NameCol).Value = _saveName
+            If ChkSel2.Checked Then
+                If selSortSeq1 < 0 Then
+                    selSortSeq1 = CInt(LblSeq2.Text)
+                    sel1Id = CInt(LblId2.Text)
+                Else
+                    selSortSeq2 = CInt(LblSeq2.Text)
+                    sel2Id = CInt(LblId2.Text)
+                End If
+            End If
+            If ChkSel3.Checked Then
+                If selSortSeq1 < 0 Then
+                    selSortSeq1 = CInt(LblSeq3.Text)
+                    sel1Id = CInt(LblId3.Text)
+                Else
+                    selSortSeq2 = CInt(LblSeq3.Text)
+                    sel2Id = CInt(LblId3.Text)
+                End If
+            End If
+            If ChkSel4.Checked Then
+                If selSortSeq1 < 0 Then
+                    selSortSeq1 = CInt(LblSeq4.Text)
+                    sel1Id = CInt(LblId4.Text)
+                Else
+                    selSortSeq2 = CInt(LblSeq4.Text)
+                    sel2Id = CInt(LblId4.Text)
+                End If
+            End If
+            If ChkSel5.Checked Then
+                If selSortSeq1 < 0 Then
+                    selSortSeq1 = CInt(LblSeq5.Text)
+                    sel1Id = CInt(LblId5.Text)
+                Else
+                    selSortSeq2 = CInt(LblSeq5.Text)
+                    sel2Id = CInt(LblId5.Text)
+                End If
+            End If
+            If ChkSel6.Checked Then
+                selSortSeq2 = CInt(LblSeq6.Text)
+                sel2Id = CInt(LblId6.Text)
+            End If
+            UpdateSortSeq(sel1Id, selSortSeq2)
+            UpdateSortSeq(sel2Id, selSortSeq1)
+            SelectPairs()
+            DgvPairs.Rows(selectedRow).Selected = True
+            GeneratePair()
         End If
-        GeneratePair()
     End Sub
     Private Sub BtnGenerate_Click(sender As Object, e As EventArgs) Handles BtnGenerate.Click
         GeneratePair()
@@ -606,17 +571,13 @@ Public Class FrmBotsd
                 Dim _pickPerson5 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId5.Name).Value)
                 Dim _pickPerson6 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId6.Name).Value)
                 _imageList = New List(Of Person)
-                chkSel1.Checked = False
-                ChkSel2.Checked = False
-                ChkSel3.Checked = False
-                ChkSel4.Checked = False
-                ChkSel5.Checked = False
-                ChkSel6.Checked = False
+
                 If _pickPerson1 IsNot Nothing Then
                     TxtForename1.Text = _pickPerson1.ForeName
                     TxtSurname1.Text = _pickPerson1.Surname
                     TxtShortDesc1.Text = _pickPerson1.ShortDesc
                     LblId1.Text = CStr(_pickPerson1.Id)
+                    LblSeq1.Text = CStr(_pickPerson1.Sortseq)
                     _imageList.Add(_pickPerson1)
                     GroupBox1.Enabled = True
                 End If
@@ -625,6 +586,7 @@ Public Class FrmBotsd
                     TxtSurname2.Text = _pickPerson2.Surname
                     TxtShortDesc2.Text = _pickPerson2.ShortDesc
                     LblId2.Text = CStr(_pickPerson2.Id)
+                    LblSeq2.Text = CStr(_pickPerson2.Sortseq)
                     _imageList.Add(_pickPerson2)
                     GroupBox2.Enabled = True
                 End If
@@ -633,6 +595,7 @@ Public Class FrmBotsd
                     TxtSurname3.Text = _pickPerson3.Surname
                     TxtShortDesc3.Text = _pickPerson3.ShortDesc
                     LblId3.Text = CStr(_pickPerson3.Id)
+                    LblSeq3.Text = CStr(_pickPerson3.Sortseq)
                     _imageList.Add(_pickPerson3)
                     GroupBox3.Enabled = True
                 End If
@@ -641,6 +604,7 @@ Public Class FrmBotsd
                     TxtSurname4.Text = _pickPerson4.Surname
                     TxtShortDesc4.Text = _pickPerson4.ShortDesc
                     LblId4.Text = CStr(_pickPerson4.Id)
+                    LblSeq4.Text = CStr(_pickPerson4.Sortseq)
                     _imageList.Add(_pickPerson4)
                     GroupBox4.Enabled = True
                 End If
@@ -649,6 +613,7 @@ Public Class FrmBotsd
                     TxtSurname5.Text = _pickPerson5.Surname
                     TxtShortDesc5.Text = _pickPerson5.ShortDesc
                     LblId5.Text = CStr(_pickPerson5.Id)
+                    LblSeq5.Text = CStr(_pickPerson5.Sortseq)
                     _imageList.Add(_pickPerson5)
                     GroupBox7.Enabled = True
                 End If
@@ -657,6 +622,7 @@ Public Class FrmBotsd
                     TxtSurname6.Text = _pickPerson6.Surname
                     TxtShortDesc6.Text = _pickPerson6.ShortDesc
                     LblId6.Text = CStr(_pickPerson6.Id)
+                    LblSeq6.Text = CStr(_pickPerson6.Sortseq)
                     _imageList.Add(_pickPerson6)
                     GroupBox6.Enabled = True
                 End If
@@ -1090,6 +1056,18 @@ Public Class FrmBotsd
         LblId4.Text = ""
         LblId5.Text = ""
         LblId6.Text = ""
+        LblSeq1.Text = ""
+        LblSeq2.Text = ""
+        LblSeq3.Text = ""
+        LblSeq4.Text = ""
+        LblSeq5.Text = ""
+        LblSeq6.Text = ""
+        chkSel1.Checked = False
+        ChkSel2.Checked = False
+        ChkSel3.Checked = False
+        ChkSel4.Checked = False
+        ChkSel5.Checked = False
+        ChkSel6.Checked = False
         GroupBox1.Enabled = False
         GroupBox2.Enabled = False
         GroupBox3.Enabled = False
@@ -1142,7 +1120,6 @@ Public Class FrmBotsd
         rtbFile1.Text = ""
         isBuildingPairs = True
         ClearPersonDetails()
-
         Try
             ThisDay = cboDay.SelectedIndex + 1
             ThisMonth = cboMonth.SelectedIndex + 1
@@ -1188,5 +1165,6 @@ Public Class FrmBotsd
         End Try
         isBuildingPairs = False
     End Sub
+
 #End Region
 End Class
