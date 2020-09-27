@@ -3,7 +3,6 @@
 Public Class FrmSearch
 #Region "variables"
     Private bLoadingPeople As Boolean
-    Private _browser As FrmBrowser
 #End Region
 #Region "form control handlers"
     Private Sub DgvPeople_SelectionChanged(sender As Object, e As EventArgs) Handles DgvPeople.SelectionChanged
@@ -57,23 +56,13 @@ Public Class FrmSearch
     End Sub
     Private Sub BtnFindInWiki_Click(sender As Object, e As EventArgs) Handles BtnFindInWiki.Click
         If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
-            ShowStatus("Finding in wiki")
-            Using _browser As New FrmBrowser
-                _browser.SearchName = TxtForename.Text & " " & TxtSurname.Text
-                _browser.FindinWiki()
-                _browser.ShowDialog()
-            End Using
-            ShowStatus("")
+            Dim wikiUrl As String = GetWikiSearchString(TxtForename.Text & " " & TxtSurname.Text)
+            Process.Start(wikiUrl)
         Else
             ShowStatus("No name supplied")
         End If
     End Sub
     Private Sub FrmSearch_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        If _browser IsNot Nothing AndAlso Not _browser.IsDisposed Then
-            _browser.Close()
-            _browser.Dispose()
-            _browser = Nothing
-        End If
         My.Settings.srchformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub

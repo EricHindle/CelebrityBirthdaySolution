@@ -40,11 +40,8 @@ Public Class frmTwitterOutput
         Dim _thisView As TreeView = TryCast(sender, TreeView)
         Dim _thisNode As TreeNode = _thisView.SelectedNode
         If _thisNode IsNot Nothing AndAlso Not String.IsNullOrEmpty(_thisNode.Text) Then
-            Using _browser As New FrmBrowser
-                _browser.SearchName = _thisNode.Text
-                _browser.FindinWiki()
-                _browser.ShowDialog()
-            End Using
+            Dim wikiUrl As String = GetWikiSearchString(_thisNode.Text)
+            Process.Start(wikiUrl)
         End If
     End Sub
     Private Sub BtnRewrite_Click(sender As Object, e As System.EventArgs)

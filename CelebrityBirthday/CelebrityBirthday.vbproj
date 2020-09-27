@@ -170,12 +170,6 @@
     <Compile Include="FrmAddWikiIds.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmBrowser.Designer.vb">
-      <DependentUpon>FrmBrowser.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FrmBrowser.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FrmDateCheck.Designer.vb">
       <DependentUpon>FrmDateCheck.vb</DependentUpon>
     </Compile>
@@ -333,9 +327,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddWikiIds.resx">
       <DependentUpon>FrmAddWikiIds.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmBrowser.resx">
-      <DependentUpon>FrmBrowser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDateCheck.resx">
       <DependentUpon>FrmDateCheck.vb</DependentUpon>

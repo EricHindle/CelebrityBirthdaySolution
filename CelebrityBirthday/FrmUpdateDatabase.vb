@@ -8,7 +8,6 @@ Public Class FrmUpdateDatabase
 #Region "variables"
     Private personTable As List(Of Person)
     Private bLoadingPerson As Boolean = False
-    Private _browser As FrmBrowser
     Private findPersonInList As Integer = -1
     Private isGotBirthName As Boolean = False
     Private isGotStageName As Boolean = False
@@ -24,16 +23,6 @@ Public Class FrmUpdateDatabase
         End Set
     End Property
 
-    Public Property Search As FrmBrowser = Nothing
-
-    Public Property Browser As FrmBrowser
-        Get
-            Return _browser
-        End Get
-        Set(value As FrmBrowser)
-            _browser = value
-        End Set
-    End Property
 #End Region
 #Region "control handlers"
     Private Sub BtnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -336,12 +325,6 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub FrmAddCbdy_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If Search IsNot Nothing AndAlso Not Search.IsDisposed Then
-            Search.Close()
-        End If
-        If Browser IsNot Nothing AndAlso Not Browser.IsDisposed Then
-            Browser.Close()
-        End If
         My.Settings.updformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
@@ -389,27 +372,9 @@ Public Class FrmUpdateDatabase
         cboMonth.SelectedIndex = -1
     End Sub
     Private Sub BtnWiki_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWiki.Click
-        Dim item As String() = {""}
-        If Browser Is Nothing OrElse Browser.IsDisposed Then
-            Browser = New FrmBrowser
-        End If
-        If lblID.Text.Length > 0 And lbPeople.SelectedIndex >= 0 Then
-            item = Split(lbPeople.SelectedItem, " ")
-            item(0) = ""
-        ElseIf Not String.IsNullOrEmpty(txtForename.Text) OrElse Not String.IsNullOrEmpty(txtSurname.Text) Then
-            txtName.Text = If(String.IsNullOrEmpty(txtForename.Text), "", txtForename.Text.Trim & " ") & txtSurname.Text.Trim
-            item = Split(txtName.Text, " ")
-        ElseIf txtName.TextLength > 0 Then
-            item = Split(txtName.Text, " ")
-        End If
-        Browser.SearchName = Join(item, " ").Trim
         If Not String.IsNullOrEmpty(TxtWikiId.Text) Then
-            Browser.WikiId = TxtWikiId.Text
-            Browser.FindByWikiId()
-        Else
-            Browser.FindinWiki()
+            Process.Start(My.Resources.WIKIURL & TxtWikiId.Text.Trim)
         End If
-        Browser.Show()
     End Sub
     Private Sub TxtDthDay_click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDthDay.Click, txtDthMth.Click, txtDied.Click
         Dim fld As TextBox = CType(sender, TextBox)
@@ -575,11 +540,6 @@ Public Class FrmUpdateDatabase
     Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
         cboDay.SelectedIndex = Today.Day - 1
         cboMonth.SelectedIndex = Today.Month - 1
-    End Sub
-    Private Sub BtnGetWikiId_Click(sender As Object, e As EventArgs) Handles BtnGetWikiId.Click
-        If Browser IsNot Nothing AndAlso Not Browser.IsDisposed Then
-            TxtWikiId.Text = Browser.txtURL.Text.Replace(My.Resources.WIKIURL, "")
-        End If
     End Sub
     Private Sub BtnPasteWikiId_Click(sender As Object, e As EventArgs) Handles BtnPasteWikiId.Click
         TxtWikiId.Paste()

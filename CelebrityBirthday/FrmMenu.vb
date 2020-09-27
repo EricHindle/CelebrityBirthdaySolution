@@ -38,13 +38,6 @@
         End Using
         Me.Show()
     End Sub
-    Private Sub BtnBrowser_Click(sender As Object, e As EventArgs) Handles BtnBrowser.Click
-        Me.Hide()
-        Using _browser As New FrmBrowser
-            _browser.ShowDialog()
-        End Using
-        Me.Show()
-    End Sub
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
         Me.Hide()
         Using _wordPress As New FrmWordPress

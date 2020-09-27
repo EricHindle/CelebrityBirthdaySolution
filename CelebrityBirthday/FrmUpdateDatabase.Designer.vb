@@ -101,7 +101,6 @@ Partial Class FrmUpdateDatabase
         Me.BtnPasteDesc = New System.Windows.Forms.Button()
         Me.BtnToday = New System.Windows.Forms.Button()
         Me.TxtWikiId = New System.Windows.Forms.TextBox()
-        Me.BtnGetWikiId = New System.Windows.Forms.Button()
         Me.BtnPasteWikiId = New System.Windows.Forms.Button()
         Me.BtnPasteName = New System.Windows.Forms.Button()
         Me.BtnPasteBirthname = New System.Windows.Forms.Button()
@@ -1028,19 +1027,8 @@ Partial Class FrmUpdateDatabase
         Me.TxtWikiId.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtWikiId.Location = New System.Drawing.Point(82, 692)
         Me.TxtWikiId.Name = "TxtWikiId"
-        Me.TxtWikiId.Size = New System.Drawing.Size(348, 24)
+        Me.TxtWikiId.Size = New System.Drawing.Size(389, 24)
         Me.TxtWikiId.TabIndex = 134
-        '
-        'BtnGetWikiId
-        '
-        Me.BtnGetWikiId.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnGetWikiId.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGetWikiId.Location = New System.Drawing.Point(436, 690)
-        Me.BtnGetWikiId.Name = "BtnGetWikiId"
-        Me.BtnGetWikiId.Size = New System.Drawing.Size(35, 26)
-        Me.BtnGetWikiId.TabIndex = 135
-        Me.BtnGetWikiId.Text = "<"
-        Me.BtnGetWikiId.UseVisualStyleBackColor = True
         '
         'BtnPasteWikiId
         '
@@ -1119,7 +1107,6 @@ Partial Class FrmUpdateDatabase
         Me.Controls.Add(Me.BtnPasteBirthname)
         Me.Controls.Add(Me.BtnPasteName)
         Me.Controls.Add(Me.BtnPasteWikiId)
-        Me.Controls.Add(Me.BtnGetWikiId)
         Me.Controls.Add(Me.TxtWikiId)
         Me.Controls.Add(Me.BtnToday)
         Me.Controls.Add(Me.BtnPasteDesc)
@@ -1286,7 +1273,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents BtnPasteDesc As Button
     Friend WithEvents BtnToday As Button
     Friend WithEvents TxtWikiId As TextBox
-    Friend WithEvents BtnGetWikiId As Button
     Friend WithEvents BtnPasteWikiId As Button
     Friend WithEvents BtnPasteName As Button
     Friend WithEvents BtnPasteBirthname As Button
