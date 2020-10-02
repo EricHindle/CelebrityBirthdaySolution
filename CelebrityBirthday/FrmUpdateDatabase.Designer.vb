@@ -107,6 +107,8 @@ Partial Class FrmUpdateDatabase
         Me.BtnPasteBirthplace = New System.Windows.Forms.Button()
         Me.BtnPasteShort = New System.Windows.Forms.Button()
         Me.LblSortSeq = New System.Windows.Forms.Label()
+        Me.LblUpdated = New System.Windows.Forms.Label()
+        Me.LbUpdateList = New System.Windows.Forms.ListBox()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -1095,12 +1097,42 @@ Partial Class FrmUpdateDatabase
         Me.LblSortSeq.TabIndex = 141
         Me.LblSortSeq.Text = "0"
         '
+        'LblUpdated
+        '
+        Me.LblUpdated.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblUpdated.AutoSize = True
+        Me.LblUpdated.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LblUpdated.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUpdated.Location = New System.Drawing.Point(939, 733)
+        Me.LblUpdated.Name = "LblUpdated"
+        Me.LblUpdated.Size = New System.Drawing.Size(95, 29)
+        Me.LblUpdated.TabIndex = 142
+        Me.LblUpdated.Text = "Updated"
+        Me.LblUpdated.Visible = False
+        '
+        'LbUpdateList
+        '
+        Me.LbUpdateList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LbUpdateList.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LbUpdateList.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.LbUpdateList.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LbUpdateList.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.LbUpdateList.FormattingEnabled = True
+        Me.LbUpdateList.ItemHeight = 14
+        Me.LbUpdateList.Location = New System.Drawing.Point(939, 768)
+        Me.LbUpdateList.Name = "LbUpdateList"
+        Me.LbUpdateList.Size = New System.Drawing.Size(319, 70)
+        Me.LbUpdateList.TabIndex = 143
+        Me.LbUpdateList.Visible = False
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1293, 923)
+        Me.Controls.Add(Me.LbUpdateList)
+        Me.Controls.Add(Me.LblUpdated)
         Me.Controls.Add(Me.LblSortSeq)
         Me.Controls.Add(Me.BtnPasteShort)
         Me.Controls.Add(Me.BtnPasteBirthplace)
@@ -1279,4 +1311,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents BtnPasteBirthplace As Button
     Friend WithEvents BtnPasteShort As Button
     Friend WithEvents LblSortSeq As Label
+    Friend WithEvents LblUpdated As Label
+    Friend WithEvents LbUpdateList As ListBox
 End Class

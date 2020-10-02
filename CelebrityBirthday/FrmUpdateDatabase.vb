@@ -128,8 +128,9 @@ Public Class FrmUpdateDatabase
                                             }
                 Dim bInserted As Boolean = False
                 Dim p As Integer = -1
+                Dim aPerson As New Person
                 For ix As Integer = 0 To personTable.Count - 1
-                    Dim aPerson As Person = personTable(ix)
+                    aPerson = personTable(ix)
                     If aPerson.IBirthYear > newPerson.IBirthYear Then
                         newPerson = UpdateSortSeq(newPerson, ix)
                         personTable.Insert(ix, newPerson)
@@ -143,6 +144,7 @@ Public Class FrmUpdateDatabase
                     newPerson = UpdateSortSeq(newPerson, p)
                     personTable.Add(newPerson)
                 End If
+                ShowUpdated(aPerson, "Inserted")
                 DisplayPersonList()
                 lbPeople.SelectedIndex = p
                 LblSortSeq.Text = CStr(newPerson.Sortseq)
@@ -156,6 +158,18 @@ Public Class FrmUpdateDatabase
             End Try
         Else
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
+        End If
+    End Sub
+
+    Private Sub ShowUpdated(aPerson As Person, dbAction As String)
+        LblUpdated.Visible = True
+        Dim iListMatches As Integer = LbUpdateList.FindString(aPerson.Name)
+        If iListMatches = ListBox.NoMatches Then
+            LblUpdated.Visible = True
+            LbUpdateList.Visible = True
+            LbUpdateList.Items.Add(aPerson.Name & " " & dbAction)
+        Else
+            LbUpdateList.Items(iListMatches) = aPerson.Name & " " & dbAction
         End If
     End Sub
 
@@ -200,6 +214,9 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub BtnLoadTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoadTable.Click, cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         ClearStatus()
+        LblUpdated.Visible = False
+        LbUpdateList.Items.Clear()
+        LbUpdateList.Visible = False
         If CheckForChanges(personTable) Then
             If MsgBox("Save unsaved changes now?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Unsaved Changes") = MsgBoxResult.Yes Then
                 UpdateAll()
@@ -283,11 +300,15 @@ Public Class FrmUpdateDatabase
             ShowStatus("Updating Database")
             StatusStrip1.Refresh()
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
+            Dim dbAction As String
             If oPerson.Id < 0 Then
                 Dim newId As Integer = InsertPerson(oPerson)
+                dbAction = "Inserted on dB"
             Else
                 UpdatePerson(oPerson)
+                dbAction = "Updated on dB"
             End If
+            ShowUpdated(oPerson, dbaction)
             oPerson.UnsavedChanges = False
             AppendStatus(" - Complete")
         End If
@@ -313,6 +334,7 @@ Public Class FrmUpdateDatabase
                     oPerson.BirthName = txtBirthName.Text.Trim
                     oPerson.UnsavedChanges = True
                     oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd)
+                    ShowUpdated(oPerson, "Updated")
                     Dim p As Integer = lbPeople.SelectedIndex
                     DisplayPersonList()
                     lbPeople.SelectedIndex = p
@@ -497,7 +519,7 @@ Public Class FrmUpdateDatabase
                 UpdateAll()
             End If
         End If
-            Using _wordpress As New FrmWordPress
+        Using _wordpress As New FrmWordPress
             _wordpress.DaySelection = cboDay.SelectedIndex + 1
             _wordpress.MonthSelection = cboMonth.SelectedIndex + 1
             _wordpress.ShowDialog()
@@ -648,12 +670,21 @@ Public Class FrmUpdateDatabase
                 iSeq = 0
                 lastYear = oPerson.BirthYear
             End If
+            Dim dbAction As String = ""
             If oPerson.Id < 0 Then
                 Dim newId As Integer = InsertPerson(oPerson)
+                dbAction = "Inserted on dB"
                 oPerson.Id = newId
             Else
+                If oPerson.UnsavedChanges Then
+                    dbAction = "Updated on dB"
+                End If
                 UpdatePerson(oPerson)
             End If
+            If Not String.IsNullOrEmpty(dbAction) Then
+                ShowUpdated(oPerson, dbAction)
+            End If
+
             oPerson.UnsavedChanges = False
         Next
         AppendStatus(" - Complete")

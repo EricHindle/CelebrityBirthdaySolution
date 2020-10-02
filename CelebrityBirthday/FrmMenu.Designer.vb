@@ -172,8 +172,7 @@ Partial Class FrmMenu
         '
         'LblCelebrities
         '
-        Me.LblCelebrities.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.LblCelebrities.Location = New System.Drawing.Point(148, 77)
+        Me.LblCelebrities.Location = New System.Drawing.Point(148, 120)
         Me.LblCelebrities.Name = "LblCelebrities"
         Me.LblCelebrities.Size = New System.Drawing.Size(205, 32)
         Me.LblCelebrities.TabIndex = 13
