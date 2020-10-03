@@ -27,6 +27,7 @@ Public Class FrmImages
         CloseForm()
     End Sub
     Private Sub FrmImages_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.imgformpos)
         ClearDetails()
         txtLoadYr.Text = String.Empty
@@ -121,6 +122,7 @@ Public Class FrmImages
         bLoadingPerson = False
     End Sub
     Private Sub FrmImages_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         My.Settings.imgformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
@@ -235,6 +237,7 @@ Public Class FrmImages
                 End If
                 PictureBox2.ImageLocation = storedImageName
             Catch ex As ArgumentException
+                LogUtil.Exception("Error loading person", ex, MyBase.Name)
                 lblStatus.Text = ex.Message
             End Try
         End If

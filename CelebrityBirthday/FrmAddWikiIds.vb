@@ -22,6 +22,7 @@ Public Class FrmAddWikiIds
         Try
             personTable = FindEverybody()
         Catch ex As DbException
+            LogUtil.Problem("Exception during list load : " & ex.Message)
             If MsgBox("Exception during list load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
                 Exit Sub
             End If

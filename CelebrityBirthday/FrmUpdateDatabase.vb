@@ -103,6 +103,7 @@ Public Class FrmUpdateDatabase
         ClearDetails()
     End Sub
     Private Sub BtnInsert_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInsert.Click
+        ShowStatus("Inserting person in list",, True)
         TidyText()
         If txtYear.TextLength = 0 OrElse Not IsNumeric(txtYear.TextLength) Then
             MsgBox("No birth year", MsgBoxStyle.Exclamation, "Error")
@@ -151,10 +152,10 @@ Public Class FrmUpdateDatabase
                 newPerson.Dispose()
             Catch ex As DbException
                 MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
-                ShowStatus(ex.Message)
+                ShowStatus(ex.Message,, True)
             Catch ex As ArgumentException
                 MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
-                ShowStatus(ex.Message)
+                ShowStatus(ex.Message,, True)
             End Try
         Else
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
@@ -164,13 +165,15 @@ Public Class FrmUpdateDatabase
     Private Sub ShowUpdated(aPerson As Person, dbAction As String)
         LblUpdated.Visible = True
         Dim iListMatches As Integer = LbUpdateList.FindString(aPerson.Name)
+        Dim msgText As String = aPerson.Name & " " & dbAction
         If iListMatches = ListBox.NoMatches Then
             LblUpdated.Visible = True
             LbUpdateList.Visible = True
-            LbUpdateList.Items.Add(aPerson.Name & " " & dbAction)
+            LbUpdateList.Items.Add(msgText)
         Else
-            LbUpdateList.Items(iListMatches) = aPerson.Name & " " & dbAction
+            LbUpdateList.Items(iListMatches) = msgText
         End If
+        LogUtil.Info(msgText, MyBase.Name)
     End Sub
 
     Private Function UpdateSortSeq(newPerson As Person, p As Integer) As Person
@@ -223,7 +226,7 @@ Public Class FrmUpdateDatabase
             End If
         End If
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
-            ShowStatus("Loading Table From Database")
+            ShowStatus("Loading Table From Database",, True)
             StatusStrip1.Refresh()
             personTable = New List(Of Person)
             lbPeople.Items.Clear()
@@ -266,7 +269,7 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub BtnReloadSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadSel.Click
-        ShowStatus("Loading Item From Database")
+        ShowStatus("Loading Item From Database",, True)
         Me.Refresh()
         If lbPeople.SelectedIndex >= 0 And lbPeople.SelectedIndex < lbPeople.Items.Count Then
             If personTable(lbPeople.SelectedIndex) IsNot Nothing Then
@@ -289,16 +292,17 @@ Public Class FrmUpdateDatabase
         If lbPeople.SelectedIndex >= 0 Then
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             LoadScreenFromPerson(oPerson)
+            ShowStatus("Selected " & oPerson.Name,, True)
         Else
             ClearDetails()
         End If
         bLoadingPerson = False
     End Sub
     Private Sub BtnUpdateSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateSel.Click
+
         ClearStatus()
         If lbPeople.SelectedIndex >= 0 Then
-            ShowStatus("Updating Database")
-            StatusStrip1.Refresh()
+            ShowStatus("Updating database with selected person", , True)
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             Dim dbAction As String
             If oPerson.Id < 0 Then
@@ -314,6 +318,7 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub BtnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+        ShowStatus("Updating person in list", , True)
         ClearStatus()
         TidyText()
         If lblID.Text.Length > 0 Then
@@ -338,8 +343,7 @@ Public Class FrmUpdateDatabase
                     Dim p As Integer = lbPeople.SelectedIndex
                     DisplayPersonList()
                     lbPeople.SelectedIndex = p
-                    ShowStatus("Updated list")
-
+                    ShowStatus("Updated list",, True)
                     Exit For
                 End If
             Next
@@ -347,10 +351,12 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub FrmAddCbdy_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         My.Settings.updformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
     Private Sub Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         NudSentences.Value = My.Settings.wikiSentences
         Label11.Text = "Version: " & My.Application.Info.Version.ToString
         GetFormPos(Me, My.Settings.updformpos)
@@ -395,6 +401,7 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub BtnWiki_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWiki.Click
         If Not String.IsNullOrEmpty(TxtWikiId.Text) Then
+            ShowStatus("Opening Wikipedia", , True)
             Process.Start(My.Resources.WIKIURL & TxtWikiId.Text.Trim)
         End If
     End Sub
@@ -504,16 +511,17 @@ Public Class FrmUpdateDatabase
                 ShowStatus("Dead")
                 Exit Sub
             End If
-
+            ShowStatus("Opening Twitter", , True)
             Dim sUrl As String = My.Settings.TwitterSearchUrl & oPerson.Name.Replace(" ", "+")
             Process.Start(sUrl)
         End If
     End Sub
     Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
+        ShowStatus("Getting wiki text", , True)
         txtDesc.Text = GetWikiText(NudSentences.Value, txtForename.Text, txtSurname.Text, TxtWikiId.Text)
     End Sub
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
-        ShowStatus("WordPress")
+        ShowStatus("WordPress",, True)
         If CheckForChanges(personTable) Then
             If MsgBox("Save unsaved changes now?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Unsaved Changes") = MsgBoxResult.Yes Then
                 UpdateAll()
@@ -536,7 +544,7 @@ Public Class FrmUpdateDatabase
     Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
         Try
             If CInt(lblID.Text) > -1 Then
-                ShowStatus("Images")
+                ShowStatus("Images",, True)
                 Using _update As New FrmImages
                     _update.PersonId = CInt(lblID.Text)
                     _update.ShowDialog()
@@ -659,8 +667,7 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub UpdateAll()
-        ShowStatus("Updating Database")
-        StatusStrip1.Refresh()
+        ShowStatus("Updating all changes onto database",, True)
         Dim lastYear As String = ""
         Dim iSeq As Integer = 0
         For Each oPerson As Person In personTable
@@ -785,9 +792,10 @@ Public Class FrmUpdateDatabase
         txtWiki.Text = GetWikiText(NudSentences.Value, oPerson.ForeName, oPerson.Surname, TxtWikiId.Text)
         bLoadingPerson = False
     End Sub
-    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False)
+    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
         lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
         StatusStrip1.Refresh()
+        If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
     Private Sub AppendStatus(pText As String)
         ShowStatus(pText, True)

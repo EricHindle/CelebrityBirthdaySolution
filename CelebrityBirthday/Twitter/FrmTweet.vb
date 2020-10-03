@@ -75,6 +75,7 @@ Public Class FrmTweet
         SaveImages()
     End Sub
     Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.twitterimagepos)
         GetAuthData()
         FillTwitterUserList()
@@ -84,6 +85,7 @@ Public Class FrmTweet
         End If
     End Sub
     Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         My.Settings.twitterimagepos = SetFormPos(Me)
         My.Settings.Save()
     End Sub

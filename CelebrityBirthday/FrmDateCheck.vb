@@ -50,6 +50,7 @@ Public Class FrmDateCheck
                 personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
             End If
         Catch ex As DbException
+            LogUtil.Problem("Exception during list load : " & ex.Message)
             If MsgBox("Exception during list load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
                 Exit Sub
             End If
@@ -85,6 +86,7 @@ Public Class FrmDateCheck
                     '    AddXRow(_person, "", "Can't find wiki Date of birth")
                 End If
             Catch ex As ArgumentException
+                LogUtil.Problem("Exception during list load : " & ex.Message)
                 If MsgBox(_person.Name & vbCrLf & "Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
                     Exit Sub
                 End If
@@ -272,6 +274,14 @@ Public Class FrmDateCheck
             _wordpress.ShowDialog()
         End Using
         DisplayMessage("")
+    End Sub
+
+    Private Sub FrmDateCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
+    End Sub
+
+    Private Sub FrmDateCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
     End Sub
 #End Region
 End Class

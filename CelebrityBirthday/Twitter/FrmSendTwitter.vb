@@ -52,6 +52,7 @@ Public Class FrmSendTwitter
         WriteTrace("Back from Authenticate " & Format(Now, "hh:MM:ss"))
     End Sub
     Private Sub FrmSendTwitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.sndtwformpos)
         NudSentences.Value = My.Settings.wikiSentences
         RtbTweetText.AllowDrop = True
@@ -96,6 +97,7 @@ Public Class FrmSendTwitter
         WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
     End Sub
     Private Sub FrmSendTwitter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         oTweetTa.Dispose()
         My.Settings.sndtwformpos = SetFormPos(Me)
         My.Settings.Save()

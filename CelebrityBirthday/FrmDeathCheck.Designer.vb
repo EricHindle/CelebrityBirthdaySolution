@@ -31,11 +31,11 @@ Partial Class FrmDeathCheck
         Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.lblCount = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.BtnStart = New System.Windows.Forms.Button()
         Me.BtnWrite = New System.Windows.Forms.Button()
-        Me.lblCount = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.dgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -118,6 +118,22 @@ Partial Class FrmDeathCheck
         Me.StatusStrip1.TabIndex = 10
         Me.StatusStrip1.Text = "StatusStrip1"
         '
+        'lblCount
+        '
+        Me.lblCount.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.lblCount.Name = "lblCount"
+        Me.lblCount.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.lblCount.Size = New System.Drawing.Size(39, 17)
+        Me.lblCount.Text = "0 of 0"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(13, 17)
+        Me.ToolStripStatusLabel1.Text = "|"
+        '
         'lblStatus
         '
         Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
@@ -149,22 +165,6 @@ Partial Class FrmDeathCheck
         Me.BtnWrite.TabIndex = 12
         Me.BtnWrite.Text = "Write File"
         Me.BtnWrite.UseVisualStyleBackColor = True
-        '
-        'lblCount
-        '
-        Me.lblCount.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
-        Me.lblCount.Name = "lblCount"
-        Me.lblCount.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.lblCount.Size = New System.Drawing.Size(39, 17)
-        Me.lblCount.Text = "0 of 0"
-        '
-        'ToolStripStatusLabel1
-        '
-        Me.ToolStripStatusLabel1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(13, 17)
-        Me.ToolStripStatusLabel1.Text = "|"
         '
         'FrmDeathCheck
         '

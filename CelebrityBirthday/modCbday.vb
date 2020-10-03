@@ -182,9 +182,11 @@ Friend Module modCbday
                         bw.Write(b)
                     End If
                 Catch ex As IOException
+                    LogUtil.Exception("Save image error", ex, "modCbday")
                     MsgBox("IO Error writing file" & vbCrLf & ex.Message)
                     rtnval = False
                 Catch ex As ArgumentException
+                    LogUtil.Exception("Save image error", ex, "modCbday")
                     MsgBox("Error writing file" & vbCrLf & ex.Message)
                     rtnval = False
                 Finally
@@ -303,6 +305,7 @@ Friend Module modCbday
         Return _extract
     End Function
     Public Function DisplayException(pMethodBase As MethodBase, pException As Exception, pExceptionType As String) As MsgBoxResult
+        LogUtil.Exception(pExceptionType, pException, pMethodBase.Name)
         Return MsgBox(pMethodBase.Name & " : Database exception" & vbCrLf _
             & pException.Message & vbCrLf _
             & If(pException.InnerException Is Nothing, "", pException.InnerException.Message) _

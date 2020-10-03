@@ -20,7 +20,7 @@ Public Class FrmSearch
     End Sub
     Private Sub BtnSearchByName_Click(sender As Object, e As EventArgs) Handles BtnSearchByName.Click
         If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
-            ShowStatus("Searching for " & TxtForename.Text & " " & TxtSurname.Text)
+            ShowStatus("Searching for " & TxtForename.Text & " " & TxtSurname.Text, True)
             bLoadingPeople = True
             DgvPeople.Rows.Clear()
             Dim selectedPersons As List(Of Person) = FindPeopleLikeName(TxtForename.Text, TxtSurname.Text)
@@ -29,14 +29,14 @@ Public Class FrmSearch
             Next
             DgvPeople.ClearSelection()
             bLoadingPeople = False
-            ShowStatus("Search complete - found " & CStr(selectedPersons.Count) & " records")
+            ShowStatus("Search complete - found " & CStr(selectedPersons.Count) & " records", True)
         Else
             ShowStatus("No name supplied")
         End If
     End Sub
     Private Sub BtnSearchById_Click(sender As Object, e As EventArgs) Handles BtnSearchById.Click
         If Not String.IsNullOrEmpty(txtId.Text) Then
-            ShowStatus("Searching for " & txtId.Text)
+            ShowStatus("Searching for " & txtId.Text, True)
             LoadScreenFromId(CInt(txtId.Text))
             ShowStatus("Search complete")
         Else
@@ -45,7 +45,7 @@ Public Class FrmSearch
     End Sub
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnDbUpdate.Click
         If DgvPeople.SelectedRows.Count = 1 Then
-            ShowStatus("Updating")
+            ShowStatus("Opening update form", True)
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
             Using _update As New FrmUpdateDatabase
                 _update.PersonId = oRow.Cells(SelPersonId.Name).Value
@@ -56,6 +56,7 @@ Public Class FrmSearch
     End Sub
     Private Sub BtnFindInWiki_Click(sender As Object, e As EventArgs) Handles BtnFindInWiki.Click
         If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
+            ShowStatus("Opening Wikipedia", True)
             Dim wikiUrl As String = GetWikiSearchString(TxtForename.Text & " " & TxtSurname.Text)
             Process.Start(wikiUrl)
         Else
@@ -63,6 +64,7 @@ Public Class FrmSearch
         End If
     End Sub
     Private Sub FrmSearch_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         My.Settings.srchformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
@@ -106,14 +108,15 @@ Public Class FrmSearch
         tRow.Cells(SelPersonYear.Name).Value = oPerson.BirthYear
         tRow.Cells(selDesc.Name).Value = oPerson.ShortDesc
     End Sub
-    Private Sub ShowStatus(pText As String)
+    Private Sub ShowStatus(pText As String, Optional isLogged As Boolean = False)
         LblStatus.Text = pText
         StatusStrip1.Refresh()
+        If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
 
     Private Sub BtnImgUpdate_Click(sender As Object, e As EventArgs) Handles BtnImgUpdate.Click
         If DgvPeople.SelectedRows.Count = 1 Then
-            ShowStatus("Updating")
+            ShowStatus("Opening images form", True)
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
             Using _update As New FrmImages
                 _update.PersonId = oRow.Cells(SelPersonId.Name).Value
@@ -125,7 +128,7 @@ Public Class FrmSearch
 
     Private Sub BtnTweet_Click(sender As Object, e As EventArgs) Handles BtnTweet.Click
         If DgvPeople.SelectedRows.Count = 1 Then
-            ShowStatus("Tweeting")
+            ShowStatus("Opening Twitter form", True)
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
             Using _tweet As New FrmTweet
                 _tweet.DaySelection = oRow.Cells(selPersonDay.Name).Value
@@ -138,7 +141,7 @@ Public Class FrmSearch
 
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
         If DgvPeople.SelectedRows.Count = 1 Then
-            ShowStatus("WordPress")
+            ShowStatus("Opening WordPress form", True)
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
             Using _wordpress As New FrmWordPress
                 _wordpress.DaySelection = oRow.Cells(selPersonDay.Name).Value
@@ -150,6 +153,7 @@ Public Class FrmSearch
     End Sub
 
     Private Sub FrmSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.srchformpos)
     End Sub
 #End Region

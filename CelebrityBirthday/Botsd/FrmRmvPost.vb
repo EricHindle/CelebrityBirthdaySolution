@@ -55,4 +55,12 @@ Public Class FrmRmvPost
             LblMessage.Text = "Must supply existing post number"
         End If
     End Sub
+
+    Private Sub FrmRmvPost_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
+    End Sub
+
+    Private Sub FrmRmvPost_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
+    End Sub
 End Class

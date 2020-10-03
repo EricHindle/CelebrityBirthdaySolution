@@ -41,6 +41,7 @@ Public Class FrmImageStore
 #End Region
 #Region "form control handlers"
     Private Sub ImageStore_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         PictureBox1.AllowDrop = True
         TxtForename.Text = _forename
         TxtSurname.Text = _surname
@@ -106,6 +107,7 @@ Public Class FrmImageStore
         PicStatus.Text = "Getting images for " & TxtForename.Text.Trim
     End Sub
     Private Sub FrmImageStore_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         If Not isSaved Then
             If MsgBox("Image has not been saved. OK to close?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.No Then
                 e.Cancel = True

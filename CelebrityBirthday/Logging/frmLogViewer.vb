@@ -14,6 +14,7 @@ Public Class frmLogViewer
         Me.Close()
     End Sub
     Private Sub LogViewer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         Me.Text = "Log: " & LogUtil.GetLogfileName
         rtbLog.Text = LogUtil.GetLogContents()
     End Sub
@@ -49,5 +50,9 @@ Public Class frmLogViewer
     Private Sub BtnClearLog_Click(sender As Object, e As EventArgs) Handles BtnClearLog.Click
         ClearLog()
         rtbLog.Text = LogUtil.GetLogContents()
+    End Sub
+
+    Private Sub FrmLogViewer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
     End Sub
 End Class

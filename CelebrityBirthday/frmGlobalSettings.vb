@@ -16,9 +16,11 @@ Public Class FrmGlobalSettings
     End Sub
 
     Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         Try
             oTa.Fill(oTable)
         Catch ex As DbException
+            LogUtil.Problem("Exception during Global Settings table load : " & ex.Message)
         End Try
         cbSelect.DataSource = oTable
         cbSelect.DisplayMember = "pKey"
@@ -97,6 +99,10 @@ Public Class FrmGlobalSettings
         Finally
             MyBase.Dispose(disposing)
         End Try
+    End Sub
+
+    Private Sub FrmGlobalSettings_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
+        LogUtil.Info("Closing", MyBase.Name)
     End Sub
 
 #End Region

@@ -71,6 +71,7 @@ Public Class frmImageCapture
 #End Region
 #Region "Form"
     Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.capformpos)
         iStartHeight = Me.Size.Height
         iStartWidth = Me.Size.Width
@@ -220,6 +221,7 @@ Public Class frmImageCapture
                 DisplayStatus(NOT_SAVED_MESSAGE, False)
             End If
         Catch ex As ArgumentException
+            LogUtil.Exception(NOT_SAVED_MESSAGE, ex, MyBase.Name)
             DisplayStatus(NOT_SAVED_MESSAGE, True, ex)
         End Try
         Return imageFile
@@ -423,6 +425,10 @@ Public Class frmImageCapture
         Finally
             MyBase.Dispose(disposing)
         End Try
+    End Sub
+
+    Private Sub FrmImageCapture_Leave(sender As Object, e As EventArgs) Handles Me.Leave
+        LogUtil.Info("Closing", MyBase.Name)
     End Sub
 #End Region
 End Class

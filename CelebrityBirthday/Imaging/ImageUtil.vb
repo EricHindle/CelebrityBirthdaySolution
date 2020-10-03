@@ -61,8 +61,10 @@ Friend Module ImageUtil
                 targetBitmap.Save(targetFile, GetCodecInfo(imgType), _encoderParameters)
                 _encoderParameters.Dispose()
             Catch ex As ArgumentException
+                LogUtil.Exception("Save image error", ex, "SaveImageFromPictureBox")
                 MsgBox(targetFile & " : " & ex.Message, MsgBoxStyle.Exclamation, "Error")
             Catch ex As Runtime.InteropServices.ExternalException
+                LogUtil.Exception("Save image error", ex, "SaveImageFromPictureBox")
                 MsgBox(targetFile & " : " & ex.Message, MsgBoxStyle.Exclamation, "Error")
             End Try
         End If
@@ -126,6 +128,7 @@ Friend Module ImageUtil
                 End Using
             End If
         Catch ex As ArgumentException
+            LogUtil.Exception("Save image error", ex, "ResizeImageToBitmap")
             MsgBox("resizeImageToBitmap:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
         End Try
         Return targetBitmap
@@ -142,6 +145,7 @@ Friend Module ImageUtil
                 End Using
             End If
         Catch ex As ArgumentNullException
+            LogUtil.Exception("Save image error", ex, "ExtractCroppedAreaFromImage")
             MsgBox("extractCroppedAreaFromImage:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
         End Try
 

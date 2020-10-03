@@ -33,6 +33,7 @@ Public Class FrmDeathCheck
                     End If
                 End If
             Catch ex As DbException
+                LogUtil.Problem("Exception during list load : " & ex.Message)
                 If MsgBox(_person.Name & vbCrLf & "Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
                     Exit Sub
                 End If
@@ -96,5 +97,13 @@ Public Class FrmDeathCheck
                 _update.ShowDialog()
             End Using
         End If
+    End Sub
+
+    Private Sub FrmDeathCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
+    End Sub
+
+    Private Sub FrmDeathCheck_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
+        LogUtil.Info("Closing", MyBase.Name)
     End Sub
 End Class

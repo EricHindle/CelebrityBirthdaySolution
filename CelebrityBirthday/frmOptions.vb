@@ -33,6 +33,7 @@ Public Class FrmOptions
     End Sub
 
     Private Sub FrmOptions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         LoadOptions()
         Version.Text = System.String.Format(myStringFormatProvider, Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
     End Sub
@@ -90,5 +91,9 @@ Public Class FrmOptions
         If LbSplitWords.SelectedItems.Count = 1 Then
             LbSplitWords.Items.Remove(LbSplitWords.SelectedItem)
         End If
+    End Sub
+
+    Private Sub FrmOptions_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
     End Sub
 End Class

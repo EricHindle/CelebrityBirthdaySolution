@@ -101,8 +101,13 @@ Public Class FrmMosaic
     End Sub
 
     Private Sub FrmMosaic_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         For Each _person As Person In _imageList
             _person.Dispose()
         Next
+    End Sub
+
+    Private Sub FrmMosaic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
     End Sub
 End Class

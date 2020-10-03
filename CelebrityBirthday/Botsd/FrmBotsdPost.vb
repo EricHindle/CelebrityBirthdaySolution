@@ -41,6 +41,7 @@ Public Class FrmBotsdPost
         Me.Close()
     End Sub
     Private Sub FrmText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.botsdpostpos)
         Dim splitWords As String() = Split(My.Settings.SplitWords, "~")
         CbSplit.Items.Clear()
@@ -52,6 +53,7 @@ Public Class FrmBotsdPost
         oAlsoFileName = GenAlsoFileName()
     End Sub
     Private Sub FrmText_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         My.Settings.botsdpostpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub

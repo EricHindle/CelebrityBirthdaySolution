@@ -51,6 +51,7 @@ Public Class FrmBotsd
         End If
     End Sub
     Private Sub FrmBotsd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.botsdformpos)
         IsNoGenerate = True
         WpNumber = GlobalSettings.GetSetting(My.Resources.NEXTWPNO)
@@ -219,6 +220,7 @@ Public Class FrmBotsd
         _pickPerson6.Dispose()
     End Sub
     Private Sub FrmBotsd_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         My.Settings.botsdformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
@@ -520,13 +522,10 @@ Public Class FrmBotsd
         rtbTweet.Text &= vbCrLf & sText
         If isStatus Then DisplayStatus(sText)
     End Sub
-    Private Sub DisplayStatus(_text As String, Optional _isAppend As Boolean = False)
-        If _isAppend Then
-            LblStatus.Text &= _text
-        Else
-            LblStatus.Text = _text
-        End If
+    Private Sub DisplayStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
+        LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
         StatusStrip1.Refresh()
+        If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
     Private Sub GetAuthData()
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")

@@ -18,6 +18,7 @@ Public Class frmTwitterOutput
         WriteFiles()
     End Sub
     Private Sub FrmTwitterOutput_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         My.Settings.twitterfilespos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
@@ -31,7 +32,7 @@ Public Class frmTwitterOutput
 
     End Sub
     Private Sub FrmTwitterOutput_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.twitterfilespos)
         dtpFrom.Value = DateAdd(DateInterval.Day, 1, Today.Date)
         dtpTo.Value = DateAdd(DateInterval.Day, -1, New Date(Today.Year, DateAdd(DateInterval.Month, 1, Today.Date).Month, 1))

@@ -62,6 +62,7 @@ Public Class FrmWordPress
         End If
     End Sub
     Private Sub FrmWordPress_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         ClearForm()
         If Not String.IsNullOrEmpty(_daySelection) AndAlso Not String.IsNullOrEmpty(_monthSelection) Then
             cboDay.SelectedIndex = _daySelection - 1
@@ -223,6 +224,7 @@ Public Class FrmWordPress
     End Sub
 
     Private Sub FrmWordPress_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         My.Settings.wprformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
