@@ -57,6 +57,8 @@ Partial Class FrmOptions
         Me.BtnAddWord = New System.Windows.Forms.Button()
         Me.LbSplitWords = New System.Windows.Forms.ListBox()
         Me.TxtSplitWords = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.TxtLogFilePath = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,7 +70,7 @@ Partial Class FrmOptions
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnCancel.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCancel.Location = New System.Drawing.Point(392, 568)
+        Me.btnCancel.Location = New System.Drawing.Point(392, 633)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(87, 41)
         Me.btnCancel.TabIndex = 0
@@ -80,7 +82,7 @@ Partial Class FrmOptions
         Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnSave.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnSave.Location = New System.Drawing.Point(272, 568)
+        Me.btnSave.Location = New System.Drawing.Point(272, 633)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(87, 41)
         Me.btnSave.TabIndex = 1
@@ -141,7 +143,7 @@ Partial Class FrmOptions
         Me.Version.BackColor = System.Drawing.Color.Transparent
         Me.Version.Font = New System.Drawing.Font("Papyrus", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Version.Location = New System.Drawing.Point(12, 591)
+        Me.Version.Location = New System.Drawing.Point(12, 656)
         Me.Version.Name = "Version"
         Me.Version.Size = New System.Drawing.Size(214, 28)
         Me.Version.TabIndex = 8
@@ -152,7 +154,7 @@ Partial Class FrmOptions
         Me.BtnResetForms.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnResetForms.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnResetForms.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnResetForms.Location = New System.Drawing.Point(16, 515)
+        Me.BtnResetForms.Location = New System.Drawing.Point(16, 580)
         Me.BtnResetForms.Name = "BtnResetForms"
         Me.BtnResetForms.Size = New System.Drawing.Size(86, 60)
         Me.BtnResetForms.TabIndex = 9
@@ -233,6 +235,8 @@ Partial Class FrmOptions
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.TxtLogFilePath)
+        Me.GroupBox1.Controls.Add(Me.Label12)
         Me.GroupBox1.Controls.Add(Me.TxtTwitterImagePath)
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.txtTwitterFilePath)
@@ -243,7 +247,7 @@ Partial Class FrmOptions
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(16, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(521, 167)
+        Me.GroupBox1.Size = New System.Drawing.Size(521, 198)
         Me.GroupBox1.TabIndex = 18
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "File Paths"
@@ -280,9 +284,9 @@ Partial Class FrmOptions
         Me.GroupBox2.Controls.Add(Me.TxtWordPress)
         Me.GroupBox2.Controls.Add(Me.Label7)
         Me.GroupBox2.Controls.Add(Me.TxtImageSearch)
-        Me.GroupBox2.Location = New System.Drawing.Point(118, 200)
+        Me.GroupBox2.Location = New System.Drawing.Point(118, 216)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(419, 300)
+        Me.GroupBox2.Size = New System.Drawing.Size(419, 331)
         Me.GroupBox2.TabIndex = 19
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "URLs"
@@ -330,7 +334,7 @@ Partial Class FrmOptions
         Me.BtnGlobalSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnGlobalSettings.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGlobalSettings.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 515)
+        Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 580)
         Me.BtnGlobalSettings.Name = "BtnGlobalSettings"
         Me.BtnGlobalSettings.Size = New System.Drawing.Size(86, 60)
         Me.BtnGlobalSettings.TabIndex = 20
@@ -341,7 +345,7 @@ Partial Class FrmOptions
         '
         Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(225, 515)
+        Me.Label9.Location = New System.Drawing.Point(225, 580)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(89, 14)
         Me.Label9.TabIndex = 21
@@ -350,7 +354,7 @@ Partial Class FrmOptions
         'NudSentences
         '
         Me.NudSentences.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.NudSentences.Location = New System.Drawing.Point(329, 513)
+        Me.NudSentences.Location = New System.Drawing.Point(329, 578)
         Me.NudSentences.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudSentences.Name = "NudSentences"
@@ -366,9 +370,9 @@ Partial Class FrmOptions
         Me.GroupBox3.Controls.Add(Me.BtnAddWord)
         Me.GroupBox3.Controls.Add(Me.LbSplitWords)
         Me.GroupBox3.Controls.Add(Me.TxtSplitWords)
-        Me.GroupBox3.Location = New System.Drawing.Point(16, 200)
+        Me.GroupBox3.Location = New System.Drawing.Point(16, 216)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(96, 300)
+        Me.GroupBox3.Size = New System.Drawing.Size(96, 331)
         Me.GroupBox3.TabIndex = 23
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Split words"
@@ -378,7 +382,7 @@ Partial Class FrmOptions
         Me.BtnRmvWord.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnRmvWord.Font = New System.Drawing.Font("Wide Latin", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRmvWord.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRmvWord.Location = New System.Drawing.Point(54, 271)
+        Me.BtnRmvWord.Location = New System.Drawing.Point(54, 302)
         Me.BtnRmvWord.Margin = New System.Windows.Forms.Padding(0)
         Me.BtnRmvWord.Name = "BtnRmvWord"
         Me.BtnRmvWord.Size = New System.Drawing.Size(32, 22)
@@ -392,7 +396,7 @@ Partial Class FrmOptions
         Me.BtnAddWord.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnAddWord.Font = New System.Drawing.Font("Wide Latin", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAddWord.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAddWord.Location = New System.Drawing.Point(6, 271)
+        Me.BtnAddWord.Location = New System.Drawing.Point(6, 302)
         Me.BtnAddWord.Margin = New System.Windows.Forms.Padding(0)
         Me.BtnAddWord.Name = "BtnAddWord"
         Me.BtnAddWord.Size = New System.Drawing.Size(32, 22)
@@ -408,24 +412,40 @@ Partial Class FrmOptions
         Me.LbSplitWords.ItemHeight = 14
         Me.LbSplitWords.Location = New System.Drawing.Point(6, 17)
         Me.LbSplitWords.Name = "LbSplitWords"
-        Me.LbSplitWords.Size = New System.Drawing.Size(84, 228)
+        Me.LbSplitWords.Size = New System.Drawing.Size(84, 256)
         Me.LbSplitWords.Sorted = True
         Me.LbSplitWords.TabIndex = 1
         '
         'TxtSplitWords
         '
         Me.TxtSplitWords.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtSplitWords.Location = New System.Drawing.Point(6, 247)
+        Me.TxtSplitWords.Location = New System.Drawing.Point(6, 278)
         Me.TxtSplitWords.Name = "TxtSplitWords"
         Me.TxtSplitWords.Size = New System.Drawing.Size(84, 22)
         Me.TxtSplitWords.TabIndex = 0
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(13, 161)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(77, 14)
+        Me.Label12.TabIndex = 10
+        Me.Label12.Text = "Log File Path"
+        '
+        'TxtLogFilePath
+        '
+        Me.TxtLogFilePath.Location = New System.Drawing.Point(172, 158)
+        Me.TxtLogFilePath.Name = "TxtLogFilePath"
+        Me.TxtLogFilePath.Size = New System.Drawing.Size(333, 22)
+        Me.TxtLogFilePath.TabIndex = 11
         '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(549, 622)
+        Me.ClientSize = New System.Drawing.Size(549, 687)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.NudSentences)
         Me.Controls.Add(Me.Label9)
@@ -485,4 +505,6 @@ Partial Class FrmOptions
     Friend WithEvents BtnAddWord As Button
     Friend WithEvents LbSplitWords As ListBox
     Friend WithEvents BtnRmvWord As Button
+    Friend WithEvents TxtLogFilePath As TextBox
+    Friend WithEvents Label12 As Label
 End Class

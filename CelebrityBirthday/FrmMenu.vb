@@ -54,12 +54,17 @@
     End Sub
     Private Sub FrmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Version.Text = System.String.Format(myStringFormatProvider, Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
+        InitialiseApplication()
+    End Sub
+    Private Sub InitialiseApplication()
         If My.Settings.callUpgrade = 0 Then
             My.Settings.Upgrade()
             My.Settings.callUpgrade = 1
             My.Settings.Save()
         End If
         LblCelebrities.Text = System.String.Format(myStringFormatProvider, LblCelebrities.Text, CStr(CountPeople()))
+        LogUtil.LogFolder = My.Settings.LogFolder
+        LogUtil.StartLogging()
     End Sub
 
     Private Sub BtnMore_Click(sender As Object, e As EventArgs) Handles BtnMore.Click
@@ -76,5 +81,9 @@
             _botsd.ShowDialog()
         End Using
         Me.Show()
+    End Sub
+
+    Private Sub FrmMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Debug("Closing")
     End Sub
 End Class

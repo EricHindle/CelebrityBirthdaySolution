@@ -23,6 +23,7 @@ Public Class FrmOptions
         My.Settings.wikiExtractSearch = TxtWikiExtract.Text
         My.Settings.wikiSentences = NudSentences.Value
         My.Settings.WordPressMonthUrl = TxtWordPressDate.Text
+        My.Settings.LogFolder = TxtLogFilePath.Text
         Dim sb As New StringBuilder
         For Each splitword As String In LbSplitWords.Items
             sb.Append(splitword).Append("~")
@@ -50,6 +51,7 @@ Public Class FrmOptions
         TxtImageSearch.Text = My.Settings.googleImageSearch
         TxtWikiExtract.Text = My.Settings.wikiExtractSearch
         TxtWordPressDate.Text = My.Settings.WordPressMonthUrl
+        TxtLogFilePath.Text = My.Settings.LogFolder
         NudSentences.Value = My.Settings.wikiSentences
     End Sub
 

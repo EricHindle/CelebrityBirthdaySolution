@@ -4,6 +4,8 @@ Imports System.Data.Common
 Imports System.IO
 Imports System.Reflection
 Imports System.Text
+Imports System.Web.ClientServices.Providers
+Imports System.Web.UI.WebControls
 Imports TweetSharp
 
 Public Class FrmBotsd
@@ -145,6 +147,7 @@ Public Class FrmBotsd
             SelectPairs()
             DgvPairs.Rows(selectedRow).Selected = True
             GeneratePair()
+            WriteTrace("Swapped " & CStr(sel1Id) & " & " & CStr(sel2Id))
         End If
     End Sub
     Private Sub BtnGenerate_Click(sender As Object, e As EventArgs) Handles BtnGenerate.Click
@@ -154,7 +157,7 @@ Public Class FrmBotsd
         Dim _pickPerson1 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
         _pickPerson1.ShortDesc = TxtShortDesc1.Text
         If UpdateShortDesc(_pickPerson1) = 1 Then
-            DisplayStatus("Updated person 1")
+            WriteTrace("Updated person 1", True)
         Else
             DisplayStatus("Updated failed")
         End If
@@ -165,7 +168,7 @@ Public Class FrmBotsd
         _pickPerson2.ShortDesc = TxtShortDesc2.Text
 
         If UpdateShortDesc(_pickPerson2) = 1 Then
-            DisplayStatus("Updated person 2")
+            WriteTrace("Updated person 2", True)
         Else
             DisplayStatus("Updated failed")
         End If
@@ -176,7 +179,7 @@ Public Class FrmBotsd
         _pickPerson3.ShortDesc = TxtShortDesc3.Text
 
         If UpdateShortDesc(_pickPerson3) = 1 Then
-            DisplayStatus("Updated person 3")
+            WriteTrace("Updated person 3", True)
         Else
             DisplayStatus("Updated failed")
         End If
@@ -187,7 +190,7 @@ Public Class FrmBotsd
         _pickPerson4.ShortDesc = TxtShortDesc4.Text
 
         If UpdateShortDesc(_pickPerson4) = 1 Then
-            DisplayStatus("Updated person 4")
+            WriteTrace("Updated person 4", True)
         Else
             DisplayStatus("Updated failed")
         End If
@@ -198,7 +201,7 @@ Public Class FrmBotsd
         _pickPerson5.ShortDesc = TxtShortDesc5.Text
 
         If UpdateShortDesc(_pickPerson5) = 1 Then
-            DisplayStatus("Updated person 5")
+            WriteTrace("Updated person 5", True)
         Else
             DisplayStatus("Updated failed")
         End If
@@ -209,7 +212,7 @@ Public Class FrmBotsd
         _pickPerson6.ShortDesc = TxtShortDesc6.Text
 
         If UpdateShortDesc(_pickPerson6) = 1 Then
-            DisplayStatus("Updated person 6")
+            WriteTrace("Updated person 6", True)
         Else
             DisplayStatus("Updated failed")
         End If
@@ -259,13 +262,16 @@ Public Class FrmBotsd
             Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.botsdFilePath, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.BOTSD & "*.*"})
             For Each _imageFile As String In _imageList
                 My.Computer.FileSystem.DeleteFile(_imageFile)
+                WriteTrace("Deleted " & Path.GetFileName(_imageFile))
             Next
+
         End If
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         Dim _imageFilename As String
         If PictureBox1.Image IsNot Nothing Then
             _imageFilename = SaveImage()
+            WriteTrace("Image saved to " & Path.GetFileName(_imageFilename))
         End If
     End Sub
     Private Sub BtnWpPost_Click(sender As Object, e As EventArgs) Handles BtnWpPost.Click
@@ -275,6 +281,7 @@ Public Class FrmBotsd
     Private Sub BtnCopyAll_Click(sender As Object, e As EventArgs) Handles BtnCopyAll.Click
         rtbFile1.SelectAll()
         rtbFile1.Copy()
+        WriteTrace("Copied text")
     End Sub
     Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
         cboDay.SelectedIndex = Today.Day - 1
@@ -294,11 +301,14 @@ Public Class FrmBotsd
             Dim _row As DataGridViewRow = DgvPairs.SelectedRows(0)
             Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked) + CInt(ChkSel5.Checked) + CInt(ChkSel6.Checked)
             If _selCount < 0 Then
+                Dim _name As String = ""
                 If ChkSel6.Checked Then
+                    _name = _row.Cells(pairId6.Name).Value
                     _row.Cells(pairId6.Name).Value = Nothing
                     _row.Cells(pairPerson6.Name).Value = ""
                 End If
                 If ChkSel5.Checked Then
+                    _name = _row.Cells(pairId5.Name).Value
                     _row.Cells(pairId5.Name).Value = _row.Cells(pairId6.Name).Value
                     _row.Cells(pairPerson5.Name).Value = _row.Cells(pairPerson6.Name).Value
                     _row.Cells(pairId6.Name).Value = Nothing
@@ -306,6 +316,7 @@ Public Class FrmBotsd
                 End If
 
                 If ChkSel4.Checked Then
+                    _name = _row.Cells(pairId4.Name).Value
                     _row.Cells(pairId4.Name).Value = _row.Cells(pairId5.Name).Value
                     _row.Cells(pairPerson4.Name).Value = _row.Cells(pairPerson5.Name).Value
                     _row.Cells(pairId5.Name).Value = _row.Cells(pairId6.Name).Value
@@ -314,6 +325,7 @@ Public Class FrmBotsd
                     _row.Cells(pairPerson6.Name).Value = ""
                 End If
                 If ChkSel3.Checked Then
+                    _name = _row.Cells(pairId3.Name).Value
                     _row.Cells(pairId3.Name).Value = _row.Cells(pairId4.Name).Value
                     _row.Cells(pairPerson3.Name).Value = _row.Cells(pairPerson4.Name).Value
                     _row.Cells(pairId4.Name).Value = _row.Cells(pairId5.Name).Value
@@ -324,6 +336,7 @@ Public Class FrmBotsd
                     _row.Cells(pairPerson6.Name).Value = ""
                 End If
                 If ChkSel2.Checked Then
+                    _name = _row.Cells(pairId2.Name).Value
                     _row.Cells(pairId2.Name).Value = _row.Cells(pairId3.Name).Value
                     _row.Cells(pairPerson2.Name).Value = _row.Cells(pairPerson3.Name).Value
                     _row.Cells(pairId3.Name).Value = _row.Cells(pairId4.Name).Value
@@ -336,6 +349,7 @@ Public Class FrmBotsd
                     _row.Cells(pairPerson6.Name).Value = ""
                 End If
                 If chkSel1.Checked Then
+                    _name = _row.Cells(pairId1.Name).Value
                     _row.Cells(pairId1.Name).Value = _row.Cells(pairId2.Name).Value
                     _row.Cells(pairPerson1.Name).Value = _row.Cells(pairPerson2.Name).Value
                     _row.Cells(pairId2.Name).Value = _row.Cells(pairId3.Name).Value
@@ -350,12 +364,15 @@ Public Class FrmBotsd
                     _row.Cells(pairPerson6.Name).Value = ""
                 End If
                 GeneratePair()
+                WriteTrace("Removed " & _name)
                 If _row.Cells(pairId2.Name).Value Is Nothing Then
                     DgvPairs.Rows.Remove(_row)
                 End If
             Else
                 DgvPairs.Rows.Remove(_row)
+                WriteTrace("Removed row")
             End If
+
         End If
     End Sub
     Private Sub BtnAtoZ_Click(sender As Object, e As EventArgs) Handles BtnAtoZ.Click

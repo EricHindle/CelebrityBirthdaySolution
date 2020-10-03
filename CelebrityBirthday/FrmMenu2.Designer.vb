@@ -34,6 +34,7 @@ Partial Class FrmMenu2
         Me.TxtBirthdateCheck = New System.Windows.Forms.Button()
         Me.BtnWikiIds = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.BtnViewLog = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -100,7 +101,7 @@ Partial Class FrmMenu2
         'BtnClose
         '
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(95, 491)
+        Me.BtnClose.Location = New System.Drawing.Point(96, 572)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(151, 49)
         Me.BtnClose.TabIndex = 18
@@ -157,20 +158,32 @@ Partial Class FrmMenu2
         Me.GroupBox1.Controls.Add(Me.BtnWikiIds)
         Me.GroupBox1.Controls.Add(Me.BtnBrownBread)
         Me.GroupBox1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.GroupBox1.Location = New System.Drawing.Point(7, 305)
+        Me.GroupBox1.Location = New System.Drawing.Point(4, 375)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(336, 166)
         Me.GroupBox1.TabIndex = 23
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Checks"
         '
+        'BtnViewLog
+        '
+        Me.BtnViewLog.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnViewLog.Location = New System.Drawing.Point(15, 298)
+        Me.BtnViewLog.Margin = New System.Windows.Forms.Padding(6)
+        Me.BtnViewLog.Name = "BtnViewLog"
+        Me.BtnViewLog.Size = New System.Drawing.Size(151, 49)
+        Me.BtnViewLog.TabIndex = 24
+        Me.BtnViewLog.Text = "View Log"
+        Me.BtnViewLog.UseVisualStyleBackColor = True
+        '
         'FrmMenu2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(352, 556)
+        Me.ClientSize = New System.Drawing.Size(352, 633)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnViewLog)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.BtnImageEditing)
         Me.Controls.Add(Me.BtnTapestry)
@@ -203,4 +216,5 @@ Partial Class FrmMenu2
     Friend WithEvents TxtBirthdateCheck As Button
     Friend WithEvents BtnWikiIds As Button
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents BtnViewLog As Button
 End Class

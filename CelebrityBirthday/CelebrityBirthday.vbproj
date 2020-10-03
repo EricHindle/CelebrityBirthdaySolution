@@ -250,6 +250,13 @@
     <Compile Include="Botsd\FrmBotsdPost.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Logging\frmLogViewer.designer.vb">
+      <DependentUpon>frmLogViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Logging\frmLogViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logging\LogUtil.vb" />
     <Compile Include="Twitter\modTwitter.vb" />
     <Compile Include="Twitter\FrmSendTwitter.Designer.vb">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>
@@ -367,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Botsd\FrmBotsdPost.resx">
       <DependentUpon>FrmBotsdPost.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logging\frmLogViewer.resx">
+      <DependentUpon>frmLogViewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\FrmSendTwitter.resx">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>
