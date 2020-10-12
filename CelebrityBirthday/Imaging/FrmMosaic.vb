@@ -69,7 +69,7 @@ Public Class FrmMosaic
             For Each _personRow As CelebrityBirthdayDataSet.FullPersonRow In _PersonTable
                 ct += 1
                 'If ct > 850 Then
-                '    Debug.Print(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))
+                '    logutil.debug(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))
                 'End If
                 _imageList.Add(New Person(_personRow))
             Next

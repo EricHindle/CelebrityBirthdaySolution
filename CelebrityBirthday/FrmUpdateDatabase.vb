@@ -145,7 +145,7 @@ Public Class FrmUpdateDatabase
                     newPerson = UpdateSortSeq(newPerson, p)
                     personTable.Add(newPerson)
                 End If
-                ShowUpdated(aPerson, "Inserted")
+                ShowUpdated(newPerson, "Inserted")
                 DisplayPersonList()
                 lbPeople.SelectedIndex = p
                 LblSortSeq.Text = CStr(newPerson.Sortseq)

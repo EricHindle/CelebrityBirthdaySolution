@@ -120,7 +120,7 @@ Public Class ImageIdentity
                     DisplayException(MethodBase.GetCurrentMethod, ex, "Argument")
                 End Try
             Else
-                Debug.Print(_Filename & " does not exist")
+                LogUtil.Debug(_Filename & " does not exist")
             End If
         End If
         Return _imageFromFile
