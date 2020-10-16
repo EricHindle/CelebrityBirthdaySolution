@@ -148,6 +148,7 @@ Friend Module modCbday
     End Function
 
     Public Function SaveImage(ByVal pUri As Uri, ByVal strFName As String) As Boolean
+        LogUtil.Info("Saving Image from " & pUri.ToString & " to " & strFName)
         Dim rtnval As Boolean = True
         Dim b() As Byte '   Store picture bytes
         ' Create a request for the URL. 
@@ -158,12 +159,14 @@ Friend Module modCbday
         Dim response As WebResponse = Nothing
         Dim memorystream As New MemoryStream
         Try
+            LogUtil.Info("Sending request for image")
             response = request.GetResponse()
             ' Get the stream containing content returned by the server.
             Dim dataStream As Stream = response.GetResponseStream()
             ' Read the content.
             Dim buffer(4096) As Byte
             Dim bct As Integer = -1
+            LogUtil.Info("Reading response")
             Do While (bct <> 0)
                 bct = dataStream.Read(buffer, 0, buffer.Length)
                 memorystream.Write(buffer, 0, bct)
@@ -174,9 +177,11 @@ Friend Module modCbday
                 Dim isOkToWrite As Boolean = True
                 Try
                     If My.Computer.FileSystem.FileExists(strFName) Then
+                        LogUtil.Warn("File already exists")
                         isOkToWrite = MsgBox("File exists. OK to continue?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes
                     End If
                     If isOkToWrite Then
+                        LogUtil.Info("Writing image to " & strFName)
                         Dim _fileStream As FileStream = File.Open(strFName, FileMode.Create)
                         bw = New BinaryWriter(_fileStream)
                         bw.Write(b)
@@ -197,8 +202,10 @@ Friend Module modCbday
                 End Try
             End If
         Catch ex As WebException
+            LogUtil.Exception("WebException:Failed to get image", ex, "modCbday")
             rtnval = False
         Catch ex As NotSupportedException
+            LogUtil.Exception("NotSupportedException:Failed to get image", ex, "modCbday")
             rtnval = False
         Finally
             ' Clean up the streams and the response.
@@ -209,6 +216,7 @@ Friend Module modCbday
             memorystream.Close()
             memorystream.Dispose()
         End Try
+        If rtnval Then LogUtil.Info("Image save complete")
         Return rtnval
     End Function
 

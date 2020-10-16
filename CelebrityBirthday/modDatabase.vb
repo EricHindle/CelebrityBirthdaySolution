@@ -164,12 +164,12 @@ Module modDatabase
         End Try
         Return iCt
     End Function
-    Public Function GetPeopleByDate(oDay As Integer, oMonth As Integer) As ArrayList
+    Public Function GetPeopleByDate(oDay As Integer, oMonth As Integer, Optional isGetPhoto As Boolean = True) As ArrayList
         Dim oPersonTable As New ArrayList
         Try
             oPersonTa.FillByMonthDay(modDatabase.oPersonTable, oMonth, oDay)
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In modDatabase.oPersonTable.Rows
-                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id, isGetPhoto))
                 oPersonTable.Add(oPerson)
             Next
         Catch dbEx As DbException
@@ -306,12 +306,12 @@ Module modDatabase
     End Function
 #End Region
 #Region "image"
-    Public Function GetImageById(ByVal _id As Integer) As ImageIdentity
+    Public Function GetImageById(ByVal _id As Integer, Optional isGetPhoto As Boolean = True) As ImageIdentity
         Dim oImage As ImageIdentity = New ImageIdentity()
         Try
             Dim ict As Integer = oImgTa.FillById(oImgTable, _id)
             If ict = 1 Then
-                oImage = New ImageIdentity(oImgTable.Rows(0))
+                oImage = New ImageIdentity(oImgTable.Rows(0), isGetPhoto)
             End If
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")

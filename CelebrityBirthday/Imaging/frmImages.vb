@@ -66,7 +66,7 @@ Public Class FrmImages
             Me.Refresh()
             personTable = New ArrayList
             ListBoxPeople.Items.Clear()
-            personTable = GetPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+            personTable = GetPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
             For Each oPerson As Person In personTable
                 ListBoxPeople.Items.Add(oPerson.BirthYear & " " & oPerson.Name)
             Next
@@ -133,8 +133,13 @@ Public Class FrmImages
         LoadScreenFromId(txtId.Text)
     End Sub
     Private Sub BtnPicSave_Click(sender As Object, e As EventArgs) Handles BtnPicSave.Click
-        Dim oFilename As String = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.Text)
-        SaveImage(New Uri(TxtImageUrl.Text), oFilename)
+        If String.IsNullOrEmpty(TxtImageFilename.Text) Then
+            TxtImageFilename.Text = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.Text)
+        End If
+        PictureBox2.Image.Dispose()
+        PictureBox2.ImageLocation = ""
+        SaveImage(New Uri(TxtImageUrl.Text), TxtImageFilename.Text)
+        PictureBox2.ImageLocation = TxtImageFilename.Text
     End Sub
     Private Sub BtnLoadDateUpdate_Click(sender As Object, e As EventArgs) Handles BtnLoadDateUpdate.Click
         If String.IsNullOrEmpty(txtImgName.Text) Then

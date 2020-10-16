@@ -69,13 +69,13 @@ Public Class ImageIdentity
     Public Sub New()
         InitialiseImage()
     End Sub
-    Public Sub New(pId As Integer, pFileName As String, pFileType As String, pLoadMonth As String, pLoadYear As String)
+    Public Sub New(pId As Integer, pFileName As String, pFileType As String, pLoadMonth As String, pLoadYear As String, Optional isGetPhoto As Boolean = True)
         _id = pId
         _imageFileName = pFileName
         _imageFileType = pFileType
         _imageLoadMonth = pLoadMonth
         _imageLoadYear = pLoadYear
-        _imagePhoto = GetPhotoFromFile()
+        If isGetPhoto Then _imagePhoto = GetPhotoFromFile()
     End Sub
 
     Public Sub New(pImage As ImageIdentity)
@@ -90,14 +90,14 @@ Public Class ImageIdentity
             InitialiseImage()
         End If
     End Sub
-    Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.ImageRow)
+    Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.ImageRow, Optional isGetPhoto As Boolean = True)
         If oRow IsNot Nothing Then
             _id = oRow.id
             _imageFileName = oRow.imgfilename
             _imageFileType = oRow.imgfiletype
             _imageLoadMonth = oRow.imgloadmonth
             _imageLoadYear = oRow.imgloadyr
-            _imagePhoto = GetPhotoFromFile()
+            If isGetPhoto Then _imagePhoto = GetPhotoFromFile()
         Else
             InitialiseImage()
         End If
