@@ -87,7 +87,7 @@ Public Class FrmUpdateDatabase
                                                                                                                             txtBirthPlace.DragEnter,
                                                                                                                             txtShortDesc.DragEnter,
                                                                                                                             txtTwitter.DragEnter,
-                                                                                                                            TxtWikiId.dragenter
+                                                                                                                            TxtWikiId.DragEnter
 
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             e.Effect = DragDropEffects.Copy
@@ -161,7 +161,6 @@ Public Class FrmUpdateDatabase
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
         End If
     End Sub
-
     Private Sub ShowUpdated(aPerson As Person, dbAction As String)
         LblUpdated.Visible = True
         Dim iListMatches As Integer = LbUpdateList.FindString(aPerson.Name)
@@ -175,7 +174,6 @@ Public Class FrmUpdateDatabase
         End If
         LogUtil.Info(msgText, MyBase.Name)
     End Sub
-
     Private Function UpdateSortSeq(newPerson As Person, p As Integer) As Person
         Dim prevPerson As Person = If(p = 0, Nothing, personTable(p - 1))
         If prevPerson IsNot Nothing AndAlso prevPerson.IBirthYear = newPerson.IBirthYear Then
@@ -184,7 +182,6 @@ Public Class FrmUpdateDatabase
         End If
         Return newPerson
     End Function
-
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         Dim oPerson As Person
         If lbPeople.SelectedIndex >= 0 Then
@@ -312,7 +309,7 @@ Public Class FrmUpdateDatabase
                 UpdatePerson(oPerson)
                 dbAction = "Updated on dB"
             End If
-            ShowUpdated(oPerson, dbaction)
+            ShowUpdated(oPerson, dbAction)
             oPerson.UnsavedChanges = False
             AppendStatus(" - Complete")
         End If
@@ -598,7 +595,25 @@ Public Class FrmUpdateDatabase
             RemoveMiddleNames()
         End If
     End Sub
-
+    Private Sub BtnWpDesc_Click(sender As Object, e As EventArgs) Handles BtnWpDesc.Click
+        Dim wpText As String = ""
+        If lbPeople.SelectedIndex >= 0 Then
+            Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
+            Dim sBorn As String = ""
+            If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
+                sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
+            End If
+            Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+            Dim sText As New StringBuilder
+            With sText
+                .Append(oPerson.Description)
+                .Append(sBorn)
+                .Append(If(oPerson.DeathYear = 0, "", sDied))
+            End With
+            wpText = sText.ToString
+        End If
+        Clipboard.SetText(wpText)
+    End Sub
 #End Region
 #Region "subroutines"
     'Form overrides dispose to clean up the component list.
@@ -1030,5 +1045,6 @@ Public Class FrmUpdateDatabase
         thatPerson.Dispose()
         thisperson.Dispose()
     End Sub
+
 #End Region
 End Class

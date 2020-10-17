@@ -109,6 +109,7 @@ Partial Class FrmUpdateDatabase
         Me.LblSortSeq = New System.Windows.Forms.Label()
         Me.LblUpdated = New System.Windows.Forms.Label()
         Me.LbUpdateList = New System.Windows.Forms.ListBox()
+        Me.BtnWpDesc = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -887,6 +888,7 @@ Partial Class FrmUpdateDatabase
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.BtnWpDesc)
         Me.GroupBox2.Controls.Add(Me.BtnPageLoadUpd)
         Me.GroupBox2.Controls.Add(Me.TxtPageLoadYr)
         Me.GroupBox2.Controls.Add(Me.TxtPageLoadMth)
@@ -1125,6 +1127,16 @@ Partial Class FrmUpdateDatabase
         Me.LbUpdateList.TabIndex = 143
         Me.LbUpdateList.Visible = False
         '
+        'BtnWpDesc
+        '
+        Me.BtnWpDesc.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWpDesc.Location = New System.Drawing.Point(182, 21)
+        Me.BtnWpDesc.Name = "BtnWpDesc"
+        Me.BtnWpDesc.Size = New System.Drawing.Size(121, 28)
+        Me.BtnWpDesc.TabIndex = 11
+        Me.BtnWpDesc.Text = "Get Description"
+        Me.BtnWpDesc.UseVisualStyleBackColor = True
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
@@ -1313,4 +1325,5 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents LblSortSeq As Label
     Friend WithEvents LblUpdated As Label
     Friend WithEvents LbUpdateList As ListBox
+    Friend WithEvents BtnWpDesc As Button
 End Class
