@@ -26,9 +26,11 @@ Module modDatabase
 #End Region
 #Region "person"
     Public Function DeletePerson(ByVal _id As Integer)
+        LogUtil.Info("Deleting person " & CStr(_id), "modDatabase")
         Return oPersonTa.DeletePerson(_id)
     End Function
     Public Function DeleteSocialMedia(ByVal _id As Integer) As Integer
+        LogUtil.Info("Deleting social media for " & CStr(_id), "modDatabase")
         Return oTwta.DeleteTwitter(_id)
     End Function
     Public Function CountPeople() As Integer
@@ -364,6 +366,7 @@ Module modDatabase
     Public Function DeleteImage(oId As Integer) As Integer
         Dim iCt As Integer = -1
         Try
+            LogUtil.Info("Deleting image for " & CStr(oId), "modDatabase")
             iCt = oImgTa.DeleteImage(oId)
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")

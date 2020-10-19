@@ -89,6 +89,7 @@ Partial Class FrmUpdateDatabase
         Me.NudSentences = New System.Windows.Forms.NumericUpDown()
         Me.BtnWordPress = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.BtnWpDesc = New System.Windows.Forms.Button()
         Me.BtnPageLoadUpd = New System.Windows.Forms.Button()
         Me.TxtPageLoadYr = New System.Windows.Forms.TextBox()
         Me.TxtPageLoadMth = New System.Windows.Forms.TextBox()
@@ -109,7 +110,8 @@ Partial Class FrmUpdateDatabase
         Me.LblSortSeq = New System.Windows.Forms.Label()
         Me.LblUpdated = New System.Windows.Forms.Label()
         Me.LbUpdateList = New System.Windows.Forms.ListBox()
-        Me.BtnWpDesc = New System.Windows.Forms.Button()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.PasteIntoDesc = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -205,84 +207,84 @@ Partial Class FrmUpdateDatabase
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UseNicknameToolStripMenuItem, Me.ShortenNameToolStripMenuItem, Me.UseNameTextToolStripMenuItem, Me.ToolStripSeparator3, Me.UpperCaseToolStripMenuItem, Me.LowercaseToolStripMenuItem, Me.TitleCaseToolStripMenuItem, Me.ToolStripSeparator2, Me.CopyToolStripMenuItem, Me.CutToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ClearToolStripMenuItem, Me.SelectAllToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UseNicknameToolStripMenuItem, Me.ShortenNameToolStripMenuItem, Me.UseNameTextToolStripMenuItem, Me.ToolStripSeparator3, Me.UpperCaseToolStripMenuItem, Me.LowercaseToolStripMenuItem, Me.TitleCaseToolStripMenuItem, Me.ToolStripSeparator2, Me.CopyToolStripMenuItem, Me.CutToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ClearToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ToolStripSeparator1, Me.PasteIntoDesc})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(155, 258)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 308)
         '
         'UseNicknameToolStripMenuItem
         '
         Me.UseNicknameToolStripMenuItem.Name = "UseNicknameToolStripMenuItem"
-        Me.UseNicknameToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.UseNicknameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.UseNicknameToolStripMenuItem.Text = "Use Nickname"
         '
         'ShortenNameToolStripMenuItem
         '
         Me.ShortenNameToolStripMenuItem.Name = "ShortenNameToolStripMenuItem"
-        Me.ShortenNameToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.ShortenNameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ShortenNameToolStripMenuItem.Text = "Shorten Name"
         '
         'UseNameTextToolStripMenuItem
         '
         Me.UseNameTextToolStripMenuItem.Name = "UseNameTextToolStripMenuItem"
-        Me.UseNameTextToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.UseNameTextToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.UseNameTextToolStripMenuItem.Text = "Use Title Name"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(151, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(177, 6)
         '
         'UpperCaseToolStripMenuItem
         '
         Me.UpperCaseToolStripMenuItem.Name = "UpperCaseToolStripMenuItem"
-        Me.UpperCaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.UpperCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.UpperCaseToolStripMenuItem.Text = "UPPERCASE"
         '
         'LowercaseToolStripMenuItem
         '
         Me.LowercaseToolStripMenuItem.Name = "LowercaseToolStripMenuItem"
-        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.LowercaseToolStripMenuItem.Text = "lowercase"
         '
         'TitleCaseToolStripMenuItem
         '
         Me.TitleCaseToolStripMenuItem.Name = "TitleCaseToolStripMenuItem"
-        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.TitleCaseToolStripMenuItem.Text = "Title Case"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(151, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
         '
         'CopyToolStripMenuItem
         '
         Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CopyToolStripMenuItem.Text = "Copy"
         '
         'CutToolStripMenuItem
         '
         Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
-        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CutToolStripMenuItem.Text = "Cut"
         '
         'PasteToolStripMenuItem
         '
         Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
-        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PasteToolStripMenuItem.Text = "Paste"
         '
         'ClearToolStripMenuItem
         '
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ClearToolStripMenuItem.Text = "Clear"
         '
         'SelectAllToolStripMenuItem
         '
         Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
-        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SelectAllToolStripMenuItem.Text = "Select All"
         '
         'btnClearDesc
@@ -761,7 +763,7 @@ Partial Class FrmUpdateDatabase
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1158, 845)
+        Me.btnClose.Location = New System.Drawing.Point(809, 845)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(100, 43)
         Me.btnClose.TabIndex = 32
@@ -907,6 +909,16 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "WordPress"
         '
+        'BtnWpDesc
+        '
+        Me.BtnWpDesc.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWpDesc.Location = New System.Drawing.Point(182, 21)
+        Me.BtnWpDesc.Name = "BtnWpDesc"
+        Me.BtnWpDesc.Size = New System.Drawing.Size(121, 28)
+        Me.BtnWpDesc.TabIndex = 11
+        Me.BtnWpDesc.Text = "Get Description"
+        Me.BtnWpDesc.UseVisualStyleBackColor = True
+        '
         'BtnPageLoadUpd
         '
         Me.BtnPageLoadUpd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -973,6 +985,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.txtWiki.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtWiki.ContextMenuStrip = Me.ContextMenuStrip1
         Me.txtWiki.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWiki.Location = New System.Drawing.Point(38, 731)
         Me.txtWiki.Multiline = True
@@ -1123,19 +1136,20 @@ Partial Class FrmUpdateDatabase
         Me.LbUpdateList.ItemHeight = 14
         Me.LbUpdateList.Location = New System.Drawing.Point(939, 768)
         Me.LbUpdateList.Name = "LbUpdateList"
-        Me.LbUpdateList.Size = New System.Drawing.Size(319, 70)
+        Me.LbUpdateList.Size = New System.Drawing.Size(319, 126)
         Me.LbUpdateList.TabIndex = 143
         Me.LbUpdateList.Visible = False
         '
-        'BtnWpDesc
+        'ToolStripSeparator1
         '
-        Me.BtnWpDesc.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnWpDesc.Location = New System.Drawing.Point(182, 21)
-        Me.BtnWpDesc.Name = "BtnWpDesc"
-        Me.BtnWpDesc.Size = New System.Drawing.Size(121, 28)
-        Me.BtnWpDesc.TabIndex = 11
-        Me.BtnWpDesc.Text = "Get Description"
-        Me.BtnWpDesc.UseVisualStyleBackColor = True
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        '
+        'PasteIntoDesc
+        '
+        Me.PasteIntoDesc.Name = "PasteIntoDesc"
+        Me.PasteIntoDesc.Size = New System.Drawing.Size(180, 22)
+        Me.PasteIntoDesc.Text = "Paste Into Desc"
         '
         'FrmUpdateDatabase
         '
@@ -1326,4 +1340,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents LblUpdated As Label
     Friend WithEvents LbUpdateList As ListBox
     Friend WithEvents BtnWpDesc As Button
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents PasteIntoDesc As ToolStripMenuItem
 End Class

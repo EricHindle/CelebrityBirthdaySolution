@@ -11,6 +11,7 @@ Public Class FrmUpdateDatabase
     Private findPersonInList As Integer = -1
     Private isGotBirthName As Boolean = False
     Private isGotStageName As Boolean = False
+    Private ReadOnly trimChars As Char() = {".", ",", " "}
 #End Region
 #Region "properties"
     Private _personId As Integer
@@ -184,9 +185,11 @@ Public Class FrmUpdateDatabase
     End Function
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         Dim oPerson As Person
+        LogUtil.Info("")
         If lbPeople.SelectedIndex >= 0 Then
             oPerson = personTable(lbPeople.SelectedIndex)
             If oPerson.Id > 0 Then
+                LogUtil.Info("Deleting person " & CStr(oPerson.Id) & " " & oPerson.Name, MyBase.Name)
                 DeleteSocialMedia(oPerson.Id)
                 DeleteImage(oPerson.Id)
                 DeletePerson(oPerson.Id)
@@ -281,7 +284,7 @@ Public Class FrmUpdateDatabase
                 End If
             End If
         End If
-        AppendStatus(" - Complete")
+        AppendStatus(" - Complete", True)
     End Sub
     Private Sub LbPeople_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbPeople.SelectedIndexChanged
         ClearStatus()
@@ -372,7 +375,12 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub BtnCreateShortDesc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateShortDesc.Click
-        txtShortDesc.Text = txtDesc.SelectedText
+        If txtDesc.SelectionLength > 0 Then
+            txtShortDesc.Text = txtDesc.SelectedText.Trim(trimChars)
+        ElseIf txtWiki.SelectionLength > 0 Then
+            txtShortDesc.Text = txtWiki.SelectedText.Trim(trimChars)
+        End If
+        txtShortDesc.Text &= "."
     End Sub
     Private Sub BtnSplitName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSplitName.Click
         txtName.Text = txtName.Text.Trim
@@ -387,6 +395,7 @@ Public Class FrmUpdateDatabase
         txtName.Text = MakeFullName(txtForename.Text, txtSurname.Text)
     End Sub
     Private Sub BtnClearList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearList.Click
+        LogUtil.Info("Clearing person list", MyBase.Name)
         If CheckForChanges(personTable) Then
             If MsgBox("Save unsaved changes now?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Unsaved Changes") = MsgBoxResult.Yes Then
                 UpdateAll()
@@ -461,18 +470,23 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub BtnCopyBirthName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyBirthName.Click
+        Dim name As String = ""
         If txtDesc.SelectionLength > 0 Then
-            Dim name As String = txtDesc.SelectedText.Trim
-            Dim names As String() = Split(name, """")
-            If names.Length = 3 Then
-                name = names(0).Trim & " " & names(2).Trim
-            End If
-            txtBirthName.Text = name
+            name = txtDesc.SelectedText.Trim
+        ElseIf txtWiki.SelectionLength > 0 Then
+            name = txtWiki.SelectedText.Trim
         End If
+        Dim names As String() = Split(name, """")
+        If names.Length = 3 Then
+            Name = names(0).Trim & " " & names(2).Trim
+        End If
+        txtBirthName.Text = Name
     End Sub
     Private Sub BtnCopyBirthPlace_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyBirthPlace.Click
         If txtDesc.SelectionLength > 0 Then
-            txtBirthPlace.Text = txtDesc.SelectedText.Trim.TrimEnd(".").TrimEnd(",")
+            txtBirthPlace.Text = txtDesc.SelectedText.Trim(trimChars)
+        ElseIf txtWiki.SelectionLength > 0 Then
+            txtBirthPlace.Text = txtWiki.SelectedText.Trim(trimChars)
         End If
     End Sub
     Private Sub BtnClearDesc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearDesc.Click
@@ -534,9 +548,11 @@ Public Class FrmUpdateDatabase
         ClearStatus()
     End Sub
     Private Sub BtnImageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnImageLoadUpd.Click
+        LogUtil.Info("Update WP image load date on Dates table")
         UpdateImageDate(TxtImageLoadYr.Text, TxtImageLoadMth.Text, True, TxtImageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
     End Sub
     Private Sub BtnPageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnPageLoadUpd.Click
+        LogUtil.Info("Update WP page load date on Dates table")
         UpdatePageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
     End Sub
     Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
@@ -601,6 +617,7 @@ Public Class FrmUpdateDatabase
         Dim wpText As String = ""
         If lbPeople.SelectedIndex >= 0 Then
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
+            LogUtil.Info("Generating WordPress description for " & oPerson.Name)
             Dim sBorn As String = ""
             If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
                 sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
@@ -1046,6 +1063,11 @@ Public Class FrmUpdateDatabase
         End If
         thatPerson.Dispose()
         thisperson.Dispose()
+    End Sub
+
+    Private Sub PasteIntoDesc_Click(MenuItem As Object, e As EventArgs) Handles PasteIntoDesc.Click
+        GetSourceControl(MenuItem).Copy()
+        txtDesc.Paste()
     End Sub
 
 #End Region
