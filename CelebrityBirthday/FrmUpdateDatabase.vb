@@ -224,6 +224,7 @@ Public Class FrmUpdateDatabase
         End If
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
             ShowStatus("Loading Table From Database",, True)
+            LogUtil.Info(cboDay.SelectedItem & " " & cboMonth.SelectedItem, MyBase.Name)
             StatusStrip1.Refresh()
             personTable = New List(Of Person)
             lbPeople.Items.Clear()
@@ -259,7 +260,7 @@ Public Class FrmUpdateDatabase
                 End If
                 AppendStatus(" - Complete")
             Else
-                AppendStatus(" - No data")
+                AppendStatus(" - No data", True)
             End If
             lbPeople.SelectedIndex = selectedIndex
             findPersonInList = -1
@@ -565,6 +566,7 @@ Public Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
+        cboMonth.SelectedIndex = -1
         cboDay.SelectedIndex = Today.Day - 1
         cboMonth.SelectedIndex = Today.Month - 1
     End Sub
@@ -812,8 +814,8 @@ Public Class FrmUpdateDatabase
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
-    Private Sub AppendStatus(pText As String)
-        ShowStatus(pText, True)
+    Private Sub AppendStatus(pText As String, Optional isLogged As Boolean = False)
+        ShowStatus(pText, True, isLogged)
     End Sub
     Private Sub ClearStatus()
         ShowStatus("", False)

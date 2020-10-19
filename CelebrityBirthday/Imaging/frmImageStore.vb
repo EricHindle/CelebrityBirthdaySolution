@@ -45,12 +45,16 @@ Public Class FrmImageStore
         PictureBox1.AllowDrop = True
         TxtForename.Text = _forename
         TxtSurname.Text = _surname
+        If Not String.IsNullOrEmpty(_forename & _surname) Then
+            LogUtil.Info("Preset name: " & Trim(_forename & " " & _surname), MyBase.Name)
+        End If
         GetFormPos(Me, My.Settings.imgselectpos)
         sApplicationPath = My.Application.Info.DirectoryPath
         sImagePath = My.Settings.NewImagePath.Replace("<applicationpath>", sApplicationPath)
         OpenImageSearch()
         LblImagePath.Text = sImagePath
         If My.Computer.FileSystem.DirectoryExists(sImagePath) = False Then
+            LogUtil.Info("Creating folder " & sImagePath)
             My.Computer.FileSystem.CreateDirectory(sImagePath)
         End If
         isSaved = True
@@ -67,7 +71,7 @@ Public Class FrmImageStore
                     End If
                     _latestSavedFile = strFName
                     lblImageFile.Text = strFName
-                    PicStatus.Text = "Saving " & strFName
+                    ShowStatus("Saving " & strFName,, True)
                     Me.Refresh()
                     PictureBox1.Image.Save(strFName, Imaging.ImageFormat.Jpeg)
                     PicStatus.Text = "Saved " & strFName
@@ -76,7 +80,7 @@ Public Class FrmImageStore
                     MsgBox("No name entered. Cannot save to file.", MsgBoxStyle.Exclamation, "Missing name")
                 End If
             Catch ex As ArgumentException
-                If DisplayException(ex) = MsgBoxResult.No Then Exit Sub
+                If DisplayException("Argument", ex) = MsgBoxResult.No Then Exit Sub
                 PicStatus.Text = ex.Message
             End Try
         Else
@@ -95,6 +99,7 @@ Public Class FrmImageStore
             My.Settings.NewImagePath = sFolder
             My.Settings.Save()
             LblImagePath.Text = sFolder
+            LogUtil.Info("Saved image folder as " & sFolder, MyBase.Name)
         End If
     End Sub
     Private Sub FrmImageStore_Move(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Move
@@ -104,13 +109,14 @@ Public Class FrmImageStore
     Private Sub BtnGetImage_Click(sender As Object, e As EventArgs) Handles btnGetImage.Click
         isSaved = False
         OpenImageSearch()
-        PicStatus.Text = "Getting images for " & TxtForename.Text.Trim
     End Sub
     Private Sub FrmImageStore_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
         If Not isSaved Then
             If MsgBox("Image has not been saved. OK to close?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.No Then
                 e.Cancel = True
+            Else
+                LogUtil.Warn("Form closed without saving image", MyBase.Name)
             End If
         End If
         My.Settings.imgselectpos = SetFormPos(Me)
@@ -118,6 +124,7 @@ Public Class FrmImageStore
     End Sub
     Private Sub BtnEditImage_Click(sender As Object, e As EventArgs) Handles BtnEditImage.Click
         _savedImage = Nothing
+        LogUtil.Info("Editing image " & _latestSavedFile, MyBase.Name)
         Using _editImage As New frmImageCapture
             _editImage.ImageFile = _latestSavedFile
             _editImage.Forename = TxtForename.Text
@@ -134,6 +141,7 @@ Public Class FrmImageStore
             lblImageFile.Text = _latestSavedFile
             Dim sizeMessage As String = ""
             If Not String.IsNullOrEmpty(oImageFilename) Then
+                LogUtil.Info("Loading image from " & oImageFilename)
                 Dim oImage As Image = Image.FromFile(oImageFilename)
                 Dim loadedImage As Image = oImage.Clone
                 If oImage IsNot Nothing Then
@@ -141,6 +149,7 @@ Public Class FrmImageStore
                 End If
                 oImage.Dispose()
             End If
+            LogUtil.Info("Setting person name fields")
             Dim filenameparts As List(Of String) = Split(Path.GetFileNameWithoutExtension(_latestSavedFile), "-").ToList
             If String.IsNullOrEmpty(TxtSurname.Text) Then
                 TxtSurname.Text = filenameparts.Last
@@ -150,11 +159,11 @@ Public Class FrmImageStore
                 TxtForename.Text = String.Join(" ", filenameparts)
             End If
         Catch ex As ArgumentException
-            DisplayException(ex)
+            DisplayException("Argument", ex)
         Catch ex As FileNotFoundException
-            DisplayException(ex)
+            DisplayException("FileNotFound", ex)
         Catch ex As OutOfMemoryException
-            DisplayException(ex)
+            DisplayException("OutOfMemory", ex)
             GC.Collect()
         End Try
     End Sub
@@ -169,12 +178,21 @@ Public Class FrmImageStore
     Private Sub OpenImageSearch()
         Dim _name As String = If(String.IsNullOrEmpty(TxtForename.Text.Trim), "", TxtForename.Text.Trim & " ") & TxtSurname.Text.Trim
         If Not String.IsNullOrEmpty(_name) Then
+            ShowStatus("Opening Google image search for " & _name,, True)
             Dim sUrl As String = GetGoogleSearchString(_name)
             Process.Start(sUrl)
+        Else
+            ShowStatus("Enter name to search for")
         End If
     End Sub
-    Private Shared Function DisplayException(ByVal ex As Exception) As MsgBoxResult
-        Return MsgBox("Exception: " & ex.Message & vbCrLf & If(ex.InnerException Is Nothing, "", ex.InnerException.Message) & vbCrLf & "OK to continue?", MsgBoxStyle.YesNo, "Excpetion")
+    Private Shared Function DisplayException(sType As String, ByVal ex As Exception) As MsgBoxResult
+        LogUtil.Exception(sType & " Exception", ex, "frmImageStore")
+        Return MsgBox("Exception: " & ex.Message & vbCrLf & If(ex.InnerException Is Nothing, "", ex.InnerException.Message) & vbCrLf & "OK to continue?", MsgBoxStyle.YesNo, "Exception")
     End Function
+    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
+        PicStatus.Text = If(isAppend, PicStatus.Text, "") & pText
+        StatusStrip1.Refresh()
+        If isLogged Then LogUtil.Info(pText, MyBase.Name)
+    End Sub
 #End Region
 End Class

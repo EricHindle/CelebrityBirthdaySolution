@@ -79,10 +79,14 @@ Public Class frmImageCapture
         lblFilename.Text = _imageFile
         TxtForename.Text = _forename
         TxtSurname.Text = _surname
+        If Not String.IsNullOrEmpty(_forename & _surname) Then
+            LogUtil.Info("Preset name: " & Trim(_forename & " " & _surname), MyBase.Name)
+        End If
         Try
             Dim sizeMessage As String = ""
             imageShrinkRatio = 1
             If Not String.IsNullOrEmpty(_imageFile) Then
+                LogUtil.Info("Preset image: " & _imageFile, MyBase.Name)
                 Dim oImage As Image = Image.FromFile(_imageFile)
                 originalImage = oImage.Clone
                 If oImage IsNot Nothing Then
@@ -123,6 +127,7 @@ Public Class frmImageCapture
             Dim sizeMessage As String = ""
             imageShrinkRatio = 1
             If Not String.IsNullOrEmpty(oImageFilename) Then
+                LogUtil.Info("Loading image", MyBase.Name)
                 Dim oImage As Image = Image.FromFile(oImageFilename)
                 originalImage = oImage.Clone
                 If oImage IsNot Nothing Then
@@ -149,14 +154,21 @@ Public Class frmImageCapture
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        LogUtil.Info("Clearing image", MyBase.Name)
         ResetWindow()
-        PicCapture.Image = Nothing
+        Try
+            PicCapture.Image.Dispose()
+            PicCapture.Image = Nothing
+        Catch ex As Exception
+        End Try
         ClearCropSelection()
     End Sub
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+        LogUtil.Info("Saving picture", MyBase.Name)
         SaveImagePlain(PicCapture, PicCapture.Width, PicCapture.Height, False)
     End Sub
     Private Sub BtnSaveCroppedImage_Click(sender As Object, e As EventArgs) Handles BtnSaveCroppedImage.Click
+        LogUtil.Info("Saving cropped image", MyBase.Name)
         _savedImage = SaveImagePlain(PreviewPictureBox, NudSaveSize.Value, NudSaveSize.Value, True)
     End Sub
     Private Sub BtnRotate_Click(sender As Object, e As EventArgs) Handles BtnRotate.Click
@@ -201,6 +213,7 @@ Public Class frmImageCapture
         }
     End Sub
     Private Sub FrmImageCapture_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         My.Settings.capformpos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
@@ -214,11 +227,12 @@ Public Class frmImageCapture
             Dim _filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
             Dim imageFileName As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Save, ImageUtil.ImageType.JPEG, _path, _filename)
             If Not String.IsNullOrEmpty(imageFileName) Then
+                LogUtil.Info("Saving image from picture box", MyBase.Name)
                 ImageUtil.SaveImageFromPictureBox(_pictureBox, _width, _height, imageFileName, ImageUtil.ImageType.JPEG)
                 imageFile = imageFileName
-                DisplayStatus(SAVED_MESSAGE & imageFileName, False)
+                DisplayStatus(SAVED_MESSAGE & imageFileName, False,,, True)
             Else
-                DisplayStatus(NOT_SAVED_MESSAGE, False)
+                DisplayStatus(NOT_SAVED_MESSAGE, False,,, True)
             End If
         Catch ex As ArgumentException
             LogUtil.Exception(NOT_SAVED_MESSAGE, ex, MyBase.Name)
@@ -226,15 +240,19 @@ Public Class frmImageCapture
         End Try
         Return imageFile
     End Function
-    Private Sub DisplayStatus(ByVal sText As String, isMessageBox As Boolean, Optional ex As Exception = Nothing, Optional _style As MsgBoxStyle = MsgBoxStyle.Exclamation)
+    Private Sub DisplayStatus(ByVal sText As String, isMessageBox As Boolean, Optional ex As Exception = Nothing, Optional _style As MsgBoxStyle = MsgBoxStyle.Exclamation, Optional isLogged As Boolean = False)
         lblStatus.Text = sText
         StatusStrip1.Refresh()
+        If isLogged Then
+            LogUtil.Info(sText, MyBase.Name)
+        End If
         If isMessageBox Then
             Dim _message As String = sText & If(ex Is Nothing, "", vbCrLf & ex.Message)
             MsgBox(_message, _style, "Information")
         End If
     End Sub
     Private Sub DisplayRawImage(ByRef oImage As Image)
+        LogUtil.Info("Loading raw image", MyBase.Name)
         Dim sizeMessage As String = ""
         If oImage.Size.Height > MAX_IMG_HEIGHT Or oImage.Size.Width > MAX_IMG_WIDTH Then
             oImage = ShrinkImage(oImage)
@@ -250,7 +268,7 @@ Public Class frmImageCapture
         PicCapture.Image = oImage.Clone
         ClearCropSelection()
         If PicCapture.Image IsNot Nothing Then
-            DisplayStatus("Image file loaded, " & sizeMessage, False)
+            DisplayStatus("Image file loaded, " & sizeMessage, False,,, True)
         End If
     End Sub
 #End Region
@@ -307,6 +325,7 @@ Public Class frmImageCapture
         End Try
     End Sub
     Private Function ShrinkImage(ByVal sourceImage As Image) As Bitmap
+        LogUtil.Info("Shrinking image", MyBase.Name)
         Dim _newBitmap As New Bitmap(10, 10)
         Try
             Dim hratio As Decimal = sourceImage.Height / MAX_IMG_HEIGHT
@@ -322,9 +341,10 @@ Public Class frmImageCapture
                 targetHeight = Int(sourceImage.Height / wratio)
                 imageShrinkRatio = wratio
             End If
+            LogUtil.Info("Shrinking ratio = " & CStr(imageShrinkRatio), MyBase.Name)
             _newBitmap = ImageUtil.ResizeImageToBitmap(sourceImage, targetWidth, targetHeight)
         Catch exc As ArithmeticException
-            DisplayStatus("ShrinkImage exception", True, exc)
+            DisplayStatus("ShrinkImage exception", True, exc,, True)
         End Try
         Return _newBitmap
     End Function
@@ -425,10 +445,6 @@ Public Class frmImageCapture
         Finally
             MyBase.Dispose(disposing)
         End Try
-    End Sub
-
-    Private Sub FrmImageCapture_Leave(sender As Object, e As EventArgs) Handles Me.Leave
-        LogUtil.Info("Closing", MyBase.Name)
     End Sub
 #End Region
 End Class

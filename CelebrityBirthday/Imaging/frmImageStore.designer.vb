@@ -42,6 +42,8 @@ Partial Class FrmImageStore
         Me.btnLoadImage = New System.Windows.Forms.Button()
         Me.lblImageFile = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -164,14 +166,14 @@ Partial Class FrmImageStore
         '
         'TxtForename
         '
-        Me.TxtForename.Location = New System.Drawing.Point(19, 5)
+        Me.TxtForename.Location = New System.Drawing.Point(89, 5)
         Me.TxtForename.Name = "TxtForename"
         Me.TxtForename.Size = New System.Drawing.Size(189, 22)
         Me.TxtForename.TabIndex = 77
         '
         'TxtSurname
         '
-        Me.TxtSurname.Location = New System.Drawing.Point(214, 5)
+        Me.TxtSurname.Location = New System.Drawing.Point(350, 5)
         Me.TxtSurname.Name = "TxtSurname"
         Me.TxtSurname.Size = New System.Drawing.Size(209, 22)
         Me.TxtSurname.TabIndex = 79
@@ -218,12 +220,36 @@ Partial Class FrmImageStore
         Me.PictureBox2.TabIndex = 132
         Me.PictureBox2.TabStop = False
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Label1.Location = New System.Drawing.Point(15, 7)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(67, 19)
+        Me.Label1.TabIndex = 133
+        Me.Label1.Text = "Forename"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Label2.Location = New System.Drawing.Point(284, 7)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(60, 19)
+        Me.Label2.TabIndex = 134
+        Me.Label2.Text = "Surname"
+        '
         'FrmImageStore
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1022, 661)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.lblImageFile)
         Me.Controls.Add(Me.btnLoadImage)
@@ -270,4 +296,6 @@ Partial Class FrmImageStore
     Friend WithEvents PasteImageToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblImageFile As Label
     Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
 End Class
