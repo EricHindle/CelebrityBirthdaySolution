@@ -9,14 +9,14 @@ Imports System.Windows.Forms
 Imports System.IO
 
 Public Class frmLogViewer
+    Dim currentDate As Date
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
     Private Sub LogViewer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
-        Me.Text = "Log: " & LogUtil.GetLogfileName
-        rtbLog.Text = LogUtil.GetLogContents()
+        LoadTodaysLog()
     End Sub
     Private Sub ClearLog()
         LogUtil.ClearLogFile()
@@ -54,5 +54,38 @@ Public Class frmLogViewer
 
     Private Sub FrmLogViewer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
+    End Sub
+
+    Private Sub BtnNextFile_Click(sender As Object, e As EventArgs) Handles BtnNextFile.Click
+        ShowNewFile(1)
+    End Sub
+    Private Sub BtnPrevFile_Click(sender As Object, e As EventArgs) Handles BtnPrevFile.Click
+        ShowNewFile(-1)
+    End Sub
+    Private Sub ShowNewFile(interval As Integer)
+        Dim newDate As Date = DateAdd(DateInterval.Day, interval, currentDate)
+        Dim newLogFileName As String = LogUtil.GetLogfileName(newDate)
+        Dim logContents As String = ""
+        If My.Computer.FileSystem.FileExists(newLogFileName) Then
+            BtnClearLog.Enabled = False
+            Me.Text = "Log: " & newLogFileName
+            If newLogFileName = LogUtil.GetLogfileName Then
+                logContents = LogUtil.GetLogContents
+                BtnClearLog.Enabled = True
+            Else
+                logContents = My.Computer.FileSystem.ReadAllText(newLogFileName)
+            End If
+            rtbLog.Text = logContents
+            currentDate = newDate
+        End If
+    End Sub
+    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
+        LoadTodaysLog()
+    End Sub
+    Private Sub LoadTodaysLog()
+        currentDate = Today
+        Me.Text = "Log: " & LogUtil.GetLogfileName
+        rtbLog.Text = LogUtil.GetLogContents()
+        BtnClearLog.Enabled = True
     End Sub
 End Class

@@ -109,6 +109,9 @@ Public NotInheritable Class LogUtil
     Public Shared Function GetLogfileName() As String
         Return My.Application.Log.DefaultFileLogWriter.FullLogFileName
     End Function
+    Public Shared Function GetLogfileName(newDate As Date) As String
+        Return Path.Combine(LogUtil.LogFolder, My.Application.Log.DefaultFileLogWriter.BaseFileName & "-" & Format(newDate, "yyyy-MM-dd") & ".log")
+    End Function
     Public Shared Sub ClearLogFile()
         Dim sLogFile As String = GetLogfileName()
         My.Application.Log.DefaultFileLogWriter.Close()
@@ -124,5 +127,6 @@ Public NotInheritable Class LogUtil
         GetLogContents = My.Computer.FileSystem.ReadAllText(sLogFile)
         My.Application.Log.DefaultFileLogWriter.Write("")
     End Function
+
 #End Region
 End Class
