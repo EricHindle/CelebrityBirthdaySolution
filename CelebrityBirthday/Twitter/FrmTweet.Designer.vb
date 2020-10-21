@@ -63,6 +63,8 @@ Partial Class FrmTweet
         Me.BtnUncheck = New System.Windows.Forms.Button()
         Me.BtnDeleteImages = New System.Windows.Forms.Button()
         Me.BtnNext = New System.Windows.Forms.Button()
+        Me.BtnExplorer = New System.Windows.Forms.Button()
+        Me.BtnTweetDeck = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -661,12 +663,38 @@ Partial Class FrmTweet
         Me.BtnNext.Text = "Next"
         Me.BtnNext.UseVisualStyleBackColor = True
         '
+        'BtnExplorer
+        '
+        Me.BtnExplorer.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnExplorer.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnExplorer.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnExplorer.Location = New System.Drawing.Point(501, 681)
+        Me.BtnExplorer.Name = "BtnExplorer"
+        Me.BtnExplorer.Size = New System.Drawing.Size(139, 33)
+        Me.BtnExplorer.TabIndex = 42
+        Me.BtnExplorer.Text = "Open Explorer"
+        Me.BtnExplorer.UseVisualStyleBackColor = True
+        '
+        'BtnTweetDeck
+        '
+        Me.BtnTweetDeck.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnTweetDeck.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnTweetDeck.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnTweetDeck.Location = New System.Drawing.Point(656, 681)
+        Me.BtnTweetDeck.Name = "BtnTweetDeck"
+        Me.BtnTweetDeck.Size = New System.Drawing.Size(155, 33)
+        Me.BtnTweetDeck.TabIndex = 43
+        Me.BtnTweetDeck.Text = "Open TweetDeck"
+        Me.BtnTweetDeck.UseVisualStyleBackColor = True
+        '
         'FrmTweet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1348, 752)
+        Me.Controls.Add(Me.BtnTweetDeck)
+        Me.Controls.Add(Me.BtnExplorer)
         Me.Controls.Add(Me.BtnNext)
         Me.Controls.Add(Me.BtnDeleteImages)
         Me.Controls.Add(Me.BtnUncheck)
@@ -776,4 +804,6 @@ Partial Class FrmTweet
     Friend WithEvents rbImageCentre As RadioButton
     Friend WithEvents BtnDeleteImages As Button
     Friend WithEvents BtnNext As Button
+    Friend WithEvents BtnExplorer As Button
+    Friend WithEvents BtnTweetDeck As Button
 End Class

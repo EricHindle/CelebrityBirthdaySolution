@@ -169,6 +169,16 @@ Public Class FrmTweet
             SaveImages()
         End If
     End Sub
+    Private Sub BtnExplorer_Click(sender As Object, e As EventArgs) Handles BtnExplorer.Click
+        Dim p As New ProcessStartInfo With {
+            .FileName = "explorer.exe",
+            .Arguments = My.Settings.twitterImageFolder
+        }
+        Process.Start(p)
+    End Sub
+    Private Sub BtnTweetDeck_Click(sender As Object, e As EventArgs) Handles BtnTweetDeck.Click
+        Process.Start(My.Resources.TWEETDECKURL)
+    End Sub
 #End Region
 #Region "Form subroutines"
     Private Sub SelectPeople()

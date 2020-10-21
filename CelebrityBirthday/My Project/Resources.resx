@@ -241,4 +241,7 @@
   <data name="WIKI_SEARCH" xml:space="preserve">
     <value>https://en.wikipedia.org/w/index.php?title=Special:Search&amp;limit=500&amp;offset=0&amp;profile=default&amp;advancedSearch-current={}&amp;ns0=1&amp;search=%22~date%22</value>
   </data>
+  <data name="TWEETDECKURL" xml:space="preserve">
+    <value>https://tweetdeck.twitter.com/</value>
+  </data>
 </root>

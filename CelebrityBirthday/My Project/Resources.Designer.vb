@@ -349,6 +349,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to https://tweetdeck.twitter.com/.
+        '''</summary>
+        Friend ReadOnly Property TWEETDECKURL() As String
+            Get
+                Return ResourceManager.GetString("TWEETDECKURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &amp;nbsp;&amp;nbsp;.
         '''</summary>
         Friend ReadOnly Property TWO_SPACES() As String
