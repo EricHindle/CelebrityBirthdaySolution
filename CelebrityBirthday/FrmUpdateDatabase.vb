@@ -185,7 +185,6 @@ Public Class FrmUpdateDatabase
     End Function
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         Dim oPerson As Person
-        LogUtil.Info("")
         If lbPeople.SelectedIndex >= 0 Then
             oPerson = personTable(lbPeople.SelectedIndex)
             If oPerson.Id > 0 Then
@@ -548,11 +547,11 @@ Public Class FrmUpdateDatabase
         ClearStatus()
     End Sub
     Private Sub BtnImageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnImageLoadUpd.Click
-        LogUtil.Info("Update WP image load date on Dates table")
+        LogUtil.Info("Update WP image load date on Dates table", MyBase.Name)
         UpdateImageDate(TxtImageLoadYr.Text, TxtImageLoadMth.Text, True, TxtImageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
     End Sub
     Private Sub BtnPageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnPageLoadUpd.Click
-        LogUtil.Info("Update WP page load date on Dates table")
+        LogUtil.Info("Update WP page load date on Dates table", MyBase.Name)
         UpdatePageDate(TxtPageLoadYr.Text, TxtPageLoadMth.Text, True, TxtPageLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
     End Sub
     Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
@@ -617,7 +616,7 @@ Public Class FrmUpdateDatabase
         Dim wpText As String = ""
         If lbPeople.SelectedIndex >= 0 Then
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
-            LogUtil.Info("Generating WordPress description for " & oPerson.Name)
+            LogUtil.Info("Generating WordPress description for " & oPerson.Name, MyBase.Name)
             Dim sBorn As String = ""
             If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
                 sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."

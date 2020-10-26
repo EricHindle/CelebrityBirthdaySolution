@@ -54,7 +54,7 @@ Public Class FrmImageStore
         OpenImageSearch()
         LblImagePath.Text = sImagePath
         If My.Computer.FileSystem.DirectoryExists(sImagePath) = False Then
-            LogUtil.Info("Creating folder " & sImagePath)
+            LogUtil.Info("Creating folder " & sImagePath, MyBase.Name)
             My.Computer.FileSystem.CreateDirectory(sImagePath)
         End If
         isSaved = True
@@ -141,7 +141,7 @@ Public Class FrmImageStore
             lblImageFile.Text = _latestSavedFile
             Dim sizeMessage As String = ""
             If Not String.IsNullOrEmpty(oImageFilename) Then
-                LogUtil.Info("Loading image from " & oImageFilename)
+                LogUtil.Info("Loading image from " & oImageFilename, MyBase.Name)
                 Dim oImage As Image = Image.FromFile(oImageFilename)
                 Dim loadedImage As Image = oImage.Clone
                 If oImage IsNot Nothing Then
@@ -149,7 +149,7 @@ Public Class FrmImageStore
                 End If
                 oImage.Dispose()
             End If
-            LogUtil.Info("Setting person name fields")
+            LogUtil.Info("Setting person name fields", MyBase.Name)
             Dim filenameparts As List(Of String) = Split(Path.GetFileNameWithoutExtension(_latestSavedFile), "-").ToList
             If String.IsNullOrEmpty(TxtSurname.Text) Then
                 TxtSurname.Text = filenameparts.Last

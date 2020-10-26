@@ -492,6 +492,7 @@ Public Class FrmBotsd
         Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim sto = New SendTweetOptions
         Dim msg = _tweetText
+
         sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
         Dim _mediaId As String = Nothing
         If chkImages.Checked Then
@@ -506,7 +507,7 @@ Public Class FrmBotsd
             End If
         End If
         If Not String.IsNullOrEmpty(_mediaId) Then
-            InsertTweet("", _month, ThisDay, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
+            InsertTweet(_filename, _month, ThisDay, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
             sto.MediaIds = {_mediaId}
         End If
         Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)

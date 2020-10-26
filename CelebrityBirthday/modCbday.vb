@@ -7,10 +7,13 @@ Imports System.Web.Script.Serialization
 Imports System.Reflection
 
 Friend Module modCbday
+#Region "constants"
+    Private Const MODULE_NAME As String = "modCbday"
+    Private Const MODULE_TYPE As String = "Application"
+#End Region
     Public Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Public Const TWEET_MAX_LEN As Integer = 280
-
     Public Const RTB_CONTROL_NAME As String = "RtbFile"
     Public Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
     Public Const TABPAGE_BASENAME As String = "TabPage_"
@@ -148,7 +151,7 @@ Friend Module modCbday
     End Function
 
     Public Function SaveImage(ByVal pUri As Uri, ByVal strFName As String) As Boolean
-        LogUtil.Info("Saving Image from " & pUri.ToString & " to " & strFName)
+        LogUtil.Info("Saving Image from " & pUri.ToString & " to " & strFName, MODULE_NAME)
         Dim rtnval As Boolean = True
         Dim b() As Byte '   Store picture bytes
         ' Create a request for the URL. 
@@ -159,14 +162,14 @@ Friend Module modCbday
         Dim response As WebResponse = Nothing
         Dim memorystream As New MemoryStream
         Try
-            LogUtil.Info("Sending request for image")
+            LogUtil.Info("Sending request for image", MODULE_NAME)
             response = request.GetResponse()
             ' Get the stream containing content returned by the server.
             Dim dataStream As Stream = response.GetResponseStream()
             ' Read the content.
             Dim buffer(4096) As Byte
             Dim bct As Integer = -1
-            LogUtil.Info("Reading response")
+            LogUtil.Info("Reading response", MODULE_NAME)
             Do While (bct <> 0)
                 bct = dataStream.Read(buffer, 0, buffer.Length)
                 memorystream.Write(buffer, 0, bct)
@@ -181,7 +184,7 @@ Friend Module modCbday
                         isOkToWrite = MsgBox("File exists. OK to continue?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes
                     End If
                     If isOkToWrite Then
-                        LogUtil.Info("Writing image to " & strFName)
+                        LogUtil.Info("Writing image to " & strFName, MODULE_NAME)
                         Dim _fileStream As FileStream = File.Open(strFName, FileMode.Create)
                         bw = New BinaryWriter(_fileStream)
                         bw.Write(b)
@@ -216,7 +219,7 @@ Friend Module modCbday
             memorystream.Close()
             memorystream.Dispose()
         End Try
-        If rtnval Then LogUtil.Info("Image save complete")
+        If rtnval Then LogUtil.Info("Image save complete", MODULE_NAME)
         Return rtnval
     End Function
 

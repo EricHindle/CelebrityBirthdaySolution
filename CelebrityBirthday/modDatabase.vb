@@ -5,7 +5,12 @@ Imports System.Threading
 Imports TweetSharp
 
 Module modDatabase
+#Region "constants"
+    Private Const MODULE_NAME As String = "modDatabase"
+    Private Const MODULE_TYPE As String = "Database"
+#End Region
 #Region "data"
+
     Private ReadOnly oTwta As New CelebrityBirthdayDataSetTableAdapters.SocialMediaTableAdapter
     Private ReadOnly oTwtable As New CelebrityBirthdayDataSet.SocialMediaDataTable
     Private ReadOnly oPersonTa As New CelebrityBirthdayDataSetTableAdapters.PersonTableAdapter
@@ -26,11 +31,11 @@ Module modDatabase
 #End Region
 #Region "person"
     Public Function DeletePerson(ByVal _id As Integer)
-        LogUtil.Info("Deleting person " & CStr(_id), "modDatabase")
+        LogUtil.Info("Deleting person " & CStr(_id), MODULE_NAME)
         Return oPersonTa.DeletePerson(_id)
     End Function
     Public Function DeleteSocialMedia(ByVal _id As Integer) As Integer
-        LogUtil.Info("Deleting social media for " & CStr(_id), "modDatabase")
+        LogUtil.Info("Deleting social media for " & CStr(_id), MODULE_NAME)
         Return oTwta.DeleteTwitter(_id)
     End Function
     Public Function CountPeople() As Integer
@@ -42,12 +47,13 @@ Module modDatabase
             Try
                 iCt = oPersonTa.CountPeople
             Catch ex1 As DbException
-                DisplayException(MethodBase.GetCurrentMethod, ex1, "dB")
+                DisplayException(MethodBase.GetCurrentMethod, ex1, MODULE_TYPE)
             End Try
         End Try
         Return iCt
     End Function
     Private Sub StartSqlService()
+        LogUtil.Info("Starting SQL Server", MODULE_NAME)
         Try
             Dim procStartInfo As New ProcessStartInfo
             With procStartInfo
@@ -74,7 +80,7 @@ Module modDatabase
                 newPerson = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
             End If
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return newPerson
     End Function
@@ -87,7 +93,7 @@ Module modDatabase
                 newPerson = New Person(oRow)
             End If
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return newPerson
     End Function
@@ -95,6 +101,7 @@ Module modDatabase
         Dim sortSeq As Integer = 0
         Dim newId As Integer = -1
         Try
+            LogUtil.Info("Inserting " & oPerson.Name, MODULE_NAME)
             newId = oPersonTa.InsertPerson(oPerson.ForeName,
                                                 oPerson.Surname,
                                                 CInt(oPerson.BirthYear),
@@ -112,13 +119,14 @@ Module modDatabase
             oPerson.Id = newId
             UpdateSocialMedia(oPerson)
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return newId
     End Function
     Public Function UpdatePerson(ByVal oPerson As Person) As Integer
         Dim iCt As Integer = -1
         Try
+            LogUtil.Info("Updating " & oPerson.Name, MODULE_NAME)
             iCt = oPersonTa.UpdatePerson(oPerson.ForeName,
                                               oPerson.Surname,
                                               CInt(oPerson.BirthYear),
@@ -135,34 +143,37 @@ Module modDatabase
                                               oPerson.Id)
             UpdateSocialMedia(oPerson)
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
     Public Function UpdateShortDesc(ByVal oPerson As Person) As Integer
         Dim iCt As Integer = -1
         Try
+            LogUtil.Info("Updating short description for " & oPerson.Name, MODULE_NAME)
             iCt = oPersonTa.UpdateShortDesc(oPerson.ShortDesc, oPerson.Id)
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
     Public Function UpdateSortSeq(ByVal personId As Integer, ByVal newSortSeq As Integer) As Integer
         Dim iCt As Integer = -1
         Try
+            LogUtil.Info("Updating sort sequence for " & CStr(personId), MODULE_NAME)
             iCt = oPersonTa.UpdateSortSeq(newSortSeq, personId)
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
     Public Function UpdateDateOfBirth(ByVal oPersonId As Integer, oDay As Integer, oMonth As Integer, oYear As Integer, oDesc As String) As Integer
         Dim iCt As Integer = -1
         Try
+            LogUtil.Info("Updating date of birth for " & CStr(oPersonId), MODULE_NAME)
             iCt = oPersonTa.UpdateDoB(oYear, oMonth, oDay, oDesc, oPersonId)
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
@@ -175,7 +186,7 @@ Module modDatabase
                 oPersonTable.Add(oPerson)
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return oPersonTable
     End Function
@@ -188,7 +199,7 @@ Module modDatabase
                 oPersonList.Add(oPerson)
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return oPersonList
     End Function
@@ -201,7 +212,7 @@ Module modDatabase
                 oPersonList.Add(oPerson)
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return oPersonList
     End Function
@@ -214,7 +225,7 @@ Module modDatabase
                 oPersonList.Add(oPerson)
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return oPersonList
     End Function
@@ -229,7 +240,7 @@ Module modDatabase
                 End If
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
 
         Return oPersonList
@@ -245,7 +256,7 @@ Module modDatabase
                 End If
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return _List
     End Function
@@ -260,7 +271,7 @@ Module modDatabase
                 _List.Add(newPerson)
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return _List
     End Function
@@ -274,7 +285,7 @@ Module modDatabase
                 End If
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return _List
     End Function
@@ -288,7 +299,7 @@ Module modDatabase
                 End If
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return _List
     End Function
@@ -302,7 +313,7 @@ Module modDatabase
                 End If
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return _List
     End Function
@@ -316,7 +327,7 @@ Module modDatabase
                 oImage = New ImageIdentity(oImgTable.Rows(0), isGetPhoto)
             End If
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return oImage
     End Function
@@ -348,28 +359,30 @@ Module modDatabase
     Public Function InsertImage(oId As Integer, imgFileName As String, imgFileType As String, loadMonth As String, loadYear As String) As Integer
         Dim iCt As Integer = -1
         Try
+            LogUtil.Info("Inserting image for " & CStr(oId), MODULE_NAME)
             iCt = oImgTa.InsertImage(oId, imgFileName, imgFileType, loadYear, loadMonth)
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
     Public Function UpdateImage(oId As Integer, imgFileName As String, imgFileType As String, loadMonth As String, loadYear As String) As Integer
         Dim iCt As Integer = -1
         Try
+            LogUtil.Info("Updating image for " & CStr(oId), MODULE_NAME)
             iCt = oImgTa.UpdateImage(imgFileName, imgFileType, loadYear, loadMonth, oId)
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
     Public Function DeleteImage(oId As Integer) As Integer
         Dim iCt As Integer = -1
         Try
-            LogUtil.Info("Deleting image for " & CStr(oId), "modDatabase")
+            LogUtil.Info("Deleting image for " & CStr(oId), MODULE_NAME)
             iCt = oImgTa.DeleteImage(oId)
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
@@ -384,6 +397,7 @@ Module modDatabase
         Return oSocial
     End Function
     Public Sub InsertSocialMedia(_id As Integer, _twitterHandle As String, _isNoTweet As Boolean, _wikiId As String, _botsd As Integer)
+        LogUtil.Info("Inserting social media for " & CStr(_id), MODULE_NAME)
         oTwta.InsertTwitter(_id, _twitterHandle, _isNoTweet, _wikiId, _botsd)
     End Sub
     Public Sub UpdateSocialMedia(ByRef _person As Person)
@@ -394,23 +408,26 @@ Module modDatabase
         End If
     End Sub
     Public Sub UpdateWikiId(pPersonId As Integer, pWikiId As String)
+        LogUtil.Info("Updating wiki id " & pWikiId, MODULE_NAME)
         Dim updCt As Integer = oTwta.UpdateWikiId(pWikiId, pPersonId)
     End Sub
     Public Function UpdateBotsdId(ByVal oSocial As SocialMedia) As Integer
         Dim iCt As Integer = -1
         Try
+            LogUtil.Info("Updating BotSD id on social media for " & CStr(oSocial.Id), MODULE_NAME)
             iCt = oTwta.UpdateBotsd(oSocial.Botsd, oSocial.Id)
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
     Public Function UpdateBotsdId(ByVal _personId As Integer, ByVal _btsdId As Integer) As Integer
         Dim iCt As Integer = -1
         Try
+            LogUtil.Info("Updating BotSD id on social media for " & CStr(_personId), MODULE_NAME)
             iCt = oTwta.UpdateBotsd(_btsdId, _personId)
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
@@ -421,7 +438,7 @@ Module modDatabase
         Try
             iCt = oDatesTa.UpdateDate(LoadYr, LoadMth, isDateAmend, LoadDay, DayIndex, MonthIndex, "I")
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
@@ -430,7 +447,7 @@ Module modDatabase
         Try
             iCt = oDatesTa.UpdateDate(LoadYr, LoadMth, isDateAmend, LoadDay, DayIndex, MonthIndex, "P")
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
     End Function
@@ -444,7 +461,7 @@ Module modDatabase
                 loadDate = New Date(CInt(oDateRow.uploadyear), CInt(oDateRow.uploadmonth), CInt(oDateRow.uploadday))
             End If
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return loadDate
     End Function
@@ -456,7 +473,7 @@ Module modDatabase
                 oDrow = oDatesTable.Rows(0)
             End If
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return oDrow
     End Function
@@ -472,7 +489,7 @@ Module modDatabase
                 }
             End If
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return oTwAuth
     End Function
@@ -485,7 +502,7 @@ Module modDatabase
                 isOK = oTwitterAuthTa.UpdateAuth(pVerifier, pToken, pSecret, pId) = 1
             End If
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return isOK
     End Function
@@ -497,16 +514,17 @@ Module modDatabase
                 _list.Add(oRow.Id)
             Next
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return _list
     End Function
     Public Function InsertTweet(pText As String, pMonth As Integer?, pDay As Integer?, pSeq As Integer?, pId As String, pAccount As String, pType As String) As Boolean
         Dim isOK As Boolean = False
+
         Try
-            isOK = oTweetTa.InsertTweet(Now, pText, pMonth, pDay, pSeq, pId, pAccount, pType) = 1
+            isOK = oTweetTa.InsertTweet(Now, If(String.IsNullOrEmpty(pText), "", pText), pMonth, pDay, pSeq, pId, pAccount, pType) = 1
         Catch dbEx As DbException
-            DisplayException(MethodBase.GetCurrentMethod(), dbEx, "Database")
+            DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return isOK
     End Function
@@ -555,8 +573,8 @@ Module modDatabase
     Public Function GetBotsdIndex() As DataRowCollection
         Try
             oBotsdViewTa.FillByAtoZ(oBotsdViewTable)
-        Catch ex As dbException
-            DisplayException(MethodBase.GetCurrentMethod, ex, "dB")
+        Catch ex As DbException
+            DisplayException(MethodBase.GetCurrentMethod, ex, MODULE_TYPE)
             oBotsdViewTable.Rows.Clear()
         End Try
 
@@ -565,8 +583,8 @@ Module modDatabase
     Public Function GetBotsdViewByPostNo(postNo As Integer) As DataRowCollection
         Try
             oBotsdViewTa.FillByPostNo(oBotsdViewTable, postNo)
-        Catch ex As dbException
-            DisplayException(MethodBase.GetCurrentMethod, ex, "dB")
+        Catch ex As DbException
+            DisplayException(MethodBase.GetCurrentMethod, ex, MODULE_TYPE)
             oBotsdViewTable.Rows.Clear()
         End Try
         Return oBotsdViewTable.Rows

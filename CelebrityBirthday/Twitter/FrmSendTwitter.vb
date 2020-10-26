@@ -439,6 +439,7 @@ Public Class FrmSendTwitter
         Dim msg = RtbTweetText.Text
         sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
         Dim _mediaId As String = Nothing
+        Dim _imageFile As String = Nothing
         If chkImages.Checked Then
             If My.Computer.FileSystem.FileExists(LblImageFile.Text) Then
                 WriteTrace("Saving Image")
@@ -447,7 +448,7 @@ Public Class FrmSendTwitter
                     My.Computer.FileSystem.CreateDirectory(_path)
                 End If
                 Dim _fileName As String = GetUniqueFname(Path.Combine(_path, My.Resources.SINGLE_TWEET) & ".jpg")
-                Dim _imageFile As String = ImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
+                _imageFile = ImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
                 Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _imageFile)
                 If _twitterUplMedia IsNot Nothing Then
                     Dim _uploadedSize As Long = _twitterUplMedia.Size
@@ -460,7 +461,7 @@ Public Class FrmSendTwitter
             End If
         End If
         If Not String.IsNullOrEmpty(_mediaId) Then
-            InsertTweet("", Today.Month + 1, Today.Day + 1, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
+            InsertTweet(_imageFile, Today.Month + 1, Today.Day + 1, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
             sto.MediaIds = {_mediaId}
         End If
         Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
