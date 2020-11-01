@@ -34,6 +34,18 @@ Public Class FrmSearch
             ShowStatus("No name supplied")
         End If
     End Sub
+
+    Private Sub SplitNameText()
+        TxtForename.Text = Trim(TxtForename.Text)
+        TxtSurname.Text = Trim(TxtSurname.Text)
+        Dim fullName As String() = Split(Trim(TxtForename.Text & " " & TxtSurname.Text))
+        If fullName.Length > 1 Then
+            TxtSurname.Text = fullName.Last
+            fullName(fullName.Length - 1) = ""
+            TxtForename.Text = Join(fullName).Trim
+        End If
+    End Sub
+
     Private Sub BtnSearchById_Click(sender As Object, e As EventArgs) Handles BtnSearchById.Click
         If Not String.IsNullOrEmpty(txtId.Text) Then
             ShowStatus("Searching for " & txtId.Text, True)
@@ -156,5 +168,58 @@ Public Class FrmSearch
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.srchformpos)
     End Sub
+
+    Private Sub Name_DragDrop(sender As Object, e As DragEventArgs) Handles TxtForename.DragDrop,
+                                                                            TxtSurname.DragDrop
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim oBox As TextBox = CType(sender, TextBox)
+            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
+            Dim textlen As Integer = oBox.TextLength
+            Dim startpos As Integer = oBox.SelectionStart
+            If textlen = 0 Then
+                oBox.Text = item.Trim
+            Else
+                If startpos = 0 Then
+                    oBox.SelectedText = item.TrimStart
+                Else
+                    If oBox.Text.Substring(startpos - 1, 1) = "." Then
+                        oBox.SelectedText = " " & item.TrimStart
+                    Else
+                        oBox.SelectedText = item
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub Name_DragOver(sender As Object, e As DragEventArgs) Handles TxtSurname.DragOver,
+                                                                            TxtForename.DragOver
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim oBox As TextBox = CType(sender, TextBox)
+            oBox.Select(TextBoxCursorPos(oBox, e.X, e.Y), 0)
+        End If
+    End Sub
+
+    Private Sub TxtSurname_DragEnter(sender As Object, e As DragEventArgs) Handles TxtSurname.DragEnter,
+                                                                                   TxtForename.DragEnter
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            e.Effect = DragDropEffects.Copy
+        Else
+            If e.Data.GetDataPresent(DataFormats.Text) Then
+                e.Effect = DragDropEffects.Copy
+            Else
+                e.Effect = DragDropEffects.None
+            End If
+        End If
+    End Sub
+
+    Private Sub BtnPasteName_Click(sender As Object, e As EventArgs) Handles BtnPasteName.Click
+        TxtSurname.Text = Clipboard.GetText
+    End Sub
+
+    Private Sub BtnSplitNameText_Click(sender As Object, e As EventArgs) Handles BtnSplitNameText.Click
+        SplitNameText()
+    End Sub
+
 #End Region
 End Class

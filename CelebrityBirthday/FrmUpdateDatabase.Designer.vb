@@ -33,6 +33,8 @@ Partial Class FrmUpdateDatabase
         Me.PasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.PasteIntoDesc = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnClearDesc = New System.Windows.Forms.Button()
         Me.txtDthMth = New System.Windows.Forms.TextBox()
         Me.btnTidy = New System.Windows.Forms.Button()
@@ -41,9 +43,9 @@ Partial Class FrmUpdateDatabase
         Me.txtDthDay = New System.Windows.Forms.TextBox()
         Me.btnCopyBirthPlace = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.txtBirthName = New System.Windows.Forms.TextBox()
+        Me.TxtBirthName = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtBirthPlace = New System.Windows.Forms.TextBox()
+        Me.TxtBirthPlace = New System.Windows.Forms.TextBox()
         Me.btnCreateFullName = New System.Windows.Forms.Button()
         Me.btnSplitName = New System.Windows.Forms.Button()
         Me.lblID = New System.Windows.Forms.Label()
@@ -51,7 +53,7 @@ Partial Class FrmUpdateDatabase
         Me.txtSurname = New System.Windows.Forms.TextBox()
         Me.txtForename = New System.Windows.Forms.TextBox()
         Me.btnDown = New System.Windows.Forms.Button()
-        Me.txtShortDesc = New System.Windows.Forms.TextBox()
+        Me.TxtShortDesc = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.btnUp = New System.Windows.Forms.Button()
         Me.lbPeople = New System.Windows.Forms.ListBox()
@@ -110,8 +112,6 @@ Partial Class FrmUpdateDatabase
         Me.LblSortSeq = New System.Windows.Forms.Label()
         Me.LblUpdated = New System.Windows.Forms.Label()
         Me.LbUpdateList = New System.Windows.Forms.ListBox()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.PasteIntoDesc = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -209,83 +209,94 @@ Partial Class FrmUpdateDatabase
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UseNicknameToolStripMenuItem, Me.ShortenNameToolStripMenuItem, Me.UseNameTextToolStripMenuItem, Me.ToolStripSeparator3, Me.UpperCaseToolStripMenuItem, Me.LowercaseToolStripMenuItem, Me.TitleCaseToolStripMenuItem, Me.ToolStripSeparator2, Me.CopyToolStripMenuItem, Me.CutToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ClearToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ToolStripSeparator1, Me.PasteIntoDesc})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 308)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(155, 286)
         '
         'UseNicknameToolStripMenuItem
         '
         Me.UseNicknameToolStripMenuItem.Name = "UseNicknameToolStripMenuItem"
-        Me.UseNicknameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UseNicknameToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.UseNicknameToolStripMenuItem.Text = "Use Nickname"
         '
         'ShortenNameToolStripMenuItem
         '
         Me.ShortenNameToolStripMenuItem.Name = "ShortenNameToolStripMenuItem"
-        Me.ShortenNameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ShortenNameToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.ShortenNameToolStripMenuItem.Text = "Shorten Name"
         '
         'UseNameTextToolStripMenuItem
         '
         Me.UseNameTextToolStripMenuItem.Name = "UseNameTextToolStripMenuItem"
-        Me.UseNameTextToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UseNameTextToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.UseNameTextToolStripMenuItem.Text = "Use Title Name"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(151, 6)
         '
         'UpperCaseToolStripMenuItem
         '
         Me.UpperCaseToolStripMenuItem.Name = "UpperCaseToolStripMenuItem"
-        Me.UpperCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UpperCaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.UpperCaseToolStripMenuItem.Text = "UPPERCASE"
         '
         'LowercaseToolStripMenuItem
         '
         Me.LowercaseToolStripMenuItem.Name = "LowercaseToolStripMenuItem"
-        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.LowercaseToolStripMenuItem.Text = "lowercase"
         '
         'TitleCaseToolStripMenuItem
         '
         Me.TitleCaseToolStripMenuItem.Name = "TitleCaseToolStripMenuItem"
-        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.TitleCaseToolStripMenuItem.Text = "Title Case"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(151, 6)
         '
         'CopyToolStripMenuItem
         '
         Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.CopyToolStripMenuItem.Text = "Copy"
         '
         'CutToolStripMenuItem
         '
         Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
-        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.CutToolStripMenuItem.Text = "Cut"
         '
         'PasteToolStripMenuItem
         '
         Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
-        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.PasteToolStripMenuItem.Text = "Paste"
         '
         'ClearToolStripMenuItem
         '
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.ClearToolStripMenuItem.Text = "Clear"
         '
         'SelectAllToolStripMenuItem
         '
         Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
-        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.SelectAllToolStripMenuItem.Text = "Select All"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(151, 6)
+        '
+        'PasteIntoDesc
+        '
+        Me.PasteIntoDesc.Name = "PasteIntoDesc"
+        Me.PasteIntoDesc.Size = New System.Drawing.Size(154, 22)
+        Me.PasteIntoDesc.Text = "Paste Into Desc"
         '
         'btnClearDesc
         '
@@ -374,16 +385,16 @@ Partial Class FrmUpdateDatabase
         Me.Label15.TabIndex = 44
         Me.Label15.Text = "Birth Name"
         '
-        'txtBirthName
+        'TxtBirthName
         '
-        Me.txtBirthName.AllowDrop = True
-        Me.txtBirthName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TxtBirthName.AllowDrop = True
+        Me.TxtBirthName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtBirthName.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBirthName.Location = New System.Drawing.Point(162, 580)
-        Me.txtBirthName.Name = "txtBirthName"
-        Me.txtBirthName.Size = New System.Drawing.Size(655, 26)
-        Me.txtBirthName.TabIndex = 10
+        Me.TxtBirthName.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtBirthName.Location = New System.Drawing.Point(162, 580)
+        Me.TxtBirthName.Name = "TxtBirthName"
+        Me.TxtBirthName.Size = New System.Drawing.Size(655, 26)
+        Me.TxtBirthName.TabIndex = 10
         '
         'Label14
         '
@@ -397,16 +408,16 @@ Partial Class FrmUpdateDatabase
         Me.Label14.TabIndex = 43
         Me.Label14.Text = "Birthplace"
         '
-        'txtBirthPlace
+        'TxtBirthPlace
         '
-        Me.txtBirthPlace.AllowDrop = True
-        Me.txtBirthPlace.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TxtBirthPlace.AllowDrop = True
+        Me.TxtBirthPlace.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtBirthPlace.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBirthPlace.Location = New System.Drawing.Point(162, 537)
-        Me.txtBirthPlace.Name = "txtBirthPlace"
-        Me.txtBirthPlace.Size = New System.Drawing.Size(655, 26)
-        Me.txtBirthPlace.TabIndex = 9
+        Me.TxtBirthPlace.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtBirthPlace.Location = New System.Drawing.Point(162, 537)
+        Me.TxtBirthPlace.Name = "TxtBirthPlace"
+        Me.TxtBirthPlace.Size = New System.Drawing.Size(655, 26)
+        Me.TxtBirthPlace.TabIndex = 9
         '
         'btnCreateFullName
         '
@@ -477,16 +488,16 @@ Partial Class FrmUpdateDatabase
         Me.btnDown.Text = "Dn"
         Me.btnDown.UseVisualStyleBackColor = True
         '
-        'txtShortDesc
+        'TxtShortDesc
         '
-        Me.txtShortDesc.AllowDrop = True
-        Me.txtShortDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TxtShortDesc.AllowDrop = True
+        Me.TxtShortDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtShortDesc.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtShortDesc.Location = New System.Drawing.Point(162, 494)
-        Me.txtShortDesc.Name = "txtShortDesc"
-        Me.txtShortDesc.Size = New System.Drawing.Size(655, 26)
-        Me.txtShortDesc.TabIndex = 8
+        Me.TxtShortDesc.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtShortDesc.Location = New System.Drawing.Point(162, 494)
+        Me.TxtShortDesc.Name = "TxtShortDesc"
+        Me.TxtShortDesc.Size = New System.Drawing.Size(655, 26)
+        Me.TxtShortDesc.TabIndex = 8
         '
         'Label10
         '
@@ -1140,17 +1151,6 @@ Partial Class FrmUpdateDatabase
         Me.LbUpdateList.TabIndex = 143
         Me.LbUpdateList.Visible = False
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
-        '
-        'PasteIntoDesc
-        '
-        Me.PasteIntoDesc.Name = "PasteIntoDesc"
-        Me.PasteIntoDesc.Size = New System.Drawing.Size(180, 22)
-        Me.PasteIntoDesc.Text = "Paste Into Desc"
-        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
@@ -1198,9 +1198,9 @@ Partial Class FrmUpdateDatabase
         Me.Controls.Add(Me.txtDthDay)
         Me.Controls.Add(Me.btnCopyBirthPlace)
         Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.txtBirthName)
+        Me.Controls.Add(Me.TxtBirthName)
         Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.txtBirthPlace)
+        Me.Controls.Add(Me.TxtBirthPlace)
         Me.Controls.Add(Me.btnCreateFullName)
         Me.Controls.Add(Me.btnSplitName)
         Me.Controls.Add(Me.lblID)
@@ -1208,7 +1208,7 @@ Partial Class FrmUpdateDatabase
         Me.Controls.Add(Me.txtSurname)
         Me.Controls.Add(Me.txtForename)
         Me.Controls.Add(Me.btnDown)
-        Me.Controls.Add(Me.txtShortDesc)
+        Me.Controls.Add(Me.TxtShortDesc)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.btnUp)
         Me.Controls.Add(Me.lbPeople)
@@ -1257,9 +1257,9 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents txtDthDay As TextBox
     Friend WithEvents btnCopyBirthPlace As Button
     Friend WithEvents Label15 As Label
-    Friend WithEvents txtBirthName As TextBox
+    Friend WithEvents TxtBirthName As TextBox
     Friend WithEvents Label14 As Label
-    Friend WithEvents txtBirthPlace As TextBox
+    Friend WithEvents TxtBirthPlace As TextBox
     Friend WithEvents btnCreateFullName As Button
     Friend WithEvents btnSplitName As Button
     Friend WithEvents lblID As Label
@@ -1267,7 +1267,7 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents txtSurname As TextBox
     Friend WithEvents txtForename As TextBox
     Friend WithEvents btnDown As Button
-    Friend WithEvents txtShortDesc As TextBox
+    Friend WithEvents TxtShortDesc As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents btnUp As Button
     Friend WithEvents lbPeople As ListBox

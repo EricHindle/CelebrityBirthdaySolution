@@ -36,9 +36,9 @@ Public Class FrmUpdateDatabase
                                                                                             txtYear.DragDrop,
                                                                                             txtForename.DragDrop,
                                                                                             txtSurname.DragDrop,
-                                                                                            txtBirthName.DragDrop,
-                                                                                            txtBirthPlace.DragDrop,
-                                                                                            txtShortDesc.DragDrop,
+                                                                                            TxtBirthName.DragDrop,
+                                                                                            TxtBirthPlace.DragDrop,
+                                                                                            TxtShortDesc.DragDrop,
                                                                                             txtTwitter.DragDrop,
                                                                                             TxtWikiId.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
@@ -67,9 +67,9 @@ Public Class FrmUpdateDatabase
                                                                                                                             txtYear.DragOver,
                                                                                                                             txtForename.DragOver,
                                                                                                                             txtSurname.DragOver,
-                                                                                                                            txtBirthName.DragOver,
-                                                                                                                            txtBirthPlace.DragOver,
-                                                                                                                            txtShortDesc.DragOver,
+                                                                                                                            TxtBirthName.DragOver,
+                                                                                                                            TxtBirthPlace.DragOver,
+                                                                                                                            TxtShortDesc.DragOver,
                                                                                                                             txtTwitter.DragOver,
                                                                                                                             TxtWikiId.DragOver
 
@@ -84,9 +84,9 @@ Public Class FrmUpdateDatabase
                                                                                                                             txtYear.DragEnter,
                                                                                                                             txtForename.DragEnter,
                                                                                                                             txtSurname.DragEnter,
-                                                                                                                            txtBirthName.DragEnter,
-                                                                                                                            txtBirthPlace.DragEnter,
-                                                                                                                            txtShortDesc.DragEnter,
+                                                                                                                            TxtBirthName.DragEnter,
+                                                                                                                            TxtBirthPlace.DragEnter,
+                                                                                                                            TxtShortDesc.DragEnter,
                                                                                                                             txtTwitter.DragEnter,
                                                                                                                             TxtWikiId.DragEnter
 
@@ -115,15 +115,15 @@ Public Class FrmUpdateDatabase
                 Dim newPerson As New Person(txtForename.Text.Trim,
                                             txtSurname.Text.Trim,
                                             txtDesc.Text.Trim,
-                                            txtShortDesc.Text.Trim,
+                                            TxtShortDesc.Text.Trim,
                                             cboDay.SelectedIndex + 1,
                                             cboMonth.SelectedIndex + 1,
                                             txtYear.Text.Trim,
                                             CInt("0" & txtDied.Text.Trim),
                                             CInt("0" & txtDthMth.Text.Trim),
                                             CInt("0" & txtDthDay.Text.Trim),
-                                            txtBirthName.Text.Trim,
-                                            txtBirthPlace.Text.Trim,
+                                            TxtBirthName.Text.Trim,
+                                            TxtBirthPlace.Text.Trim,
                                             New ImageIdentity(),
                                             New SocialMedia(-1, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, 0)) With {
                                             .UnsavedChanges = True
@@ -332,11 +332,11 @@ Public Class FrmUpdateDatabase
                     oPerson.Description = txtDesc.Text.Trim
                     oPerson.ForeName = txtForename.Text.Trim
                     oPerson.Surname = txtSurname.Text.Trim
-                    oPerson.ShortDesc = txtShortDesc.Text.Trim
+                    oPerson.ShortDesc = TxtShortDesc.Text.Trim
                     oPerson.DeathDay = CInt("0" & txtDthDay.Text.Trim)
                     oPerson.DeathMonth = CInt("0" & txtDthMth.Text.Trim)
-                    oPerson.BirthPlace = txtBirthPlace.Text.Trim
-                    oPerson.BirthName = txtBirthName.Text.Trim
+                    oPerson.BirthPlace = TxtBirthPlace.Text.Trim
+                    oPerson.BirthName = TxtBirthName.Text.Trim
                     oPerson.UnsavedChanges = True
                     oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd)
                     ShowUpdated(oPerson, "Updated")
@@ -375,11 +375,11 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub BtnCreateShortDesc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateShortDesc.Click
         If txtDesc.SelectionLength > 0 Then
-            txtShortDesc.Text = txtDesc.SelectedText.Trim(trimChars)
+            TxtShortDesc.Text = txtDesc.SelectedText.Trim(trimChars)
         ElseIf txtWiki.SelectionLength > 0 Then
-            txtShortDesc.Text = txtWiki.SelectedText.Trim(trimChars)
+            TxtShortDesc.Text = txtWiki.SelectedText.Trim(trimChars)
         End If
-        txtShortDesc.Text &= "."
+        TxtShortDesc.Text &= "."
     End Sub
     Private Sub BtnSplitName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSplitName.Click
         txtName.Text = txtName.Text.Trim
@@ -477,15 +477,15 @@ Public Class FrmUpdateDatabase
         End If
         Dim names As String() = Split(name, """")
         If names.Length = 3 Then
-            Name = names(0).Trim & " " & names(2).Trim
+            name = names(0).Trim & " " & names(2).Trim
         End If
-        txtBirthName.Text = Name
+        TxtBirthName.Text = name
     End Sub
     Private Sub BtnCopyBirthPlace_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyBirthPlace.Click
         If txtDesc.SelectionLength > 0 Then
-            txtBirthPlace.Text = txtDesc.SelectedText.Trim(trimChars)
+            TxtBirthPlace.Text = txtDesc.SelectedText.Trim(trimChars)
         ElseIf txtWiki.SelectionLength > 0 Then
-            txtBirthPlace.Text = txtWiki.SelectedText.Trim(trimChars)
+            TxtBirthPlace.Text = txtWiki.SelectedText.Trim(trimChars)
         End If
     End Sub
     Private Sub BtnClearDesc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearDesc.Click
@@ -595,20 +595,20 @@ Public Class FrmUpdateDatabase
         txtDesc.Paste()
     End Sub
     Private Sub BtnPasteShort_Click(sender As Object, e As EventArgs) Handles BtnPasteShort.Click
-        txtShortDesc.Paste()
+        TxtShortDesc.Paste()
     End Sub
     Private Sub BtnPasteBirthplace_Click(sender As Object, e As EventArgs) Handles BtnPasteBirthplace.Click
-        txtBirthPlace.Paste()
+        TxtBirthPlace.Paste()
     End Sub
     Private Sub BtnPasteBirthname_Click(sender As Object, e As EventArgs) Handles BtnPasteBirthname.Click
-        txtBirthName.Paste()
+        TxtBirthName.Paste()
     End Sub
     Private Sub UseNameTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseNameTextToolStripMenuItem.Click
         UseTitleName()
     End Sub
     Private Sub ShortenNameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShortenNameToolStripMenuItem.Click
         If txtDesc.SelectionLength > 0 Then
-            txtBirthName.Text = txtDesc.SelectedText
+            TxtBirthName.Text = txtDesc.SelectedText
             RemoveMiddleNames()
         End If
     End Sub
@@ -669,7 +669,7 @@ Public Class FrmUpdateDatabase
         lblID.Text = ""
         txtDesc.Text = ""
         txtWiki.Text = ""
-        txtShortDesc.Text = ""
+        TxtShortDesc.Text = ""
         txtDied.Text = ""
         txtName.Text = ""
         txtForename.Text = ""
@@ -677,8 +677,8 @@ Public Class FrmUpdateDatabase
         txtYear.Text = ""
         LblSortSeq.Text = 0
         PictureBox1.ImageLocation = ""
-        txtBirthName.Text = ""
-        txtBirthPlace.Text = ""
+        TxtBirthName.Text = ""
+        TxtBirthPlace.Text = ""
         txtDthDay.Text = ""
         txtDthMth.Text = ""
         txtTwitter.Text = ""
@@ -803,14 +803,14 @@ Public Class FrmUpdateDatabase
         txtForename.Text = oPerson.ForeName
         txtSurname.Text = oPerson.Surname
         txtDesc.Text = oPerson.Description
-        txtShortDesc.Text = oPerson.ShortDesc
+        TxtShortDesc.Text = oPerson.ShortDesc
         txtYear.Text = CStr(oPerson.BirthYear)
         LblSortSeq.Text = CStr(oPerson.Sortseq)
         txtDied.Text = CStr(oPerson.DeathYear)
         txtDthDay.Text = CStr(oPerson.DeathDay)
         txtDthMth.Text = CStr(oPerson.DeathMonth)
-        txtBirthName.Text = oPerson.BirthName
-        txtBirthPlace.Text = oPerson.BirthPlace
+        TxtBirthName.Text = oPerson.BirthName
+        TxtBirthPlace.Text = oPerson.BirthPlace
         txtName.Text = MakeFullName(oPerson.ForeName, oPerson.Surname)
         Dim sYear As String = TxtImageLoadYr.Text
         Dim sMth As String = TxtImageLoadMth.Text
@@ -856,7 +856,7 @@ Public Class FrmUpdateDatabase
             Dim _selStart As Integer = txtDesc.SelectionStart
             Dim _selLength As Integer = txtDesc.SelectionLength
             Dim sShortname As String = txtName.Text
-            txtBirthName.Text = txtDesc.SelectedText
+            TxtBirthName.Text = txtDesc.SelectedText
             txtDesc.SelectionStart = _selStart
             txtDesc.SelectionLength = _selLength
             txtDesc.Cut()
@@ -876,7 +876,7 @@ Public Class FrmUpdateDatabase
             Dim sNickName As String = names(1).Trim & names(2)
             Dim sNoNickName As String = Trim(names(0).Trim & names(2))
             If MsgBox("Use " & sNickName.Trim & " as name and " & sNoNickName.Substring(0, Math.Min(40, sNoNickName.Length)) & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Nickname") = MsgBoxResult.Yes Then
-                txtBirthName.Text = sNoNickName
+                TxtBirthName.Text = sNoNickName
                 sReturnName = sNickName
                 isGotBirthName = True
             End If
@@ -985,10 +985,10 @@ Public Class FrmUpdateDatabase
         txtName.Text = txtName.Text.Trim(charsToTrim)
         txtForename.Text = txtForename.Text.Trim(charsToTrim2)
         txtSurname.Text = txtSurname.Text.Trim(charsToTrim)
-        Dim newShortText = RemoveSquareBrackets(FixQuotes(txtShortDesc.Text)).Trim(charsToTrim)
-        txtShortDesc.Text = newShortText & If(newShortText.Length > 0, ".", "")
-        txtBirthName.Text = RemoveSquareBrackets(FixQuotes(txtBirthName.Text).Replace(",", "").Replace(".", "").Replace(";", "")).Trim(charsToTrim)
-        txtBirthPlace.Text = RemoveSquareBrackets(FixQuotes(txtBirthPlace.Text).Replace(".", "").Replace(";", "")).Trim(charsToTrim)
+        Dim newShortText = RemoveSquareBrackets(FixQuotes(TxtShortDesc.Text)).Trim(charsToTrim)
+        TxtShortDesc.Text = newShortText & If(newShortText.Length > 0, ".", "")
+        TxtBirthName.Text = RemoveSquareBrackets(FixQuotes(TxtBirthName.Text).Replace(",", "").Replace(".", "").Replace(";", "")).Trim(charsToTrim)
+        TxtBirthPlace.Text = RemoveSquareBrackets(FixQuotes(TxtBirthPlace.Text).Replace(".", "").Replace(";", "")).Trim(charsToTrim)
         txtTwitter.Text = RemoveBadCharacters(txtTwitter.Text, {8207}).Trim
         rtbDesc.Text = txtDesc.Text
         Return _parts
@@ -996,7 +996,7 @@ Public Class FrmUpdateDatabase
     Private Function IsUseAsBirthName(_birthName As String) As Boolean
         Dim isUsed As Boolean = False
         If MsgBox("Use " & _birthName & " as birthname?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth name") = MsgBoxResult.Yes Then
-            txtBirthName.Text = _birthName
+            TxtBirthName.Text = _birthName
             isGotBirthName = True
             isUsed = True
         End If
@@ -1005,7 +1005,7 @@ Public Class FrmUpdateDatabase
     Private Function IsUseAsBirthPlace(_birthPlace As String) As Boolean
         Dim isUsed As Boolean = False
         If MsgBox("Use " & _birthPlace & " as birthplace?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Birth place") = MsgBoxResult.Yes Then
-            txtBirthPlace.Text = _birthPlace
+            TxtBirthPlace.Text = _birthPlace
             isUsed = True
         End If
         Return isUsed
@@ -1068,6 +1068,5 @@ Public Class FrmUpdateDatabase
         GetSourceControl(MenuItem).Copy()
         txtDesc.Paste()
     End Sub
-
 #End Region
 End Class

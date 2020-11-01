@@ -50,6 +50,8 @@ Partial Class FrmSearch
         Me.BtnWordPress = New System.Windows.Forms.Button()
         Me.BtnTweet = New System.Windows.Forms.Button()
         Me.BtnImgUpdate = New System.Windows.Forms.Button()
+        Me.BtnPasteName = New System.Windows.Forms.Button()
+        Me.BtnSplitNameText = New System.Windows.Forms.Button()
         CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -194,9 +196,9 @@ Partial Class FrmSearch
         '
         Me.BtnSearchByName.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearchByName.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSearchByName.Location = New System.Drawing.Point(15, 70)
+        Me.BtnSearchByName.Location = New System.Drawing.Point(15, 61)
         Me.BtnSearchByName.Name = "BtnSearchByName"
-        Me.BtnSearchByName.Size = New System.Drawing.Size(107, 36)
+        Me.BtnSearchByName.Size = New System.Drawing.Size(107, 54)
         Me.BtnSearchByName.TabIndex = 16
         Me.BtnSearchByName.Text = "Search by name"
         Me.BtnSearchByName.UseVisualStyleBackColor = True
@@ -217,9 +219,9 @@ Partial Class FrmSearch
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.BtnSearchById)
         Me.GroupBox1.Controls.Add(Me.BtnSearchByName)
-        Me.GroupBox1.Location = New System.Drawing.Point(959, 92)
+        Me.GroupBox1.Location = New System.Drawing.Point(959, 81)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(135, 116)
+        Me.GroupBox1.Size = New System.Drawing.Size(135, 127)
         Me.GroupBox1.TabIndex = 22
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Database Search"
@@ -299,7 +301,7 @@ Partial Class FrmSearch
         Me.GroupBox3.Size = New System.Drawing.Size(135, 192)
         Me.GroupBox3.TabIndex = 26
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Update"
+        Me.GroupBox3.Text = "Open form"
         '
         'BtnWordPress
         '
@@ -334,12 +336,36 @@ Partial Class FrmSearch
         Me.BtnImgUpdate.Text = "Image"
         Me.BtnImgUpdate.UseVisualStyleBackColor = True
         '
+        'BtnPasteName
+        '
+        Me.BtnPasteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPasteName.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnPasteName.Location = New System.Drawing.Point(667, 55)
+        Me.BtnPasteName.Name = "BtnPasteName"
+        Me.BtnPasteName.Size = New System.Drawing.Size(31, 22)
+        Me.BtnPasteName.TabIndex = 40
+        Me.BtnPasteName.Text = "<"
+        Me.BtnPasteName.UseVisualStyleBackColor = True
+        '
+        'BtnSplitNameText
+        '
+        Me.BtnSplitNameText.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSplitNameText.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSplitNameText.Location = New System.Drawing.Point(714, 55)
+        Me.BtnSplitNameText.Name = "BtnSplitNameText"
+        Me.BtnSplitNameText.Size = New System.Drawing.Size(45, 22)
+        Me.BtnSplitNameText.TabIndex = 41
+        Me.BtnSplitNameText.Text = "[]<->[]"
+        Me.BtnSplitNameText.UseVisualStyleBackColor = True
+        '
         'FrmSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1106, 566)
+        Me.Controls.Add(Me.BtnSplitNameText)
+        Me.Controls.Add(Me.BtnPasteName)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.BtnClear)
         Me.Controls.Add(Me.StatusStrip1)
@@ -393,4 +419,6 @@ Partial Class FrmSearch
     Friend WithEvents BtnImgUpdate As Button
     Friend WithEvents BtnTweet As Button
     Friend WithEvents BtnWordPress As Button
+    Friend WithEvents BtnPasteName As Button
+    Friend WithEvents BtnSplitNameText As Button
 End Class
