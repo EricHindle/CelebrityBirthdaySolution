@@ -312,6 +312,7 @@ Public Class FrmUpdateDatabase
                 UpdatePerson(oPerson)
                 dbAction = "Updated on dB"
             End If
+            lblID.Text = CStr(oPerson.Id)
             ShowUpdated(oPerson, dbAction)
             oPerson.UnsavedChanges = False
             AppendStatus(" - Complete")
@@ -513,17 +514,24 @@ Public Class FrmUpdateDatabase
         TidyAndFix()
     End Sub
     Private Sub BtnTwitter_Click(sender As Object, e As EventArgs) Handles btnTwitter.Click
-        If lbPeople.SelectedIndex >= 0 Then
+        Dim twitterSearchName As String = ""
+        If lblID.Text = "-1" Then
+            twitterSearchName = txtName.Text
+        ElseIf lbPeople.SelectedIndex >= 0 Then
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             If oPerson.DeathYear > 0 Then
                 MsgBox("DEAD. Expired and gone to meet their maker. Pushing up the daisies." _
                     & vbCrLf & "Bereft of life, they rest in peace. Shuffled off this mortal coil" _
                     & vbCrLf & "Run down the curtain and joined the choir invisible.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly)
                 ShowStatus("Dead")
-                Exit Sub
+                txtTwitter.Text = ""
+            Else
+                twitterSearchName = oPerson.Name
             End If
+        End If
+        If Not String.IsNullOrEmpty(twitterSearchName) Then
             ShowStatus("Opening Twitter", , True)
-            Dim sUrl As String = My.Settings.TwitterSearchUrl & oPerson.Name.Replace(" ", "+")
+            Dim sUrl As String = My.Settings.TwitterSearchUrl & twitterSearchName.Replace(" ", "+")
             Process.Start(sUrl)
         End If
     End Sub
@@ -561,6 +569,7 @@ Public Class FrmUpdateDatabase
                 Using _update As New FrmImages
                     _update.PersonId = CInt(lblID.Text)
                     _update.ShowDialog()
+                    PictureBox1.ImageLocation = _update.ImageFile
                 End Using
                 ShowStatus("")
             Else

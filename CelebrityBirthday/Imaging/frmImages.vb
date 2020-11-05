@@ -15,6 +15,15 @@ Public Class FrmImages
             _personId = value
         End Set
     End Property
+    Private _imagefile As String
+    Public Property ImageFile() As String
+        Get
+            Return _imagefile
+        End Get
+        Set(ByVal value As String)
+            _imagefile = value
+        End Set
+    End Property
 #End Region
 
 #Region "variables"
@@ -24,6 +33,7 @@ Public Class FrmImages
 #End Region
 #Region "control handlers"
     Private Sub BtnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnClose.Click
+        ImageFile = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.Text)
         CloseForm()
     End Sub
     Private Sub FrmImages_Load(sender As Object, e As EventArgs) Handles MyBase.Load

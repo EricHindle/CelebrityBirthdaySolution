@@ -97,7 +97,7 @@ Module modDatabase
         End Try
         Return newPerson
     End Function
-    Public Function InsertPerson(ByVal oPerson As Person) As Integer
+    Public Function InsertPerson(ByRef oPerson As Person) As Integer
         Dim sortSeq As Integer = 0
         Dim newId As Integer = -1
         Try
