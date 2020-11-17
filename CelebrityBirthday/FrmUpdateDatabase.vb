@@ -564,12 +564,14 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
         Try
-            If CInt(lblID.Text) > -1 Then
+            Dim _id As Integer = CInt(lblID.Text)
+            If lbPeople.SelectedIndex > -1 AndAlso _id > -1 Then
                 ShowStatus("Images",, True)
                 Using _update As New FrmImages
                     _update.PersonId = CInt(lblID.Text)
                     _update.ShowDialog()
                     PictureBox1.ImageLocation = _update.ImageFile
+                    personTable(lbPeople.SelectedIndex).Image = GetImageById(_id, False)
                 End Using
                 ShowStatus("")
             Else

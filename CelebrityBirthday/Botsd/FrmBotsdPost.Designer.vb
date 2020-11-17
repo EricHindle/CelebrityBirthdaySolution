@@ -67,7 +67,7 @@ Partial Class FrmBotsdPost
         Me.BtnImportList = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.chkAnd = New System.Windows.Forms.CheckBox()
+        Me.ChkAnd = New System.Windows.Forms.CheckBox()
         Me.CbRejectDuplicates = New System.Windows.Forms.CheckBox()
         Me.BtnUndoSplit = New System.Windows.Forms.Button()
         Me.chkBack = New System.Windows.Forms.CheckBox()
@@ -529,7 +529,7 @@ Partial Class FrmBotsdPost
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.chkAnd)
+        Me.Panel1.Controls.Add(Me.ChkAnd)
         Me.Panel1.Controls.Add(Me.CbRejectDuplicates)
         Me.Panel1.Controls.Add(Me.BtnUndoSplit)
         Me.Panel1.Controls.Add(Me.chkBack)
@@ -559,16 +559,16 @@ Partial Class FrmBotsdPost
         '
         'chkAnd
         '
-        Me.chkAnd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkAnd.AutoSize = True
-        Me.chkAnd.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkAnd.Location = New System.Drawing.Point(506, 443)
-        Me.chkAnd.Margin = New System.Windows.Forms.Padding(0)
-        Me.chkAnd.Name = "chkAnd"
-        Me.chkAnd.Size = New System.Drawing.Size(51, 22)
-        Me.chkAnd.TabIndex = 77
-        Me.chkAnd.Text = "And"
-        Me.chkAnd.UseVisualStyleBackColor = True
+        Me.ChkAnd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChkAnd.AutoSize = True
+        Me.ChkAnd.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkAnd.Location = New System.Drawing.Point(506, 443)
+        Me.ChkAnd.Margin = New System.Windows.Forms.Padding(0)
+        Me.ChkAnd.Name = "chkAnd"
+        Me.ChkAnd.Size = New System.Drawing.Size(51, 22)
+        Me.ChkAnd.TabIndex = 77
+        Me.ChkAnd.Text = "And"
+        Me.ChkAnd.UseVisualStyleBackColor = True
         '
         'CbRejectDuplicates
         '
@@ -821,5 +821,5 @@ Partial Class FrmBotsdPost
     Friend WithEvents chkBack As CheckBox
     Friend WithEvents BtnUndoSplit As Button
     Friend WithEvents CbRejectDuplicates As CheckBox
-    Friend WithEvents chkAnd As CheckBox
+    Friend WithEvents ChkAnd As CheckBox
 End Class

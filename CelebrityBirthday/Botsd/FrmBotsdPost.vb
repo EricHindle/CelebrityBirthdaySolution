@@ -302,12 +302,12 @@ Public Class FrmBotsdPost
             Else
                 GetSplitPart(0)
             End If
-            If chkAnd.Checked And CbSplit.Text.Trim = "and" And Not chkBack.Checked Then
+            If ChkAnd.Checked And CbSplit.Text.Trim = "and" And Not chkBack.Checked Then
                 MoveAnd()
             End If
         End If
         chkBack.Checked = False
-        chkAnd.Checked = False
+        ChkAnd.Checked = False
     End Sub
     Private Sub BtnClearList_Click(sender As Object, e As EventArgs) Handles BtnClearList.Click
         DgvAlso.Rows.Clear()
@@ -435,8 +435,8 @@ Public Class FrmBotsdPost
                         DgvAlso.Rows(selectedRow).Selected = True
                     End If
                     DisplayStatus("Person not added")
-                    End If
                 End If
+            End If
         End If
     End Sub
     Private Function IsOkToAddAlso(wikiUri As String, ByRef selectedRow As Integer) As Boolean
@@ -529,5 +529,11 @@ Public Class FrmBotsdPost
         Dim returnUrl As String = "https://" & If(splitUrl.Length < 2, splitUrl(0), splitUrl(1))
         Return returnUrl
     End Function
+
+    Private Sub ChkAnd_CheckedChanged(sender As Object, e As EventArgs) Handles ChkAnd.CheckedChanged
+        If ChkAnd.Checked Then
+            CbSplit.SelectedIndex = CbSplit.FindString(" and")
+        End If
+    End Sub
 #End Region
 End Class
