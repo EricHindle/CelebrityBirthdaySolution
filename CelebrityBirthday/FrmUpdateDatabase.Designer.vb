@@ -1071,7 +1071,7 @@ Partial Class FrmUpdateDatabase
         '
         'BtnPasteName
         '
-        Me.BtnPasteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPasteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPasteName.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnPasteName.Image = Global.CelebrityBirthday.My.Resources.Resources.pasteicon
         Me.BtnPasteName.Location = New System.Drawing.Point(813, 14)
