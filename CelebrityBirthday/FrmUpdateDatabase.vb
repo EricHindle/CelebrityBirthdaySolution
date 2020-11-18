@@ -231,7 +231,7 @@ Public Class FrmUpdateDatabase
             personTable = New List(Of Person)
             lbPeople.Items.Clear()
             Dim selectedIndex As Integer = -1
-            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
+            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False)
             If personTable.Count > 0 Then
                 Dim lastYear As String = ""
                 Dim sortSeq As Integer = 0

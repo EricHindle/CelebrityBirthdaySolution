@@ -127,7 +127,9 @@ Public Class ImageIdentity
     End Function
     Protected Overridable Sub Dispose(disposing As Boolean)
         If disposing Then
-            _imagePhoto.Dispose()
+            If _imagePhoto IsNot Nothing Then
+                _imagePhoto.Dispose()
+            End If
         End If
     End Sub
     Public Sub Dispose() Implements IDisposable.Dispose

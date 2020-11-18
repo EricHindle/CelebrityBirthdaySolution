@@ -229,14 +229,14 @@ Module modDatabase
         End Try
         Return oPersonList
     End Function
-    Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean) As List(Of Person)
+    Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean, Optional isGetPhoto As Boolean = True) As List(Of Person)
         Dim oPersonList As New List(Of Person)
         Try
             oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
                 Dim _socialMedia As SocialMedia = GetSocialMedia(oRow.id)
                 If Not isTweetsOnly Or Not _socialMedia.IsNoTweet Then
-                    oPersonList.Add(New Person(oRow, _socialMedia, GetImageById(oRow.id)))
+                    oPersonList.Add(New Person(oRow, _socialMedia, GetImageById(oRow.id, isGetPhoto)))
                 End If
             Next
         Catch dbEx As DbException
