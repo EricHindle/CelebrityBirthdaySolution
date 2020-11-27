@@ -338,7 +338,6 @@ Partial Class FrmSearch
         '
         'BtnPasteName
         '
-        Me.BtnPasteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPasteName.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnPasteName.Location = New System.Drawing.Point(667, 55)
         Me.BtnPasteName.Name = "BtnPasteName"
@@ -349,7 +348,6 @@ Partial Class FrmSearch
         '
         'BtnSplitNameText
         '
-        Me.BtnSplitNameText.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSplitNameText.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSplitNameText.Location = New System.Drawing.Point(714, 55)
         Me.BtnSplitNameText.Name = "BtnSplitNameText"
