@@ -929,7 +929,7 @@ Public Class FrmBotsd
 
             titleSb.Append(" - ").Append(titleDate)
             sb.Append(My.Resources.WP_PARA).Append(vbCrLf)
-            sb.Append("Links:").Append(My.Resources.BREAK)
+            sb.Append("Links:").Append(My.Resources.BREAK).Append(vbCrLf)
 
             If _pickPerson1 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson1.Social.WikiId) Then
                 sb.Append(GetWikiLinkText(_pickPerson1))

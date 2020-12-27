@@ -412,7 +412,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to &lt;!-- /wp:paragraph --&gt;.
+        '''  Looks up a localized string similar to &lt;/p&gt;&lt;!-- /wp:paragraph --&gt;.
         '''</summary>
         Friend ReadOnly Property WP_END_PARA() As String
             Get
@@ -421,7 +421,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to &lt;!-- wp:paragraph --&gt;.
+        '''  Looks up a localized string similar to &lt;!-- wp:paragraph --&gt;&lt;p&gt;.
         '''</summary>
         Friend ReadOnly Property WP_PARA() As String
             Get
