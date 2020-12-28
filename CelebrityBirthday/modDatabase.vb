@@ -97,6 +97,10 @@ Module modDatabase
         End Try
         Return newPerson
     End Function
+    Public Function GetPeopleByDeathYear(ByVal _year As Integer) As CelebrityBirthdayDataSet.PersonDataTable
+        oPersonTa.FillByDeathYear(oPersonTable, _year)
+        Return oPersonTable
+    End Function
     Public Function InsertPerson(ByRef oPerson As Person) As Integer
         Dim sortSeq As Integer = 0
         Dim newId As Integer = -1

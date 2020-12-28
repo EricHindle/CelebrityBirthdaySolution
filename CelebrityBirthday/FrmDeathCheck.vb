@@ -106,4 +106,12 @@ Public Class FrmDeathCheck
     Private Sub FrmDeathCheck_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
         LogUtil.Info("Closing", MyBase.Name)
     End Sub
+
+    Private Sub BtnDeathList_Click(sender As Object, e As EventArgs) Handles BtnDeathList.Click
+        LogUtil.Info("List of deaths", MyBase.Name)
+        Using _list As New FrmDeathList
+            _list.Year = Today.Year
+            _list.ShowDialog()
+        End Using
+    End Sub
 End Class

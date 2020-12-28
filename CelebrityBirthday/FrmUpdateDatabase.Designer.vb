@@ -849,8 +849,8 @@ Partial Class FrmUpdateDatabase
         Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(5, 17)
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(5, 0, 3, 0)
+        Me.lblStatus.Size = New System.Drawing.Size(8, 17)
         '
         'StatusStrip1
         '

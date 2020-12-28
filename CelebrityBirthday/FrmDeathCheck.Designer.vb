@@ -36,6 +36,7 @@ Partial Class FrmDeathCheck
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.BtnStart = New System.Windows.Forms.Button()
         Me.BtnWrite = New System.Windows.Forms.Button()
+        Me.BtnDeathList = New System.Windows.Forms.Button()
         CType(Me.dgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -100,7 +101,7 @@ Partial Class FrmDeathCheck
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(947, 500)
+        Me.btnClose.Location = New System.Drawing.Point(947, 487)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(139, 33)
         Me.btnClose.TabIndex = 9
@@ -147,7 +148,7 @@ Partial Class FrmDeathCheck
         Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnStart.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnStart.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnStart.Location = New System.Drawing.Point(236, 500)
+        Me.BtnStart.Location = New System.Drawing.Point(47, 487)
         Me.BtnStart.Name = "BtnStart"
         Me.BtnStart.Size = New System.Drawing.Size(139, 33)
         Me.BtnStart.TabIndex = 11
@@ -159,12 +160,24 @@ Partial Class FrmDeathCheck
         Me.BtnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnWrite.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWrite.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWrite.Location = New System.Drawing.Point(445, 500)
+        Me.BtnWrite.Location = New System.Drawing.Point(211, 487)
         Me.BtnWrite.Name = "BtnWrite"
         Me.BtnWrite.Size = New System.Drawing.Size(139, 33)
         Me.BtnWrite.TabIndex = 12
         Me.BtnWrite.Text = "Write File"
         Me.BtnWrite.UseVisualStyleBackColor = True
+        '
+        'BtnDeathList
+        '
+        Me.BtnDeathList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnDeathList.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDeathList.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnDeathList.Location = New System.Drawing.Point(543, 487)
+        Me.BtnDeathList.Name = "BtnDeathList"
+        Me.BtnDeathList.Size = New System.Drawing.Size(139, 33)
+        Me.BtnDeathList.TabIndex = 13
+        Me.BtnDeathList.Text = "Death List"
+        Me.BtnDeathList.UseVisualStyleBackColor = True
         '
         'FrmDeathCheck
         '
@@ -172,6 +185,7 @@ Partial Class FrmDeathCheck
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1098, 558)
+        Me.Controls.Add(Me.BtnDeathList)
         Me.Controls.Add(Me.dgvWarnings)
         Me.Controls.Add(Me.BtnWrite)
         Me.Controls.Add(Me.BtnStart)
@@ -201,4 +215,5 @@ Partial Class FrmDeathCheck
     Friend WithEvents xDesc As DataGridViewTextBoxColumn
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents lblCount As ToolStripStatusLabel
+    Friend WithEvents BtnDeathList As Button
 End Class

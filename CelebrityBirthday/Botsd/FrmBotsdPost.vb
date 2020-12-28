@@ -524,7 +524,7 @@ Public Class FrmBotsdPost
             ReplaceRowValues(oRow)
         End If
     End Sub
-    Private Function FormatUrl(_url As String) As String
+    Private Shared Function FormatUrl(_url As String) As String
         Dim splitUrl As String() = Split(_url, "//", 2)
         Dim returnUrl As String = "https://" & If(splitUrl.Length < 2, splitUrl(0), splitUrl(1))
         Return returnUrl
