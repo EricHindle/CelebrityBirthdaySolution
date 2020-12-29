@@ -20,6 +20,7 @@
         dgvPeople.Rows.Clear()
         For Each oRow As CelebrityBirthdayDataSet.PersonRow In oTable.Rows
             Dim tRow As DataGridViewRow = dgvPeople.Rows(dgvPeople.Rows.Add())
+            tRow.Cells(tId.Name).Value = oRow.id
             tRow.Cells(tForename.Name).Value = oRow.forename
             tRow.Cells(tSurname.Name).Value = oRow.surname
             Dim _deathdate As Date
@@ -28,6 +29,7 @@
                 _birthDate = New Date(oRow.birthyear, oRow.birthmonth, oRow.birthday)
                 _deathdate = New Date(oRow.deathyear, If(oRow.IsdeathmonthNull, 0, oRow.deathmonth), If(oRow.IsdeathdayNull, 0, oRow.deathday))
             Catch ex As ArgumentOutOfRangeException
+                ColourRow(tRow)
                 LogUtil.Exception("Invalid date for " & oRow.forename & " " & oRow.surname, ex, MyBase.Name)
                 _deathdate = Today
             End Try
@@ -49,8 +51,15 @@
             tRow.Cells(tBirthPlace.Name).Value = If(oRow.IsbirthplaceNull, "", oRow.birthplace)
         Next
     End Sub
+
+    Private Sub ColourRow(oRow As DataGridViewRow)
+        For Each oCell As DataGridViewCell In oRow.Cells
+            oCell.Style.BackColor = Color.LightSteelBlue
+        Next
+    End Sub
+
     Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
-        lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
+        LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
@@ -65,5 +74,16 @@
 
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
         FillGrid(nudYear.Value)
+    End Sub
+
+    Private Sub DgvPeople_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPeople.CellDoubleClick
+        If e.RowIndex >= 0 And e.RowIndex < dgvPeople.Rows.Count Then
+            Dim tRow As DataGridViewRow = dgvPeople.Rows(e.RowIndex)
+            Dim _index As Integer = tRow.Cells(tId.Name).Value
+            Using _update As New FrmUpdateDatabase
+                _update.PersonId = _index
+                _update.ShowDialog()
+            End Using
+        End If
     End Sub
 End Class

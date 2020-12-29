@@ -2,7 +2,10 @@
 Imports System.IO
 Imports System.Net
 Public Class FrmDeathCheck
+#Region "variables"
     Private personTable As List(Of Person)
+#End Region
+#Region "form event handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
@@ -33,13 +36,48 @@ Public Class FrmDeathCheck
                     End If
                 End If
             Catch ex As DbException
-                LogUtil.Problem("Exception during list load : " & ex.Message)
+                LogUtil.Exception("Exception during list load", ex, MyBase.Name)
                 If MsgBox(_person.Name & vbCrLf & "Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
                     Exit Sub
                 End If
             End Try
         Next
     End Sub
+    Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvWarnings.CellDoubleClick
+        If e.RowIndex >= 0 And e.RowIndex < dgvWarnings.Rows.Count Then
+            Dim tRow As DataGridViewRow = dgvWarnings.Rows(e.RowIndex)
+            Dim _index As Integer = tRow.Cells(xId.Name).Value
+            Using _update As New FrmUpdateDatabase
+                _update.PersonId = _index
+                _update.ShowDialog()
+            End Using
+        End If
+    End Sub
+    Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
+        Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "deadpeople.csv")
+        Using _outfile As New StreamWriter(_filename, True)
+            For Each _row As DataGridViewRow In dgvWarnings.Rows
+                _outfile.WriteLine(_row.Cells(xId.Name).Value & "," & _row.Cells(xName.Name).Value & "," & _row.Cells(xBirth.Name).Value & "," & _row.Cells(xDeath.Name).Value)
+            Next
+        End Using
+    End Sub
+    Private Sub FrmDeathCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
+    End Sub
+    Private Sub FrmDeathCheck_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
+        LogUtil.Info("Closing", MyBase.Name)
+    End Sub
+    Private Sub BtnDeathList_Click(sender As Object, e As EventArgs) Handles BtnDeathList.Click
+        LogUtil.Info("List of deaths", MyBase.Name)
+        Me.Hide()
+        Using _list As New FrmDeathList
+            _list.Year = Today.Year
+            _list.ShowDialog()
+        End Using
+        Me.Show()
+    End Sub
+#End Region
+#Region "subroutines"
     Private Shared Function GetWikiDeathDate(_searchName As String) As String
         Dim _deathDate As Date? = Nothing
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
@@ -80,38 +118,5 @@ Public Class FrmDeathCheck
         dgvWarnings.Refresh()
         Return _newRow
     End Function
-    Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
-        Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "deadpeople.csv")
-        Using _outfile As New StreamWriter(_filename, True)
-            For Each _row As DataGridViewRow In dgvWarnings.Rows
-                _outfile.WriteLine(_row.Cells(xId.Name).Value & "," & _row.Cells(xName.Name).Value & "," & _row.Cells(xBirth.Name).Value & "," & _row.Cells(xDeath.Name).Value)
-            Next
-        End Using
-    End Sub
-    Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvWarnings.CellDoubleClick
-        If e.RowIndex >= 0 And e.RowIndex < dgvWarnings.Rows.Count Then
-            Dim tRow As DataGridViewRow = dgvWarnings.Rows(e.RowIndex)
-            Dim _index As Integer = tRow.Cells(xId.Name).Value
-            Using _update As New FrmUpdateDatabase
-                _update.PersonId = _index
-                _update.ShowDialog()
-            End Using
-        End If
-    End Sub
-
-    Private Sub FrmDeathCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LogUtil.Info("Loading", MyBase.Name)
-    End Sub
-
-    Private Sub FrmDeathCheck_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
-        LogUtil.Info("Closing", MyBase.Name)
-    End Sub
-
-    Private Sub BtnDeathList_Click(sender As Object, e As EventArgs) Handles BtnDeathList.Click
-        LogUtil.Info("List of deaths", MyBase.Name)
-        Using _list As New FrmDeathList
-            _list.Year = Today.Year
-            _list.ShowDialog()
-        End Using
-    End Sub
+#End Region
 End Class

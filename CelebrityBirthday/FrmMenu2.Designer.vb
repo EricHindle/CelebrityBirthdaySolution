@@ -35,6 +35,7 @@ Partial Class FrmMenu2
         Me.BtnWikiIds = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.BtnViewLog = New System.Windows.Forms.Button()
+        Me.BtnDeadList = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -154,6 +155,7 @@ Partial Class FrmMenu2
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.BtnDeadList)
         Me.GroupBox1.Controls.Add(Me.TxtBirthdateCheck)
         Me.GroupBox1.Controls.Add(Me.BtnWikiIds)
         Me.GroupBox1.Controls.Add(Me.BtnBrownBread)
@@ -175,6 +177,17 @@ Partial Class FrmMenu2
         Me.BtnViewLog.TabIndex = 24
         Me.BtnViewLog.Text = "View Log"
         Me.BtnViewLog.UseVisualStyleBackColor = True
+        '
+        'BtnDeadList
+        '
+        Me.BtnDeadList.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnDeadList.Location = New System.Drawing.Point(178, 96)
+        Me.BtnDeadList.Margin = New System.Windows.Forms.Padding(6)
+        Me.BtnDeadList.Name = "BtnDeadList"
+        Me.BtnDeadList.Size = New System.Drawing.Size(151, 49)
+        Me.BtnDeadList.TabIndex = 23
+        Me.BtnDeadList.Text = "Dead List"
+        Me.BtnDeadList.UseVisualStyleBackColor = True
         '
         'FrmMenu2
         '
@@ -217,4 +230,5 @@ Partial Class FrmMenu2
     Friend WithEvents BtnWikiIds As Button
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents BtnViewLog As Button
+    Friend WithEvents BtnDeadList As Button
 End Class

@@ -30,6 +30,7 @@ Partial Class FrmDeathList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tForename = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tSurname = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tDeathDay = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,14 +51,19 @@ Partial Class FrmDeathList
         '
         'dgvPeople
         '
+        Me.dgvPeople.AllowUserToAddRows = False
+        Me.dgvPeople.AllowUserToDeleteRows = False
+        Me.dgvPeople.AllowUserToResizeRows = False
         Me.dgvPeople.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPeople.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tForename, Me.tSurname, Me.tDeathDay, Me.tDeathMonth, Me.tDeathYear, Me.tYearsDead, Me.tAge, Me.tShortDesc, Me.tBirthDay, Me.tBirthMonth, Me.tBirthYear, Me.tBirthPlace, Me.tBirthName})
+        Me.dgvPeople.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tId, Me.tForename, Me.tSurname, Me.tDeathDay, Me.tDeathMonth, Me.tDeathYear, Me.tYearsDead, Me.tAge, Me.tShortDesc, Me.tBirthDay, Me.tBirthMonth, Me.tBirthYear, Me.tBirthPlace, Me.tBirthName})
         Me.dgvPeople.Location = New System.Drawing.Point(14, 13)
         Me.dgvPeople.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvPeople.Name = "dgvPeople"
+        Me.dgvPeople.RowHeadersVisible = False
+        Me.dgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvPeople.Size = New System.Drawing.Size(1281, 487)
         Me.dgvPeople.TabIndex = 0
         '
@@ -76,10 +82,10 @@ Partial Class FrmDeathList
         '
         'BtnSelect
         '
-        Me.BtnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSelect.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSelect.Location = New System.Drawing.Point(654, 508)
+        Me.BtnSelect.Location = New System.Drawing.Point(183, 508)
         Me.BtnSelect.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnSelect.Name = "BtnSelect"
         Me.BtnSelect.Size = New System.Drawing.Size(162, 36)
@@ -124,6 +130,12 @@ Partial Class FrmDeathList
         Me.LblStatus.Name = "LblStatus"
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.LblStatus.Size = New System.Drawing.Size(10, 17)
+        '
+        'tId
+        '
+        Me.tId.HeaderText = "Id"
+        Me.tId.Name = "tId"
+        Me.tId.Visible = False
         '
         'tForename
         '
@@ -244,6 +256,7 @@ Partial Class FrmDeathList
     Friend WithEvents Label1 As Label
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents LblStatus As ToolStripStatusLabel
+    Friend WithEvents tId As DataGridViewTextBoxColumn
     Friend WithEvents tForename As DataGridViewTextBoxColumn
     Friend WithEvents tSurname As DataGridViewTextBoxColumn
     Friend WithEvents tDeathDay As DataGridViewTextBoxColumn

@@ -1079,5 +1079,17 @@ Public Class FrmUpdateDatabase
         GetSourceControl(MenuItem).Copy()
         txtDesc.Paste()
     End Sub
+
+    Private Sub BtnDateCopy_Click(sender As Object, e As EventArgs) Handles BtnDateCopy.Click
+        Dim source As List(Of String) = ParseStringWithBrackets(txtWiki.Text)
+        Dim target As List(Of String) = ParseStringWithBrackets(txtDesc.Text)
+        If source.Count > 2 And target.Count > 2 Then
+            If target(2).StartsWith(" is ") Then
+                target(2) = " was " & target(2).Substring(4)
+            End If
+            txtDesc.Text = target(0) & "(" & source(1) & ")" & target(2)
+
+        End If
+    End Sub
 #End Region
 End Class

@@ -283,5 +283,6 @@ Public Class FrmDateCheck
     Private Sub FrmDateCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
     End Sub
+
 #End Region
 End Class
