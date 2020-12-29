@@ -494,7 +494,7 @@ Public Class FrmBotsdPost
         ReplaceRow()
     End Sub
     Private Sub MoveAnd()
-        Dim commaPos As Integer = TxtDesc.Text.LastIndexOf(",")
+        Dim commaPos As Integer = TxtDesc.Text.LastIndexOf(",", System.StringComparison.CurrentCultureIgnoreCase)
         If commaPos > 0 And commaPos < TxtDesc.TextLength Then
             TxtDesc.Text = TxtDesc.Text.Substring(0, commaPos) & " and" & TxtDesc.Text.Substring(commaPos + 1)
             ReplaceRow()

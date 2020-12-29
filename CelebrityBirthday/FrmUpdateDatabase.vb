@@ -370,6 +370,7 @@ Public Class FrmUpdateDatabase
         bLoadingPerson = False
         rtbDesc.AllowDrop = True
         rtbDesc.EnableAutoDragDrop = True
+        ResetBackgroundColors()
         If _personId > 0 Then
             LoadScreenFromId(_personId)
         End If
@@ -762,7 +763,6 @@ Public Class FrmUpdateDatabase
             txtDesc.Text = Trim(_parts(0)) & " (" & _datePart & ")" & _parts(2)
         End If
         rtbDesc.Text = txtDesc.Text
-
     End Sub
     Private Sub ExtractDeathDate(_date As String)
         Dim _deathDate As String = _date.Trim.TrimEnd({"E"c})
@@ -810,6 +810,7 @@ Public Class FrmUpdateDatabase
     End Sub
     Private Sub LoadScreenFromPerson(oPerson As Person)
         bLoadingPerson = True
+        ResetBackgroundColors()
         lblID.Text = oPerson.Id
         txtForename.Text = oPerson.ForeName
         txtSurname.Text = oPerson.Surname
@@ -834,6 +835,7 @@ Public Class FrmUpdateDatabase
             TxtWikiId.Text = oPerson.Social.WikiId
         End If
         txtWiki.Text = GetWikiText(NudSentences.Value, oPerson.ForeName, oPerson.Surname, TxtWikiId.Text)
+        ResetBackgroundColors()
         bLoadingPerson = False
     End Sub
     Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
@@ -1090,6 +1092,33 @@ Public Class FrmUpdateDatabase
             txtDesc.Text = target(0) & "(" & source(1) & ")" & target(2)
 
         End If
+    End Sub
+    Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged,
+                                                                            txtForename.TextChanged,
+                                                                            txtSurname.TextChanged,
+                                                                            txtYear.TextChanged,
+                                                                            txtDied.TextChanged,
+                                                                            txtDthDay.TextChanged,
+                                                                            txtDthMth.TextChanged,
+                                                                            txtDesc.TextChanged,
+                                                                            TxtShortDesc.TextChanged,
+                                                                            TxtBirthPlace.TextChanged,
+                                                                            TxtBirthName.TextChanged,
+                                                                            TxtWikiId.TextChanged
+        If Not bLoadingPerson Then
+            Dim _control As TextBox = TryCast(sender, TextBox)
+            If _control IsNot Nothing Then
+                _control.BackColor = Color.LightYellow
+            End If
+        End If
+    End Sub
+    Private Sub ResetBackgroundColors()
+        For Each _control As Control In Me.Controls
+            Dim _textbox As TextBox = TryCast(_control, TextBox)
+            If _textbox IsNot Nothing Then
+                _textbox.BackColor = SystemColors.Window
+            End If
+        Next
     End Sub
 #End Region
 End Class
