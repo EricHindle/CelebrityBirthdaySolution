@@ -60,7 +60,6 @@ Public Class frmTwitterOutput
     Private Sub CopyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyToolStripMenuItem.Click
         Dim _rtb As RichTextBox = GetTextBoxFromPage(TcFileTabs.SelectedTab)
         My.Computer.Clipboard.Clear()
-
         If _rtb IsNot Nothing Then
             My.Computer.Clipboard.SetText(_rtb.SelectedText)
         End If

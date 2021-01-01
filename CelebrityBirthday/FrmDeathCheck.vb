@@ -82,7 +82,7 @@ Public Class FrmDeathCheck
         Dim _deathDate As Date? = Nothing
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
         Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
-        Dim _desc As String = RemoveSquareBrackets(FixQuotes(extract))
+        Dim _desc As String = RemoveSquareBrackets(FixQuotesAndHyphens(extract))
         Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
         Dim _return As String = Nothing
         Select Case _parts.Count

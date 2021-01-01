@@ -7,11 +7,12 @@ Imports System.Reflection
 Imports System.Text
 Imports TweetSharp
 
-Public Class FrmTweet
+Public NotInheritable Class FrmTweet
 #Region "constants"
     Private Const NUD_BASENAME As String = "NudHorizontal"
     Private Const PICBOX_BASENAME As String = "pictureBox"
     Private Const SC_BASENAME As String = "SplitContainer"
+    Private ReadOnly LINE_FEED As Char = Convert.ToChar(vbLf, myStringFormatProvider)
 #End Region
 #Region "variables"
     Private personTable As New List(Of Person)
@@ -495,14 +496,14 @@ Public Class FrmTweet
             .Append(vbCrLf) _
             .Append("Born")
             If _person.BirthName.Length > 0 Then
-                _text.Append(" ") _
+                _text.Append(" "c) _
                     .Append(_person.BirthName)
             End If
             If _person.BirthPlace.Length > 0 Then
                 _text.Append(" in ") _
                     .Append(_person.BirthPlace)
             End If
-            _text.Append(".")
+            _text.Append("."c)
         End If
         If _person.DeathYear <> 0 Then
             _text.Append(_died)
@@ -581,8 +582,8 @@ Public Class FrmTweet
     Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person), _type As String, _index As Integer, _numberOfLists As Integer)
         LogUtil.Info("Generating text", MyBase.Name)
         Dim _outString As New StringBuilder
-        _outString.Append(cboMonth.SelectedItem).Append(" ").Append(cboDay.SelectedItem).Append(vbLf).Append(vbLf)
-        _outString.Append(GetHeading(_type)).Append(vbLf)
+        _outString.Append(cboMonth.SelectedItem).Append(" "c).Append(cboDay.SelectedItem).Append(LINE_FEED).Append(LINE_FEED)
+        _outString.Append(GetHeading(_type)).Append(LINE_FEED)
         Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
@@ -603,12 +604,12 @@ Public Class FrmTweet
                     _outString.Append(" @").Append(_person.Social.TwitterHandle)
                 End If
             End If
-            _outString.Append(vbLf)
+            _outString.Append(LINE_FEED)
         Next
         If Not String.IsNullOrEmpty(_footer) Then
-            _outString.Append(vbLf).Append(_footer)
+            _outString.Append(LINE_FEED).Append(_footer)
         End If
-        _textBox.Text = _outString.ToString.Trim(vbLf)
+        _textBox.Text = _outString.ToString.Trim(LINE_FEED)
     End Sub
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
         LogUtil.Info("Generating picture", MyBase.Name)

@@ -1,6 +1,6 @@
 ﻿Imports System.Text
 
-Public Class FrmOptions
+Public NotInheritable Class FrmOptions
 
     Private Sub BtnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -26,7 +26,7 @@ Public Class FrmOptions
         My.Settings.LogFolder = TxtLogFilePath.Text
         Dim sb As New StringBuilder
         For Each splitword As String In LbSplitWords.Items
-            sb.Append(splitword).Append("~")
+            sb.Append(splitword).Append("~"c)
         Next
         My.Settings.SplitWords = sb.ToString.TrimEnd("~")
         My.Settings.Save()

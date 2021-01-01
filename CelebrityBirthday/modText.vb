@@ -14,8 +14,8 @@ Module modText
         }
         Return _return
     End Function
-    Public Function FixQuotes(ByVal _text As String) As String
-        Return _text.Trim(vbCrLf).Replace(Chr(147), """").Replace(Chr(148), """").Replace(Chr(150), "-")
+    Public Function FixQuotesAndHyphens(ByVal _text As String) As String
+        Return _text.Trim(vbCrLf).Replace(Chr(147), """").Replace(Chr(148), """").Replace(Chr(150), "-").Replace("—", "-").Replace("-", " - ").Replace("  ", " ")
     End Function
     Public Function ParseStringWithBrackets(ByRef _string As String, Optional ByRef _start As Integer = 0, Optional ByVal _openChar As Char = "("c, Optional ByVal _closeChar As Char = ")"c) As List(Of String)
         Dim _return As New List(Of String) From {_string}

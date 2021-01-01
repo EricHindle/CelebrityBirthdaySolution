@@ -4,13 +4,13 @@ Imports System.Net
 Imports CelebrityBirthday
 Imports System.Data.Common
 
-Public Class FrmUpdateDatabase
+Public NotInheritable Class FrmUpdateDatabase
 #Region "variables"
     Private personTable As List(Of Person)
-    Private bLoadingPerson As Boolean = False
+    Private bLoadingPerson As Boolean
     Private findPersonInList As Integer = -1
-    Private isGotBirthName As Boolean = False
-    Private isGotStageName As Boolean = False
+    Private isGotBirthName As Boolean
+    Private isGotStageName As Boolean
     Private ReadOnly trimChars As Char() = {".", ",", " "}
 #End Region
 #Region "properties"
@@ -130,9 +130,8 @@ Public Class FrmUpdateDatabase
                                             }
                 Dim bInserted As Boolean = False
                 Dim p As Integer = -1
-                Dim aPerson As New Person
                 For ix As Integer = 0 To personTable.Count - 1
-                    aPerson = personTable(ix)
+                    Dim aPerson As Person = personTable(ix)
                     If aPerson.IBirthYear > newPerson.IBirthYear Then
                         newPerson = UpdateSortSeq(newPerson, ix)
                         personTable.Insert(ix, newPerson)
@@ -141,6 +140,7 @@ Public Class FrmUpdateDatabase
                         Exit For
                     End If
                 Next
+
                 If Not bInserted Then
                     p = personTable.Count
                     newPerson = UpdateSortSeq(newPerson, p)
@@ -323,32 +323,37 @@ Public Class FrmUpdateDatabase
         ClearStatus()
         TidyText()
         If lblID.Text.Length > 0 Then
+            If String.IsNullOrEmpty(txtSurname.Text) Then
+                ShowStatus("No surname for " & txtForename.Text,, True)
+                MsgBox("No surname", MsgBoxStyle.Exclamation, "Warning")
+            End If
             Dim id As Integer = CInt(lblID.Text)
-            For Each oPerson As Person In personTable
-                If oPerson.Id = id Then
-                    Dim CurrentSocialMedia As SocialMedia = oPerson.Social
-                    oPerson.BirthYear = txtYear.Text
-                    oPerson.DeathYear = 0
-                    If Not Integer.TryParse(txtDied.Text, oPerson.DeathYear) Then txtDied.Text = ""
-                    oPerson.Description = txtDesc.Text.Trim
-                    oPerson.ForeName = txtForename.Text.Trim
-                    oPerson.Surname = txtSurname.Text.Trim
-                    oPerson.ShortDesc = TxtShortDesc.Text.Trim
-                    oPerson.DeathDay = CInt("0" & txtDthDay.Text.Trim)
-                    oPerson.DeathMonth = CInt("0" & txtDthMth.Text.Trim)
-                    oPerson.BirthPlace = TxtBirthPlace.Text.Trim
-                    oPerson.BirthName = TxtBirthName.Text.Trim
-                    oPerson.UnsavedChanges = True
-                    oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd)
-                    ShowUpdated(oPerson, "Updated")
-                    Dim p As Integer = lbPeople.SelectedIndex
-                    DisplayPersonList()
-                    lbPeople.SelectedIndex = p
-                    ShowStatus("Updated list",, True)
-                    Exit For
-                End If
-            Next
-
+                For Each oPerson As Person In personTable
+                    If oPerson.Id = id Then
+                        Dim CurrentSocialMedia As SocialMedia = oPerson.Social
+                        oPerson.BirthYear = txtYear.Text
+                        oPerson.DeathYear = 0
+                        If Not Integer.TryParse(txtDied.Text, oPerson.DeathYear) Then txtDied.Text = ""
+                        oPerson.Description = txtDesc.Text.Trim
+                        oPerson.ForeName = txtForename.Text.Trim
+                        oPerson.Surname = txtSurname.Text.Trim
+                        oPerson.ShortDesc = TxtShortDesc.Text.Trim
+                        oPerson.DeathDay = CInt("0" & txtDthDay.Text.Trim)
+                        oPerson.DeathMonth = CInt("0" & txtDthMth.Text.Trim)
+                        oPerson.BirthPlace = TxtBirthPlace.Text.Trim
+                        oPerson.BirthName = TxtBirthName.Text.Trim
+                        oPerson.UnsavedChanges = True
+                        oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd)
+                        ShowUpdated(oPerson, "Updated")
+                        Dim p As Integer = lbPeople.SelectedIndex
+                        DisplayPersonList()
+                        lbPeople.SelectedIndex = p
+                        ShowStatus("Updated list",, True)
+                        Exit For
+                    End If
+                Next
+                Else
+                LogUtil.Problem("ID label is empty", MyBase.Name)
         End If
     End Sub
     Private Sub FrmAddCbdy_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -969,19 +974,14 @@ Public Class FrmUpdateDatabase
         End If
         Return isExtract
     End Function
-    'Private Function GetWikiText(_sentences As Integer, Optional wikiId As String = "") As String
-    '    Dim _searchName As String = If(String.IsNullOrEmpty(wikiId), MakeFullName(txtForename.Text, txtSurname.Text), wikiId)
-    '    Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _sentences))
-    '    Dim extract As String = GetExtractFromResponse(_response)
-    '    Return extract
-    'End Function
     Private Function TidyText() As List(Of String)
-        Dim newText As String = RemoveSquareBrackets(FixQuotes(txtDesc.Text))
+        Dim newText As String = RemoveSquareBrackets(FixQuotesAndHyphens(txtDesc.Text))
         Dim _parts As List(Of String) = ParseStringWithBrackets(newText)
         Dim charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c}
         Dim charsToTrim2() As Char = {" "c, ","c, ";"c, "["c}
         If _parts.Count = 3 Then
-            Dim _dates As String() = Split(_parts(1), " - ")
+            Dim dateRange As String = _parts(1)
+            Dim _dates As String() = Split(dateRange, " - ")
             If _dates.Length = 2 Then
                 ExtractDeathDate(_dates(1))
             End If
@@ -998,10 +998,10 @@ Public Class FrmUpdateDatabase
         txtName.Text = txtName.Text.Trim(charsToTrim)
         txtForename.Text = txtForename.Text.Trim(charsToTrim2)
         txtSurname.Text = txtSurname.Text.Trim(charsToTrim)
-        Dim newShortText = RemoveSquareBrackets(FixQuotes(TxtShortDesc.Text)).Trim(charsToTrim)
+        Dim newShortText = RemoveSquareBrackets(FixQuotesAndHyphens(TxtShortDesc.Text)).Trim(charsToTrim)
         TxtShortDesc.Text = newShortText & If(newShortText.Length > 0, ".", "")
-        TxtBirthName.Text = RemoveSquareBrackets(FixQuotes(TxtBirthName.Text).Replace(",", "").Replace(".", "").Replace(";", "")).Trim(charsToTrim)
-        TxtBirthPlace.Text = RemoveSquareBrackets(FixQuotes(TxtBirthPlace.Text).Replace(".", "").Replace(";", "")).Trim(charsToTrim)
+        TxtBirthName.Text = RemoveSquareBrackets(FixQuotesAndHyphens(TxtBirthName.Text).Replace(",", "").Replace(".", "").Replace(";", "")).Trim(charsToTrim)
+        TxtBirthPlace.Text = RemoveSquareBrackets(FixQuotesAndHyphens(TxtBirthPlace.Text).Replace(".", "").Replace(";", "")).Trim(charsToTrim)
         txtTwitter.Text = RemoveBadCharacters(txtTwitter.Text, {8207}).Trim
         rtbDesc.Text = txtDesc.Text
         Return _parts
@@ -1086,11 +1086,10 @@ Public Class FrmUpdateDatabase
         Dim source As List(Of String) = ParseStringWithBrackets(txtWiki.Text)
         Dim target As List(Of String) = ParseStringWithBrackets(txtDesc.Text)
         If source.Count > 2 And target.Count > 2 Then
-            If target(2).StartsWith(" is ") Then
+            If target(2).StartsWith(" is ", StringComparison.CurrentCultureIgnoreCase) Then
                 target(2) = " was " & target(2).Substring(4)
             End If
             txtDesc.Text = target(0) & "(" & source(1) & ")" & target(2)
-
         End If
     End Sub
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged,

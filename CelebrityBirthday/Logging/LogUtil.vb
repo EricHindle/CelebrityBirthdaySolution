@@ -9,7 +9,7 @@ Imports System.Threading
 Public NotInheritable Class LogUtil
 #Region "properties"
     Private Shared _LogFolder As String
-    Private Shared isConfigured As Boolean = False
+    Private Shared isConfigured As Boolean
     Private Shared _isDebugOn As Boolean
     Public Shared Property IsDebugOn() As Boolean
         Get
@@ -65,8 +65,8 @@ Public NotInheritable Class LogUtil
         Dim thisThread As String = "{" & CStr(Thread.CurrentThread.ManagedThreadId) & "} "
         padCt += (6 - thisThread.Length)
         Dim sPad As String = "".PadRight(padCt)
-        Dim sPrefix As String = sPad & thisThread & My.Computer.Clock.LocalTime.ToString() & " - "
-        If sSub.Length > 0 Then
+        Dim sPrefix As String = sPad & thisThread & My.Computer.Clock.LocalTime.ToString(myStringFormatProvider) & " - "
+        If Not String.IsNullOrEmpty(sSub) Then
             sPrefix += "(" & sSub & ") "
         End If
         If Not String.IsNullOrEmpty(errorCode) Then

@@ -31,7 +31,7 @@ Public Class FrmDateCheck
 #Region "variables"
     Private personTable As List(Of Person)
     Private isLoadingTable As Boolean
-    Private isWikiIdChanged As Boolean = False
+    Private isWikiIdChanged As Boolean
 #End Region
 #Region "form event handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -193,7 +193,7 @@ Public Class FrmDateCheck
         Try
             extract = GetWikiText(3, _forename, _surname, wikiId)
             If extract.Contains("may refer to:") = False Then
-                Dim _desc As String = RemoveSquareBrackets(FixQuotes(extract))
+                Dim _desc As String = RemoveSquareBrackets(FixQuotesAndHyphens(extract))
                 Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
                 If _parts.Count = 3 Then
                     Dim datePart As String = _parts(1)

@@ -483,7 +483,7 @@ Public Class FrmSendTwitter
             .Append("Id=").Append(pStatus.IdStr).Append(vbCrLf) _
             .Append("FullText=").Append(pStatus.FullText).Append(vbCrLf) _
             .Append("Author=").Append(pStatus.Author.ScreenName).Append(vbCrLf) _
-            .Append("User=").Append(pStatus.User.ScreenName).Append("(").Append(pStatus.User.Name).Append(")").Append(vbCrLf)
+            .Append("User=").Append(pStatus.User.ScreenName).Append("("c).Append(pStatus.User.Name).Append(")"c).Append(vbCrLf)
         Return statusText.ToString
     End Function
     Private Sub CreateTwitterImage(_image As String)

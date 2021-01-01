@@ -29,7 +29,7 @@ Public Class frmImageCapture
     Private iStartWidth As Integer
     Private iStartHeight As Integer
     Private imageShrinkRatio As Decimal = 1
-    Private originalImage As Image = Nothing
+    Private originalImage As Image
 #End Region
 #Region "properties"
     Private _imageFile As String

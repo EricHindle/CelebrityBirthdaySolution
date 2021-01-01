@@ -332,11 +332,11 @@ Public Class FrmBotsdPost
                     .Append(My.Resources.DOUBLEQUOTES).Append(" _blank").Append(My.Resources.DOUBLEQUOTES)
                     .Append(" rel=")
                     .Append(My.Resources.DOUBLEQUOTES).Append("noreferrer noopener").Append(My.Resources.DOUBLEQUOTES)
-                    .Append(">")
+                    .Append(">"c)
                     .Append(oName.Trim)
-                    .Append(My.Resources.WP_END_A).Append(" ")
+                    .Append(My.Resources.WP_END_A).Append(" "c)
                     .Append(oDesc.Trim({" "c, ","c, ";"c, "."c, "["c}))
-                    .Append(".").Append(My.Resources.BREAK)
+                    .Append("."c).Append(My.Resources.BREAK)
                     .Append(vbCrLf)
                 End With
             End If

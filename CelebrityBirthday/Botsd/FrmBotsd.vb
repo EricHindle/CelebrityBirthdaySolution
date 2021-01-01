@@ -8,7 +8,7 @@ Imports System.Web.ClientServices.Providers
 Imports System.Web.UI.WebControls
 Imports TweetSharp
 
-Public Class FrmBotsd
+Public NotInheritable Class FrmBotsd
 #Region "variables"
     Private _imageList As New List(Of Person)
     Private IsNoGenerate As Boolean
@@ -383,7 +383,15 @@ Public Class FrmBotsd
         Dim indexText As New StringBuilder
         For Each oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In oRows
             Try
-                Dim surnameInitial As String = oRow.surname.Substring(0, 1)
+                Dim surnameInitial As String
+                If String.IsNullOrEmpty(oRow.surname) Then
+                    Dim errorMsg As String = "Empty surname for " & CStr(oRow.id) & " " & oRow.forename & " " & CStr(oRow.birthday) & "/" & CStr(oRow.birthmonth) & "/" & CStr(oRow.birthyear)
+                    DisplayStatus(errorMsg)
+                    LogUtil.Problem(errorMsg, MyBase.Name)
+                    surnameInitial = "z"
+                Else
+                    surnameInitial = oRow.surname.Substring(0, 1)
+                End If
                 Dim tempBytes As Byte() = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(surnameInitial)
                 surnameInitial = System.Text.Encoding.UTF8.GetString(tempBytes).ToLower(myCultureInfo)
                 If surnameInitial <> currentLetter Then
@@ -667,7 +675,7 @@ Public Class FrmBotsd
             _outString.Append(_person.Name)
             _outString.Append(", ")
             _outString.Append(_person.ShortDesc.Trim("."))
-            _outString.Append(",")
+            _outString.Append(","c)
             _index += 1
         Next
         _outString.Append(vbCrLf)
@@ -687,7 +695,7 @@ Public Class FrmBotsd
                 End If
             Next
             If Not String.IsNullOrEmpty(handleString.ToString.Trim) Then
-                _outString.Append(vbCrLf).Append(vbCrLf).Append("[").Append(handleString.ToString).Append(" ]")
+                _outString.Append(vbCrLf).Append(vbCrLf).Append("["c).Append(handleString.ToString).Append(" ]")
             End If
         End If
         rtbFile1.Text = _outString.ToString
@@ -723,23 +731,23 @@ Public Class FrmBotsd
                             .Append(oRow.Cells(pairPerson1.Name).Value)
                         End If
                         If Not String.IsNullOrEmpty(oRow.Cells(pairPerson2.Name).Value) Then
-                            .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
+                            .Append(My.Resources.TWO_SPACES).Append("/"c).Append(My.Resources.TWO_SPACES)
                             .Append(oRow.Cells(pairPerson2.Name).Value)
                         End If
                         If Not String.IsNullOrEmpty(oRow.Cells(pairPerson3.Name).Value) Then
-                            .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
+                            .Append(My.Resources.TWO_SPACES).Append("/"c).Append(My.Resources.TWO_SPACES)
                             .Append(oRow.Cells(pairPerson3.Name).Value)
                         End If
                         If Not String.IsNullOrEmpty(oRow.Cells(pairPerson4.Name).Value) Then
-                            .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
+                            .Append(My.Resources.TWO_SPACES).Append("/"c).Append(My.Resources.TWO_SPACES)
                             .Append(oRow.Cells(pairPerson4.Name).Value)
                         End If
                         If Not String.IsNullOrEmpty(oRow.Cells(pairPerson5.Name).Value) Then
-                            .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
+                            .Append(My.Resources.TWO_SPACES).Append("/"c).Append(My.Resources.TWO_SPACES)
                             .Append(oRow.Cells(pairPerson5.Name).Value)
                         End If
                         If Not String.IsNullOrEmpty(oRow.Cells(pairPerson6.Name).Value) Then
-                            .Append(My.Resources.TWO_SPACES).Append("/").Append(My.Resources.TWO_SPACES)
+                            .Append(My.Resources.TWO_SPACES).Append("/"c).Append(My.Resources.TWO_SPACES)
                             .Append(oRow.Cells(pairPerson6.Name).Value)
                         End If
 
@@ -807,7 +815,7 @@ Public Class FrmBotsd
             .Append(urlDay)
             .Append(My.Resources.SLASH)
             .Append(CStr(ThisDay))
-            .Append("-")
+            .Append("-"c)
             .Append(Format(New Date(2000, ThisMonth, 1), "MMMM").ToLower(myCultureInfo))
             .Append(My.Resources.SLASH)
             .Append(lowername)
@@ -825,7 +833,7 @@ Public Class FrmBotsd
             .Append(oPerson.Image.ImageFileType)
             .Append("?w=150&amp;h=150"" alt=")
             .Append(My.Resources.DOUBLEQUOTES).Append(imagename).Append(My.Resources.DOUBLEQUOTES)
-            .Append(">")
+            .Append(">"c)
             .Append(My.Resources.WP_END_A)
             .Append("</figure>")
             .Append(vbCrLf)
@@ -884,7 +892,7 @@ Public Class FrmBotsd
             thisWpNumber = CStr(WpNumber)
         End If
         Try
-            titleSb.Append("#").Append(thisWpNumber).Append(" ")
+            titleSb.Append("#"c).Append(thisWpNumber).Append(" "c)
             Dim titleDate As String = ""
             Dim _pickPerson1 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
             Dim _pickPerson2 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
@@ -1023,7 +1031,7 @@ Public Class FrmBotsd
             .Append(oRow.forename)
             .Append(" (")
             .Append(CStr(oRow.birthyear))
-            .Append(")")
+            .Append(")"c)
             .Append(My.Resources.TWO_SPACES)
             .Append(My.Resources.WP_A_HREF)
             .Append(My.Resources.DOUBLEQUOTES)
@@ -1043,7 +1051,7 @@ Public Class FrmBotsd
             .Append(My.Resources.DOUBLEQUOTES)
             .Append(surnameInitial)
             .Append(My.Resources.DOUBLEQUOTES)
-            .Append(">")
+            .Append(">"c)
             .Append(My.Resources.WP_END_A)
             .Append(surnameInitial)
             .Append("</h1>")

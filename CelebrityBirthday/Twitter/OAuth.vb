@@ -33,8 +33,8 @@ Public Class OAuth
         RSASHA1
     End Enum
     Protected Class QueryParameter
-        Dim _name As String = Nothing
-        Dim _value As String = Nothing
+        Dim _name As String
+        Dim _value As String
 
         Public Sub New(ByVal Name As String, ByVal value As String)
             _name = Name
@@ -135,7 +135,7 @@ Public Class OAuth
                 p = Parameters(i)
                 sb.AppendFormat(myStringFormatProvider, "{0}={1}", p.Name, p.Value)
                 If i < Parameters.Count - 1 Then
-                    sb.Append("&")
+                    sb.Append("&"c)
                 End If
             Next
         End If
@@ -264,16 +264,18 @@ Public Class OAuth
             Case SignatureType.HMACSHA1
                 Dim SignatureBase As String = GenerateSignatureBaseCB(url, ConsumerKey, Token, TokenSecret, HTTPMethod, TimeStamp, Nonce, HMACSHA1SignatureType, NormalizedUrl, NormalizedRequestParameters, CallbackUrl, Verifier)
 
-                Dim hmacsha1 As New HMACSHA1()
-                Dim ts As String = String.Empty
-                If String.IsNullOrEmpty(TokenSecret) Then
-                    ts = String.Empty
-                Else
-                    ts = OAuthUrlEncode(TokenSecret).ToString
-                End If
-                hmacsha1.Key = Encoding.ASCII.GetBytes(String.Format(myStringFormatProvider, "{0}&{1}", OAuthUrlEncode(ConsumerSecret).ToString, ts))
-                Return GenerateSignatureUsingHash(SignatureBase, hmacsha1)
+                Using hmacsha1 As New HMACSHA1()
+                    Dim ts As String = String.Empty
+                    If String.IsNullOrEmpty(TokenSecret) Then
+                        ts = String.Empty
+                    Else
+                        ts = OAuthUrlEncode(TokenSecret).ToString
+                    End If
+                    hmacsha1.Key = Encoding.ASCII.GetBytes(String.Format(myStringFormatProvider, "{0}&{1}", OAuthUrlEncode(ConsumerSecret).ToString, ts))
 
+                    Dim signature As String = GenerateSignatureUsingHash(SignatureBase, hmacsha1)
+                    Return signature
+                End Using
             Case SignatureType.RSASHA1
                 Throw New NotImplementedException()
 
@@ -319,7 +321,7 @@ Public Class OAuth
             Parameters.Add(New QueryParameter(OAuthTokenKey, Token))
         End If
 
-        If Not CallbackUrl Is Nothing Then
+        If CallbackUrl IsNot Nothing Then
             Parameters.Add(New QueryParameter(OAuthCallbackKey, OAuthUrlEncode(CallbackUrl.ToString).ToString))
         End If
 
@@ -353,7 +355,7 @@ Public Class OAuth
                 p = Parameters(i)
                 sb.AppendFormat(myStringFormatProvider, "{0}={1}", p.Name, """" & p.Value & """")
                 If i < Parameters.Count - 1 Then
-                    sb.Append("&")
+                    sb.Append("&"c)
                 End If
             Next
         End If

@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Text
 
-Public Class FrmImages
+Public NotInheritable Class FrmImages
 #Region "constants"
     Private Const SEP As String = "/"
 #End Region
@@ -27,7 +27,7 @@ Public Class FrmImages
 #End Region
 
 #Region "variables"
-    Private bLoadingPerson As Boolean = False
+    Private bLoadingPerson As Boolean
     Private personTable As ArrayList
     Private bLoadingPeople As Boolean
 #End Region

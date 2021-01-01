@@ -1,4 +1,4 @@
-﻿Public Class FrmDeathList
+﻿Public NotInheritable Class FrmDeathList
     Private _year As Integer
     Public Property Year() As Integer
         Get
@@ -34,14 +34,14 @@
                 _deathdate = Today
             End Try
             tRow.Cells(tDeathDay.Name).Value = If(oRow.IsdeathdayNull, 0, oRow.deathday)
-            tRow.Cells(tDeathMonth.Name).Value = If(oRow.IsdeathmonthNull, 0, Format(_deathDate, "MMM"))
+            tRow.Cells(tDeathMonth.Name).Value = If(oRow.IsdeathmonthNull, 0, Format(_deathdate, "MMM"))
             tRow.Cells(tDeathYear.Name).Value = oRow.deathyear
-            Dim ydiff As Integer = DateDiff(DateInterval.Year, _deathDate, Today)
-            If (_deathDate > Today.AddYears(-ydiff)) Then ydiff -= 1
-            Dim mdiff As Integer = DateDiff(DateInterval.Month, _deathDate, Today) - (ydiff * 12)
+            Dim ydiff As Integer = DateDiff(DateInterval.Year, _deathdate, Today)
+            If (_deathdate > Today.AddYears(-ydiff)) Then ydiff -= 1
+            Dim mdiff As Integer = DateDiff(DateInterval.Month, _deathdate, Today) - (ydiff * 12)
             tRow.Cells(tYearsDead.Name).Value = CStr(ydiff) & "y " & CStr(mdiff) & "m"
             Dim bdiff As Integer = DateDiff(DateInterval.Year, _birthDate, _deathdate)
-            If (_birthDate > _deathDate.AddYears(-bdiff)) Then bdiff -= 1
+            If (_birthDate > _deathdate.AddYears(-bdiff)) Then bdiff -= 1
             tRow.Cells(tAge.Name).Value = CStr(bdiff)
             tRow.Cells(tShortDesc.Name).Value = If(oRow.IsshortdescNull, "", oRow.shortdesc)
             tRow.Cells(tBirthDay.Name).Value = oRow.birthday
@@ -52,7 +52,7 @@
         Next
     End Sub
 
-    Private Sub ColourRow(oRow As DataGridViewRow)
+    Private Shared Sub ColourRow(oRow As DataGridViewRow)
         For Each oCell As DataGridViewCell In oRow.Cells
             oCell.Style.BackColor = Color.LightSteelBlue
         Next

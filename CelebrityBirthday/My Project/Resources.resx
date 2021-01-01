@@ -244,4 +244,10 @@
   <data name="TWEETDECKURL" xml:space="preserve">
     <value>https://tweetdeck.twitter.com/</value>
   </data>
+  <data name="NO_POST" xml:space="preserve">
+    <value>No post found for this number</value>
+  </data>
+  <data name="SUPPLY_POST_NO" xml:space="preserve">
+    <value>Must supply existing post number</value>
+  </data>
 </root>

@@ -9,7 +9,6 @@ Imports System.Reflection
 Friend Module modCbday
 #Region "constants"
     Private Const MODULE_NAME As String = "modCbday"
-    Private Const MODULE_TYPE As String = "Application"
 #End Region
     Public Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
@@ -31,7 +30,7 @@ Friend Module modCbday
         Public Y As Integer
     End Structure
     Private Const EM_CHARFROMPOS As Int32 = &HD7
-    Dim _lookup As Dictionary(Of Char, String) = Nothing
+    Dim _lookup As Dictionary(Of Char, String)
 
     Public Function ToSimpleCharacters(ByVal original As String) As String
         Dim rtnvalue As String = original

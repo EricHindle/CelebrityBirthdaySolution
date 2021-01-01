@@ -76,4 +76,13 @@
         End Using
         Me.Show()
     End Sub
+
+    Private Sub BtnTest_Click_1(sender As Object, e As EventArgs) Handles BtnTest.Click
+        LogUtil.Info("Testing", MyBase.Name)
+        Me.Hide()
+        Using _fbtest As New FrmFacebookTest
+            _fbtest.ShowDialog()
+        End Using
+        Me.Show()
+    End Sub
 End Class

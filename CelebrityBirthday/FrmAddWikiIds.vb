@@ -133,7 +133,7 @@ Public Class FrmAddWikiIds
             If pageTitles.Count > 0 Then
                 Dim alts As New StringBuilder()
                 For Each _title As String In pageTitles
-                    alts.Append(_title).Append("|")
+                    alts.Append(_title).Append("|"c)
                 Next
                 oRow.Cells(xAlternates.Name).Value = alts.ToString
                 oRow.Cells(xDesc.Name).Value = pageTitles(0)
@@ -152,7 +152,7 @@ Public Class FrmAddWikiIds
         Dim oExtract As String
         Dim wikipage As String
         Dim titleList As New List(Of String)
-        If Not pResponse Is Nothing Then
+        If pResponse IsNot Nothing Then
             Try
                 Dim sr As System.IO.StreamReader = New System.IO.StreamReader(pResponse.GetResponseStream())
                 wikipage = sr.ReadToEnd

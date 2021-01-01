@@ -228,6 +228,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to No post found for this number.
+        '''</summary>
+        Friend ReadOnly Property NO_POST() As String
+            Get
+                Return ResourceManager.GetString("NO_POST", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Cannot identify a single record.
         '''</summary>
         Friend ReadOnly Property NO_SINGLE_RECORD() As String
@@ -318,6 +327,15 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("StatusBar", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Must supply existing post number.
+        '''</summary>
+        Friend ReadOnly Property SUPPLY_POST_NO() As String
+            Get
+                Return ResourceManager.GetString("SUPPLY_POST_NO", resourceCulture)
             End Get
         End Property
         

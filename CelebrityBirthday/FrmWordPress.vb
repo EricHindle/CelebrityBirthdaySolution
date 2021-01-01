@@ -1,10 +1,10 @@
 ﻿Imports System.Text
 
-Public Class FrmWordPress
+Public NotInheritable Class FrmWordPress
 #Region "constants"
-    Private Const DOUBLE_QUOTES As String = """"
+    Private Const DOUBLE_QUOTES As Char = """"c
     Private ReadOnly A_TAG_START As String = "<a href=""" & My.Resources.WPFILESURL
-    Private Const A_TAG_END As String = ">"
+    Private Const A_TAG_END As Char = ">"c
     Private Const IMG_TAG_START As String = "<img title="
     Private ReadOnly IMG_TAG_MIDDLE As String = " src=""" & My.Resources.WPFILESURL
     Private Const IMG_TAG_ALT As String = " alt="
@@ -100,9 +100,9 @@ Public Class FrmWordPress
             With newText
                 .Append(A_TAG_START)
                 .Append(urlYear)
-                .Append(MY.resources.SLASH)
+                .Append(My.Resources.SLASH)
                 .Append(urlMonth)
-                .Append(MY.resources.SLASH)
+                .Append(My.Resources.SLASH)
                 .Append(lowername)
                 .Append(oPerson.Image.ImageFileType)
                 .Append(DOUBLE_QUOTES)
@@ -111,9 +111,9 @@ Public Class FrmWordPress
                 .Append(AddQuotes(oPerson.Name))
                 .Append(IMG_TAG_MIDDLE)
                 .Append(urlYear)
-                .Append(MY.resources.SLASH)
+                .Append(My.Resources.SLASH)
                 .Append(urlMonth)
-                .Append(MY.resources.SLASH)
+                .Append(My.Resources.SLASH)
                 .Append(lowername)
                 .Append(oPerson.Image.ImageFileType)
                 .Append(DOUBLE_QUOTES)
@@ -128,7 +128,7 @@ Public Class FrmWordPress
                 .Append(sBorn)
                 .Append(If(oPerson.DeathYear = 0, "", sDied))
                 .Append(vbCrLf)
-                .Append(MY.resources.break)
+                .Append(My.Resources.BREAK)
                 .Append(vbCrLf)
             End With
         Next
@@ -188,6 +188,9 @@ Public Class FrmWordPress
             Next
             txtCurrentExcerpt.Text = newText.ToString
         End If
+        For Each oPerson In pList
+            oPerson.Dispose()
+        Next
     End Sub
     Private Sub ClearForm()
         txtCurrentExcerpt.Text = ""
@@ -202,7 +205,7 @@ Public Class FrmWordPress
             .Append("<font ") _
             .Append("Size = '2' ") _
             .Append("face='Verdana' ") _
-            .Append(">") _
+            .Append(">"c) _
             .Append(pText) _
             .Append("</font>") _
             .Append("</html>").ToString

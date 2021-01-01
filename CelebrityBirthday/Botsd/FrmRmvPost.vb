@@ -1,6 +1,7 @@
 ﻿Imports System.Text
 
-Public Class FrmRmvPost
+Public NotInheritable Class FrmRmvPost
+
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
@@ -15,7 +16,7 @@ Public Class FrmRmvPost
             For Each postRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In postRows
                 Dim updCt As Integer = UpdateBotsdId(postRow.personId, 0)
                 postRowDetails.Clear()
-                postRowDetails.Append(postRow.forename).Append(" ").Append(postRow.surname).Append(" (").Append(postRow.birthyear).Append(" - ").Append(If(postRow.deathyear <> 0, postRow.deathyear, "")).Append(")")
+                postRowDetails.Append(postRow.forename).Append(" "c).Append(postRow.surname).Append(" (").Append(postRow.birthyear).Append(" - ").Append(If(postRow.deathyear <> 0, postRow.deathyear, "")).Append(")"c)
                 If updCt > 0 Then
                     postRowDetails.Append(" updated")
                 Else
@@ -32,8 +33,8 @@ Public Class FrmRmvPost
                 postRowDetails.Append(" **ERROR")
             End If
             LblMessage.Text &= postRowDetails.ToString
-            Else
-                MsgBox("Must supply existing and new numbers", MsgBoxStyle.Exclamation, "Error")
+        Else
+            MsgBox("Must supply existing and new numbers", MsgBoxStyle.Exclamation, "Error")
         End If
     End Sub
 
@@ -45,14 +46,14 @@ Public Class FrmRmvPost
             If postRows.Count > 0 Then
                 For Each postRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In postRows
                     Dim postRowDetails As New StringBuilder
-                    postRowDetails.Append(postRow.forename).Append(" ").Append(postRow.surname).Append(" (").Append(postRow.birthyear).Append(" - ").Append(If(postRow.deathyear <> 0, postRow.deathyear, "")).Append(")")
+                    postRowDetails.Append(postRow.forename).Append(" "c).Append(postRow.surname).Append(" (").Append(postRow.birthyear).Append(" - ").Append(If(postRow.deathyear <> 0, postRow.deathyear, "")).Append(")"c)
                     LblMessage.Text &= postRowDetails.ToString & vbCrLf
                 Next
             Else
-                LblMessage.Text = "No post found for this number"
+                LblMessage.Text = My.Resources.NO_POST
             End If
         Else
-            LblMessage.Text = "Must supply existing post number"
+            LblMessage.Text = My.Resources.SUPPLY_POST_NO
         End If
     End Sub
 

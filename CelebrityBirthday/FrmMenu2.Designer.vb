@@ -34,8 +34,9 @@ Partial Class FrmMenu2
         Me.TxtBirthdateCheck = New System.Windows.Forms.Button()
         Me.BtnWikiIds = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.BtnViewLog = New System.Windows.Forms.Button()
         Me.BtnDeadList = New System.Windows.Forms.Button()
+        Me.BtnViewLog = New System.Windows.Forms.Button()
+        Me.BtnTest = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -167,17 +168,6 @@ Partial Class FrmMenu2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Checks"
         '
-        'BtnViewLog
-        '
-        Me.BtnViewLog.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnViewLog.Location = New System.Drawing.Point(15, 298)
-        Me.BtnViewLog.Margin = New System.Windows.Forms.Padding(6)
-        Me.BtnViewLog.Name = "BtnViewLog"
-        Me.BtnViewLog.Size = New System.Drawing.Size(151, 49)
-        Me.BtnViewLog.TabIndex = 24
-        Me.BtnViewLog.Text = "View Log"
-        Me.BtnViewLog.UseVisualStyleBackColor = True
-        '
         'BtnDeadList
         '
         Me.BtnDeadList.ForeColor = System.Drawing.Color.RoyalBlue
@@ -189,6 +179,28 @@ Partial Class FrmMenu2
         Me.BtnDeadList.Text = "Dead List"
         Me.BtnDeadList.UseVisualStyleBackColor = True
         '
+        'BtnViewLog
+        '
+        Me.BtnViewLog.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnViewLog.Location = New System.Drawing.Point(15, 298)
+        Me.BtnViewLog.Margin = New System.Windows.Forms.Padding(6)
+        Me.BtnViewLog.Name = "BtnViewLog"
+        Me.BtnViewLog.Size = New System.Drawing.Size(151, 49)
+        Me.BtnViewLog.TabIndex = 24
+        Me.BtnViewLog.Text = "View Log"
+        Me.BtnViewLog.UseVisualStyleBackColor = True
+        '
+        'BtnTest
+        '
+        Me.BtnTest.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnTest.Location = New System.Drawing.Point(185, 298)
+        Me.BtnTest.Margin = New System.Windows.Forms.Padding(6)
+        Me.BtnTest.Name = "BtnTest"
+        Me.BtnTest.Size = New System.Drawing.Size(151, 49)
+        Me.BtnTest.TabIndex = 25
+        Me.BtnTest.Text = "Test"
+        Me.BtnTest.UseVisualStyleBackColor = True
+        '
         'FrmMenu2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 25.0!)
@@ -196,6 +208,7 @@ Partial Class FrmMenu2
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(352, 633)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnTest)
         Me.Controls.Add(Me.BtnViewLog)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.BtnImageEditing)
@@ -231,4 +244,5 @@ Partial Class FrmMenu2
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents BtnViewLog As Button
     Friend WithEvents BtnDeadList As Button
+    Friend WithEvents BtnTest As Button
 End Class
