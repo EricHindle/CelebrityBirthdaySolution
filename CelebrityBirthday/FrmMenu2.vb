@@ -27,7 +27,7 @@
         End Using
         Me.Show()
     End Sub
-    Private Sub BtnTapestry_Click(sender As Object, e As EventArgs) Handles BtnTapestry.Click
+    Private Sub BtnTapestry_Click(sender As Object, e As EventArgs) Handles BtnMosaic.Click
         LogUtil.Info("Photo tapestry", MyBase.Name)
         Me.Hide()
         Using _tapestryForm As New FrmMosaic

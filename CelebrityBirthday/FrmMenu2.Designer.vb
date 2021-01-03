@@ -29,7 +29,7 @@ Partial Class FrmMenu2
         Me.BtnTwitter = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnClose = New System.Windows.Forms.Button()
-        Me.BtnTapestry = New System.Windows.Forms.Button()
+        Me.BtnMosaic = New System.Windows.Forms.Button()
         Me.BtnImageEditing = New System.Windows.Forms.Button()
         Me.TxtBirthdateCheck = New System.Windows.Forms.Button()
         Me.BtnWikiIds = New System.Windows.Forms.Button()
@@ -110,16 +110,16 @@ Partial Class FrmMenu2
         Me.BtnClose.Text = "Close"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
-        'BtnTapestry
+        'BtnMosaic
         '
-        Me.BtnTapestry.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTapestry.Location = New System.Drawing.Point(15, 237)
-        Me.BtnTapestry.Margin = New System.Windows.Forms.Padding(6)
-        Me.BtnTapestry.Name = "BtnTapestry"
-        Me.BtnTapestry.Size = New System.Drawing.Size(151, 49)
-        Me.BtnTapestry.TabIndex = 19
-        Me.BtnTapestry.Text = "Tapestry"
-        Me.BtnTapestry.UseVisualStyleBackColor = True
+        Me.BtnMosaic.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnMosaic.Location = New System.Drawing.Point(15, 237)
+        Me.BtnMosaic.Margin = New System.Windows.Forms.Padding(6)
+        Me.BtnMosaic.Name = "BtnMosaic"
+        Me.BtnMosaic.Size = New System.Drawing.Size(151, 49)
+        Me.BtnMosaic.TabIndex = 19
+        Me.BtnMosaic.Text = "Mosaic"
+        Me.BtnMosaic.UseVisualStyleBackColor = True
         '
         'BtnImageEditing
         '
@@ -212,7 +212,7 @@ Partial Class FrmMenu2
         Me.Controls.Add(Me.BtnViewLog)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.BtnImageEditing)
-        Me.Controls.Add(Me.BtnTapestry)
+        Me.Controls.Add(Me.BtnMosaic)
         Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnSendTweet)
@@ -237,7 +237,7 @@ Partial Class FrmMenu2
     Friend WithEvents BtnTwitter As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents BtnClose As Button
-    Friend WithEvents BtnTapestry As Button
+    Friend WithEvents BtnMosaic As Button
     Friend WithEvents BtnImageEditing As Button
     Friend WithEvents TxtBirthdateCheck As Button
     Friend WithEvents BtnWikiIds As Button

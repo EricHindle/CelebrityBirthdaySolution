@@ -109,5 +109,8 @@
     <Setting Name="LogFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\CelebrityBirthday\Logs</Value>
     </Setting>
+    <Setting Name="MosaicImagePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F:\CelebrityBirthday\Images\mosaics</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -10,11 +10,11 @@ Public Class FrmMosaic
 
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         DisplayStatus("Saving File")
-        Dim _path As String = My.Settings.twitterImageFolder
+        Dim _path As String = My.Settings.MosaicImagePath
         If Not My.Computer.FileSystem.DirectoryExists(_path) Then
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
-        Dim _fileName As String = Path.Combine(_path, cboMonth.SelectedItem & "_mosaic_" & CStr(nudSkip.Value + 1) & "-" & CStr(nudSkip.Value + NudHeight.Value) & ".jpg")
+        Dim _fileName As String = Path.Combine(_path, cboMonth.SelectedItem & "_mosaic_" & If(chkBotSD.Checked, "botsd_", "") & CStr(nudSkip.Value + 1) & "-" & CStr(nudSkip.Value + NudHeight.Value) & ".jpg")
         ImageUtil.SaveImageFromPictureBox(PictureBox1, (NudWidth.Value * 60), (NudHeight.Value * 60), _fileName)
         DisplayStatus("File saved")
     End Sub
@@ -62,25 +62,30 @@ Public Class FrmMosaic
         Dim ct As Integer = 0
         DisplayStatus("Selecting Images")
         _imageList = New List(Of Person)
-        If cboMonth.SelectedIndex >= 0 Then
-            Dim _PersonTa As New CelebrityBirthdayDataSetTableAdapters.FullPersonTableAdapter
-            Dim _PersonTable As New CelebrityBirthdayDataSet.FullPersonDataTable
-            _PersonTa.FillByMonth(_PersonTable, cboMonth.SelectedIndex + 1)
-            For Each _personRow As CelebrityBirthdayDataSet.FullPersonRow In _PersonTable
-                ct += 1
-                'If ct > 850 Then
-                '    logutil.debug(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))
-                'End If
-                _imageList.Add(New Person(_personRow))
-            Next
-            lblImgCount.Text = CStr(_imageList.Count)
-            lblImgCount.Refresh()
-            GenerateImage(PictureBox1, _imageList, NudWidth.Value, NudHeight.Value)
-            _PersonTable.Dispose()
-            _PersonTa.Dispose()
+        Dim _PersonTa As New CelebrityBirthdayDataSetTableAdapters.FullPersonTableAdapter
+        Dim _PersonTable As New CelebrityBirthdayDataSet.FullPersonDataTable
+        If chkBotSD.Checked Then
+            _PersonTa.FillByBotsd(_PersonTable)
         Else
-            DisplayStatus("No month selected")
+            If cboMonth.SelectedIndex >= 0 Then
+                _PersonTa.FillByMonth(_PersonTable, cboMonth.SelectedIndex + 1)
+            Else
+                DisplayStatus("No month selected")
+            End If
         End If
+        For Each _personRow As CelebrityBirthdayDataSet.FullPersonRow In _PersonTable
+            ct += 1
+            'If ct > 850 Then
+            '    logutil.debug(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))
+            'End If
+            _imageList.Add(New Person(_personRow))
+        Next
+        lblImgCount.Text = CStr(_imageList.Count)
+                lblImgCount.Refresh()
+                GenerateImage(PictureBox1, _imageList, NudWidth.Value, NudHeight.Value)
+                _PersonTable.Dispose()
+                _PersonTa.Dispose()
+
     End Sub
 
     Private Sub NudWidth_ValueChanged(sender As Object, e As EventArgs) Handles NudWidth.ValueChanged

@@ -42,6 +42,7 @@ Partial Class FrmMosaic
         Me.LblImgShown = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.nudSkip = New System.Windows.Forms.NumericUpDown()
+        Me.chkBotSD = New System.Windows.Forms.CheckBox()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudWidth, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -251,12 +252,23 @@ Partial Class FrmMosaic
         Me.nudSkip.Size = New System.Drawing.Size(68, 22)
         Me.nudSkip.TabIndex = 15
         '
+        'chkBotSD
+        '
+        Me.chkBotSD.AutoSize = True
+        Me.chkBotSD.Location = New System.Drawing.Point(525, 635)
+        Me.chkBotSD.Name = "chkBotSD"
+        Me.chkBotSD.Size = New System.Drawing.Size(86, 18)
+        Me.chkBotSD.TabIndex = 17
+        Me.chkBotSD.Text = "BotSD only"
+        Me.chkBotSD.UseVisualStyleBackColor = True
+        '
         'FrmMosaic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1276, 719)
+        Me.Controls.Add(Me.chkBotSD)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.nudSkip)
         Me.Controls.Add(Me.Label5)
@@ -309,4 +321,5 @@ Partial Class FrmMosaic
     Friend WithEvents LblImgShown As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents nudSkip As NumericUpDown
+    Friend WithEvents chkBotSD As CheckBox
 End Class
