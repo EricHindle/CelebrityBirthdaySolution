@@ -250,7 +250,7 @@ Public Class Person
         End If
 
     End Sub
-    Public Sub New(ByVal pPerson As Person)
+    Public Sub New(ByVal pPerson As Person, Optional isIncludeImage As Boolean = True)
         InitialisePerson()
         If pPerson IsNot Nothing Then
             _id = pPerson.Id
@@ -263,14 +263,18 @@ Public Class Person
             _birthMonth = pPerson.BirthMonth
             _birthYear = pPerson.BirthYear
             _deathYear = pPerson.DeathYear
-            _image = pPerson.Image
+            If isIncludeImage Then
+                _image = pPerson.Image
+            Else
+                _image = New ImageIdentity()
+            End If
             _deathMonth = pPerson.DeathMonth
             _deathday = pPerson.DeathDay
-            _birthName = pPerson.BirthName
-            _birthPlace = pPerson.BirthPlace
-            _social = pPerson.Social
-        End If
-        _unsavedChanges = False
+                _birthName = pPerson.BirthName
+                _birthPlace = pPerson.BirthPlace
+                _social = pPerson.Social
+            End If
+            _unsavedChanges = False
     End Sub
     Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.PersonRow, ByVal oSocial As SocialMedia, ByVal oImage As ImageIdentity)
         InitialisePerson()

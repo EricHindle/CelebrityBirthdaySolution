@@ -1,6 +1,7 @@
 ﻿Imports System.Data.Common
 Imports System.IO
 Imports System.Net
+Imports System.Text
 Imports System.Web.Script.Serialization
 
 Structure WikiBirthInfo
@@ -38,15 +39,19 @@ Public Class FrmDateCheck
         Me.Close()
     End Sub
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
-        DisplayMessage("Finding everybody")
         ClearPersonDetails()
         isLoadingTable = True
         DgvWarnings.Rows.Clear()
         Me.Refresh()
+        personTable = New List(Of Person)
         Try
             If cboDay.SelectedIndex < 0 Or cboMonth.SelectedIndex < 0 Then
-                personTable = FindEverybody()
+                If MsgBox("Do you really want to select all persons?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Check") = MsgBoxResult.Yes Then
+                    DisplayMessage("Finding everybody", True)
+                    personTable = FindEverybody()
+                End If
             Else
+                    DisplayMessage("Finding persons for " & CStr(cboDay.SelectedIndex + 1) & "/" & CStr(cboMonth.SelectedIndex + 1), True)
                 personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
             End If
         Catch ex As DbException
@@ -136,11 +141,12 @@ Public Class FrmDateCheck
                 Not String.IsNullOrEmpty(TxtToMonth.Text) And
                 Not String.IsNullOrEmpty(TxtToDay.Text) And
                 IsDate(TxtToDay.Text & "/" & TxtToMonth.Text & "/" & TxtToYear.Text) Then
+                DisplayMessage("Updating DoB and text for " & TxtFullName.Text, True)
                 Dim pYear As Integer = CInt(TxtToYear.Text)
                 Dim pMonth As Integer = CInt(TxtToMonth.Text)
                 Dim pDay As Integer = CInt(TxtToDay.Text)
                 UpdateDateOfBirth(pPersonId, pDay, pMonth, pYear, TxtFullDesc.Text)
-                DisplayMessage("Updated " & CStr(pPersonId))
+                DisplayMessage("Updated " & CStr(pPersonId), True)
             End If
         End If
     End Sub
@@ -177,8 +183,9 @@ Public Class FrmDateCheck
     End Sub
     Private Sub BtnWikiUpdate_Click(sender As Object, e As EventArgs) Handles BtnWikiUpdate.Click
         If isWikiIdChanged Then
+            DisplayMessage("Updating wiki id", True)
             UpdateWikiId(CInt(LblId.Text), TxtWikiId.Text)
-            DisplayMessage(LblId.Text & "Wiki Id Updated to " & TxtWikiId.Text)
+            DisplayMessage(LblId.Text & "Wiki Id Updated to " & TxtWikiId.Text, True)
         End If
     End Sub
     Private Sub Date_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
@@ -236,9 +243,10 @@ Public Class FrmDateCheck
         _wikiBirthInfo.BirthDate = _birthDate
         Return _wikiBirthInfo
     End Function
-    Private Sub DisplayMessage(oText As String)
+    Private Sub DisplayMessage(oText As String, Optional isLogged As Boolean = False)
         lblStatus.Text = oText
         StatusStrip1.Refresh()
+        If isLogged Then LogUtil.Info(oText, MyBase.Name)
     End Sub
     Private Function AddXRow(oPerson As Person, oDateOfBirth As String, oDesc As String, oWikiId As String) As DataGridViewRow
         Dim _newRow As DataGridViewRow = DgvWarnings.Rows(DgvWarnings.Rows.Add())
@@ -267,7 +275,7 @@ Public Class FrmDateCheck
         isWikiIdChanged = False
     End Sub
     Private Sub OpenWordPress(pDay As Integer, pMonth As Integer)
-        DisplayMessage("WordPress")
+        DisplayMessage("Opening WordPress form for " & CStr(pDay) & "/" & CStr(pMonth), True)
         Using _wordpress As New FrmWordPress
             _wordpress.DaySelection = pDay
             _wordpress.MonthSelection = pMonth
@@ -282,6 +290,28 @@ Public Class FrmDateCheck
 
     Private Sub FrmDateCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
+    End Sub
+
+    Private Sub BtnWpDesc_Click(sender As Object, e As EventArgs) Handles BtnWpDesc.Click
+        Dim wpText As String = ""
+        Dim oPerson As Person = GetPersonById(CInt(LblId.Text))
+        If oPerson IsNot Nothing Then
+            LogUtil.Info("Generating WordPress description for " & TxtFullName.Text, MyBase.Name)
+            Dim sBorn As String = ""
+            If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
+                sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
+            End If
+            Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+            Dim sText As New StringBuilder
+            With sText
+                .Append(TxtFullDesc.Text)
+                .Append(sBorn)
+                .Append(If(oPerson.DeathYear = 0, "", sDied))
+            End With
+            wpText = sText.ToString
+        End If
+        Clipboard.SetText(wpText)
+        oPerson.Dispose()
     End Sub
 
 #End Region
