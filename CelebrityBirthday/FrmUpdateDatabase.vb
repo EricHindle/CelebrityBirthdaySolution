@@ -162,27 +162,6 @@ Public NotInheritable Class FrmUpdateDatabase
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
         End If
     End Sub
-    Private Sub ShowUpdated(aPerson As Person, dbAction As String)
-        LblUpdated.Visible = True
-        Dim iListMatches As Integer = LbUpdateList.FindString(aPerson.Name)
-        Dim msgText As String = aPerson.Name & " " & dbAction
-        If iListMatches = ListBox.NoMatches Then
-            LblUpdated.Visible = True
-            LbUpdateList.Visible = True
-            LbUpdateList.Items.Add(msgText)
-        Else
-            LbUpdateList.Items(iListMatches) = msgText
-        End If
-        LogUtil.Info(msgText, MyBase.Name)
-    End Sub
-    Private Function UpdateSortSeq(newPerson As Person, p As Integer) As Person
-        Dim prevPerson As Person = If(p = 0, Nothing, personTable(p - 1))
-        If prevPerson IsNot Nothing AndAlso prevPerson.IBirthYear = newPerson.IBirthYear Then
-            newPerson.Sortseq = prevPerson.Sortseq + 1
-            prevPerson.Dispose()
-        End If
-        Return newPerson
-    End Function
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         Dim oPerson As Person
         If lbPeople.SelectedIndex >= 0 Then
@@ -649,6 +628,56 @@ Public NotInheritable Class FrmUpdateDatabase
         End If
         Clipboard.SetText(wpText)
     End Sub
+    Private Sub PasteIntoDesc_Click(MenuItem As Object, e As EventArgs) Handles PasteIntoDesc.Click
+        GetSourceControl(MenuItem).Copy()
+        txtDesc.Paste()
+    End Sub
+    Private Sub BtnDateCopy_Click(sender As Object, e As EventArgs) Handles BtnDateCopy.Click
+        Dim source As List(Of String) = ParseStringWithBrackets(txtWiki.Text)
+        Dim target As List(Of String) = ParseStringWithBrackets(txtDesc.Text)
+        If source.Count > 2 And target.Count > 2 Then
+            If target(2).StartsWith(" is ", StringComparison.CurrentCultureIgnoreCase) Then
+                target(2) = " was " & target(2).Substring(4)
+            End If
+            txtDesc.Text = target(0) & "(" & source(1) & ")" & target(2)
+        End If
+    End Sub
+    Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged,
+                                                                            txtForename.TextChanged,
+                                                                            txtSurname.TextChanged,
+                                                                            txtYear.TextChanged,
+                                                                            txtDied.TextChanged,
+                                                                            txtDthDay.TextChanged,
+                                                                            txtDthMth.TextChanged,
+                                                                            txtDesc.TextChanged,
+                                                                            TxtShortDesc.TextChanged,
+                                                                            TxtBirthPlace.TextChanged,
+                                                                            TxtBirthName.TextChanged,
+                                                                            TxtWikiId.TextChanged
+        If Not bLoadingPerson Then
+            Dim _control As TextBox = TryCast(sender, TextBox)
+            If _control IsNot Nothing Then
+                _control.BackColor = Color.LightYellow
+            End If
+        End If
+    End Sub
+    Private Sub BTnRmvBotsd_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsd.Click
+        If IsNumeric(lblBotsdId.Text) AndAlso CInt(lblBotsdId.Text) > 0 Then
+            UpdateBotsdId(CInt(lblID.Text), 0)
+            ShowStatus("Removed BotSD Id", False, True)
+            lblBotsdId.Text = 0
+        End If
+    End Sub
+    Private Sub BtnUpdBotsd_Click(sender As Object, e As EventArgs) Handles BtnUpdBotsd.Click
+        ShowStatus("Born On The Same Day", False, True)
+        Using _botsd As New FrmBotsd
+            _botsd.ThisDay = cboDay.SelectedIndex + 1
+            _botsd.ThisMonth = cboMonth.SelectedIndex + 1
+            _botsd.ShowDialog()
+        End Using
+        ClearStatus()
+    End Sub
+
 #End Region
 #Region "subroutines"
     'Form overrides dispose to clean up the component list.
@@ -838,6 +867,7 @@ Public NotInheritable Class FrmUpdateDatabase
             txtTwitter.Text = If(oPerson.Social.TwitterHandle, "")
             cbNoTweet.Checked = oPerson.Social.IsNoTweet
             TxtWikiId.Text = oPerson.Social.WikiId
+            lblBotsdId.Text = oPerson.Social.Botsd
         End If
         txtWiki.Text = GetWikiText(NudSentences.Value, oPerson.ForeName, oPerson.Surname, TxtWikiId.Text)
         ResetBackgroundColors()
@@ -880,6 +910,19 @@ Public NotInheritable Class FrmUpdateDatabase
             txtDesc.Cut()
             txtDesc.Paste(sShortname)
         End If
+    End Sub
+    Private Sub ShowUpdated(aPerson As Person, dbAction As String)
+        LblUpdated.Visible = True
+        Dim iListMatches As Integer = LbUpdateList.FindString(aPerson.Name)
+        Dim msgText As String = aPerson.Name & " " & dbAction
+        If iListMatches = ListBox.NoMatches Then
+            LblUpdated.Visible = True
+            LbUpdateList.Visible = True
+            LbUpdateList.Items.Add(msgText)
+        Else
+            LbUpdateList.Items(iListMatches) = msgText
+        End If
+        LogUtil.Info(msgText, MyBase.Name)
     End Sub
 
 #End Region
@@ -1076,41 +1119,6 @@ Public NotInheritable Class FrmUpdateDatabase
         thatPerson.Dispose()
         thisperson.Dispose()
     End Sub
-
-    Private Sub PasteIntoDesc_Click(MenuItem As Object, e As EventArgs) Handles PasteIntoDesc.Click
-        GetSourceControl(MenuItem).Copy()
-        txtDesc.Paste()
-    End Sub
-
-    Private Sub BtnDateCopy_Click(sender As Object, e As EventArgs) Handles BtnDateCopy.Click
-        Dim source As List(Of String) = ParseStringWithBrackets(txtWiki.Text)
-        Dim target As List(Of String) = ParseStringWithBrackets(txtDesc.Text)
-        If source.Count > 2 And target.Count > 2 Then
-            If target(2).StartsWith(" is ", StringComparison.CurrentCultureIgnoreCase) Then
-                target(2) = " was " & target(2).Substring(4)
-            End If
-            txtDesc.Text = target(0) & "(" & source(1) & ")" & target(2)
-        End If
-    End Sub
-    Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged,
-                                                                            txtForename.TextChanged,
-                                                                            txtSurname.TextChanged,
-                                                                            txtYear.TextChanged,
-                                                                            txtDied.TextChanged,
-                                                                            txtDthDay.TextChanged,
-                                                                            txtDthMth.TextChanged,
-                                                                            txtDesc.TextChanged,
-                                                                            TxtShortDesc.TextChanged,
-                                                                            TxtBirthPlace.TextChanged,
-                                                                            TxtBirthName.TextChanged,
-                                                                            TxtWikiId.TextChanged
-        If Not bLoadingPerson Then
-            Dim _control As TextBox = TryCast(sender, TextBox)
-            If _control IsNot Nothing Then
-                _control.BackColor = Color.LightYellow
-            End If
-        End If
-    End Sub
     Private Sub ResetBackgroundColors()
         For Each _control As Control In Me.Controls
             Dim _textbox As TextBox = TryCast(_control, TextBox)
@@ -1119,5 +1127,14 @@ Public NotInheritable Class FrmUpdateDatabase
             End If
         Next
     End Sub
+    Private Function UpdateSortSeq(newPerson As Person, p As Integer) As Person
+        Dim prevPerson As Person = If(p = 0, Nothing, personTable(p - 1))
+        If prevPerson IsNot Nothing AndAlso prevPerson.IBirthYear = newPerson.IBirthYear Then
+            newPerson.Sortseq = prevPerson.Sortseq + 1
+            prevPerson.Dispose()
+        End If
+        Return newPerson
+    End Function
+
 #End Region
 End Class

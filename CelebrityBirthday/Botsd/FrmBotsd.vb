@@ -59,6 +59,11 @@ Public NotInheritable Class FrmBotsd
         LblDay.Text = ""
         GetAuthData()
         FillTwitterUserList()
+        If _day > 0 And _month > 0 Then
+            cboDay.SelectedIndex = _day - 1
+            cboMonth.SelectedIndex = _month - 1
+            SelectPairs()
+        End If
         IsNoGenerate = False
     End Sub
     Private Sub DgvPairs_SelectionChanged(sender As Object, e As EventArgs) Handles DgvPairs.SelectionChanged

@@ -45,14 +45,17 @@ Public Class FrmDateCheck
         Me.Refresh()
         personTable = New List(Of Person)
         Try
-            If cboDay.SelectedIndex < 0 Or cboMonth.SelectedIndex < 0 Then
+            If cboDay.SelectedIndex < 0 And cboMonth.SelectedIndex < 0 Then
                 If MsgBox("Do you really want to select all persons?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Check") = MsgBoxResult.Yes Then
                     DisplayMessage("Finding everybody", True)
                     personTable = FindEverybody()
                 End If
+            ElseIf cboDay.SelectedIndex < 0 Then
+                DisplayMessage("Finding persons for " & CStr(cboMonth.SelectedItem), True)
+                personTable = FindPeopleByDate(-1, cboMonth.SelectedIndex + 1, False, False)
             Else
-                    DisplayMessage("Finding persons for " & CStr(cboDay.SelectedIndex + 1) & "/" & CStr(cboMonth.SelectedIndex + 1), True)
-                personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
+                DisplayMessage("Finding persons for " & CStr(cboDay.SelectedIndex + 1) & "/" & CStr(cboMonth.SelectedIndex + 1), True)
+                personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False)
             End If
         Catch ex As DbException
             LogUtil.Problem("Exception during list load : " & ex.Message)
@@ -312,6 +315,24 @@ Public Class FrmDateCheck
         End If
         Clipboard.SetText(wpText)
         oPerson.Dispose()
+    End Sub
+
+    Private Sub BtnBotSD_Click(sender As Object, e As EventArgs) Handles BtnBotSD.Click
+        Using _botsd As New FrmBotsd
+            If cboDay.SelectedIndex < 0 Then
+                If IsNumeric(TxtToDay.Text) Then
+                    _botsd.ThisDay = CInt(TxtToDay.Text)
+                End If
+            Else
+                    _botsd.ThisDay = cboDay.SelectedIndex + 1
+            End If
+            _botsd.ThisMonth = cboMonth.SelectedIndex + 1
+            _botsd.ShowDialog()
+        End Using
+    End Sub
+
+    Private Sub BtnMonth_Click(sender As Object, e As EventArgs) Handles BtnMonth.Click
+        cboDay.SelectedIndex = -1
     End Sub
 
 #End Region

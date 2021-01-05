@@ -113,12 +113,18 @@ Partial Class FrmUpdateDatabase
         Me.LblUpdated = New System.Windows.Forms.Label()
         Me.LbUpdateList = New System.Windows.Forms.ListBox()
         Me.BtnDateCopy = New System.Windows.Forms.Button()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.BtnRmvBotsd = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblBotsdId = New System.Windows.Forms.Label()
+        Me.BtnUpdBotsd = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbNoTweet
@@ -189,7 +195,7 @@ Partial Class FrmUpdateDatabase
         Me.btnRTB.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnRTB.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRTB.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnRTB.Location = New System.Drawing.Point(119, 447)
+        Me.btnRTB.Location = New System.Drawing.Point(118, 401)
         Me.btnRTB.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.btnRTB.Name = "btnRTB"
         Me.btnRTB.Size = New System.Drawing.Size(36, 29)
@@ -210,7 +216,7 @@ Partial Class FrmUpdateDatabase
         Me.txtDesc.Multiline = True
         Me.txtDesc.Name = "txtDesc"
         Me.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDesc.Size = New System.Drawing.Size(692, 313)
+        Me.txtDesc.Size = New System.Drawing.Size(692, 266)
         Me.txtDesc.TabIndex = 7
         '
         'ContextMenuStrip1
@@ -562,7 +568,7 @@ Partial Class FrmUpdateDatabase
         Me.lbPeople.Location = New System.Drawing.Point(947, 58)
         Me.lbPeople.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.lbPeople.Name = "lbPeople"
-        Me.lbPeople.Size = New System.Drawing.Size(284, 418)
+        Me.lbPeople.Size = New System.Drawing.Size(284, 382)
         Me.lbPeople.TabIndex = 24
         '
         'cboMonth
@@ -678,7 +684,7 @@ Partial Class FrmUpdateDatabase
         Me.rtbDesc.Location = New System.Drawing.Point(162, 164)
         Me.rtbDesc.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.rtbDesc.Name = "rtbDesc"
-        Me.rtbDesc.Size = New System.Drawing.Size(692, 313)
+        Me.rtbDesc.Size = New System.Drawing.Size(692, 266)
         Me.rtbDesc.TabIndex = 33
         Me.rtbDesc.Text = ""
         Me.rtbDesc.Visible = False
@@ -836,9 +842,8 @@ Partial Class FrmUpdateDatabase
         '
         'TxtImageLoadDay
         '
-        Me.TxtImageLoadDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtImageLoadDay.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtImageLoadDay.Location = New System.Drawing.Point(12, 132)
+        Me.TxtImageLoadDay.Location = New System.Drawing.Point(12, 112)
         Me.TxtImageLoadDay.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.TxtImageLoadDay.Name = "TxtImageLoadDay"
         Me.TxtImageLoadDay.Size = New System.Drawing.Size(55, 22)
@@ -846,10 +851,9 @@ Partial Class FrmUpdateDatabase
         '
         'BtnImageLoadUpd
         '
-        Me.BtnImageLoadUpd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnImageLoadUpd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnImageLoadUpd.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnImageLoadUpd.Location = New System.Drawing.Point(251, 131)
+        Me.BtnImageLoadUpd.Location = New System.Drawing.Point(251, 111)
         Me.BtnImageLoadUpd.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnImageLoadUpd.Name = "BtnImageLoadUpd"
         Me.BtnImageLoadUpd.Size = New System.Drawing.Size(51, 27)
@@ -859,11 +863,10 @@ Partial Class FrmUpdateDatabase
         '
         'Label5
         '
-        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(9, 107)
+        Me.Label5.Location = New System.Drawing.Point(9, 87)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(101, 14)
@@ -872,9 +875,8 @@ Partial Class FrmUpdateDatabase
         '
         'TxtImageLoadMth
         '
-        Me.TxtImageLoadMth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtImageLoadMth.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtImageLoadMth.Location = New System.Drawing.Point(75, 132)
+        Me.TxtImageLoadMth.Location = New System.Drawing.Point(75, 112)
         Me.TxtImageLoadMth.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.TxtImageLoadMth.Name = "TxtImageLoadMth"
         Me.TxtImageLoadMth.Size = New System.Drawing.Size(55, 22)
@@ -882,9 +884,8 @@ Partial Class FrmUpdateDatabase
         '
         'TxtImageLoadYr
         '
-        Me.TxtImageLoadYr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtImageLoadYr.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtImageLoadYr.Location = New System.Drawing.Point(138, 132)
+        Me.TxtImageLoadYr.Location = New System.Drawing.Point(138, 112)
         Me.TxtImageLoadYr.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.TxtImageLoadYr.Name = "TxtImageLoadYr"
         Me.TxtImageLoadYr.Size = New System.Drawing.Size(82, 22)
@@ -949,10 +950,9 @@ Partial Class FrmUpdateDatabase
         '
         'BtnWordPress
         '
-        Me.BtnWordPress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnWordPress.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWordPress.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWordPress.Location = New System.Drawing.Point(62, 177)
+        Me.BtnWordPress.Location = New System.Drawing.Point(61, 146)
         Me.BtnWordPress.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnWordPress.Name = "BtnWordPress"
         Me.BtnWordPress.Size = New System.Drawing.Size(198, 38)
@@ -975,11 +975,11 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox2.Controls.Add(Me.TxtImageLoadMth)
         Me.GroupBox2.Controls.Add(Me.TxtImageLoadDay)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Location = New System.Drawing.Point(939, 494)
+        Me.GroupBox2.Location = New System.Drawing.Point(939, 460)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2, 4, 2, 4)
-        Me.GroupBox2.Size = New System.Drawing.Size(317, 233)
+        Me.GroupBox2.Size = New System.Drawing.Size(317, 196)
         Me.GroupBox2.TabIndex = 31
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "WordPress"
@@ -987,7 +987,7 @@ Partial Class FrmUpdateDatabase
         'BtnWpDesc
         '
         Me.BtnWpDesc.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnWpDesc.Location = New System.Drawing.Point(182, 20)
+        Me.BtnWpDesc.Location = New System.Drawing.Point(182, 17)
         Me.BtnWpDesc.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnWpDesc.Name = "BtnWpDesc"
         Me.BtnWpDesc.Size = New System.Drawing.Size(121, 28)
@@ -997,10 +997,9 @@ Partial Class FrmUpdateDatabase
         '
         'BtnPageLoadUpd
         '
-        Me.BtnPageLoadUpd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPageLoadUpd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPageLoadUpd.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPageLoadUpd.Location = New System.Drawing.Point(251, 60)
+        Me.BtnPageLoadUpd.Location = New System.Drawing.Point(251, 52)
         Me.BtnPageLoadUpd.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPageLoadUpd.Name = "BtnPageLoadUpd"
         Me.BtnPageLoadUpd.Size = New System.Drawing.Size(51, 27)
@@ -1010,9 +1009,8 @@ Partial Class FrmUpdateDatabase
         '
         'TxtPageLoadYr
         '
-        Me.TxtPageLoadYr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPageLoadYr.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtPageLoadYr.Location = New System.Drawing.Point(138, 65)
+        Me.TxtPageLoadYr.Location = New System.Drawing.Point(138, 57)
         Me.TxtPageLoadYr.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.TxtPageLoadYr.Name = "TxtPageLoadYr"
         Me.TxtPageLoadYr.Size = New System.Drawing.Size(82, 22)
@@ -1020,9 +1018,8 @@ Partial Class FrmUpdateDatabase
         '
         'TxtPageLoadMth
         '
-        Me.TxtPageLoadMth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPageLoadMth.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtPageLoadMth.Location = New System.Drawing.Point(75, 65)
+        Me.TxtPageLoadMth.Location = New System.Drawing.Point(75, 57)
         Me.TxtPageLoadMth.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.TxtPageLoadMth.Name = "TxtPageLoadMth"
         Me.TxtPageLoadMth.Size = New System.Drawing.Size(55, 22)
@@ -1030,9 +1027,8 @@ Partial Class FrmUpdateDatabase
         '
         'TxtPageLoadDay
         '
-        Me.TxtPageLoadDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPageLoadDay.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtPageLoadDay.Location = New System.Drawing.Point(12, 65)
+        Me.TxtPageLoadDay.Location = New System.Drawing.Point(12, 57)
         Me.TxtPageLoadDay.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.TxtPageLoadDay.Name = "TxtPageLoadDay"
         Me.TxtPageLoadDay.Size = New System.Drawing.Size(55, 22)
@@ -1040,11 +1036,10 @@ Partial Class FrmUpdateDatabase
         '
         'Label3
         '
-        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(9, 34)
+        Me.Label3.Location = New System.Drawing.Point(9, 26)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(94, 14)
@@ -1251,12 +1246,67 @@ Partial Class FrmUpdateDatabase
         Me.BtnDateCopy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.BtnDateCopy.UseVisualStyleBackColor = True
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox3.Controls.Add(Me.BtnUpdBotsd)
+        Me.GroupBox3.Controls.Add(Me.lblBotsdId)
+        Me.GroupBox3.Controls.Add(Me.Label8)
+        Me.GroupBox3.Controls.Add(Me.BtnRmvBotsd)
+        Me.GroupBox3.Location = New System.Drawing.Point(939, 663)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(317, 59)
+        Me.GroupBox3.TabIndex = 145
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Born on the Same Day"
+        '
+        'BtnRmvBotsd
+        '
+        Me.BtnRmvBotsd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvBotsd.Location = New System.Drawing.Point(228, 21)
+        Me.BtnRmvBotsd.Name = "BtnRmvBotsd"
+        Me.BtnRmvBotsd.Size = New System.Drawing.Size(75, 23)
+        Me.BtnRmvBotsd.TabIndex = 0
+        Me.BtnRmvBotsd.Text = "Remove"
+        Me.BtnRmvBotsd.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.ForeColor = System.Drawing.Color.Black
+        Me.Label8.Location = New System.Drawing.Point(9, 24)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(18, 14)
+        Me.Label8.TabIndex = 1
+        Me.Label8.Text = "Id"
+        '
+        'lblBotsdId
+        '
+        Me.lblBotsdId.AutoSize = True
+        Me.lblBotsdId.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBotsdId.Location = New System.Drawing.Point(33, 22)
+        Me.lblBotsdId.Name = "lblBotsdId"
+        Me.lblBotsdId.Size = New System.Drawing.Size(16, 18)
+        Me.lblBotsdId.TabIndex = 2
+        Me.lblBotsdId.Text = "0"
+        '
+        'BtnUpdBotsd
+        '
+        Me.BtnUpdBotsd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdBotsd.Location = New System.Drawing.Point(138, 21)
+        Me.BtnUpdBotsd.Name = "BtnUpdBotsd"
+        Me.BtnUpdBotsd.Size = New System.Drawing.Size(75, 23)
+        Me.BtnUpdBotsd.TabIndex = 3
+        Me.BtnUpdBotsd.Text = "Update"
+        Me.BtnUpdBotsd.UseVisualStyleBackColor = True
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1293, 923)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.BtnDateCopy)
         Me.Controls.Add(Me.LbUpdateList)
         Me.Controls.Add(Me.LblUpdated)
@@ -1339,6 +1389,8 @@ Partial Class FrmUpdateDatabase
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1445,4 +1497,9 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents PasteIntoDesc As ToolStripMenuItem
     Friend WithEvents BtnDateCopy As Button
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents lblBotsdId As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents BtnRmvBotsd As Button
+    Friend WithEvents BtnUpdBotsd As Button
 End Class

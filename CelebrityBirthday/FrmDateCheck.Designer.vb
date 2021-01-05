@@ -65,6 +65,8 @@ Partial Class FrmDateCheck
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.BtnWpDesc = New System.Windows.Forms.Button()
+        Me.BtnBotSD = New System.Windows.Forms.Button()
+        Me.BtnMonth = New System.Windows.Forms.Button()
         CType(Me.DgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.nudSelectCount, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -194,7 +196,7 @@ Partial Class FrmDateCheck
         Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnStart.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnStart.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnStart.Location = New System.Drawing.Point(675, 625)
+        Me.BtnStart.Location = New System.Drawing.Point(783, 625)
         Me.BtnStart.Name = "BtnStart"
         Me.BtnStart.Size = New System.Drawing.Size(139, 33)
         Me.BtnStart.TabIndex = 16
@@ -272,7 +274,7 @@ Partial Class FrmDateCheck
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label1.Location = New System.Drawing.Point(507, 630)
+        Me.Label1.Location = New System.Drawing.Point(597, 631)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(52, 22)
         Me.Label1.TabIndex = 58
@@ -290,7 +292,7 @@ Partial Class FrmDateCheck
         'nudSelectCount
         '
         Me.nudSelectCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.nudSelectCount.Location = New System.Drawing.Point(565, 631)
+        Me.nudSelectCount.Location = New System.Drawing.Point(655, 632)
         Me.nudSelectCount.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.nudSelectCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudSelectCount.Name = "nudSelectCount"
@@ -326,7 +328,7 @@ Partial Class FrmDateCheck
         Me.BtnToday.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnToday.Location = New System.Drawing.Point(100, 627)
+        Me.BtnToday.Location = New System.Drawing.Point(180, 627)
         Me.BtnToday.Name = "BtnToday"
         Me.BtnToday.Size = New System.Drawing.Size(72, 28)
         Me.BtnToday.TabIndex = 136
@@ -340,7 +342,7 @@ Partial Class FrmDateCheck
         Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
-        Me.cboMonth.Location = New System.Drawing.Point(266, 628)
+        Me.cboMonth.Location = New System.Drawing.Point(368, 628)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(207, 27)
         Me.cboMonth.TabIndex = 135
@@ -351,7 +353,7 @@ Partial Class FrmDateCheck
         Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(189, 628)
+        Me.cboDay.Location = New System.Drawing.Point(281, 628)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(71, 27)
         Me.cboDay.TabIndex = 134
@@ -513,12 +515,40 @@ Partial Class FrmDateCheck
         Me.BtnWpDesc.Text = "Get Description"
         Me.BtnWpDesc.UseVisualStyleBackColor = True
         '
+        'BtnBotSD
+        '
+        Me.BtnBotSD.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnBotSD.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBotSD.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnBotSD.Location = New System.Drawing.Point(1196, 526)
+        Me.BtnBotSD.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
+        Me.BtnBotSD.Name = "BtnBotSD"
+        Me.BtnBotSD.Size = New System.Drawing.Size(135, 33)
+        Me.BtnBotSD.TabIndex = 150
+        Me.BtnBotSD.Text = "BotSD"
+        Me.BtnBotSD.UseVisualStyleBackColor = True
+        '
+        'BtnMonth
+        '
+        Me.BtnMonth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnMonth.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnMonth.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnMonth.Location = New System.Drawing.Point(102, 627)
+        Me.BtnMonth.Name = "BtnMonth"
+        Me.BtnMonth.Size = New System.Drawing.Size(72, 28)
+        Me.BtnMonth.TabIndex = 151
+        Me.BtnMonth.Text = "Month"
+        Me.ToolTip1.SetToolTip(Me.BtnMonth, "Select Today only")
+        Me.BtnMonth.UseVisualStyleBackColor = True
+        '
         'FrmDateCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1344, 690)
+        Me.Controls.Add(Me.BtnMonth)
+        Me.Controls.Add(Me.BtnBotSD)
         Me.Controls.Add(Me.BtnWpDesc)
         Me.Controls.Add(Me.TxtWikiId)
         Me.Controls.Add(Me.Label4)
@@ -607,4 +637,6 @@ Partial Class FrmDateCheck
     Friend WithEvents Label4 As Label
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents BtnWpDesc As Button
+    Friend WithEvents BtnBotSD As Button
+    Friend WithEvents BtnMonth As Button
 End Class

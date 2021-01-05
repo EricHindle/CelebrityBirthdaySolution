@@ -7540,7 +7540,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                 "@birthname, @birthplace, @deathday, @deathmonth);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT id, forename, surname,"& _ 
                 " birthyear, birthmonth, birthday, deathyear, shortdesc, longdesc, sortseq, datea"& _ 
                 "dded, birthname, birthplace, deathday, deathmonth FROM Person WHERE (id = SCOPE_"& _ 
-                "IDENTITY())"
+                "IDENTITY()) ORDER BY birthmonth, birthday, birthyear, sortseq"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@forename", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "forename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@surname", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "surname", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7576,7 +7576,8 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                 "_deathmonth = 1 AND [deathmonth] IS NULL) OR ([deathmonth] = @Original_deathmont"& _ 
                 "h)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear,"& _ 
                 " shortdesc, longdesc, sortseq, dateadded, birthname, birthplace, deathday, death"& _ 
-                "month FROM Person WHERE (id = @id)"
+                "month FROM Person WHERE (id = @id) ORDER BY birthmonth, birthday, birthyear, sor"& _ 
+                "tseq"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@forename", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "forename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@surname", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "surname", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7629,9 +7630,9 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(13) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortde"& _ 
-                "sc, longdesc, sortseq, dateadded, birthname, birthplace, deathday, deathmonth FR"& _ 
-                "OM Person"
+            Me._commandCollection(0).CommandText = "SELECT        id, forename, surname, birthyear, birthmonth, birthday, deathyear, "& _ 
+                "shortdesc, longdesc, sortseq, dateadded, birthname, birthplace, deathday, deathm"& _ 
+                "onth"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Person"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY birthmonth, birthday, birthyear, sortseq"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
@@ -7644,40 +7645,41 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@id", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "id", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT        id, forename, surname, birthyear, birthmonth, birthday, deathyear, "& _ 
-                "shortdesc, longdesc, sortseq, dateadded, birthname, birthplace, deathday, deathm"& _ 
-                "onth"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Person"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (deathyear = @year)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY deathmo"& _ 
-                "nth, deathday, surname, forename"
+            Me._commandCollection(3).CommandText = "SELECT birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathda"& _ 
+                "y, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname FR"& _ 
+                "OM Person WHERE (deathyear = @year) ORDER BY deathmonth, deathday, surname, fore"& _ 
+                "name"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@year", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "deathyear", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortde"& _ 
-                "sc, longdesc, sortseq, dateadded, birthname, birthplace, deathday, deathmonth FR"& _ 
+            Me._commandCollection(4).CommandText = "SELECT birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathda"& _ 
+                "y, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname FR"& _ 
                 "OM Person WHERE (id = @id)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@id", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortde"& _ 
-                "sc, longdesc, sortseq, dateadded, birthname, birthplace, deathday, deathmonth FR"& _ 
-                "OM Person WHERE (birthmonth = @month) AND (birthday = @day) ORDER BY birthyear, "& _ 
-                "sortseq"
+            Me._commandCollection(5).CommandText = "SELECT        birthday, birthmonth, birthname, birthplace, birthyear, dateadded, "& _ 
+                "deathday, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, sur"& _ 
+                "name"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Person"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (birthmonth = @month) AND (birthday ="& _ 
+                " @day) OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (birthmonth = @month) AND (@day = - 1)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDE"& _ 
+                "R BY birthmonth, birthday, birthyear, sortseq"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(6).Connection = Me.Connection
-            Me._commandCollection(6).CommandText = "SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortde"& _ 
-                "sc, longdesc, sortseq, dateadded, birthname, birthplace, deathday, deathmonth FR"& _ 
+            Me._commandCollection(6).CommandText = "SELECT birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathda"& _ 
+                "y, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname FR"& _ 
                 "OM Person WHERE (forename LIKE @forename) AND (surname LIKE @surname)"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@forename", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "forename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@surname", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "surname", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(7) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(7).Connection = Me.Connection
-            Me._commandCollection(7).CommandText = "SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortde"& _ 
-                "sc, longdesc, sortseq, dateadded, birthname, birthplace, deathday, deathmonth FR"& _ 
+            Me._commandCollection(7).CommandText = "SELECT birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathda"& _ 
+                "y, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname FR"& _ 
                 "OM Person WHERE (forename = @forename) AND (surname = @surname) AND (birthyear ="& _ 
                 " @year) AND (birthmonth = @month) AND (birthday = @day)"
             Me._commandCollection(7).CommandType = Global.System.Data.CommandType.Text
@@ -7688,8 +7690,8 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(8) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(8).Connection = Me.Connection
-            Me._commandCollection(8).CommandText = "SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortde"& _ 
-                "sc, longdesc, sortseq, dateadded, birthname, birthplace, deathday, deathmonth FR"& _ 
+            Me._commandCollection(8).CommandText = "SELECT birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathda"& _ 
+                "y, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname FR"& _ 
                 "OM Person WHERE (forename LIKE @forename + N'%') AND (surname LIKE @surname + N'"& _ 
                 "%') ORDER BY surname, forename"
             Me._commandCollection(8).CommandType = Global.System.Data.CommandType.Text
