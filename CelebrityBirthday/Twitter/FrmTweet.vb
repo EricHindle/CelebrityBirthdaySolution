@@ -8,6 +8,13 @@ Imports System.Text
 Imports TweetSharp
 
 Public NotInheritable Class FrmTweet
+#Region "enum"
+    Private Enum TweetType
+        BIRTHDAY
+        ANNIVERSARY
+        FULL
+    End Enum
+#End Region
 #Region "constants"
     Private Const NUD_BASENAME As String = "NudHorizontal"
     Private Const PICBOX_BASENAME As String = "pictureBox"
@@ -399,7 +406,9 @@ Public NotInheritable Class FrmTweet
     Private Shared Sub ClearImages(Optional isConfirm As Boolean = True)
         If Not isConfirm OrElse MsgBox("Confirm delete tweet images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
             LogUtil.Info("Deleting tweet images", "FrmTweet")
-            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.ANNIVERSARY & "*.*", My.Resources.BIRTHDAY & "*.*", My.Resources.TOTD & "*.*"})
+            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder,
+                                                                                              FileIO.SearchOption.SearchTopLevelOnly,
+                                                                                              {[Enum].GetName(GetType(TweetType), TweetType.ANNIVERSARY) & "*.*", [Enum].GetName(GetType(TweetType), TweetType.BIRTHDAY) & "*.*", My.Resources.TOTD & "*.*"})
             For Each _imageFile As String In _imageList
                 My.Computer.FileSystem.DeleteFile(_imageFile)
             Next
@@ -516,7 +525,6 @@ Public NotInheritable Class FrmTweet
         If cboDay.SelectedIndex > -1 AndAlso cboMonth.SelectedIndex > -1 Then
             TabControl1.TabPages.Clear()
             TabControl1.Refresh()
-            Dim tabTitle As String
             Dim _imageStart As Integer = 0
             Dim _dateLength As Integer = cboDay.SelectedItem.length + cboMonth.SelectedItem.length + 1
             oTweetLists = New List(Of List(Of Person))
@@ -534,29 +542,27 @@ Public NotInheritable Class FrmTweet
                     Next
                 Next
                 oTweetLists.Add(_selectedPersons)
-                tabTitle = "Full_"
-                GenerateTweets(oTweetLists, tabTitle, _imageStart)
+                GenerateTweets(oTweetLists, _imageStart, TweetType.FULL)
             Else
-                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, "B")
+                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, TweetType.BIRTHDAY)
                 oTweetLists.AddRange(_birthdayImageTweets)
-                tabTitle = My.Resources.BIRTHDAY
-                GenerateTweets(oTweetLists, tabTitle, _imageStart)
+                GenerateTweets(oTweetLists, _imageStart, TweetType.BIRTHDAY)
                 _imageStart = oTweetLists.Count
-                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, "A")
+                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, TweetType.ANNIVERSARY)
                 oTweetLists.AddRange(_annivImageTweets)
-                tabTitle = My.Resources.ANNIVERSARY
-                GenerateTweets(oTweetLists, tabTitle, _imageStart)
+                GenerateTweets(oTweetLists, _imageStart, TweetType.ANNIVERSARY)
             End If
             DisplayStatus("Images Complete")
         Else
             MsgBox("Select some people", MsgBoxStyle.Exclamation, "Error")
         End If
     End Sub
-    Private Sub GenerateTweets(_tweetLists As List(Of List(Of Person)), _tabTitle As String, _listStart As Integer)
+    Private Sub GenerateTweets(_tweetLists As List(Of List(Of Person)), _listStart As Integer, _tweetType As TweetType)
         For _personIndex As Integer = _listStart To _tweetLists.Count - 1
+
             Dim _personList As List(Of Person) = _tweetLists(_personIndex)
             DisplayStatus(">" & CStr(_personIndex), True)
-            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, _tabTitle & CStr(_personIndex - _listStart + 1))
+            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, [Enum].GetName(GetType(TweetType), _tweetType) & CStr(_personIndex - _listStart + 1))
             Dim pbControl As PictureBox = GetPictureBoxFromPage(newTweetTabPage)
             Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
             IsNoGenerate = True
@@ -575,11 +581,11 @@ Public NotInheritable Class FrmTweet
             GetNudFromPage(newTweetTabPage).Value = colCt
             Dim _width As Integer = colCt
             GeneratePicture(pbControl, _personList, _width)
-            GenerateText(rtbControl, _personList, _tabTitle.Substring(0, 1), _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
+            GenerateText(rtbControl, _personList, _tweetType, _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
             IsNoGenerate = False
         Next
     End Sub
-    Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person), _type As String, _index As Integer, _numberOfLists As Integer)
+    Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer)
         LogUtil.Info("Generating text", MyBase.Name)
         Dim _outString As New StringBuilder
         _outString.Append(cboMonth.SelectedItem).Append(" "c).Append(cboDay.SelectedItem).Append(LINE_FEED).Append(LINE_FEED)
@@ -588,7 +594,7 @@ Public NotInheritable Class FrmTweet
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
             If rbAges.Checked Then
-                If _type.StartsWith("B", StringComparison.CurrentCultureIgnoreCase) Then
+                If _type = TweetType.BIRTHDAY Then
                     _outString.Append(" (" & CStr(CalculateAgeNextBirthday(_person)) & ")")
                 Else
                     Dim _yr As Integer = CInt(_person.BirthYear)
@@ -599,7 +605,7 @@ Public NotInheritable Class FrmTweet
                     _outString.Append(" (" & _birthyear & ")")
                 End If
             End If
-            If rbHandles.Checked Then
+            If rbHandles.Checked And _type = TweetType.BIRTHDAY Then
                 If _person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle) Then
                     _outString.Append(" @").Append(_person.Social.TwitterHandle)
                 End If
@@ -706,7 +712,7 @@ Public NotInheritable Class FrmTweet
             tw.ConsumerSecret = _auth.TokenSecret
         End If
     End Sub
-    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As String) As List(Of List(Of Person))
+    Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As TweetType) As List(Of List(Of Person))
         Dim availableLength As Integer = TWEET_MAX_LEN - _headerLength
         Dim _totalLengthOfTweet As Integer = 0
         Dim _lengthsText As String = ""
@@ -734,11 +740,11 @@ Public NotInheritable Class FrmTweet
         ListOfLists.Reverse()
         Return ListOfLists
     End Function
-    Private Function GetNumberOfPersonsPerTweet(oPersonListCount As Integer, _type As String, oNumberOfTweets As Integer) As Integer
+    Private Function GetNumberOfPersonsPerTweet(oPersonListCount As Integer, _type As TweetType, oNumberOfTweets As Integer) As Integer
         Dim _nudValue As Integer
         Dim _numberOfPersonsPerTweet As Integer
         Try
-            If _type.ToLower(myCultureInfo) = "b" Then
+            If _type = TweetType.BIRTHDAY Then
                 _nudValue = NudBirthdaysPerTweet.Value
             Else
                 _nudValue = NudAnnivsPerTweet.Value
@@ -761,11 +767,11 @@ Public NotInheritable Class FrmTweet
         Next
         Return _tweetList
     End Function
-    Private Function GetExpectedNumberOfTweets(oPersonlist As List(Of Person), _type As String, availableLength As Integer, ByRef _totalLength As Integer) As Integer
+    Private Function GetExpectedNumberOfTweets(oPersonlist As List(Of Person), _type As TweetType, availableLength As Integer, ByRef _totalLength As Integer) As Integer
         _totalLength = GetTotalLengthOfTweet(oPersonlist, _type)
         Return Math.Ceiling(_totalLength / availableLength)
     End Function
-    Private Function GetTotalLengthOfTweet(oPersonlist As List(Of Person), _type As String) As Integer
+    Private Function GetTotalLengthOfTweet(oPersonlist As List(Of Person), _type As TweetType) As Integer
         Dim _totalLength As Integer = 0
         For Each _person As Person In oPersonlist
             Dim _tweetLineLength As Integer = GetTweetLineLength(_person, _type)
@@ -773,20 +779,20 @@ Public NotInheritable Class FrmTweet
         Next
         Return _totalLength
     End Function
-    Private Function GetTweetLineLength(_person As Person, _type As String) As Integer
+    Private Function GetTweetLineLength(_person As Person, _type As TweetType) As Integer
         Dim _length As Integer = _person.Name.Length _
             + If(rbHandles.Checked, _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 2, 0), 0) _
-            + If(_type = "B" And rbAges.Checked, 5, 0) _
-            + If(_type = "A" And rbAges.Checked, 7, 0) _
+            + If(_type = TweetType.BIRTHDAY And rbAges.Checked, 5, 0) _
+            + If(_type = TweetType.ANNIVERSARY And rbAges.Checked, 7, 0) _
             + 1
         Return _length
     End Function
-    Private Shared Function GetHeading(_typeNode As String) As String
+    Private Shared Function GetHeading(_type As TweetType) As String
         Dim _header As String = ""
-        If _typeNode.StartsWith("A", True, myCultureInfo) Then
+        If _type = TweetType.ANNIVERSARY Then
             _header = ANNIV_HDR
         End If
-        If _typeNode.StartsWith("B", True, myCultureInfo) Then
+        If _type = TweetType.BIRTHDAY Then
             _header = BIRTHDAY_HDR
         End If
         Return _header
