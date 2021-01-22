@@ -113,43 +113,47 @@ Public NotInheritable Class FrmUpdateDatabase
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
             Try
                 Dim newPerson As New Person(txtForename.Text.Trim,
-                                            txtSurname.Text.Trim,
-                                            txtDesc.Text.Trim,
-                                            TxtShortDesc.Text.Trim,
-                                            cboDay.SelectedIndex + 1,
-                                            cboMonth.SelectedIndex + 1,
-                                            txtYear.Text.Trim,
-                                            CInt("0" & txtDied.Text.Trim),
-                                            CInt("0" & txtDthMth.Text.Trim),
-                                            CInt("0" & txtDthDay.Text.Trim),
-                                            TxtBirthName.Text.Trim,
-                                            TxtBirthPlace.Text.Trim,
-                                            New ImageIdentity(),
-                                            New SocialMedia(-1, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, 0)) With {
-                                            .UnsavedChanges = True
-                                            }
-                Dim bInserted As Boolean = False
-                Dim p As Integer = -1
-                For ix As Integer = 0 To personTable.Count - 1
-                    Dim aPerson As Person = personTable(ix)
-                    If aPerson.IBirthYear > newPerson.IBirthYear Then
-                        newPerson = UpdateSortSeq(newPerson, ix)
-                        personTable.Insert(ix, newPerson)
-                        bInserted = True
-                        p = ix
-                        Exit For
-                    End If
-                Next
+                                                txtSurname.Text.Trim,
+                                                txtDesc.Text.Trim,
+                                                TxtShortDesc.Text.Trim,
+                                                cboDay.SelectedIndex + 1,
+                                                cboMonth.SelectedIndex + 1,
+                                                txtYear.Text.Trim,
+                                                CInt("0" & txtDied.Text.Trim),
+                                                CInt("0" & txtDthMth.Text.Trim),
+                                                CInt("0" & txtDthDay.Text.Trim),
+                                                TxtBirthName.Text.Trim,
+                                                TxtBirthPlace.Text.Trim,
+                                                New ImageIdentity(),
+                                                New SocialMedia(-1, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, 0)) With {
+                                                .UnsavedChanges = True
+                                                }
+                If Not IsInList(newPerson) Then
+                    Dim bInserted As Boolean = False
+                    Dim p As Integer = -1
+                    For ix As Integer = 0 To personTable.Count - 1
+                        Dim aPerson As Person = personTable(ix)
+                        If aPerson.IBirthYear > newPerson.IBirthYear Then
+                            newPerson = UpdateSortSeq(newPerson, ix)
+                            personTable.Insert(ix, newPerson)
+                            bInserted = True
+                            p = ix
+                            Exit For
+                        End If
+                    Next
 
-                If Not bInserted Then
-                    p = personTable.Count
-                    newPerson = UpdateSortSeq(newPerson, p)
-                    personTable.Add(newPerson)
+                    If Not bInserted Then
+                        p = personTable.Count
+                        newPerson = UpdateSortSeq(newPerson, p)
+                        personTable.Add(newPerson)
+                    End If
+                    ShowUpdated(newPerson, "Inserted")
+                    DisplayPersonList()
+                    lbPeople.SelectedIndex = p
+                    LblSortSeq.Text = CStr(newPerson.Sortseq)
+                Else
+                    ShowStatus(newPerson.Name & " not inserted", False, True)
                 End If
-                ShowUpdated(newPerson, "Inserted")
-                DisplayPersonList()
-                lbPeople.SelectedIndex = p
-                LblSortSeq.Text = CStr(newPerson.Sortseq)
                 newPerson.Dispose()
             Catch ex As DbException
                 MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
@@ -160,7 +164,8 @@ Public NotInheritable Class FrmUpdateDatabase
             End Try
         Else
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
-        End If
+            End If
+
     End Sub
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         Dim oPerson As Person
@@ -1134,6 +1139,17 @@ Public NotInheritable Class FrmUpdateDatabase
         End If
         Return newPerson
     End Function
-
+    Private Function IsInList(ByRef newPerson As Person) As Boolean
+        Dim isFound As Boolean = False
+        For Each oPerson As Person In personTable
+            If oPerson.Name = newPerson.Name Then
+                If MsgBox(oPerson.Name & " found in the list. OK to Insert?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Duplicate Person") = MsgBoxResult.No Then
+                    isFound = True
+                End If
+                Exit For
+            End If
+        Next
+        Return isFound
+    End Function
 #End Region
 End Class
