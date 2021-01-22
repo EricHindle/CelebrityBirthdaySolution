@@ -10,9 +10,9 @@ Imports TweetSharp
 Public NotInheritable Class FrmTweet
 #Region "enum"
     Private Enum TweetType
-        BIRTHDAY
-        ANNIVERSARY
-        FULL
+        Birthday
+        Anniversary
+        Full
     End Enum
 #End Region
 #Region "constants"
@@ -408,7 +408,7 @@ Public NotInheritable Class FrmTweet
             LogUtil.Info("Deleting tweet images", "FrmTweet")
             Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder,
                                                                                               FileIO.SearchOption.SearchTopLevelOnly,
-                                                                                              {[Enum].GetName(GetType(TweetType), TweetType.ANNIVERSARY) & "*.*", [Enum].GetName(GetType(TweetType), TweetType.BIRTHDAY) & "*.*", My.Resources.TOTD & "*.*"})
+                                                                                              {[Enum].GetName(GetType(TweetType), TweetType.Anniversary) & "*.*", [Enum].GetName(GetType(TweetType), TweetType.Birthday) & "*.*", My.Resources.TOTD & "*.*"})
             For Each _imageFile As String In _imageList
                 My.Computer.FileSystem.DeleteFile(_imageFile)
             Next
@@ -562,7 +562,7 @@ Public NotInheritable Class FrmTweet
 
             Dim _personList As List(Of Person) = _tweetLists(_personIndex)
             DisplayStatus(">" & CStr(_personIndex), True)
-            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, [Enum].GetName(GetType(TweetType), _tweetType) & CStr(_personIndex - _listStart + 1))
+            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, [Enum].GetName(GetType(TweetType), _tweetType) & "_" & CStr(_personIndex - _listStart + 1))
             Dim pbControl As PictureBox = GetPictureBoxFromPage(newTweetTabPage)
             Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
             IsNoGenerate = True

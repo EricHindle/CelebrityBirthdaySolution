@@ -203,7 +203,7 @@ Public Class FrmDateCheck
         Try
             extract = GetWikiText(3, _forename, _surname, wikiId)
             If extract.Contains("may refer to:") = False Then
-                Dim _desc As String = RemoveSquareBrackets(FixQuotesAndHyphens(extract))
+                Dim _desc As String = RemoveSquareBrackets(FixQuotesAndHyphens(extract, True))
                 Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
                 If _parts.Count = 3 Then
                     Dim datePart As String = _parts(1)

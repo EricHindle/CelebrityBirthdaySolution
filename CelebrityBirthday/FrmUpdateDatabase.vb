@@ -1043,8 +1043,8 @@ Public NotInheritable Class FrmUpdateDatabase
         txtSurname.Text = txtSurname.Text.Trim(charsToTrim)
         Dim newShortText = RemoveSquareBrackets(FixQuotesAndHyphens(TxtShortDesc.Text)).Trim(charsToTrim)
         TxtShortDesc.Text = newShortText & If(newShortText.Length > 0, ".", "")
-        TxtBirthName.Text = RemoveSquareBrackets(FixQuotesAndHyphens(TxtBirthName.Text).Replace(",", "").Replace(".", "").Replace(";", "")).Trim(charsToTrim)
-        TxtBirthPlace.Text = RemoveSquareBrackets(FixQuotesAndHyphens(TxtBirthPlace.Text).Replace(".", "").Replace(";", "")).Trim(charsToTrim)
+        TxtBirthName.Text = RemoveSquareBrackets(FixQuotesAndHyphens(TxtBirthName.Text, False).Replace(",", "").Replace(".", "").Replace(";", "")).Trim(charsToTrim)
+        TxtBirthPlace.Text = RemoveSquareBrackets(FixQuotesAndHyphens(TxtBirthPlace.Text, False).Replace(".", "").Replace(";", "")).Trim(charsToTrim)
         txtTwitter.Text = RemoveBadCharacters(txtTwitter.Text, {8207}).Trim
         rtbDesc.Text = txtDesc.Text
         Return _parts
