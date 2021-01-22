@@ -267,7 +267,6 @@ Public NotInheritable Class FrmUpdateDatabase
     Private Sub LbPeople_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbPeople.SelectedIndexChanged
         ClearStatus()
         SwapText("Text")
-        bLoadingPerson = True
         If lbPeople.SelectedIndex >= 0 Then
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             LoadScreenFromPerson(oPerson)
@@ -275,10 +274,8 @@ Public NotInheritable Class FrmUpdateDatabase
         Else
             ClearDetails()
         End If
-        bLoadingPerson = False
     End Sub
     Private Sub BtnUpdateSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateSel.Click
-
         ClearStatus()
         If lbPeople.SelectedIndex >= 0 Then
             ShowStatus("Updating database with selected person", , True)
@@ -712,6 +709,7 @@ Public NotInheritable Class FrmUpdateDatabase
         _personId = 0
     End Sub
     Private Sub ClearDetails()
+        bLoadingPerson = True
         lblID.Text = ""
         txtDesc.Text = ""
         txtWiki.Text = ""
@@ -730,6 +728,8 @@ Public NotInheritable Class FrmUpdateDatabase
         txtTwitter.Text = ""
         cbNoTweet.Checked = False
         TxtWikiId.Text = ""
+        ResetBackgroundColors()
+        bLoadingPerson = False
     End Sub
     Private Sub DisplayPersonList()
         lbPeople.Items.Clear()
@@ -870,7 +870,6 @@ Public NotInheritable Class FrmUpdateDatabase
             lblBotsdId.Text = oPerson.Social.Botsd
         End If
         txtWiki.Text = GetWikiText(NudSentences.Value, oPerson.ForeName, oPerson.Surname, TxtWikiId.Text)
-        ResetBackgroundColors()
         bLoadingPerson = False
     End Sub
     Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
