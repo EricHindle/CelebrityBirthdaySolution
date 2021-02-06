@@ -23,13 +23,7 @@ Partial Class FrmDeathList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDeathList))
-        Me.dgvPeople = New System.Windows.Forms.DataGridView()
-        Me.BtnClose = New System.Windows.Forms.Button()
-        Me.BtnSelect = New System.Windows.Forms.Button()
-        Me.nudYear = New System.Windows.Forms.NumericUpDown()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.DgvPeople = New System.Windows.Forms.DataGridView()
         Me.tId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tForename = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tSurname = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,92 +38,36 @@ Partial Class FrmDeathList
         Me.tBirthYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tBirthPlace = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tBirthName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        CType(Me.dgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tImg = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.BtnClose = New System.Windows.Forms.Button()
+        Me.BtnSelect = New System.Windows.Forms.Button()
+        Me.nudYear = New System.Windows.Forms.NumericUpDown()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ChkShowImage = New System.Windows.Forms.CheckBox()
+        CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'dgvPeople
+        'DgvPeople
         '
-        Me.dgvPeople.AllowUserToAddRows = False
-        Me.dgvPeople.AllowUserToDeleteRows = False
-        Me.dgvPeople.AllowUserToResizeRows = False
-        Me.dgvPeople.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.DgvPeople.AllowUserToAddRows = False
+        Me.DgvPeople.AllowUserToDeleteRows = False
+        Me.DgvPeople.AllowUserToResizeRows = False
+        Me.DgvPeople.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPeople.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tId, Me.tForename, Me.tSurname, Me.tDeathDay, Me.tDeathMonth, Me.tDeathYear, Me.tYearsDead, Me.tAge, Me.tShortDesc, Me.tBirthDay, Me.tBirthMonth, Me.tBirthYear, Me.tBirthPlace, Me.tBirthName})
-        Me.dgvPeople.Location = New System.Drawing.Point(14, 13)
-        Me.dgvPeople.Margin = New System.Windows.Forms.Padding(4)
-        Me.dgvPeople.Name = "dgvPeople"
-        Me.dgvPeople.RowHeadersVisible = False
-        Me.dgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvPeople.Size = New System.Drawing.Size(1281, 487)
-        Me.dgvPeople.TabIndex = 0
-        '
-        'BtnClose
-        '
-        Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(1133, 508)
-        Me.BtnClose.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnClose.Name = "BtnClose"
-        Me.BtnClose.Size = New System.Drawing.Size(162, 36)
-        Me.BtnClose.TabIndex = 14
-        Me.BtnClose.Text = "Close"
-        Me.BtnClose.UseVisualStyleBackColor = True
-        '
-        'BtnSelect
-        '
-        Me.BtnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSelect.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSelect.Location = New System.Drawing.Point(183, 508)
-        Me.BtnSelect.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnSelect.Name = "BtnSelect"
-        Me.BtnSelect.Size = New System.Drawing.Size(162, 36)
-        Me.BtnSelect.TabIndex = 15
-        Me.BtnSelect.Text = "Select"
-        Me.BtnSelect.UseVisualStyleBackColor = True
-        '
-        'nudYear
-        '
-        Me.nudYear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.nudYear.Location = New System.Drawing.Point(69, 516)
-        Me.nudYear.Margin = New System.Windows.Forms.Padding(4)
-        Me.nudYear.Maximum = New Decimal(New Integer() {2030, 0, 0, 0})
-        Me.nudYear.Name = "nudYear"
-        Me.nudYear.Size = New System.Drawing.Size(90, 22)
-        Me.nudYear.TabIndex = 16
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(29, 518)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(32, 14)
-        Me.Label1.TabIndex = 17
-        Me.Label1.Text = "Year"
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 550)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1309, 22)
-        Me.StatusStrip1.TabIndex = 18
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'LblStatus
-        '
-        Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
-        Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
-        Me.LblStatus.Name = "LblStatus"
-        Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.LblStatus.Size = New System.Drawing.Size(10, 17)
+        Me.DgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvPeople.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tId, Me.tForename, Me.tSurname, Me.tDeathDay, Me.tDeathMonth, Me.tDeathYear, Me.tYearsDead, Me.tAge, Me.tShortDesc, Me.tBirthDay, Me.tBirthMonth, Me.tBirthYear, Me.tBirthPlace, Me.tBirthName, Me.tImg})
+        Me.DgvPeople.Location = New System.Drawing.Point(14, 13)
+        Me.DgvPeople.Margin = New System.Windows.Forms.Padding(4)
+        Me.DgvPeople.Name = "DgvPeople"
+        Me.DgvPeople.RowHeadersVisible = False
+        Me.DgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvPeople.Size = New System.Drawing.Size(1323, 487)
+        Me.DgvPeople.TabIndex = 0
         '
         'tId
         '
@@ -224,23 +162,109 @@ Partial Class FrmDeathList
         Me.tBirthName.Name = "tBirthName"
         Me.tBirthName.Width = 150
         '
+        'tImg
+        '
+        Me.tImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.tImg.HeaderText = "Img"
+        Me.tImg.Name = "tImg"
+        Me.tImg.ReadOnly = True
+        Me.tImg.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tImg.Visible = False
+        Me.tImg.Width = 65
+        '
+        'BtnClose
+        '
+        Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnClose.Location = New System.Drawing.Point(1175, 508)
+        Me.BtnClose.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnClose.Name = "BtnClose"
+        Me.BtnClose.Size = New System.Drawing.Size(162, 36)
+        Me.BtnClose.TabIndex = 14
+        Me.BtnClose.Text = "Close"
+        Me.BtnClose.UseVisualStyleBackColor = True
+        '
+        'BtnSelect
+        '
+        Me.BtnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSelect.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSelect.Location = New System.Drawing.Point(183, 508)
+        Me.BtnSelect.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnSelect.Name = "BtnSelect"
+        Me.BtnSelect.Size = New System.Drawing.Size(162, 36)
+        Me.BtnSelect.TabIndex = 15
+        Me.BtnSelect.Text = "Select"
+        Me.BtnSelect.UseVisualStyleBackColor = True
+        '
+        'nudYear
+        '
+        Me.nudYear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.nudYear.Location = New System.Drawing.Point(69, 516)
+        Me.nudYear.Margin = New System.Windows.Forms.Padding(4)
+        Me.nudYear.Maximum = New Decimal(New Integer() {2030, 0, 0, 0})
+        Me.nudYear.Name = "nudYear"
+        Me.nudYear.Size = New System.Drawing.Size(90, 22)
+        Me.nudYear.TabIndex = 16
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(29, 518)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(32, 14)
+        Me.Label1.TabIndex = 17
+        Me.Label1.Text = "Year"
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 550)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(1351, 22)
+        Me.StatusStrip1.TabIndex = 18
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'LblStatus
+        '
+        Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
+        Me.LblStatus.Name = "LblStatus"
+        Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.LblStatus.Size = New System.Drawing.Size(10, 17)
+        '
+        'ChkShowImage
+        '
+        Me.ChkShowImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ChkShowImage.AutoSize = True
+        Me.ChkShowImage.Location = New System.Drawing.Point(356, 518)
+        Me.ChkShowImage.Name = "ChkShowImage"
+        Me.ChkShowImage.Size = New System.Drawing.Size(100, 18)
+        Me.ChkShowImage.TabIndex = 19
+        Me.ChkShowImage.Text = "Show Images"
+        Me.ChkShowImage.UseVisualStyleBackColor = True
+        '
         'FrmDeathList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1309, 572)
+        Me.ClientSize = New System.Drawing.Size(1351, 572)
+        Me.Controls.Add(Me.ChkShowImage)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.nudYear)
         Me.Controls.Add(Me.BtnSelect)
         Me.Controls.Add(Me.BtnClose)
-        Me.Controls.Add(Me.dgvPeople)
+        Me.Controls.Add(Me.DgvPeople)
         Me.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "FrmDeathList"
         Me.Text = "Death List"
-        CType(Me.dgvPeople, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudYear, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
@@ -249,7 +273,7 @@ Partial Class FrmDeathList
 
     End Sub
 
-    Friend WithEvents dgvPeople As DataGridView
+    Friend WithEvents DgvPeople As DataGridView
     Friend WithEvents BtnClose As Button
     Friend WithEvents BtnSelect As Button
     Friend WithEvents nudYear As NumericUpDown
@@ -270,4 +294,6 @@ Partial Class FrmDeathList
     Friend WithEvents tBirthYear As DataGridViewTextBoxColumn
     Friend WithEvents tBirthPlace As DataGridViewTextBoxColumn
     Friend WithEvents tBirthName As DataGridViewTextBoxColumn
+    Friend WithEvents tImg As DataGridViewImageColumn
+    Friend WithEvents ChkShowImage As CheckBox
 End Class

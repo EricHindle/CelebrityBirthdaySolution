@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmImageCapture
+Partial Class FrmImageCapture
     Inherits System.Windows.Forms.Form
 
     'Required by the Windows Form Designer

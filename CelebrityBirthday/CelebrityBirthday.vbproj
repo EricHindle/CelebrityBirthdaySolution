@@ -210,16 +210,16 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GlobalSuppressions.vb" />
-    <Compile Include="Imaging\frmImageCapture.designer.vb">
-      <DependentUpon>frmImageCapture.vb</DependentUpon>
+    <Compile Include="Imaging\FrmImageCapture.designer.vb">
+      <DependentUpon>FrmImageCapture.vb</DependentUpon>
     </Compile>
-    <Compile Include="Imaging\frmImageCapture.vb">
+    <Compile Include="Imaging\FrmImageCapture.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Imaging\frmImages.Designer.vb">
-      <DependentUpon>frmImages.vb</DependentUpon>
+    <Compile Include="Imaging\FrmImages.Designer.vb">
+      <DependentUpon>FrmImages.vb</DependentUpon>
     </Compile>
-    <Compile Include="Imaging\frmImages.vb">
+    <Compile Include="Imaging\FrmImages.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmMenu.Designer.vb">
@@ -263,6 +263,12 @@
       <DependentUpon>FrmBotsdPost.vb</DependentUpon>
     </Compile>
     <Compile Include="Botsd\FrmBotsdPost.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Imaging\FrmShowImage.Designer.vb">
+      <DependentUpon>FrmShowImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Imaging\FrmShowImage.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Logging\frmLogViewer.designer.vb">
@@ -323,10 +329,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Domain\Person.vb" />
-    <Compile Include="Imaging\frmImageStore.designer.vb">
-      <DependentUpon>frmImageStore.vb</DependentUpon>
+    <Compile Include="Imaging\FrmImageStore.designer.vb">
+      <DependentUpon>FrmImageStore.vb</DependentUpon>
     </Compile>
-    <Compile Include="Imaging\frmImageStore.vb">
+    <Compile Include="Imaging\FrmImageStore.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SplashScreen1.Designer.vb">
@@ -368,11 +374,11 @@
     <EmbeddedResource Include="FrmText.resx">
       <DependentUpon>FrmText.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Imaging\frmImageCapture.resx">
-      <DependentUpon>frmImageCapture.vb</DependentUpon>
+    <EmbeddedResource Include="Imaging\FrmImageCapture.resx">
+      <DependentUpon>FrmImageCapture.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Imaging\frmImages.resx">
-      <DependentUpon>frmImages.vb</DependentUpon>
+    <EmbeddedResource Include="Imaging\FrmImages.resx">
+      <DependentUpon>FrmImages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.vb</DependentUpon>
@@ -395,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Botsd\FrmBotsdPost.resx">
       <DependentUpon>FrmBotsdPost.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Imaging\FrmShowImage.resx">
+      <DependentUpon>FrmShowImage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logging\frmLogViewer.resx">
       <DependentUpon>frmLogViewer.vb</DependentUpon>
@@ -420,8 +429,8 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Imaging\frmImageStore.resx">
-      <DependentUpon>frmImageStore.vb</DependentUpon>
+    <EmbeddedResource Include="Imaging\FrmImageStore.resx">
+      <DependentUpon>FrmImageStore.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SplashScreen1.resx">

@@ -4,7 +4,7 @@ Imports System.IO
 Imports System.Drawing.Imaging
 Imports System.Reflection
 
-Public Class frmImageCapture
+Public NotInheritable Class FrmImageCapture
 #Region "Constants"
 
     Private Const SAVED_MESSAGE As String = "Image saved to "

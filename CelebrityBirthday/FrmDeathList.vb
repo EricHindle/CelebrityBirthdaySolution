@@ -17,9 +17,12 @@
     End Sub
     Private Sub FillGrid(_year As Integer)
         Dim oTable As CelebrityBirthdayDataSet.PersonDataTable = GetPeopleByDeathYear(_year)
-        dgvPeople.Rows.Clear()
+        DgvPeople.Rows.Clear()
         For Each oRow As CelebrityBirthdayDataSet.PersonRow In oTable.Rows
-            Dim tRow As DataGridViewRow = dgvPeople.Rows(dgvPeople.Rows.Add())
+            Dim tRow As DataGridViewRow = DgvPeople.Rows(DgvPeople.Rows.Add())
+            If ChkShowImage.Checked Then
+                tRow.Height = 65
+            End If
             tRow.Cells(tId.Name).Value = oRow.id
             tRow.Cells(tForename.Name).Value = oRow.forename
             tRow.Cells(tSurname.Name).Value = oRow.surname
@@ -49,6 +52,8 @@
             tRow.Cells(tBirthYear.Name).Value = oRow.birthyear
             tRow.Cells(tBirthName.Name).Value = If(oRow.IsbirthnameNull, "", oRow.birthname)
             tRow.Cells(tBirthPlace.Name).Value = If(oRow.IsbirthplaceNull, "", oRow.birthplace)
+            Dim imageCell As DataGridViewImageCell = tRow.Cells(tImg.Name)
+            imageCell.Value = GetImageById(oRow.id, True).Photo
         Next
     End Sub
 
@@ -76,14 +81,21 @@
         FillGrid(nudYear.Value)
     End Sub
 
-    Private Sub DgvPeople_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPeople.CellDoubleClick
-        If e.RowIndex >= 0 And e.RowIndex < dgvPeople.Rows.Count Then
-            Dim tRow As DataGridViewRow = dgvPeople.Rows(e.RowIndex)
+    Private Sub DgvPeople_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvPeople.CellDoubleClick
+        If e.RowIndex >= 0 And e.RowIndex < DgvPeople.Rows.Count Then
+            Dim tRow As DataGridViewRow = DgvPeople.Rows(e.RowIndex)
             Dim _index As Integer = tRow.Cells(tId.Name).Value
             Using _update As New FrmUpdateDatabase
                 _update.PersonId = _index
                 _update.ShowDialog()
             End Using
         End If
+    End Sub
+
+    Private Sub ChkShowImage_CheckedChanged(sender As Object, e As EventArgs) Handles ChkShowImage.CheckedChanged
+        DgvPeople.Columns().Item(tImg.Name).Visible = ChkShowImage.Checked
+        For Each tRow As DataGridViewRow In DgvPeople.Rows
+            tRow.Height = If(ChkShowImage.Checked, 65, DgvPeople.RowTemplate.Height)
+        Next
     End Sub
 End Class
