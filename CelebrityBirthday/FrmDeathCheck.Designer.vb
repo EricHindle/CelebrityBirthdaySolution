@@ -22,6 +22,7 @@ Partial Class FrmDeathCheck
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDeathCheck))
         Me.dgvWarnings = New System.Windows.Forms.DataGridView()
         Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -37,6 +38,7 @@ Partial Class FrmDeathCheck
         Me.BtnStart = New System.Windows.Forms.Button()
         Me.BtnWrite = New System.Windows.Forms.Button()
         Me.BtnDeathList = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.dgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -140,27 +142,28 @@ Partial Class FrmDeathCheck
         Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(3, 17)
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.lblStatus.Size = New System.Drawing.Size(6, 17)
         '
         'BtnStart
         '
-        Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnStart.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnStart.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnStart.Location = New System.Drawing.Point(47, 487)
+        Me.BtnStart.Location = New System.Drawing.Point(44, 487)
         Me.BtnStart.Name = "BtnStart"
         Me.BtnStart.Size = New System.Drawing.Size(139, 33)
         Me.BtnStart.TabIndex = 11
         Me.BtnStart.Text = "Start Check"
+        Me.ToolTip1.SetToolTip(Me.BtnStart, "List missing deaths")
         Me.BtnStart.UseVisualStyleBackColor = True
         '
         'BtnWrite
         '
-        Me.BtnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnWrite.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWrite.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWrite.Location = New System.Drawing.Point(211, 487)
+        Me.BtnWrite.Location = New System.Drawing.Point(210, 487)
         Me.BtnWrite.Name = "BtnWrite"
         Me.BtnWrite.Size = New System.Drawing.Size(139, 33)
         Me.BtnWrite.TabIndex = 12
@@ -169,14 +172,15 @@ Partial Class FrmDeathCheck
         '
         'BtnDeathList
         '
-        Me.BtnDeathList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnDeathList.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnDeathList.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDeathList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnDeathList.Location = New System.Drawing.Point(543, 487)
+        Me.BtnDeathList.Location = New System.Drawing.Point(376, 487)
         Me.BtnDeathList.Name = "BtnDeathList"
         Me.BtnDeathList.Size = New System.Drawing.Size(139, 33)
         Me.BtnDeathList.TabIndex = 13
         Me.BtnDeathList.Text = "Death List"
+        Me.ToolTip1.SetToolTip(Me.BtnDeathList, "List deaths for a year")
         Me.BtnDeathList.UseVisualStyleBackColor = True
         '
         'FrmDeathCheck
@@ -216,4 +220,5 @@ Partial Class FrmDeathCheck
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents lblCount As ToolStripStatusLabel
     Friend WithEvents BtnDeathList As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

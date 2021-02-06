@@ -314,13 +314,13 @@ Friend Module modCbday
         End Try
         Return _extract
     End Function
-    Public Function DisplayException(pMethodBase As MethodBase, pException As Exception, pExceptionType As String) As MsgBoxResult
+    Public Function DisplayException(pMethodBase As MethodBase, pException As Exception, pExceptionType As String, Optional isAsk As Boolean = False) As MsgBoxResult
         LogUtil.Exception(pExceptionType, pException, pMethodBase.Name)
         Return MsgBox(pMethodBase.Name & " : Database exception" & vbCrLf _
             & pException.Message & vbCrLf _
             & If(pException.InnerException Is Nothing, "", pException.InnerException.Message) _
-            & vbCrLf & "OK to continue?",
-                      MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation,
+            & If(isAsk, vbCrLf & "OK to continue?", ""),
+                   If(isAsk, MsgBoxStyle.YesNo, MsgBoxStyle.OkOnly) Or MsgBoxStyle.Exclamation,
                       pExceptionType)
     End Function
     Public Function GetUniqueFname(ByVal filename As String, ByVal Optional pPath As String = Nothing) As String

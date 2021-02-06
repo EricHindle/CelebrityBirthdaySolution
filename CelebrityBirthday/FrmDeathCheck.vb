@@ -1,6 +1,8 @@
 ﻿Imports System.Data.Common
 Imports System.IO
 Imports System.Net
+Imports System.Reflection
+
 Public Class FrmDeathCheck
 #Region "variables"
     Private personTable As List(Of Person)
@@ -10,9 +12,9 @@ Public Class FrmDeathCheck
         Me.Close()
     End Sub
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
-        DisplayMessage("Finding the living")
+        DisplayMessage("Finding the living", True)
         personTable = FindLivingPeople(False)
-        DisplayMessage("Found " & CStr(personTable.Count) & " people")
+        DisplayMessage("Found " & CStr(personTable.Count) & " people", True)
         Dim countText As String = "{0} of " & CStr(personTable.Count)
         Dim iCt As Integer = 0
         For Each _person In personTable
@@ -36,10 +38,7 @@ Public Class FrmDeathCheck
                     End If
                 End If
             Catch ex As DbException
-                LogUtil.Exception("Exception during list load", ex, MyBase.Name)
-                If MsgBox(_person.Name & vbCrLf & "Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
-                    Exit Sub
-                End If
+                If DisplayException(MethodBase.GetCurrentMethod(), ex, "dB", True) = MsgBoxResult.No Then Exit Sub
             End Try
         Next
     End Sub
@@ -47,6 +46,7 @@ Public Class FrmDeathCheck
         If e.RowIndex >= 0 And e.RowIndex < dgvWarnings.Rows.Count Then
             Dim tRow As DataGridViewRow = dgvWarnings.Rows(e.RowIndex)
             Dim _index As Integer = tRow.Cells(xId.Name).Value
+            DisplayMessage("Showing update form for " & tRow.Cells(xName.Name).Value, True)
             Using _update As New FrmUpdateDatabase
                 _update.PersonId = _index
                 _update.ShowDialog()
@@ -55,6 +55,7 @@ Public Class FrmDeathCheck
     End Sub
     Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
         Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "deadpeople.csv")
+        DisplayMessage("Writing " & _filename, True)
         Using _outfile As New StreamWriter(_filename, True)
             For Each _row As DataGridViewRow In dgvWarnings.Rows
                 _outfile.WriteLine(_row.Cells(xId.Name).Value & "," & _row.Cells(xName.Name).Value & "," & _row.Cells(xBirth.Name).Value & "," & _row.Cells(xDeath.Name).Value)
@@ -104,9 +105,12 @@ Public Class FrmDeathCheck
         End Select
         Return _return
     End Function
-    Private Sub DisplayMessage(oText As String)
+    Private Sub DisplayMessage(oText As String, Optional isLogged As Boolean = False)
         lblStatus.Text = oText
         StatusStrip1.Refresh()
+        If isLogged Then
+            LogUtil.Info(oText, MyBase.Name)
+        End If
     End Sub
     Private Function AddXRow(oPerson As Person, oDateOfDeath As String, oDesc As String) As DataGridViewRow
         Dim _newRow As DataGridViewRow = dgvWarnings.Rows(dgvWarnings.Rows.Add())
