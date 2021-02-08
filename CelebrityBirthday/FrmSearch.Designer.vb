@@ -29,13 +29,6 @@ Partial Class FrmSearch
         Me.txtId = New System.Windows.Forms.TextBox()
         Me.TxtSurname = New System.Windows.Forms.TextBox()
         Me.DgvPeople = New System.Windows.Forms.DataGridView()
-        Me.SelPersonId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.selPersonDay = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.selPersonMonth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SelPersonYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SelPersonForename = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SelPersonSurname = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.selDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.BtnSearchByName = New System.Windows.Forms.Button()
         Me.BtnSearchById = New System.Windows.Forms.Button()
@@ -52,6 +45,15 @@ Partial Class FrmSearch
         Me.BtnImgUpdate = New System.Windows.Forms.Button()
         Me.BtnPasteName = New System.Windows.Forms.Button()
         Me.BtnSplitNameText = New System.Windows.Forms.Button()
+        Me.ChkShowImage = New System.Windows.Forms.CheckBox()
+        Me.SelPersonId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.selPersonDay = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.selPersonMonth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SelPersonYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SelPersonForename = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SelPersonSurname = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.selDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xImg = New System.Windows.Forms.DataGridViewImageColumn()
         CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -115,77 +117,22 @@ Partial Class FrmSearch
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvPeople.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SelPersonId, Me.selPersonDay, Me.selPersonMonth, Me.SelPersonYear, Me.SelPersonForename, Me.SelPersonSurname, Me.selDesc})
+        Me.DgvPeople.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SelPersonId, Me.selPersonDay, Me.selPersonMonth, Me.SelPersonYear, Me.SelPersonForename, Me.SelPersonSurname, Me.selDesc, Me.xImg})
         Me.DgvPeople.Location = New System.Drawing.Point(23, 92)
         Me.DgvPeople.MultiSelect = False
         Me.DgvPeople.Name = "DgvPeople"
         Me.DgvPeople.ReadOnly = True
         Me.DgvPeople.RowHeadersVisible = False
         Me.DgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvPeople.Size = New System.Drawing.Size(923, 434)
+        Me.DgvPeople.Size = New System.Drawing.Size(1030, 434)
         Me.DgvPeople.TabIndex = 19
-        '
-        'SelPersonId
-        '
-        Me.SelPersonId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.SelPersonId.HeaderText = "Id"
-        Me.SelPersonId.Name = "SelPersonId"
-        Me.SelPersonId.ReadOnly = True
-        Me.SelPersonId.Width = 50
-        '
-        'selPersonDay
-        '
-        Me.selPersonDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.selPersonDay.HeaderText = "Day"
-        Me.selPersonDay.Name = "selPersonDay"
-        Me.selPersonDay.ReadOnly = True
-        Me.selPersonDay.Width = 50
-        '
-        'selPersonMonth
-        '
-        Me.selPersonMonth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.selPersonMonth.HeaderText = "Month"
-        Me.selPersonMonth.Name = "selPersonMonth"
-        Me.selPersonMonth.ReadOnly = True
-        Me.selPersonMonth.Width = 50
-        '
-        'SelPersonYear
-        '
-        Me.SelPersonYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.SelPersonYear.HeaderText = "Year"
-        Me.SelPersonYear.Name = "SelPersonYear"
-        Me.SelPersonYear.ReadOnly = True
-        Me.SelPersonYear.Width = 50
-        '
-        'SelPersonForename
-        '
-        Me.SelPersonForename.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.SelPersonForename.HeaderText = "Forename"
-        Me.SelPersonForename.Name = "SelPersonForename"
-        Me.SelPersonForename.ReadOnly = True
-        Me.SelPersonForename.Width = 200
-        '
-        'SelPersonSurname
-        '
-        Me.SelPersonSurname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.SelPersonSurname.HeaderText = "Surname"
-        Me.SelPersonSurname.Name = "SelPersonSurname"
-        Me.SelPersonSurname.ReadOnly = True
-        Me.SelPersonSurname.Width = 200
-        '
-        'selDesc
-        '
-        Me.selDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.selDesc.HeaderText = "Description"
-        Me.selDesc.Name = "selDesc"
-        Me.selDesc.ReadOnly = True
         '
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(974, 481)
+        Me.BtnClose.Location = New System.Drawing.Point(1081, 481)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(117, 45)
         Me.BtnClose.TabIndex = 17
@@ -219,7 +166,7 @@ Partial Class FrmSearch
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.BtnSearchById)
         Me.GroupBox1.Controls.Add(Me.BtnSearchByName)
-        Me.GroupBox1.Location = New System.Drawing.Point(959, 81)
+        Me.GroupBox1.Location = New System.Drawing.Point(1066, 81)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(135, 127)
         Me.GroupBox1.TabIndex = 22
@@ -230,7 +177,7 @@ Partial Class FrmSearch
         '
         Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.Controls.Add(Me.BtnFindInWiki)
-        Me.GroupBox2.Location = New System.Drawing.Point(959, 214)
+        Me.GroupBox2.Location = New System.Drawing.Point(1066, 214)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(135, 63)
         Me.GroupBox2.TabIndex = 23
@@ -255,7 +202,7 @@ Partial Class FrmSearch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 544)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1106, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1213, 22)
         Me.StatusStrip1.TabIndex = 24
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -283,7 +230,7 @@ Partial Class FrmSearch
         Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClear.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClear.Location = New System.Drawing.Point(974, 23)
+        Me.BtnClear.Location = New System.Drawing.Point(1081, 12)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(107, 36)
         Me.BtnClear.TabIndex = 17
@@ -297,7 +244,7 @@ Partial Class FrmSearch
         Me.GroupBox3.Controls.Add(Me.BtnTweet)
         Me.GroupBox3.Controls.Add(Me.BtnImgUpdate)
         Me.GroupBox3.Controls.Add(Me.BtnDbUpdate)
-        Me.GroupBox3.Location = New System.Drawing.Point(959, 283)
+        Me.GroupBox3.Location = New System.Drawing.Point(1066, 283)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(135, 192)
         Me.GroupBox3.TabIndex = 26
@@ -357,12 +304,88 @@ Partial Class FrmSearch
         Me.BtnSplitNameText.Text = "[]<->[]"
         Me.BtnSplitNameText.UseVisualStyleBackColor = True
         '
+        'ChkShowImage
+        '
+        Me.ChkShowImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChkShowImage.AutoSize = True
+        Me.ChkShowImage.Location = New System.Drawing.Point(1098, 54)
+        Me.ChkShowImage.Name = "ChkShowImage"
+        Me.ChkShowImage.Size = New System.Drawing.Size(90, 17)
+        Me.ChkShowImage.TabIndex = 42
+        Me.ChkShowImage.Text = "Show Images"
+        Me.ChkShowImage.UseVisualStyleBackColor = True
+        '
+        'SelPersonId
+        '
+        Me.SelPersonId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.SelPersonId.HeaderText = "Id"
+        Me.SelPersonId.Name = "SelPersonId"
+        Me.SelPersonId.ReadOnly = True
+        Me.SelPersonId.Width = 50
+        '
+        'selPersonDay
+        '
+        Me.selPersonDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.selPersonDay.HeaderText = "Day"
+        Me.selPersonDay.Name = "selPersonDay"
+        Me.selPersonDay.ReadOnly = True
+        Me.selPersonDay.Width = 50
+        '
+        'selPersonMonth
+        '
+        Me.selPersonMonth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.selPersonMonth.HeaderText = "Month"
+        Me.selPersonMonth.Name = "selPersonMonth"
+        Me.selPersonMonth.ReadOnly = True
+        Me.selPersonMonth.Width = 50
+        '
+        'SelPersonYear
+        '
+        Me.SelPersonYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.SelPersonYear.HeaderText = "Year"
+        Me.SelPersonYear.Name = "SelPersonYear"
+        Me.SelPersonYear.ReadOnly = True
+        Me.SelPersonYear.Width = 50
+        '
+        'SelPersonForename
+        '
+        Me.SelPersonForename.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.SelPersonForename.HeaderText = "Forename"
+        Me.SelPersonForename.Name = "SelPersonForename"
+        Me.SelPersonForename.ReadOnly = True
+        Me.SelPersonForename.Width = 200
+        '
+        'SelPersonSurname
+        '
+        Me.SelPersonSurname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.SelPersonSurname.HeaderText = "Surname"
+        Me.SelPersonSurname.Name = "SelPersonSurname"
+        Me.SelPersonSurname.ReadOnly = True
+        Me.SelPersonSurname.Width = 200
+        '
+        'selDesc
+        '
+        Me.selDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.selDesc.HeaderText = "Description"
+        Me.selDesc.Name = "selDesc"
+        Me.selDesc.ReadOnly = True
+        '
+        'xImg
+        '
+        Me.xImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xImg.HeaderText = "Img"
+        Me.xImg.Name = "xImg"
+        Me.xImg.ReadOnly = True
+        Me.xImg.Visible = False
+        Me.xImg.Width = 65
+        '
         'FrmSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1106, 566)
+        Me.ClientSize = New System.Drawing.Size(1213, 566)
+        Me.Controls.Add(Me.ChkShowImage)
         Me.Controls.Add(Me.BtnSplitNameText)
         Me.Controls.Add(Me.BtnPasteName)
         Me.Controls.Add(Me.GroupBox3)
@@ -407,6 +430,13 @@ Partial Class FrmSearch
     Friend WithEvents LblStatus As ToolStripStatusLabel
     Friend WithEvents BtnDbUpdate As Button
     Friend WithEvents BtnClear As Button
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents BtnImgUpdate As Button
+    Friend WithEvents BtnTweet As Button
+    Friend WithEvents BtnWordPress As Button
+    Friend WithEvents BtnPasteName As Button
+    Friend WithEvents BtnSplitNameText As Button
+    Friend WithEvents ChkShowImage As CheckBox
     Friend WithEvents SelPersonId As DataGridViewTextBoxColumn
     Friend WithEvents selPersonDay As DataGridViewTextBoxColumn
     Friend WithEvents selPersonMonth As DataGridViewTextBoxColumn
@@ -414,10 +444,5 @@ Partial Class FrmSearch
     Friend WithEvents SelPersonForename As DataGridViewTextBoxColumn
     Friend WithEvents SelPersonSurname As DataGridViewTextBoxColumn
     Friend WithEvents selDesc As DataGridViewTextBoxColumn
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents BtnImgUpdate As Button
-    Friend WithEvents BtnTweet As Button
-    Friend WithEvents BtnWordPress As Button
-    Friend WithEvents BtnPasteName As Button
-    Friend WithEvents BtnSplitNameText As Button
+    Friend WithEvents xImg As DataGridViewImageColumn
 End Class

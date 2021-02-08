@@ -75,7 +75,7 @@ Public Class FrmSearch
             ShowStatus("No name supplied")
         End If
     End Sub
-    Private Sub FrmSearch_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub FrmSearch_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
         My.Settings.srchformpos = SetFormPos(Me)
         My.Settings.Save()
@@ -112,6 +112,7 @@ Public Class FrmSearch
     End Sub
     Private Sub AddTableRow(oPerson As Person)
         Dim tRow As DataGridViewRow = DgvPeople.Rows(DgvPeople.Rows.Add)
+        tRow.Height = If(ChkShowImage.Checked, 65, DgvPeople.RowTemplate.Height)
         tRow.Cells(SelPersonId.Name).Value = oPerson.Id
         tRow.Cells(SelPersonForename.Name).Value = oPerson.ForeName
         tRow.Cells(SelPersonSurname.Name).Value = oPerson.Surname
@@ -119,6 +120,13 @@ Public Class FrmSearch
         tRow.Cells(selPersonMonth.Name).Value = oPerson.BirthMonth
         tRow.Cells(SelPersonYear.Name).Value = oPerson.BirthYear
         tRow.Cells(selDesc.Name).Value = oPerson.ShortDesc
+        Dim imageCell As DataGridViewImageCell = tRow.Cells(xImg.Name)
+        Dim oImageIdentity = GetImageById(oPerson.Id, True)
+        If oImageIdentity IsNot Nothing Then
+            imageCell.Value = oImageIdentity.Photo.Clone
+            oImageIdentity.Dispose()
+        End If
+
     End Sub
     Private Sub ShowStatus(pText As String, Optional isLogged As Boolean = False)
         LblStatus.Text = pText
@@ -169,8 +177,7 @@ Public Class FrmSearch
         GetFormPos(Me, My.Settings.srchformpos)
     End Sub
 
-    Private Sub Name_DragDrop(sender As Object, e As DragEventArgs) Handles TxtForename.DragDrop,
-                                                                            TxtSurname.DragDrop
+    Private Sub Name_DragDrop(sender As Object, e As DragEventArgs) Handles TxtSurname.DragDrop, TxtForename.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             Dim item As String = e.Data.GetData(DataFormats.StringFormat)
@@ -192,16 +199,14 @@ Public Class FrmSearch
         End If
     End Sub
 
-    Private Sub Name_DragOver(sender As Object, e As DragEventArgs) Handles TxtSurname.DragOver,
-                                                                            TxtForename.DragOver
+    Private Sub Name_DragOver(sender As Object, e As DragEventArgs) Handles TxtSurname.DragOver, TxtForename.DragOver
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             oBox.Select(TextBoxCursorPos(oBox, e.X, e.Y), 0)
         End If
     End Sub
 
-    Private Sub TxtSurname_DragEnter(sender As Object, e As DragEventArgs) Handles TxtSurname.DragEnter,
-                                                                                   TxtForename.DragEnter
+    Private Sub TxtSurname_DragEnter(sender As Object, e As DragEventArgs) Handles TxtSurname.DragEnter, TxtForename.DragEnter
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             e.Effect = DragDropEffects.Copy
         Else
@@ -212,7 +217,12 @@ Public Class FrmSearch
             End If
         End If
     End Sub
-
+    Private Sub ChkShowImage_CheckedChanged(sender As Object, e As EventArgs) Handles ChkShowImage.CheckedChanged
+        DgvPeople.Columns().Item(xImg.Name).Visible = ChkShowImage.Checked
+        For Each tRow As DataGridViewRow In DgvPeople.Rows
+            tRow.Height = If(ChkShowImage.Checked, 65, DgvPeople.RowTemplate.Height)
+        Next
+    End Sub
     Private Sub BtnPasteName_Click(sender As Object, e As EventArgs) Handles BtnPasteName.Click
         TxtSurname.Text = Clipboard.GetText
     End Sub
