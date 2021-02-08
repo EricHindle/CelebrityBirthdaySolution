@@ -25,11 +25,6 @@ Partial Class FrmDeathCheck
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDeathCheck))
         Me.dgvWarnings = New System.Windows.Forms.DataGridView()
-        Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xDeath = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblCount = New System.Windows.Forms.ToolStripStatusLabel()
@@ -39,6 +34,12 @@ Partial Class FrmDeathCheck
         Me.BtnWrite = New System.Windows.Forms.Button()
         Me.BtnDeathList = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xDeath = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xImg = New System.Windows.Forms.DataGridViewImageColumn()
         CType(Me.dgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -52,7 +53,7 @@ Partial Class FrmDeathCheck
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvWarnings.BackgroundColor = System.Drawing.Color.GhostWhite
         Me.dgvWarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvWarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.xId, Me.xName, Me.xBirth, Me.xDeath, Me.xDesc})
+        Me.dgvWarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.xId, Me.xName, Me.xBirth, Me.xDeath, Me.xDesc, Me.xImg})
         Me.dgvWarnings.Location = New System.Drawing.Point(12, 12)
         Me.dgvWarnings.Name = "dgvWarnings"
         Me.dgvWarnings.ReadOnly = True
@@ -60,43 +61,6 @@ Partial Class FrmDeathCheck
         Me.dgvWarnings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvWarnings.Size = New System.Drawing.Size(1074, 469)
         Me.dgvWarnings.TabIndex = 0
-        '
-        'xId
-        '
-        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xId.HeaderText = "Id"
-        Me.xId.Name = "xId"
-        Me.xId.ReadOnly = True
-        Me.xId.Width = 50
-        '
-        'xName
-        '
-        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xName.HeaderText = "Name"
-        Me.xName.Name = "xName"
-        Me.xName.ReadOnly = True
-        Me.xName.Width = 150
-        '
-        'xBirth
-        '
-        Me.xBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xBirth.HeaderText = "Birth"
-        Me.xBirth.Name = "xBirth"
-        Me.xBirth.ReadOnly = True
-        '
-        'xDeath
-        '
-        Me.xDeath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xDeath.HeaderText = "Death"
-        Me.xDeath.Name = "xDeath"
-        Me.xDeath.ReadOnly = True
-        '
-        'xDesc
-        '
-        Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.xDesc.HeaderText = "Description"
-        Me.xDesc.Name = "xDesc"
-        Me.xDesc.ReadOnly = True
         '
         'btnClose
         '
@@ -183,6 +147,53 @@ Partial Class FrmDeathCheck
         Me.ToolTip1.SetToolTip(Me.BtnDeathList, "List deaths for a year")
         Me.BtnDeathList.UseVisualStyleBackColor = True
         '
+        'xId
+        '
+        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xId.HeaderText = "Id"
+        Me.xId.Name = "xId"
+        Me.xId.ReadOnly = True
+        Me.xId.Width = 50
+        '
+        'xName
+        '
+        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xName.HeaderText = "Name"
+        Me.xName.Name = "xName"
+        Me.xName.ReadOnly = True
+        Me.xName.Width = 150
+        '
+        'xBirth
+        '
+        Me.xBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xBirth.HeaderText = "Birth"
+        Me.xBirth.Name = "xBirth"
+        Me.xBirth.ReadOnly = True
+        '
+        'xDeath
+        '
+        Me.xDeath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xDeath.HeaderText = "Death"
+        Me.xDeath.Name = "xDeath"
+        Me.xDeath.ReadOnly = True
+        '
+        'xDesc
+        '
+        Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.xDesc.HeaderText = "Description"
+        Me.xDesc.Name = "xDesc"
+        Me.xDesc.ReadOnly = True
+        '
+        'xImg
+        '
+        Me.xImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xImg.HeaderText = "Img"
+        Me.xImg.Name = "xImg"
+        Me.xImg.ReadOnly = True
+        Me.xImg.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.xImg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.xImg.Width = 65
+        '
         'FrmDeathCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -212,13 +223,14 @@ Partial Class FrmDeathCheck
     Friend WithEvents lblStatus As ToolStripStatusLabel
     Friend WithEvents BtnStart As Button
     Friend WithEvents BtnWrite As Button
+    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
+    Friend WithEvents lblCount As ToolStripStatusLabel
+    Friend WithEvents BtnDeathList As Button
+    Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents xId As DataGridViewTextBoxColumn
     Friend WithEvents xName As DataGridViewTextBoxColumn
     Friend WithEvents xBirth As DataGridViewTextBoxColumn
     Friend WithEvents xDeath As DataGridViewTextBoxColumn
     Friend WithEvents xDesc As DataGridViewTextBoxColumn
-    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
-    Friend WithEvents lblCount As ToolStripStatusLabel
-    Friend WithEvents BtnDeathList As Button
-    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents xImg As DataGridViewImageColumn
 End Class

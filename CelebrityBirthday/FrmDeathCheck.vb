@@ -1,4 +1,5 @@
-﻿Imports System.Data.Common
+﻿Imports System.ComponentModel
+Imports System.Data.Common
 Imports System.IO
 Imports System.Net
 Imports System.Reflection
@@ -65,9 +66,6 @@ Public Class FrmDeathCheck
     Private Sub FrmDeathCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
     End Sub
-    Private Sub FrmDeathCheck_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
-        LogUtil.Info("Closing", MyBase.Name)
-    End Sub
     Private Sub BtnDeathList_Click(sender As Object, e As EventArgs) Handles BtnDeathList.Click
         LogUtil.Info("List of deaths", MyBase.Name)
         Me.Hide()
@@ -114,13 +112,25 @@ Public Class FrmDeathCheck
     End Sub
     Private Function AddXRow(oPerson As Person, oDateOfDeath As String, oDesc As String) As DataGridViewRow
         Dim _newRow As DataGridViewRow = dgvWarnings.Rows(dgvWarnings.Rows.Add())
+        _newRow.Height = 65
         _newRow.Cells(xId.Name).Value = oPerson.Id
         _newRow.Cells(xName.Name).Value = oPerson.Name
         _newRow.Cells(xBirth.Name).Value = If(oPerson.DateOfBirth Is Nothing, "", Format(oPerson.DateOfBirth, "dd MMM yyyy"))
         _newRow.Cells(xDeath.Name).Value = oDateOfDeath
         _newRow.Cells(xDesc.Name).Value = If(String.IsNullOrEmpty(oDesc), "", oDesc)
+        Dim imageCell As DataGridViewImageCell = _newRow.Cells(xImg.Name)
+        Dim oImageIdentity = GetImageById(oPerson.Id, True)
+        If oImageIdentity IsNot Nothing Then
+            imageCell.Value = oImageIdentity.Photo.Clone
+            oImageIdentity.Dispose()
+        End If
         dgvWarnings.Refresh()
         Return _newRow
     End Function
+
+    Private Sub FrmDeathCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
+    End Sub
+
 #End Region
 End Class

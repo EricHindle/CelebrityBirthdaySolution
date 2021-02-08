@@ -53,7 +53,11 @@
             tRow.Cells(tBirthName.Name).Value = If(oRow.IsbirthnameNull, "", oRow.birthname)
             tRow.Cells(tBirthPlace.Name).Value = If(oRow.IsbirthplaceNull, "", oRow.birthplace)
             Dim imageCell As DataGridViewImageCell = tRow.Cells(tImg.Name)
-            imageCell.Value = GetImageById(oRow.id, True).Photo
+            Dim oImageIdentity = GetImageById(oRow.id, True)
+            If oImageIdentity IsNot Nothing Then
+                imageCell.Value = oImageIdentity.Photo.Clone
+                oImageIdentity.Dispose()
+            End If
         Next
     End Sub
 

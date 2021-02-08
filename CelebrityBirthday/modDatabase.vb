@@ -324,16 +324,15 @@ Module modDatabase
 #End Region
 #Region "image"
     Public Function GetImageById(ByVal _id As Integer, Optional isGetPhoto As Boolean = True) As ImageIdentity
-        Dim oImage As ImageIdentity = New ImageIdentity()
         Try
             Dim ict As Integer = oImgTa.FillById(oImgTable, _id)
             If ict = 1 Then
-                oImage = New ImageIdentity(oImgTable.Rows(0), isGetPhoto)
+                Return New ImageIdentity(oImgTable.Rows(0), isGetPhoto)
             End If
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
-        Return oImage
+        Return Nothing
     End Function
     Public Function IsExistsImage(ByVal _id As Integer) As Boolean
         Dim oImage As ImageIdentity = GetImageById(_id)

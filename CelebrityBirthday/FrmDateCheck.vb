@@ -28,7 +28,7 @@ Structure WikiBirthInfo
         End Set
     End Property
 End Structure
-Public Class FrmDateCheck
+Public NotInheritable Class FrmDateCheck
 #Region "variables"
     Private personTable As List(Of Person)
     Private isLoadingTable As Boolean
@@ -41,6 +41,7 @@ Public Class FrmDateCheck
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         ClearPersonDetails()
         isLoadingTable = True
+        DgvWarnings.Columns().Item(xImg.Name).Visible = ChkShowImage.Checked
         DgvWarnings.Rows.Clear()
         Me.Refresh()
         personTable = New List(Of Person)
@@ -253,6 +254,7 @@ Public Class FrmDateCheck
     End Sub
     Private Function AddXRow(oPerson As Person, oDateOfBirth As String, oDesc As String, oWikiId As String) As DataGridViewRow
         Dim _newRow As DataGridViewRow = DgvWarnings.Rows(DgvWarnings.Rows.Add())
+        _newRow.Height = If(ChkShowImage.Checked, 65, DgvWarnings.RowTemplate.Height)
         _newRow.Cells(xId.Name).Value = oPerson.Id
         _newRow.Cells(xName.Name).Value = oPerson.Name
         _newRow.Cells(xBirth.Name).Value = If(oPerson.DateOfBirth Is Nothing, "", Format(oPerson.DateOfBirth, "dd MMM yyyy"))
@@ -260,6 +262,13 @@ Public Class FrmDateCheck
         _newRow.Cells(xWikiExtract.Name).Value = If(String.IsNullOrEmpty(oDesc), "", oDesc)
         _newRow.Cells(xPersonDescription.Name).Value = oPerson.Description
         _newRow.Cells(xWikiId.Name).Value = If(String.IsNullOrEmpty(oWikiId), "", oWikiId)
+        Dim imageCell As DataGridViewImageCell = _newRow.Cells(xImg.Name)
+        Dim oImageIdentity = GetImageById(oPerson.Id, True)
+        If oImageIdentity IsNot Nothing Then
+            imageCell.Value = oImageIdentity.Photo.Clone
+            oImageIdentity.Dispose()
+        End If
+
         DgvWarnings.Refresh()
         Return _newRow
     End Function
@@ -324,7 +333,7 @@ Public Class FrmDateCheck
                     _botsd.ThisDay = CInt(TxtToDay.Text)
                 End If
             Else
-                    _botsd.ThisDay = cboDay.SelectedIndex + 1
+                _botsd.ThisDay = cboDay.SelectedIndex + 1
             End If
             _botsd.ThisMonth = cboMonth.SelectedIndex + 1
             _botsd.ShowDialog()
@@ -333,6 +342,13 @@ Public Class FrmDateCheck
 
     Private Sub BtnMonth_Click(sender As Object, e As EventArgs) Handles BtnMonth.Click
         cboDay.SelectedIndex = -1
+    End Sub
+
+    Private Sub ChkShowImage_CheckedChanged(sender As Object, e As EventArgs) Handles ChkShowImage.CheckedChanged
+        DgvWarnings.Columns().Item(xImg.Name).Visible = ChkShowImage.Checked
+        For Each tRow As DataGridViewRow In DgvWarnings.Rows
+            tRow.Height = If(ChkShowImage.Checked, 65, DgvWarnings.RowTemplate.Height)
+        Next
     End Sub
 
 #End Region
