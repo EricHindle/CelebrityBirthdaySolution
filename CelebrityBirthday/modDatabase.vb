@@ -332,7 +332,7 @@ Module modDatabase
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
-        Return Nothing
+        Return New ImageIdentity
     End Function
     Public Function IsExistsImage(ByVal _id As Integer) As Boolean
         Dim oImage As ImageIdentity = GetImageById(_id)

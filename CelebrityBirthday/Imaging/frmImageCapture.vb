@@ -156,11 +156,10 @@ Public NotInheritable Class FrmImageCapture
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
         LogUtil.Info("Clearing image", MyBase.Name)
         ResetWindow()
-        Try
+        If PicCapture.Image IsNot Nothing Then
             PicCapture.Image.Dispose()
             PicCapture.Image = Nothing
-        Catch ex As Exception
-        End Try
+        End If
         ClearCropSelection()
     End Sub
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
