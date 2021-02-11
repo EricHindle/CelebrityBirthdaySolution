@@ -595,7 +595,7 @@ Public NotInheritable Class FrmTweet
             _outString.Append(_person.Name)
             If rbAges.Checked Then
                 If _type = TweetType.BIRTHDAY Then
-                    _outString.Append(" (" & CStr(CalculateAgeNextBirthday(_person)) & ")")
+                    _outString.Append(" (" & CStr(CalculateAge(_person, ChkAtNextBirthday.Checked)) & ")")
                 Else
                     Dim _yr As Integer = CInt(_person.BirthYear)
                     Dim _birthyear As String = CStr(Math.Abs(_yr))

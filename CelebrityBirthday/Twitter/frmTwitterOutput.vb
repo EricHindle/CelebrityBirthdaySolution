@@ -111,14 +111,14 @@ Public Class frmTwitterOutput
         End If
         DisplayMessage("Selection Complete")
     End Sub
-    Private Shared Sub AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, newDateNode As TreeNode, _type As String)
+    Private Sub AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, newDateNode As TreeNode, _type As String)
         Dim newBirthdayNode As TreeNode = newDateNode.Nodes.Add(Format(testDate, "MMMM dd") & _type, _type)
         newBirthdayNode.Checked = True
         For Each oPerson As Person In oBirthdayTable
             AddNameNode(newBirthdayNode, oPerson, _type)
         Next
     End Sub
-    Private Shared Sub AddNameNode(newBirthdayNode As TreeNode, oPerson As Person, _type As String)
+    Private Sub AddNameNode(newBirthdayNode As TreeNode, oPerson As Person, _type As String)
         Dim newNameNode As TreeNode = newBirthdayNode.Nodes.Add(oPerson.Name)
         If oPerson.Social IsNot Nothing Then
             If Not String.IsNullOrEmpty(oPerson.Social.TwitterHandle) Then
@@ -134,20 +134,20 @@ Public Class frmTwitterOutput
         newNameNode.Nodes.Add("desc", oPerson.ShortDesc)
         newNameNode.Nodes.Add("length", oPerson.Name.Length)
         newNameNode.Nodes.Add("year", oPerson.BirthYear)
-        Dim _age As Integer = CalculateAgeNextBirthday(oPerson)
+        Dim _age As Integer = CalculateAge(oPerson, ChkAtNextBirthday.Checked)
         Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
         _ageNode.Checked = (_type = "Birthday")
     End Sub
-    Private Shared Function CalculateAgeNextBirthday(oPerson As Person) As Integer
-        Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
-        Dim _thisMonth As Integer = Today.Month
-        Dim _thisDay As Integer = Today.Day
-        Dim _years As Integer = DateDiff(DateInterval.Year, _dob, Today)
-        If _thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay) Then
-            _years += 1
-        End If
-        Return _years
-    End Function
+    'Private Shared Function CalculateAgeNextBirthday(oPerson As Person) As Integer
+    '    Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
+    '    Dim _thisMonth As Integer = Today.Month
+    '    Dim _thisDay As Integer = Today.Day
+    '    Dim _years As Integer = DateDiff(DateInterval.Year, _dob, Today)
+    '    If _thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay) Then
+    '        _years += 1
+    '    End If
+    '    Return _years
+    'End Function
 
     Private Sub TvAnniv_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck
         If e.Action <> TreeViewAction.Unknown Then

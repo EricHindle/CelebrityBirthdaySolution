@@ -363,19 +363,19 @@ Friend Module modCbday
         newNameNode.Nodes.Add("desc", oPerson.ShortDesc)
         newNameNode.Nodes.Add("length", oPerson.Name.Length)
         newNameNode.Nodes.Add("year", oPerson.BirthYear)
-        Dim _age As Integer = CalculateAgeNextBirthday(oPerson)
+        Dim _age As Integer = CalculateAge(oPerson)
         Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
         _ageNode.Checked = (_type = "Birthday")
         Return newNameNode
     End Function
-    Public Function CalculateAgeNextBirthday(oPerson As Person) As Integer
+    Public Function CalculateAge(oPerson As Person, Optional isNextBirthday As Boolean = True) As Integer
         Dim _years As Integer = 0
         If oPerson.BirthYear > 0 Then
             Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
             Dim _thisMonth As Integer = Today.Month
             Dim _thisDay As Integer = Today.Day
             _years = DateDiff(DateInterval.Year, _dob, Today)
-            If _thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay) Then
+            If (_thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay)) And isNextBirthday Then
                 _years += 1
             End If
         End If

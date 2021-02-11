@@ -51,9 +51,10 @@ Partial Class frmTwitterOutput
         Me.cboDay = New System.Windows.Forms.ComboBox()
         Me.cboMonth = New System.Windows.Forms.ComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.rbAge = New System.Windows.Forms.RadioButton()
         Me.rbTwitter = New System.Windows.Forms.RadioButton()
+        Me.rbAge = New System.Windows.Forms.RadioButton()
         Me.BtnClear = New System.Windows.Forms.Button()
+        Me.ChkAtNextBirthday = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -349,16 +350,27 @@ Partial Class frmTwitterOutput
         'GroupBox3
         '
         Me.GroupBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox3.Controls.Add(Me.ChkAtNextBirthday)
         Me.GroupBox3.Controls.Add(Me.rbTwitter)
         Me.GroupBox3.Controls.Add(Me.rbAge)
         Me.GroupBox3.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox3.ForeColor = System.Drawing.Color.RoyalBlue
         Me.GroupBox3.Location = New System.Drawing.Point(820, 293)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(139, 89)
+        Me.GroupBox3.Size = New System.Drawing.Size(139, 105)
         Me.GroupBox3.TabIndex = 19
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Include"
+        '
+        'rbTwitter
+        '
+        Me.rbTwitter.AutoSize = True
+        Me.rbTwitter.Location = New System.Drawing.Point(6, 74)
+        Me.rbTwitter.Name = "rbTwitter"
+        Me.rbTwitter.Size = New System.Drawing.Size(127, 26)
+        Me.rbTwitter.TabIndex = 1
+        Me.rbTwitter.Text = "Twitter Handle"
+        Me.rbTwitter.UseVisualStyleBackColor = True
         '
         'rbAge
         '
@@ -372,16 +384,6 @@ Partial Class frmTwitterOutput
         Me.rbAge.Text = "Age"
         Me.rbAge.UseVisualStyleBackColor = True
         '
-        'rbTwitter
-        '
-        Me.rbTwitter.AutoSize = True
-        Me.rbTwitter.Location = New System.Drawing.Point(6, 57)
-        Me.rbTwitter.Name = "rbTwitter"
-        Me.rbTwitter.Size = New System.Drawing.Size(127, 26)
-        Me.rbTwitter.TabIndex = 1
-        Me.rbTwitter.Text = "Twitter Handle"
-        Me.rbTwitter.UseVisualStyleBackColor = True
-        '
         'BtnClear
         '
         Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -393,6 +395,20 @@ Partial Class frmTwitterOutput
         Me.BtnClear.TabIndex = 20
         Me.BtnClear.Text = "Clear"
         Me.BtnClear.UseVisualStyleBackColor = True
+        '
+        'ChkAtNextBirthday
+        '
+        Me.ChkAtNextBirthday.AutoSize = True
+        Me.ChkAtNextBirthday.Checked = True
+        Me.ChkAtNextBirthday.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ChkAtNextBirthday.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkAtNextBirthday.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.ChkAtNextBirthday.Location = New System.Drawing.Point(18, 46)
+        Me.ChkAtNextBirthday.Name = "ChkAtNextBirthday"
+        Me.ChkAtNextBirthday.Size = New System.Drawing.Size(103, 22)
+        Me.ChkAtNextBirthday.TabIndex = 38
+        Me.ChkAtNextBirthday.Text = "at next birthday"
+        Me.ChkAtNextBirthday.UseVisualStyleBackColor = True
         '
         'frmTwitterOutput
         '
@@ -469,4 +485,5 @@ Partial Class frmTwitterOutput
     Friend WithEvents rbTwitter As RadioButton
     Friend WithEvents rbAge As RadioButton
     Friend WithEvents BtnClear As Button
+    Friend WithEvents ChkAtNextBirthday As CheckBox
 End Class
