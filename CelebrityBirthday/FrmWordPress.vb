@@ -152,8 +152,10 @@ Public NotInheritable Class FrmWordPress
         Dim bOK As Boolean = True
         Dim listRem As Integer
         Dim listSize As Integer
-        Dim pList As New List(Of Person)
-        pList.AddRange(personTable)
+        Dim pList As New List(Of String)
+        For Each oPerson In personTable
+            pList.Add(oPerson.Name)
+        Next
         If pList.Count = 0 Then
             bOK = False
         Else
@@ -161,9 +163,9 @@ Public NotInheritable Class FrmWordPress
             listSize = Int(pList.Count / 3)
             If listRem > 0 Then
                 If listRem = 1 Then
-                    pList.Insert((listSize * 2) + 1, New Person)
+                    pList.Insert((listSize * 2) + 1, "")
                 End If
-                pList.Add(New Person)
+                pList.Add("")
                 listSize += 1
             End If
         End If
@@ -171,12 +173,12 @@ Public NotInheritable Class FrmWordPress
             Dim newText As New StringBuilder(EXCERPT_START)
             newText.Append(vbCrLf)
             Dim iCt As Integer = 0
-            For Each oPerson As Person In pList
+            For Each oName As String In pList
                 If iCt = 0 Then
                     newText.Append(EXCERPT_DIV).Append(vbCrLf)
                 End If
                 With newText
-                    .Append(oPerson.Name)
+                    .Append(oName)
                     .Append("<br />")
                     .Append(vbCrLf)
                 End With
@@ -188,9 +190,6 @@ Public NotInheritable Class FrmWordPress
             Next
             txtCurrentExcerpt.Text = newText.ToString
         End If
-        For Each oPerson In pList
-            oPerson.Dispose()
-        Next
     End Sub
     Private Sub ClearForm()
         txtCurrentExcerpt.Text = ""

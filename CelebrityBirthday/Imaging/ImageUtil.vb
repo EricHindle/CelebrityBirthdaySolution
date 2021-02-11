@@ -213,10 +213,12 @@ Friend Module ImageUtil
                 End Select
 
                 Dim oBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(_image, 60, 60)
-                oGraphics.DrawImage(oBitMap, New Point((60 * _imgHPos) + rowStartPos, 60 * _imgVPos))
+                oGraphics.DrawImage(oBitMap.Clone, New Point((60 * _imgHPos) + rowStartPos, 60 * _imgVPos))
+                oBitMap.Dispose()
             Next
         End If
-        If oPictureBox IsNot Nothing Then oPictureBox.Image = mosaic
+        If oPictureBox IsNot Nothing Then oPictureBox.Image = mosaic.Clone
+        mosaic.Dispose()
     End Sub
 
 End Module

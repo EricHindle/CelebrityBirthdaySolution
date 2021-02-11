@@ -138,17 +138,6 @@ Public Class frmTwitterOutput
         Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
         _ageNode.Checked = (_type = "Birthday")
     End Sub
-    'Private Shared Function CalculateAgeNextBirthday(oPerson As Person) As Integer
-    '    Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
-    '    Dim _thisMonth As Integer = Today.Month
-    '    Dim _thisDay As Integer = Today.Day
-    '    Dim _years As Integer = DateDiff(DateInterval.Year, _dob, Today)
-    '    If _thisMonth > oPerson.BirthMonth OrElse (_thisMonth = oPerson.BirthMonth And _thisDay > oPerson.BirthDay) Then
-    '        _years += 1
-    '    End If
-    '    Return _years
-    'End Function
-
     Private Sub TvAnniv_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck
         If e.Action <> TreeViewAction.Unknown Then
             If e.Node.Nodes.Count > 0 Then
@@ -186,17 +175,15 @@ Public Class frmTwitterOutput
                     TwitterFilename = SetTwitterFilename(TwitterFilenameA, TwitterFilenameB, currentDate)
                     Dim newTabPage As TabPage = Me.NewTabPage(TwitterFilename, fileCount)
                     Dim _controls As Control() = newTabPage.Controls.Find(RTB_CONTROL_NAME & fileCount, False)
-                    Dim rtbControl As New RichTextBox
-                    If _controls.Any() Then
-                        rtbControl = TryCast(_controls(0), RichTextBox)
-                    End If
                     Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, TwitterFilename)
                     TcFileTabs.TabPages.Add(newTabPage)
                     Using _outfile As New StreamWriter(_filename, True)
                         WriteTypes(_datenode, _outfile)
                     End Using
                     DisplayMessage("Written file " & _filename)
-                    LoadRtb(rtbControl, _filename)
+                    If _controls.Any() Then
+                        LoadRtb(TryCast(_controls(0), RichTextBox), _filename)
+                    End If
                     fileCount += 1
                 End If
             End If

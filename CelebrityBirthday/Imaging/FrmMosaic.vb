@@ -46,7 +46,8 @@ Public Class FrmMosaic
                         _imgHPos = 0
                     End If
                     Dim oBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(_image, 60, 60)
-                    oGraphics.DrawImage(oBitMap, New Point(60 * _imgHPos, 60 * _imgVPos))
+                    oGraphics.DrawImage(oBitMap.Clone, New Point(60 * _imgHPos, 60 * _imgVPos))
+                    oBitMap.Dispose()
                 End If
             Else
                 _skip -= 1

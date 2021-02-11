@@ -612,6 +612,7 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub BtnWpDesc_Click(sender As Object, e As EventArgs) Handles BtnWpDesc.Click
         Dim wpText As String = ""
+        Clipboard.Clear()
         If lbPeople.SelectedIndex >= 0 Then
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             LogUtil.Info("Generating WordPress description for " & oPerson.Name, MyBase.Name)
@@ -627,8 +628,8 @@ Public NotInheritable Class FrmUpdateDatabase
                 .Append(If(oPerson.DeathYear = 0, "", sDied))
             End With
             wpText = sText.ToString
+            If Not String.IsNullOrEmpty(wpText) Then Clipboard.SetText(wpText)
         End If
-        Clipboard.SetText(wpText)
     End Sub
     Private Sub PasteIntoDesc_Click(MenuItem As Object, e As EventArgs) Handles PasteIntoDesc.Click
         GetSourceControl(MenuItem).Copy()

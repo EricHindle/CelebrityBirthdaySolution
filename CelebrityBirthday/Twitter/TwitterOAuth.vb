@@ -74,19 +74,6 @@ Public Class TwitterOAuth
         End Set
     End Property
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     Public Sub New()
     End Sub
     Public Sub New(ByVal ConsumerKey As String, ByVal ConsumerKeySecret As String)
@@ -284,9 +271,10 @@ Public Class TwitterOAuth
 
             requestStream.Write(Bytes, 0, Bytes.Length)
             Dim wr As HttpWebResponse = DirectCast(request.GetResponse, HttpWebResponse)
-
             Dim responseStream As New StreamReader(wr.GetResponseStream)
-            Return responseStream.ReadToEnd
+            Dim responseString As String = responseStream.ReadToEnd
+            responseStream.Dispose()
+            Return responseString
 
         Catch ex As Exception
             Dim Message As String = Nothing

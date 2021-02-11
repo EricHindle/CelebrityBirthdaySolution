@@ -243,15 +243,18 @@ Friend Module modCbday
         Return My.Settings.wikiTitleSearch.Replace("#f", oSearchName).Replace("#t", endName(0) & "_(zzzzzzzz)")
     End Function
     Public Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
-        Dim _rtb As New RichTextBox
         Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
-        If _controls.Length > 0 Then
-            _rtb = TryCast(_controls(0), RichTextBox)
+        If _controls.Any() Then
+            For _controlIndex = 0 To _controls.GetUpperBound(0)
+                If TryCast(_controls(_controlIndex), RichTextBox) IsNot Nothing Then
+                    Return _controls(_controlIndex)
+                    Exit For
+                End If
+            Next
         End If
-        Return _rtb
+        Return Nothing
     End Function
-
     Public Function RemoveSquareBrackets(ByVal _text As String) As String
         Dim newText As String = _text.Trim(vbCrLf)
         Do While newText.Contains("[") And newText.Contains("]")
