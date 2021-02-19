@@ -114,10 +114,12 @@ Partial Class FrmUpdateDatabase
         Me.LbUpdateList = New System.Windows.Forms.ListBox()
         Me.BtnDateCopy = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.BtnRmvBotsd = New System.Windows.Forms.Button()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.lblBotsdId = New System.Windows.Forms.Label()
         Me.BtnUpdBotsd = New System.Windows.Forms.Button()
+        Me.lblBotsdId = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.BtnRmvBotsd = New System.Windows.Forms.Button()
+        Me.BtnCopyName = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -452,6 +454,7 @@ Partial Class FrmUpdateDatabase
         Me.btnCreateFullName.Size = New System.Drawing.Size(35, 26)
         Me.btnCreateFullName.TabIndex = 12
         Me.btnCreateFullName.Text = ">"
+        Me.ToolTip1.SetToolTip(Me.btnCreateFullName, "Get from two part name")
         Me.btnCreateFullName.UseVisualStyleBackColor = True
         '
         'btnSplitName
@@ -463,6 +466,7 @@ Partial Class FrmUpdateDatabase
         Me.btnSplitName.Size = New System.Drawing.Size(35, 26)
         Me.btnSplitName.TabIndex = 13
         Me.btnSplitName.Text = ">"
+        Me.ToolTip1.SetToolTip(Me.btnSplitName, "Get from full name")
         Me.btnSplitName.UseVisualStyleBackColor = True
         '
         'lblID
@@ -512,10 +516,10 @@ Partial Class FrmUpdateDatabase
         Me.btnDown.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDown.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDown.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnDown.Location = New System.Drawing.Point(1245, 108)
+        Me.btnDown.Location = New System.Drawing.Point(954, 108)
         Me.btnDown.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.btnDown.Name = "btnDown"
-        Me.btnDown.Size = New System.Drawing.Size(40, 43)
+        Me.btnDown.Size = New System.Drawing.Size(40, 40)
         Me.btnDown.TabIndex = 26
         Me.btnDown.Text = "Dn"
         Me.btnDown.UseVisualStyleBackColor = True
@@ -550,10 +554,10 @@ Partial Class FrmUpdateDatabase
         Me.btnUp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnUp.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUp.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnUp.Location = New System.Drawing.Point(1245, 58)
+        Me.btnUp.Location = New System.Drawing.Point(954, 60)
         Me.btnUp.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.btnUp.Name = "btnUp"
-        Me.btnUp.Size = New System.Drawing.Size(40, 43)
+        Me.btnUp.Size = New System.Drawing.Size(40, 40)
         Me.btnUp.TabIndex = 25
         Me.btnUp.Text = "Up"
         Me.btnUp.UseVisualStyleBackColor = True
@@ -565,7 +569,7 @@ Partial Class FrmUpdateDatabase
         Me.lbPeople.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbPeople.FormattingEnabled = True
         Me.lbPeople.ItemHeight = 18
-        Me.lbPeople.Location = New System.Drawing.Point(947, 58)
+        Me.lbPeople.Location = New System.Drawing.Point(998, 60)
         Me.lbPeople.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.lbPeople.Name = "lbPeople"
         Me.lbPeople.Size = New System.Drawing.Size(284, 382)
@@ -577,7 +581,7 @@ Partial Class FrmUpdateDatabase
         Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
-        Me.cboMonth.Location = New System.Drawing.Point(1024, 18)
+        Me.cboMonth.Location = New System.Drawing.Point(1075, 18)
         Me.cboMonth.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(207, 27)
@@ -589,7 +593,7 @@ Partial Class FrmUpdateDatabase
         Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(947, 18)
+        Me.cboDay.Location = New System.Drawing.Point(998, 18)
         Me.cboDay.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(69, 27)
@@ -975,7 +979,7 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox2.Controls.Add(Me.TxtImageLoadMth)
         Me.GroupBox2.Controls.Add(Me.TxtImageLoadDay)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Location = New System.Drawing.Point(939, 460)
+        Me.GroupBox2.Location = New System.Drawing.Point(965, 460)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2, 4, 2, 4)
@@ -1110,7 +1114,7 @@ Partial Class FrmUpdateDatabase
         '
         Me.BtnToday.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnToday.Location = New System.Drawing.Point(859, 16)
+        Me.BtnToday.Location = New System.Drawing.Point(922, 19)
         Me.BtnToday.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnToday.Name = "BtnToday"
         Me.BtnToday.Size = New System.Drawing.Size(72, 28)
@@ -1140,18 +1144,21 @@ Partial Class FrmUpdateDatabase
         Me.BtnPasteWikiId.Name = "BtnPasteWikiId"
         Me.BtnPasteWikiId.Size = New System.Drawing.Size(35, 37)
         Me.BtnPasteWikiId.TabIndex = 136
+        Me.ToolTip1.SetToolTip(Me.BtnPasteWikiId, "Paste")
         Me.BtnPasteWikiId.UseVisualStyleBackColor = True
         '
         'BtnPasteName
         '
         Me.BtnPasteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPasteName.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.pasteicon
+        Me.BtnPasteName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnPasteName.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPasteName.Image = Global.CelebrityBirthday.My.Resources.Resources.pasteicon
-        Me.BtnPasteName.Location = New System.Drawing.Point(813, 14)
+        Me.BtnPasteName.Location = New System.Drawing.Point(813, 16)
         Me.BtnPasteName.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPasteName.Name = "BtnPasteName"
-        Me.BtnPasteName.Size = New System.Drawing.Size(35, 37)
+        Me.BtnPasteName.Size = New System.Drawing.Size(30, 30)
         Me.BtnPasteName.TabIndex = 137
+        Me.ToolTip1.SetToolTip(Me.BtnPasteName, "Paste")
         Me.BtnPasteName.UseVisualStyleBackColor = True
         '
         'BtnPasteBirthname
@@ -1164,6 +1171,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnPasteBirthname.Name = "BtnPasteBirthname"
         Me.BtnPasteBirthname.Size = New System.Drawing.Size(35, 37)
         Me.BtnPasteBirthname.TabIndex = 138
+        Me.ToolTip1.SetToolTip(Me.BtnPasteBirthname, "Paste")
         Me.BtnPasteBirthname.UseVisualStyleBackColor = True
         '
         'BtnPasteBirthplace
@@ -1176,6 +1184,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnPasteBirthplace.Name = "BtnPasteBirthplace"
         Me.BtnPasteBirthplace.Size = New System.Drawing.Size(35, 37)
         Me.BtnPasteBirthplace.TabIndex = 139
+        Me.ToolTip1.SetToolTip(Me.BtnPasteBirthplace, "Paste")
         Me.BtnPasteBirthplace.UseVisualStyleBackColor = True
         '
         'BtnPasteShort
@@ -1188,6 +1197,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnPasteShort.Name = "BtnPasteShort"
         Me.BtnPasteShort.Size = New System.Drawing.Size(35, 37)
         Me.BtnPasteShort.TabIndex = 140
+        Me.ToolTip1.SetToolTip(Me.BtnPasteShort, "Paste")
         Me.BtnPasteShort.UseVisualStyleBackColor = True
         '
         'LblSortSeq
@@ -1207,7 +1217,7 @@ Partial Class FrmUpdateDatabase
         Me.LblUpdated.AutoSize = True
         Me.LblUpdated.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.LblUpdated.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUpdated.Location = New System.Drawing.Point(939, 733)
+        Me.LblUpdated.Location = New System.Drawing.Point(965, 733)
         Me.LblUpdated.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblUpdated.Name = "LblUpdated"
         Me.LblUpdated.Size = New System.Drawing.Size(95, 29)
@@ -1224,7 +1234,7 @@ Partial Class FrmUpdateDatabase
         Me.LbUpdateList.ForeColor = System.Drawing.Color.RoyalBlue
         Me.LbUpdateList.FormattingEnabled = True
         Me.LbUpdateList.ItemHeight = 14
-        Me.LbUpdateList.Location = New System.Drawing.Point(939, 768)
+        Me.LbUpdateList.Location = New System.Drawing.Point(965, 771)
         Me.LbUpdateList.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.LbUpdateList.Name = "LbUpdateList"
         Me.LbUpdateList.Size = New System.Drawing.Size(317, 126)
@@ -1244,6 +1254,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnDateCopy.TabIndex = 144
         Me.BtnDateCopy.Text = "dmy"
         Me.BtnDateCopy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.ToolTip1.SetToolTip(Me.BtnDateCopy, "Copy date to description")
         Me.BtnDateCopy.UseVisualStyleBackColor = True
         '
         'GroupBox3
@@ -1253,32 +1264,23 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox3.Controls.Add(Me.lblBotsdId)
         Me.GroupBox3.Controls.Add(Me.Label8)
         Me.GroupBox3.Controls.Add(Me.BtnRmvBotsd)
-        Me.GroupBox3.Location = New System.Drawing.Point(939, 663)
+        Me.GroupBox3.Location = New System.Drawing.Point(965, 663)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(317, 59)
         Me.GroupBox3.TabIndex = 145
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Born on the Same Day"
         '
-        'BtnRmvBotsd
+        'BtnUpdBotsd
         '
-        Me.BtnRmvBotsd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnRmvBotsd.Location = New System.Drawing.Point(228, 21)
-        Me.BtnRmvBotsd.Name = "BtnRmvBotsd"
-        Me.BtnRmvBotsd.Size = New System.Drawing.Size(75, 23)
-        Me.BtnRmvBotsd.TabIndex = 0
-        Me.BtnRmvBotsd.Text = "Remove"
-        Me.BtnRmvBotsd.UseVisualStyleBackColor = True
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.ForeColor = System.Drawing.Color.Black
-        Me.Label8.Location = New System.Drawing.Point(9, 24)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(18, 14)
-        Me.Label8.TabIndex = 1
-        Me.Label8.Text = "Id"
+        Me.BtnUpdBotsd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdBotsd.Location = New System.Drawing.Point(138, 21)
+        Me.BtnUpdBotsd.Name = "BtnUpdBotsd"
+        Me.BtnUpdBotsd.Size = New System.Drawing.Size(75, 23)
+        Me.BtnUpdBotsd.TabIndex = 3
+        Me.BtnUpdBotsd.Text = "Update"
+        Me.ToolTip1.SetToolTip(Me.BtnUpdBotsd, "Open form to change botsd id")
+        Me.BtnUpdBotsd.UseVisualStyleBackColor = True
         '
         'lblBotsdId
         '
@@ -1290,15 +1292,40 @@ Partial Class FrmUpdateDatabase
         Me.lblBotsdId.TabIndex = 2
         Me.lblBotsdId.Text = "0"
         '
-        'BtnUpdBotsd
+        'Label8
         '
-        Me.BtnUpdBotsd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUpdBotsd.Location = New System.Drawing.Point(138, 21)
-        Me.BtnUpdBotsd.Name = "BtnUpdBotsd"
-        Me.BtnUpdBotsd.Size = New System.Drawing.Size(75, 23)
-        Me.BtnUpdBotsd.TabIndex = 3
-        Me.BtnUpdBotsd.Text = "Update"
-        Me.BtnUpdBotsd.UseVisualStyleBackColor = True
+        Me.Label8.AutoSize = True
+        Me.Label8.ForeColor = System.Drawing.Color.Black
+        Me.Label8.Location = New System.Drawing.Point(9, 24)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(18, 14)
+        Me.Label8.TabIndex = 1
+        Me.Label8.Text = "Id"
+        '
+        'BtnRmvBotsd
+        '
+        Me.BtnRmvBotsd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvBotsd.Location = New System.Drawing.Point(228, 21)
+        Me.BtnRmvBotsd.Name = "BtnRmvBotsd"
+        Me.BtnRmvBotsd.Size = New System.Drawing.Size(75, 23)
+        Me.BtnRmvBotsd.TabIndex = 0
+        Me.BtnRmvBotsd.Text = "Remove"
+        Me.ToolTip1.SetToolTip(Me.BtnRmvBotsd, "Remove botsd id")
+        Me.BtnRmvBotsd.UseVisualStyleBackColor = True
+        '
+        'BtnCopyName
+        '
+        Me.BtnCopyName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnCopyName.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.copyicon
+        Me.BtnCopyName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnCopyName.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnCopyName.Location = New System.Drawing.Point(847, 16)
+        Me.BtnCopyName.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
+        Me.BtnCopyName.Name = "BtnCopyName"
+        Me.BtnCopyName.Size = New System.Drawing.Size(30, 30)
+        Me.BtnCopyName.TabIndex = 146
+        Me.ToolTip1.SetToolTip(Me.BtnCopyName, "Copy")
+        Me.BtnCopyName.UseVisualStyleBackColor = True
         '
         'FrmUpdateDatabase
         '
@@ -1306,6 +1333,7 @@ Partial Class FrmUpdateDatabase
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1293, 923)
+        Me.Controls.Add(Me.BtnCopyName)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.BtnDateCopy)
         Me.Controls.Add(Me.LbUpdateList)
@@ -1502,4 +1530,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents Label8 As Label
     Friend WithEvents BtnRmvBotsd As Button
     Friend WithEvents BtnUpdBotsd As Button
+    Friend WithEvents BtnCopyName As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

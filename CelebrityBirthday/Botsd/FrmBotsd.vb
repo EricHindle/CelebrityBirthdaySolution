@@ -298,10 +298,12 @@ Public NotInheritable Class FrmBotsd
         SelectPairs()
     End Sub
     Private Sub BtnAlterPostNo_Click(sender As Object, e As EventArgs) Handles BtnAlterPostNo.Click
+        DisplayStatus("Altering post number", True)
         Using _alterPost As New FrmAlterPostNo
             _alterPost.ShowDialog()
             UpdatePostNumbers()
         End Using
+        ClearStatus()
     End Sub
     Private Sub BtnRemove_Click(sender As Object, e As EventArgs) Handles BtnRemove.Click
         If DgvPairs.SelectedRows.Count = 1 Then
@@ -383,6 +385,7 @@ Public NotInheritable Class FrmBotsd
         End If
     End Sub
     Private Sub BtnAtoZ_Click(sender As Object, e As EventArgs) Handles BtnAtoZ.Click
+        DisplayStatus("Generating A to Z", True)
         Dim oRows As DataRowCollection = GetBotsdIndex()
         Dim currentLetter As String = String.Empty
         Dim indexText As New StringBuilder
@@ -419,11 +422,14 @@ Public NotInheritable Class FrmBotsd
             _text.rtbText.Text = indexText.ToString
             _text.ShowDialog()
         End Using
+        ClearStatus()
     End Sub
     Private Sub BtnRmvPostDetails_Click(sender As Object, e As EventArgs) Handles BtnRmvPostDetails.Click
+        DisplayStatus("Remove post details", True)
         Using _rmvPost As New FrmRmvPost
             _rmvPost.ShowDialog()
         End Using
+        ClearStatus()
     End Sub
     Private Sub ChkHandles_CheckedChanged(sender As Object, e As EventArgs) Handles ChkHandles.CheckedChanged
         GeneratePair()
@@ -532,14 +538,23 @@ Public NotInheritable Class FrmBotsd
             WriteTrace("Failed", True)
         End If
     End Sub
-    Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False)
+    Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False, Optional isLogged As Boolean = True)
         rtbTweet.Text &= vbCrLf & sText
-        If isStatus Then DisplayStatus(sText)
+        If isStatus Then DisplayStatus(sText, False, isLogged)
     End Sub
-    Private Sub DisplayStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
+    Private Sub DisplayStatus(pText As String, isAppend As Boolean, isLogged As Boolean)
         LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(pText, MyBase.Name)
+    End Sub
+    Private Sub DisplayStatus(pText As String, Optional isLogged As Boolean = False)
+        DisplayStatus(pText, False, isLogged)
+    End Sub
+    Private Sub DisplayStatus(pText As String)
+        DisplayStatus(pText, False, False)
+    End Sub
+    Private Sub ClearStatus()
+        DisplayStatus("")
     End Sub
     Private Sub GetAuthData()
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
@@ -591,6 +606,7 @@ Public NotInheritable Class FrmBotsd
         DgvPairs.Sort(DgvPairs.Columns(0), ListSortDirection.Ascending)
     End Sub
     Private Sub GeneratePair()
+        DisplayStatus("Generate tweet", True)
         ClearPersonDetails()
         If DgvPairs.SelectedRows.Count = 1 Then
             Try
@@ -658,6 +674,7 @@ Public NotInheritable Class FrmBotsd
                 End If
                 GeneratePicture(PictureBox1, _imageList, NudPic1Horizontal.Value)
                 GenerateText(_imageList)
+                ClearStatus()
             Catch ex As DbException
                 DisplayStatus("Person exception")
             End Try
@@ -706,6 +723,7 @@ Public NotInheritable Class FrmBotsd
         rtbFile1.Text = _outString.ToString
     End Sub
     Private Sub GenerateWordpress()
+        DisplayStatus("Generating WordPress list entry", True)
         Dim sb As New StringBuilder
         With sb
             .Append(My.Resources.WP_PARA).Append(vbCrLf)
@@ -755,10 +773,8 @@ Public NotInheritable Class FrmBotsd
                             .Append(My.Resources.TWO_SPACES).Append("/"c).Append(My.Resources.TWO_SPACES)
                             .Append(oRow.Cells(pairPerson6.Name).Value)
                         End If
-
                         .Append(My.Resources.TWO_SPACES)
                         If postNo > -1 Then
-
                             .Append(My.Resources.WP_A_HREF)
                             .Append(My.Resources.DOUBLEQUOTES)
                             .Append(btsdUrl)
@@ -777,7 +793,6 @@ Public NotInheritable Class FrmBotsd
                         End If
                         .Append(My.Resources.BREAK)
                         .Append(vbCrLf)
-
                     End With
                     _pickPerson1.Dispose()
                 End If
@@ -788,6 +803,7 @@ Public NotInheritable Class FrmBotsd
             oTextForm.rtbText.Text = sb.ToString
             oTextForm.ShowDialog()
         End Using
+        ClearStatus()
     End Sub
     Private Function GetImageLink(oPerson As Person) As String
         Dim oImage As ImageIdentity = oPerson.Image
@@ -888,6 +904,7 @@ Public NotInheritable Class FrmBotsd
         If DgvPairs.SelectedRows.Count = 0 Then
             Exit Sub
         End If
+        DisplayStatus("Generating WordPress post", True)
         Dim sb As New StringBuilder
         Dim titleSb As New StringBuilder
         Dim thisWpNumber As String = DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value
@@ -1023,7 +1040,7 @@ Public NotInheritable Class FrmBotsd
             If _pickPerson4 IsNot Nothing Then _pickPerson4.Dispose()
             If _pickPerson5 IsNot Nothing Then _pickPerson5.Dispose()
             If _pickPerson6 IsNot Nothing Then _pickPerson6.Dispose()
-
+            ClearStatus()
         Catch ex As DbException
             DisplayException(MethodBase.GetCurrentMethod, ex, "Db")
         End Try
@@ -1126,6 +1143,7 @@ Public NotInheritable Class FrmBotsd
         PictureBox1.Image = Nothing
     End Sub
     Private Sub UpdatePostNumbers()
+        DisplayStatus("Updating post numbers", True)
         For Each oRow As DataGridViewRow In DgvPairs.Rows
             Try
                 If oRow.Cells(pairId1.Name).Value IsNot Nothing Then
@@ -1145,8 +1163,10 @@ Public NotInheritable Class FrmBotsd
                 DisplayException(MethodBase.GetCurrentMethod(), ex, "Conversion")
             End Try
         Next
+        ClearStatus()
     End Sub
     Private Sub SelectPairs()
+        DisplayStatus("Selecting...", True)
         rtbFile1.Text = ""
         isBuildingPairs = True
         ClearPersonDetails()
@@ -1193,8 +1213,8 @@ Public NotInheritable Class FrmBotsd
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Error")
             Me.Close()
         End Try
+        ClearStatus()
         isBuildingPairs = False
     End Sub
-
 #End Region
 End Class

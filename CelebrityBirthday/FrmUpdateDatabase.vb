@@ -1152,5 +1152,9 @@ Public NotInheritable Class FrmUpdateDatabase
         Next
         Return isFound
     End Function
+
+    Private Sub BtnCopyName_Click(sender As Object, e As EventArgs) Handles BtnCopyName.Click
+        txtName.Copy()
+    End Sub
 #End Region
 End Class
