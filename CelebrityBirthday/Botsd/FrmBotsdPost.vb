@@ -124,8 +124,11 @@ Public NotInheritable Class FrmBotsdPost
         TxtUrl.Text = Clipboard.GetText
     End Sub
     Private Sub BtnGenerate_Click(sender As Object, e As EventArgs) Handles BtnGenerate.Click
+        SaveList()
         Dim alsosText As String = GenerateAlsos()
         RtbText.Text = oPostText & alsosText
+        RtbText.SelectAll()
+        RtbText.Copy()
     End Sub
     Private Sub BtnName_Click(sender As Object, e As EventArgs) Handles BtnName.Click
         TxtName.Text = Clipboard.GetText
@@ -318,6 +321,7 @@ Public NotInheritable Class FrmBotsdPost
 #End Region
 #Region "subroutines"
     Private Function GenerateAlsos() As String
+        DisplayStatus("Generating Text")
         Dim sb As New StringBuilder
         sb.Append(vbCrLf).Append(My.Resources.WP_PARA).Append(vbCrLf)
         For Each oRow As DataGridViewRow In DgvAlso.Rows
@@ -344,6 +348,7 @@ Public NotInheritable Class FrmBotsdPost
             End If
         Next
         sb.Append(My.Resources.WP_END_PARA)
+        DisplayStatus("Generated Text")
         Return sb.ToString
     End Function
     Private Function GenAlsoFileName() As String

@@ -222,16 +222,16 @@
     <Compile Include="Imaging\FrmImages.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMenu.Designer.vb">
+    <Compile Include="Menus\FrmMenu.Designer.vb">
       <DependentUpon>FrmMenu.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmMenu.vb">
+    <Compile Include="Menus\FrmMenu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMenu2.Designer.vb">
+    <Compile Include="Menus\FrmMenu2.Designer.vb">
       <DependentUpon>FrmMenu2.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmMenu2.vb">
+    <Compile Include="Menus\FrmMenu2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmOptions.Designer.vb">
@@ -380,10 +380,10 @@
     <EmbeddedResource Include="Imaging\FrmImages.resx">
       <DependentUpon>FrmImages.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMenu.resx">
+    <EmbeddedResource Include="Menus\FrmMenu.resx">
       <DependentUpon>FrmMenu.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMenu2.resx">
+    <EmbeddedResource Include="Menus\FrmMenu2.resx">
       <DependentUpon>FrmMenu2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOptions.resx">
@@ -466,6 +466,7 @@
   <ItemGroup>
     <Content Include="bcake.ico" />
     <Content Include="cake.ico" />
+    <None Include="images\paste.png" />
     <None Include="images\pasteicon.png" />
     <None Include="images\NoImage.png" />
     <None Include="images\id.jpg" />
@@ -528,6 +529,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.3.2\analyzers\dotnet\vb\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.3.2\analyzers\dotnet\vb\Microsoft.NetFramework.VisualBasic.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

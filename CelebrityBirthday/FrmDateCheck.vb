@@ -178,6 +178,7 @@ Public NotInheritable Class FrmDateCheck
                 TxtFullDesc.Text = personStringList(0) & "(" & wikiStringList(1) & ")" & personStringList(2)
             End If
         End If
+        DisplayMessage("Date copied to full desc", True)
     End Sub
     Private Sub BtnClearDetails_Click(sender As Object, e As EventArgs) Handles BtnClearDetails.Click
         ClearPersonDetails()
@@ -195,6 +196,62 @@ Public NotInheritable Class FrmDateCheck
     Private Sub Date_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         ClearPersonDetails()
         DisplayMessage("")
+    End Sub
+    Private Sub FrmDateCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
+    End Sub
+    Private Sub FrmDateCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
+    End Sub
+    Private Sub BtnWpDesc_Click(sender As Object, e As EventArgs) Handles BtnWpDesc.Click
+        Dim wpText As String = ""
+        Dim oPerson As Person = GetPersonById(CInt(LblId.Text))
+        If oPerson IsNot Nothing Then
+            DisplayMessage("Generating WordPress description for " & TxtFullName.Text, True)
+            Dim sBorn As String = ""
+            If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
+                sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
+            End If
+            Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+            Dim sText As New StringBuilder
+            With sText
+                .Append(TxtFullDesc.Text)
+                .Append(sBorn)
+                .Append(If(oPerson.DeathYear = 0, "", sDied))
+            End With
+            wpText = sText.ToString
+        End If
+        Clipboard.SetText(wpText)
+        oPerson.Dispose()
+    End Sub
+    Private Sub BtnBotSD_Click(sender As Object, e As EventArgs) Handles BtnBotSD.Click
+        DisplayMessage("Born on the same day update", True)
+        Using _botsd As New FrmBotsd
+            If cboDay.SelectedIndex < 0 Then
+                If IsNumeric(TxtToDay.Text) Then
+                    _botsd.ThisDay = CInt(TxtToDay.Text)
+                End If
+            Else
+                _botsd.ThisDay = cboDay.SelectedIndex + 1
+            End If
+            _botsd.ThisMonth = cboMonth.SelectedIndex + 1
+            _botsd.ShowDialog()
+        End Using
+        DisplayMessage("")
+    End Sub
+    Private Sub BtnMonth_Click(sender As Object, e As EventArgs) Handles BtnMonth.Click
+        cboDay.SelectedIndex = -1
+    End Sub
+    Private Sub ChkShowImage_CheckedChanged(sender As Object, e As EventArgs) Handles ChkShowImage.CheckedChanged
+        DgvWarnings.Columns().Item(xImg.Name).Visible = ChkShowImage.Checked
+        For Each tRow As DataGridViewRow In DgvWarnings.Rows
+            tRow.Height = If(ChkShowImage.Checked, 65, DgvWarnings.RowTemplate.Height)
+        Next
+    End Sub
+    Private Sub BtnRemoveRow_Click(sender As Object, e As EventArgs) Handles BtnRemoveRow.Click
+        If DgvWarnings.SelectedRows.Count = 1 Then
+            DgvWarnings.Rows.Remove(DgvWarnings.SelectedRows(0))
+        End If
     End Sub
 #End Region
 #Region "subroutines"
@@ -295,61 +352,5 @@ Public NotInheritable Class FrmDateCheck
         End Using
         DisplayMessage("")
     End Sub
-
-    Private Sub FrmDateCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LogUtil.Info("Loading", MyBase.Name)
-    End Sub
-
-    Private Sub FrmDateCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("Closing", MyBase.Name)
-    End Sub
-
-    Private Sub BtnWpDesc_Click(sender As Object, e As EventArgs) Handles BtnWpDesc.Click
-        Dim wpText As String = ""
-        Dim oPerson As Person = GetPersonById(CInt(LblId.Text))
-        If oPerson IsNot Nothing Then
-            LogUtil.Info("Generating WordPress description for " & TxtFullName.Text, MyBase.Name)
-            Dim sBorn As String = ""
-            If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
-                sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
-            End If
-            Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
-            Dim sText As New StringBuilder
-            With sText
-                .Append(TxtFullDesc.Text)
-                .Append(sBorn)
-                .Append(If(oPerson.DeathYear = 0, "", sDied))
-            End With
-            wpText = sText.ToString
-        End If
-        Clipboard.SetText(wpText)
-        oPerson.Dispose()
-    End Sub
-
-    Private Sub BtnBotSD_Click(sender As Object, e As EventArgs) Handles BtnBotSD.Click
-        Using _botsd As New FrmBotsd
-            If cboDay.SelectedIndex < 0 Then
-                If IsNumeric(TxtToDay.Text) Then
-                    _botsd.ThisDay = CInt(TxtToDay.Text)
-                End If
-            Else
-                _botsd.ThisDay = cboDay.SelectedIndex + 1
-            End If
-            _botsd.ThisMonth = cboMonth.SelectedIndex + 1
-            _botsd.ShowDialog()
-        End Using
-    End Sub
-
-    Private Sub BtnMonth_Click(sender As Object, e As EventArgs) Handles BtnMonth.Click
-        cboDay.SelectedIndex = -1
-    End Sub
-
-    Private Sub ChkShowImage_CheckedChanged(sender As Object, e As EventArgs) Handles ChkShowImage.CheckedChanged
-        DgvWarnings.Columns().Item(xImg.Name).Visible = ChkShowImage.Checked
-        For Each tRow As DataGridViewRow In DgvWarnings.Rows
-            tRow.Height = If(ChkShowImage.Checked, 65, DgvWarnings.RowTemplate.Height)
-        Next
-    End Sub
-
 #End Region
 End Class

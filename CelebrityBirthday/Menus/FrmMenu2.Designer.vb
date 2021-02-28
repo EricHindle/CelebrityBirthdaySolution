@@ -107,7 +107,7 @@ Partial Class FrmMenu2
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(151, 49)
         Me.BtnClose.TabIndex = 18
-        Me.BtnClose.Text = "Close"
+        Me.BtnClose.Text = "Back"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
         'BtnMosaic

@@ -1101,8 +1101,9 @@ Partial Class FrmUpdateDatabase
         '
         'BtnPasteDesc
         '
+        Me.BtnPasteDesc.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.paste
+        Me.BtnPasteDesc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnPasteDesc.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPasteDesc.Image = Global.CelebrityBirthday.My.Resources.Resources.pasteicon
         Me.BtnPasteDesc.Location = New System.Drawing.Point(257, 127)
         Me.BtnPasteDesc.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPasteDesc.Name = "BtnPasteDesc"
@@ -1137,8 +1138,9 @@ Partial Class FrmUpdateDatabase
         'BtnPasteWikiId
         '
         Me.BtnPasteWikiId.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPasteWikiId.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.paste
+        Me.BtnPasteWikiId.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnPasteWikiId.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPasteWikiId.Image = Global.CelebrityBirthday.My.Resources.Resources.pasteicon
         Me.BtnPasteWikiId.Location = New System.Drawing.Point(477, 685)
         Me.BtnPasteWikiId.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPasteWikiId.Name = "BtnPasteWikiId"
@@ -1150,7 +1152,7 @@ Partial Class FrmUpdateDatabase
         'BtnPasteName
         '
         Me.BtnPasteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnPasteName.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.pasteicon
+        Me.BtnPasteName.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.paste
         Me.BtnPasteName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnPasteName.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnPasteName.Location = New System.Drawing.Point(813, 16)
@@ -1164,8 +1166,9 @@ Partial Class FrmUpdateDatabase
         'BtnPasteBirthname
         '
         Me.BtnPasteBirthname.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPasteBirthname.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.paste
+        Me.BtnPasteBirthname.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnPasteBirthname.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPasteBirthname.Image = Global.CelebrityBirthday.My.Resources.Resources.pasteicon
         Me.BtnPasteBirthname.Location = New System.Drawing.Point(863, 575)
         Me.BtnPasteBirthname.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPasteBirthname.Name = "BtnPasteBirthname"
@@ -1177,8 +1180,9 @@ Partial Class FrmUpdateDatabase
         'BtnPasteBirthplace
         '
         Me.BtnPasteBirthplace.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPasteBirthplace.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.paste
+        Me.BtnPasteBirthplace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnPasteBirthplace.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPasteBirthplace.Image = Global.CelebrityBirthday.My.Resources.Resources.pasteicon
         Me.BtnPasteBirthplace.Location = New System.Drawing.Point(863, 532)
         Me.BtnPasteBirthplace.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPasteBirthplace.Name = "BtnPasteBirthplace"
@@ -1190,8 +1194,9 @@ Partial Class FrmUpdateDatabase
         'BtnPasteShort
         '
         Me.BtnPasteShort.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPasteShort.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.paste
+        Me.BtnPasteShort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnPasteShort.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPasteShort.Image = Global.CelebrityBirthday.My.Resources.Resources.pasteicon
         Me.BtnPasteShort.Location = New System.Drawing.Point(863, 489)
         Me.BtnPasteShort.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPasteShort.Name = "BtnPasteShort"
