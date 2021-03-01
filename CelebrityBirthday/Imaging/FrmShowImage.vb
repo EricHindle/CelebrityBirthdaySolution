@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Windows.Forms
 
 Public NotInheritable Class FrmShowImage
     Private _imageLocation As String

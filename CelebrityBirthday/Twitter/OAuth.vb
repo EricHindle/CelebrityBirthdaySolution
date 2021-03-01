@@ -1,10 +1,6 @@
-﻿Imports System
-Imports System.Security.Cryptography
-Imports System.Collections.Specialized
-Imports System.IO
+﻿Imports System.Security.Cryptography
 Imports System.Text
 Imports System.Web
-Imports System.Net
 Public Class OAuth
     Public Enum Method
         [GET]

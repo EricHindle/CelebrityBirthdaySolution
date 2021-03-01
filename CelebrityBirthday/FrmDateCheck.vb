@@ -1,8 +1,5 @@
 ﻿Imports System.Data.Common
-Imports System.IO
-Imports System.Net
 Imports System.Text
-Imports System.Web.Script.Serialization
 
 Structure WikiBirthInfo
     Private _birthDate As Date?

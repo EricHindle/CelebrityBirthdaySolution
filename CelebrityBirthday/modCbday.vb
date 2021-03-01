@@ -2,7 +2,6 @@
 Imports System.Globalization
 Imports System.Net
 Imports System.IO
-Imports System.Drawing.Drawing2D
 Imports System.Web.Script.Serialization
 Imports System.Reflection
 

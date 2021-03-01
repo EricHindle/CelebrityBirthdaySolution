@@ -1,6 +1,4 @@
-﻿Imports System.Reflection
-
-Public Class Person
+﻿Public Class Person
     Implements IDisposable
 #Region "properties"
     Private _id As Integer
@@ -270,11 +268,11 @@ Public Class Person
             End If
             _deathMonth = pPerson.DeathMonth
             _deathday = pPerson.DeathDay
-                _birthName = pPerson.BirthName
-                _birthPlace = pPerson.BirthPlace
-                _social = pPerson.Social
-            End If
-            _unsavedChanges = False
+            _birthName = pPerson.BirthName
+            _birthPlace = pPerson.BirthPlace
+            _social = pPerson.Social
+        End If
+        _unsavedChanges = False
     End Sub
     Public Sub New(ByRef oRow As CelebrityBirthdayDataSet.PersonRow, ByVal oSocial As SocialMedia, ByVal oImage As ImageIdentity)
         InitialisePerson()

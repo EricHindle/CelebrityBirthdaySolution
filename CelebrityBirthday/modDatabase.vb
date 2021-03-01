@@ -1,8 +1,5 @@
 ﻿Imports System.Data.Common
-Imports System.Data.SqlClient
 Imports System.Reflection
-Imports System.Threading
-Imports TweetSharp
 
 Module modDatabase
 #Region "constants"

@@ -1,5 +1,4 @@
-﻿Imports System.Drawing.Imaging
-Imports System.IO
+﻿Imports System.IO
 Imports System.Reflection
 Imports TweetSharp
 Module modTwitter

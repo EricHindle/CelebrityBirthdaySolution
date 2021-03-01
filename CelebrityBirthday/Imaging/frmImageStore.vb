@@ -1,8 +1,5 @@
 ﻿Imports System.IO
 
-Imports System.Net
-Imports System.Reflection
-
 Public Class FrmImageStore
 #Region "variables"
     Dim sImagePath As String

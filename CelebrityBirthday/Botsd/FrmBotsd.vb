@@ -4,7 +4,6 @@ Imports System.Data.Common
 Imports System.IO
 Imports System.Reflection
 Imports System.Text
-Imports System.Web.ClientServices.Providers
 Imports System.Web.UI.WebControls
 Imports TweetSharp
 

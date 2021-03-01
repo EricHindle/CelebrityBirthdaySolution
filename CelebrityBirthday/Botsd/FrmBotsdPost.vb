@@ -1,6 +1,5 @@
 ﻿Imports System.IO
 Imports System.Text
-Imports TweetSharp
 
 Public NotInheritable Class FrmBotsdPost
 #Region "variables"

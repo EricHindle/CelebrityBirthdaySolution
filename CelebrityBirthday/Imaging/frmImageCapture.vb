@@ -1,5 +1,4 @@
-﻿Imports System.Runtime.InteropServices
-Imports System.Drawing.Drawing2D
+﻿Imports System.Drawing.Drawing2D
 Imports System.IO
 Imports System.Drawing.Imaging
 Imports System.Reflection

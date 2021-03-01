@@ -1,5 +1,4 @@
 ﻿Imports Facebook
-Imports Newtonsoft.Json
 Public NotInheritable Class FrmFacebookTest
     Private Sub BtnTest1_Click(sender As Object, e As EventArgs) Handles BtnTest1.Click
         Dim accessToken As String = "EAACHZBQRkG5wBADWZCSL1VkG7G0vfZCsNNXvr3egVqsrOxQpMMAZCSxK2LlChtPxPtCxvwMZCxb5Tr2lO7uWzooZCEzjP0ILNxbZAteDTUb5ZBUSdwTO9EWrJejZAl8tPxHxcDKb36bkr0DZAqzcZCYhJGnHOJBAZC9jnImRaR7YWfZAihgZDZD"

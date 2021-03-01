@@ -1,7 +1,4 @@
 ﻿Imports System.Collections.ObjectModel
-Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Reflection
 Imports System.Text

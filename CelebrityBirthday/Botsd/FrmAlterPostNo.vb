@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-
-Public Class FrmAlterPostNo
+﻿Public Class FrmAlterPostNo
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         If Not String.IsNullOrEmpty(TxtExistingNo.Text) AndAlso Not String.IsNullOrEmpty(TxtNewNo.Text) _

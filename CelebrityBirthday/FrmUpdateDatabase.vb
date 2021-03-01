@@ -1,7 +1,5 @@
 ﻿Imports System.Text
 Imports System.IO
-Imports System.Net
-Imports CelebrityBirthday
 Imports System.Data.Common
 
 Public NotInheritable Class FrmUpdateDatabase
@@ -164,7 +162,7 @@ Public NotInheritable Class FrmUpdateDatabase
             End Try
         Else
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
-            End If
+        End If
 
     End Sub
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
@@ -309,32 +307,32 @@ Public NotInheritable Class FrmUpdateDatabase
                 MsgBox("No surname", MsgBoxStyle.Exclamation, "Warning")
             End If
             Dim id As Integer = CInt(lblID.Text)
-                For Each oPerson As Person In personTable
-                    If oPerson.Id = id Then
-                        Dim CurrentSocialMedia As SocialMedia = oPerson.Social
-                        oPerson.BirthYear = txtYear.Text
-                        oPerson.DeathYear = 0
-                        If Not Integer.TryParse(txtDied.Text, oPerson.DeathYear) Then txtDied.Text = ""
-                        oPerson.Description = txtDesc.Text.Trim
-                        oPerson.ForeName = txtForename.Text.Trim
-                        oPerson.Surname = txtSurname.Text.Trim
-                        oPerson.ShortDesc = TxtShortDesc.Text.Trim
-                        oPerson.DeathDay = CInt("0" & txtDthDay.Text.Trim)
-                        oPerson.DeathMonth = CInt("0" & txtDthMth.Text.Trim)
-                        oPerson.BirthPlace = TxtBirthPlace.Text.Trim
-                        oPerson.BirthName = TxtBirthName.Text.Trim
-                        oPerson.UnsavedChanges = True
-                        oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd)
-                        ShowUpdated(oPerson, "Updated")
-                        Dim p As Integer = lbPeople.SelectedIndex
-                        DisplayPersonList()
-                        lbPeople.SelectedIndex = p
-                        ShowStatus("Updated list",, True)
-                        Exit For
-                    End If
-                Next
-                Else
-                LogUtil.Problem("ID label is empty", MyBase.Name)
+            For Each oPerson As Person In personTable
+                If oPerson.Id = id Then
+                    Dim CurrentSocialMedia As SocialMedia = oPerson.Social
+                    oPerson.BirthYear = txtYear.Text
+                    oPerson.DeathYear = 0
+                    If Not Integer.TryParse(txtDied.Text, oPerson.DeathYear) Then txtDied.Text = ""
+                    oPerson.Description = txtDesc.Text.Trim
+                    oPerson.ForeName = txtForename.Text.Trim
+                    oPerson.Surname = txtSurname.Text.Trim
+                    oPerson.ShortDesc = TxtShortDesc.Text.Trim
+                    oPerson.DeathDay = CInt("0" & txtDthDay.Text.Trim)
+                    oPerson.DeathMonth = CInt("0" & txtDthMth.Text.Trim)
+                    oPerson.BirthPlace = TxtBirthPlace.Text.Trim
+                    oPerson.BirthName = TxtBirthName.Text.Trim
+                    oPerson.UnsavedChanges = True
+                    oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd)
+                    ShowUpdated(oPerson, "Updated")
+                    Dim p As Integer = lbPeople.SelectedIndex
+                    DisplayPersonList()
+                    lbPeople.SelectedIndex = p
+                    ShowStatus("Updated list",, True)
+                    Exit For
+                End If
+            Next
+        Else
+            LogUtil.Problem("ID label is empty", MyBase.Name)
         End If
     End Sub
     Private Sub FrmAddCbdy_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing

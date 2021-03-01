@@ -5,9 +5,6 @@
 ' Author E Hindle
 ' Created June 2020
 
-Imports System.Windows.Forms
-Imports System.IO
-
 Public Class frmLogViewer
     Dim currentDate As Date
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click

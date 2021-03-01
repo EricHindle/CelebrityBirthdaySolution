@@ -1,6 +1,4 @@
-﻿Imports CelebrityBirthday
-
-Public Class FrmSearch
+﻿Public Class FrmSearch
 #Region "variables"
     Private bLoadingPeople As Boolean
 #End Region

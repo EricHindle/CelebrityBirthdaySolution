@@ -1,5 +1,4 @@
-﻿Imports System
-Imports System.Reflection
+﻿Imports System.Reflection
 Imports System.Runtime.InteropServices
 
 ' General Information about an assembly is controlled through the following 
@@ -8,12 +7,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Celebrity Birthday Database Maintenance")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("netWYrks")> 
+<Assembly: AssemblyTitle("Celebrity Birthday Database Maintenance")>
+<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyCompany("netWYrks")>
 <Assembly: AssemblyProduct("Celebrity Birthday Database")>
 <Assembly: AssemblyCopyright("Copyright © Eric Hindle  2013-2021")>
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 

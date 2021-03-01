@@ -1,5 +1,4 @@
-﻿Imports System.IO
-Imports System.Drawing.Drawing2D
+﻿Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
 
 Friend Module ImageUtil
