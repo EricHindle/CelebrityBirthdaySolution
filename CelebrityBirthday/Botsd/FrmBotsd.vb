@@ -264,30 +264,17 @@ Public NotInheritable Class FrmBotsd
         GenerateWordpress()
     End Sub
     Private Sub BtnClearImages_Click(sender As Object, e As EventArgs) Handles BtnClearImages.Click
-        If MsgBox("Confirm delete BOTSD images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.botsdFilePath, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.BOTSD & "*.*"})
-            For Each _imageFile As String In _imageList
-                My.Computer.FileSystem.DeleteFile(_imageFile)
-                WriteTrace("Deleted " & Path.GetFileName(_imageFile))
-            Next
-
-        End If
+        ClearImages(True)
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
-        Dim _imageFilename As String
-        If PictureBox1.Image IsNot Nothing Then
-            _imageFilename = SaveImage()
-            WriteTrace("Image saved to " & Path.GetFileName(_imageFilename))
-        End If
+        SaveImageGroup()
     End Sub
     Private Sub BtnWpPost_Click(sender As Object, e As EventArgs) Handles BtnWpPost.Click
         GenerateWpPost()
         UpdatePostNumbers()
     End Sub
     Private Sub BtnCopyAll_Click(sender As Object, e As EventArgs) Handles BtnCopyAll.Click
-        rtbFile1.SelectAll()
-        rtbFile1.Copy()
-        WriteTrace("Copied text")
+        CopyAllText()
     End Sub
     Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
         cboDay.SelectedIndex = Today.Day - 1
@@ -391,11 +378,17 @@ Public NotInheritable Class FrmBotsd
         For Each oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In oRows
             Try
                 Dim surnameInitial As String
-                If String.IsNullOrEmpty(oRow.surname) Then
-                    Dim errorMsg As String = "Empty surname for " & CStr(oRow.id) & " " & oRow.forename & " " & CStr(oRow.birthday) & "/" & CStr(oRow.birthmonth) & "/" & CStr(oRow.birthyear)
-                    DisplayStatus(errorMsg)
-                    LogUtil.Problem(errorMsg, MyBase.Name)
-                    surnameInitial = "z"
+                If oRow.IssurnameNull() Then
+                    Dim errorMsg As String
+                    If oRow.IsidNull() Then
+                        errorMsg = "Missing person records " & CStr(oRow.btsdId) & " " & CStr(oRow.btsdDay) & "/" & CStr(oRow.btsdMonth) & "/" & CStr(oRow.btsdYear) & " " & oRow.btsdUrl
+                        DisplayStatus(errorMsg, True)
+                        Continue For
+                    Else
+                        errorMsg = "Empty surname for " & CStr(oRow.id) & " " & oRow.forename & " " & CStr(oRow.birthday) & "/" & CStr(oRow.birthmonth) & "/" & CStr(oRow.birthyear)
+                        surnameInitial = "z"
+                        DisplayStatus(errorMsg, True)
+                    End If
                 Else
                     surnameInitial = oRow.surname.Substring(0, 1)
                 End If
@@ -409,6 +402,8 @@ Public NotInheritable Class FrmBotsd
                     currentLetter = surnameInitial
                 End If
                 indexText.Append(GetIndexEntry(oRow))
+            Catch ex4 As DataException
+                DisplayException(MethodBase.GetCurrentMethod(), ex4, "Data")
             Catch ex1 As DecoderFallbackException
                 DisplayException(MethodBase.GetCurrentMethod(), ex1, "Decoder")
             Catch ex2 As EncoderFallbackException
@@ -433,6 +428,20 @@ Public NotInheritable Class FrmBotsd
     Private Sub ChkHandles_CheckedChanged(sender As Object, e As EventArgs) Handles ChkHandles.CheckedChanged
         GeneratePair()
     End Sub
+    Private Sub BtnFb_Click(sender As Object, e As EventArgs) Handles BtnFb.Click
+        If DgvPairs.SelectedRows.Count = 1 Then
+            If DgvPairs.SelectedRows(0).Index = 0 Then
+                rtbTweet.Text = ""
+                ClearImages(False)
+            End If
+            SaveImageGroup()
+            CopyAllText()
+            DisplayStatus("Ready to post")
+        Else
+            DisplayStatus("No row selected")
+        End If
+    End Sub
+
 #End Region
 #Region "subroutines"
     Private Function SaveImage() As String
@@ -1215,5 +1224,27 @@ Public NotInheritable Class FrmBotsd
         ClearStatus()
         isBuildingPairs = False
     End Sub
+    Private Sub CopyAllText()
+        rtbFile1.SelectAll()
+        rtbFile1.Copy()
+        WriteTrace("Copied text")
+    End Sub
+    Private Sub SaveImageGroup()
+        Dim _imageFilename As String
+        If PictureBox1.Image IsNot Nothing Then
+            _imageFilename = SaveImage()
+            WriteTrace("Image saved to " & Path.GetFileName(_imageFilename))
+        End If
+    End Sub
+    Private Sub ClearImages(isPrompt As Boolean)
+        If Not isPrompt OrElse MsgBox("Confirm delete BOTSD images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.botsdFilePath, FileIO.SearchOption.SearchTopLevelOnly, {My.Resources.BOTSD & "*.*"})
+            For Each _imageFile As String In _imageList
+                My.Computer.FileSystem.DeleteFile(_imageFile)
+                WriteTrace("Deleted " & Path.GetFileName(_imageFile))
+            Next
+        End If
+    End Sub
+
 #End Region
 End Class

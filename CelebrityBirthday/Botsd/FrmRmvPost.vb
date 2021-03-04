@@ -1,4 +1,5 @@
 ﻿Imports System.Text
+Imports System.Reflection
 
 Public NotInheritable Class FrmRmvPost
 
@@ -14,9 +15,18 @@ Public NotInheritable Class FrmRmvPost
             Dim postRows As DataRowCollection = GetBotsdViewByPostNo(_postNo)
             Dim postRowDetails As New StringBuilder
             For Each postRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In postRows
-                Dim updCt As Integer = UpdateBotsdId(postRow.personId, 0)
                 postRowDetails.Clear()
-                postRowDetails.Append(postRow.forename).Append(" "c).Append(postRow.surname).Append(" (").Append(postRow.birthyear).Append(" - ").Append(If(postRow.deathyear <> 0, postRow.deathyear, "")).Append(")"c)
+                Dim updCt As Integer = 0
+                Try
+                    If postRow.IspersonIdNull Then
+                        postRowDetails.Append(" ** No persons")
+                    Else
+                        updCt = UpdateBotsdId(postRow.personId, 0)
+                    End If
+                    postRowDetails.Append(postRow.forename).Append(" "c).Append(postRow.surname).Append(" (").Append(postRow.birthyear).Append(" - ").Append(If(postRow.deathyear <> 0, postRow.deathyear, "")).Append(")"c)
+                Catch ex As DataException
+                    DisplayException(MethodBase.GetCurrentMethod, ex, "Data")
+                End Try
                 If updCt > 0 Then
                     postRowDetails.Append(" updated")
                 Else
@@ -45,9 +55,18 @@ Public NotInheritable Class FrmRmvPost
             Dim postRows As DataRowCollection = GetBotsdViewByPostNo(_postNo)
             If postRows.Count > 0 Then
                 For Each postRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In postRows
-                    Dim postRowDetails As New StringBuilder
-                    postRowDetails.Append(postRow.forename).Append(" "c).Append(postRow.surname).Append(" (").Append(postRow.birthyear).Append(" - ").Append(If(postRow.deathyear <> 0, postRow.deathyear, "")).Append(")"c)
-                    LblMessage.Text &= postRowDetails.ToString & vbCrLf
+                    Try
+                        Dim postRowDetails As New StringBuilder
+                        If postRow.IsidNull Then
+                            LblMessage.Text &= "No persons on this post" & vbCrLf
+                        Else
+                            postRowDetails.Append(postRow.forename).Append(" "c).Append(postRow.surname).Append(" (").Append(postRow.birthyear).Append(" - ").Append(If(postRow.deathyear <> 0, postRow.deathyear, "")).Append(")"c)
+                            LblMessage.Text &= postRowDetails.ToString & vbCrLf
+                        End If
+                    Catch ex As DataException
+                        LblMessage.Text &= "Data error" & vbCrLf
+                        DisplayException(MethodBase.GetCurrentMethod, ex, "Data")
+                    End Try
                 Next
             Else
                 LblMessage.Text = My.Resources.NO_POST

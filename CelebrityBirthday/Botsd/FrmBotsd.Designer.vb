@@ -128,6 +128,7 @@ Partial Class FrmBotsd
         Me.TxtSurname5 = New System.Windows.Forms.TextBox()
         Me.BtnRmvPostDetails = New System.Windows.Forms.Button()
         Me.ChkHandles = New System.Windows.Forms.CheckBox()
+        Me.BtnFb = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1273,12 +1274,25 @@ Partial Class FrmBotsd
         Me.ChkHandles.Text = "Include Handles"
         Me.ChkHandles.UseVisualStyleBackColor = True
         '
+        'BtnFb
+        '
+        Me.BtnFb.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnFb.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnFb.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnFb.Location = New System.Drawing.Point(609, 407)
+        Me.BtnFb.Name = "BtnFb"
+        Me.BtnFb.Size = New System.Drawing.Size(83, 34)
+        Me.BtnFb.TabIndex = 64
+        Me.BtnFb.Text = "Facebook"
+        Me.BtnFb.UseVisualStyleBackColor = True
+        '
         'FrmBotsd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1392, 677)
+        Me.Controls.Add(Me.BtnFb)
         Me.Controls.Add(Me.ChkHandles)
         Me.Controls.Add(Me.BtnRmvPostDetails)
         Me.Controls.Add(Me.GroupBox6)
@@ -1451,4 +1465,5 @@ Partial Class FrmBotsd
     Friend WithEvents LblSeq4 As Label
     Friend WithEvents LblSeq6 As Label
     Friend WithEvents LblSeq5 As Label
+    Friend WithEvents BtnFb As Button
 End Class

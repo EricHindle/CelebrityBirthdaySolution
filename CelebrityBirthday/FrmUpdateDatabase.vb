@@ -662,11 +662,36 @@ Public NotInheritable Class FrmUpdateDatabase
             End If
         End If
     End Sub
-    Private Sub BTnRmvBotsd_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsd.Click
-        If IsNumeric(lblBotsdId.Text) AndAlso CInt(lblBotsdId.Text) > 0 Then
-            UpdateBotsdId(CInt(lblID.Text), 0)
-            ShowStatus("Removed BotSD Id", False, True)
-            lblBotsdId.Text = 0
+    Private Sub BtnRmvBotsd_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsd.Click
+        ShowStatus("Removing BotSD id", False, True)
+        If lbPeople.SelectedIndex >= 0 Then
+            Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
+            Dim oSocial As SocialMedia = oPerson.Social
+            If oSocial IsNot Nothing Then
+                If oSocial.Botsd > 0 Then
+                    UpdateBotsdId(oPerson.Id, 0)
+                    ShowStatus("Removed BotSD Id from person " & CStr(oPerson.Id) & " " & oPerson.Surname, False, True)
+                    lblBotsdId.Text = 0
+                    ShowStatus("Checking post", False, True)
+                    Dim oBotsdRow As CelebrityBirthdayDataSet.BotSDRow = GetBotsd(oSocial.Botsd)
+                    If oBotsdRow IsNot Nothing Then
+                        Dim oRows As DataRowCollection = GetBotsdViewByPostNo(oBotsdRow.btsdPostNo)
+                        If oRows.Count = 1 Then
+                            Dim oViewRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow = oRows(0)
+                            If oViewRow.IspersonIdNull Then
+                                DeleteBotsdByPostNo(oViewRow.btsdPostNo)
+                                ShowStatus("Removed BotSD post " & CStr(oViewRow.btsdPostNo) & "with no persons", False, True)
+                            End If
+                        End If
+                    End If
+                Else
+                    ShowStatus("No BotSD id to remove", False, True)
+                End If
+            Else
+                ShowStatus("No social details", False, True)
+            End If
+        Else
+            ShowStatus("No person selected", False, True)
         End If
     End Sub
     Private Sub BtnUpdBotsd_Click(sender As Object, e As EventArgs) Handles BtnUpdBotsd.Click

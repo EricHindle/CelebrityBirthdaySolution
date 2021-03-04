@@ -1310,11 +1310,11 @@ Partial Class FrmUpdateDatabase
         'BtnRmvBotsd
         '
         Me.BtnRmvBotsd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnRmvBotsd.Location = New System.Drawing.Point(228, 21)
+        Me.BtnRmvBotsd.Location = New System.Drawing.Point(219, 21)
         Me.BtnRmvBotsd.Name = "BtnRmvBotsd"
-        Me.BtnRmvBotsd.Size = New System.Drawing.Size(75, 23)
+        Me.BtnRmvBotsd.Size = New System.Drawing.Size(84, 23)
         Me.BtnRmvBotsd.TabIndex = 0
-        Me.BtnRmvBotsd.Text = "Remove"
+        Me.BtnRmvBotsd.Text = "Remove Id"
         Me.ToolTip1.SetToolTip(Me.BtnRmvBotsd, "Remove botsd id")
         Me.BtnRmvBotsd.UseVisualStyleBackColor = True
         '
