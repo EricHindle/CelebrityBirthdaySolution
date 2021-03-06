@@ -422,42 +422,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to &lt;a href=.
-        '''</summary>
-        Friend ReadOnly Property WP_A_HREF() As String
-            Get
-                Return ResourceManager.GetString("WP_A_HREF", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to &lt;/a&gt;.
-        '''</summary>
-        Friend ReadOnly Property WP_END_A() As String
-            Get
-                Return ResourceManager.GetString("WP_END_A", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to &lt;/p&gt;&lt;!-- /wp:paragraph --&gt;.
-        '''</summary>
-        Friend ReadOnly Property WP_END_PARA() As String
-            Get
-                Return ResourceManager.GetString("WP_END_PARA", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to &lt;!-- wp:paragraph --&gt;&lt;p&gt;.
-        '''</summary>
-        Friend ReadOnly Property WP_PARA() As String
-            Get
-                Return ResourceManager.GetString("WP_PARA", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to https://celebritybirthday.files.wordpress.com/.
         '''</summary>
         Friend ReadOnly Property WPFILESURL() As String

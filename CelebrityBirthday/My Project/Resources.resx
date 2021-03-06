@@ -220,18 +220,6 @@
   <data name="TWO_SPACES" xml:space="preserve">
     <value>&amp;nbsp;&amp;nbsp;</value>
   </data>
-  <data name="WP_A_HREF" xml:space="preserve">
-    <value>&lt;a href=</value>
-  </data>
-  <data name="WP_END_A" xml:space="preserve">
-    <value>&lt;/a&gt;</value>
-  </data>
-  <data name="WP_END_PARA" xml:space="preserve">
-    <value>&lt;/p&gt;&lt;!-- /wp:paragraph --&gt;</value>
-  </data>
-  <data name="WP_PARA" xml:space="preserve">
-    <value>&lt;!-- wp:paragraph --&gt;&lt;p&gt;</value>
-  </data>
   <data name="NON_BREAKING_SPACE" xml:space="preserve">
     <value>&amp;nbsp;</value>
   </data>

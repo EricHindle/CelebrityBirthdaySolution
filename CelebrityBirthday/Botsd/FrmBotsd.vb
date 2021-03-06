@@ -734,7 +734,7 @@ Public NotInheritable Class FrmBotsd
         DisplayStatus("Generating WordPress list entry", True)
         Dim sb As New StringBuilder
         With sb
-            .Append(My.Resources.WP_PARA).Append(vbCrLf)
+            .Append(WP_PARA).Append(vbCrLf)
             .Append("<strong>").Append(CStr(ThisDay))
             Select Case ThisDay
                 Case 1, 21, 31
@@ -783,21 +783,21 @@ Public NotInheritable Class FrmBotsd
                         End If
                         .Append(My.Resources.TWO_SPACES)
                         If postNo > -1 Then
-                            .Append(My.Resources.WP_A_HREF)
-                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append(WP_A_HREF)
+                            .Append(DOUBLEQUOTES)
                             .Append(btsdUrl)
-                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append(DOUBLEQUOTES)
                             .Append(" target=")
-                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append(DOUBLEQUOTES)
                             .Append("_blank")
-                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append(DOUBLEQUOTES)
                             .Append(" rel=")
-                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append(DOUBLEQUOTES)
                             .Append("noreferrer noopener")
-                            .Append(My.Resources.DOUBLEQUOTES)
+                            .Append(DOUBLEQUOTES)
                             .Append(">#")
                             .Append(CStr(postNo))
-                            .Append(My.Resources.WP_END_A)
+                            .Append(WP_END_A)
                         End If
                         .Append(My.Resources.BREAK)
                         .Append(vbCrLf)
@@ -805,7 +805,7 @@ Public NotInheritable Class FrmBotsd
                     _pickPerson1.Dispose()
                 End If
             Next
-            .Append(My.Resources.WP_END_PARA).Append(vbCrLf)
+            .Append(WP_END_PARA).Append(vbCrLf)
         End With
         Using oTextForm As New FrmText
             oTextForm.rtbText.Text = sb.ToString
@@ -834,8 +834,8 @@ Public NotInheritable Class FrmBotsd
             .Append("<!-- wp:image {""linkDestination"":""custom""} -->")
             .Append(vbCrLf)
             .Append("<figure class=""wp-block-image"">")
-            .Append(My.Resources.WP_A_HREF)
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(WP_A_HREF)
+            .Append(DOUBLEQUOTES)
             .Append(My.Resources.WPPAGEURL)
             .Append(urlYear)
             .Append(My.Resources.SLASH)
@@ -849,9 +849,9 @@ Public NotInheritable Class FrmBotsd
             .Append(My.Resources.SLASH)
             .Append(lowername)
             .Append(My.Resources.SLASH)
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(DOUBLEQUOTES)
             .Append("><img src=")
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(DOUBLEQUOTES)
             .Append(My.Resources.WPFILESURL)
             .Append(My.Resources.SLASH)
             .Append(imageLoadYear)
@@ -861,9 +861,9 @@ Public NotInheritable Class FrmBotsd
             .Append(imagename)
             .Append(oPerson.Image.ImageFileType)
             .Append("?w=150&amp;h=150"" alt=")
-            .Append(My.Resources.DOUBLEQUOTES).Append(imagename).Append(My.Resources.DOUBLEQUOTES)
+            .Append(DOUBLEQUOTES).Append(imagename).Append(DOUBLEQUOTES)
             .Append(">"c)
-            .Append(My.Resources.WP_END_A)
+            .Append(WP_END_A)
             .Append("</figure>")
             .Append(vbCrLf)
             .Append("<!-- /wp:image -->")
@@ -885,25 +885,25 @@ Public NotInheritable Class FrmBotsd
             .Append("<!-- /wp:heading -->").Append(vbCrLf)
             .Append(vbCrLf)
             .Append(GetImageLink(oPerson)).Append(vbCrLf)
-            .Append(My.Resources.WP_PARA).Append(vbCrLf)
+            .Append(WP_PARA).Append(vbCrLf)
             .Append(oPerson.Description).Append(sBorn)
             .Append(If(oPerson.DeathYear = 0, "", sDied)).Append(vbCrLf)
-            .Append(My.Resources.WP_END_PARA).Append(vbCrLf).Append(vbCrLf)
+            .Append(WP_END_PARA).Append(vbCrLf).Append(vbCrLf)
         End With
         Return oPersonText.ToString
     End Function
     Private Shared Function GetWikiLinkText(oPerson As Person) As String
         Dim oImageText As New StringBuilder
         With oImageText
-            .Append(My.Resources.WP_A_HREF)
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(WP_A_HREF)
+            .Append(DOUBLEQUOTES)
             .Append(My.Resources.WIKIURL)
             .Append(oPerson.Social.WikiId)
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(DOUBLEQUOTES)
             .Append(" target="" _blank"" rel="" noreferrer noopener"">")
             .Append(My.Resources.WIKIURL)
             .Append(oPerson.Social.WikiId)
-            .Append(My.Resources.WP_END_A).Append(My.Resources.BREAK)
+            .Append(WP_END_A).Append(My.Resources.BREAK)
             .Append(vbCrLf)
         End With
         Return oImageText.ToString
@@ -966,7 +966,7 @@ Public NotInheritable Class FrmBotsd
             End If
 
             titleSb.Append(" - ").Append(titleDate)
-            sb.Append(My.Resources.WP_PARA).Append(vbCrLf)
+            sb.Append(WP_PARA).Append(vbCrLf)
             sb.Append("Links:").Append(My.Resources.BREAK).Append(vbCrLf)
 
             If _pickPerson1 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson1.Social.WikiId) Then
@@ -987,16 +987,16 @@ Public NotInheritable Class FrmBotsd
             If _pickPerson6 IsNot Nothing AndAlso Not String.IsNullOrEmpty(_pickPerson6.Social.WikiId) Then
                 sb.Append(GetWikiLinkText(_pickPerson6))
             End If
-            sb.Append(My.Resources.WP_END_PARA).Append(vbCrLf)
+            sb.Append(WP_END_PARA).Append(vbCrLf)
             sb.Append(vbCrLf)
             With sb
                 .Append("<!-- wp:more {""customText"":""Also born on this day...""} -->").Append(vbCrLf)
                 .Append("<!--more Also born on this day...-->").Append(vbCrLf)
                 .Append("<!-- /wp:more -->").Append(vbCrLf)
                 .Append(vbCrLf)
-                .Append(My.Resources.WP_PARA).Append(vbCrLf)
+                .Append(WP_PARA).Append(vbCrLf)
                 .Append("Also born on this day:").Append(vbCrLf)
-                .Append(My.Resources.WP_END_PARA).Append(vbCrLf)
+                .Append(WP_END_PARA).Append(vbCrLf)
             End With
             Using oTextForm As New FrmBotsdPost
                 With oTextForm
@@ -1063,13 +1063,13 @@ Public NotInheritable Class FrmBotsd
             .Append(CStr(oRow.birthyear))
             .Append(")"c)
             .Append(My.Resources.TWO_SPACES)
-            .Append(My.Resources.WP_A_HREF)
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(WP_A_HREF)
+            .Append(DOUBLEQUOTES)
             .Append(oRow.btsdUrl)
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(DOUBLEQUOTES)
             .Append(">#")
             .Append(CStr(oRow.btsdPostNo))
-            .Append(My.Resources.WP_END_A)
+            .Append(WP_END_A)
             .Append(vbCrLf)
         End With
         Return entry.ToString
@@ -1078,11 +1078,11 @@ Public NotInheritable Class FrmBotsd
         Dim heading As New StringBuilder
         With heading
             .Append("<h1><a name=")
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(DOUBLEQUOTES)
             .Append(surnameInitial)
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(DOUBLEQUOTES)
             .Append(">"c)
-            .Append(My.Resources.WP_END_A)
+            .Append(WP_END_A)
             .Append(surnameInitial)
             .Append("</h1>")
             .Append(vbCrLf)
@@ -1093,12 +1093,12 @@ Public NotInheritable Class FrmBotsd
         Dim footing As New StringBuilder
         With footing
             .Append("<h6>")
-            .Append(My.Resources.WP_A_HREF)
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(WP_A_HREF)
+            .Append(DOUBLEQUOTES)
             .Append("#Top")
-            .Append(My.Resources.DOUBLEQUOTES)
+            .Append(DOUBLEQUOTES)
             .Append(">Back to top")
-            .Append(My.Resources.WP_END_A)
+            .Append(WP_END_A)
             .Append("</h6>")
             .Append(vbCrLf)
         End With

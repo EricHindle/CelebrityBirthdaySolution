@@ -330,6 +330,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Logging\LogUtil.vb" />
+    <Compile Include="modGlobalConstants.vb" />
     <Compile Include="Twitter\modTwitter.vb" />
     <Compile Include="Twitter\FrmSendTwitter.Designer.vb">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>

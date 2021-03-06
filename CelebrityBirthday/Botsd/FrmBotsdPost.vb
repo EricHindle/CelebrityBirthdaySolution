@@ -2,6 +2,7 @@
 Imports System.Text
 
 Public NotInheritable Class FrmBotsdPost
+
 #Region "variables"
     Private oAlsoFileName As String
     Private ReadOnly charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c, "("c, "."c}
@@ -199,7 +200,7 @@ Public NotInheritable Class FrmBotsdPost
             TxtWiki.Text = If(String.IsNullOrEmpty(DgvAlso.SelectedRows(0).Cells(alsoWiki.Name).Value), "", DgvAlso.SelectedRows(0).Cells(alsoWiki.Name).Value)
             TxtDesc.Text = If(String.IsNullOrEmpty(DgvAlso.SelectedRows(0).Cells(alsoDesc.Name).Value), "", DgvAlso.SelectedRows(0).Cells(alsoDesc.Name).Value)
             If String.IsNullOrEmpty(TxtDesc.Text) And NudSentences.Value > 1 Then
-                ExtractNewDescription
+                ExtractNewDescription()
             End If
         End If
     End Sub
@@ -228,9 +229,9 @@ Public NotInheritable Class FrmBotsdPost
     Private Sub BtnImportList_Click(sender As Object, e As EventArgs) Handles BtnImportList.Click
         Dim alsoList As String() = Split(Clipboard.GetText, vbCrLf)
         For Each _also As String In alsoList
-            Dim parts As String() = Split(_also, My.Resources.DOUBLEQUOTES)
+            Dim parts As String() = Split(_also, DOUBLEQUOTES)
             If parts.Length > 4 Then
-                Dim _lastpart As String() = Split(_also, My.Resources.WP_END_A)
+                Dim _lastpart As String() = Split(_also, WP_END_A)
                 TxtName.Text = ParseStringWithBrackets(parts(1))(0)
                 If String.IsNullOrEmpty(TxtName.Text) Then
                     TxtName.Text = Split(_lastpart(0), ">")(1)
@@ -322,7 +323,7 @@ Public NotInheritable Class FrmBotsdPost
     Private Function GenerateAlsos() As String
         DisplayStatus("Generating Text")
         Dim sb As New StringBuilder
-        sb.Append(vbCrLf).Append(My.Resources.WP_PARA).Append(vbCrLf)
+        sb.Append(vbCrLf).Append(WP_PARA).Append(vbCrLf)
         For Each oRow As DataGridViewRow In DgvAlso.Rows
             If Not String.IsNullOrEmpty(oRow.Cells(alsoName.Name).Value) Then
                 Dim oName As String = oRow.Cells(alsoName.Name).Value
@@ -330,23 +331,23 @@ Public NotInheritable Class FrmBotsdPost
                 Dim oDesc As String = oRow.Cells(alsoDesc.Name).Value
                 With sb
                     .Append("<a title=")
-                    .Append(My.Resources.DOUBLEQUOTES).Append(oName.Trim).Append(My.Resources.DOUBLEQUOTES)
+                    .Append(DOUBLEQUOTES).Append(oName.Trim).Append(DOUBLEQUOTES)
                     .Append(" href=")
-                    .Append(My.Resources.DOUBLEQUOTES).Append(oWiki.Trim).Append(My.Resources.DOUBLEQUOTES)
+                    .Append(DOUBLEQUOTES).Append(oWiki.Trim).Append(DOUBLEQUOTES)
                     .Append(" target=")
-                    .Append(My.Resources.DOUBLEQUOTES).Append(" _blank").Append(My.Resources.DOUBLEQUOTES)
+                    .Append(DOUBLEQUOTES).Append(" _blank").Append(DOUBLEQUOTES)
                     .Append(" rel=")
-                    .Append(My.Resources.DOUBLEQUOTES).Append("noreferrer noopener").Append(My.Resources.DOUBLEQUOTES)
+                    .Append(DOUBLEQUOTES).Append("noreferrer noopener").Append(DOUBLEQUOTES)
                     .Append(">"c)
                     .Append(oName.Trim)
-                    .Append(My.Resources.WP_END_A).Append(" "c)
+                    .Append(WP_END_A).Append(" "c)
                     .Append(oDesc.Trim({" "c, ","c, ";"c, "."c, "["c}))
                     .Append("."c).Append(My.Resources.BREAK)
                     .Append(vbCrLf)
                 End With
             End If
         Next
-        sb.Append(My.Resources.WP_END_PARA)
+        sb.Append(WP_END_PARA)
         DisplayStatus("Generated Text")
         Return sb.ToString
     End Function
