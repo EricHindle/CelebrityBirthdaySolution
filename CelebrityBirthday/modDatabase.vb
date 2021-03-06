@@ -81,13 +81,13 @@ Module modDatabase
         End Try
         Return newPerson
     End Function
-    Public Function GetFullPersonById(ByVal _id As Integer) As Person
+    Public Function GetFullPersonById(ByVal _id As Integer, Optional isIncludeImage As Boolean = True) As Person
         Dim newPerson As Person = Nothing
         Try
             Dim iCt As Integer = oFullPersonTa.FillById(oFullPersonTable, _id)
             If iCt = 1 Then
                 Dim oRow As CelebrityBirthdayDataSet.FullPersonRow = oFullPersonTable.Rows(0)
-                newPerson = New Person(oRow)
+                newPerson = New Person(oRow, isIncludeImage)
             End If
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
@@ -96,6 +96,10 @@ Module modDatabase
     End Function
     Public Function GetPeopleByDeathYear(ByVal _year As Integer) As CelebrityBirthdayDataSet.PersonDataTable
         oPersonTa.FillByDeathYear(oPersonTable, _year)
+        Return oPersonTable
+    End Function
+    Public Function GetPeopleByDateofBirth(ByVal _year As Integer, ByVal _month As Integer, ByVal _day As Integer) As CelebrityBirthdayDataSet.PersonDataTable
+        oPersonTa.FillByDob(oPersonTable, _year, _month, _day)
         Return oPersonTable
     End Function
     Public Function InsertPerson(ByRef oPerson As Person) As Integer

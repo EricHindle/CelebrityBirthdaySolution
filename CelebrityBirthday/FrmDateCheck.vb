@@ -27,7 +27,8 @@ Structure WikiBirthInfo
 End Structure
 Public NotInheritable Class FrmDateCheck
 #Region "variables"
-    Private personTable As List(Of Person)
+    Private personList As New List(Of Person)
+    Private personTable As New List(Of Person)
     Private isLoadingTable As Boolean
     Private isWikiIdChanged As Boolean
 #End Region
@@ -41,19 +42,19 @@ Public NotInheritable Class FrmDateCheck
         DgvWarnings.Columns().Item(xImg.Name).Visible = ChkShowImage.Checked
         DgvWarnings.Rows.Clear()
         Me.Refresh()
-        personTable = New List(Of Person)
+        personList = New List(Of Person)
         Try
             If cboDay.SelectedIndex < 0 And cboMonth.SelectedIndex < 0 Then
                 If MsgBox("Do you really want to select all persons?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Check") = MsgBoxResult.Yes Then
                     DisplayMessage("Finding everybody", True)
-                    personTable = FindEverybody()
+                    personList = FindEverybody()
                 End If
             ElseIf cboDay.SelectedIndex < 0 Then
                 DisplayMessage("Finding persons for " & CStr(cboMonth.SelectedItem), True)
-                personTable = FindPeopleByDate(-1, cboMonth.SelectedIndex + 1, False, False)
+                personList = FindPeopleByDate(-1, cboMonth.SelectedIndex + 1, False, False)
             Else
                 DisplayMessage("Finding persons for " & CStr(cboDay.SelectedIndex + 1) & "/" & CStr(cboMonth.SelectedIndex + 1), True)
-                personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False)
+                personList = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False)
             End If
         Catch ex As DbException
             LogUtil.Problem("Exception during list load : " & ex.Message)
@@ -61,11 +62,12 @@ Public NotInheritable Class FrmDateCheck
                 Exit Sub
             End If
         End Try
-        Dim totalPeople As Integer = personTable.Count
+        Dim totalPeople As Integer = personList.Count
         Dim _ct As Integer = 0
         Dim _addedct As Integer = 0
         DisplayMessage("Found " & CStr(totalPeople) & " people")
-        For Each _person In personTable
+        personTable.Clear()
+        For Each _person In personList
             _ct += 1
             DisplayMessage(CStr(_ct) & " of " & CStr(totalPeople))
             Try
@@ -83,6 +85,7 @@ Public NotInheritable Class FrmDateCheck
                 If _dateOfBirth IsNot Nothing Then
                     If _dateOfBirth.Value <> _person.DateOfBirth Then
                         AddXRow(_person, Format(_dateOfBirth.Value, "dd MMM yyyy"), _desc, wikiId)
+                        personTable.Add(_person)
                         _addedct += 1
                         If nudSelectCount.Value > 0 AndAlso _addedct = nudSelectCount.Value Then
                             Exit For
@@ -136,19 +139,54 @@ Public NotInheritable Class FrmDateCheck
         End If
     End Sub
     Private Sub BtnSingleUpdate_Click(sender As Object, e As EventArgs) Handles BtnSingleUpdate.Click
-        Dim pPersonId As Integer = CInt(LblId.Text)
-        If pPersonId > 0 Then
-            If Not String.IsNullOrEmpty(TxtToYear.Text) And
-                Not String.IsNullOrEmpty(TxtToMonth.Text) And
-                Not String.IsNullOrEmpty(TxtToDay.Text) And
-                IsDate(TxtToDay.Text & "/" & TxtToMonth.Text & "/" & TxtToYear.Text) Then
-                DisplayMessage("Updating DoB and text for " & TxtFullName.Text, True)
-                Dim pYear As Integer = CInt(TxtToYear.Text)
-                Dim pMonth As Integer = CInt(TxtToMonth.Text)
-                Dim pDay As Integer = CInt(TxtToDay.Text)
-                UpdateDateOfBirth(pPersonId, pDay, pMonth, pYear, TxtFullDesc.Text)
-                DisplayMessage("Updated " & CStr(pPersonId), True)
+        If DgvWarnings.SelectedRows.Count = 1 Then
+            Dim oPerson As Person = personTable(DgvWarnings.SelectedRows(0).Index)
+            ResetChecklistButtons()
+            Dim isOldReseqRequired As Boolean = False
+            If oPerson.Social IsNot Nothing AndAlso oPerson.Social.Botsd > 0 Then
+                Dim oBotsdId As Integer = oPerson.Social.Botsd
+                Dim oBotsdRow As CelebrityBirthdayDataSet.BotSDRow = GetBotsd(oBotsdId)
+                Dim oBotsdPostNo As Integer = If(oBotsdRow Is Nothing, 0, oBotsdRow.btsdPostNo)
+                Dim oBotsdRowCollection As DataRowCollection = GetBotsdViewByPostNo(oBotsdPostNo)
+                BtnRmvBotsdId.Visible = True
+                Dim otherBotsd As New List(Of Integer)
+                For Each oViewRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In oBotsdRowCollection
+                    If Not oViewRow.IspersonIdNull AndAlso oViewRow.personId <> oPerson.Id Then
+                        otherBotsd.Add(oViewRow.personId)
+                    End If
+                Next
+                If otherBotsd.Count = 1 Then
+                    BtnRmvOtherBotsdId.Visible = True
+                End If
+                If otherBotsd.Count < 2 Then
+                    BtnRmvBotsdRecord.Visible = True
+                    BtnRmvOldBotsdPost.Visible = True
+                Else
+                    BtnUpdOldBotsdPost.Visible = True
+                End If
+                BtnUpdOldBotsdList.Visible = True
+                isOldReseqRequired = True
             End If
+            BtnUpdatePerson.Visible = True
+            If isOldReseqRequired Then BtnReseqOldGroup.Visible = True
+            Dim oNewGroup As CelebrityBirthdayDataSet.PersonDataTable = GetPeopleByDateofBirth(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
+            If oNewGroup.Rows.Count > 1 Then
+                BtnReseqNewGroup.Visible = True
+                BtnUpdateNewBotsdPost.Visible = True
+                BtnPosted.Visible = True
+                BtnUpdNewBotsdList.Visible = True
+            End If
+            Dim isYearOnlyChange As Boolean = TxtFromDay.Text = TxtToDay.Text AndAlso TxtFromMonth.Text = TxtToMonth.Text
+            If isYearOnlyChange Then
+                BtnMoveCbPic.Visible = True
+            Else
+                BtnRmvOldPicture.Visible = True
+                BtnUpdOldCbPage.Visible = True
+                BtnAddCbPic.Visible = True
+            End If
+            BtnUpdCbPicDesc.Visible = True
+            BtnUpdNewCbPage.Visible = True
+            BtnRmvRow.Visible = True
         End If
     End Sub
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnFromWordPress.Click
@@ -196,6 +234,7 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub FrmDateCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
+        ResetChecklistButtons()
     End Sub
     Private Sub FrmDateCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
@@ -245,11 +284,7 @@ Public NotInheritable Class FrmDateCheck
             tRow.Height = If(ChkShowImage.Checked, 65, DgvWarnings.RowTemplate.Height)
         Next
     End Sub
-    Private Sub BtnRemoveRow_Click(sender As Object, e As EventArgs) Handles BtnRemoveRow.Click
-        If DgvWarnings.SelectedRows.Count = 1 Then
-            DgvWarnings.Rows.Remove(DgvWarnings.SelectedRows(0))
-        End If
-    End Sub
+
 #End Region
 #Region "subroutines"
     Private Shared Function GetWikiBirthDate(ByRef extract As String, _forename As String, _surname As String, Optional wikiId As String = "") As WikiBirthInfo
@@ -349,5 +384,177 @@ Public NotInheritable Class FrmDateCheck
         End Using
         DisplayMessage("")
     End Sub
+    Private Sub ResetChecklistButtons()
+        HideChecklistButtons
+        DisableChecklistButtons
+    End Sub
+    Private Sub HideChecklistButtons()
+        BtnRmvBotsdId.Visible = False
+        BtnRmvOtherBotsdId.Visible = False
+        BtnRmvBotsdRecord.Visible = False
+        BtnRmvOldBotsdPost.Visible = False
+        BtnUpdOldBotsdPost.Visible = False
+        BtnUpdOldBotsdList.Visible = False
+        BtnUpdatePerson.Visible = False
+        BtnReseqOldGroup.Visible = False
+        BtnReseqNewGroup.Visible = False
+        BtnUpdateNewBotsdPost.Visible = False
+        BtnPosted.Visible = False
+        BtnUpdNewBotsdList.Visible = False
+        BtnRmvOldPicture.Visible = False
+        BtnUpdOldCbPage.Visible = False
+        BtnAddCbPic.Visible = False
+        BtnMoveCbPic.Visible = False
+        BtnUpdCbPicDesc.Visible = False
+        BtnUpdNewCbPage.Visible = False
+        BtnRmvRow.Visible = False
+    End Sub
+    Private Sub DisableChecklistButtons()
+        BtnRmvBotsdId.Enabled = False
+        BtnRmvOtherBotsdId.Enabled = False
+        BtnRmvBotsdRecord.Enabled = False
+        BtnRmvOldBotsdPost.Enabled = False
+        BtnUpdOldBotsdPost.Enabled = False
+        BtnUpdOldBotsdList.Enabled = False
+        BtnUpdatePerson.Enabled = False
+        BtnReseqOldGroup.Enabled = False
+        BtnReseqNewGroup.Enabled = False
+        BtnUpdateNewBotsdPost.Enabled = False
+        BtnPosted.Enabled = False
+        BtnUpdNewBotsdList.Enabled = False
+        BtnRmvOldPicture.Enabled = False
+        BtnUpdOldCbPage.Enabled = False
+        BtnAddCbPic.Enabled = False
+        BtnMoveCbPic.Enabled = False
+        BtnUpdCbPicDesc.Enabled = False
+        BtnUpdNewCbPage.Enabled = False
+        BtnRmvRow.Enabled = False
+    End Sub
 #End Region
+#Region "checklist"
+    Private Sub BtnRmvBotsdId_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsdId.Click
+        DisplayMessage("Removing BotSD id", True)
+        If DgvWarnings.SelectedRows.Count = 1 Then
+            Dim oPerson As Person = personTable(DgvWarnings.SelectedRows(0).Index)
+            Dim oSocial As SocialMedia = oPerson.Social
+            If oSocial IsNot Nothing Then
+                If oSocial.Botsd > 0 Then
+                    UpdateBotsdId(oPerson.Id, 0)
+                    DisplayMessage("Removed BotSD Id from person " & CStr(oPerson.Id) & " " & oPerson.Surname, True)
+                Else
+                    DisplayMessage("No BotSD id to remove", True)
+                End If
+            Else
+                DisplayMessage("No social details", True)
+            End If
+        Else
+            DisplayMessage("No person selected", True)
+        End If
+
+    End Sub
+
+    Private Sub BtnRmvOtherBotsdId_Click(sender As Object, e As EventArgs) Handles BtnRmvOtherBotsdId.Click
+
+    End Sub
+
+    Private Sub BtnRmvBotsdRecord_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsdRecord.Click
+
+    End Sub
+
+    Private Sub BtnRmvOldBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnRmvOldBotsdPost.Click
+
+    End Sub
+
+    Private Sub BtnUpdOldBotsdList_Click(sender As Object, e As EventArgs) Handles BtnUpdOldBotsdList.Click
+
+    End Sub
+
+    Private Sub BtnUpdatePerson_Click(sender As Object, e As EventArgs) Handles BtnUpdatePerson.Click
+        If DgvWarnings.SelectedRows.Count = 1 Then
+            Dim oPerson As Person = personTable(DgvWarnings.SelectedRows(0).Index)
+            If Not String.IsNullOrEmpty(TxtToYear.Text) And
+                Not String.IsNullOrEmpty(TxtToMonth.Text) And
+                Not String.IsNullOrEmpty(TxtToDay.Text) And
+                IsDate(TxtToDay.Text & "/" & TxtToMonth.Text & "/" & TxtToYear.Text) Then
+                DisplayMessage("Updating DoB and text for " & TxtFullName.Text, True)
+                Dim pYear As Integer = CInt(TxtToYear.Text)
+                Dim pMonth As Integer = CInt(TxtToMonth.Text)
+                Dim pDay As Integer = CInt(TxtToDay.Text)
+                UpdateDateOfBirth(oPerson.Id, pDay, pMonth, pYear, TxtFullDesc.Text)
+                oPerson = GetFullPersonById(oPerson.Id, False)
+                DisplayMessage("Updated " & CStr(oPerson.Id), True)
+            End If
+        End If
+    End Sub
+
+    Private Sub BtnReseqOldGroup_Click(sender As Object, e As EventArgs) Handles BtnReseqOldGroup.Click
+
+    End Sub
+
+    Private Sub BtnUpdateNewBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnUpdateNewBotsdPost.Click
+
+    End Sub
+
+    Private Sub BtnPosted_Click(sender As Object, e As EventArgs) Handles BtnPosted.Click
+
+    End Sub
+
+    Private Sub BtnUpdNewBotsdList_Click(sender As Object, e As EventArgs) Handles BtnUpdNewBotsdList.Click
+
+    End Sub
+
+    Private Sub BtnRmvOldPicture_Click(sender As Object, e As EventArgs) Handles BtnRmvOldPicture.Click
+
+    End Sub
+
+    Private Sub BtnUpdOldCbPage_Click(sender As Object, e As EventArgs) Handles BtnUpdOldCbPage.Click
+
+    End Sub
+
+    Private Sub BtnAddCbPic_Click(sender As Object, e As EventArgs) Handles BtnAddCbPic.Click
+
+    End Sub
+
+    Private Sub BtnMoveCbPic_Click(sender As Object, e As EventArgs) Handles BtnMoveCbPic.Click
+
+    End Sub
+
+    Private Sub BtnUpdCbPicDesc_Click(sender As Object, e As EventArgs) Handles BtnUpdCbPicDesc.Click
+
+    End Sub
+
+    Private Sub BtnUpdNewCbPage_Click(sender As Object, e As EventArgs) Handles BtnUpdNewCbPage.Click
+
+    End Sub
+
+    Private Sub BtnRmvRow_Click(sender As Object, e As EventArgs) Handles BtnRmvRow.Click
+        RemoveSelectedRow()
+    End Sub
+
+    Private Sub RemoveSelectedRow()
+        If DgvWarnings.SelectedRows.Count = 1 Then
+            DgvWarnings.SelectedRows(0).Visible = False
+            DgvWarnings.ClearSelection()
+        End If
+    End Sub
+
+    Private Sub BtnUpdatePerson_ContextMenuStripChanged(sender As Object, e As EventArgs) Handles BtnUpdatePerson.ContextMenuStripChanged
+
+    End Sub
+
+    Private Sub BtnUpdOldBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnUpdOldBotsdPost.Click
+
+    End Sub
+
+    Private Sub BtnReseqNewGroup_Click(sender As Object, e As EventArgs) Handles BtnReseqNewGroup.Click
+
+    End Sub
+
+    Private Sub BtnRemoveRow_Click(sender As Object, e As EventArgs) Handles BtnRemoveRow.Click
+        RemoveSelectedRow()
+    End Sub
+#End Region
+
+
+
 End Class

@@ -69,6 +69,26 @@ Partial Class FrmDateCheck
         Me.BtnWpDesc = New System.Windows.Forms.Button()
         Me.BtnBotSD = New System.Windows.Forms.Button()
         Me.ChkShowImage = New System.Windows.Forms.CheckBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.BtnReseqNewGroup = New System.Windows.Forms.Button()
+        Me.BtnUpdOldBotsdPost = New System.Windows.Forms.Button()
+        Me.BtnRmvRow = New System.Windows.Forms.Button()
+        Me.BtnUpdCbPicDesc = New System.Windows.Forms.Button()
+        Me.BtnUpdNewCbPage = New System.Windows.Forms.Button()
+        Me.BtnAddCbPic = New System.Windows.Forms.Button()
+        Me.BtnRmvOldPicture = New System.Windows.Forms.Button()
+        Me.BtnUpdOldCbPage = New System.Windows.Forms.Button()
+        Me.BtnMoveCbPic = New System.Windows.Forms.Button()
+        Me.BtnPosted = New System.Windows.Forms.Button()
+        Me.BtnUpdNewBotsdList = New System.Windows.Forms.Button()
+        Me.BtnUpdateNewBotsdPost = New System.Windows.Forms.Button()
+        Me.BtnReseqOldGroup = New System.Windows.Forms.Button()
+        Me.BtnUpdOldBotsdList = New System.Windows.Forms.Button()
+        Me.BtnRmvOldBotsdPost = New System.Windows.Forms.Button()
+        Me.BtnRmvBotsdRecord = New System.Windows.Forms.Button()
+        Me.BtnRmvOtherBotsdId = New System.Windows.Forms.Button()
+        Me.BtnRmvBotsdId = New System.Windows.Forms.Button()
+        Me.BtnUpdatePerson = New System.Windows.Forms.Button()
         Me.BtnRemoveRow = New System.Windows.Forms.Button()
         CType(Me.DgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -77,6 +97,7 @@ Partial Class FrmDateCheck
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DgvWarnings
@@ -93,7 +114,7 @@ Partial Class FrmDateCheck
         Me.DgvWarnings.ReadOnly = True
         Me.DgvWarnings.RowHeadersVisible = False
         Me.DgvWarnings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvWarnings.Size = New System.Drawing.Size(1015, 596)
+        Me.DgvWarnings.Size = New System.Drawing.Size(857, 596)
         Me.DgvWarnings.TabIndex = 0
         '
         'xId
@@ -110,7 +131,7 @@ Partial Class FrmDateCheck
         Me.xName.HeaderText = "Name"
         Me.xName.Name = "xName"
         Me.xName.ReadOnly = True
-        Me.xName.Width = 250
+        Me.xName.Width = 150
         '
         'xBirth
         '
@@ -260,7 +281,7 @@ Partial Class FrmDateCheck
         Me.BtnSingleUpdate.Name = "BtnSingleUpdate"
         Me.BtnSingleUpdate.Size = New System.Drawing.Size(135, 33)
         Me.BtnSingleUpdate.TabIndex = 60
-        Me.BtnSingleUpdate.Text = "Single Update"
+        Me.BtnSingleUpdate.Text = "Start Update"
         Me.ToolTip1.SetToolTip(Me.BtnSingleUpdate, "Update Date of Birth and Text for person")
         Me.BtnSingleUpdate.UseVisualStyleBackColor = True
         '
@@ -562,17 +583,256 @@ Partial Class FrmDateCheck
         Me.ChkShowImage.Text = "Show Images"
         Me.ChkShowImage.UseVisualStyleBackColor = True
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.BtnReseqNewGroup)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdOldBotsdPost)
+        Me.GroupBox1.Controls.Add(Me.BtnRmvRow)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdCbPicDesc)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdNewCbPage)
+        Me.GroupBox1.Controls.Add(Me.BtnAddCbPic)
+        Me.GroupBox1.Controls.Add(Me.BtnRmvOldPicture)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdOldCbPage)
+        Me.GroupBox1.Controls.Add(Me.BtnMoveCbPic)
+        Me.GroupBox1.Controls.Add(Me.BtnPosted)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdNewBotsdList)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdateNewBotsdPost)
+        Me.GroupBox1.Controls.Add(Me.BtnReseqOldGroup)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdOldBotsdList)
+        Me.GroupBox1.Controls.Add(Me.BtnRmvOldBotsdPost)
+        Me.GroupBox1.Controls.Add(Me.BtnRmvBotsdRecord)
+        Me.GroupBox1.Controls.Add(Me.BtnRmvOtherBotsdId)
+        Me.GroupBox1.Controls.Add(Me.BtnRmvBotsdId)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdatePerson)
+        Me.GroupBox1.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.GroupBox1.Location = New System.Drawing.Point(875, 12)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(152, 596)
+        Me.GroupBox1.TabIndex = 154
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Checklist"
+        '
+        'BtnReseqNewGroup
+        '
+        Me.BtnReseqNewGroup.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReseqNewGroup.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnReseqNewGroup.Location = New System.Drawing.Point(6, 265)
+        Me.BtnReseqNewGroup.Name = "BtnReseqNewGroup"
+        Me.BtnReseqNewGroup.Size = New System.Drawing.Size(140, 25)
+        Me.BtnReseqNewGroup.TabIndex = 18
+        Me.BtnReseqNewGroup.Text = "Reseq new grp"
+        Me.BtnReseqNewGroup.UseVisualStyleBackColor = True
+        '
+        'BtnUpdOldBotsdPost
+        '
+        Me.BtnUpdOldBotsdPost.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdOldBotsdPost.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdOldBotsdPost.Location = New System.Drawing.Point(6, 145)
+        Me.BtnUpdOldBotsdPost.Name = "BtnUpdOldBotsdPost"
+        Me.BtnUpdOldBotsdPost.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdOldBotsdPost.TabIndex = 17
+        Me.BtnUpdOldBotsdPost.Text = "Update old botsd post"
+        Me.BtnUpdOldBotsdPost.UseVisualStyleBackColor = True
+        '
+        'BtnRmvRow
+        '
+        Me.BtnRmvRow.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvRow.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnRmvRow.Location = New System.Drawing.Point(6, 565)
+        Me.BtnRmvRow.Name = "BtnRmvRow"
+        Me.BtnRmvRow.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvRow.TabIndex = 16
+        Me.BtnRmvRow.Text = "Remove row"
+        Me.BtnRmvRow.UseVisualStyleBackColor = True
+        '
+        'BtnUpdCbPicDesc
+        '
+        Me.BtnUpdCbPicDesc.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdCbPicDesc.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdCbPicDesc.Location = New System.Drawing.Point(6, 505)
+        Me.BtnUpdCbPicDesc.Name = "BtnUpdCbPicDesc"
+        Me.BtnUpdCbPicDesc.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdCbPicDesc.TabIndex = 15
+        Me.BtnUpdCbPicDesc.Text = "Update picture desc"
+        Me.BtnUpdCbPicDesc.UseVisualStyleBackColor = True
+        '
+        'BtnUpdNewCbPage
+        '
+        Me.BtnUpdNewCbPage.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdNewCbPage.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdNewCbPage.Location = New System.Drawing.Point(6, 535)
+        Me.BtnUpdNewCbPage.Name = "BtnUpdNewCbPage"
+        Me.BtnUpdNewCbPage.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdNewCbPage.TabIndex = 14
+        Me.BtnUpdNewCbPage.Text = "Update new CB page"
+        Me.BtnUpdNewCbPage.UseVisualStyleBackColor = True
+        '
+        'BtnAddCbPic
+        '
+        Me.BtnAddCbPic.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAddCbPic.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnAddCbPic.Location = New System.Drawing.Point(6, 445)
+        Me.BtnAddCbPic.Name = "BtnAddCbPic"
+        Me.BtnAddCbPic.Size = New System.Drawing.Size(140, 25)
+        Me.BtnAddCbPic.TabIndex = 13
+        Me.BtnAddCbPic.Text = "Add CB picture"
+        Me.BtnAddCbPic.UseVisualStyleBackColor = True
+        '
+        'BtnRmvOldPicture
+        '
+        Me.BtnRmvOldPicture.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvOldPicture.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnRmvOldPicture.Location = New System.Drawing.Point(6, 385)
+        Me.BtnRmvOldPicture.Name = "BtnRmvOldPicture"
+        Me.BtnRmvOldPicture.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvOldPicture.TabIndex = 12
+        Me.BtnRmvOldPicture.Text = "Remove old picture"
+        Me.BtnRmvOldPicture.UseVisualStyleBackColor = True
+        '
+        'BtnUpdOldCbPage
+        '
+        Me.BtnUpdOldCbPage.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdOldCbPage.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdOldCbPage.Location = New System.Drawing.Point(6, 415)
+        Me.BtnUpdOldCbPage.Name = "BtnUpdOldCbPage"
+        Me.BtnUpdOldCbPage.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdOldCbPage.TabIndex = 11
+        Me.BtnUpdOldCbPage.Text = "Update old CB Page"
+        Me.BtnUpdOldCbPage.UseVisualStyleBackColor = True
+        '
+        'BtnMoveCbPic
+        '
+        Me.BtnMoveCbPic.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnMoveCbPic.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnMoveCbPic.Location = New System.Drawing.Point(6, 475)
+        Me.BtnMoveCbPic.Name = "BtnMoveCbPic"
+        Me.BtnMoveCbPic.Size = New System.Drawing.Size(140, 25)
+        Me.BtnMoveCbPic.TabIndex = 10
+        Me.BtnMoveCbPic.Text = "Move CB picture"
+        Me.BtnMoveCbPic.UseVisualStyleBackColor = True
+        '
+        'BtnPosted
+        '
+        Me.BtnPosted.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPosted.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnPosted.Location = New System.Drawing.Point(6, 325)
+        Me.BtnPosted.Name = "BtnPosted"
+        Me.BtnPosted.Size = New System.Drawing.Size(140, 25)
+        Me.BtnPosted.TabIndex = 9
+        Me.BtnPosted.Text = "Update post ids"
+        Me.BtnPosted.UseVisualStyleBackColor = True
+        '
+        'BtnUpdNewBotsdList
+        '
+        Me.BtnUpdNewBotsdList.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdNewBotsdList.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdNewBotsdList.Location = New System.Drawing.Point(6, 355)
+        Me.BtnUpdNewBotsdList.Name = "BtnUpdNewBotsdList"
+        Me.BtnUpdNewBotsdList.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdNewBotsdList.TabIndex = 8
+        Me.BtnUpdNewBotsdList.Text = "Update new botsd list"
+        Me.BtnUpdNewBotsdList.UseVisualStyleBackColor = True
+        '
+        'BtnUpdateNewBotsdPost
+        '
+        Me.BtnUpdateNewBotsdPost.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdateNewBotsdPost.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdateNewBotsdPost.Location = New System.Drawing.Point(6, 295)
+        Me.BtnUpdateNewBotsdPost.Name = "BtnUpdateNewBotsdPost"
+        Me.BtnUpdateNewBotsdPost.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdateNewBotsdPost.TabIndex = 7
+        Me.BtnUpdateNewBotsdPost.Text = "Upd new botsd post"
+        Me.BtnUpdateNewBotsdPost.UseVisualStyleBackColor = True
+        '
+        'BtnReseqOldGroup
+        '
+        Me.BtnReseqOldGroup.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReseqOldGroup.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnReseqOldGroup.Location = New System.Drawing.Point(6, 235)
+        Me.BtnReseqOldGroup.Name = "BtnReseqOldGroup"
+        Me.BtnReseqOldGroup.Size = New System.Drawing.Size(140, 25)
+        Me.BtnReseqOldGroup.TabIndex = 6
+        Me.BtnReseqOldGroup.Text = "Reseq old grp"
+        Me.BtnReseqOldGroup.UseVisualStyleBackColor = True
+        '
+        'BtnUpdOldBotsdList
+        '
+        Me.BtnUpdOldBotsdList.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdOldBotsdList.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdOldBotsdList.Location = New System.Drawing.Point(6, 175)
+        Me.BtnUpdOldBotsdList.Name = "BtnUpdOldBotsdList"
+        Me.BtnUpdOldBotsdList.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdOldBotsdList.TabIndex = 5
+        Me.BtnUpdOldBotsdList.Text = "Update old botsd list"
+        Me.BtnUpdOldBotsdList.UseVisualStyleBackColor = True
+        '
+        'BtnRmvOldBotsdPost
+        '
+        Me.BtnRmvOldBotsdPost.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvOldBotsdPost.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnRmvOldBotsdPost.Location = New System.Drawing.Point(6, 115)
+        Me.BtnRmvOldBotsdPost.Name = "BtnRmvOldBotsdPost"
+        Me.BtnRmvOldBotsdPost.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvOldBotsdPost.TabIndex = 4
+        Me.BtnRmvOldBotsdPost.Text = "Remove old botsd post"
+        Me.BtnRmvOldBotsdPost.UseVisualStyleBackColor = True
+        '
+        'BtnRmvBotsdRecord
+        '
+        Me.BtnRmvBotsdRecord.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvBotsdRecord.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnRmvBotsdRecord.Location = New System.Drawing.Point(6, 85)
+        Me.BtnRmvBotsdRecord.Name = "BtnRmvBotsdRecord"
+        Me.BtnRmvBotsdRecord.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvBotsdRecord.TabIndex = 3
+        Me.BtnRmvBotsdRecord.Text = "Remove botsd rec"
+        Me.BtnRmvBotsdRecord.UseVisualStyleBackColor = True
+        '
+        'BtnRmvOtherBotsdId
+        '
+        Me.BtnRmvOtherBotsdId.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvOtherBotsdId.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnRmvOtherBotsdId.Location = New System.Drawing.Point(6, 55)
+        Me.BtnRmvOtherBotsdId.Name = "BtnRmvOtherBotsdId"
+        Me.BtnRmvOtherBotsdId.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvOtherBotsdId.TabIndex = 2
+        Me.BtnRmvOtherBotsdId.Text = "Remove other botsd id"
+        Me.BtnRmvOtherBotsdId.UseVisualStyleBackColor = True
+        '
+        'BtnRmvBotsdId
+        '
+        Me.BtnRmvBotsdId.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvBotsdId.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnRmvBotsdId.Location = New System.Drawing.Point(6, 25)
+        Me.BtnRmvBotsdId.Name = "BtnRmvBotsdId"
+        Me.BtnRmvBotsdId.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvBotsdId.TabIndex = 1
+        Me.BtnRmvBotsdId.Text = "Remove botsd id"
+        Me.BtnRmvBotsdId.UseVisualStyleBackColor = True
+        '
+        'BtnUpdatePerson
+        '
+        Me.BtnUpdatePerson.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdatePerson.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdatePerson.Location = New System.Drawing.Point(6, 205)
+        Me.BtnUpdatePerson.Name = "BtnUpdatePerson"
+        Me.BtnUpdatePerson.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdatePerson.TabIndex = 0
+        Me.BtnUpdatePerson.Text = "Update Person"
+        Me.BtnUpdatePerson.UseVisualStyleBackColor = True
+        '
         'BtnRemoveRow
         '
-        Me.BtnRemoveRow.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnRemoveRow.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRemoveRow.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRemoveRow.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRemoveRow.Location = New System.Drawing.Point(1234, 373)
+        Me.BtnRemoveRow.Location = New System.Drawing.Point(1245, 375)
         Me.BtnRemoveRow.Name = "BtnRemoveRow"
-        Me.BtnRemoveRow.Size = New System.Drawing.Size(98, 23)
-        Me.BtnRemoveRow.TabIndex = 153
-        Me.BtnRemoveRow.Text = "Remove Row"
-        Me.ToolTip1.SetToolTip(Me.BtnRemoveRow, "Clear perosn details")
+        Me.BtnRemoveRow.Size = New System.Drawing.Size(86, 29)
+        Me.BtnRemoveRow.TabIndex = 19
+        Me.BtnRemoveRow.Text = "Remove row"
         Me.BtnRemoveRow.UseVisualStyleBackColor = True
         '
         'FrmDateCheck
@@ -582,6 +842,7 @@ Partial Class FrmDateCheck
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1344, 690)
         Me.Controls.Add(Me.BtnRemoveRow)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ChkShowImage)
         Me.Controls.Add(Me.BtnMonth)
         Me.Controls.Add(Me.BtnBotSD)
@@ -628,6 +889,7 @@ Partial Class FrmDateCheck
         Me.SplitContainer1.Panel2.PerformLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -668,6 +930,7 @@ Partial Class FrmDateCheck
     Friend WithEvents BtnWpDesc As Button
     Friend WithEvents BtnBotSD As Button
     Friend WithEvents BtnMonth As Button
+    Friend WithEvents ChkShowImage As CheckBox
     Friend WithEvents xId As DataGridViewTextBoxColumn
     Friend WithEvents xName As DataGridViewTextBoxColumn
     Friend WithEvents xBirth As DataGridViewTextBoxColumn
@@ -676,6 +939,25 @@ Partial Class FrmDateCheck
     Friend WithEvents xWikiId As DataGridViewTextBoxColumn
     Friend WithEvents xPersonDescription As DataGridViewTextBoxColumn
     Friend WithEvents xImg As DataGridViewImageColumn
-    Friend WithEvents ChkShowImage As CheckBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents BtnRmvRow As Button
+    Friend WithEvents BtnUpdCbPicDesc As Button
+    Friend WithEvents BtnUpdNewCbPage As Button
+    Friend WithEvents BtnAddCbPic As Button
+    Friend WithEvents BtnRmvOldPicture As Button
+    Friend WithEvents BtnUpdOldCbPage As Button
+    Friend WithEvents BtnMoveCbPic As Button
+    Friend WithEvents BtnPosted As Button
+    Friend WithEvents BtnUpdNewBotsdList As Button
+    Friend WithEvents BtnUpdateNewBotsdPost As Button
+    Friend WithEvents BtnReseqOldGroup As Button
+    Friend WithEvents BtnUpdOldBotsdList As Button
+    Friend WithEvents BtnRmvOldBotsdPost As Button
+    Friend WithEvents BtnRmvBotsdRecord As Button
+    Friend WithEvents BtnRmvOtherBotsdId As Button
+    Friend WithEvents BtnRmvBotsdId As Button
+    Friend WithEvents BtnUpdatePerson As Button
+    Friend WithEvents BtnUpdOldBotsdPost As Button
+    Friend WithEvents BtnReseqNewGroup As Button
     Friend WithEvents BtnRemoveRow As Button
 End Class
