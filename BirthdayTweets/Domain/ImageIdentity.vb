@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Drawing
+Imports System.IO
 Imports System.Reflection
 
 Public Class ImageIdentity
@@ -113,11 +114,11 @@ Public Class ImageIdentity
                 Try
                     _imageFromFile = Image.FromFile(_Filename)
                 Catch ex As OutOfMemoryException
-                    DisplayException(MethodBase.GetCurrentMethod, ex, "Out of Memory")
+                    LogUtil.Exception("GetPhotoFromFile", ex)
                 Catch ex As FileNotFoundException
-                    DisplayException(MethodBase.GetCurrentMethod, ex, "File Not Found")
+                    LogUtil.Exception("GetPhotoFromFile", ex)
                 Catch ex As ArgumentException
-                    DisplayException(MethodBase.GetCurrentMethod, ex, "Argument")
+                    LogUtil.Exception("GetPhotoFromFile", ex)
                 End Try
             Else
                 LogUtil.Debug(_Filename & " does not exist")

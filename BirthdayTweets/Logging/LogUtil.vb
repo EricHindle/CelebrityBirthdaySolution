@@ -10,9 +10,6 @@ Imports System.Threading
 Public NotInheritable Class LogUtil
 #Region "properties"
     Private Shared _LogFolder As String
-    Private Shared isConfigured As Boolean
-    Public Shared myCultureInfo As CultureInfo = CultureInfo.CurrentUICulture
-    Public Shared myStringFormatProvider As IFormatProvider = myCultureInfo.GetFormat(GetType(String))
     Public Shared Property LogFolder() As String
         Get
             Return _LogFolder
@@ -24,16 +21,14 @@ Public NotInheritable Class LogUtil
 #End Region
 #Region "Start / stop"
     Public Shared Sub InitialiseLogging()
-        If isConfigured = False Then
-            My.Application.Log.DefaultFileLogWriter.LogFileCreationSchedule = Logging.LogFileCreationScheduleOption.Daily
-            If _LogFolder IsNot Nothing Then
-                My.Application.Log.DefaultFileLogWriter.CustomLocation = _LogFolder
-            End If
-            My.Application.Log.DefaultFileLogWriter.Append = True
-            My.Application.Log.DefaultFileLogWriter.AutoFlush = True
-            My.Application.Log.DefaultFileLogWriter.ReserveDiskSpace = 50000000
-            isConfigured = True
+        LogFolder = My.Settings.LogFolder
+        My.Application.Log.DefaultFileLogWriter.LogFileCreationSchedule = Logging.LogFileCreationScheduleOption.Daily
+        If _LogFolder IsNot Nothing Then
+            My.Application.Log.DefaultFileLogWriter.CustomLocation = _LogFolder
         End If
+        My.Application.Log.DefaultFileLogWriter.Append = True
+        My.Application.Log.DefaultFileLogWriter.AutoFlush = True
+        My.Application.Log.DefaultFileLogWriter.ReserveDiskSpace = 50000000
     End Sub
     Public Shared Sub StartLogging()
         Info("=".PadRight(40, "="))
@@ -42,11 +37,10 @@ Public NotInheritable Class LogUtil
         Info("Logging started at " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
     Public Shared Sub StopLogging()
-        If isConfigured Then
-            My.Application.Log.DefaultFileLogWriter.Flush()
-            My.Application.Log.DefaultFileLogWriter.Close()
-            isConfigured = False
-        End If
+        Info("Logging stopped at " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
+        Info("=".PadRight(40, "="))
+        My.Application.Log.DefaultFileLogWriter.Flush()
+        My.Application.Log.DefaultFileLogWriter.Close()
     End Sub
 #End Region
 #Region "Add log"

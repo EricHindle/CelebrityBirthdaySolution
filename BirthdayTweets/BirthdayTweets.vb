@@ -1,10 +1,6 @@
 ﻿Imports System.Timers
 Imports TweetSharp
-Imports System.Collections.ObjectModel
-Imports System.IO
-Imports System.Reflection
 Imports System.Text
-Imports System.Windows.Forms
 Imports System.Drawing
 
 Public Class BirthdayTweets
@@ -14,105 +10,116 @@ Public Class BirthdayTweets
         Anniversary
         Full
     End Enum
+    Private Enum TweetUserType
+        CelebBirthday
+        HBurpday
+    End Enum
+#End Region
+#Region "classes"
+    Private Class CbTweet
+        Private _tweetText As String
+        Private _tweetImage As Image
+        Public Property TweetImage() As Image
+            Get
+                Return _tweetImage
+            End Get
+            Set(ByVal value As Image)
+                _tweetImage = value
+            End Set
+        End Property
+        Public Property TweetText() As String
+            Get
+                Return _tweetText
+            End Get
+            Set(ByVal value As String)
+                _tweetText = value
+            End Set
+        End Property
+    End Class
 #End Region
 #Region "constants"
-    Private Const NUD_BASENAME As String = "NudHorizontal"
-    Private Const PICBOX_BASENAME As String = "pictureBox"
-    Private Const SC_BASENAME As String = "SplitContainer"
-    Private ReadOnly vbcrlf As Char = Convert.ToChar(vbLf, myStringFormatProvider)
     Private Const LAST_CELEB_TWEET As String = "LastCelebTweet"
     Private Const LAST_HBURPDAY_TWEET As String = "LastHBurpdayTweet"
     Private Const TWEET_TIME As String = "TweetTime"
-    Private Shared Timer1 As System.Timers.Timer
     Private Const BIRTHDAY_HDR As String = "Birthdays_"
     Private Const ANNIV_HDR As String = "Anniv_"
-    Private Const LINEFEED As String = Chr(13) + Chr(10)
+    Private Shared ReadOnly LINEFEED As String = Convert.ToChar(vbLf, myStringFormatProvider)
+    Private Const TIMER_INTERVAL As Integer = 60000
+    Private Const CELEB_USER As String = "CelebBirthdayUK"
+    Private Const HBURPDAY_HDR As String = "HBurpday"
 #End Region
 #Region "variables"
-    Private Shared personTable As New List(Of Person)
+    Private Shared Timer1 As System.Timers.Timer
     Private Shared oBirthdayList As New List(Of Person)
     Private Shared oAnniversaryList As New List(Of Person)
     Private Shared oTweetLists As New List(Of List(Of Person))
+    Private Shared oTodaysTweets As List(Of CbTweet)
     Private Shared IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
-    Private Shared isBuildingTrees As Boolean
-    Private Shared tvBirthday As TreeView
+    Private Shared isBuildingLists As Boolean
 #End Region
+#Region "service"
     Protected Overrides Sub OnStart(ByVal args() As String)
         Timer1 = New System.Timers.Timer
         AddHandler Timer1.Elapsed, AddressOf Timer1_Tick
-        LogUtil.LogFolder = My.Settings.LogFolder
         LogUtil.InitialiseLogging()
         LogUtil.StartLogging()
-        Timer1.Interval = 10000
+        Timer1.Interval = My.Settings.TimerInterval
         Timer1.Start()
     End Sub
     Protected Overrides Sub OnStop()
+        LogUtil.Info("----- Stopping the Service -----")
         Timer1.Stop()
-        LogUtil.Info("Stopping the Service")
-        LogUtil.StopLogging()
-        ' Add code here to perform any tear-down necessary to stop your service.
-        MyBase.OnStop()
     End Sub
 
     Protected Overrides Sub OnShutdown()
+        LogUtil.Info("----- Shutdown detected -----")
         Timer1.Stop()
-        LogUtil.Info("Shutdown detected")
-        LogUtil.StopLogging()
-        MyBase.OnShutdown()
     End Sub
 
     Protected Overrides Sub OnPause()
-        LogUtil.Info("Service paused")
+        LogUtil.Info("----- Service paused -----")
         Timer1.Stop()
-        MyBase.OnPause()
     End Sub
 
     Protected Overrides Sub OnContinue()
-        LogUtil.Info("Service continues")
+        LogUtil.Info("----- Service continues -----")
         Timer1.Start()
-        MyBase.OnContinue()
     End Sub
-
+#End Region
+#Region "timer"
     Private Shared Sub Timer1_Tick(source As Object, e As ElapsedEventArgs)
         Try
             LogUtil.Info("----------------------------------------- start")
             Timer1.Stop()
             LogUtil.Info("Stopped timer")
             Dim celebLastTweetDate As Date = GlobalSettings.GetSetting(LAST_CELEB_TWEET)
-            Dim hburpdayLastTweetDate As Date = GlobalSettings.GetSetting(LAST_HBURPDAY_TWEET)
-            Dim todaysDate As String = Format(Today.Date, "yyyy-MM-dd")
+            Dim todaysDate As String = Format(Now, "yyyy-MM-dd")
             Dim tweetTime As DateTime = CDate(todaysDate & " " & GlobalSettings.GetSetting(TWEET_TIME))
             Try
                 If celebLastTweetDate < Today.Date Then
                     If Now > tweetTime Then
-                        LogUtil.Info("Sending CeleBirthday tweets for " & todaysDate)
+                        LogUtil.Info("Sending tweets for " & todaysDate)
                         LogUtil.Info("Selecting people")
-                        SelectPeople()
-                        '                    SendCbBirthdayTweets()
-                        '                    SendCbAnniversaryTweets()
-                        GlobalSettings.SetSetting(LAST_CELEB_TWEET, "date", todaysDate, "")
-                        LogUtil.Info("CeleBirthday tweets complete for " & todaysDate)
+                        If BuildPersonLists() Then
+                            LogUtil.Info("Generating CeleBirthday tweets")
+                            GenerateAllTweets(TweetUserType.CelebBirthday)
+                            '                    SendCbBirthdayTweets()
+                            '                    SendCbAnniversaryTweets()
+                            LogUtil.Info("CeleBirthday tweets complete")
+                            LogUtil.Info("Generating HBurpday tweets")
+                            GenerateAllTweets(TweetUserType.HBurpday)
+                            '                    SendHbBirthdayTweets()
+                            '                    SendHbAnniversaryTweets()
+                            GlobalSettings.SetSetting(LAST_CELEB_TWEET, "date", todaysDate, "")
+                            LogUtil.Info("HBurpday Tweets complete")
+                        Else
+                            LogUtil.Problem("Tweets not sent - selection error")
+                        End If
                     End If
                 End If
             Catch ex As Exception
                 LogUtil.Exception("CeleBirthday tweets failed", ex)
-            End Try
-            Try
-                If hburpdayLastTweetDate < Today.Date Then
-                    If Now > tweetTime Then
-                        LogUtil.Info("Sending HBurpday tweets for " & todaysDate)
-                        LogUtil.Info("Selecting people")
-                        SelectPeople()
-
-                        '                    SendHbBirthdayTweets()
-                        '                    SendHbAnniversaryTweets()
-                        GlobalSettings.SetSetting(LAST_HBURPDAY_TWEET, "date", todaysDate, "")
-                        LogUtil.Info("HBurpday tweets complete for " & todaysDate)
-                    End If
-                End If
-            Catch ex As Exception
-                LogUtil.Exception("HBurpday tweets failed", ex)
             End Try
             LogUtil.Info("Restarted timer")
             LogUtil.Info("------------------------------------------- end")
@@ -137,61 +144,50 @@ Public Class BirthdayTweets
     Private Sub SendCbBirthdayTweets()
         Throw New NotImplementedException()
     End Sub
-
-    Private Shared Sub SelectPeople()
-        If BuildTrees() Then
-            GenerateAllTweets()
-        Else
-            LogUtil.Info("No people selected")
-        End If
-    End Sub
-    Private Shared Function BuildTrees() As Boolean
-        LogUtil.Info("Building trees")
-        isBuildingTrees = True
+#End Region
+#Region "tweets"
+    Private Shared Function BuildPersonLists() As Boolean
+        LogUtil.Info("Building person lists")
+        isBuildingLists = True
         Dim isBuiltOk As Boolean
         LogUtil.Info("Selecting...")
-        tvBirthday.Nodes.Clear()
-        personTable.Clear()
         Try
-
             Dim _day As Integer = Today.Day
             Dim _mth As Integer = Today.Month
-            '        Dim testDate As Date = New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
-            personTable = FindPeopleByDate(_day, _mth, True)
-            oBirthdayList = FindBirthdays(_day, _mth, True)
-            oAnniversaryList = FindAnniversaries(_day, _mth, True)
-            'AddTypeNode(oAnniversaryList, testDate, tvBirthday, My.Resources.ANNIVERSARY)
-            'AddTypeNode(oBirthdayList, testDate, tvBirthday, My.Resources.BIRTHDAY)
+            oBirthdayList = FindBirthdays(_day, _mth)
+            oAnniversaryList = FindAnniversaries(_day, _mth)
             LogUtil.Info("Selection Complete")
             isBuiltOk = True
-
         Catch ex As ArgumentOutOfRangeException
-            LogUtil.Exception("BuildTrees error", ex)
+            LogUtil.Exception("BuildPersonLists error", ex)
             isBuiltOk = False
         End Try
-        isBuildingTrees = False
+        isBuildingLists = False
         Return isBuiltOk
     End Function
-    Private Shared Sub GenerateAllTweets()
+    Private Shared Sub GenerateAllTweets(_tweetUserType As TweetUserType)
         LogUtil.Info("Generating all tweets")
-        Dim _imageStart As Integer = 0
-        Dim _dateLength As Integer = Format(Today, "dd MMMM").Length
+        oTodaysTweets = New List(Of CbTweet)
         oTweetLists = New List(Of List(Of Person))
-        Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, TweetType.Birthday)
-        oTweetLists.AddRange(_birthdayImageTweets)
-        GenerateTweets(oTweetLists, _imageStart, TweetType.Birthday)
-        _imageStart = oTweetLists.Count
-        Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, TweetType.Anniversary)
-        oTweetLists.AddRange(_annivImageTweets)
-        GenerateTweets(oTweetLists, _imageStart, TweetType.Anniversary)
-        LogUtil.Info("Images Complete")
+
+        GenerateTweetsForType(TweetType.Birthday, oBirthdayList, _tweetUserType, BIRTHDAY_HDR)
+        GenerateTweetsForType(TweetType.Anniversary, oAnniversaryList, _tweetUserType, ANNIV_HDR)
+
+        LogUtil.Info("Tweets Created")
     End Sub
-    Private Shared Sub GenerateTweets(_tweetLists As List(Of List(Of Person)), _listStart As Integer, _tweetType As TweetType)
-        For _personIndex As Integer = _listStart To _tweetLists.Count - 1
-            Dim _personList As List(Of Person) = _tweetLists(_personIndex)
-            LogUtil.Info(">" & CStr(_personIndex), True)
-            IsNoGenerate = True
-            Dim personCt As Integer = _personList.Count
+
+    Private Shared Sub GenerateTweetsForType(_tweetType As TweetType, oPersonList As List(Of Person), _tweetUserType As TweetUserType, _header As String)
+        Dim _dateLength As Integer = Format(Today, "dd MMMM").Length
+        Dim _imageStart As Integer = oTweetLists.Count
+        Dim _splitTweets As List(Of List(Of Person)) = SplitIntoTweets(oPersonList, _dateLength + _header.Length + 3, _tweetType)
+        GenerateTweets(_splitTweets, _tweetType, _tweetUserType)
+    End Sub
+
+    Private Shared Sub GenerateTweets(_tweetLists As List(Of List(Of Person)), _tweetType As TweetType, _tweetUserType As TweetUserType)
+        Dim _tweetIndex As Integer = 0
+        For Each _personlist As List(Of Person) In _tweetLists
+            _tweetIndex += 1
+            Dim personCt As Integer = _personlist.Count
             Dim colCt As Integer
             If personCt <= 12 Then
                 colCt = Math.Ceiling(personCt / 2)
@@ -203,29 +199,28 @@ Public Class BirthdayTweets
                 End If
             End If
             Dim _width As Integer = colCt
-            Dim _image As Image = GeneratePicture(_personList, _width)
-            Dim _text As String = GenerateText(_personList, _tweetType, _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
-            IsNoGenerate = False
+            Dim _cbTweet As New CbTweet With {
+                .TweetImage = GeneratePicture(_personlist, _width),
+                .TweetText = GenerateText(_personlist, _tweetType, _tweetIndex, _tweetLists.Count, _tweetUserType)
+            }
+            oTodaysTweets.Add(_cbTweet)
         Next
     End Sub
-    Private Shared Function GenerateText(_imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer) As String
+    Private Shared Function GenerateText(_imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer, _userType As TweetUserType) As String
         LogUtil.Info("Generating text")
         Dim _outString As New StringBuilder
-
         _outString.Append(Format(Today, "MMMM")).Append(" "c).Append(Format(Today, "dd")).Append(LINEFEED).Append(LINEFEED)
         _outString.Append(GetHeading(_type)).Append(LINEFEED)
         Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
             If TweetType.Anniversary Then
-
                 Dim _yr As Integer = CInt(_person.BirthYear)
-                    Dim _birthyear As String = CStr(Math.Abs(_yr))
-                    If _yr < 0 Then
-                        _birthyear &= " BCE"
-                    End If
-                    _outString.Append(" (" & _birthyear & ")")
-
+                Dim _birthyear As String = CStr(Math.Abs(_yr))
+                If _yr < 0 Then
+                    _birthyear &= " BCE"
+                End If
+                _outString.Append(" (" & _birthyear & ")")
             End If
             If _type = TweetType.Birthday Then
                 If _person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle) Then
@@ -347,7 +342,7 @@ Public Class BirthdayTweets
                 _rangeCount = Math.Min(_numberOfNamesThisTweet, _endIndex + 1)
                 _range = oPersonlist.GetRange(_endIndex - _rangeCount + 1, _rangeCount)
             Loop
-            _lengthsText = CStr(_totalLengthOfTweet) & vbCrLf & _lengthsText
+            _lengthsText = CStr(_totalLengthOfTweet) & LINEFEED & _lengthsText
             ListOfLists.Add(BuildList(_range))
             _endIndex -= _rangeCount
         Loop
@@ -405,5 +400,5 @@ Public Class BirthdayTweets
         End If
         Return _header
     End Function
-
+#End Region
 End Class

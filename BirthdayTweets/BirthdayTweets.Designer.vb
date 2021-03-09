@@ -30,6 +30,7 @@ Partial Class BirthdayTweets
         '
         ServicesToRun = New System.ServiceProcess.ServiceBase() {New BirthdayTweets}
 
+        ServicesToRun(0).CanPauseAndContinue = True
         System.ServiceProcess.ServiceBase.Run(ServicesToRun)
     End Sub
 
@@ -45,6 +46,6 @@ Partial Class BirthdayTweets
         'BirthdayTweets
         '
         Me.ServiceName = "Service1"
-
+        Me.CanPauseAndContinue = True
     End Sub
 End Class

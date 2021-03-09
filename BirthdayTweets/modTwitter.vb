@@ -15,7 +15,7 @@ Module modTwitter
                 _twitterUplMedia = pTwitterService.UploadMedia(_uploadOptions)
             End Using
         Catch ex As IOException
-            DisplayException(MethodBase.GetCurrentMethod, ex, "IO")
+            LogUtil.Exception("PostMedia", ex)
         End Try
         Return _twitterUplMedia
     End Function

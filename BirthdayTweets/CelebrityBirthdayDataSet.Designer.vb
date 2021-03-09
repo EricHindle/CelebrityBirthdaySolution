@@ -9281,11 +9281,17 @@ Namespace CelebrityBirthdayDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(1) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT id, imgfilename, imgfiletype, imgloadyr, imgloadmonth FROM dbo.Image"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "SELECT        id, imgfilename, imgfiletype, imgloadyr, imgloadmonth"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM        "& _ 
+                "    Image"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (id = @Id)"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9310,6 +9316,20 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Dim dataTable As CelebrityBirthdayDataSet.ImageDataTable = New CelebrityBirthdayDataSet.ImageDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillById(ByVal dataTable As CelebrityBirthdayDataSet.ImageDataTable, ByVal Id As Integer) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(Id,Integer)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9779,13 +9799,23 @@ Namespace CelebrityBirthdayDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(1) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortde"& _ 
                 "sc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday FR"& _ 
                 "OM dbo.Person"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "SELECT        birthday, birthmonth, birthname, birthplace, birthyear, dateadded, "& _ 
+                "deathday, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, sur"& _ 
+                "name"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Person"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (birthmonth = @month) AND (birthday ="& _ 
+                " @day) OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (birthmonth = @month) AND (@day = - 1)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDE"& _ 
+                "R BY birthmonth, birthday, birthyear, sortseq"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9810,6 +9840,21 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Dim dataTable As CelebrityBirthdayDataSet.PersonDataTable = New CelebrityBirthdayDataSet.PersonDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByMonthDay(ByVal dataTable As CelebrityBirthdayDataSet.PersonDataTable, ByVal month As Integer, ByVal day As Integer) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(month,Integer)
+            Me.Adapter.SelectCommand.Parameters(1).Value = CType(day,Integer)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10910,11 +10955,17 @@ Namespace CelebrityBirthdayDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(1) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT personId, twitterHandle, noTweet, wikiId, botsd FROM dbo.SocialMedia"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "SELECT        personId, twitterHandle, noTweet, wikiId, botsd"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            So"& _ 
+                "cialMedia"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (personId = @Id)"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "personId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10939,6 +10990,20 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Dim dataTable As CelebrityBirthdayDataSet.SocialMediaDataTable = New CelebrityBirthdayDataSet.SocialMediaDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillById(ByVal dataTable As CelebrityBirthdayDataSet.SocialMediaDataTable, ByVal Id As Integer) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(Id,Integer)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11378,12 +11443,28 @@ Namespace CelebrityBirthdayDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(1) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT Id, tweetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, twe"& _ 
                 "etAccount, tweetType FROM dbo.Tweets"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "INSERT INTO Tweets"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (tweetDateSent, tweetText, tweetMont"& _ 
+                "h, tweetDay, tweetSeq, tweetId, tweetAccount, tweetType)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@tweetD"& _ 
+                "ateSent,@tweetText,@tweetMonth,@tweetDay,@tweetSeq,@tweetId,@tweetAccount,@tweet"& _ 
+                "Type); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, tweetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tw"& _ 
+                "eetId, tweetAccount, tweetType FROM Tweets WHERE (Id = SCOPE_IDENTITY())"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetDateSent", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetDateSent", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetText", Global.System.Data.SqlDbType.NVarChar, 280, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetText", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetMonth", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetMonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetDay", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetDay", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetSeq", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetSeq", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetId", Global.System.Data.SqlDbType.NChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetAccount", Global.System.Data.SqlDbType.NChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetAccount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@tweetType", Global.System.Data.SqlDbType.NChar, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "tweetType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11735,6 +11816,68 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                     ByVal Original_tweetType As String) As Integer
             Return Me.Update(tweetDateSent, tweetText, tweetMonth, tweetDay, tweetSeq, tweetId, tweetAccount, tweetType, Original_Id, Original_tweetDateSent, Original_tweetText, Original_tweetMonth, Original_tweetDay, Original_tweetSeq, Original_tweetId, Original_tweetAccount, Original_tweetType, Original_Id)
         End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, false)>  _
+        Public Overloads Overridable Function InsertTweet(ByVal tweetDateSent As Global.System.Nullable(Of Date), ByVal tweetText As String, ByVal tweetMonth As Global.System.Nullable(Of Integer), ByVal tweetDay As Global.System.Nullable(Of Integer), ByVal tweetSeq As Global.System.Nullable(Of Integer), ByVal tweetId As String, ByVal tweetAccount As String, ByVal tweetType As String) As Integer
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(1)
+            If (tweetDateSent.HasValue = true) Then
+                command.Parameters(0).Value = CType(tweetDateSent.Value,Date)
+            Else
+                command.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (tweetText Is Nothing) Then
+                command.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(1).Value = CType(tweetText,String)
+            End If
+            If (tweetMonth.HasValue = true) Then
+                command.Parameters(2).Value = CType(tweetMonth.Value,Integer)
+            Else
+                command.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (tweetDay.HasValue = true) Then
+                command.Parameters(3).Value = CType(tweetDay.Value,Integer)
+            Else
+                command.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (tweetSeq.HasValue = true) Then
+                command.Parameters(4).Value = CType(tweetSeq.Value,Integer)
+            Else
+                command.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (tweetId Is Nothing) Then
+                command.Parameters(5).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(5).Value = CType(tweetId,String)
+            End If
+            If (tweetAccount Is Nothing) Then
+                command.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(6).Value = CType(tweetAccount,String)
+            End If
+            If (tweetType Is Nothing) Then
+                command.Parameters(7).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(7).Value = CType(tweetType,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Integer
+            Try 
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            Return returnValue
+        End Function
     End Class
     
     '''<summary>
@@ -11925,11 +12068,17 @@ Namespace CelebrityBirthdayDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(1) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT Id, Verifier, Token, Secret FROM dbo.TwitterAuth"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "SELECT        Id, Verifier, Token, Secret"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            TwitterAuth"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE    "& _ 
+                "    (Id = @Id)"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.NVarChar, 30, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11954,6 +12103,24 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Dim dataTable As CelebrityBirthdayDataSet.TwitterAuthDataTable = New CelebrityBirthdayDataSet.TwitterAuthDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillById(ByVal dataTable As CelebrityBirthdayDataSet.TwitterAuthDataTable, ByVal Id As String) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            If (Id Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Id")
+            Else
+                Me.Adapter.SelectCommand.Parameters(0).Value = CType(Id,String)
+            End If
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

@@ -79,5 +79,14 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Unknown signature type.
+        '''</summary>
+        Friend ReadOnly Property UNKNOWN_SIG() As String
+            Get
+                Return ResourceManager.GetString("UNKNOWN_SIG", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

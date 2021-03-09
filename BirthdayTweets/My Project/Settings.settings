@@ -13,5 +13,11 @@
     <Setting Name="LogFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\CelebrityBirthday\Logs</Value>
     </Setting>
+    <Setting Name="TimerInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60000</Value>
+    </Setting>
+    <Setting Name="ImgPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F:\CelebrityBirthday\Twitter\Images</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

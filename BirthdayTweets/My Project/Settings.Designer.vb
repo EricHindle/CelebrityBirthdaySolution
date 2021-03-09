@@ -76,6 +76,30 @@ Namespace My
                 Me("LogFolder") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("60000")>  _
+        Public Property TimerInterval() As Integer
+            Get
+                Return CType(Me("TimerInterval"),Integer)
+            End Get
+            Set
+                Me("TimerInterval") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Twitter\Images")>  _
+        Public Property ImgPath() As String
+            Get
+                Return CType(Me("ImgPath"),String)
+            End Get
+            Set
+                Me("ImgPath") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
