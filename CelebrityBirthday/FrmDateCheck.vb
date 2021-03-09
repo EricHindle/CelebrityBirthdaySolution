@@ -386,7 +386,6 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub ResetChecklistButtons()
         HideChecklistButtons
-        DisableChecklistButtons
     End Sub
     Private Sub HideChecklistButtons()
         BtnRmvBotsdId.Visible = False
@@ -408,27 +407,6 @@ Public NotInheritable Class FrmDateCheck
         BtnUpdCbPicDesc.Visible = False
         BtnUpdNewCbPage.Visible = False
         BtnRmvRow.Visible = False
-    End Sub
-    Private Sub DisableChecklistButtons()
-        BtnRmvBotsdId.Enabled = False
-        BtnRmvOtherBotsdId.Enabled = False
-        BtnRmvBotsdRecord.Enabled = False
-        BtnRmvOldBotsdPost.Enabled = False
-        BtnUpdOldBotsdPost.Enabled = False
-        BtnUpdOldBotsdList.Enabled = False
-        BtnUpdatePerson.Enabled = False
-        BtnReseqOldGroup.Enabled = False
-        BtnReseqNewGroup.Enabled = False
-        BtnUpdateNewBotsdPost.Enabled = False
-        BtnPosted.Enabled = False
-        BtnUpdNewBotsdList.Enabled = False
-        BtnRmvOldPicture.Enabled = False
-        BtnUpdOldCbPage.Enabled = False
-        BtnAddCbPic.Enabled = False
-        BtnMoveCbPic.Enabled = False
-        BtnUpdCbPicDesc.Enabled = False
-        BtnUpdNewCbPage.Enabled = False
-        BtnRmvRow.Enabled = False
     End Sub
 #End Region
 #Region "checklist"
