@@ -17,6 +17,9 @@
       <Value Profile="(Default)">60000</Value>
     </Setting>
     <Setting Name="ImgPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F:\CelebrityBirthday\Images</Value>
+    </Setting>
+    <Setting Name="TwitterImgPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\CelebrityBirthday\Twitter\Images</Value>
     </Setting>
   </Settings>

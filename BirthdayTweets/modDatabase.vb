@@ -65,7 +65,7 @@ Module modDatabase
 
         Return oPersonList
     End Function
-    Public Function FindBirthdays(oDay As Integer, oMonth As Integer)
+    Public Function FindBirthdays(oDay As Integer, oMonth As Integer) As List(Of Person)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
@@ -79,7 +79,7 @@ Module modDatabase
         End Try
         Return _List
     End Function
-    Public Function FindAnniversaries(oDay As Integer, oMonth As Integer)
+    Public Function FindAnniversaries(oDay As Integer, oMonth As Integer) As List(Of Person)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByAnniversary(oFullPersonTable, oDay, oMonth)

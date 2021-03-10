@@ -112,7 +112,6 @@ Friend Module ImageUtil
     End Function
 
     Public Function GenerateImage(imageTable As List(Of Person), widthImageCount As Integer, pHeight As Integer, pAlignType As AlignType) As Image
-
         Dim mosaic As Image = New Bitmap(My.Resources.blank, Math.Max(60 * widthImageCount, 300), Math.Max((60 * pHeight) + 18, 80))
         Dim oGraphics As Graphics = Graphics.FromImage(mosaic)
         oGraphics.DrawImage(My.Resources.id, New Point(mosaic.Width - 125, mosaic.Height - 18))
@@ -124,6 +123,9 @@ Friend Module ImageUtil
                 Dim rowStartPos As Integer = 0
                 Dim rowImageWidth As Integer = widthImageCount
                 Dim _image As Image = _person.Image.Photo
+                If _image Is Nothing Then
+                    LogUtil.Info("Image missing")
+                End If
                 _imgHPos += 1
                 If _imgHPos = widthImageCount Then
                     _imgVPos += 1
@@ -151,6 +153,22 @@ Friend Module ImageUtil
         Dim _imageClone As Image = mosaic.Clone
         mosaic.Dispose()
         Return _imageClone
+    End Function
+    Public Function SaveImage(_image As Image, ByVal targetFile As String) As Boolean
+        Dim isSavedOk As Boolean = True
+        Dim targetBitmap As System.Drawing.Bitmap = New Bitmap(_image)
+        Try
+            Dim _encoderParameters As EncoderParameters = GetEncoderParameters()
+            targetBitmap.Save(targetFile, GetCodecInfo(ImageType.JPEG), _encoderParameters)
+            _encoderParameters.Dispose()
+        Catch ex As ArgumentException
+            isSavedOk = False
+            LogUtil.Exception("Save image error", ex, "SaveImage")
+        Catch ex As Runtime.InteropServices.ExternalException
+            isSavedOk = False
+            LogUtil.Exception("Save image error", ex, "SaveImage")
+        End Try
+        Return isSavedOk
     End Function
 
 End Module

@@ -91,13 +91,25 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Twitter\Images")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Images")>  _
         Public Property ImgPath() As String
             Get
                 Return CType(Me("ImgPath"),String)
             End Get
             Set
                 Me("ImgPath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Twitter\Images")>  _
+        Public Property TwitterImgPath() As String
+            Get
+                Return CType(Me("TwitterImgPath"),String)
+            End Get
+            Set
+                Me("TwitterImgPath") = value
             End Set
         End Property
     End Class

@@ -47,6 +47,7 @@ Partial Class FrmTweet
         Me.rbImageRight = New System.Windows.Forms.RadioButton()
         Me.rbImageLeft = New System.Windows.Forms.RadioButton()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.ChkAtNextBirthday = New System.Windows.Forms.CheckBox()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.rbHandles = New System.Windows.Forms.RadioButton()
         Me.rbAges = New System.Windows.Forms.RadioButton()
@@ -65,7 +66,6 @@ Partial Class FrmTweet
         Me.BtnNext = New System.Windows.Forms.Button()
         Me.BtnExplorer = New System.Windows.Forms.Button()
         Me.BtnTweetDeck = New System.Windows.Forms.Button()
-        Me.ChkAtNextBirthday = New System.Windows.Forms.CheckBox()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -480,6 +480,20 @@ Partial Class FrmTweet
         Me.GroupBox3.TabIndex = 37
         Me.GroupBox3.TabStop = False
         '
+        'ChkAtNextBirthday
+        '
+        Me.ChkAtNextBirthday.AutoSize = True
+        Me.ChkAtNextBirthday.Checked = True
+        Me.ChkAtNextBirthday.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ChkAtNextBirthday.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkAtNextBirthday.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.ChkAtNextBirthday.Location = New System.Drawing.Point(28, 72)
+        Me.ChkAtNextBirthday.Name = "ChkAtNextBirthday"
+        Me.ChkAtNextBirthday.Size = New System.Drawing.Size(103, 22)
+        Me.ChkAtNextBirthday.TabIndex = 37
+        Me.ChkAtNextBirthday.Text = "at next birthday"
+        Me.ChkAtNextBirthday.UseVisualStyleBackColor = True
+        '
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
@@ -688,20 +702,6 @@ Partial Class FrmTweet
         Me.BtnTweetDeck.TabIndex = 43
         Me.BtnTweetDeck.Text = "Open TweetDeck"
         Me.BtnTweetDeck.UseVisualStyleBackColor = True
-        '
-        'ChkAtNextBirthday
-        '
-        Me.ChkAtNextBirthday.AutoSize = True
-        Me.ChkAtNextBirthday.Checked = True
-        Me.ChkAtNextBirthday.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ChkAtNextBirthday.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkAtNextBirthday.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.ChkAtNextBirthday.Location = New System.Drawing.Point(28, 72)
-        Me.ChkAtNextBirthday.Name = "ChkAtNextBirthday"
-        Me.ChkAtNextBirthday.Size = New System.Drawing.Size(103, 22)
-        Me.ChkAtNextBirthday.TabIndex = 37
-        Me.ChkAtNextBirthday.Text = "at next birthday"
-        Me.ChkAtNextBirthday.UseVisualStyleBackColor = True
         '
         'FrmTweet
         '
