@@ -14,7 +14,7 @@
       <Value Profile="(Default)">F:\CelebrityBirthday\Logs</Value>
     </Setting>
     <Setting Name="TimerInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">60000</Value>
+      <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="ImgPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\CelebrityBirthday\Images</Value>

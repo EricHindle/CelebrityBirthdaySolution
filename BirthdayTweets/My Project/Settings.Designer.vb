@@ -79,7 +79,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("60000")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("30")>  _
         Public Property TimerInterval() As Integer
             Get
                 Return CType(Me("TimerInterval"),Integer)

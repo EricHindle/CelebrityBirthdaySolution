@@ -2,18 +2,12 @@
 Imports System.Reflection
 
 Module modDatabase
-#Region "constants"
-    Private Const MODULE_NAME As String = "modDatabase"
-    Private Const MODULE_TYPE As String = "Database"
-#End Region
 #Region "data"
 
     Private ReadOnly oTwta As New CelebrityBirthdayDataSetTableAdapters.SocialMediaTableAdapter
     Private ReadOnly oTwtable As New CelebrityBirthdayDataSet.SocialMediaDataTable
     Private ReadOnly oPersonTa As New CelebrityBirthdayDataSetTableAdapters.PersonTableAdapter
     Private ReadOnly oPersonTable As New CelebrityBirthdayDataSet.PersonDataTable
-    Private ReadOnly oDatesTa As New CelebrityBirthdayDataSetTableAdapters.DatesTableAdapter
-    Private ReadOnly oDatesTable As New CelebrityBirthdayDataSet.DatesDataTable
     Private ReadOnly oImgTa As New CelebrityBirthdayDataSetTableAdapters.ImageTableAdapter
     Private ReadOnly oImgTable As New CelebrityBirthdayDataSet.ImageDataTable
     Private ReadOnly oFullPersonTa As New CelebrityBirthdayDataSetTableAdapters.FullPersonTableAdapter
@@ -21,10 +15,10 @@ Module modDatabase
     Private ReadOnly oTwitterAuthTa As New CelebrityBirthdayDataSetTableAdapters.TwitterAuthTableAdapter
     Private ReadOnly oTwitterAuthTable As New CelebrityBirthdayDataSet.TwitterAuthDataTable
     Private ReadOnly oTweetTa As New CelebrityBirthdayDataSetTableAdapters.TweetsTableAdapter
-    Private ReadOnly oBotsdTa As New CelebrityBirthdayDataSetTableAdapters.BotSDTableAdapter
-    Private ReadOnly oBotsdTable As New CelebrityBirthdayDataSet.BotSDDataTable
-    Private ReadOnly oBotsdViewTa As New CelebrityBirthdayDataSetTableAdapters.BornOnTheSameDayTableAdapter
-    Private ReadOnly oBotsdViewTable As New CelebrityBirthdayDataSet.BornOnTheSameDayDataTable
+    'Private ReadOnly oBotsdTa As New CelebrityBirthdayDataSetTableAdapters.BotSDTableAdapter
+    'Private ReadOnly oBotsdTable As New CelebrityBirthdayDataSet.BotSDDataTable
+    'Private ReadOnly oBotsdViewTa As New CelebrityBirthdayDataSetTableAdapters.BornOnTheSameDayTableAdapter
+    'Private ReadOnly oBotsdViewTable As New CelebrityBirthdayDataSet.BornOnTheSameDayDataTable
 #End Region
 #Region "person"
     'Public Function GetFullPersonById(ByVal _id As Integer, Optional isIncludeImage As Boolean = True) As Person
@@ -66,6 +60,7 @@ Module modDatabase
         Return oPersonList
     End Function
     Public Function FindBirthdays(oDay As Integer, oMonth As Integer) As List(Of Person)
+        LogUtil.Info("Birthdays")
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
@@ -80,6 +75,7 @@ Module modDatabase
         Return _List
     End Function
     Public Function FindAnniversaries(oDay As Integer, oMonth As Integer) As List(Of Person)
+        LogUtil.Info("Anniversaries")
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByAnniversary(oFullPersonTable, oDay, oMonth)
@@ -129,6 +125,8 @@ Module modDatabase
                     .TokenSecret = If(oRow.IsSecretNull, "", oRow.Secret),
                     .Verifier = If(oRow.IsVerifierNull, "", oRow.Verifier)
                 }
+            Else
+                LogUtil.Problem("Twitter user " & pId & " not found in database")
             End If
         Catch dbEx As DbException
             LogUtil.Exception("GetAuthById", dbEx)
