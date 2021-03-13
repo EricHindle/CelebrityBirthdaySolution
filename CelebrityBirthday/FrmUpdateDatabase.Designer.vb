@@ -120,6 +120,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnRmvBotsd = New System.Windows.Forms.Button()
         Me.BtnCopyName = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cbIsTwin = New System.Windows.Forms.CheckBox()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -133,13 +134,14 @@ Partial Class FrmUpdateDatabase
         '
         Me.cbNoTweet.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbNoTweet.AutoSize = True
-        Me.cbNoTweet.ForeColor = System.Drawing.Color.Black
-        Me.cbNoTweet.Location = New System.Drawing.Point(411, 633)
+        Me.cbNoTweet.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbNoTweet.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.cbNoTweet.Location = New System.Drawing.Point(407, 631)
         Me.cbNoTweet.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.cbNoTweet.Name = "cbNoTweet"
-        Me.cbNoTweet.Size = New System.Drawing.Size(94, 18)
+        Me.cbNoTweet.Size = New System.Drawing.Size(111, 28)
         Me.cbNoTweet.TabIndex = 47
-        Me.cbNoTweet.Text = "Don't tweet"
+        Me.cbNoTweet.Text = "do not tweet"
         Me.cbNoTweet.UseVisualStyleBackColor = True
         '
         'btnTwitter
@@ -1332,12 +1334,24 @@ Partial Class FrmUpdateDatabase
         Me.ToolTip1.SetToolTip(Me.BtnCopyName, "Copy")
         Me.BtnCopyName.UseVisualStyleBackColor = True
         '
+        'cbIsTwin
+        '
+        Me.cbIsTwin.AutoSize = True
+        Me.cbIsTwin.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbIsTwin.Location = New System.Drawing.Point(163, 459)
+        Me.cbIsTwin.Name = "cbIsTwin"
+        Me.cbIsTwin.Size = New System.Drawing.Size(78, 28)
+        Me.cbIsTwin.TabIndex = 147
+        Me.cbIsTwin.Text = "is a twin"
+        Me.cbIsTwin.UseVisualStyleBackColor = True
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1293, 923)
+        Me.Controls.Add(Me.cbIsTwin)
         Me.Controls.Add(Me.BtnCopyName)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.BtnDateCopy)
@@ -1537,4 +1551,5 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents BtnUpdBotsd As Button
     Friend WithEvents BtnCopyName As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents cbIsTwin As CheckBox
 End Class

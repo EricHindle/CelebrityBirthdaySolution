@@ -37,20 +37,28 @@ Public Class BirthdayTweets
             End Set
         End Property
     End Class
+
 #End Region
 #Region "constants"
     Private Const LAST_CELEB_TWEET As String = "LastCelebTweet"
+    Private Const LAST_BOTSD_TWEET As String = "LastBotsdTweet"
+
     Private Const TWEET_TIME As String = "TweetTime"
     Private Const TIMER_INTERVAL As String = "ServiceTimerInterval"
     Private Const BIRTHDAY_FNAME As String = "Birthdays_"
     Private Const ANNIV_FNAME As String = "Anniv_"
+    Private Const BOTSD_FNAME As String = "Botsd_"
+
     Private Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Private Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Private Shared ReadOnly LINEFEED As String = Convert.ToChar(vbLf, myStringFormatProvider)
-    Private Const CELEB_USER As String = "CelebBirthdayUK"
-    Private Const HBURPDAY_USER As String = "HBurpday"
-    'Private Const CELEB_USER As String = "FunsterMuddy"
-    'Private Const HBURPDAY_USER As String = "FunsterMuddy"
+    'Private Const CELEB_USER As String = "CelebBirthdayUK"
+    'Private Const HBURPDAY_USER As String = "HBurpday"
+    'Private Const BOTSD_USER As String = "NotTwins1"
+    Private Const CELEB_USER As String = "FunsterMuddy"
+    Private Const HBURPDAY_USER As String = "FunsterMuddy"
+    Private Const BOTSD_USER As String = "FunsterMuddy"
+
     Private Const TWEET_FOOTER_LENGTH As Integer = 5
     Private Const NOT_DELETED As String = "File not deleted"
 #End Region
@@ -62,6 +70,7 @@ Public Class BirthdayTweets
     Private Shared todayDay As String
     Private Shared todayMonth As String
     Private Shared tweetHeaderDate As String
+    Private Shared ReadOnly oBotSDList As New List(Of List(Of Person))
 #End Region
 #Region "service"
     Protected Overrides Sub OnStart(ByVal args() As String)
@@ -102,6 +111,7 @@ Public Class BirthdayTweets
             GetAuthData()
             ClearImages()
             Dim celebLastTweetDate As Date = GlobalSettings.GetSetting(LAST_CELEB_TWEET)
+            Dim botsdLastTweetDate As Date = GlobalSettings.GetSetting(LAST_BOTSD_TWEET)
             Dim todaysDate As String = Format(Now, "yyyy-MM-dd")
             todayDay = Format(Now, "dd")
             todayMonth = Format(Now, "MMMM")
@@ -109,7 +119,7 @@ Public Class BirthdayTweets
             Dim tweetTime As DateTime = CDate(todaysDate & " " & GlobalSettings.GetSetting(TWEET_TIME))
             If celebLastTweetDate < Today.Date Then
                 If Now > tweetTime Then
-                    LogUtil.Info("Sending tweets for " & todaysDate)
+                    LogUtil.Info("Sending birthday tweets for " & todaysDate)
                     LogUtil.Info("Selecting people")
                     If BuildPersonLists() Then
                         SendCbBirthdayTweets()
@@ -120,7 +130,21 @@ Public Class BirthdayTweets
                         GlobalSettings.SetSetting(LAST_CELEB_TWEET, "date", todaysDate, "")
                         LogUtil.Info("HBurpday Tweets complete")
                     Else
-                        LogUtil.Problem("Tweets not sent - selection error")
+                        LogUtil.Problem("Birthday Tweets not sent - selection error")
+                    End If
+                End If
+            End If
+
+            If botsdLastTweetDate < Today.Date Then
+                If Now > tweetTime Then
+                    LogUtil.Info("Sending botsd tweets for " & todaysDate)
+                    LogUtil.Info("Selecting pairs")
+                    If SelectPairs() Then
+                        SendBotsdTweets()
+                        LogUtil.Info("BotSD tweets complete")
+                        GlobalSettings.SetSetting(LAST_BOTSD_TWEET, "date", todaysDate, "")
+                    Else
+                        LogUtil.Problem("BotSD Tweets not sent - selection error")
                     End If
                 End If
             End If
@@ -169,6 +193,26 @@ Public Class BirthdayTweets
             SendTheTweet(tweetToSend, CELEB_USER, imageFilename)
         Next
     End Sub
+    Private Shared Sub SendBotsdTweets()
+        LogUtil.Info("Generating BotSD tweets")
+        Dim cbTweets As List(Of CbTweet) = GenerateBotSDTweets(oBotSDList)
+        LogUtil.Info("Sending BotSDtweets")
+        For Each tweetToSend As CbTweet In cbTweets
+            Dim imageFilename As String = SaveImage(tweetToSend, BOTSD_FNAME)
+            SendTheTweet(tweetToSend, CELEB_USER, imageFilename)
+        Next
+    End Sub
+    Private Shared Function GenerateBotSDTweets(oBotSDList As List(Of List(Of Person))) As List(Of CbTweet)
+        Dim cbTweets As New List(Of CbTweet)
+        For Each oPersonList As List(Of Person) In oBotSDList
+            Dim _cbTweet As New CbTweet With {
+          .TweetImage = GeneratePicture(oPersonList, oPersonList.Count),
+          .TweetText = GenerateBotsdText(oPersonList)
+          }
+            cbTweets.Add(_cbTweet)
+        Next
+        Return cbTweets
+    End Function
     Private Shared Function GenerateTweets(oPersonList As List(Of Person), _tweetType As TweetType, _tweetUserType As TweetUserType, _header As String) As List(Of CbTweet)
         Dim dateLength As Integer = tweetHeaderDate.Length
         Dim headerLength As Integer = dateLength + _header.Length + 3
@@ -248,6 +292,38 @@ Public Class BirthdayTweets
     Private Shared Function GetTweetLineLength(_person As Person, _type As TweetType, _userType As TweetUserType) As Integer
         Dim tweetLine As String = GenerateTweetLine(_person, _type, _userType)
         Return tweetLine.Length
+    End Function
+    Private Shared Function GenerateBotsdText(oPersonList As List(Of Person)) As String
+        LogUtil.Info("Generating text")
+        Dim _outString As New StringBuilder
+        Dim _index As Integer = 0
+        Dim _dob As String = ""
+        For Each _person As Person In oPersonList
+            Select Case _index
+                Case 0
+                    _dob = Format(_person.DateOfBirth, "d MMMM yyyy")
+                Case oPersonList.Count - 1
+                    _outString.Append(vbCrLf)
+                    _outString.Append("and ")
+                Case Else
+                    _outString.Append(vbCrLf)
+            End Select
+            _outString.Append(_person.Name)
+            _outString.Append(", ")
+            _outString.Append(_person.ShortDesc.Trim("."))
+            _outString.Append(","c)
+            _index += 1
+        Next
+        _outString.Append(vbCrLf)
+        _outString.Append("were ")
+        If oPersonList.Count = 2 Then
+            _outString.Append("both")
+        Else
+            _outString.Append("all")
+        End If
+        _outString.Append(" born on ")
+        _outString.Append(_dob)
+        Return _outString.ToString
     End Function
     Private Shared Function GenerateText(_imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer, _userType As TweetUserType) As String
         LogUtil.Info("Generating text")
@@ -376,7 +452,7 @@ Public Class BirthdayTweets
         Try
             Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.TwitterImgPath,
                                                                                               FileIO.SearchOption.SearchTopLevelOnly,
-                                                                                              {"Birth*.jpg", "Anniv*.jpg"})
+                                                                                              {BIRTHDAY_FNAME & "*.jpg", ANNIV_FNAME & "*.jpg", BOTSD_FNAME & "*.jpg"})
             For Each _imageFile As String In _imageList
                 LogUtil.Info(_imageFile)
                 My.Computer.FileSystem.DeleteFile(_imageFile)
@@ -441,6 +517,29 @@ Public Class BirthdayTweets
             isBuiltOk = False
         End Try
         Return isBuiltOk
+    End Function
+    Private Shared Function SelectPairs() As Boolean
+        Dim isOK As Boolean = True
+        LogUtil.Info("Selecting shared birthdays")
+        oBotSDList.Clear()
+        Dim _fullList As List(Of Person) = FindTodays(Now.Day, Now.Month, False)
+        Dim lastYear As String = ""
+        Dim _sameYearList As New List(Of Person)
+        For Each oPerson As Person In _fullList
+            If Not oPerson.BirthYear.Equals(lastYear, Global.System.StringComparison.Ordinal) Then
+                If _sameYearList.Count > 1 Then
+                    oBotSDList.Add(_sameYearList)
+                End If
+                _sameYearList = New List(Of Person)
+                lastYear = oPerson.BirthYear
+            End If
+            _sameYearList.Add(oPerson)
+        Next
+        If _sameYearList.Count > 1 Then
+            oBotSDList.Add(_sameYearList)
+        End If
+        LogUtil.Info(CStr(oBotSDList.Count) & " same birthdays found")
+        Return isOK
     End Function
 #End Region
 End Class

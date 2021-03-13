@@ -123,7 +123,7 @@ Public NotInheritable Class FrmUpdateDatabase
                                                 TxtBirthName.Text.Trim,
                                                 TxtBirthPlace.Text.Trim,
                                                 New ImageIdentity(),
-                                                New SocialMedia(-1, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, 0)) With {
+                                                New SocialMedia(-1, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, 0, cbIsTwin.Checked)) With {
                                                 .UnsavedChanges = True
                                                 }
                 If Not IsInList(newPerson) Then
@@ -322,7 +322,7 @@ Public NotInheritable Class FrmUpdateDatabase
                     oPerson.BirthPlace = TxtBirthPlace.Text.Trim
                     oPerson.BirthName = TxtBirthName.Text.Trim
                     oPerson.UnsavedChanges = True
-                    oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd)
+                    oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd, cbIsTwin.Checked)
                     ShowUpdated(oPerson, "Updated")
                     Dim p As Integer = lbPeople.SelectedIndex
                     DisplayPersonList()
@@ -756,6 +756,7 @@ Public NotInheritable Class FrmUpdateDatabase
         txtDthMth.Text = ""
         txtTwitter.Text = ""
         cbNoTweet.Checked = False
+        cbIsTwin.Checked = False
         TxtWikiId.Text = ""
         ResetBackgroundColors()
         bLoadingPerson = False
@@ -897,6 +898,7 @@ Public NotInheritable Class FrmUpdateDatabase
             cbNoTweet.Checked = oPerson.Social.IsNoTweet
             TxtWikiId.Text = oPerson.Social.WikiId
             lblBotsdId.Text = oPerson.Social.Botsd
+            cbIsTwin.Checked = oPerson.Social.IsTwin
         End If
         txtWiki.Text = GetWikiText(NudSentences.Value, oPerson.ForeName, oPerson.Surname, TxtWikiId.Text)
         bLoadingPerson = False

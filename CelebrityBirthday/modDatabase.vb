@@ -400,15 +400,15 @@ Module modDatabase
         End If
         Return oSocial
     End Function
-    Public Sub InsertSocialMedia(_id As Integer, _twitterHandle As String, _isNoTweet As Boolean, _wikiId As String, _botsd As Integer)
+    Public Sub InsertSocialMedia(_id As Integer, _twitterHandle As String, _isNoTweet As Boolean, _wikiId As String, _botsd As Integer, _isTwin As Boolean)
         LogUtil.Info("Inserting social media for " & CStr(_id), MODULE_NAME)
-        oTwta.InsertTwitter(_id, _twitterHandle, _isNoTweet, _wikiId, _botsd)
+        oTwta.InsertTwitter(_id, _twitterHandle, _isNoTweet, _wikiId, _botsd, _isTwin)
     End Sub
     Public Sub UpdateSocialMedia(ByRef _person As Person)
         DeleteSocialMedia(_person.Id)
         Dim _social As SocialMedia = _person.Social
         If _social IsNot Nothing Then
-            InsertSocialMedia(_person.Id, _social.TwitterHandle, _social.IsNoTweet, _social.WikiId, _social.Botsd)
+            InsertSocialMedia(_person.Id, _social.TwitterHandle, _social.IsNoTweet, _social.WikiId, _social.Botsd, _social.IsTwin)
         End If
     End Sub
     Public Sub UpdateWikiId(pPersonId As Integer, pWikiId As String)

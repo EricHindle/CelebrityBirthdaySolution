@@ -112,7 +112,7 @@ Public Class FrmAddWikiIds
             DisplayMessage(CStr(ict))
             If oRow.Cells(xExclude.Name).Value = False Then
                 If GetSocialMedia(oRow.Cells(xId.Name).Value).Id < 0 Then
-                    InsertSocialMedia(oRow.Cells(xId.Name).Value, "", False, oRow.Cells(xDesc.Name).Value, 0)
+                    InsertSocialMedia(oRow.Cells(xId.Name).Value, "", False, oRow.Cells(xDesc.Name).Value, 0, False)
                 Else
                     UpdateWikiId(oRow.Cells(xId.Name).Value, oRow.Cells(xDesc.Name).Value)
                 End If

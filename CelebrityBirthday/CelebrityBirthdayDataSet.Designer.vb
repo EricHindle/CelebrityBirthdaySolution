@@ -31,8 +31,6 @@ Partial Public Class CelebrityBirthdayDataSet
     
     Private tableImage As ImageDataTable
     
-    Private tableFullPerson As FullPersonDataTable
-    
     Private tableSocialMedia As SocialMediaDataTable
     
     Private tableTweets As TweetsDataTable
@@ -44,6 +42,8 @@ Partial Public Class CelebrityBirthdayDataSet
     Private tableBotSD As BotSDDataTable
     
     Private tableBornOnTheSameDay As BornOnTheSameDayDataTable
+    
+    Private tableFullPerson As FullPersonDataTable
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -83,9 +83,6 @@ Partial Public Class CelebrityBirthdayDataSet
             If (Not (ds.Tables("Image")) Is Nothing) Then
                 MyBase.Tables.Add(New ImageDataTable(ds.Tables("Image")))
             End If
-            If (Not (ds.Tables("FullPerson")) Is Nothing) Then
-                MyBase.Tables.Add(New FullPersonDataTable(ds.Tables("FullPerson")))
-            End If
             If (Not (ds.Tables("SocialMedia")) Is Nothing) Then
                 MyBase.Tables.Add(New SocialMediaDataTable(ds.Tables("SocialMedia")))
             End If
@@ -103,6 +100,9 @@ Partial Public Class CelebrityBirthdayDataSet
             End If
             If (Not (ds.Tables("BornOnTheSameDay")) Is Nothing) Then
                 MyBase.Tables.Add(New BornOnTheSameDayDataTable(ds.Tables("BornOnTheSameDay")))
+            End If
+            If (Not (ds.Tables("FullPerson")) Is Nothing) Then
+                MyBase.Tables.Add(New FullPersonDataTable(ds.Tables("FullPerson")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -148,16 +148,6 @@ Partial Public Class CelebrityBirthdayDataSet
     Public ReadOnly Property Image() As ImageDataTable
         Get
             Return Me.tableImage
-        End Get
-    End Property
-    
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-     Global.System.ComponentModel.Browsable(false),  _
-     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property FullPerson() As FullPersonDataTable
-        Get
-            Return Me.tableFullPerson
         End Get
     End Property
     
@@ -218,6 +208,16 @@ Partial Public Class CelebrityBirthdayDataSet
     Public ReadOnly Property BornOnTheSameDay() As BornOnTheSameDayDataTable
         Get
             Return Me.tableBornOnTheSameDay
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property FullPerson() As FullPersonDataTable
+        Get
+            Return Me.tableFullPerson
         End Get
     End Property
     
@@ -297,9 +297,6 @@ Partial Public Class CelebrityBirthdayDataSet
             If (Not (ds.Tables("Image")) Is Nothing) Then
                 MyBase.Tables.Add(New ImageDataTable(ds.Tables("Image")))
             End If
-            If (Not (ds.Tables("FullPerson")) Is Nothing) Then
-                MyBase.Tables.Add(New FullPersonDataTable(ds.Tables("FullPerson")))
-            End If
             If (Not (ds.Tables("SocialMedia")) Is Nothing) Then
                 MyBase.Tables.Add(New SocialMediaDataTable(ds.Tables("SocialMedia")))
             End If
@@ -317,6 +314,9 @@ Partial Public Class CelebrityBirthdayDataSet
             End If
             If (Not (ds.Tables("BornOnTheSameDay")) Is Nothing) Then
                 MyBase.Tables.Add(New BornOnTheSameDayDataTable(ds.Tables("BornOnTheSameDay")))
+            End If
+            If (Not (ds.Tables("FullPerson")) Is Nothing) Then
+                MyBase.Tables.Add(New FullPersonDataTable(ds.Tables("FullPerson")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -368,12 +368,6 @@ Partial Public Class CelebrityBirthdayDataSet
                 Me.tableImage.InitVars
             End If
         End If
-        Me.tableFullPerson = CType(MyBase.Tables("FullPerson"),FullPersonDataTable)
-        If (initTable = true) Then
-            If (Not (Me.tableFullPerson) Is Nothing) Then
-                Me.tableFullPerson.InitVars
-            End If
-        End If
         Me.tableSocialMedia = CType(MyBase.Tables("SocialMedia"),SocialMediaDataTable)
         If (initTable = true) Then
             If (Not (Me.tableSocialMedia) Is Nothing) Then
@@ -410,6 +404,12 @@ Partial Public Class CelebrityBirthdayDataSet
                 Me.tableBornOnTheSameDay.InitVars
             End If
         End If
+        Me.tableFullPerson = CType(MyBase.Tables("FullPerson"),FullPersonDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableFullPerson) Is Nothing) Then
+                Me.tableFullPerson.InitVars
+            End If
+        End If
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -426,8 +426,6 @@ Partial Public Class CelebrityBirthdayDataSet
         MyBase.Tables.Add(Me.tableDates)
         Me.tableImage = New ImageDataTable()
         MyBase.Tables.Add(Me.tableImage)
-        Me.tableFullPerson = New FullPersonDataTable()
-        MyBase.Tables.Add(Me.tableFullPerson)
         Me.tableSocialMedia = New SocialMediaDataTable()
         MyBase.Tables.Add(Me.tableSocialMedia)
         Me.tableTweets = New TweetsDataTable()
@@ -440,6 +438,8 @@ Partial Public Class CelebrityBirthdayDataSet
         MyBase.Tables.Add(Me.tableBotSD)
         Me.tableBornOnTheSameDay = New BornOnTheSameDayDataTable()
         MyBase.Tables.Add(Me.tableBornOnTheSameDay)
+        Me.tableFullPerson = New FullPersonDataTable()
+        MyBase.Tables.Add(Me.tableFullPerson)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -457,12 +457,6 @@ Partial Public Class CelebrityBirthdayDataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Private Function ShouldSerializeImage() As Boolean
-        Return false
-    End Function
-    
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-    Private Function ShouldSerializeFullPerson() As Boolean
         Return false
     End Function
     
@@ -499,6 +493,12 @@ Partial Public Class CelebrityBirthdayDataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Private Function ShouldSerializeBornOnTheSameDay() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Private Function ShouldSerializeFullPerson() As Boolean
         Return false
     End Function
     
@@ -570,9 +570,6 @@ Partial Public Class CelebrityBirthdayDataSet
     Public Delegate Sub ImageRowChangeEventHandler(ByVal sender As Object, ByVal e As ImageRowChangeEvent)
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-    Public Delegate Sub FullPersonRowChangeEventHandler(ByVal sender As Object, ByVal e As FullPersonRowChangeEvent)
-    
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Public Delegate Sub SocialMediaRowChangeEventHandler(ByVal sender As Object, ByVal e As SocialMediaRowChangeEvent)
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
@@ -589,6 +586,9 @@ Partial Public Class CelebrityBirthdayDataSet
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Public Delegate Sub BornOnTheSameDayRowChangeEventHandler(ByVal sender As Object, ByVal e As BornOnTheSameDayRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Delegate Sub FullPersonRowChangeEventHandler(ByVal sender As Object, ByVal e As FullPersonRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -1716,595 +1716,6 @@ Partial Public Class CelebrityBirthdayDataSet
     '''</summary>
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class FullPersonDataTable
-        Inherits Global.System.Data.TypedTableBase(Of FullPersonRow)
-        
-        Private columnlongdesc As Global.System.Data.DataColumn
-        
-        Private columnshortdesc As Global.System.Data.DataColumn
-        
-        Private columndeathyear As Global.System.Data.DataColumn
-        
-        Private columnbirthday As Global.System.Data.DataColumn
-        
-        Private columnbirthmonth As Global.System.Data.DataColumn
-        
-        Private columnbirthyear As Global.System.Data.DataColumn
-        
-        Private columnsurname As Global.System.Data.DataColumn
-        
-        Private columnforename As Global.System.Data.DataColumn
-        
-        Private columnid As Global.System.Data.DataColumn
-        
-        Private columnsortseq As Global.System.Data.DataColumn
-        
-        Private columndateadded As Global.System.Data.DataColumn
-        
-        Private columnbirthplace As Global.System.Data.DataColumn
-        
-        Private columnbirthname As Global.System.Data.DataColumn
-        
-        Private columndeathmonth As Global.System.Data.DataColumn
-        
-        Private columndeathday As Global.System.Data.DataColumn
-        
-        Private columnimgfiletype As Global.System.Data.DataColumn
-        
-        Private columnimgloadyr As Global.System.Data.DataColumn
-        
-        Private columnimgloadmonth As Global.System.Data.DataColumn
-        
-        Private columntwitterHandle As Global.System.Data.DataColumn
-        
-        Private columnnoTweet As Global.System.Data.DataColumn
-        
-        Private columnimgfilename As Global.System.Data.DataColumn
-        
-        Private columnwikiId As Global.System.Data.DataColumn
-        
-        Private columnbotsd As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub New()
-            MyBase.New
-            Me.TableName = "FullPerson"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
-            Me.TableName = table.TableName
-            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-                Me.CaseSensitive = table.CaseSensitive
-            End If
-            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-                Me.Locale = table.Locale
-            End If
-            If (table.Namespace <> table.DataSet.Namespace) Then
-                Me.Namespace = table.Namespace
-            End If
-            Me.Prefix = table.Prefix
-            Me.MinimumCapacity = table.MinimumCapacity
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-            MyBase.New(info, context)
-            Me.InitVars
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property longdescColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnlongdesc
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property shortdescColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnshortdesc
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property deathyearColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columndeathyear
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property birthdayColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnbirthday
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property birthmonthColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnbirthmonth
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property birthyearColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnbirthyear
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property surnameColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnsurname
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property forenameColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnforename
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property idColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnid
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property sortseqColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnsortseq
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property dateaddedColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columndateadded
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property birthplaceColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnbirthplace
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property birthnameColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnbirthname
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property deathmonthColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columndeathmonth
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property deathdayColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columndeathday
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property imgfiletypeColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnimgfiletype
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property imgloadyrColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnimgloadyr
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property imgloadmonthColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnimgloadmonth
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property twitterHandleColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columntwitterHandle
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property noTweetColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnnoTweet
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property imgfilenameColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnimgfilename
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property wikiIdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnwikiId
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property botsdColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnbotsd
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Browsable(false)>  _
-        Public ReadOnly Property Count() As Integer
-            Get
-                Return Me.Rows.Count
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As FullPersonRow
-            Get
-                Return CType(Me.Rows(index),FullPersonRow)
-            End Get
-        End Property
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event FullPersonRowChanging As FullPersonRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event FullPersonRowChanged As FullPersonRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event FullPersonRowDeleting As FullPersonRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event FullPersonRowDeleted As FullPersonRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Sub AddFullPersonRow(ByVal row As FullPersonRow)
-            Me.Rows.Add(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddFullPersonRow( _
-                    ByVal longdesc As String,  _
-                    ByVal shortdesc As String,  _
-                    ByVal deathyear As Integer,  _
-                    ByVal birthday As Integer,  _
-                    ByVal birthmonth As Integer,  _
-                    ByVal birthyear As Integer,  _
-                    ByVal surname As String,  _
-                    ByVal forename As String,  _
-                    ByVal id As Integer,  _
-                    ByVal sortseq As Integer,  _
-                    ByVal dateadded As Date,  _
-                    ByVal birthplace As String,  _
-                    ByVal birthname As String,  _
-                    ByVal deathmonth As Integer,  _
-                    ByVal deathday As Integer,  _
-                    ByVal imgfiletype As String,  _
-                    ByVal imgloadyr As String,  _
-                    ByVal imgloadmonth As String,  _
-                    ByVal twitterHandle As String,  _
-                    ByVal noTweet As Boolean,  _
-                    ByVal imgfilename As String,  _
-                    ByVal wikiId As String,  _
-                    ByVal botsd As Integer) As FullPersonRow
-            Dim rowFullPersonRow As FullPersonRow = CType(Me.NewRow,FullPersonRow)
-            Dim columnValuesArray() As Object = New Object() {longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId, botsd}
-            rowFullPersonRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowFullPersonRow)
-            Return rowFullPersonRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function FindByid(ByVal id As Integer) As FullPersonRow
-            Return CType(Me.Rows.Find(New Object() {id}),FullPersonRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As FullPersonDataTable = CType(MyBase.Clone,FullPersonDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New FullPersonDataTable()
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Sub InitVars()
-            Me.columnlongdesc = MyBase.Columns("longdesc")
-            Me.columnshortdesc = MyBase.Columns("shortdesc")
-            Me.columndeathyear = MyBase.Columns("deathyear")
-            Me.columnbirthday = MyBase.Columns("birthday")
-            Me.columnbirthmonth = MyBase.Columns("birthmonth")
-            Me.columnbirthyear = MyBase.Columns("birthyear")
-            Me.columnsurname = MyBase.Columns("surname")
-            Me.columnforename = MyBase.Columns("forename")
-            Me.columnid = MyBase.Columns("id")
-            Me.columnsortseq = MyBase.Columns("sortseq")
-            Me.columndateadded = MyBase.Columns("dateadded")
-            Me.columnbirthplace = MyBase.Columns("birthplace")
-            Me.columnbirthname = MyBase.Columns("birthname")
-            Me.columndeathmonth = MyBase.Columns("deathmonth")
-            Me.columndeathday = MyBase.Columns("deathday")
-            Me.columnimgfiletype = MyBase.Columns("imgfiletype")
-            Me.columnimgloadyr = MyBase.Columns("imgloadyr")
-            Me.columnimgloadmonth = MyBase.Columns("imgloadmonth")
-            Me.columntwitterHandle = MyBase.Columns("twitterHandle")
-            Me.columnnoTweet = MyBase.Columns("noTweet")
-            Me.columnimgfilename = MyBase.Columns("imgfilename")
-            Me.columnwikiId = MyBase.Columns("wikiId")
-            Me.columnbotsd = MyBase.Columns("botsd")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Private Sub InitClass()
-            Me.columnlongdesc = New Global.System.Data.DataColumn("longdesc", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnlongdesc)
-            Me.columnshortdesc = New Global.System.Data.DataColumn("shortdesc", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnshortdesc)
-            Me.columndeathyear = New Global.System.Data.DataColumn("deathyear", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columndeathyear)
-            Me.columnbirthday = New Global.System.Data.DataColumn("birthday", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnbirthday)
-            Me.columnbirthmonth = New Global.System.Data.DataColumn("birthmonth", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnbirthmonth)
-            Me.columnbirthyear = New Global.System.Data.DataColumn("birthyear", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnbirthyear)
-            Me.columnsurname = New Global.System.Data.DataColumn("surname", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnsurname)
-            Me.columnforename = New Global.System.Data.DataColumn("forename", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnforename)
-            Me.columnid = New Global.System.Data.DataColumn("id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnid)
-            Me.columnsortseq = New Global.System.Data.DataColumn("sortseq", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnsortseq)
-            Me.columndateadded = New Global.System.Data.DataColumn("dateadded", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columndateadded)
-            Me.columnbirthplace = New Global.System.Data.DataColumn("birthplace", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnbirthplace)
-            Me.columnbirthname = New Global.System.Data.DataColumn("birthname", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnbirthname)
-            Me.columndeathmonth = New Global.System.Data.DataColumn("deathmonth", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columndeathmonth)
-            Me.columndeathday = New Global.System.Data.DataColumn("deathday", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columndeathday)
-            Me.columnimgfiletype = New Global.System.Data.DataColumn("imgfiletype", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnimgfiletype)
-            Me.columnimgloadyr = New Global.System.Data.DataColumn("imgloadyr", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnimgloadyr)
-            Me.columnimgloadmonth = New Global.System.Data.DataColumn("imgloadmonth", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnimgloadmonth)
-            Me.columntwitterHandle = New Global.System.Data.DataColumn("twitterHandle", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columntwitterHandle)
-            Me.columnnoTweet = New Global.System.Data.DataColumn("noTweet", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnnoTweet)
-            Me.columnimgfilename = New Global.System.Data.DataColumn("imgfilename", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnimgfilename)
-            Me.columnwikiId = New Global.System.Data.DataColumn("wikiId", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnwikiId)
-            Me.columnbotsd = New Global.System.Data.DataColumn("botsd", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnbotsd)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnid}, true))
-            Me.columnlongdesc.MaxLength = 2147483647
-            Me.columnshortdesc.MaxLength = 250
-            Me.columndeathyear.AllowDBNull = false
-            Me.columnbirthday.AllowDBNull = false
-            Me.columnbirthmonth.AllowDBNull = false
-            Me.columnbirthyear.AllowDBNull = false
-            Me.columnsurname.AllowDBNull = false
-            Me.columnsurname.MaxLength = 50
-            Me.columnforename.MaxLength = 50
-            Me.columnid.AllowDBNull = false
-            Me.columnid.Unique = true
-            Me.columnsortseq.AllowDBNull = false
-            Me.columnbirthplace.MaxLength = 100
-            Me.columnbirthname.MaxLength = 100
-            Me.columnimgfiletype.MaxLength = 5
-            Me.columnimgloadyr.MaxLength = 4
-            Me.columnimgloadmonth.MaxLength = 2
-            Me.columntwitterHandle.MaxLength = 50
-            Me.columnnoTweet.DefaultValue = CType(false,Boolean)
-            Me.columnimgfilename.MaxLength = 100
-            Me.columnwikiId.MaxLength = 100
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function NewFullPersonRow() As FullPersonRow
-            Return CType(Me.NewRow,FullPersonRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New FullPersonRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(FullPersonRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.FullPersonRowChangedEvent) Is Nothing) Then
-                RaiseEvent FullPersonRowChanged(Me, New FullPersonRowChangeEvent(CType(e.Row,FullPersonRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.FullPersonRowChangingEvent) Is Nothing) Then
-                RaiseEvent FullPersonRowChanging(Me, New FullPersonRowChangeEvent(CType(e.Row,FullPersonRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.FullPersonRowDeletedEvent) Is Nothing) Then
-                RaiseEvent FullPersonRowDeleted(Me, New FullPersonRowChangeEvent(CType(e.Row,FullPersonRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.FullPersonRowDeletingEvent) Is Nothing) Then
-                RaiseEvent FullPersonRowDeleting(Me, New FullPersonRowChangeEvent(CType(e.Row,FullPersonRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub RemoveFullPersonRow(ByVal row As FullPersonRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-            Dim ds As CelebrityBirthdayDataSet = New CelebrityBirthdayDataSet()
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "FullPersonDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the strongly named DataTable class.
-    '''</summary>
-    <Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class SocialMediaDataTable
         Inherits Global.System.Data.TypedTableBase(Of SocialMediaRow)
         
@@ -2317,6 +1728,8 @@ Partial Public Class CelebrityBirthdayDataSet
         Private columnwikiId As Global.System.Data.DataColumn
         
         Private columnbotsd As Global.System.Data.DataColumn
+        
+        Private columnisTwin As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
@@ -2394,6 +1807,14 @@ Partial Public Class CelebrityBirthdayDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property isTwinColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnisTwin
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2430,9 +1851,9 @@ Partial Public Class CelebrityBirthdayDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddSocialMediaRow(ByVal twitterHandle As String, ByVal personId As Integer, ByVal noTweet As Byte, ByVal wikiId As String, ByVal botsd As Integer) As SocialMediaRow
+        Public Overloads Function AddSocialMediaRow(ByVal twitterHandle As String, ByVal personId As Integer, ByVal noTweet As Byte, ByVal wikiId As String, ByVal botsd As Integer, ByVal isTwin As Byte) As SocialMediaRow
             Dim rowSocialMediaRow As SocialMediaRow = CType(Me.NewRow,SocialMediaRow)
-            Dim columnValuesArray() As Object = New Object() {twitterHandle, personId, noTweet, wikiId, botsd}
+            Dim columnValuesArray() As Object = New Object() {twitterHandle, personId, noTweet, wikiId, botsd, isTwin}
             rowSocialMediaRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSocialMediaRow)
             Return rowSocialMediaRow
@@ -2466,6 +1887,7 @@ Partial Public Class CelebrityBirthdayDataSet
             Me.columnnoTweet = MyBase.Columns("noTweet")
             Me.columnwikiId = MyBase.Columns("wikiId")
             Me.columnbotsd = MyBase.Columns("botsd")
+            Me.columnisTwin = MyBase.Columns("isTwin")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2481,6 +1903,8 @@ Partial Public Class CelebrityBirthdayDataSet
             MyBase.Columns.Add(Me.columnwikiId)
             Me.columnbotsd = New Global.System.Data.DataColumn("botsd", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnbotsd)
+            Me.columnisTwin = New Global.System.Data.DataColumn("isTwin", GetType(Byte), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnisTwin)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnpersonId}, true))
             Me.columntwitterHandle.MaxLength = 50
             Me.columnpersonId.AllowDBNull = false
@@ -3992,6 +3416,8 @@ Partial Public Class CelebrityBirthdayDataSet
         
         Private columndeathday As Global.System.Data.DataColumn
         
+        Private columnisTwin As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -4236,6 +3662,14 @@ Partial Public Class CelebrityBirthdayDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property isTwinColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnisTwin
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -4298,9 +3732,10 @@ Partial Public Class CelebrityBirthdayDataSet
                     ByVal birthplace As String,  _
                     ByVal birthname As String,  _
                     ByVal deathmonth As Integer,  _
-                    ByVal deathday As Integer) As BornOnTheSameDayRow
+                    ByVal deathday As Integer,  _
+                    ByVal isTwin As Boolean) As BornOnTheSameDayRow
             Dim rowBornOnTheSameDayRow As BornOnTheSameDayRow = CType(Me.NewRow,BornOnTheSameDayRow)
-            Dim columnValuesArray() As Object = New Object() {btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday}
+            Dim columnValuesArray() As Object = New Object() {btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, isTwin}
             rowBornOnTheSameDayRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowBornOnTheSameDayRow)
             Return rowBornOnTheSameDayRow
@@ -4349,6 +3784,7 @@ Partial Public Class CelebrityBirthdayDataSet
             Me.columnbirthname = MyBase.Columns("birthname")
             Me.columndeathmonth = MyBase.Columns("deathmonth")
             Me.columndeathday = MyBase.Columns("deathday")
+            Me.columnisTwin = MyBase.Columns("isTwin")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4406,6 +3842,8 @@ Partial Public Class CelebrityBirthdayDataSet
             MyBase.Columns.Add(Me.columndeathmonth)
             Me.columndeathday = New Global.System.Data.DataColumn("deathday", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columndeathday)
+            Me.columnisTwin = New Global.System.Data.DataColumn("isTwin", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnisTwin)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnbtsdId, Me.columnpersonId, Me.columnid}, false))
             Me.columnbtsdId.AllowDBNull = false
             Me.columnbtsdDay.AllowDBNull = false
@@ -4506,6 +3944,608 @@ Partial Public Class CelebrityBirthdayDataSet
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
             attribute2.Name = "tableTypeName"
             attribute2.FixedValue = "BornOnTheSameDayDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class FullPersonDataTable
+        Inherits Global.System.Data.TypedTableBase(Of FullPersonRow)
+        
+        Private columnlongdesc As Global.System.Data.DataColumn
+        
+        Private columnshortdesc As Global.System.Data.DataColumn
+        
+        Private columndeathyear As Global.System.Data.DataColumn
+        
+        Private columnbirthday As Global.System.Data.DataColumn
+        
+        Private columnbirthmonth As Global.System.Data.DataColumn
+        
+        Private columnbirthyear As Global.System.Data.DataColumn
+        
+        Private columnsurname As Global.System.Data.DataColumn
+        
+        Private columnforename As Global.System.Data.DataColumn
+        
+        Private columnid As Global.System.Data.DataColumn
+        
+        Private columnsortseq As Global.System.Data.DataColumn
+        
+        Private columndateadded As Global.System.Data.DataColumn
+        
+        Private columnbirthplace As Global.System.Data.DataColumn
+        
+        Private columnbirthname As Global.System.Data.DataColumn
+        
+        Private columndeathmonth As Global.System.Data.DataColumn
+        
+        Private columndeathday As Global.System.Data.DataColumn
+        
+        Private columnimgfiletype As Global.System.Data.DataColumn
+        
+        Private columnimgloadyr As Global.System.Data.DataColumn
+        
+        Private columnimgloadmonth As Global.System.Data.DataColumn
+        
+        Private columntwitterHandle As Global.System.Data.DataColumn
+        
+        Private columnnoTweet As Global.System.Data.DataColumn
+        
+        Private columnimgfilename As Global.System.Data.DataColumn
+        
+        Private columnwikiId As Global.System.Data.DataColumn
+        
+        Private columnbotsd As Global.System.Data.DataColumn
+        
+        Private columnisTwin As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "FullPerson"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property longdescColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnlongdesc
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property shortdescColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnshortdesc
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property deathyearColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndeathyear
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property birthdayColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnbirthday
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property birthmonthColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnbirthmonth
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property birthyearColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnbirthyear
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property surnameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnsurname
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property forenameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnforename
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnid
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property sortseqColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnsortseq
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property dateaddedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndateadded
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property birthplaceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnbirthplace
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property birthnameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnbirthname
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property deathmonthColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndeathmonth
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property deathdayColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndeathday
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property imgfiletypeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnimgfiletype
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property imgloadyrColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnimgloadyr
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property imgloadmonthColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnimgloadmonth
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property twitterHandleColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columntwitterHandle
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property noTweetColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnnoTweet
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property imgfilenameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnimgfilename
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property wikiIdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnwikiId
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property botsdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnbotsd
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property isTwinColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnisTwin
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As FullPersonRow
+            Get
+                Return CType(Me.Rows(index),FullPersonRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event FullPersonRowChanging As FullPersonRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event FullPersonRowChanged As FullPersonRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event FullPersonRowDeleting As FullPersonRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event FullPersonRowDeleted As FullPersonRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Sub AddFullPersonRow(ByVal row As FullPersonRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Function AddFullPersonRow( _
+                    ByVal longdesc As String,  _
+                    ByVal shortdesc As String,  _
+                    ByVal deathyear As Integer,  _
+                    ByVal birthday As Integer,  _
+                    ByVal birthmonth As Integer,  _
+                    ByVal birthyear As Integer,  _
+                    ByVal surname As String,  _
+                    ByVal forename As String,  _
+                    ByVal id As Integer,  _
+                    ByVal sortseq As Integer,  _
+                    ByVal dateadded As Date,  _
+                    ByVal birthplace As String,  _
+                    ByVal birthname As String,  _
+                    ByVal deathmonth As Integer,  _
+                    ByVal deathday As Integer,  _
+                    ByVal imgfiletype As String,  _
+                    ByVal imgloadyr As String,  _
+                    ByVal imgloadmonth As String,  _
+                    ByVal twitterHandle As String,  _
+                    ByVal noTweet As Boolean,  _
+                    ByVal imgfilename As String,  _
+                    ByVal wikiId As String,  _
+                    ByVal botsd As Integer,  _
+                    ByVal isTwin As Boolean) As FullPersonRow
+            Dim rowFullPersonRow As FullPersonRow = CType(Me.NewRow,FullPersonRow)
+            Dim columnValuesArray() As Object = New Object() {longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId, botsd, isTwin}
+            rowFullPersonRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowFullPersonRow)
+            Return rowFullPersonRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function FindByid(ByVal id As Integer) As FullPersonRow
+            Return CType(Me.Rows.Find(New Object() {id}),FullPersonRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As FullPersonDataTable = CType(MyBase.Clone,FullPersonDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New FullPersonDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnlongdesc = MyBase.Columns("longdesc")
+            Me.columnshortdesc = MyBase.Columns("shortdesc")
+            Me.columndeathyear = MyBase.Columns("deathyear")
+            Me.columnbirthday = MyBase.Columns("birthday")
+            Me.columnbirthmonth = MyBase.Columns("birthmonth")
+            Me.columnbirthyear = MyBase.Columns("birthyear")
+            Me.columnsurname = MyBase.Columns("surname")
+            Me.columnforename = MyBase.Columns("forename")
+            Me.columnid = MyBase.Columns("id")
+            Me.columnsortseq = MyBase.Columns("sortseq")
+            Me.columndateadded = MyBase.Columns("dateadded")
+            Me.columnbirthplace = MyBase.Columns("birthplace")
+            Me.columnbirthname = MyBase.Columns("birthname")
+            Me.columndeathmonth = MyBase.Columns("deathmonth")
+            Me.columndeathday = MyBase.Columns("deathday")
+            Me.columnimgfiletype = MyBase.Columns("imgfiletype")
+            Me.columnimgloadyr = MyBase.Columns("imgloadyr")
+            Me.columnimgloadmonth = MyBase.Columns("imgloadmonth")
+            Me.columntwitterHandle = MyBase.Columns("twitterHandle")
+            Me.columnnoTweet = MyBase.Columns("noTweet")
+            Me.columnimgfilename = MyBase.Columns("imgfilename")
+            Me.columnwikiId = MyBase.Columns("wikiId")
+            Me.columnbotsd = MyBase.Columns("botsd")
+            Me.columnisTwin = MyBase.Columns("isTwin")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnlongdesc = New Global.System.Data.DataColumn("longdesc", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnlongdesc)
+            Me.columnshortdesc = New Global.System.Data.DataColumn("shortdesc", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnshortdesc)
+            Me.columndeathyear = New Global.System.Data.DataColumn("deathyear", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndeathyear)
+            Me.columnbirthday = New Global.System.Data.DataColumn("birthday", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnbirthday)
+            Me.columnbirthmonth = New Global.System.Data.DataColumn("birthmonth", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnbirthmonth)
+            Me.columnbirthyear = New Global.System.Data.DataColumn("birthyear", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnbirthyear)
+            Me.columnsurname = New Global.System.Data.DataColumn("surname", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnsurname)
+            Me.columnforename = New Global.System.Data.DataColumn("forename", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnforename)
+            Me.columnid = New Global.System.Data.DataColumn("id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnid)
+            Me.columnsortseq = New Global.System.Data.DataColumn("sortseq", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnsortseq)
+            Me.columndateadded = New Global.System.Data.DataColumn("dateadded", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndateadded)
+            Me.columnbirthplace = New Global.System.Data.DataColumn("birthplace", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnbirthplace)
+            Me.columnbirthname = New Global.System.Data.DataColumn("birthname", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnbirthname)
+            Me.columndeathmonth = New Global.System.Data.DataColumn("deathmonth", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndeathmonth)
+            Me.columndeathday = New Global.System.Data.DataColumn("deathday", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndeathday)
+            Me.columnimgfiletype = New Global.System.Data.DataColumn("imgfiletype", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnimgfiletype)
+            Me.columnimgloadyr = New Global.System.Data.DataColumn("imgloadyr", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnimgloadyr)
+            Me.columnimgloadmonth = New Global.System.Data.DataColumn("imgloadmonth", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnimgloadmonth)
+            Me.columntwitterHandle = New Global.System.Data.DataColumn("twitterHandle", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columntwitterHandle)
+            Me.columnnoTweet = New Global.System.Data.DataColumn("noTweet", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnnoTweet)
+            Me.columnimgfilename = New Global.System.Data.DataColumn("imgfilename", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnimgfilename)
+            Me.columnwikiId = New Global.System.Data.DataColumn("wikiId", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnwikiId)
+            Me.columnbotsd = New Global.System.Data.DataColumn("botsd", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnbotsd)
+            Me.columnisTwin = New Global.System.Data.DataColumn("isTwin", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnisTwin)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnid}, true))
+            Me.columnlongdesc.MaxLength = 2147483647
+            Me.columnshortdesc.MaxLength = 250
+            Me.columndeathyear.AllowDBNull = false
+            Me.columnbirthday.AllowDBNull = false
+            Me.columnbirthmonth.AllowDBNull = false
+            Me.columnbirthyear.AllowDBNull = false
+            Me.columnsurname.AllowDBNull = false
+            Me.columnsurname.MaxLength = 50
+            Me.columnforename.MaxLength = 50
+            Me.columnid.AllowDBNull = false
+            Me.columnid.Unique = true
+            Me.columnsortseq.AllowDBNull = false
+            Me.columnbirthplace.MaxLength = 100
+            Me.columnbirthname.MaxLength = 100
+            Me.columnimgfiletype.MaxLength = 5
+            Me.columnimgloadyr.MaxLength = 4
+            Me.columnimgloadmonth.MaxLength = 2
+            Me.columntwitterHandle.MaxLength = 50
+            Me.columnimgfilename.MaxLength = 100
+            Me.columnwikiId.MaxLength = 100
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function NewFullPersonRow() As FullPersonRow
+            Return CType(Me.NewRow,FullPersonRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New FullPersonRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(FullPersonRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.FullPersonRowChangedEvent) Is Nothing) Then
+                RaiseEvent FullPersonRowChanged(Me, New FullPersonRowChangeEvent(CType(e.Row,FullPersonRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.FullPersonRowChangingEvent) Is Nothing) Then
+                RaiseEvent FullPersonRowChanging(Me, New FullPersonRowChangeEvent(CType(e.Row,FullPersonRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.FullPersonRowDeletedEvent) Is Nothing) Then
+                RaiseEvent FullPersonRowDeleted(Me, New FullPersonRowChangeEvent(CType(e.Row,FullPersonRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.FullPersonRowDeletingEvent) Is Nothing) Then
+                RaiseEvent FullPersonRowDeleting(Me, New FullPersonRowChangeEvent(CType(e.Row,FullPersonRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub RemoveFullPersonRow(ByVal row As FullPersonRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As CelebrityBirthdayDataSet = New CelebrityBirthdayDataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "FullPersonDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -5137,531 +5177,6 @@ Partial Public Class CelebrityBirthdayDataSet
     '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
-    Partial Public Class FullPersonRow
-        Inherits Global.System.Data.DataRow
-        
-        Private tableFullPerson As FullPersonDataTable
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-            MyBase.New(rb)
-            Me.tableFullPerson = CType(Me.Table,FullPersonDataTable)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property longdesc() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableFullPerson.longdescColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'longdesc' in table 'FullPerson' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableFullPerson.longdescColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property shortdesc() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableFullPerson.shortdescColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'shortdesc' in table 'FullPerson' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableFullPerson.shortdescColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property deathyear() As Integer
-            Get
-                Return CType(Me(Me.tableFullPerson.deathyearColumn),Integer)
-            End Get
-            Set
-                Me(Me.tableFullPerson.deathyearColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property birthday() As Integer
-            Get
-                Return CType(Me(Me.tableFullPerson.birthdayColumn),Integer)
-            End Get
-            Set
-                Me(Me.tableFullPerson.birthdayColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property birthmonth() As Integer
-            Get
-                Return CType(Me(Me.tableFullPerson.birthmonthColumn),Integer)
-            End Get
-            Set
-                Me(Me.tableFullPerson.birthmonthColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property birthyear() As Integer
-            Get
-                Return CType(Me(Me.tableFullPerson.birthyearColumn),Integer)
-            End Get
-            Set
-                Me(Me.tableFullPerson.birthyearColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property surname() As String
-            Get
-                Return CType(Me(Me.tableFullPerson.surnameColumn),String)
-            End Get
-            Set
-                Me(Me.tableFullPerson.surnameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property forename() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableFullPerson.forenameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'forename' in table 'FullPerson' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableFullPerson.forenameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property id() As Integer
-            Get
-                Return CType(Me(Me.tableFullPerson.idColumn),Integer)
-            End Get
-            Set
-                Me(Me.tableFullPerson.idColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property sortseq() As Integer
-            Get
-                Return CType(Me(Me.tableFullPerson.sortseqColumn),Integer)
-            End Get
-            Set
-                Me(Me.tableFullPerson.sortseqColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property dateadded() As Date
-            Get
-                Try 
-                    Return CType(Me(Me.tableFullPerson.dateaddedColumn),Date)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'dateadded' in table 'FullPerson' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableFullPerson.dateaddedColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property birthplace() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableFullPerson.birthplaceColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'birthplace' in table 'FullPerson' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableFullPerson.birthplaceColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property birthname() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableFullPerson.birthnameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'birthname' in table 'FullPerson' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableFullPerson.birthnameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property deathmonth() As Integer
-            Get
-                Try 
-                    Return CType(Me(Me.tableFullPerson.deathmonthColumn),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'deathmonth' in table 'FullPerson' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableFullPerson.deathmonthColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property deathday() As Integer
-            Get
-                Try 
-                    Return CType(Me(Me.tableFullPerson.deathdayColumn),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'deathday' in table 'FullPerson' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableFullPerson.deathdayColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property imgfiletype() As String
-            Get
-                If Me.IsimgfiletypeNull Then
-                    Return String.Empty
-                Else
-                    Return CType(Me(Me.tableFullPerson.imgfiletypeColumn),String)
-                End If
-            End Get
-            Set
-                Me(Me.tableFullPerson.imgfiletypeColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property imgloadyr() As String
-            Get
-                If Me.IsimgloadyrNull Then
-                    Return String.Empty
-                Else
-                    Return CType(Me(Me.tableFullPerson.imgloadyrColumn),String)
-                End If
-            End Get
-            Set
-                Me(Me.tableFullPerson.imgloadyrColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property imgloadmonth() As String
-            Get
-                If Me.IsimgloadmonthNull Then
-                    Return String.Empty
-                Else
-                    Return CType(Me(Me.tableFullPerson.imgloadmonthColumn),String)
-                End If
-            End Get
-            Set
-                Me(Me.tableFullPerson.imgloadmonthColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property twitterHandle() As String
-            Get
-                If Me.IstwitterHandleNull Then
-                    Return String.Empty
-                Else
-                    Return CType(Me(Me.tableFullPerson.twitterHandleColumn),String)
-                End If
-            End Get
-            Set
-                Me(Me.tableFullPerson.twitterHandleColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property noTweet() As Boolean
-            Get
-                If Me.IsnoTweetNull Then
-                    Return false
-                Else
-                    Return CType(Me(Me.tableFullPerson.noTweetColumn),Boolean)
-                End If
-            End Get
-            Set
-                Me(Me.tableFullPerson.noTweetColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property imgfilename() As String
-            Get
-                If Me.IsimgfilenameNull Then
-                    Return String.Empty
-                Else
-                    Return CType(Me(Me.tableFullPerson.imgfilenameColumn),String)
-                End If
-            End Get
-            Set
-                Me(Me.tableFullPerson.imgfilenameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property wikiId() As String
-            Get
-                If Me.IswikiIdNull Then
-                    Return String.Empty
-                Else
-                    Return CType(Me(Me.tableFullPerson.wikiIdColumn),String)
-                End If
-            End Get
-            Set
-                Me(Me.tableFullPerson.wikiIdColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property botsd() As Integer
-            Get
-                If Me.IsbotsdNull Then
-                    Return 0
-                Else
-                    Return CType(Me(Me.tableFullPerson.botsdColumn),Integer)
-                End If
-            End Get
-            Set
-                Me(Me.tableFullPerson.botsdColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IslongdescNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.longdescColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetlongdescNull()
-            Me(Me.tableFullPerson.longdescColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsshortdescNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.shortdescColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetshortdescNull()
-            Me(Me.tableFullPerson.shortdescColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsforenameNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.forenameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetforenameNull()
-            Me(Me.tableFullPerson.forenameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsdateaddedNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.dateaddedColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetdateaddedNull()
-            Me(Me.tableFullPerson.dateaddedColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsbirthplaceNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.birthplaceColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetbirthplaceNull()
-            Me(Me.tableFullPerson.birthplaceColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsbirthnameNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.birthnameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetbirthnameNull()
-            Me(Me.tableFullPerson.birthnameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsdeathmonthNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.deathmonthColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetdeathmonthNull()
-            Me(Me.tableFullPerson.deathmonthColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsdeathdayNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.deathdayColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetdeathdayNull()
-            Me(Me.tableFullPerson.deathdayColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsimgfiletypeNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.imgfiletypeColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetimgfiletypeNull()
-            Me(Me.tableFullPerson.imgfiletypeColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsimgloadyrNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.imgloadyrColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetimgloadyrNull()
-            Me(Me.tableFullPerson.imgloadyrColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsimgloadmonthNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.imgloadmonthColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetimgloadmonthNull()
-            Me(Me.tableFullPerson.imgloadmonthColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IstwitterHandleNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.twitterHandleColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SettwitterHandleNull()
-            Me(Me.tableFullPerson.twitterHandleColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsnoTweetNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.noTweetColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetnoTweetNull()
-            Me(Me.tableFullPerson.noTweetColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsimgfilenameNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.imgfilenameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetimgfilenameNull()
-            Me(Me.tableFullPerson.imgfilenameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IswikiIdNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.wikiIdColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetwikiIdNull()
-            Me(Me.tableFullPerson.wikiIdColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsbotsdNull() As Boolean
-            Return Me.IsNull(Me.tableFullPerson.botsdColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetbotsdNull()
-            Me(Me.tableFullPerson.botsdColumn) = Global.System.Convert.DBNull
-        End Sub
-    End Class
-    
-    '''<summary>
-    '''Represents strongly named DataRow class.
-    '''</summary>
     Partial Public Class SocialMediaRow
         Inherits Global.System.Data.DataRow
         
@@ -5747,6 +5262,21 @@ Partial Public Class CelebrityBirthdayDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property isTwin() As Byte
+            Get
+                Try 
+                    Return CType(Me(Me.tableSocialMedia.isTwinColumn),Byte)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'isTwin' in table 'SocialMedia' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSocialMedia.isTwinColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IstwitterHandleNull() As Boolean
             Return Me.IsNull(Me.tableSocialMedia.twitterHandleColumn)
         End Function
@@ -5791,6 +5321,18 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetbotsdNull()
             Me(Me.tableSocialMedia.botsdColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsisTwinNull() As Boolean
+            Return Me.IsNull(Me.tableSocialMedia.isTwinColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetisTwinNull()
+            Me(Me.tableSocialMedia.isTwinColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -6726,6 +6268,21 @@ Partial Public Class CelebrityBirthdayDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property isTwin() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableBornOnTheSameDay.isTwinColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'isTwin' in table 'BornOnTheSameDay' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableBornOnTheSameDay.isTwinColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsbtsdPostNoNull() As Boolean
             Return Me.IsNull(Me.tableBornOnTheSameDay.btsdPostNoColumn)
         End Function
@@ -6987,6 +6544,570 @@ Partial Public Class CelebrityBirthdayDataSet
         Public Sub SetdeathdayNull()
             Me(Me.tableBornOnTheSameDay.deathdayColumn) = Global.System.Convert.DBNull
         End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsisTwinNull() As Boolean
+            Return Me.IsNull(Me.tableBornOnTheSameDay.isTwinColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetisTwinNull()
+            Me(Me.tableBornOnTheSameDay.isTwinColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class FullPersonRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableFullPerson As FullPersonDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableFullPerson = CType(Me.Table,FullPersonDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property longdesc() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.longdescColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'longdesc' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.longdescColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property shortdesc() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.shortdescColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'shortdesc' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.shortdescColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property deathyear() As Integer
+            Get
+                Return CType(Me(Me.tableFullPerson.deathyearColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableFullPerson.deathyearColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property birthday() As Integer
+            Get
+                Return CType(Me(Me.tableFullPerson.birthdayColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableFullPerson.birthdayColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property birthmonth() As Integer
+            Get
+                Return CType(Me(Me.tableFullPerson.birthmonthColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableFullPerson.birthmonthColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property birthyear() As Integer
+            Get
+                Return CType(Me(Me.tableFullPerson.birthyearColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableFullPerson.birthyearColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property surname() As String
+            Get
+                Return CType(Me(Me.tableFullPerson.surnameColumn),String)
+            End Get
+            Set
+                Me(Me.tableFullPerson.surnameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property forename() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.forenameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'forename' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.forenameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property id() As Integer
+            Get
+                Return CType(Me(Me.tableFullPerson.idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableFullPerson.idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property sortseq() As Integer
+            Get
+                Return CType(Me(Me.tableFullPerson.sortseqColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableFullPerson.sortseqColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property dateadded() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.dateaddedColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'dateadded' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.dateaddedColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property birthplace() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.birthplaceColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'birthplace' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.birthplaceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property birthname() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.birthnameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'birthname' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.birthnameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property deathmonth() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.deathmonthColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'deathmonth' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.deathmonthColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property deathday() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.deathdayColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'deathday' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.deathdayColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property imgfiletype() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.imgfiletypeColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'imgfiletype' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.imgfiletypeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property imgloadyr() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.imgloadyrColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'imgloadyr' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.imgloadyrColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property imgloadmonth() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.imgloadmonthColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'imgloadmonth' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.imgloadmonthColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property twitterHandle() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.twitterHandleColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'twitterHandle' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.twitterHandleColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property noTweet() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.noTweetColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'noTweet' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.noTweetColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property imgfilename() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.imgfilenameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'imgfilename' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.imgfilenameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property wikiId() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.wikiIdColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'wikiId' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.wikiIdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property botsd() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.botsdColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'botsd' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.botsdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property isTwin() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableFullPerson.isTwinColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'isTwin' in table 'FullPerson' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableFullPerson.isTwinColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IslongdescNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.longdescColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetlongdescNull()
+            Me(Me.tableFullPerson.longdescColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsshortdescNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.shortdescColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetshortdescNull()
+            Me(Me.tableFullPerson.shortdescColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsforenameNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.forenameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetforenameNull()
+            Me(Me.tableFullPerson.forenameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsdateaddedNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.dateaddedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetdateaddedNull()
+            Me(Me.tableFullPerson.dateaddedColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsbirthplaceNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.birthplaceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetbirthplaceNull()
+            Me(Me.tableFullPerson.birthplaceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsbirthnameNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.birthnameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetbirthnameNull()
+            Me(Me.tableFullPerson.birthnameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsdeathmonthNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.deathmonthColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetdeathmonthNull()
+            Me(Me.tableFullPerson.deathmonthColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsdeathdayNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.deathdayColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetdeathdayNull()
+            Me(Me.tableFullPerson.deathdayColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsimgfiletypeNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.imgfiletypeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetimgfiletypeNull()
+            Me(Me.tableFullPerson.imgfiletypeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsimgloadyrNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.imgloadyrColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetimgloadyrNull()
+            Me(Me.tableFullPerson.imgloadyrColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsimgloadmonthNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.imgloadmonthColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetimgloadmonthNull()
+            Me(Me.tableFullPerson.imgloadmonthColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IstwitterHandleNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.twitterHandleColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SettwitterHandleNull()
+            Me(Me.tableFullPerson.twitterHandleColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsnoTweetNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.noTweetColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetnoTweetNull()
+            Me(Me.tableFullPerson.noTweetColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsimgfilenameNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.imgfilenameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetimgfilenameNull()
+            Me(Me.tableFullPerson.imgfilenameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IswikiIdNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.wikiIdColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetwikiIdNull()
+            Me(Me.tableFullPerson.wikiIdColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsbotsdNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.botsdColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetbotsdNull()
+            Me(Me.tableFullPerson.botsdColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsisTwinNull() As Boolean
+            Return Me.IsNull(Me.tableFullPerson.isTwinColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetisTwinNull()
+            Me(Me.tableFullPerson.isTwinColumn) = Global.System.Convert.DBNull
+        End Sub
     End Class
     
     '''<summary>
@@ -7083,42 +7204,6 @@ Partial Public Class CelebrityBirthdayDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public ReadOnly Property Row() As ImageRow
-            Get
-                Return Me.eventRow
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
-            Get
-                Return Me.eventAction
-            End Get
-        End Property
-    End Class
-    
-    '''<summary>
-    '''Row event argument class
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-    Public Class FullPersonRowChangeEvent
-        Inherits Global.System.EventArgs
-        
-        Private eventRow As FullPersonRow
-        
-        Private eventAction As Global.System.Data.DataRowAction
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub New(ByVal row As FullPersonRow, ByVal action As Global.System.Data.DataRowAction)
-            MyBase.New
-            Me.eventRow = row
-            Me.eventAction = action
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property Row() As FullPersonRow
             Get
                 Return Me.eventRow
             End Get
@@ -7335,6 +7420,42 @@ Partial Public Class CelebrityBirthdayDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public ReadOnly Property Row() As BornOnTheSameDayRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Class FullPersonRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As FullPersonRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New(ByVal row As FullPersonRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Row() As FullPersonRow
             Get
                 Return Me.eventRow
             End Get
@@ -9874,344 +9995,6 @@ Namespace CelebrityBirthdayDataSetTableAdapters
      Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
      Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-    Partial Public Class FullPersonTableAdapter
-        Inherits Global.System.ComponentModel.Component
-        
-        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
-        
-        Private _connection As Global.System.Data.SqlClient.SqlConnection
-        
-        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
-        
-        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
-        
-        Private _clearBeforeFill As Boolean
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub New()
-            MyBase.New
-            Me.ClearBeforeFill = true
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
-            Get
-                If (Me._adapter Is Nothing) Then
-                    Me.InitAdapter
-                End If
-                Return Me._adapter
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
-            Get
-                If (Me._connection Is Nothing) Then
-                    Me.InitConnection
-                End If
-                Return Me._connection
-            End Get
-            Set
-                Me._connection = value
-                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
-                    Me.Adapter.InsertCommand.Connection = value
-                End If
-                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
-                    Me.Adapter.DeleteCommand.Connection = value
-                End If
-                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
-                    Me.Adapter.UpdateCommand.Connection = value
-                End If
-                Dim i As Integer = 0
-                Do While (i < Me.CommandCollection.Length)
-                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
-                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
-                    End If
-                    i = (i + 1)
-                Loop
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
-            Get
-                Return Me._transaction
-            End Get
-            Set
-                Me._transaction = value
-                Dim i As Integer = 0
-                Do While (i < Me.CommandCollection.Length)
-                    Me.CommandCollection(i).Transaction = Me._transaction
-                    i = (i + 1)
-                Loop
-                If ((Not (Me.Adapter) Is Nothing)  _
-                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
-                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
-                End If
-                If ((Not (Me.Adapter) Is Nothing)  _
-                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
-                    Me.Adapter.InsertCommand.Transaction = Me._transaction
-                End If
-                If ((Not (Me.Adapter) Is Nothing)  _
-                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
-                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
-                End If
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
-            Get
-                If (Me._commandCollection Is Nothing) Then
-                    Me.InitCommandCollection
-                End If
-                Return Me._commandCollection
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property ClearBeforeFill() As Boolean
-            Get
-                Return Me._clearBeforeFill
-            End Get
-            Set
-                Me._clearBeforeFill = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Private Sub InitAdapter()
-            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
-            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
-            tableMapping.SourceTable = "Table"
-            tableMapping.DataSetTable = "FullPerson"
-            tableMapping.ColumnMappings.Add("longdesc", "longdesc")
-            tableMapping.ColumnMappings.Add("shortdesc", "shortdesc")
-            tableMapping.ColumnMappings.Add("deathyear", "deathyear")
-            tableMapping.ColumnMappings.Add("birthday", "birthday")
-            tableMapping.ColumnMappings.Add("birthmonth", "birthmonth")
-            tableMapping.ColumnMappings.Add("birthyear", "birthyear")
-            tableMapping.ColumnMappings.Add("surname", "surname")
-            tableMapping.ColumnMappings.Add("forename", "forename")
-            tableMapping.ColumnMappings.Add("id", "id")
-            tableMapping.ColumnMappings.Add("sortseq", "sortseq")
-            tableMapping.ColumnMappings.Add("dateadded", "dateadded")
-            tableMapping.ColumnMappings.Add("birthplace", "birthplace")
-            tableMapping.ColumnMappings.Add("birthname", "birthname")
-            tableMapping.ColumnMappings.Add("deathmonth", "deathmonth")
-            tableMapping.ColumnMappings.Add("deathday", "deathday")
-            tableMapping.ColumnMappings.Add("imgfiletype", "imgfiletype")
-            tableMapping.ColumnMappings.Add("imgloadyr", "imgloadyr")
-            tableMapping.ColumnMappings.Add("imgloadmonth", "imgloadmonth")
-            tableMapping.ColumnMappings.Add("twitterHandle", "twitterHandle")
-            tableMapping.ColumnMappings.Add("noTweet", "noTweet")
-            tableMapping.ColumnMappings.Add("imgfilename", "imgfilename")
-            tableMapping.ColumnMappings.Add("wikiId", "wikiId")
-            tableMapping.ColumnMappings.Add("botsd", "botsd")
-            Me._adapter.TableMappings.Add(tableMapping)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Private Sub InitConnection()
-            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.CelebrityBirthday.My.MySettings.Default.CelebrityBirthdayConnectionString
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(6) {}
-            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
-                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
-                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
-                " wikiId FROM FullPerson"
-            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(1).Connection = Me.Connection
-            Me._commandCollection(1).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
-                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
-                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
-                " wikiId FROM FullPerson WHERE (birthday = @birthday) AND (birthmonth = @birthmon"& _ 
-                "th) AND (deathyear <> 0) ORDER BY birthyear"
-            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@birthday", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@birthmonth", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
-                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
-                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
-                " wikiId FROM FullPerson WHERE (birthmonth = @month) AND (birthday = @day) AND (d"& _ 
-                "eathyear = 0) ORDER BY birthyear"
-            Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT        longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, su"& _ 
-                "rname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deat"& _ 
-                "hday, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         imgfiletype, imgloadyr, imgloadmonth, twitterHa"& _ 
-                "ndle, noTweet, imgfilename, botsd, wikiId"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            FullPerson"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE    "& _ 
-                "    (botsd > 0)"
-            Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT        longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, su"& _ 
-                "rname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deat"& _ 
-                "hday, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         imgfiletype, imgloadyr, imgloadmonth, twitterHa"& _ 
-                "ndle, noTweet, imgfilename, botsd, wikiId"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            FullPerson"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE    "& _ 
-                "    (birthday = @day) AND (birthmonth = @month)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY birthyear, sortseq"
-            Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
-                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
-                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
-                " wikiId FROM FullPerson WHERE (id = @personId)"
-            Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@personId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(6).Connection = Me.Connection
-            Me._commandCollection(6).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
-                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
-                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
-                " wikiId FROM FullPerson WHERE (birthmonth = @month)"
-            Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
-            End If
-            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            Return returnValue
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As CelebrityBirthdayDataSet.FullPersonDataTable
-            Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            Dim dataTable As CelebrityBirthdayDataSet.FullPersonDataTable = New CelebrityBirthdayDataSet.FullPersonDataTable()
-            Me.Adapter.Fill(dataTable)
-            Return dataTable
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
-        Public Overloads Overridable Function FillByAnniversary(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal birthday As Integer, ByVal birthmonth As Integer) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(1)
-            Me.Adapter.SelectCommand.Parameters(0).Value = CType(birthday,Integer)
-            Me.Adapter.SelectCommand.Parameters(1).Value = CType(birthmonth,Integer)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
-            End If
-            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            Return returnValue
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
-        Public Overloads Overridable Function FillByBirthday(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal month As Integer, ByVal day As Integer) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(2)
-            Me.Adapter.SelectCommand.Parameters(0).Value = CType(month,Integer)
-            Me.Adapter.SelectCommand.Parameters(1).Value = CType(day,Integer)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
-            End If
-            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            Return returnValue
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
-        Public Overloads Overridable Function FillByBotsd(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(3)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
-            End If
-            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            Return returnValue
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
-        Public Overloads Overridable Function FillByDayAndMonth(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal day As Integer, ByVal month As Integer) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(4)
-            Me.Adapter.SelectCommand.Parameters(0).Value = CType(day,Integer)
-            Me.Adapter.SelectCommand.Parameters(1).Value = CType(month,Integer)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
-            End If
-            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            Return returnValue
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
-        Public Overloads Overridable Function FillById(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal personId As Integer) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(5)
-            Me.Adapter.SelectCommand.Parameters(0).Value = CType(personId,Integer)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
-            End If
-            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            Return returnValue
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
-        Public Overloads Overridable Function FillByMonth(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal month As Integer) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(6)
-            Me.Adapter.SelectCommand.Parameters(0).Value = CType(month,Integer)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
-            End If
-            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            Return returnValue
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the connection and commands used to retrieve and save data.
-    '''</summary>
-    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
-     Global.System.ComponentModel.ToolboxItem(true),  _
-     Global.System.ComponentModel.DataObjectAttribute(true),  _
-     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
-     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
     Partial Public Class SocialMediaTableAdapter
         Inherits Global.System.ComponentModel.Component
         
@@ -10335,6 +10118,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             tableMapping.ColumnMappings.Add("noTweet", "noTweet")
             tableMapping.ColumnMappings.Add("wikiId", "wikiId")
             tableMapping.ColumnMappings.Add("botsd", "botsd")
+            tableMapping.ColumnMappings.Add("isTwin", "isTwin")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -10343,7 +10127,8 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                 "inal_personId) AND ((@IsNull_noTweet = 1 AND [noTweet] IS NULL) OR ([noTweet] = "& _ 
                 "@Original_noTweet)) AND ((@IsNull_botsd = 1 AND [botsd] IS NULL) OR ([botsd] = @"& _ 
                 "Original_botsd)) AND ((@IsNull_wikiId = 1 AND [wikiId] IS NULL) OR ([wikiId] = @"& _ 
-                "Original_wikiId)))"
+                "Original_wikiId)) AND ((@IsNull_isTwin = 1 AND [isTwin] IS NULL) OR ([isTwin] = "& _ 
+                "@Original_isTwin)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_twitterHandle", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "twitterHandle", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_twitterHandle", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "twitterHandle", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -10354,34 +10139,40 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_botsd", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "botsd", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_wikiId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "wikiId", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_wikiId", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "wikiId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_isTwin", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "isTwin", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_isTwin", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "isTwin", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [SocialMedia] ([twitterHandle], [personId], [noTweet], [botsd], [wiki"& _ 
-                "Id]) VALUES (@twitterHandle, @personId, @noTweet, @botsd, @wikiId);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT twit"& _ 
-                "terHandle, personId, noTweet, botsd, wikiId FROM SocialMedia WHERE (personId = @"& _ 
-                "personId)"
+                "Id], [isTwin]) VALUES (@twitterHandle, @personId, @noTweet, @botsd, @wikiId, @is"& _ 
+                "Twin);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT twitterHandle, personId, noTweet, botsd, wikiId, isTwin FROM Soci"& _ 
+                "alMedia WHERE (personId = @personId)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@twitterHandle", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "twitterHandle", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@personId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "personId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@noTweet", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "noTweet", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@botsd", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "botsd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@wikiId", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "wikiId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@isTwin", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "isTwin", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [SocialMedia] SET [twitterHandle] = @twitterHandle, [personId] = @personId"& _ 
-                ", [noTweet] = @noTweet, [botsd] = @botsd, [wikiId] = @wikiId WHERE (((@IsNull_tw"& _ 
-                "itterHandle = 1 AND [twitterHandle] IS NULL) OR ([twitterHandle] = @Original_twi"& _ 
-                "tterHandle)) AND ([personId] = @Original_personId) AND ((@IsNull_noTweet = 1 AND"& _ 
-                " [noTweet] IS NULL) OR ([noTweet] = @Original_noTweet)) AND ((@IsNull_botsd = 1 "& _ 
-                "AND [botsd] IS NULL) OR ([botsd] = @Original_botsd)) AND ((@IsNull_wikiId = 1 AN"& _ 
-                "D [wikiId] IS NULL) OR ([wikiId] = @Original_wikiId)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT twitterHandle, p"& _ 
-                "ersonId, noTweet, botsd, wikiId FROM SocialMedia WHERE (personId = @personId)"
+                ", [noTweet] = @noTweet, [botsd] = @botsd, [wikiId] = @wikiId, [isTwin] = @isTwin"& _ 
+                " WHERE (((@IsNull_twitterHandle = 1 AND [twitterHandle] IS NULL) OR ([twitterHan"& _ 
+                "dle] = @Original_twitterHandle)) AND ([personId] = @Original_personId) AND ((@Is"& _ 
+                "Null_noTweet = 1 AND [noTweet] IS NULL) OR ([noTweet] = @Original_noTweet)) AND "& _ 
+                "((@IsNull_botsd = 1 AND [botsd] IS NULL) OR ([botsd] = @Original_botsd)) AND ((@"& _ 
+                "IsNull_wikiId = 1 AND [wikiId] IS NULL) OR ([wikiId] = @Original_wikiId)) AND (("& _ 
+                "@IsNull_isTwin = 1 AND [isTwin] IS NULL) OR ([isTwin] = @Original_isTwin)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SE"& _ 
+                "LECT twitterHandle, personId, noTweet, botsd, wikiId, isTwin FROM SocialMedia WH"& _ 
+                "ERE (personId = @personId)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@twitterHandle", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "twitterHandle", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@personId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "personId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@noTweet", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "noTweet", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@botsd", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "botsd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@wikiId", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "wikiId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@isTwin", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "isTwin", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_twitterHandle", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "twitterHandle", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_twitterHandle", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "twitterHandle", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_personId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "personId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -10391,6 +10182,8 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_botsd", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "botsd", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_wikiId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "wikiId", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_wikiId", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "wikiId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_isTwin", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "isTwin", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_isTwin", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "isTwin", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10406,7 +10199,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(6) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT twitterHandle, personId, noTweet, botsd, wikiId FROM SocialMedia"
+            Me._commandCollection(0).CommandText = "SELECT twitterHandle, personId, noTweet, botsd, wikiId, isTwin FROM SocialMedia"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
@@ -10415,21 +10208,22 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@personId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "personId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT twitterHandle, personId, noTweet, botsd, wikiId FROM SocialMedia WHERE (pe"& _ 
-                "rsonId = @Id)"
+            Me._commandCollection(2).CommandText = "SELECT twitterHandle, personId, noTweet, botsd, wikiId, isTwin FROM SocialMedia W"& _ 
+                "HERE (personId = @Id)"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "personId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
             Me._commandCollection(3).CommandText = "INSERT INTO SocialMedia"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (personId, twitterHandle, noTwe"& _ 
-                "et, wikiId, botsd)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@personId,@twitterHandle,@noTweet,@wikiId,@bo"& _ 
-                "tsd)"
+                "et, wikiId, botsd, isTwin)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@personId,@twitterHandle,@noTweet,@wi"& _ 
+                "kiId,@botsd,@isTwin)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@personId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "personId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@twitterHandle", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "twitterHandle", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@noTweet", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "noTweet", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@wikiId", Global.System.Data.SqlDbType.NVarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "wikiId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@botsd", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "botsd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@isTwin", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "isTwin", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
             Me._commandCollection(4).CommandText = "UPDATE       SocialMedia"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                botsd = @botsd"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (person"& _ 
@@ -10441,15 +10235,16 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
             Me._commandCollection(5).CommandText = "UPDATE       SocialMedia"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                twitterHandle = @twitterHandle, noTw"& _ 
-                "eet = @noTweet, wikiId = @wikiId, botsd = @botsd"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (personId = @pers"& _ 
-                "onId);   "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT twitterHandle, personId FROM SocialMedia WHERE (personId = @pe"& _ 
-                "rsonId)"
+                "eet = @noTweet, wikiId = @wikiId, botsd = @botsd, isTwin ="&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (person"& _ 
+                "Id = @personId) AND (isTwin = @isTwin);    "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT twitterHandle, personId FROM"& _ 
+                " SocialMedia WHERE (personId = @personId)"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@twitterHandle", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "twitterHandle", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@noTweet", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "noTweet", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@wikiId", Global.System.Data.SqlDbType.NVarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "wikiId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@botsd", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "botsd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@personId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "personId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@isTwin", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "isTwin", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(6).Connection = Me.Connection
             Me._commandCollection(6).CommandText = "UPDATE       SocialMedia"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                wikiId = @wikiId"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (pers"& _ 
@@ -10530,7 +10325,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_twitterHandle As String, ByVal Original_personId As Integer, ByVal Original_noTweet As Global.System.Nullable(Of Boolean), ByVal Original_botsd As Global.System.Nullable(Of Integer), ByVal Original_wikiId As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_twitterHandle As String, ByVal Original_personId As Integer, ByVal Original_noTweet As Global.System.Nullable(Of Boolean), ByVal Original_botsd As Global.System.Nullable(Of Integer), ByVal Original_wikiId As String, ByVal Original_isTwin As Global.System.Nullable(Of Boolean)) As Integer
             If (Original_twitterHandle Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(0).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(1).Value = Global.System.DBNull.Value
@@ -10560,6 +10355,13 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_wikiId,String)
             End If
+            If (Original_isTwin.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_isTwin.Value,Boolean)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -10579,7 +10381,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal twitterHandle As String, ByVal personId As Integer, ByVal noTweet As Global.System.Nullable(Of Boolean), ByVal botsd As Global.System.Nullable(Of Integer), ByVal wikiId As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal twitterHandle As String, ByVal personId As Integer, ByVal noTweet As Global.System.Nullable(Of Boolean), ByVal botsd As Global.System.Nullable(Of Integer), ByVal wikiId As String, ByVal isTwin As Global.System.Nullable(Of Boolean)) As Integer
             If (twitterHandle Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -10601,6 +10403,11 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(4).Value = CType(wikiId,String)
             End If
+            If (isTwin.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(isTwin.Value,Boolean)
+            Else
+                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -10620,7 +10427,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal twitterHandle As String, ByVal personId As Integer, ByVal noTweet As Global.System.Nullable(Of Boolean), ByVal botsd As Global.System.Nullable(Of Integer), ByVal wikiId As String, ByVal Original_twitterHandle As String, ByVal Original_personId As Integer, ByVal Original_noTweet As Global.System.Nullable(Of Boolean), ByVal Original_botsd As Global.System.Nullable(Of Integer), ByVal Original_wikiId As String) As Integer
+        Public Overloads Overridable Function Update(ByVal twitterHandle As String, ByVal personId As Integer, ByVal noTweet As Global.System.Nullable(Of Boolean), ByVal botsd As Global.System.Nullable(Of Integer), ByVal wikiId As String, ByVal isTwin As Global.System.Nullable(Of Boolean), ByVal Original_twitterHandle As String, ByVal Original_personId As Integer, ByVal Original_noTweet As Global.System.Nullable(Of Boolean), ByVal Original_botsd As Global.System.Nullable(Of Integer), ByVal Original_wikiId As String, ByVal Original_isTwin As Global.System.Nullable(Of Boolean)) As Integer
             If (twitterHandle Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -10642,34 +10449,46 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(4).Value = CType(wikiId,String)
             End If
-            If (Original_twitterHandle Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
+            If (isTwin.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(isTwin.Value,Boolean)
             Else
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Original_twitterHandle,String)
+                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_personId,Integer)
-            If (Original_noTweet.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_noTweet.Value,Boolean)
+            If (Original_twitterHandle Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_twitterHandle,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_personId,Integer)
+            If (Original_noTweet.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_noTweet.Value,Boolean)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
             If (Original_botsd.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_botsd.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_botsd.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
             End If
             If (Original_wikiId Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_wikiId,String)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_wikiId,String)
+            End If
+            If (Original_isTwin.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_isTwin.Value,Boolean)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -10690,8 +10509,8 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal twitterHandle As String, ByVal noTweet As Global.System.Nullable(Of Boolean), ByVal botsd As Global.System.Nullable(Of Integer), ByVal wikiId As String, ByVal Original_twitterHandle As String, ByVal Original_personId As Integer, ByVal Original_noTweet As Global.System.Nullable(Of Boolean), ByVal Original_botsd As Global.System.Nullable(Of Integer), ByVal Original_wikiId As String) As Integer
-            Return Me.Update(twitterHandle, Original_personId, noTweet, botsd, wikiId, Original_twitterHandle, Original_personId, Original_noTweet, Original_botsd, Original_wikiId)
+        Public Overloads Overridable Function Update(ByVal twitterHandle As String, ByVal noTweet As Global.System.Nullable(Of Boolean), ByVal botsd As Global.System.Nullable(Of Integer), ByVal wikiId As String, ByVal isTwin As Global.System.Nullable(Of Boolean), ByVal Original_twitterHandle As String, ByVal Original_personId As Integer, ByVal Original_noTweet As Global.System.Nullable(Of Boolean), ByVal Original_botsd As Global.System.Nullable(Of Integer), ByVal Original_wikiId As String, ByVal Original_isTwin As Global.System.Nullable(Of Boolean)) As Integer
+            Return Me.Update(twitterHandle, Original_personId, noTweet, botsd, wikiId, isTwin, Original_twitterHandle, Original_personId, Original_noTweet, Original_botsd, Original_wikiId, Original_isTwin)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10721,7 +10540,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, false)>  _
-        Public Overloads Overridable Function InsertTwitter(ByVal personId As Integer, ByVal twitterHandle As String, ByVal noTweet As Global.System.Nullable(Of Boolean), ByVal wikiId As String, ByVal botsd As Global.System.Nullable(Of Integer)) As Integer
+        Public Overloads Overridable Function InsertTwitter(ByVal personId As Integer, ByVal twitterHandle As String, ByVal noTweet As Global.System.Nullable(Of Boolean), ByVal wikiId As String, ByVal botsd As Global.System.Nullable(Of Integer), ByVal isTwin As Global.System.Nullable(Of Boolean)) As Integer
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(3)
             command.Parameters(0).Value = CType(personId,Integer)
             If (twitterHandle Is Nothing) Then
@@ -10743,6 +10562,11 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                 command.Parameters(4).Value = CType(botsd.Value,Integer)
             Else
                 command.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (isTwin.HasValue = true) Then
+                command.Parameters(5).Value = CType(isTwin.Value,Boolean)
+            Else
+                command.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
             If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -10792,7 +10616,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function UpdateTwitter(ByVal twitterHandle As String, ByVal noTweet As Global.System.Nullable(Of Boolean), ByVal wikiId As String, ByVal botsd As Global.System.Nullable(Of Integer), ByVal personId As Integer) As Integer
+        Public Overloads Overridable Function UpdateTwitter(ByVal twitterHandle As String, ByVal noTweet As Global.System.Nullable(Of Boolean), ByVal wikiId As String, ByVal botsd As Global.System.Nullable(Of Integer), ByVal personId As Integer, ByVal isTwin As Global.System.Nullable(Of Boolean)) As Integer
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(5)
             If (twitterHandle Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
@@ -10815,6 +10639,11 @@ Namespace CelebrityBirthdayDataSetTableAdapters
                 command.Parameters(3).Value = Global.System.DBNull.Value
             End If
             command.Parameters(4).Value = CType(personId,Integer)
+            If (isTwin.HasValue = true) Then
+                command.Parameters(5).Value = CType(isTwin.Value,Boolean)
+            Else
+                command.Parameters(5).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
             If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -13365,6 +13194,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             tableMapping.ColumnMappings.Add("birthname", "birthname")
             tableMapping.ColumnMappings.Add("deathmonth", "deathmonth")
             tableMapping.ColumnMappings.Add("deathday", "deathday")
+            tableMapping.ColumnMappings.Add("isTwin", "isTwin")
             Me._adapter.TableMappings.Add(tableMapping)
         End Sub
         
@@ -13384,42 +13214,44 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(0).CommandText = "SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitt"& _ 
                 "erHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, "& _ 
                 "birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthn"& _ 
-                "ame, deathmonth, deathday FROM dbo.BornOnTheSameDay"
+                "ame, deathmonth, deathday, isTwin FROM BornOnTheSameDay"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
-            Me._commandCollection(1).CommandText = "SELECT       *"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            BornOnTheSameDay"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY surname, forename, bir"& _ 
-                "thyear"
+            Me._commandCollection(1).CommandText = "SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitt"& _ 
+                "erHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, "& _ 
+                "birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthn"& _ 
+                "ame, deathmonth, deathday, isTwin FROM BornOnTheSameDay ORDER BY surname, forena"& _ 
+                "me, birthyear"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT        btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId"& _ 
-                ", twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birth"& _ 
-                "month, birthday, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         deathyear, shortdesc, longdesc, sort"& _ 
-                "seq, dateadded, birthplace, birthname, deathmonth, deathday"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Bor"& _ 
-                "nOnTheSameDay"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (btsdDay = @day) AND (btsdMonth = @month)"
+            Me._commandCollection(2).CommandText = "SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitt"& _ 
+                "erHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, "& _ 
+                "birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthn"& _ 
+                "ame, deathmonth, deathday, isTwin FROM BornOnTheSameDay WHERE (btsdDay = @day) A"& _ 
+                "ND (btsdMonth = @month)"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "btsdDay", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "btsdMonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT        btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId"& _ 
-                ", twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birth"& _ 
-                "month, birthday, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         deathyear, shortdesc, longdesc, sort"& _ 
-                "seq, dateadded, birthplace, birthname, deathmonth, deathday"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Bor"& _ 
-                "nOnTheSameDay"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (btsdDay = @day) AND (btsdMonth = @month) AND (btsdY"& _ 
-                "ear = @year)"
+            Me._commandCollection(3).CommandText = "SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitt"& _ 
+                "erHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, "& _ 
+                "birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthn"& _ 
+                "ame, deathmonth, deathday, isTwin FROM BornOnTheSameDay WHERE (btsdDay = @day) A"& _ 
+                "ND (btsdMonth = @month) AND (btsdYear = @year)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "btsdDay", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "btsdMonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@year", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "btsdYear", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT        btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId"& _ 
-                ", twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birth"& _ 
-                "month, birthday, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         deathyear, shortdesc, longdesc, sort"& _ 
-                "seq, dateadded, birthplace, birthname, deathmonth, deathday"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Bor"& _ 
-                "nOnTheSameDay"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (btsdPostNo = @postNo)"
+            Me._commandCollection(4).CommandText = "SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitt"& _ 
+                "erHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, "& _ 
+                "birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthn"& _ 
+                "ame, deathmonth, deathday, isTwin FROM BornOnTheSameDay WHERE (btsdPostNo = @pos"& _ 
+                "tNo)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@postNo", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "btsdPostNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
@@ -13503,6 +13335,344 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(0).Value = Global.System.DBNull.Value
             End If
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class FullPersonTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "FullPerson"
+            tableMapping.ColumnMappings.Add("longdesc", "longdesc")
+            tableMapping.ColumnMappings.Add("shortdesc", "shortdesc")
+            tableMapping.ColumnMappings.Add("deathyear", "deathyear")
+            tableMapping.ColumnMappings.Add("birthday", "birthday")
+            tableMapping.ColumnMappings.Add("birthmonth", "birthmonth")
+            tableMapping.ColumnMappings.Add("birthyear", "birthyear")
+            tableMapping.ColumnMappings.Add("surname", "surname")
+            tableMapping.ColumnMappings.Add("forename", "forename")
+            tableMapping.ColumnMappings.Add("id", "id")
+            tableMapping.ColumnMappings.Add("sortseq", "sortseq")
+            tableMapping.ColumnMappings.Add("dateadded", "dateadded")
+            tableMapping.ColumnMappings.Add("birthplace", "birthplace")
+            tableMapping.ColumnMappings.Add("birthname", "birthname")
+            tableMapping.ColumnMappings.Add("deathmonth", "deathmonth")
+            tableMapping.ColumnMappings.Add("deathday", "deathday")
+            tableMapping.ColumnMappings.Add("imgfiletype", "imgfiletype")
+            tableMapping.ColumnMappings.Add("imgloadyr", "imgloadyr")
+            tableMapping.ColumnMappings.Add("imgloadmonth", "imgloadmonth")
+            tableMapping.ColumnMappings.Add("twitterHandle", "twitterHandle")
+            tableMapping.ColumnMappings.Add("noTweet", "noTweet")
+            tableMapping.ColumnMappings.Add("imgfilename", "imgfilename")
+            tableMapping.ColumnMappings.Add("wikiId", "wikiId")
+            tableMapping.ColumnMappings.Add("botsd", "botsd")
+            tableMapping.ColumnMappings.Add("isTwin", "isTwin")
+            Me._adapter.TableMappings.Add(tableMapping)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
+            Me._connection.ConnectionString = Global.CelebrityBirthday.My.MySettings.Default.CelebrityBirthdayConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(6) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
+                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
+                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId"& _ 
+                ", botsd, isTwin FROM FullPerson"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
+                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
+                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
+                " wikiId, isTwin FROM FullPerson WHERE (birthday = @birthday) AND (birthmonth = @"& _ 
+                "birthmonth) AND (deathyear <> 0) ORDER BY birthyear"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@birthday", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@birthmonth", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(2).Connection = Me.Connection
+            Me._commandCollection(2).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
+                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
+                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
+                " wikiId, isTwin FROM FullPerson WHERE (birthmonth = @month) AND (birthday = @day"& _ 
+                ") AND (deathyear = 0) ORDER BY birthyear"
+            Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(3).Connection = Me.Connection
+            Me._commandCollection(3).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
+                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
+                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId"& _ 
+                ", botsd, isTwin FROM FullPerson WHERE (botsd > 0)"
+            Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(4).Connection = Me.Connection
+            Me._commandCollection(4).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
+                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
+                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
+                " wikiId, isTwin FROM FullPerson WHERE (birthday = @day) AND (birthmonth = @month"& _ 
+                ") ORDER BY birthyear, sortseq"
+            Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(5).Connection = Me.Connection
+            Me._commandCollection(5).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
+                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
+                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId"& _ 
+                ", botsd, isTwin FROM FullPerson WHERE (id = @id)"
+            Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@id", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(6).Connection = Me.Connection
+            Me._commandCollection(6).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
+                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
+                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId"& _ 
+                ", botsd, isTwin FROM FullPerson WHERE (birthmonth = @mth)"
+            Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@mth", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As CelebrityBirthdayDataSet.FullPersonDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As CelebrityBirthdayDataSet.FullPersonDataTable = New CelebrityBirthdayDataSet.FullPersonDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByAnniversary(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal birthday As Integer, ByVal birthmonth As Integer) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(birthday,Integer)
+            Me.Adapter.SelectCommand.Parameters(1).Value = CType(birthmonth,Integer)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByBirthday(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal month As Integer, ByVal day As Integer) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(2)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(month,Integer)
+            Me.Adapter.SelectCommand.Parameters(1).Value = CType(day,Integer)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByBotsd(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(3)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByDayAndMonth(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal day As Integer, ByVal month As Integer) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(4)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(day,Integer)
+            Me.Adapter.SelectCommand.Parameters(1).Value = CType(month,Integer)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillById(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal id As Integer) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(5)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(id,Integer)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByMonth(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal mth As Integer) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(6)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(mth,Integer)
             If (Me.ClearBeforeFill = true) Then
                 dataTable.Clear
             End If

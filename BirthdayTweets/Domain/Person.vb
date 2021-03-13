@@ -322,7 +322,7 @@
                 _image = New ImageIdentity()
             End If
             _sortSeq = oRow.sortseq
-            _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet, oRow.wikiId, oRow.botsd)
+            _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet, oRow.wikiId, oRow.botsd, oRow.isTwin)
         End If
         _unsavedChanges = False
     End Sub

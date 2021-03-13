@@ -15,33 +15,21 @@ Module modDatabase
     Private ReadOnly oTwitterAuthTa As New CelebrityBirthdayDataSetTableAdapters.TwitterAuthTableAdapter
     Private ReadOnly oTwitterAuthTable As New CelebrityBirthdayDataSet.TwitterAuthDataTable
     Private ReadOnly oTweetTa As New CelebrityBirthdayDataSetTableAdapters.TweetsTableAdapter
-    'Private ReadOnly oBotsdTa As New CelebrityBirthdayDataSetTableAdapters.BotSDTableAdapter
-    'Private ReadOnly oBotsdTable As New CelebrityBirthdayDataSet.BotSDDataTable
-    'Private ReadOnly oBotsdViewTa As New CelebrityBirthdayDataSetTableAdapters.BornOnTheSameDayTableAdapter
-    'Private ReadOnly oBotsdViewTable As New CelebrityBirthdayDataSet.BornOnTheSameDayDataTable
 #End Region
 #Region "person"
-    'Public Function GetFullPersonById(ByVal _id As Integer, Optional isIncludeImage As Boolean = True) As Person
-    '    Dim newPerson As Person = Nothing
-    '    Try
-    '        Dim iCt As Integer = oFullPersonTa.FillById(oFullPersonTable, _id)
-    '        If iCt = 1 Then
-    '            Dim oRow As CelebrityBirthdayDataSet.FullPersonRow = oFullPersonTable.Rows(0)
-    '            newPerson = New Person(oRow, isIncludeImage)
-    '        End If
-    '    Catch dbEx As DbException
-    '        LogUtil.Exception("GetFullPersonById", dbEx)
-    '    End Try
-    '    Return newPerson
-    'End Function
-    'Public Function GetPeopleByDeathYear(ByVal _year As Integer) As CelebrityBirthdayDataSet.PersonDataTable
-    '    oPersonTa.FillByDeathYear(oPersonTable, _year)
-    '    Return oPersonTable
-    'End Function
-    'Public Function GetPeopleByDateofBirth(ByVal _year As Integer, ByVal _month As Integer, ByVal _day As Integer) As CelebrityBirthdayDataSet.PersonDataTable
-    '    oPersonTa.FillByDob(oPersonTable, _year, _month, _day)
-    '    Return oPersonTable
-    'End Function
+    Public Function FindTodays(oDay As Integer, oMonth As Integer, isTwin As Boolean)
+        Dim _List As New List(Of Person)
+        Try
+            oFullPersonTa.FillByDayAndMonth(oFullPersonTable, oDay, oMonth, isTwin)
+            For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
+                _List.Add(New Person(oRow))
+            Next
+            LogUtil.Info(CStr(_List.Count) & " birthdays found (no twins)")
+        Catch dbEx As DbException
+            LogUtil.Exception("FindTodays", dbEx)
+        End Try
+        Return _List
+    End Function
 
     Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean, Optional isGetPhoto As Boolean = True) As List(Of Person)
         Dim oPersonList As New List(Of Person)
@@ -147,7 +135,6 @@ Module modDatabase
     End Function
     Public Function InsertTweet(pText As String, pMonth As Integer?, pDay As Integer?, pSeq As Integer?, pId As String, pAccount As String, pType As String) As Boolean
         Dim isOK As Boolean = False
-
         Try
             isOK = oTweetTa.InsertTweet(Now, If(String.IsNullOrEmpty(pText), "", pText), pMonth, pDay, pSeq, pId, pAccount, pType) = 1
         Catch dbEx As DbException
@@ -155,7 +142,5 @@ Module modDatabase
         End Try
         Return isOK
     End Function
-#End Region
-#Region "BornOnTheSameDay"
 #End Region
 End Module

@@ -161,7 +161,7 @@ WHERE        (id = @id)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByDob" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByDob" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="FillByDob">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByDob" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByDob" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillByDob">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthname, birthplace, deathday, deathmonth
@@ -176,7 +176,7 @@ ORDER BY birthmonth, birthday, birthyear, sortseq</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillById" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy5" GeneratorSourceName="FillById" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillById">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillById" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy5" GeneratorSourceName="FillById" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="FillById">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathday, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname FROM Person WHERE (id = @id)</CommandText>
@@ -186,7 +186,7 @@ ORDER BY birthmonth, birthday, birthyear, sortseq</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByMonthDay" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByMonthDay" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="FillByMonthDay">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByMonthDay" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByMonthDay" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="FillByMonthDay">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathday, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname
@@ -201,7 +201,7 @@ ORDER BY birthmonth, birthday, birthyear, sortseq</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByName" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy6" GeneratorSourceName="FillByName" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="FillByName">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByName" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy6" GeneratorSourceName="FillByName" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="FillByName">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathday, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname FROM Person WHERE (forename LIKE @forename) AND (surname LIKE @surname)</CommandText>
@@ -212,7 +212,7 @@ ORDER BY birthmonth, birthday, birthyear, sortseq</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByNameDate" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy4" GeneratorSourceName="FillByNameDate" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="FillByNameDate">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByNameDate" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy4" GeneratorSourceName="FillByNameDate" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="FillByNameDate">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathday, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname FROM Person WHERE (forename = @forename) AND (surname = @surname) AND (birthyear = @year) AND (birthmonth = @month) AND (birthday = @day)</CommandText>
@@ -226,7 +226,7 @@ ORDER BY birthmonth, birthday, birthyear, sortseq</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByPersonLikeName" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByPersonLikeName" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="FillByPersonLikeName">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.Person" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByPersonLikeName" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByPersonLikeName" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy8" UserSourceName="FillByPersonLikeName">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathday, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname FROM Person WHERE (forename LIKE @forename + N'%') AND (surname LIKE @surname + N'%') ORDER BY surname, forename</CommandText>
@@ -237,7 +237,7 @@ ORDER BY birthmonth, birthday, birthyear, sortseq</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="InsertPerson" Modifier="Public" Name="InsertPerson" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy8" UserSourceName="InsertPerson">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="InsertPerson" Modifier="Public" Name="InsertPerson" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy9" UserSourceName="InsertPerson">
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>INSERT INTO Person
@@ -263,7 +263,7 @@ SELECT @@IDENTITY</CommandText>
                   </DbCommand>
                 </InsertCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateDoB" Modifier="Public" Name="UpdateDoB" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy9" UserSourceName="UpdateDoB">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateDoB" Modifier="Public" Name="UpdateDoB" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy10" UserSourceName="UpdateDoB">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       Person
@@ -280,7 +280,7 @@ SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortd
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdatePerson" Modifier="Public" Name="UpdatePerson" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy10" UserSourceName="UpdatePerson">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdatePerson" Modifier="Public" Name="UpdatePerson" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="UpdatePerson">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       Person
@@ -308,7 +308,7 @@ SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortd
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateShortDesc" Modifier="Public" Name="UpdateShortDesc" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="UpdateShortDesc">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateShortDesc" Modifier="Public" Name="UpdateShortDesc" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="UpdateShortDesc">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       Person
@@ -322,7 +322,7 @@ SELECT id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortd
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateSortSeq" Modifier="Public" Name="UpdateSortSeq" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="UpdateSortSeq">
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateSortSeq" Modifier="Public" Name="UpdateSortSeq" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="UpdateSortSeq">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       Person
@@ -633,119 +633,12 @@ SELECT id, imgfilename, imgfiletype, imgloadyr, imgloadmonth FROM Image WHERE (i
               </DbSource>
             </Sources>
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="FullPersonTableAdapter" GeneratorDataComponentClassName="FullPersonTableAdapter" Name="FullPerson" UserDataComponentName="FullPersonTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd, wikiId FROM FullPerson</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="longdesc" DataSetColumn="longdesc" />
-              <Mapping SourceColumn="shortdesc" DataSetColumn="shortdesc" />
-              <Mapping SourceColumn="deathyear" DataSetColumn="deathyear" />
-              <Mapping SourceColumn="birthday" DataSetColumn="birthday" />
-              <Mapping SourceColumn="birthmonth" DataSetColumn="birthmonth" />
-              <Mapping SourceColumn="birthyear" DataSetColumn="birthyear" />
-              <Mapping SourceColumn="surname" DataSetColumn="surname" />
-              <Mapping SourceColumn="forename" DataSetColumn="forename" />
-              <Mapping SourceColumn="id" DataSetColumn="id" />
-              <Mapping SourceColumn="sortseq" DataSetColumn="sortseq" />
-              <Mapping SourceColumn="dateadded" DataSetColumn="dateadded" />
-              <Mapping SourceColumn="birthplace" DataSetColumn="birthplace" />
-              <Mapping SourceColumn="birthname" DataSetColumn="birthname" />
-              <Mapping SourceColumn="deathmonth" DataSetColumn="deathmonth" />
-              <Mapping SourceColumn="deathday" DataSetColumn="deathday" />
-              <Mapping SourceColumn="imgfiletype" DataSetColumn="imgfiletype" />
-              <Mapping SourceColumn="imgloadyr" DataSetColumn="imgloadyr" />
-              <Mapping SourceColumn="imgloadmonth" DataSetColumn="imgloadmonth" />
-              <Mapping SourceColumn="twitterHandle" DataSetColumn="twitterHandle" />
-              <Mapping SourceColumn="noTweet" DataSetColumn="noTweet" />
-              <Mapping SourceColumn="imgfilename" DataSetColumn="imgfilename" />
-              <Mapping SourceColumn="wikiId" DataSetColumn="wikiId" />
-              <Mapping SourceColumn="botsd" DataSetColumn="botsd" />
-            </Mappings>
-            <Sources>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByAnniversary" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByAnniversary" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByAnniversary">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd, wikiId FROM FullPerson WHERE (birthday = @birthday) AND (birthmonth = @birthmonth) AND (deathyear &lt;&gt; 0) ORDER BY birthyear</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="birthday" ColumnName="birthday" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@birthday" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthday" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="birthmonth" ColumnName="birthmonth" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@birthmonth" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthmonth" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBirthday" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByBirthday" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByBirthday">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd, wikiId FROM FullPerson WHERE (birthmonth = @month) AND (birthday = @day) AND (deathyear = 0) ORDER BY birthyear</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="month" ColumnName="birthmonth" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@month" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthmonth" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="day" ColumnName="birthday" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@day" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthday" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBotsd" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByBotsd" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillByBotsd">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, 
-                         imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd, wikiId
-FROM            FullPerson
-WHERE        (botsd &gt; 0)</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByDayAndMonth" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByDayAndMonth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillByDayAndMonth">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, 
-                         imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd, wikiId
-FROM            FullPerson
-WHERE        (birthday = @day) AND (birthmonth = @month)
-ORDER BY birthyear, sortseq</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="day" ColumnName="birthday" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@day" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthday" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="month" ColumnName="birthmonth" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@month" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthmonth" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillById" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillById" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="FillById">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd, wikiId FROM FullPerson WHERE (id = @personId)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="personId" ColumnName="id" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@personId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="id" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByMonth" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByMonth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="FillByMonth">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd, wikiId FROM FullPerson WHERE (birthmonth = @month)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="month" ColumnName="birthmonth" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@month" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthmonth" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </Sources>
-          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SocialMediaTableAdapter" GeneratorDataComponentClassName="SocialMediaTableAdapter" Name="SocialMedia" UserDataComponentName="SocialMediaTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.SocialMedia" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [SocialMedia] WHERE (((@IsNull_twitterHandle = 1 AND [twitterHandle] IS NULL) OR ([twitterHandle] = @Original_twitterHandle)) AND ([personId] = @Original_personId) AND ((@IsNull_noTweet = 1 AND [noTweet] IS NULL) OR ([noTweet] = @Original_noTweet)) AND ((@IsNull_botsd = 1 AND [botsd] IS NULL) OR ([botsd] = @Original_botsd)) AND ((@IsNull_wikiId = 1 AND [wikiId] IS NULL) OR ([wikiId] = @Original_wikiId)))</CommandText>
+                    <CommandText>DELETE FROM [SocialMedia] WHERE (((@IsNull_twitterHandle = 1 AND [twitterHandle] IS NULL) OR ([twitterHandle] = @Original_twitterHandle)) AND ([personId] = @Original_personId) AND ((@IsNull_noTweet = 1 AND [noTweet] IS NULL) OR ([noTweet] = @Original_noTweet)) AND ((@IsNull_botsd = 1 AND [botsd] IS NULL) OR ([botsd] = @Original_botsd)) AND ((@IsNull_wikiId = 1 AND [wikiId] IS NULL) OR ([wikiId] = @Original_wikiId)) AND ((@IsNull_isTwin = 1 AND [isTwin] IS NULL) OR ([isTwin] = @Original_isTwin)))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_twitterHandle" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="twitterHandle" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_twitterHandle" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="twitterHandle" SourceColumnNullMapping="false" SourceVersion="Original" />
@@ -756,38 +649,42 @@ ORDER BY birthyear, sortseq</CommandText>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_botsd" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="botsd" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_wikiId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="wikiId" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_wikiId" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="wikiId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_isTwin" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="isTwin" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Original_isTwin" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="isTwin" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </DeleteCommand>
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [SocialMedia] ([twitterHandle], [personId], [noTweet], [botsd], [wikiId]) VALUES (@twitterHandle, @personId, @noTweet, @botsd, @wikiId);
-SELECT twitterHandle, personId, noTweet, botsd, wikiId FROM SocialMedia WHERE (personId = @personId)</CommandText>
+                    <CommandText>INSERT INTO [SocialMedia] ([twitterHandle], [personId], [noTweet], [botsd], [wikiId], [isTwin]) VALUES (@twitterHandle, @personId, @noTweet, @botsd, @wikiId, @isTwin);
+SELECT twitterHandle, personId, noTweet, botsd, wikiId, isTwin FROM SocialMedia WHERE (personId = @personId)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@twitterHandle" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="twitterHandle" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@personId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="personId" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@noTweet" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="noTweet" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@botsd" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="botsd" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@wikiId" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="wikiId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@isTwin" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="isTwin" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT twitterHandle, personId, noTweet, botsd, wikiId FROM SocialMedia</CommandText>
+                    <CommandText>SELECT twitterHandle, personId, noTweet, botsd, wikiId, isTwin FROM SocialMedia</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [SocialMedia] SET [twitterHandle] = @twitterHandle, [personId] = @personId, [noTweet] = @noTweet, [botsd] = @botsd, [wikiId] = @wikiId WHERE (((@IsNull_twitterHandle = 1 AND [twitterHandle] IS NULL) OR ([twitterHandle] = @Original_twitterHandle)) AND ([personId] = @Original_personId) AND ((@IsNull_noTweet = 1 AND [noTweet] IS NULL) OR ([noTweet] = @Original_noTweet)) AND ((@IsNull_botsd = 1 AND [botsd] IS NULL) OR ([botsd] = @Original_botsd)) AND ((@IsNull_wikiId = 1 AND [wikiId] IS NULL) OR ([wikiId] = @Original_wikiId)));
-SELECT twitterHandle, personId, noTweet, botsd, wikiId FROM SocialMedia WHERE (personId = @personId)</CommandText>
+                    <CommandText>UPDATE [SocialMedia] SET [twitterHandle] = @twitterHandle, [personId] = @personId, [noTweet] = @noTweet, [botsd] = @botsd, [wikiId] = @wikiId, [isTwin] = @isTwin WHERE (((@IsNull_twitterHandle = 1 AND [twitterHandle] IS NULL) OR ([twitterHandle] = @Original_twitterHandle)) AND ([personId] = @Original_personId) AND ((@IsNull_noTweet = 1 AND [noTweet] IS NULL) OR ([noTweet] = @Original_noTweet)) AND ((@IsNull_botsd = 1 AND [botsd] IS NULL) OR ([botsd] = @Original_botsd)) AND ((@IsNull_wikiId = 1 AND [wikiId] IS NULL) OR ([wikiId] = @Original_wikiId)) AND ((@IsNull_isTwin = 1 AND [isTwin] IS NULL) OR ([isTwin] = @Original_isTwin)));
+SELECT twitterHandle, personId, noTweet, botsd, wikiId, isTwin FROM SocialMedia WHERE (personId = @personId)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@twitterHandle" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="twitterHandle" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@personId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="personId" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@noTweet" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="noTweet" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@botsd" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="botsd" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@wikiId" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="wikiId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@isTwin" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="isTwin" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_twitterHandle" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="twitterHandle" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_twitterHandle" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="twitterHandle" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_personId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="personId" SourceColumnNullMapping="false" SourceVersion="Original" />
@@ -797,6 +694,8 @@ SELECT twitterHandle, personId, noTweet, botsd, wikiId FROM SocialMedia WHERE (p
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_botsd" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="botsd" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_wikiId" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="wikiId" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_wikiId" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="wikiId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_isTwin" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="isTwin" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Original_isTwin" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="isTwin" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </UpdateCommand>
@@ -808,6 +707,7 @@ SELECT twitterHandle, personId, noTweet, botsd, wikiId FROM SocialMedia WHERE (p
               <Mapping SourceColumn="noTweet" DataSetColumn="noTweet" />
               <Mapping SourceColumn="wikiId" DataSetColumn="wikiId" />
               <Mapping SourceColumn="botsd" DataSetColumn="botsd" />
+              <Mapping SourceColumn="isTwin" DataSetColumn="isTwin" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteTwitter" Modifier="Public" Name="DeleteTwitter" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteTwitter">
@@ -824,7 +724,7 @@ WHERE        (personId = @personId)</CommandText>
               <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.SocialMedia" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillById" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillById" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillById">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT twitterHandle, personId, noTweet, botsd, wikiId FROM SocialMedia WHERE (personId = @Id)</CommandText>
+                    <CommandText>SELECT twitterHandle, personId, noTweet, botsd, wikiId, isTwin FROM SocialMedia WHERE (personId = @Id)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="Id" ColumnName="personId" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="personId" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
@@ -835,14 +735,15 @@ WHERE        (personId = @personId)</CommandText>
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>INSERT INTO SocialMedia
-                         (personId, twitterHandle, noTweet, wikiId, botsd)
-VALUES        (@personId,@twitterHandle,@noTweet,@wikiId,@botsd)</CommandText>
+                         (personId, twitterHandle, noTweet, wikiId, botsd, isTwin)
+VALUES        (@personId,@twitterHandle,@noTweet,@wikiId,@botsd,@isTwin)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="personId" ColumnName="personId" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@personId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="personId" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="twitterHandle" ColumnName="twitterHandle" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@twitterHandle" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="twitterHandle" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="noTweet" ColumnName="noTweet" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@noTweet" Precision="0" ProviderType="Bit" Scale="0" Size="1" SourceColumn="noTweet" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="wikiId" ColumnName="wikiId" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="nvarchar(100)" DbType="String" Direction="Input" ParameterName="@wikiId" Precision="0" ProviderType="NVarChar" Scale="0" Size="100" SourceColumn="wikiId" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="botsd" ColumnName="botsd" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@botsd" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="botsd" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="isTwin" ColumnName="isTwin" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@isTwin" Precision="0" ProviderType="Bit" Scale="0" Size="1" SourceColumn="isTwin" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </InsertCommand>
@@ -865,8 +766,8 @@ SELECT twitterHandle, personId, noTweet, botsd, wikiId FROM SocialMedia WHERE (p
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SocialMedia
-SET                twitterHandle = @twitterHandle, noTweet = @noTweet, wikiId = @wikiId, botsd = @botsd
-WHERE        (personId = @personId);   
+SET                twitterHandle = @twitterHandle, noTweet = @noTweet, wikiId = @wikiId, botsd = @botsd, isTwin =
+WHERE        (personId = @personId) AND (isTwin = @isTwin);    
 SELECT twitterHandle, personId FROM SocialMedia WHERE (personId = @personId)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="twitterHandle" ColumnName="twitterHandle" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@twitterHandle" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="twitterHandle" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -874,6 +775,7 @@ SELECT twitterHandle, personId FROM SocialMedia WHERE (personId = @personId)</Co
                       <Parameter AllowDbNull="true" AutogeneratedName="wikiId" ColumnName="wikiId" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="nvarchar(100)" DbType="String" Direction="Input" ParameterName="@wikiId" Precision="0" ProviderType="NVarChar" Scale="0" Size="100" SourceColumn="wikiId" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="botsd" ColumnName="botsd" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@botsd" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="botsd" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="personId" ColumnName="personId" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@personId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="personId" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="isTwin" ColumnName="isTwin" DataSourceName="CelebrityBirthday.dbo.SocialMedia" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@isTwin" Precision="0" ProviderType="Bit" Scale="0" Size="1" SourceColumn="isTwin" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </UpdateCommand>
@@ -1393,7 +1295,7 @@ SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl FROM BotSD WHER
               <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.BornOnTheSameDay" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday FROM dbo.BornOnTheSameDay</CommandText>
+                    <CommandText>SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, isTwin FROM BornOnTheSameDay</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -1426,14 +1328,13 @@ SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl FROM BotSD WHER
               <Mapping SourceColumn="birthname" DataSetColumn="birthname" />
               <Mapping SourceColumn="deathmonth" DataSetColumn="deathmonth" />
               <Mapping SourceColumn="deathday" DataSetColumn="deathday" />
+              <Mapping SourceColumn="isTwin" DataSetColumn="isTwin" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.BornOnTheSameDay" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByAtoZ" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByAtoZ" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByAtoZ">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT       *
-FROM            BornOnTheSameDay
-ORDER BY surname, forename, birthyear</CommandText>
+                    <CommandText>SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, isTwin FROM BornOnTheSameDay ORDER BY surname, forename, birthyear</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -1441,10 +1342,7 @@ ORDER BY surname, forename, birthyear</CommandText>
               <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.BornOnTheSameDay" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByDayMonth" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByDayMonth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByDayMonth">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, 
-                         deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday
-FROM            BornOnTheSameDay
-WHERE        (btsdDay = @day) AND (btsdMonth = @month)</CommandText>
+                    <CommandText>SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, isTwin FROM BornOnTheSameDay WHERE (btsdDay = @day) AND (btsdMonth = @month)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="day" ColumnName="btsdDay" DataSourceName="CelebrityBirthday.dbo.BornOnTheSameDay" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@day" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="btsdDay" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="month" ColumnName="btsdMonth" DataSourceName="CelebrityBirthday.dbo.BornOnTheSameDay" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@month" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="btsdMonth" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -1455,10 +1353,7 @@ WHERE        (btsdDay = @day) AND (btsdMonth = @month)</CommandText>
               <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.BornOnTheSameDay" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByDayMonthYear" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByDayMonthYear" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillByDayMonthYear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, 
-                         deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday
-FROM            BornOnTheSameDay
-WHERE        (btsdDay = @day) AND (btsdMonth = @month) AND (btsdYear = @year)</CommandText>
+                    <CommandText>SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, isTwin FROM BornOnTheSameDay WHERE (btsdDay = @day) AND (btsdMonth = @month) AND (btsdYear = @year)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="day" ColumnName="btsdDay" DataSourceName="CelebrityBirthday.dbo.BornOnTheSameDay" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@day" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="btsdDay" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="month" ColumnName="btsdMonth" DataSourceName="CelebrityBirthday.dbo.BornOnTheSameDay" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@month" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="btsdMonth" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -1470,12 +1365,110 @@ WHERE        (btsdDay = @day) AND (btsdMonth = @month) AND (btsdYear = @year)</C
               <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.BornOnTheSameDay" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByPostNo" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByPostNo" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillByPostNo">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, 
-                         deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday
-FROM            BornOnTheSameDay
-WHERE        (btsdPostNo = @postNo)</CommandText>
+                    <CommandText>SELECT btsdId, btsdDay, btsdMonth, btsdYear, btsdPostNo, btsdUrl, personId, twitterHandle, noTweet, wikiId, botsd, id, forename, surname, birthyear, birthmonth, birthday, deathyear, shortdesc, longdesc, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, isTwin FROM BornOnTheSameDay WHERE (btsdPostNo = @postNo)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="postNo" ColumnName="btsdPostNo" DataSourceName="CelebrityBirthday.dbo.BornOnTheSameDay" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@postNo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="btsdPostNo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="FullPersonTableAdapter" GeneratorDataComponentClassName="FullPersonTableAdapter" Name="FullPerson" UserDataComponentName="FullPersonTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId, botsd, isTwin FROM FullPerson</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="longdesc" DataSetColumn="longdesc" />
+              <Mapping SourceColumn="shortdesc" DataSetColumn="shortdesc" />
+              <Mapping SourceColumn="deathyear" DataSetColumn="deathyear" />
+              <Mapping SourceColumn="birthday" DataSetColumn="birthday" />
+              <Mapping SourceColumn="birthmonth" DataSetColumn="birthmonth" />
+              <Mapping SourceColumn="birthyear" DataSetColumn="birthyear" />
+              <Mapping SourceColumn="surname" DataSetColumn="surname" />
+              <Mapping SourceColumn="forename" DataSetColumn="forename" />
+              <Mapping SourceColumn="id" DataSetColumn="id" />
+              <Mapping SourceColumn="sortseq" DataSetColumn="sortseq" />
+              <Mapping SourceColumn="dateadded" DataSetColumn="dateadded" />
+              <Mapping SourceColumn="birthplace" DataSetColumn="birthplace" />
+              <Mapping SourceColumn="birthname" DataSetColumn="birthname" />
+              <Mapping SourceColumn="deathmonth" DataSetColumn="deathmonth" />
+              <Mapping SourceColumn="deathday" DataSetColumn="deathday" />
+              <Mapping SourceColumn="imgfiletype" DataSetColumn="imgfiletype" />
+              <Mapping SourceColumn="imgloadyr" DataSetColumn="imgloadyr" />
+              <Mapping SourceColumn="imgloadmonth" DataSetColumn="imgloadmonth" />
+              <Mapping SourceColumn="twitterHandle" DataSetColumn="twitterHandle" />
+              <Mapping SourceColumn="noTweet" DataSetColumn="noTweet" />
+              <Mapping SourceColumn="imgfilename" DataSetColumn="imgfilename" />
+              <Mapping SourceColumn="wikiId" DataSetColumn="wikiId" />
+              <Mapping SourceColumn="botsd" DataSetColumn="botsd" />
+              <Mapping SourceColumn="isTwin" DataSetColumn="isTwin" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByAnniversary" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByAnniversary" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByAnniversary">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd, wikiId, isTwin FROM FullPerson WHERE (birthday = @birthday) AND (birthmonth = @birthmonth) AND (deathyear &lt;&gt; 0) ORDER BY birthyear</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="birthday" ColumnName="birthday" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@birthday" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthday" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="birthmonth" ColumnName="birthmonth" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@birthmonth" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthmonth" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBirthday" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByBirthday" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillByBirthday">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd, wikiId, isTwin FROM FullPerson WHERE (birthmonth = @month) AND (birthday = @day) AND (deathyear = 0) ORDER BY birthyear</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="month" ColumnName="birthmonth" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@month" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthmonth" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="day" ColumnName="birthday" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@day" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthday" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBotsd" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByBotsd" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="FillByBotsd">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId, botsd, isTwin FROM FullPerson WHERE (botsd &gt; 0)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByDayAndMonth" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByDayAndMonth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillByDayAndMonth">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd, wikiId, isTwin FROM FullPerson WHERE (birthday = @day) AND (birthmonth = @month) ORDER BY birthyear, sortseq</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="day" ColumnName="birthday" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@day" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthday" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="month" ColumnName="birthmonth" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@month" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthmonth" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillById" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillById" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillById">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId, botsd, isTwin FROM FullPerson WHERE (id = @id)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="id" ColumnName="id" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="CelebrityBirthdayConnectionString (MySettings)" DbObjectName="CelebrityBirthday.dbo.FullPerson" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByMonth" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByMonth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="FillByMonth">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId, botsd, isTwin FROM FullPerson WHERE (birthmonth = @mth)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="mth" ColumnName="birthmonth" DataSourceName="CelebrityBirthday.dbo.FullPerson" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@mth" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="birthmonth" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
@@ -1619,107 +1612,6 @@ WHERE        (btsdPostNo = @postNo)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="FullPerson" msprop:Generator_UserTableName="FullPerson" msprop:Generator_RowEvArgName="FullPersonRowChangeEvent" msprop:Generator_TableVarName="tableFullPerson" msprop:Generator_TablePropName="FullPerson" msprop:Generator_RowDeletingName="FullPersonRowDeleting" msprop:Generator_RowChangingName="FullPersonRowChanging" msprop:Generator_RowDeletedName="FullPersonRowDeleted" msprop:Generator_RowEvHandlerName="FullPersonRowChangeEventHandler" msprop:Generator_TableClassName="FullPersonDataTable" msprop:Generator_RowChangedName="FullPersonRowChanged" msprop:Generator_RowClassName="FullPersonRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="longdesc" msprop:Generator_ColumnVarNameInTable="columnlongdesc" msprop:Generator_ColumnPropNameInRow="longdesc" msprop:Generator_ColumnPropNameInTable="longdescColumn" msprop:Generator_UserColumnName="longdesc" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="shortdesc" msprop:Generator_ColumnVarNameInTable="columnshortdesc" msprop:Generator_ColumnPropNameInRow="shortdesc" msprop:Generator_ColumnPropNameInTable="shortdescColumn" msprop:Generator_UserColumnName="shortdesc" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="250" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="deathyear" msprop:Generator_ColumnVarNameInTable="columndeathyear" msprop:Generator_ColumnPropNameInRow="deathyear" msprop:Generator_ColumnPropNameInTable="deathyearColumn" msprop:Generator_UserColumnName="deathyear" type="xs:int" />
-              <xs:element name="birthday" msprop:Generator_ColumnVarNameInTable="columnbirthday" msprop:Generator_ColumnPropNameInRow="birthday" msprop:Generator_ColumnPropNameInTable="birthdayColumn" msprop:Generator_UserColumnName="birthday" type="xs:int" />
-              <xs:element name="birthmonth" msprop:Generator_ColumnVarNameInTable="columnbirthmonth" msprop:Generator_ColumnPropNameInRow="birthmonth" msprop:Generator_ColumnPropNameInTable="birthmonthColumn" msprop:Generator_UserColumnName="birthmonth" type="xs:int" />
-              <xs:element name="birthyear" msprop:Generator_ColumnVarNameInTable="columnbirthyear" msprop:Generator_ColumnPropNameInRow="birthyear" msprop:Generator_ColumnPropNameInTable="birthyearColumn" msprop:Generator_UserColumnName="birthyear" type="xs:int" />
-              <xs:element name="surname" msprop:Generator_ColumnVarNameInTable="columnsurname" msprop:Generator_ColumnPropNameInRow="surname" msprop:Generator_ColumnPropNameInTable="surnameColumn" msprop:Generator_UserColumnName="surname">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="forename" msprop:Generator_ColumnVarNameInTable="columnforename" msprop:Generator_ColumnPropNameInRow="forename" msprop:Generator_ColumnPropNameInTable="forenameColumn" msprop:Generator_UserColumnName="forename" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
-              <xs:element name="sortseq" msprop:Generator_ColumnVarNameInTable="columnsortseq" msprop:Generator_ColumnPropNameInRow="sortseq" msprop:Generator_ColumnPropNameInTable="sortseqColumn" msprop:Generator_UserColumnName="sortseq" type="xs:int" />
-              <xs:element name="dateadded" msprop:Generator_ColumnVarNameInTable="columndateadded" msprop:Generator_ColumnPropNameInRow="dateadded" msprop:Generator_ColumnPropNameInTable="dateaddedColumn" msprop:Generator_UserColumnName="dateadded" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="birthplace" msprop:Generator_ColumnVarNameInTable="columnbirthplace" msprop:Generator_ColumnPropNameInRow="birthplace" msprop:Generator_ColumnPropNameInTable="birthplaceColumn" msprop:Generator_UserColumnName="birthplace" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="100" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="birthname" msprop:Generator_ColumnVarNameInTable="columnbirthname" msprop:Generator_ColumnPropNameInRow="birthname" msprop:Generator_ColumnPropNameInTable="birthnameColumn" msprop:Generator_UserColumnName="birthname" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="100" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="deathmonth" msprop:Generator_ColumnVarNameInTable="columndeathmonth" msprop:Generator_ColumnPropNameInRow="deathmonth" msprop:Generator_ColumnPropNameInTable="deathmonthColumn" msprop:Generator_UserColumnName="deathmonth" type="xs:int" minOccurs="0" />
-              <xs:element name="deathday" msprop:Generator_ColumnVarNameInTable="columndeathday" msprop:Generator_ColumnPropNameInRow="deathday" msprop:Generator_ColumnPropNameInTable="deathdayColumn" msprop:Generator_UserColumnName="deathday" type="xs:int" minOccurs="0" />
-              <xs:element name="imgfiletype" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="imgfiletype" msprop:Generator_ColumnVarNameInTable="columnimgfiletype" msprop:Generator_ColumnPropNameInTable="imgfiletypeColumn" msprop:Generator_UserColumnName="imgfiletype" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="5" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="imgloadyr" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="imgloadyr" msprop:Generator_ColumnVarNameInTable="columnimgloadyr" msprop:Generator_ColumnPropNameInTable="imgloadyrColumn" msprop:Generator_UserColumnName="imgloadyr" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="4" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="imgloadmonth" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="imgloadmonth" msprop:Generator_ColumnVarNameInTable="columnimgloadmonth" msprop:Generator_ColumnPropNameInTable="imgloadmonthColumn" msprop:Generator_UserColumnName="imgloadmonth" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="twitterHandle" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="twitterHandle" msprop:Generator_ColumnVarNameInTable="columntwitterHandle" msprop:Generator_ColumnPropNameInTable="twitterHandleColumn" msprop:Generator_UserColumnName="twitterHandle" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="noTweet" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="noTweet" msprop:Generator_ColumnVarNameInTable="columnnoTweet" msprop:Generator_ColumnPropNameInTable="noTweetColumn" msprop:Generator_UserColumnName="noTweet" type="xs:boolean" default="false" minOccurs="0" />
-              <xs:element name="imgfilename" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="imgfilename" msprop:Generator_ColumnVarNameInTable="columnimgfilename" msprop:Generator_ColumnPropNameInTable="imgfilenameColumn" msprop:Generator_UserColumnName="imgfilename" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="100" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="wikiId" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="wikiId" msprop:Generator_ColumnVarNameInTable="columnwikiId" msprop:Generator_ColumnPropNameInTable="wikiIdColumn" msprop:Generator_UserColumnName="wikiId" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="100" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="botsd" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="botsd" msprop:Generator_ColumnVarNameInTable="columnbotsd" msprop:Generator_ColumnPropNameInTable="botsdColumn" msprop:Generator_UserColumnName="botsd" type="xs:int" minOccurs="0" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="SocialMedia" msprop:Generator_TableClassName="SocialMediaDataTable" msprop:Generator_TableVarName="tableSocialMedia" msprop:Generator_RowChangedName="SocialMediaRowChanged" msprop:Generator_TablePropName="SocialMedia" msprop:Generator_RowDeletingName="SocialMediaRowDeleting" msprop:Generator_RowChangingName="SocialMediaRowChanging" msprop:Generator_RowEvHandlerName="SocialMediaRowChangeEventHandler" msprop:Generator_RowDeletedName="SocialMediaRowDeleted" msprop:Generator_RowClassName="SocialMediaRow" msprop:Generator_UserTableName="SocialMedia" msprop:Generator_RowEvArgName="SocialMediaRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
@@ -1740,6 +1632,7 @@ WHERE        (btsdPostNo = @postNo)</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="botsd" msprop:Generator_ColumnVarNameInTable="columnbotsd" msprop:Generator_ColumnPropNameInRow="botsd" msprop:Generator_ColumnPropNameInTable="botsdColumn" msprop:Generator_UserColumnName="botsd" type="xs:int" minOccurs="0" />
+              <xs:element name="isTwin" msprop:Generator_ColumnVarNameInTable="columnisTwin" msprop:Generator_ColumnPropNameInRow="isTwin" msprop:Generator_ColumnPropNameInTable="isTwinColumn" msprop:Generator_UserColumnName="isTwin" type="xs:unsignedByte" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1951,6 +1844,109 @@ WHERE        (btsdPostNo = @postNo)</CommandText>
               </xs:element>
               <xs:element name="deathmonth" msprop:Generator_ColumnVarNameInTable="columndeathmonth" msprop:Generator_ColumnPropNameInRow="deathmonth" msprop:Generator_ColumnPropNameInTable="deathmonthColumn" msprop:Generator_UserColumnName="deathmonth" type="xs:int" minOccurs="0" />
               <xs:element name="deathday" msprop:Generator_ColumnVarNameInTable="columndeathday" msprop:Generator_ColumnPropNameInRow="deathday" msprop:Generator_ColumnPropNameInTable="deathdayColumn" msprop:Generator_UserColumnName="deathday" type="xs:int" minOccurs="0" />
+              <xs:element name="isTwin" msprop:Generator_ColumnVarNameInTable="columnisTwin" msprop:Generator_ColumnPropNameInRow="isTwin" msprop:Generator_ColumnPropNameInTable="isTwinColumn" msprop:Generator_UserColumnName="isTwin" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FullPerson" msprop:Generator_TableClassName="FullPersonDataTable" msprop:Generator_TableVarName="tableFullPerson" msprop:Generator_TablePropName="FullPerson" msprop:Generator_RowDeletingName="FullPersonRowDeleting" msprop:Generator_RowChangingName="FullPersonRowChanging" msprop:Generator_RowEvHandlerName="FullPersonRowChangeEventHandler" msprop:Generator_RowDeletedName="FullPersonRowDeleted" msprop:Generator_UserTableName="FullPerson" msprop:Generator_RowChangedName="FullPersonRowChanged" msprop:Generator_RowEvArgName="FullPersonRowChangeEvent" msprop:Generator_RowClassName="FullPersonRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="longdesc" msprop:Generator_ColumnVarNameInTable="columnlongdesc" msprop:Generator_ColumnPropNameInRow="longdesc" msprop:Generator_ColumnPropNameInTable="longdescColumn" msprop:Generator_UserColumnName="longdesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="shortdesc" msprop:Generator_ColumnVarNameInTable="columnshortdesc" msprop:Generator_ColumnPropNameInRow="shortdesc" msprop:Generator_ColumnPropNameInTable="shortdescColumn" msprop:Generator_UserColumnName="shortdesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="deathyear" msprop:Generator_ColumnVarNameInTable="columndeathyear" msprop:Generator_ColumnPropNameInRow="deathyear" msprop:Generator_ColumnPropNameInTable="deathyearColumn" msprop:Generator_UserColumnName="deathyear" type="xs:int" />
+              <xs:element name="birthday" msprop:Generator_ColumnVarNameInTable="columnbirthday" msprop:Generator_ColumnPropNameInRow="birthday" msprop:Generator_ColumnPropNameInTable="birthdayColumn" msprop:Generator_UserColumnName="birthday" type="xs:int" />
+              <xs:element name="birthmonth" msprop:Generator_ColumnVarNameInTable="columnbirthmonth" msprop:Generator_ColumnPropNameInRow="birthmonth" msprop:Generator_ColumnPropNameInTable="birthmonthColumn" msprop:Generator_UserColumnName="birthmonth" type="xs:int" />
+              <xs:element name="birthyear" msprop:Generator_ColumnVarNameInTable="columnbirthyear" msprop:Generator_ColumnPropNameInRow="birthyear" msprop:Generator_ColumnPropNameInTable="birthyearColumn" msprop:Generator_UserColumnName="birthyear" type="xs:int" />
+              <xs:element name="surname" msprop:Generator_ColumnVarNameInTable="columnsurname" msprop:Generator_ColumnPropNameInRow="surname" msprop:Generator_ColumnPropNameInTable="surnameColumn" msprop:Generator_UserColumnName="surname">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="forename" msprop:Generator_ColumnVarNameInTable="columnforename" msprop:Generator_ColumnPropNameInRow="forename" msprop:Generator_ColumnPropNameInTable="forenameColumn" msprop:Generator_UserColumnName="forename" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
+              <xs:element name="sortseq" msprop:Generator_ColumnVarNameInTable="columnsortseq" msprop:Generator_ColumnPropNameInRow="sortseq" msprop:Generator_ColumnPropNameInTable="sortseqColumn" msprop:Generator_UserColumnName="sortseq" type="xs:int" />
+              <xs:element name="dateadded" msprop:Generator_ColumnVarNameInTable="columndateadded" msprop:Generator_ColumnPropNameInRow="dateadded" msprop:Generator_ColumnPropNameInTable="dateaddedColumn" msprop:Generator_UserColumnName="dateadded" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="birthplace" msprop:Generator_ColumnVarNameInTable="columnbirthplace" msprop:Generator_ColumnPropNameInRow="birthplace" msprop:Generator_ColumnPropNameInTable="birthplaceColumn" msprop:Generator_UserColumnName="birthplace" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="birthname" msprop:Generator_ColumnVarNameInTable="columnbirthname" msprop:Generator_ColumnPropNameInRow="birthname" msprop:Generator_ColumnPropNameInTable="birthnameColumn" msprop:Generator_UserColumnName="birthname" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="deathmonth" msprop:Generator_ColumnVarNameInTable="columndeathmonth" msprop:Generator_ColumnPropNameInRow="deathmonth" msprop:Generator_ColumnPropNameInTable="deathmonthColumn" msprop:Generator_UserColumnName="deathmonth" type="xs:int" minOccurs="0" />
+              <xs:element name="deathday" msprop:Generator_ColumnVarNameInTable="columndeathday" msprop:Generator_ColumnPropNameInRow="deathday" msprop:Generator_ColumnPropNameInTable="deathdayColumn" msprop:Generator_UserColumnName="deathday" type="xs:int" minOccurs="0" />
+              <xs:element name="imgfiletype" msprop:Generator_ColumnVarNameInTable="columnimgfiletype" msprop:Generator_ColumnPropNameInRow="imgfiletype" msprop:Generator_ColumnPropNameInTable="imgfiletypeColumn" msprop:Generator_UserColumnName="imgfiletype" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="imgloadyr" msprop:Generator_ColumnVarNameInTable="columnimgloadyr" msprop:Generator_ColumnPropNameInRow="imgloadyr" msprop:Generator_ColumnPropNameInTable="imgloadyrColumn" msprop:Generator_UserColumnName="imgloadyr" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="imgloadmonth" msprop:Generator_ColumnVarNameInTable="columnimgloadmonth" msprop:Generator_ColumnPropNameInRow="imgloadmonth" msprop:Generator_ColumnPropNameInTable="imgloadmonthColumn" msprop:Generator_UserColumnName="imgloadmonth" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="twitterHandle" msprop:Generator_ColumnVarNameInTable="columntwitterHandle" msprop:Generator_ColumnPropNameInRow="twitterHandle" msprop:Generator_ColumnPropNameInTable="twitterHandleColumn" msprop:Generator_UserColumnName="twitterHandle" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="noTweet" msprop:Generator_ColumnVarNameInTable="columnnoTweet" msprop:Generator_ColumnPropNameInRow="noTweet" msprop:Generator_ColumnPropNameInTable="noTweetColumn" msprop:Generator_UserColumnName="noTweet" type="xs:boolean" minOccurs="0" />
+              <xs:element name="imgfilename" msprop:Generator_ColumnVarNameInTable="columnimgfilename" msprop:Generator_ColumnPropNameInRow="imgfilename" msprop:Generator_ColumnPropNameInTable="imgfilenameColumn" msprop:Generator_UserColumnName="imgfilename" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="wikiId" msprop:Generator_ColumnVarNameInTable="columnwikiId" msprop:Generator_ColumnPropNameInRow="wikiId" msprop:Generator_ColumnPropNameInTable="wikiIdColumn" msprop:Generator_UserColumnName="wikiId" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="botsd" msprop:Generator_ColumnVarNameInTable="columnbotsd" msprop:Generator_ColumnPropNameInRow="botsd" msprop:Generator_ColumnPropNameInTable="botsdColumn" msprop:Generator_UserColumnName="botsd" type="xs:int" minOccurs="0" />
+              <xs:element name="isTwin" msprop:Generator_ColumnVarNameInTable="columnisTwin" msprop:Generator_ColumnPropNameInRow="isTwin" msprop:Generator_ColumnPropNameInTable="isTwinColumn" msprop:Generator_UserColumnName="isTwin" type="xs:boolean" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1967,10 +1963,6 @@ WHERE        (btsdPostNo = @postNo)</CommandText>
     </xs:unique>
     <xs:unique name="Image_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Image" />
-      <xs:field xpath="mstns:id" />
-    </xs:unique>
-    <xs:unique name="FullPerson_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:FullPerson" />
       <xs:field xpath="mstns:id" />
     </xs:unique>
     <xs:unique name="SocialMedia_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
@@ -1997,6 +1989,10 @@ WHERE        (btsdPostNo = @postNo)</CommandText>
       <xs:selector xpath=".//mstns:BornOnTheSameDay" />
       <xs:field xpath="mstns:btsdId" />
       <xs:field xpath="mstns:personId" />
+      <xs:field xpath="mstns:id" />
+    </xs:unique>
+    <xs:unique name="FullPerson_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:FullPerson" />
       <xs:field xpath="mstns:id" />
     </xs:unique>
   </xs:element>
