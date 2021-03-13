@@ -52,12 +52,12 @@ Public Class BirthdayTweets
     Private Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Private Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Private Shared ReadOnly LINEFEED As String = Convert.ToChar(vbLf, myStringFormatProvider)
-    'Private Const CELEB_USER As String = "CelebBirthdayUK"
-    'Private Const HBURPDAY_USER As String = "HBurpday"
-    'Private Const BOTSD_USER As String = "NotTwins1"
-    Private Const CELEB_USER As String = "FunsterMuddy"
-    Private Const HBURPDAY_USER As String = "FunsterMuddy"
-    Private Const BOTSD_USER As String = "FunsterMuddy"
+    Private Const CELEB_USER As String = "CelebBirthdayUK"
+    Private Const HBURPDAY_USER As String = "HBurpday"
+    Private Const BOTSD_USER As String = "NotTwins1"
+    'Private Const CELEB_USER As String = "FunsterMuddy"
+    'Private Const HBURPDAY_USER As String = "FunsterMuddy"
+    'Private Const BOTSD_USER As String = "FunsterMuddy"
 
     Private Const TWEET_FOOTER_LENGTH As Integer = 5
     Private Const NOT_DELETED As String = "File not deleted"
