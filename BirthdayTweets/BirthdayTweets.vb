@@ -199,7 +199,7 @@ Public Class BirthdayTweets
         LogUtil.Info("Sending BotSDtweets")
         For Each tweetToSend As CbTweet In cbTweets
             Dim imageFilename As String = SaveImage(tweetToSend, BOTSD_FNAME)
-            SendTheTweet(tweetToSend, CELEB_USER, imageFilename)
+            SendTheTweet(tweetToSend, BOTSD_USER, imageFilename)
         Next
     End Sub
     Private Shared Function GenerateBotSDTweets(oBotSDList As List(Of List(Of Person))) As List(Of CbTweet)
