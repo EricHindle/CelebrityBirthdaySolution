@@ -29,12 +29,52 @@ Public Class FrmDeathCheck
                 If String.IsNullOrEmpty(searchString) Then
                     searchString = _person.Name
                 End If
-                Dim _dateOfDeath As String = GetWikiDeathDate(searchString)
+                Dim _wikiExtract As String = GetWikiExtract(searchString)
+                Dim _displayExtract As String = _wikiExtract.Substring(0, Math.Min(180, _wikiExtract.Length))
+                Dim isDateFound As Boolean = False
+                Dim isEndOfExtract As Boolean = String.IsNullOrEmpty(_wikiExtract)
+                Dim _dates As New List(Of String)
+                Do Until isDateFound Or isEndOfExtract
+                    Dim _parts As List(Of String) = ParseStringWithBrackets(_wikiExtract)
+                    If _parts.Count <> 3 Then
+                        isEndOfExtract = True
+                    Else
+                        _dates = GetWikiDates(_parts(1))
+                        If _dates.Count > 0 Then
+                            isDateFound = True
+                            If IsDate(_dates(0)) Then
+                                Dim _dob As Date = CDate(_dates(0))
+                                If _person.DateOfBirth <> _dob Then
+                                    isDateFound = False
+                                    _wikiExtract = _parts(2)
+                                End If
+                            End If
+                        Else
+                            _wikiExtract = _parts(2)
+                        End If
+                    End If
+                Loop
+                'If isDateFound Then
+                '    For Each d As String In _dates
+                '        If IsDate(d) Then
+                '            LogUtil.Info(_person.Name & " >> " & d, "frmDeathCheck")
+                '        Else
+                '            LogUtil.Info(_person.Name & " ?? " & d, "frmDeathCheck")
+                '        End If
+
+                '    Next
+                'Else
+                '    LogUtil.Info(_person.Name & " ** No date found" & _displayExtract, "frmDeathCheck")
+                'End If
+                Dim _dateOfDeath As String = Nothing
+                If _dates.Count > 1 Then
+                    _dateOfDeath = _dates(1)
+                End If
                 If _dateOfDeath IsNot Nothing Then
                     If IsDate(_dateOfDeath) Then
-                        AddXRow(_person, _dateOfDeath, "")
+                        AddXRow(_person, _dateOfDeath, _wikiExtract)
                     Else
-                        AddXRow(_person, "", _dateOfDeath)
+                        AddXRow(_person, "", _dateOfDeath)      ' Error
                     End If
                 End If
             Catch ex As DbException
@@ -76,29 +116,85 @@ Public Class FrmDeathCheck
     End Sub
 #End Region
 #Region "subroutines"
-    Private Shared Function GetWikiDeathDate(_searchName As String) As String
-        Dim _deathDate As Date? = Nothing
+    Private Shared Function GetWikiDates(_dateString As String) As List(Of String)
+        Dim wikiDates As New List(Of String)
+        Dim _semiSplit As String() = Split(_dateString, ";")
+        Dim _possibleDates As String() = Nothing
+        '       LogUtil.Info(_dateString)
+        For Each _semi As String In _semiSplit
+            '    LogUtil.Info("[" & _semi & "]")
+            Dim _s1 As String() = Split(_semi, "born")
+            Dim _s2 As String() = Split(_s1(Math.Min(_s1.Length - 1, 1)), " on ")
+            Dim _s3 As String() = Split(_s2(Math.Min(_s2.Length - 1, 1)), " in ")
+            Dim _s4 As String = _s3(0)
+            _possibleDates = Split(_s4, " - ")
+            If IsDate(_possibleDates(0)) Then
+                Exit For
+            End If
+        Next
+        If _possibleDates IsNot Nothing Then
+            For Each _possibleDate As String In _possibleDates
+                Dim foundDate As String = findDateInString(_possibleDate)
+                If Not String.IsNullOrEmpty(foundDate) Then
+                    wikiDates.Add(foundDate)
+                End If
+            Next
+        End If
+        Return wikiDates
+    End Function
+    Private Shared Function FindDateInString(_possibleDate As String) As String
+        Dim _foundDate As String = Nothing
+        Dim _words As String() = Split(_possibleDate.Replace(",", "").Replace("  ", " ").Trim, " ")
+        If _words.Length >= 3 Then
+            For w As Integer = 0 To _words.Length - 3
+                Dim _testDate As String = _words(w) & " " & _words(w + 1) & " " & _words(w + 2)
+                If IsDate(_testDate) Then
+                    _foundDate = _testDate
+                    Exit For
+                End If
+            Next
+        End If
+        Return _foundDate
+    End Function
+    Private Shared Function GetWikiExtract(_searchName As String) As String
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
         Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
-        Dim _desc As String = RemoveSquareBrackets(FixQuotesAndHyphens(extract, True))
-        Dim _parts As List(Of String) = ParseStringWithBrackets(_desc)
+        Return RemoveSquareBrackets(FixQuotesAndHyphens(extract, True))
+    End Function
+    Private Shared Function GetWikiDeathDate(_parts As List(Of String)) As String
+        Dim _deathDate As Date? = Nothing
         Dim _return As String = Nothing
+        Dim _displayDesc As String = _parts(0).Substring(0, Math.Min(_parts(0).Length, 180))
         Select Case _parts.Count
             Case 3
                 Dim datePart As String = _parts(1)
                 Dim _dates As String() = Split(datePart, " - ")
-                If _dates.Length = 2 Then
+                If _dates.Length >= 2 Then
                     Try
                         If IsDate(_dates(1)) Then
-                            _deathDate = CDate(_dates(1))
+                            _return = _dates(1)
+                        Else
+                            _return = _displayDesc & " ** Not a date " & _parts(1)
                         End If
                     Catch ex As OverflowException
-                        _return = _searchName & " Not a date " & _dates(1)
+                        _return = _displayDesc & " ** Exception " & _parts(1)
+                    End Try
+                Else
+                    Try
+                        Dim _semisplit As String() = Split(_dates(0), ";")
+                        Dim _insplit As String() = Split(_semisplit(_semisplit.Length - 1), "in")
+                        Dim _trimmedDate As String = _insplit(0).Replace("born", "").Trim
+
+                        Dim _date1 As String = _trimmedDate
+                        If Not IsDate(_date1) Then
+                            _return = _displayDesc & " ** Not a date " & _date1
+                        End If
+                    Catch ex As OverflowException
+                        _return = _displayDesc & " ** Exception " & _parts(0)
                     End Try
                 End If
-                _return = If(_deathDate Is Nothing, Nothing, Format(_deathDate, "dd MMM yyyy"))
             Case 2
-                _return = _searchName & " " & My.Resources.NO_CLOSE_BRACKET
+                _return = _displayDesc & " " & My.Resources.NO_CLOSE_BRACKET
         End Select
         Return _return
     End Function
