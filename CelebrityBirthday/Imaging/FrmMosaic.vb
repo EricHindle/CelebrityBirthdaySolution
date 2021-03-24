@@ -1,7 +1,9 @@
 ﻿Imports System.IO
 
 Public Class FrmMosaic
-
+    Dim _width As Integer
+    Dim _height As Integer
+    Dim isChangingSize As Boolean = False
     Private _imageList As New List(Of Person)
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
@@ -14,16 +16,19 @@ Public Class FrmMosaic
         If Not My.Computer.FileSystem.DirectoryExists(_path) Then
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
-        Dim _fileName As String = Path.Combine(_path, cboMonth.SelectedItem & "_mosaic_" & If(chkBotSD.Checked, "botsd_", "") & CStr(nudSkip.Value + 1) & "-" & CStr(nudSkip.Value + NudHeight.Value) & ".jpg")
-        ImageUtil.SaveImageFromPictureBox(PictureBox1, (NudWidth.Value * 60), (NudHeight.Value * 60), _fileName)
-        DisplayStatus("File saved")
+        Dim _fileName As String = Path.Combine(_path, cboMonth.SelectedItem & If(CboDay.SelectedIndex > 0, CboDay.SelectedItem, "") & "_mosaic_" & If(chkBotSD.Checked, "botsd_", "") & CStr(nudSkip.Value + 1) & "-" & CStr(nudSkip.Value + NudHeight.Value) & ".jpg")
+        ImageUtil.SaveImageFromPictureBox(PictureBox1, (_width * 60), (_height * 60), _fileName)
+        DisplayStatus("File saved : " & _fileName)
     End Sub
 
-    Private Sub DisplayStatus(_text As String, Optional _isAppend As Boolean = False)
-        If _isAppend Then
+    Private Sub DisplayStatus(_text As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = True)
+        If isAppend Then
             lblStatus.Text &= _text
         Else
             lblStatus.Text = _text
+        End If
+        If isLogged Then
+            LogUtil.Info(_text, "FrmMosaic")
         End If
         StatusStrip1.Refresh()
     End Sub
@@ -35,7 +40,7 @@ Public Class FrmMosaic
         oGraphics.DrawImage(My.Resources.id, New Point(_mosaic.Width - 60, _mosaic.Height - 60))
         Dim _imgHPos As Integer = -1
         Dim _imgVPos As Integer = 0
-        Dim _skip As Integer = nudSkip.Value * NudWidth.Value
+        Dim _skip As Integer = nudSkip.Value * _width
         For Each _person As Person In _imageTable
             If _skip = 0 Then
                 If _person.Image IsNot Nothing AndAlso _person.Image.Photo IsNot Nothing Then
@@ -54,7 +59,7 @@ Public Class FrmMosaic
             End If
         Next
         _pictureBox.Image = _mosaic
-        LblImgShown.Text = CStr(NudWidth.Value * NudHeight.Value)
+        LblImgShown.Text = CStr(_width * _height)
         LblImgShown.Refresh()
         DisplayStatus("Image complete")
     End Sub
@@ -69,7 +74,11 @@ Public Class FrmMosaic
             _PersonTa.FillByBotsd(_PersonTable)
         Else
             If cboMonth.SelectedIndex >= 0 Then
-                _PersonTa.FillByMonth(_PersonTable, cboMonth.SelectedIndex + 1)
+                If CboDay.SelectedIndex > 0 Then
+                    _PersonTa.FillByDayAndMonth(_PersonTable, CboDay.SelectedIndex, cboMonth.SelectedIndex + 1)
+                Else
+                    _PersonTa.FillByMonth(_PersonTable, cboMonth.SelectedIndex + 1)
+                End If
             Else
                 DisplayStatus("No month selected")
             End If
@@ -81,28 +90,61 @@ Public Class FrmMosaic
             'End If
             _imageList.Add(New Person(_personRow))
         Next
+        _height = Int(Math.Sqrt(_imageList.Count))
+        isChangingSize = True
+        NudHeight.Value = _height
+        _width = Int(_imageList.Count / NudHeight.Value) + If(_imageList.Count > (_height ^ 2), 1, 0)
+        NudWidth.Value = _width
+        isChangingSize = False
         lblImgCount.Text = CStr(_imageList.Count)
-                lblImgCount.Refresh()
-                GenerateImage(PictureBox1, _imageList, NudWidth.Value, NudHeight.Value)
-                _PersonTable.Dispose()
-                _PersonTa.Dispose()
+        lblImgCount.Refresh()
+        GenerateImage(PictureBox1, _imageList, _width, _height)
+        _PersonTable.Dispose()
+        _PersonTa.Dispose()
 
     End Sub
 
     Private Sub NudWidth_ValueChanged(sender As Object, e As EventArgs) Handles NudWidth.ValueChanged
-        If _imageList.Count > 0 And NudWidth.Value > 0 Then
-            Try
-                NudHeight.Value = Int(_imageList.Count / NudWidth.Value)
-            Catch ex As ArithmeticException
-                NudHeight.Value = NudHeight.Maximum
-            End Try
-            GenerateImage(PictureBox1, _imageList, NudWidth.Value, NudHeight.Value)
+        If Not isChangingSize Then
+            isChangingSize = True
+            If _imageList.Count > 0 And NudWidth.Value > 0 Then
+                Try
+                    _width = NudWidth.Value
+                    Dim _possibleNewHeight As Integer = Int(_imageList.Count / _width)
+                    _height = Int(_imageList.Count / _width) + If(_imageList.Count > (_possibleNewHeight * _width), 1, 0)
+                    NudHeight.Value = _height
+                    GenerateImage(PictureBox1, _imageList, _width, _height)
+                Catch ex As ArithmeticException
+                    DisplayStatus("Exception occurred")
+                    LogUtil.Exception("Error", ex, "FrmMosaic")
+                End Try
+            End If
+            isChangingSize = False
         End If
     End Sub
-
+    Private Sub NudHeight_ValueChanged(sender As Object, e As EventArgs) Handles NudHeight.ValueChanged
+        If Not isChangingSize Then
+            isChangingSize = True
+            If _imageList.Count > 0 And NudHeight.Value > 0 Then
+                Try
+                    _height = NudHeight.Value
+                    Dim _possibleNewWidth As Integer = Int(_imageList.Count / _height)
+                    _width = Int(_imageList.Count / _height) + If(_imageList.Count > (_possibleNewWidth * _height), 1, 0)
+                    NudWidth.Value = _width
+                    GenerateImage(PictureBox1, _imageList, _width, _height)
+                Catch ex As ArithmeticException
+                    DisplayStatus("Exception occurred")
+                    LogUtil.Exception("Error", ex, "FrmMosaic")
+                End Try
+            End If
+            isChangingSize = False
+        End If
+    End Sub
     Private Sub BtnRegen_Click(sender As Object, e As EventArgs) Handles BtnRegen.Click
         If _imageList.Count > 0 And NudWidth.Value > 0 Then
-            GenerateImage(PictureBox1, _imageList, NudWidth.Value, NudHeight.Value)
+            _width = NudWidth.Value
+            _height = NudHeight.Value
+            GenerateImage(PictureBox1, _imageList, _width, _height)
         End If
     End Sub
 
@@ -115,5 +157,10 @@ Public Class FrmMosaic
 
     Private Sub FrmMosaic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
+    End Sub
+
+    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
+        CboDay.SelectedIndex = Today.Day
+        cboMonth.SelectedIndex = Today.Month - 1
     End Sub
 End Class

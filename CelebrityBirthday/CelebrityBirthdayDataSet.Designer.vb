@@ -4454,10 +4454,14 @@ Partial Public Class CelebrityBirthdayDataSet
             Me.columnsortseq.AllowDBNull = false
             Me.columnbirthplace.MaxLength = 100
             Me.columnbirthname.MaxLength = 100
+            Me.columnimgfiletype.DefaultValue = CType("""""",String)
             Me.columnimgfiletype.MaxLength = 5
+            Me.columnimgloadyr.DefaultValue = CType("""""",String)
             Me.columnimgloadyr.MaxLength = 4
+            Me.columnimgloadmonth.DefaultValue = CType("""""",String)
             Me.columnimgloadmonth.MaxLength = 2
             Me.columntwitterHandle.MaxLength = 50
+            Me.columnimgfilename.DefaultValue = CType("""""",String)
             Me.columnimgfilename.MaxLength = 100
             Me.columnwikiId.MaxLength = 100
         End Sub
@@ -6774,11 +6778,11 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property imgfiletype() As String
             Get
-                Try 
+                If Me.IsimgfiletypeNull Then
+                    Return String.Empty
+                Else
                     Return CType(Me(Me.tableFullPerson.imgfiletypeColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'imgfiletype' in table 'FullPerson' is DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableFullPerson.imgfiletypeColumn) = value
@@ -6789,11 +6793,11 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property imgloadyr() As String
             Get
-                Try 
+                If Me.IsimgloadyrNull Then
+                    Return String.Empty
+                Else
                     Return CType(Me(Me.tableFullPerson.imgloadyrColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'imgloadyr' in table 'FullPerson' is DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableFullPerson.imgloadyrColumn) = value
@@ -6804,11 +6808,11 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property imgloadmonth() As String
             Get
-                Try 
+                If Me.IsimgloadmonthNull Then
+                    Return String.Empty
+                Else
                     Return CType(Me(Me.tableFullPerson.imgloadmonthColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'imgloadmonth' in table 'FullPerson' is DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableFullPerson.imgloadmonthColumn) = value
@@ -6819,11 +6823,11 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property twitterHandle() As String
             Get
-                Try 
+                If Me.IstwitterHandleNull Then
+                    Return String.Empty
+                Else
                     Return CType(Me(Me.tableFullPerson.twitterHandleColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'twitterHandle' in table 'FullPerson' is DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableFullPerson.twitterHandleColumn) = value
@@ -6834,11 +6838,11 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property noTweet() As Boolean
             Get
-                Try 
+                If Me.IsnoTweetNull Then
+                    Return false
+                Else
                     Return CType(Me(Me.tableFullPerson.noTweetColumn),Boolean)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'noTweet' in table 'FullPerson' is DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableFullPerson.noTweetColumn) = value
@@ -6849,11 +6853,11 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property imgfilename() As String
             Get
-                Try 
+                If Me.IsimgfilenameNull Then
+                    Return String.Empty
+                Else
                     Return CType(Me(Me.tableFullPerson.imgfilenameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'imgfilename' in table 'FullPerson' is DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableFullPerson.imgfilenameColumn) = value
@@ -6864,11 +6868,11 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property wikiId() As String
             Get
-                Try 
+                If Me.IswikiIdNull Then
+                    Return String.Empty
+                Else
                     Return CType(Me(Me.tableFullPerson.wikiIdColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'wikiId' in table 'FullPerson' is DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableFullPerson.wikiIdColumn) = value
@@ -6879,11 +6883,11 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property botsd() As Integer
             Get
-                Try 
+                If Me.IsbotsdNull Then
+                    Return 0
+                Else
                     Return CType(Me(Me.tableFullPerson.botsdColumn),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'botsd' in table 'FullPerson' is DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableFullPerson.botsdColumn) = value
@@ -6894,11 +6898,11 @@ Partial Public Class CelebrityBirthdayDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property isTwin() As Boolean
             Get
-                Try 
+                If Me.IsisTwinNull Then
+                    Return false
+                Else
                     Return CType(Me(Me.tableFullPerson.isTwinColumn),Boolean)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'isTwin' in table 'FullPerson' is DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableFullPerson.isTwinColumn) = value

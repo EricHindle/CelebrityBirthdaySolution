@@ -43,6 +43,9 @@ Partial Class FrmMosaic
         Me.Label6 = New System.Windows.Forms.Label()
         Me.nudSkip = New System.Windows.Forms.NumericUpDown()
         Me.chkBotSD = New System.Windows.Forms.CheckBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.CboDay = New System.Windows.Forms.ComboBox()
+        Me.BtnToday = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudWidth, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -144,7 +147,7 @@ Partial Class FrmMosaic
         Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
         Me.cboMonth.Location = New System.Drawing.Point(226, 628)
         Me.cboMonth.Name = "cboMonth"
-        Me.cboMonth.Size = New System.Drawing.Size(240, 27)
+        Me.cboMonth.Size = New System.Drawing.Size(161, 27)
         Me.cboMonth.TabIndex = 7
         '
         'Label3
@@ -162,7 +165,7 @@ Partial Class FrmMosaic
         Me.BtnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSelect.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSelect.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSelect.Location = New System.Drawing.Point(681, 623)
+        Me.BtnSelect.Location = New System.Drawing.Point(757, 623)
         Me.BtnSelect.Name = "BtnSelect"
         Me.BtnSelect.Size = New System.Drawing.Size(87, 40)
         Me.BtnSelect.TabIndex = 1
@@ -174,7 +177,7 @@ Partial Class FrmMosaic
         Me.BtnSaveImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSaveImage.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSaveImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSaveImage.Location = New System.Drawing.Point(956, 627)
+        Me.BtnSaveImage.Location = New System.Drawing.Point(1032, 627)
         Me.BtnSaveImage.Name = "BtnSaveImage"
         Me.BtnSaveImage.Size = New System.Drawing.Size(139, 33)
         Me.BtnSaveImage.TabIndex = 9
@@ -206,7 +209,7 @@ Partial Class FrmMosaic
         Me.BtnRegen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnRegen.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRegen.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRegen.Location = New System.Drawing.Point(787, 623)
+        Me.BtnRegen.Location = New System.Drawing.Point(863, 623)
         Me.BtnRegen.Name = "BtnRegen"
         Me.BtnRegen.Size = New System.Drawing.Size(135, 40)
         Me.BtnRegen.TabIndex = 12
@@ -262,12 +265,45 @@ Partial Class FrmMosaic
         Me.chkBotSD.Text = "BotSD only"
         Me.chkBotSD.UseVisualStyleBackColor = True
         '
+        'Label7
+        '
+        Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(407, 635)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(27, 14)
+        Me.Label7.TabIndex = 18
+        Me.Label7.Text = "Day"
+        '
+        'CboDay
+        '
+        Me.CboDay.FormattingEnabled = True
+        Me.CboDay.Items.AddRange(New Object() {"All", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
+        Me.CboDay.Location = New System.Drawing.Point(440, 632)
+        Me.CboDay.Name = "CboDay"
+        Me.CboDay.Size = New System.Drawing.Size(61, 22)
+        Me.CboDay.TabIndex = 19
+        '
+        'BtnToday
+        '
+        Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnToday.Location = New System.Drawing.Point(633, 627)
+        Me.BtnToday.Name = "BtnToday"
+        Me.BtnToday.Size = New System.Drawing.Size(75, 30)
+        Me.BtnToday.TabIndex = 28
+        Me.BtnToday.Text = "Today"
+        Me.BtnToday.UseVisualStyleBackColor = True
+        '
         'FrmMosaic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1276, 719)
+        Me.Controls.Add(Me.BtnToday)
+        Me.Controls.Add(Me.CboDay)
+        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.chkBotSD)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.nudSkip)
@@ -322,4 +358,7 @@ Partial Class FrmMosaic
     Friend WithEvents Label6 As Label
     Friend WithEvents nudSkip As NumericUpDown
     Friend WithEvents chkBotSD As CheckBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents CboDay As ComboBox
+    Friend WithEvents BtnToday As Button
 End Class
