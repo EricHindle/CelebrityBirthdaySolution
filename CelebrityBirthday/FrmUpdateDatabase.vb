@@ -700,6 +700,9 @@ Public NotInheritable Class FrmUpdateDatabase
             _botsd.ThisDay = cboDay.SelectedIndex + 1
             _botsd.ThisMonth = cboMonth.SelectedIndex + 1
             _botsd.ShowDialog()
+            Dim selectedPerson As Person = personTable(lbPeople.SelectedIndex)
+            selectedPerson.Social = GetPersonById(selectedPerson.Id).Social
+            lblBotsdId.Text = CStr(selectedPerson.Social.Botsd)
         End Using
         ClearStatus()
     End Sub

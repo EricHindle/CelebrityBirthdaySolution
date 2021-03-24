@@ -13541,11 +13541,14 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
-                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
-                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, wikiId"& _ 
-                ", botsd, isTwin FROM FullPerson WHERE (botsd > 0)"
+            Me._commandCollection(3).CommandText = "SELECT        longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, su"& _ 
+                "rname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deat"& _ 
+                "hday, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         imgfiletype, imgloadyr, imgloadmonth, twitterHa"& _ 
+                "ndle, noTweet, imgfilename, wikiId, botsd, isTwin"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            FullPerson"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"W"& _ 
+                "HERE        (botsd > 0) AND (birthmonth = @mth) OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (bo"& _ 
+                "tsd > 0) AND (@mth = 0)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY birthmonth, birthday, birthyear, sortseq"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@mth", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
             Me._commandCollection(4).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
@@ -13632,8 +13635,9 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
-        Public Overloads Overridable Function FillByBotsd(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable) As Integer
+        Public Overloads Overridable Function FillByBotsd(ByVal dataTable As CelebrityBirthdayDataSet.FullPersonDataTable, ByVal mth As Integer) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(3)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(mth,Integer)
             If (Me.ClearBeforeFill = true) Then
                 dataTable.Clear
             End If

@@ -71,7 +71,7 @@ Public Class FrmMosaic
         Dim _PersonTa As New CelebrityBirthdayDataSetTableAdapters.FullPersonTableAdapter
         Dim _PersonTable As New CelebrityBirthdayDataSet.FullPersonDataTable
         If chkBotSD.Checked Then
-            _PersonTa.FillByBotsd(_PersonTable)
+            _PersonTa.FillByBotsd(_PersonTable, cboMonth.SelectedIndex + 1)
         Else
             If cboMonth.SelectedIndex >= 0 Then
                 If CboDay.SelectedIndex > 0 Then
