@@ -37,6 +37,7 @@ Public NotInheritable Class FrmDateCheck
         Me.Close()
     End Sub
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+        ResetChecklistButtons()
         ClearPersonDetails()
         isLoadingTable = True
         DgvWarnings.Columns().Item(xImg.Name).Visible = ChkShowImage.Checked
@@ -65,7 +66,7 @@ Public NotInheritable Class FrmDateCheck
         Dim totalPeople As Integer = personList.Count
         Dim _ct As Integer = 0
         Dim _addedct As Integer = 0
-        DisplayMessage("Found " & CStr(totalPeople) & " people")
+        DisplayMessage("Found " & CStr(totalPeople) & " people", True)
         personTable.Clear()
         For Each _person In personList
             _ct += 1
@@ -142,41 +143,79 @@ Public NotInheritable Class FrmDateCheck
         If DgvWarnings.SelectedRows.Count = 1 Then
             Dim oPerson As Person = personTable(DgvWarnings.SelectedRows(0).Index)
             ResetChecklistButtons()
+            Dim toDate As Date = New Date(CInt(TxtToYear.Text), CInt(TxtToMonth.Text), CInt(TxtToDay.Text))
+            Dim fromDate As Date = New Date(CInt(TxtFromYear.Text), CInt(TxtFromMonth.Text), CInt(TxtFromDay.Text))
             Dim isOldReseqRequired As Boolean = False
             If oPerson.Social IsNot Nothing AndAlso oPerson.Social.Botsd > 0 Then
+                '
+                ' BotSD work required
+                '
                 Dim oBotsdId As Integer = oPerson.Social.Botsd
                 Dim oBotsdRow As CelebrityBirthdayDataSet.BotSDRow = GetBotsd(oBotsdId)
                 Dim oBotsdPostNo As Integer = If(oBotsdRow Is Nothing, 0, oBotsdRow.btsdPostNo)
                 Dim oBotsdRowCollection As DataRowCollection = GetBotsdViewByPostNo(oBotsdPostNo)
+                LblBotsdPostNo.Text = "#" & CStr(oBotsdPostNo)
+                LblBotsdId.Text = CStr(oBotsdId)
+                LblBotsdUrl.Text = oBotsdRow.btsdUrl
+                '
+                ' Remove BotSD id
+                '
                 BtnRmvBotsdId.Visible = True
+                ' 
+                ' List other people on the same day
+                '
                 Dim otherBotsd As New List(Of Integer)
                 For Each oViewRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In oBotsdRowCollection
                     If Not oViewRow.IspersonIdNull AndAlso oViewRow.personId <> oPerson.Id Then
                         otherBotsd.Add(oViewRow.personId)
                     End If
                 Next
+                '
+                'If only one person will remain - remove their botsd id too
+                '
                 If otherBotsd.Count = 1 Then
+                    LblOthPersonId.Text = CStr(otherBotsd(0))
                     BtnRmvOtherBotsdId.Visible = True
                 End If
                 If otherBotsd.Count < 2 Then
+                    ' No longert a BotSD
                     BtnRmvBotsdRecord.Visible = True
                     BtnRmvOldBotsdPost.Visible = True
                 Else
+                    ' still a BotSD
                     BtnUpdOldBotsdPost.Visible = True
+                    LblBotsdDate.Text = TxtFromDay.Text & "/" & TxtFromMonth.Text
                 End If
+                ' list will need changing
                 BtnUpdOldBotsdList.Visible = True
+                LblBotsdListUrl.Text = My.Settings.botsdWordPressUrl & Format(fromDate, "MMMM") & "/"
                 isOldReseqRequired = True
             End If
             BtnUpdatePerson.Visible = True
+            '
+            ' After person has been updated, BotSD group needs resequencing
+            '
             If isOldReseqRequired Then BtnReseqOldGroup.Visible = True
-            Dim oNewGroup As CelebrityBirthdayDataSet.PersonDataTable = GetPeopleByDateofBirth(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
-            If oNewGroup.Rows.Count > 1 Then
+            'Find any existing people on intended new dob
+            Dim oNewGroup As New CelebrityBirthdayDataSet.PersonDataTable
+            Try
+                oNewGroup = GetPeopleByDateofBirth(CInt(TxtToDay.Text), CInt(TxtToMonth.Text), CInt(TxtToYear.Text))
+            Catch ex As Exception
+                DisplayMessage("Invalid To Date")
+            End Try
+            ' If this person will be in a BotSD group
+            If oNewGroup.Rows.Count > 0 Then
                 BtnReseqNewGroup.Visible = True
                 BtnUpdateNewBotsdPost.Visible = True
                 BtnPosted.Visible = True
                 BtnUpdNewBotsdList.Visible = True
             End If
             Dim isYearOnlyChange As Boolean = TxtFromDay.Text = TxtToDay.Text AndAlso TxtFromMonth.Text = TxtToMonth.Text
+            '
+            ' If only the year of birth is changing, the person will stay on the same CB post
+            ' The picture may need to be moved
+            ' otherwise 
+            ' The both posts and pictures need changing
             If isYearOnlyChange Then
                 BtnMoveCbPic.Visible = True
             Else
@@ -234,10 +273,13 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub FrmDateCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
+        GetFormPos(Me, My.Settings.datecheckformpos)
         ResetChecklistButtons()
     End Sub
     Private Sub FrmDateCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
+        My.Settings.datecheckformpos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
     Private Sub BtnWpDesc_Click(sender As Object, e As EventArgs) Handles BtnWpDesc.Click
         Dim wpText As String = ""
@@ -385,7 +427,8 @@ Public NotInheritable Class FrmDateCheck
         DisplayMessage("")
     End Sub
     Private Sub ResetChecklistButtons()
-        HideChecklistButtons
+        HideChecklistButtons()
+        ClearChecklistLabels()
     End Sub
     Private Sub HideChecklistButtons()
         BtnRmvBotsdId.Visible = False
@@ -408,6 +451,15 @@ Public NotInheritable Class FrmDateCheck
         BtnUpdNewCbPage.Visible = False
         BtnRmvRow.Visible = False
     End Sub
+    Private Sub ClearChecklistLabels()
+        LblBotsdPostNo.Text = ""
+        LblOthPersonId.Text = ""
+        LblBotsdId.Text = ""
+        LblBotsdUrl.Text = ""
+        LblBotsdDate.Text = ""
+        LblBotsdListUrl.Text = ""
+
+    End Sub
 #End Region
 #Region "checklist"
     Private Sub BtnRmvBotsdId_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsdId.Click
@@ -419,34 +471,71 @@ Public NotInheritable Class FrmDateCheck
                 If oSocial.Botsd > 0 Then
                     UpdateBotsdId(oPerson.Id, 0)
                     DisplayMessage("Removed BotSD Id from person " & CStr(oPerson.Id) & " " & oPerson.Surname, True)
+                    LblBotsdPostNo.Text = "done"
                 Else
                     DisplayMessage("No BotSD id to remove", True)
+                    LblBotsdPostNo.Text = "err"
                 End If
             Else
                 DisplayMessage("No social details", True)
+                LblBotsdPostNo.Text = "err"
             End If
         Else
             DisplayMessage("No person selected", True)
+            LblBotsdPostNo.Text = "err"
         End If
 
     End Sub
 
     Private Sub BtnRmvOtherBotsdId_Click(sender As Object, e As EventArgs) Handles BtnRmvOtherBotsdId.Click
-
+        DisplayMessage("Removing other BotSD id", True)
+        If Not String.IsNullOrEmpty(LblOthPersonId.Text) AndAlso IsNumeric(LblOthPersonId.Text) Then
+            UpdateBotsdId(CInt(LblOthPersonId.Text), 0)
+            DisplayMessage("Removed BotSD Id from person " & CStr(LblOthPersonId.Text))
+            LblOthPersonId.Text = "done"
+        Else
+            DisplayMessage("No person identified", True)
+            LblBotsdPostNo.Text = "err"
+        End If
     End Sub
 
     Private Sub BtnRmvBotsdRecord_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsdRecord.Click
-
+        DisplayMessage("Removing BotSD record", True)
+        If Not String.IsNullOrEmpty(LblBotsdId.Text) AndAlso IsNumeric(LblBotsdId.Text) Then
+            Dim botsdId As Integer = CInt(LblBotsdId.Text)
+            If DeleteBotsdById(botsdId) = 1 Then
+                LblBotsdId.Text = "done"
+            Else
+                LblBotsdId.Text = "failed"
+            End If
+        Else
+            DisplayMessage("No post identified", True)
+            LblBotsdId.Text = "err"
+        End If
     End Sub
-
     Private Sub BtnRmvOldBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnRmvOldBotsdPost.Click
-
+        DisplayMessage("Opening old BotSD post for removal")
+        Try
+            Process.Start(LblBotsdUrl.Text)
+            LblBotsdUrl.Text = "open"
+        Catch ex As ComponentModel.Win32Exception
+            LblBotsdUrl.Text = "invalid"
+        End Try
     End Sub
-
     Private Sub BtnUpdOldBotsdList_Click(sender As Object, e As EventArgs) Handles BtnUpdOldBotsdList.Click
-
+        DisplayMessage("Opening old BotSD list for amendment")
+        Try
+            Process.Start(LblBotsdListUrl.Text)
+            LblBotsdUrl.Text = "open"
+        Catch ex As ComponentModel.Win32Exception
+            LblBotsdUrl.Text = "invalid"
+        End Try
+        Using _botsd As New FrmBotsd
+            _botsd.ThisDay = CInt(TxtFromDay.Text)
+            _botsd.ThisMonth = CInt(TxtFromMonth.Text)
+            _botsd.ShowDialog()
+        End Using
     End Sub
-
     Private Sub BtnUpdatePerson_Click(sender As Object, e As EventArgs) Handles BtnUpdatePerson.Click
         If DgvWarnings.SelectedRows.Count = 1 Then
             Dim oPerson As Person = personTable(DgvWarnings.SelectedRows(0).Index)
@@ -464,45 +553,38 @@ Public NotInheritable Class FrmDateCheck
             End If
         End If
     End Sub
-
     Private Sub BtnReseqOldGroup_Click(sender As Object, e As EventArgs) Handles BtnReseqOldGroup.Click
-
+        DisplayMessage("ReseqOldGroup not implemented")
     End Sub
-
     Private Sub BtnUpdateNewBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnUpdateNewBotsdPost.Click
-
+        DisplayMessage("UpdateNewBotsdPost not implemented")
     End Sub
-
     Private Sub BtnPosted_Click(sender As Object, e As EventArgs) Handles BtnPosted.Click
-
+        DisplayMessage("Posted not implemented")
     End Sub
-
     Private Sub BtnUpdNewBotsdList_Click(sender As Object, e As EventArgs) Handles BtnUpdNewBotsdList.Click
-
+        DisplayMessage("UpdNewBotsdList not implemented")
     End Sub
-
     Private Sub BtnRmvOldPicture_Click(sender As Object, e As EventArgs) Handles BtnRmvOldPicture.Click
-
+        DisplayMessage("RmvOldPicture not implemented")
     End Sub
-
     Private Sub BtnUpdOldCbPage_Click(sender As Object, e As EventArgs) Handles BtnUpdOldCbPage.Click
-
+        DisplayMessage("UpdOldCbPage not implemented")
     End Sub
-
     Private Sub BtnAddCbPic_Click(sender As Object, e As EventArgs) Handles BtnAddCbPic.Click
-
+        DisplayMessage("AddCbPic not implemented")
     End Sub
 
     Private Sub BtnMoveCbPic_Click(sender As Object, e As EventArgs) Handles BtnMoveCbPic.Click
-
+        DisplayMessage("MoveCbPic not implemented")
     End Sub
 
     Private Sub BtnUpdCbPicDesc_Click(sender As Object, e As EventArgs) Handles BtnUpdCbPicDesc.Click
-
+        DisplayMessage("UpdCbPicDesc not implemented")
     End Sub
 
     Private Sub BtnUpdNewCbPage_Click(sender As Object, e As EventArgs) Handles BtnUpdNewCbPage.Click
-
+        DisplayMessage("UpdNewCbPage not implemented")
     End Sub
 
     Private Sub BtnRmvRow_Click(sender As Object, e As EventArgs) Handles BtnRmvRow.Click
@@ -516,20 +598,39 @@ Public NotInheritable Class FrmDateCheck
         End If
     End Sub
 
-    Private Sub BtnUpdatePerson_ContextMenuStripChanged(sender As Object, e As EventArgs) Handles BtnUpdatePerson.ContextMenuStripChanged
-
-    End Sub
-
     Private Sub BtnUpdOldBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnUpdOldBotsdPost.Click
-
+        DisplayMessage("Opening old BotSD post for amendment")
+        Try
+            Process.Start(LblBotsdUrl.Text)
+            LblBotsdUrl.Text = "open"
+        Catch ex As ComponentModel.Win32Exception
+            LblBotsdUrl.Text = "invalid"
+        End Try
+        Using _botsd As New FrmBotsd
+            _botsd.ThisDay = CInt(TxtFromDay.Text)
+            _botsd.ThisMonth = CInt(TxtFromMonth.Text)
+            _botsd.ShowDialog()
+        End Using
     End Sub
 
     Private Sub BtnReseqNewGroup_Click(sender As Object, e As EventArgs) Handles BtnReseqNewGroup.Click
-
+        DisplayMessage("ReseqNewGroup not implemented")
     End Sub
 
     Private Sub BtnRemoveRow_Click(sender As Object, e As EventArgs) Handles BtnRemoveRow.Click
         RemoveSelectedRow()
+    End Sub
+
+    Private Sub LblBotsdUrl_Click(sender As Object, e As EventArgs) Handles LblBotsdUrl.DoubleClick
+        LblBotsdUrl.Text = "done"
+    End Sub
+
+    Private Sub LblBotsdDate_Click(sender As Object, e As EventArgs) Handles LblBotsdDate.DoubleClick
+        LblBotsdDate.Text = "done"
+    End Sub
+
+    Private Sub LblBotsdListUrl_Click(sender As Object, e As EventArgs) Handles LblBotsdListUrl.DoubleClick
+        LblBotsdListUrl.Text = "done"
     End Sub
 #End Region
 

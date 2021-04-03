@@ -404,7 +404,7 @@ Partial Class FrmUpdateDatabase
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(35, 584)
+        Me.Label15.Location = New System.Drawing.Point(89, 586)
         Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(67, 14)
@@ -429,7 +429,7 @@ Partial Class FrmUpdateDatabase
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.Black
-        Me.Label14.Location = New System.Drawing.Point(35, 541)
+        Me.Label14.Location = New System.Drawing.Point(89, 543)
         Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(60, 14)
@@ -544,7 +544,7 @@ Partial Class FrmUpdateDatabase
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Black
-        Me.Label10.Location = New System.Drawing.Point(35, 496)
+        Me.Label10.Location = New System.Drawing.Point(89, 500)
         Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(66, 14)
@@ -1283,7 +1283,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnUpdBotsd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdBotsd.Location = New System.Drawing.Point(138, 21)
         Me.BtnUpdBotsd.Name = "BtnUpdBotsd"
-        Me.BtnUpdBotsd.Size = New System.Drawing.Size(75, 23)
+        Me.BtnUpdBotsd.Size = New System.Drawing.Size(75, 30)
         Me.BtnUpdBotsd.TabIndex = 3
         Me.BtnUpdBotsd.Text = "Update"
         Me.ToolTip1.SetToolTip(Me.BtnUpdBotsd, "Open form to change botsd id")
@@ -1314,7 +1314,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnRmvBotsd.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRmvBotsd.Location = New System.Drawing.Point(219, 21)
         Me.BtnRmvBotsd.Name = "BtnRmvBotsd"
-        Me.BtnRmvBotsd.Size = New System.Drawing.Size(84, 23)
+        Me.BtnRmvBotsd.Size = New System.Drawing.Size(84, 30)
         Me.BtnRmvBotsd.TabIndex = 0
         Me.BtnRmvBotsd.Text = "Remove Id"
         Me.ToolTip1.SetToolTip(Me.BtnRmvBotsd, "Remove botsd id")
@@ -1336,6 +1336,7 @@ Partial Class FrmUpdateDatabase
         '
         'cbIsTwin
         '
+        Me.cbIsTwin.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cbIsTwin.AutoSize = True
         Me.cbIsTwin.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbIsTwin.Location = New System.Drawing.Point(163, 459)

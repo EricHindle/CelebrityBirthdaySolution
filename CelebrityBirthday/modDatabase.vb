@@ -593,6 +593,9 @@ Module modDatabase
         End Try
         Return oBotsdViewTable.Rows
     End Function
+    Public Function DeleteBotsdById(ByVal _id As Integer) As Integer
+        Return oBotsdTa.DeleteBotsd(_id)
+    End Function
     Public Function DeleteBotsdByPostNo(ByVal _postNo As Integer) As Integer
         Return oBotsdTa.DeleteByPostNo(_postNo)
     End Function

@@ -474,6 +474,30 @@ Namespace My
                 Me("MosaicImagePath") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://bornonthesameday.wordpress.com/")>  _
+        Public Property botsdWordPressUrl() As String
+            Get
+                Return CType(Me("botsdWordPressUrl"),String)
+            End Get
+            Set
+                Me("botsdWordPressUrl") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property datecheckformpos() As String
+            Get
+                Return CType(Me("datecheckformpos"),String)
+            End Get
+            Set
+                Me("datecheckformpos") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

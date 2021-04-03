@@ -182,7 +182,7 @@
             Try
                 _dob = New Date(_birthYear, _birthMonth, _birthDay)
             Catch ex As ArgumentOutOfRangeException
-                LogUtil.Problem(Name & "Invalid date of birth")
+                LogUtil.Problem(Name & " Invalid date of birth", "Person")
             End Try
             Return _dob
         End Get
@@ -194,7 +194,7 @@
                 Try
                     _dod = New Date(_birthYear, _birthMonth, _birthDay)
                 Catch ex As ArgumentOutOfRangeException
-                    LogUtil.Problem(Name & "Invalid date of birth")
+                    LogUtil.Problem(Name & " Invalid date of death", "Person")
                 End Try
             End If
             Return _dod

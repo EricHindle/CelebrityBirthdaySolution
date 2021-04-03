@@ -70,6 +70,12 @@ Partial Class FrmDateCheck
         Me.BtnBotSD = New System.Windows.Forms.Button()
         Me.ChkShowImage = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LblBotsdListUrl = New System.Windows.Forms.Label()
+        Me.LblBotsdDate = New System.Windows.Forms.Label()
+        Me.LblBotsdUrl = New System.Windows.Forms.Label()
+        Me.LblBotsdId = New System.Windows.Forms.Label()
+        Me.LblOthPersonId = New System.Windows.Forms.Label()
+        Me.LblBotsdPostNo = New System.Windows.Forms.Label()
         Me.BtnReseqNewGroup = New System.Windows.Forms.Button()
         Me.BtnUpdOldBotsdPost = New System.Windows.Forms.Button()
         Me.BtnRmvRow = New System.Windows.Forms.Button()
@@ -114,7 +120,7 @@ Partial Class FrmDateCheck
         Me.DgvWarnings.ReadOnly = True
         Me.DgvWarnings.RowHeadersVisible = False
         Me.DgvWarnings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvWarnings.Size = New System.Drawing.Size(857, 596)
+        Me.DgvWarnings.Size = New System.Drawing.Size(781, 596)
         Me.DgvWarnings.TabIndex = 0
         '
         'xId
@@ -587,6 +593,12 @@ Partial Class FrmDateCheck
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.LblBotsdListUrl)
+        Me.GroupBox1.Controls.Add(Me.LblBotsdDate)
+        Me.GroupBox1.Controls.Add(Me.LblBotsdUrl)
+        Me.GroupBox1.Controls.Add(Me.LblBotsdId)
+        Me.GroupBox1.Controls.Add(Me.LblOthPersonId)
+        Me.GroupBox1.Controls.Add(Me.LblBotsdPostNo)
         Me.GroupBox1.Controls.Add(Me.BtnReseqNewGroup)
         Me.GroupBox1.Controls.Add(Me.BtnUpdOldBotsdPost)
         Me.GroupBox1.Controls.Add(Me.BtnRmvRow)
@@ -608,12 +620,77 @@ Partial Class FrmDateCheck
         Me.GroupBox1.Controls.Add(Me.BtnUpdatePerson)
         Me.GroupBox1.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.GroupBox1.Location = New System.Drawing.Point(875, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(799, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(152, 596)
+        Me.GroupBox1.Size = New System.Drawing.Size(228, 596)
         Me.GroupBox1.TabIndex = 154
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Checklist"
+        '
+        'LblBotsdListUrl
+        '
+        Me.LblBotsdListUrl.AutoSize = True
+        Me.LblBotsdListUrl.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblBotsdListUrl.ForeColor = System.Drawing.Color.MidnightBlue
+        Me.LblBotsdListUrl.Location = New System.Drawing.Point(161, 179)
+        Me.LblBotsdListUrl.Name = "LblBotsdListUrl"
+        Me.LblBotsdListUrl.Size = New System.Drawing.Size(52, 14)
+        Me.LblBotsdListUrl.TabIndex = 24
+        Me.LblBotsdListUrl.Text = "botsdlist"
+        '
+        'LblBotsdDate
+        '
+        Me.LblBotsdDate.AutoSize = True
+        Me.LblBotsdDate.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblBotsdDate.ForeColor = System.Drawing.Color.MidnightBlue
+        Me.LblBotsdDate.Location = New System.Drawing.Point(161, 149)
+        Me.LblBotsdDate.Name = "LblBotsdDate"
+        Me.LblBotsdDate.Size = New System.Drawing.Size(63, 14)
+        Me.LblBotsdDate.TabIndex = 23
+        Me.LblBotsdDate.Text = "botsddate"
+        '
+        'LblBotsdUrl
+        '
+        Me.LblBotsdUrl.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblBotsdUrl.ForeColor = System.Drawing.Color.MidnightBlue
+        Me.LblBotsdUrl.Location = New System.Drawing.Point(161, 119)
+        Me.LblBotsdUrl.Name = "LblBotsdUrl"
+        Me.LblBotsdUrl.Size = New System.Drawing.Size(61, 14)
+        Me.LblBotsdUrl.TabIndex = 22
+        Me.LblBotsdUrl.Text = "botsdurl"
+        '
+        'LblBotsdId
+        '
+        Me.LblBotsdId.AutoSize = True
+        Me.LblBotsdId.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblBotsdId.ForeColor = System.Drawing.Color.MidnightBlue
+        Me.LblBotsdId.Location = New System.Drawing.Point(161, 89)
+        Me.LblBotsdId.Name = "LblBotsdId"
+        Me.LblBotsdId.Size = New System.Drawing.Size(47, 14)
+        Me.LblBotsdId.TabIndex = 21
+        Me.LblBotsdId.Text = "botsdid"
+        '
+        'LblOthPersonId
+        '
+        Me.LblOthPersonId.AutoSize = True
+        Me.LblOthPersonId.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblOthPersonId.ForeColor = System.Drawing.Color.MidnightBlue
+        Me.LblOthPersonId.Location = New System.Drawing.Point(161, 59)
+        Me.LblOthPersonId.Name = "LblOthPersonId"
+        Me.LblOthPersonId.Size = New System.Drawing.Size(63, 14)
+        Me.LblOthPersonId.TabIndex = 20
+        Me.LblOthPersonId.Text = "othperson"
+        '
+        'LblBotsdPostNo
+        '
+        Me.LblBotsdPostNo.AutoSize = True
+        Me.LblBotsdPostNo.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblBotsdPostNo.ForeColor = System.Drawing.Color.MidnightBlue
+        Me.LblBotsdPostNo.Location = New System.Drawing.Point(161, 31)
+        Me.LblBotsdPostNo.Name = "LblBotsdPostNo"
+        Me.LblBotsdPostNo.Size = New System.Drawing.Size(45, 14)
+        Me.LblBotsdPostNo.TabIndex = 19
+        Me.LblBotsdPostNo.Text = "postno"
         '
         'BtnReseqNewGroup
         '
@@ -826,6 +903,7 @@ Partial Class FrmDateCheck
         '
         'BtnRemoveRow
         '
+        Me.BtnRemoveRow.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnRemoveRow.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRemoveRow.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnRemoveRow.Location = New System.Drawing.Point(1245, 375)
@@ -878,6 +956,7 @@ Partial Class FrmDateCheck
         Me.Controls.Add(Me.BtnStart)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmDateCheck"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Date Check"
         CType(Me.DgvWarnings, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
@@ -890,6 +969,7 @@ Partial Class FrmDateCheck
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -960,4 +1040,10 @@ Partial Class FrmDateCheck
     Friend WithEvents BtnUpdOldBotsdPost As Button
     Friend WithEvents BtnReseqNewGroup As Button
     Friend WithEvents BtnRemoveRow As Button
+    Friend WithEvents LblOthPersonId As Label
+    Friend WithEvents LblBotsdPostNo As Label
+    Friend WithEvents LblBotsdId As Label
+    Friend WithEvents LblBotsdUrl As Label
+    Friend WithEvents LblBotsdDate As Label
+    Friend WithEvents LblBotsdListUrl As Label
 End Class

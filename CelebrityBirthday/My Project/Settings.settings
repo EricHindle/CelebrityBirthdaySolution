@@ -112,5 +112,11 @@
     <Setting Name="MosaicImagePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\CelebrityBirthday\Images\mosaics</Value>
     </Setting>
+    <Setting Name="botsdWordPressUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://bornonthesameday.wordpress.com/</Value>
+    </Setting>
+    <Setting Name="datecheckformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
