@@ -31,6 +31,15 @@ Public NotInheritable Class FrmDateCheck
     Private personTable As New List(Of Person)
     Private isLoadingTable As Boolean
     Private isWikiIdChanged As Boolean
+    Private fromDate As Date
+    Private toDate As Date
+    Private oldPageLoadDay As String
+    Private oldPageLoadMonth As String
+    Private oldPageLoadYear As String
+    Private newPageLoadDay As String
+    Private newPageLoadMonth As String
+    Private newPageLoadYear As String
+
 #End Region
 #Region "form event handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -126,14 +135,14 @@ Public NotInheritable Class FrmDateCheck
                 TxtFullName.Text = oRow.Cells(xName.Name).Value
                 TxtFullDesc.Text = oRow.Cells(xPersonDescription.Name).Value
                 TxtWiki.Text = oRow.Cells(xWikiExtract.Name).Value
-                Dim FromDt As Date = CDate(oRow.Cells(xBirth.Name).Value)
-                Dim ToDt As Date = CDate(oRow.Cells(xWikiBirth.Name).Value)
-                TxtToDay.Text = Format(ToDt, "dd")
-                TxtToMonth.Text = Format(ToDt, "MM")
-                TxtToYear.Text = Format(ToDt, "yyyy")
-                TxtFromDay.Text = Format(FromDt, "dd")
-                TxtFromMonth.Text = Format(FromDt, "MM")
-                TxtFromYear.Text = Format(FromDt, "yyyy")
+                fromDate = CDate(oRow.Cells(xBirth.Name).Value)
+                toDate = CDate(oRow.Cells(xWikiBirth.Name).Value)
+                TxtToDay.Text = Format(toDate, "dd")
+                TxtToMonth.Text = Format(toDate, "MM")
+                TxtToYear.Text = Format(toDate, "yyyy")
+                TxtFromDay.Text = Format(fromDate, "dd")
+                TxtFromMonth.Text = Format(fromDate, "MM")
+                TxtFromYear.Text = Format(fromDate, "yyyy")
                 TxtWikiId.Text = oRow.Cells(xWikiId.Name).Value
                 isWikiIdChanged = False
             End If
@@ -143,8 +152,6 @@ Public NotInheritable Class FrmDateCheck
         If DgvWarnings.SelectedRows.Count = 1 Then
             Dim oPerson As Person = personTable(DgvWarnings.SelectedRows(0).Index)
             ResetChecklistButtons()
-            Dim toDate As Date = New Date(CInt(TxtToYear.Text), CInt(TxtToMonth.Text), CInt(TxtToDay.Text))
-            Dim fromDate As Date = New Date(CInt(TxtFromYear.Text), CInt(TxtFromMonth.Text), CInt(TxtFromDay.Text))
             Dim isOldReseqRequired As Boolean = False
             If oPerson.Social IsNot Nothing AndAlso oPerson.Social.Botsd > 0 Then
                 '
@@ -155,8 +162,6 @@ Public NotInheritable Class FrmDateCheck
                 Dim oBotsdPostNo As Integer = If(oBotsdRow Is Nothing, 0, oBotsdRow.btsdPostNo)
                 Dim oBotsdRowCollection As DataRowCollection = GetBotsdViewByPostNo(oBotsdPostNo)
                 LblBotsdPostNo.Text = "#" & CStr(oBotsdPostNo)
-                LblBotsdId.Text = CStr(oBotsdId)
-                LblBotsdUrl.Text = oBotsdRow.btsdUrl
                 '
                 ' Remove BotSD id
                 '
@@ -180,11 +185,14 @@ Public NotInheritable Class FrmDateCheck
                 If otherBotsd.Count < 2 Then
                     ' No longert a BotSD
                     BtnRmvBotsdRecord.Visible = True
+                    LblBotsdId.Text = CStr(oBotsdId)
                     BtnRmvOldBotsdPost.Visible = True
+                    LblBotsdUrl.Text = oBotsdRow.btsdUrl
+
                 Else
                     ' still a BotSD
                     BtnUpdOldBotsdPost.Visible = True
-                    LblBotsdDate.Text = TxtFromDay.Text & "/" & TxtFromMonth.Text
+                    LblBotsdUpdUrl.Text = oBotsdRow.btsdUrl
                 End If
                 ' list will need changing
                 BtnUpdOldBotsdList.Visible = True
@@ -192,23 +200,29 @@ Public NotInheritable Class FrmDateCheck
                 isOldReseqRequired = True
             End If
             BtnUpdatePerson.Visible = True
+            LblUpdPerson.Text = CStr(oPerson.Id)
             '
             ' After person has been updated, BotSD group needs resequencing
             '
-            If isOldReseqRequired Then BtnReseqOldGroup.Visible = True
+            If isOldReseqRequired Then
+                BtnReseqOldGroup.Visible = True
+                LblReseqOld.Text = "reqd"
+            End If
             'Find any existing people on intended new dob
             Dim oNewGroup As New CelebrityBirthdayDataSet.PersonDataTable
             Try
-                oNewGroup = GetPeopleByDateofBirth(CInt(TxtToDay.Text), CInt(TxtToMonth.Text), CInt(TxtToYear.Text))
+                oNewGroup = GetPeopleByDateofBirth(toDate.Year, toDate.Month, toDate.Day)
             Catch ex As Exception
                 DisplayMessage("Invalid To Date")
             End Try
             ' If this person will be in a BotSD group
             If oNewGroup.Rows.Count > 0 Then
                 BtnReseqNewGroup.Visible = True
+                LblReseqNew.Text = "reqd"
                 BtnUpdateNewBotsdPost.Visible = True
-                BtnPosted.Visible = True
+                LblNewBotsdUrl.Text = GetGroupUrl(oNewGroup)
                 BtnUpdNewBotsdList.Visible = True
+                LblNewListUrl.Text = My.Settings.botsdWordPressUrl & Format(toDate, "MMMM") & "/"
             End If
             Dim isYearOnlyChange As Boolean = TxtFromDay.Text = TxtToDay.Text AndAlso TxtFromMonth.Text = TxtToMonth.Text
             '
@@ -218,16 +232,61 @@ Public NotInheritable Class FrmDateCheck
             ' The both posts and pictures need changing
             If isYearOnlyChange Then
                 BtnMoveCbPic.Visible = True
+                LblMoveImage.Text = GetNewPageLoadDate()
             Else
                 BtnRmvOldPicture.Visible = True
+                LblOldPageLoad.Text = GetOldPageLoadDate()
                 BtnUpdOldCbPage.Visible = True
+                LblUpdOldPost.Text = LblOldPageLoad.Text
                 BtnAddCbPic.Visible = True
+                LblNewPageLoad.Text = GetNewPageLoadDate()
             End If
             BtnUpdCbPicDesc.Visible = True
+            LblImageName.Text = oPerson.Image.ImageFileName
             BtnUpdNewCbPage.Visible = True
+            LblUpdNewPost.Text = GetNewPageLoadDate()
             BtnRmvRow.Visible = True
         End If
     End Sub
+    Private Function GetOldPageLoadDate() As String
+        oldPageLoadYear = ""
+        oldPageLoadMonth = ""
+        oldPageLoadDay = ""
+        Dim oDrow As CelebrityBirthdayDataSet.DatesRow = GetDatesRow(fromDate.Day, fromDate.Month, "P")
+        If oDrow IsNot Nothing Then
+            oldPageLoadYear = If(oDrow.IsuploadyearNull, "", oDrow.uploadyear)
+            oldPageLoadMonth = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
+            oldPageLoadDay = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
+        End If
+        Return oldPageLoadDay & "-" & oldPageLoadMonth & "-" & oldPageLoadYear
+    End Function
+    Private Function GetNewPageLoadDate() As String
+        newPageLoadYear = ""
+        newPageLoadMonth = ""
+        newPageLoadDay = ""
+        Dim oDrow As CelebrityBirthdayDataSet.DatesRow = GetDatesRow(toDate.Day, toDate.Month, "P")
+        If oDrow IsNot Nothing Then
+            newPageLoadYear = If(oDrow.IsuploadyearNull, "", oDrow.uploadyear)
+            newPageLoadMonth = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
+            newPageLoadDay = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
+        End If
+        Return newPageLoadDay & "-" & newPageLoadMonth & "-" & newPageLoadYear
+    End Function
+    Private Shared Function GetGroupUrl(oNewGroup As CelebrityBirthdayDataSet.PersonDataTable) As String
+        Dim newUrl As String = ""
+        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oNewGroup.Rows
+            Dim _person As Person = New Person(oRow)
+            If _person.Social.Botsd > 0 Then
+                Dim _row As CelebrityBirthdayDataSet.BotSDRow = GetBotsd(_person.Social.Botsd)
+                If _row IsNot Nothing Then
+                    newUrl = _row.btsdUrl
+                    Exit For
+                End If
+            End If
+        Next
+        Return newUrl
+    End Function
+
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnFromWordPress.Click
         OpenWordPress(CInt(TxtFromDay.Text), CInt(TxtFromMonth.Text))
     End Sub
@@ -306,9 +365,7 @@ Public NotInheritable Class FrmDateCheck
         DisplayMessage("Born on the same day update", True)
         Using _botsd As New FrmBotsd
             If cboDay.SelectedIndex < 0 Then
-                If IsNumeric(TxtToDay.Text) Then
-                    _botsd.ThisDay = CInt(TxtToDay.Text)
-                End If
+                _botsd.ThisDay = toDate.Day
             Else
                 _botsd.ThisDay = cboDay.SelectedIndex + 1
             End If
@@ -441,7 +498,6 @@ Public NotInheritable Class FrmDateCheck
         BtnReseqOldGroup.Visible = False
         BtnReseqNewGroup.Visible = False
         BtnUpdateNewBotsdPost.Visible = False
-        BtnPosted.Visible = False
         BtnUpdNewBotsdList.Visible = False
         BtnRmvOldPicture.Visible = False
         BtnUpdOldCbPage.Visible = False
@@ -456,9 +512,19 @@ Public NotInheritable Class FrmDateCheck
         LblOthPersonId.Text = ""
         LblBotsdId.Text = ""
         LblBotsdUrl.Text = ""
-        LblBotsdDate.Text = ""
+        LblBotsdUpdUrl.Text = ""
         LblBotsdListUrl.Text = ""
-
+        LblUpdPerson.Text = ""
+        LblReseqOld.Text = ""
+        LblReseqNew.Text = ""
+        LblNewListUrl.Text = ""
+        LblNewBotsdUrl.Text = ""
+        LblOldPageLoad.Text = ""
+        LblNewPageLoad.Text = ""
+        LblImageName.Text = ""
+        LblUpdNewPost.Text = ""
+        LblUpdOldPost.Text = ""
+        LblMoveImage.Text = ""
     End Sub
 #End Region
 #Region "checklist"
@@ -495,7 +561,7 @@ Public NotInheritable Class FrmDateCheck
             LblOthPersonId.Text = "done"
         Else
             DisplayMessage("No person identified", True)
-            LblBotsdPostNo.Text = "err"
+            LblOthPersonId.Text = "err"
         End If
     End Sub
 
@@ -526,13 +592,13 @@ Public NotInheritable Class FrmDateCheck
         DisplayMessage("Opening old BotSD list for amendment")
         Try
             Process.Start(LblBotsdListUrl.Text)
-            LblBotsdUrl.Text = "open"
+            LblBotsdListUrl.Text = "open"
         Catch ex As ComponentModel.Win32Exception
-            LblBotsdUrl.Text = "invalid"
+            LblBotsdListUrl.Text = "invalid"
         End Try
         Using _botsd As New FrmBotsd
-            _botsd.ThisDay = CInt(TxtFromDay.Text)
-            _botsd.ThisMonth = CInt(TxtFromMonth.Text)
+            _botsd.ThisDay = fromDate.Day
+            _botsd.ThisMonth = fromDate.Month
             _botsd.ShowDialog()
         End Using
     End Sub
@@ -544,51 +610,86 @@ Public NotInheritable Class FrmDateCheck
                 Not String.IsNullOrEmpty(TxtToDay.Text) And
                 IsDate(TxtToDay.Text & "/" & TxtToMonth.Text & "/" & TxtToYear.Text) Then
                 DisplayMessage("Updating DoB and text for " & TxtFullName.Text, True)
-                Dim pYear As Integer = CInt(TxtToYear.Text)
-                Dim pMonth As Integer = CInt(TxtToMonth.Text)
-                Dim pDay As Integer = CInt(TxtToDay.Text)
-                UpdateDateOfBirth(oPerson.Id, pDay, pMonth, pYear, TxtFullDesc.Text)
+                UpdateDateOfBirth(oPerson.Id, toDate.Day, toDate.Month, toDate.Year, TxtFullDesc.Text)
                 oPerson = GetFullPersonById(oPerson.Id, False)
                 DisplayMessage("Updated " & CStr(oPerson.Id), True)
+                LblUpdPerson.Text = "done"
             End If
         End If
     End Sub
     Private Sub BtnReseqOldGroup_Click(sender As Object, e As EventArgs) Handles BtnReseqOldGroup.Click
-        DisplayMessage("ReseqOldGroup not implemented")
+        Dim oldGroup As CelebrityBirthdayDataSet.PersonDataTable
+        oldGroup = GetPeopleByDateofBirth(fromDate.Year, fromDate.Month, fromDate.Day)
+        Dim newSeq As Integer = 0
+        For Each oRow As CelebrityBirthdayDataSet.PersonRow In oldGroup
+            UpdateSortSeq(oRow.id, newSeq)
+            newSeq += 1
+        Next
+        LblReseqOld.Text = "done"
+        DisplayMessage("Resequenced old BotSD group", True)
     End Sub
     Private Sub BtnUpdateNewBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnUpdateNewBotsdPost.Click
-        DisplayMessage("UpdateNewBotsdPost not implemented")
-    End Sub
-    Private Sub BtnPosted_Click(sender As Object, e As EventArgs) Handles BtnPosted.Click
-        DisplayMessage("Posted not implemented")
+        DisplayMessage("Opening new BotSD post for amendment")
+        Try
+            Process.Start(LblNewBotsdUrl.Text)
+            LblNewBotsdUrl.Text = "open"
+        Catch ex As ComponentModel.Win32Exception
+            LblNewBotsdUrl.Text = "invalid"
+        End Try
+        Using _botsd As New FrmBotsd
+            _botsd.ThisDay = toDate.Day
+            _botsd.ThisMonth = toDate.Month
+            _botsd.ShowDialog()
+        End Using
     End Sub
     Private Sub BtnUpdNewBotsdList_Click(sender As Object, e As EventArgs) Handles BtnUpdNewBotsdList.Click
-        DisplayMessage("UpdNewBotsdList not implemented")
-    End Sub
-    Private Sub BtnRmvOldPicture_Click(sender As Object, e As EventArgs) Handles BtnRmvOldPicture.Click
-        DisplayMessage("RmvOldPicture not implemented")
-    End Sub
-    Private Sub BtnUpdOldCbPage_Click(sender As Object, e As EventArgs) Handles BtnUpdOldCbPage.Click
-        DisplayMessage("UpdOldCbPage not implemented")
-    End Sub
-    Private Sub BtnAddCbPic_Click(sender As Object, e As EventArgs) Handles BtnAddCbPic.Click
-        DisplayMessage("AddCbPic not implemented")
-    End Sub
+        DisplayMessage("Opening new BotSD list for amendment")
+        Try
+            Process.Start(LblNewListUrl.Text)
+            LblNewListUrl.Text = "open"
+        Catch ex As ComponentModel.Win32Exception
+            LblNewListUrl.Text = "invalid"
+        End Try
+        Using _botsd As New FrmBotsd
+            _botsd.ThisDay = toDate.Day
+            _botsd.ThisMonth = toDate.Month
+            _botsd.ShowDialog()
+        End Using
 
-    Private Sub BtnMoveCbPic_Click(sender As Object, e As EventArgs) Handles BtnMoveCbPic.Click
-        DisplayMessage("MoveCbPic not implemented")
+    End Sub
+    Private Sub BtnRmvOldPicture_Click(sender As Object, e As EventArgs) Handles BtnRmvOldPicture.Click, BtnUpdOldCbPage.Click
+        DisplayMessage("Updating old CB post")
+        Dim _selMonth As String = Format(fromDate, "MMMM")
+        Dim _selDay As String = CStr(fromDate.Day)
+        Dim sUrl As String = GetWordPressMonthUrl(oldPageLoadYear, oldPageLoadMonth, oldPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo))
+        Process.Start(sUrl)
+        LblOldPageLoad.Text = "open"
+        OpenWordPress(fromDate.Day, fromDate.Month)
     End Sub
 
     Private Sub BtnUpdCbPicDesc_Click(sender As Object, e As EventArgs) Handles BtnUpdCbPicDesc.Click
-        DisplayMessage("UpdCbPicDesc not implemented")
+        DisplayMessage("Updating CB image description")
+        Dim _selMonth As String = Format(toDate, "MMMM")
+        Dim _selDay As String = CStr(toDate.Day)
+        Dim sUrl As String = GetWordPressMonthUrl(newPageLoadYear, newPageLoadMonth, newPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo)) & LblImageName.Text & "/"
+        Process.Start(sUrl)
+        LblImageName.Text = "open"
     End Sub
 
-    Private Sub BtnUpdNewCbPage_Click(sender As Object, e As EventArgs) Handles BtnUpdNewCbPage.Click
-        DisplayMessage("UpdNewCbPage not implemented")
+    Private Sub BtnUpdNewCbPage_Click(sender As Object, e As EventArgs) Handles BtnUpdNewCbPage.Click, BtnAddCbPic.Click, BtnMoveCbPic.Click
+        DisplayMessage("Updating new CB post")
+        Dim _selMonth As String = Format(toDate, "MMMM")
+        Dim _selDay As String = CStr(toDate.Day)
+        Dim sUrl As String = GetWordPressMonthUrl(newPageLoadYear, newPageLoadMonth, newPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo))
+        Process.Start(sUrl)
+        LblMoveImage.Text = "open"
+        LblUpdNewPost.Text = "open"
+        OpenWordPress(toDate.Day, toDate.Month)
     End Sub
 
     Private Sub BtnRmvRow_Click(sender As Object, e As EventArgs) Handles BtnRmvRow.Click
         RemoveSelectedRow()
+        ResetChecklistButtons()
     End Sub
 
     Private Sub RemoveSelectedRow()
@@ -601,10 +702,10 @@ Public NotInheritable Class FrmDateCheck
     Private Sub BtnUpdOldBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnUpdOldBotsdPost.Click
         DisplayMessage("Opening old BotSD post for amendment")
         Try
-            Process.Start(LblBotsdUrl.Text)
-            LblBotsdUrl.Text = "open"
+            Process.Start(LblBotsdUpdUrl.Text)
+            LblBotsdUpdUrl.Text = "open"
         Catch ex As ComponentModel.Win32Exception
-            LblBotsdUrl.Text = "invalid"
+            LblBotsdUpdUrl.Text = "invalid"
         End Try
         Using _botsd As New FrmBotsd
             _botsd.ThisDay = CInt(TxtFromDay.Text)
@@ -614,26 +715,38 @@ Public NotInheritable Class FrmDateCheck
     End Sub
 
     Private Sub BtnReseqNewGroup_Click(sender As Object, e As EventArgs) Handles BtnReseqNewGroup.Click
-        DisplayMessage("ReseqNewGroup not implemented")
+        Dim newGroup As CelebrityBirthdayDataSet.PersonDataTable
+        newGroup = GetPeopleByDateofBirth(toDate.Year, toDate.Month, toDate.Day)
+        Dim newSeq As Integer = 0
+        For Each oRow As CelebrityBirthdayDataSet.PersonRow In newGroup
+            UpdateSortSeq(oRow.id, newSeq)
+            newSeq += 1
+        Next
+        LblReseqNew.Text = "done"
+        DisplayMessage("Resequenced new BotSD group", True)
     End Sub
 
     Private Sub BtnRemoveRow_Click(sender As Object, e As EventArgs) Handles BtnRemoveRow.Click
         RemoveSelectedRow()
+        ResetChecklistButtons()
     End Sub
 
-    Private Sub LblBotsdUrl_Click(sender As Object, e As EventArgs) Handles LblBotsdUrl.DoubleClick
-        LblBotsdUrl.Text = "done"
+    Private Sub LblBotsdUrl_Click(sender As Object, e As EventArgs) Handles LblBotsdUrl.DoubleClick,
+                                                                            LblBotsdUpdUrl.DoubleClick,
+                                                                            LblBotsdListUrl.DoubleClick,
+                                                                            LblNewBotsdUrl.DoubleClick,
+                                                                            LblOldPageLoad.DoubleClick,
+                                                                            LblNewPageLoad.DoubleClick,
+                                                                            LblNewListUrl.DoubleClick,
+                                                                            LblOldPageLoad.DoubleClick,
+                                                                            LblUpdOldPost.DoubleClick,
+                                                                            LblNewPageLoad.DoubleClick,
+                                                                            LblMoveImage.DoubleClick,
+                                                                            LblUpdNewPost.DoubleClick,
+                                                                            LblImageName.DoubleClick
+        Dim _label As Label = CType(sender, Label)
+        _label.Text = "done"
     End Sub
 
-    Private Sub LblBotsdDate_Click(sender As Object, e As EventArgs) Handles LblBotsdDate.DoubleClick
-        LblBotsdDate.Text = "done"
-    End Sub
-
-    Private Sub LblBotsdListUrl_Click(sender As Object, e As EventArgs) Handles LblBotsdListUrl.DoubleClick
-        LblBotsdListUrl.Text = "done"
-    End Sub
 #End Region
-
-
-
 End Class
