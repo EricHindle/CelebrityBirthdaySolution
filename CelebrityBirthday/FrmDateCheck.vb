@@ -631,8 +631,12 @@ Public NotInheritable Class FrmDateCheck
     Private Sub BtnUpdateNewBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnUpdateNewBotsdPost.Click
         DisplayMessage("Opening new BotSD post for amendment")
         Try
-            Process.Start(LblNewBotsdUrl.Text)
-            LblNewBotsdUrl.Text = "open"
+            If Not String.IsNullOrEmpty(LblNewBotsdUrl.Text) Then
+                Process.Start(LblNewBotsdUrl.Text)
+                LblNewBotsdUrl.Text = "open"
+            Else
+                LblNewBotsdUrl.Text = "n/a"
+            End If
         Catch ex As ComponentModel.Win32Exception
             LblNewBotsdUrl.Text = "invalid"
         End Try
