@@ -28,7 +28,7 @@ End Structure
 Public NotInheritable Class FrmDateCheck
 #Region "variables"
     Private personList As New List(Of Person)
-    Private personTable As New List(Of Person)
+    Private ReadOnly personTable As New List(Of Person)
     Private isLoadingTable As Boolean
     Private isWikiIdChanged As Boolean
     Private fromDate As Date
@@ -235,9 +235,9 @@ Public NotInheritable Class FrmDateCheck
                 LblMoveImage.Text = GetNewPageLoadDate()
             Else
                 BtnRmvOldPicture.Visible = True
-                LblOldPageLoad.Text = GetOldPageLoadDate()
+                LblRmvImage.Text = GetOldPageLoadDate()
                 BtnUpdOldCbPage.Visible = True
-                LblUpdOldPost.Text = LblOldPageLoad.Text
+                LblUpdOldPost.Text = LblRmvImage.Text
                 BtnAddCbPic.Visible = True
                 LblAddImage.Text = GetNewPageLoadDate()
             End If
@@ -519,7 +519,7 @@ Public NotInheritable Class FrmDateCheck
         LblReseqNew.Text = ""
         LblNewListUrl.Text = ""
         LblNewBotsdUrl.Text = ""
-        LblOldPageLoad.Text = ""
+        LblRmvImage.Text = ""
         LblAddImage.Text = ""
         LblImageName.Text = ""
         LblUpdNewPost.Text = ""
@@ -667,7 +667,8 @@ Public NotInheritable Class FrmDateCheck
         Dim _selDay As String = CStr(fromDate.Day)
         Dim sUrl As String = GetWordPressMonthUrl(oldPageLoadYear, oldPageLoadMonth, oldPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo))
         Process.Start(sUrl)
-        LblOldPageLoad.Text = "open"
+        LblRmvImage.Text = "open"
+        LblUpdOldPost.Text = "open"
         OpenWordPress(fromDate.Day, fromDate.Month)
     End Sub
 
@@ -679,9 +680,9 @@ Public NotInheritable Class FrmDateCheck
         Process.Start(sUrl)
         LblImageName.Text = "open"
     End Sub
-
     Private Sub BtnUpdNewCbPage_Click(sender As Object, e As EventArgs) Handles BtnUpdNewCbPage.Click, BtnAddCbPic.Click, BtnMoveCbPic.Click
         DisplayMessage("Updating new CB post")
+        TxtWiki.Text = GetPersonContext()
         Dim _selMonth As String = Format(toDate, "MMMM")
         Dim _selDay As String = CStr(toDate.Day)
         Dim sUrl As String = GetWordPressMonthUrl(newPageLoadYear, newPageLoadMonth, newPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo))
@@ -695,6 +696,24 @@ Public NotInheritable Class FrmDateCheck
         LblUpdNewPost.Text = "open"
         OpenWordPress(toDate.Day, toDate.Month)
     End Sub
+
+    Private Function GetPersonContext() As String
+        Dim _list As New StringBuilder
+        If DgvWarnings.SelectedRows.Count = 1 Then
+            Dim _name As String = DgvWarnings.SelectedRows(0).Cells(xName.Name).Value
+            Dim personTable As List(Of Person) = FindPeopleByDate(toDate.Day, toDate.Month, False, False)
+            Dim thisPerson As Person = GetPersonById(CInt(LblId.Text))
+            Dim _index As Integer = personTable.FindIndex(Function(_person As Person) _person.Name = _name)
+            If _index > 0 Then
+                _list.Append(CStr(personTable(_index - 1).BirthYear)).Append(" "c).Append(personTable(_index - 1).Name).Append(vbCrLf)
+            End If
+            _list.Append(CStr(personTable(_index).BirthYear)).Append(" "c).Append(personTable(_index).Name).Append(vbCrLf)
+            If _index < personTable.Count - 1 Then
+                _list.Append(CStr(personTable(_index + 1).BirthYear)).Append(" "c).Append(personTable(_index + 1).Name).Append(vbCrLf)
+            End If
+        End If
+        Return _list.ToString
+    End Function
 
     Private Sub BtnRmvRow_Click(sender As Object, e As EventArgs) Handles BtnRmvRow.Click
         RemoveSelectedRow()
@@ -744,10 +763,10 @@ Public NotInheritable Class FrmDateCheck
                                                                             LblBotsdUpdUrl.DoubleClick,
                                                                             LblBotsdListUrl.DoubleClick,
                                                                             LblNewBotsdUrl.DoubleClick,
-                                                                            LblOldPageLoad.DoubleClick,
+                                                                            LblRmvImage.DoubleClick,
                                                                             LblAddImage.DoubleClick,
                                                                             LblNewListUrl.DoubleClick,
-                                                                            LblOldPageLoad.DoubleClick,
+                                                                            LblRmvImage.DoubleClick,
                                                                             LblUpdOldPost.DoubleClick,
                                                                             LblAddImage.DoubleClick,
                                                                             LblMoveImage.DoubleClick,
@@ -755,6 +774,11 @@ Public NotInheritable Class FrmDateCheck
                                                                             LblImageName.DoubleClick
         Dim _label As Label = CType(sender, Label)
         _label.Text = "done"
+    End Sub
+    Private Sub BtnCopyName_Click(sender As Object, e As EventArgs) Handles BtnCopyName.Click
+        If DgvWarnings.SelectedRows.Count = 1 Then
+            Clipboard.SetText(DgvWarnings.SelectedRows(0).Cells(xName.Name).Value)
+        End If
     End Sub
 
 #End Region

@@ -66,6 +66,7 @@ Partial Class FrmDateCheck
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.BtnMonth = New System.Windows.Forms.Button()
+        Me.BtnCopyName = New System.Windows.Forms.Button()
         Me.BtnWpDesc = New System.Windows.Forms.Button()
         Me.BtnBotSD = New System.Windows.Forms.Button()
         Me.ChkShowImage = New System.Windows.Forms.CheckBox()
@@ -75,7 +76,7 @@ Partial Class FrmDateCheck
         Me.LblUpdOldPost = New System.Windows.Forms.Label()
         Me.LblAddImage = New System.Windows.Forms.Label()
         Me.LblImageName = New System.Windows.Forms.Label()
-        Me.LblOldPageLoad = New System.Windows.Forms.Label()
+        Me.LblRmvImage = New System.Windows.Forms.Label()
         Me.LblNewBotsdUrl = New System.Windows.Forms.Label()
         Me.LblNewListUrl = New System.Windows.Forms.Label()
         Me.LblReseqNew = New System.Windows.Forms.Label()
@@ -562,6 +563,22 @@ Partial Class FrmDateCheck
         Me.ToolTip1.SetToolTip(Me.BtnMonth, "Select Today only")
         Me.BtnMonth.UseVisualStyleBackColor = True
         '
+        'BtnCopyName
+        '
+        Me.BtnCopyName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnCopyName.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCopyName.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnCopyName.Image = Global.CelebrityBirthday.My.Resources.Resources.copyicon
+        Me.BtnCopyName.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnCopyName.Location = New System.Drawing.Point(1186, 333)
+        Me.BtnCopyName.Name = "BtnCopyName"
+        Me.BtnCopyName.Size = New System.Drawing.Size(64, 33)
+        Me.BtnCopyName.TabIndex = 155
+        Me.BtnCopyName.Text = "Name"
+        Me.BtnCopyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ToolTip1.SetToolTip(Me.BtnCopyName, "Copy selected text or wiki date to person text")
+        Me.BtnCopyName.UseVisualStyleBackColor = True
+        '
         'BtnWpDesc
         '
         Me.BtnWpDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -608,7 +625,7 @@ Partial Class FrmDateCheck
         Me.GroupBox1.Controls.Add(Me.LblUpdOldPost)
         Me.GroupBox1.Controls.Add(Me.LblAddImage)
         Me.GroupBox1.Controls.Add(Me.LblImageName)
-        Me.GroupBox1.Controls.Add(Me.LblOldPageLoad)
+        Me.GroupBox1.Controls.Add(Me.LblRmvImage)
         Me.GroupBox1.Controls.Add(Me.LblNewBotsdUrl)
         Me.GroupBox1.Controls.Add(Me.LblNewListUrl)
         Me.GroupBox1.Controls.Add(Me.LblReseqNew)
@@ -701,16 +718,16 @@ Partial Class FrmDateCheck
         Me.LblImageName.TabIndex = 32
         Me.LblImageName.Text = "imagedesc"
         '
-        'LblOldPageLoad
+        'LblRmvImage
         '
-        Me.LblOldPageLoad.AutoSize = True
-        Me.LblOldPageLoad.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblOldPageLoad.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblOldPageLoad.Location = New System.Drawing.Point(152, 370)
-        Me.LblOldPageLoad.Name = "LblOldPageLoad"
-        Me.LblOldPageLoad.Size = New System.Drawing.Size(58, 14)
-        Me.LblOldPageLoad.TabIndex = 31
-        Me.LblOldPageLoad.Text = "rmvoldpic"
+        Me.LblRmvImage.AutoSize = True
+        Me.LblRmvImage.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblRmvImage.ForeColor = System.Drawing.Color.MidnightBlue
+        Me.LblRmvImage.Location = New System.Drawing.Point(152, 370)
+        Me.LblRmvImage.Name = "LblRmvImage"
+        Me.LblRmvImage.Size = New System.Drawing.Size(58, 14)
+        Me.LblRmvImage.TabIndex = 31
+        Me.LblRmvImage.Text = "rmvoldpic"
         '
         'LblNewBotsdUrl
         '
@@ -1044,6 +1061,7 @@ Partial Class FrmDateCheck
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1344, 690)
+        Me.Controls.Add(Me.BtnCopyName)
         Me.Controls.Add(Me.BtnRemoveRow)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ChkShowImage)
@@ -1175,10 +1193,11 @@ Partial Class FrmDateCheck
     Friend WithEvents LblReseqOld As Label
     Friend WithEvents LblNewListUrl As Label
     Friend WithEvents LblNewBotsdUrl As Label
-    Friend WithEvents LblOldPageLoad As Label
+    Friend WithEvents LblRmvImage As Label
     Friend WithEvents LblImageName As Label
     Friend WithEvents LblAddImage As Label
     Friend WithEvents LblUpdNewPost As Label
     Friend WithEvents LblMoveImage As Label
     Friend WithEvents LblUpdOldPost As Label
+    Friend WithEvents BtnCopyName As Button
 End Class
