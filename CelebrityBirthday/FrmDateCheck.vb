@@ -239,7 +239,7 @@ Public NotInheritable Class FrmDateCheck
                 BtnUpdOldCbPage.Visible = True
                 LblUpdOldPost.Text = LblOldPageLoad.Text
                 BtnAddCbPic.Visible = True
-                LblNewPageLoad.Text = GetNewPageLoadDate()
+                LblAddImage.Text = GetNewPageLoadDate()
             End If
             BtnUpdCbPicDesc.Visible = True
             LblImageName.Text = oPerson.Image.ImageFileName
@@ -520,7 +520,7 @@ Public NotInheritable Class FrmDateCheck
         LblNewListUrl.Text = ""
         LblNewBotsdUrl.Text = ""
         LblOldPageLoad.Text = ""
-        LblNewPageLoad.Text = ""
+        LblAddImage.Text = ""
         LblImageName.Text = ""
         LblUpdNewPost.Text = ""
         LblUpdOldPost.Text = ""
@@ -686,7 +686,12 @@ Public NotInheritable Class FrmDateCheck
         Dim _selDay As String = CStr(toDate.Day)
         Dim sUrl As String = GetWordPressMonthUrl(newPageLoadYear, newPageLoadMonth, newPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo))
         Process.Start(sUrl)
-        LblMoveImage.Text = "open"
+        If Not String.IsNullOrEmpty(LblAddImage.Text) Then
+            LblAddImage.Text = "open"
+        End If
+        If Not String.IsNullOrEmpty(LblMoveImage.Text) Then
+            LblMoveImage.Text = "open"
+        End If
         LblUpdNewPost.Text = "open"
         OpenWordPress(toDate.Day, toDate.Month)
     End Sub
@@ -740,11 +745,11 @@ Public NotInheritable Class FrmDateCheck
                                                                             LblBotsdListUrl.DoubleClick,
                                                                             LblNewBotsdUrl.DoubleClick,
                                                                             LblOldPageLoad.DoubleClick,
-                                                                            LblNewPageLoad.DoubleClick,
+                                                                            LblAddImage.DoubleClick,
                                                                             LblNewListUrl.DoubleClick,
                                                                             LblOldPageLoad.DoubleClick,
                                                                             LblUpdOldPost.DoubleClick,
-                                                                            LblNewPageLoad.DoubleClick,
+                                                                            LblAddImage.DoubleClick,
                                                                             LblMoveImage.DoubleClick,
                                                                             LblUpdNewPost.DoubleClick,
                                                                             LblImageName.DoubleClick

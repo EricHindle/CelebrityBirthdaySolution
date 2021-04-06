@@ -73,7 +73,7 @@ Partial Class FrmDateCheck
         Me.LblUpdNewPost = New System.Windows.Forms.Label()
         Me.LblMoveImage = New System.Windows.Forms.Label()
         Me.LblUpdOldPost = New System.Windows.Forms.Label()
-        Me.LblNewPageLoad = New System.Windows.Forms.Label()
+        Me.LblAddImage = New System.Windows.Forms.Label()
         Me.LblImageName = New System.Windows.Forms.Label()
         Me.LblOldPageLoad = New System.Windows.Forms.Label()
         Me.LblNewBotsdUrl = New System.Windows.Forms.Label()
@@ -606,7 +606,7 @@ Partial Class FrmDateCheck
         Me.GroupBox1.Controls.Add(Me.LblUpdNewPost)
         Me.GroupBox1.Controls.Add(Me.LblMoveImage)
         Me.GroupBox1.Controls.Add(Me.LblUpdOldPost)
-        Me.GroupBox1.Controls.Add(Me.LblNewPageLoad)
+        Me.GroupBox1.Controls.Add(Me.LblAddImage)
         Me.GroupBox1.Controls.Add(Me.LblImageName)
         Me.GroupBox1.Controls.Add(Me.LblOldPageLoad)
         Me.GroupBox1.Controls.Add(Me.LblNewBotsdUrl)
@@ -680,16 +680,16 @@ Partial Class FrmDateCheck
         Me.LblUpdOldPost.TabIndex = 34
         Me.LblUpdOldPost.Text = "rmvoldcb"
         '
-        'LblNewPageLoad
+        'LblAddImage
         '
-        Me.LblNewPageLoad.AutoSize = True
-        Me.LblNewPageLoad.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblNewPageLoad.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblNewPageLoad.Location = New System.Drawing.Point(152, 432)
-        Me.LblNewPageLoad.Name = "LblNewPageLoad"
-        Me.LblNewPageLoad.Size = New System.Drawing.Size(46, 14)
-        Me.LblNewPageLoad.TabIndex = 33
-        Me.LblNewPageLoad.Text = "addimg"
+        Me.LblAddImage.AutoSize = True
+        Me.LblAddImage.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAddImage.ForeColor = System.Drawing.Color.MidnightBlue
+        Me.LblAddImage.Location = New System.Drawing.Point(152, 432)
+        Me.LblAddImage.Name = "LblAddImage"
+        Me.LblAddImage.Size = New System.Drawing.Size(46, 14)
+        Me.LblAddImage.TabIndex = 33
+        Me.LblAddImage.Text = "addimg"
         '
         'LblImageName
         '
@@ -1177,7 +1177,7 @@ Partial Class FrmDateCheck
     Friend WithEvents LblNewBotsdUrl As Label
     Friend WithEvents LblOldPageLoad As Label
     Friend WithEvents LblImageName As Label
-    Friend WithEvents LblNewPageLoad As Label
+    Friend WithEvents LblAddImage As Label
     Friend WithEvents LblUpdNewPost As Label
     Friend WithEvents LblMoveImage As Label
     Friend WithEvents LblUpdOldPost As Label
