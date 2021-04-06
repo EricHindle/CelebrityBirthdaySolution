@@ -568,7 +568,7 @@ Partial Class FrmDateCheck
         Me.BtnCopyName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnCopyName.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyName.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnCopyName.Image = Global.CelebrityBirthday.My.Resources.Resources.copyicon
+        Me.BtnCopyName.Image = Global.CelebrityBirthday.My.Resources.Resources.copyiconpale
         Me.BtnCopyName.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.BtnCopyName.Location = New System.Drawing.Point(1186, 333)
         Me.BtnCopyName.Name = "BtnCopyName"
@@ -582,14 +582,18 @@ Partial Class FrmDateCheck
         'BtnWpDesc
         '
         Me.BtnWpDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnWpDesc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.BtnWpDesc.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWpDesc.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWpDesc.Image = Global.CelebrityBirthday.My.Resources.Resources.copyiconpale
+        Me.BtnWpDesc.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.BtnWpDesc.Location = New System.Drawing.Point(1045, 526)
         Me.BtnWpDesc.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnWpDesc.Name = "BtnWpDesc"
         Me.BtnWpDesc.Size = New System.Drawing.Size(135, 33)
         Me.BtnWpDesc.TabIndex = 149
         Me.BtnWpDesc.Text = "Get Description"
+        Me.BtnWpDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BtnWpDesc.UseVisualStyleBackColor = True
         '
         'BtnBotSD
@@ -609,6 +613,8 @@ Partial Class FrmDateCheck
         '
         Me.ChkShowImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ChkShowImage.AutoSize = True
+        Me.ChkShowImage.Checked = True
+        Me.ChkShowImage.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ChkShowImage.Location = New System.Drawing.Point(937, 633)
         Me.ChkShowImage.Name = "ChkShowImage"
         Me.ChkShowImage.Size = New System.Drawing.Size(90, 17)

@@ -146,6 +146,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property copyiconpale() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("copyiconpale", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &quot;.
         '''</summary>
         Friend ReadOnly Property DOUBLEQUOTES() As String
