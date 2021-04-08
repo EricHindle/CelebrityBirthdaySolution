@@ -390,6 +390,85 @@ Friend Module modCbday
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
+    Public Function GetWikiExtract(_searchName As String) As String
+        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
+        Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
+        Return RemoveSquareBrackets(FixQuotesAndHyphens(extract, True))
+    End Function
+    Public Function GetWikiDates(_dateString As String) As List(Of String)
+        Dim wikiDates As New List(Of String)
+        Dim _semiSplit As String() = Split(_dateString, ";")
+        Dim _possibleDates As String() = Nothing
+        For Each _semi As String In _semiSplit
+            Dim _s1 As String() = Split(_semi, "born")
+            '  LogUtil.Debug("_s1: " & Join(_s1, "|"))
+            Dim _s2 As String() = Split(_s1(Math.Min(_s1.Length - 1, 1)), "c.")
+            '  LogUtil.Debug("_s2: " & Join(_s2, "|"))
+            Dim _s3 As String() = Split(_s2(Math.Min(_s2.Length - 1, 1)), " on ")
+            '  LogUtil.Debug("_s3: " & Join(_s3, "|"))
+            Dim _s4 As String() = Split(_s3(Math.Min(_s3.Length - 1, 1)), " in ")
+            '  LogUtil.Debug("_s4: " & Join(_s4, "|"))
+            Dim _s5 As String = _s4(0)
+            _possibleDates = Split(_s5, " - ")
+            '  LogUtil.Debug("_possibleDates: " & Join(_possibleDates, "|"))
+            If IsDate(_possibleDates(0).Trim) Then
+                Exit For
+            End If
+        Next
+        If _possibleDates IsNot Nothing Then
+            For Each _possibleDate As String In _possibleDates
+                Dim foundDate As String = FindDateInString(_possibleDate.Trim)
+                If Not String.IsNullOrEmpty(foundDate) Then
+                    '  LogUtil.Debug("foundDate: " & foundDate)
+                    wikiDates.Add(foundDate)
+                End If
+            Next
+        End If
+        Return wikiDates
+    End Function
+    Public Function FindDateInString(_possibleDate As String) As String
+        Dim _foundDate As String = Nothing
+        Dim _words As String() = Split(_possibleDate.Replace(",", "").Replace("  ", " ").Trim, " ")
+        If _words.Length >= 3 Then
+            For w As Integer = 0 To _words.Length - 3
+                Dim _testDate As String = _words(w) & " " & _words(w + 1) & " " & _words(w + 2)
+                If IsDate(_testDate) Then
+                    _foundDate = _testDate
+                    Exit For
+                End If
+            Next
+        End If
+        Return _foundDate
+    End Function
+    Public Function GetPersonDatesFromWiki(searchString As String, ByRef _person As Person) As List(Of String)
+        Dim _wikiExtract As String = GetWikiExtract(searchString)
+        Dim isDateFound As Boolean = False
+        Dim isEndOfExtract As Boolean = String.IsNullOrEmpty(_wikiExtract)
+        Dim _dates As New List(Of String)
+        Do Until isDateFound Or isEndOfExtract
+            Dim _parts As List(Of String) = ParseStringWithBrackets(_wikiExtract)
+            If _parts.Count <> 3 Then
+                isEndOfExtract = True
+            Else
+                '  LogUtil.Debug("_parts(1): " & _parts(1))
+                _dates = GetWikiDates(_parts(1))
+                If _dates.Count > 0 Then
+                    isDateFound = True
+                    If IsDate(_dates(0)) Then
+                        Dim _dob As Date = CDate(_dates(0))
+                        '  LogUtil.Debug("_dob: " & _dates(0))
+                        If _person.DateOfBirth <> _dob Then
+                            isDateFound = False
+                            _wikiExtract = _parts(2)
+                        End If
+                    End If
+                Else
+                    _wikiExtract = _parts(2)
+                End If
+            End If
+        Loop
+        Return _dates
+    End Function
 
 End Module
 

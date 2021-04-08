@@ -116,51 +116,6 @@ Public Class FrmDeathCheck
     End Sub
 #End Region
 #Region "subroutines"
-    Private Shared Function GetWikiDates(_dateString As String) As List(Of String)
-        Dim wikiDates As New List(Of String)
-        Dim _semiSplit As String() = Split(_dateString, ";")
-        Dim _possibleDates As String() = Nothing
-        '       LogUtil.Info(_dateString)
-        For Each _semi As String In _semiSplit
-            '    LogUtil.Info("[" & _semi & "]")
-            Dim _s1 As String() = Split(_semi, "born")
-            Dim _s2 As String() = Split(_s1(Math.Min(_s1.Length - 1, 1)), " on ")
-            Dim _s3 As String() = Split(_s2(Math.Min(_s2.Length - 1, 1)), " in ")
-            Dim _s4 As String = _s3(0)
-            _possibleDates = Split(_s4, " - ")
-            If IsDate(_possibleDates(0)) Then
-                Exit For
-            End If
-        Next
-        If _possibleDates IsNot Nothing Then
-            For Each _possibleDate As String In _possibleDates
-                Dim foundDate As String = findDateInString(_possibleDate)
-                If Not String.IsNullOrEmpty(foundDate) Then
-                    wikiDates.Add(foundDate)
-                End If
-            Next
-        End If
-        Return wikiDates
-    End Function
-    Private Shared Function FindDateInString(_possibleDate As String) As String
-        Dim _foundDate As String = Nothing
-        Dim _words As String() = Split(_possibleDate.Replace(",", "").Replace("  ", " ").Trim, " ")
-        If _words.Length >= 3 Then
-            For w As Integer = 0 To _words.Length - 3
-                Dim _testDate As String = _words(w) & " " & _words(w + 1) & " " & _words(w + 2)
-                If IsDate(_testDate) Then
-                    _foundDate = _testDate
-                    Exit For
-                End If
-            Next
-        End If
-        Return _foundDate
-    End Function
-    Private Shared Function GetWikiExtract(_searchName As String) As String
-        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
-        Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
-        Return RemoveSquareBrackets(FixQuotesAndHyphens(extract, True))
-    End Function
     Private Shared Function GetWikiDeathDate(_parts As List(Of String)) As String
         Dim _deathDate As Date? = Nothing
         Dim _return As String = Nothing
