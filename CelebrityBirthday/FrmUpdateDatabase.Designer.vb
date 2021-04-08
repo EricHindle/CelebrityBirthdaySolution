@@ -1253,11 +1253,11 @@ Partial Class FrmUpdateDatabase
         Me.BtnDateCopy.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnDateCopy.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDateCopy.ForeColor = System.Drawing.Color.Black
-        Me.BtnDateCopy.Image = Global.CelebrityBirthday.My.Resources.Resources.copyicon
+        Me.BtnDateCopy.Image = Global.CelebrityBirthday.My.Resources.Resources.copyiconpale
         Me.BtnDateCopy.Location = New System.Drawing.Point(477, 733)
         Me.BtnDateCopy.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnDateCopy.Name = "BtnDateCopy"
-        Me.BtnDateCopy.Size = New System.Drawing.Size(35, 47)
+        Me.BtnDateCopy.Size = New System.Drawing.Size(35, 37)
         Me.BtnDateCopy.TabIndex = 144
         Me.BtnDateCopy.Text = "dmy"
         Me.BtnDateCopy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
@@ -1323,8 +1323,8 @@ Partial Class FrmUpdateDatabase
         'BtnCopyName
         '
         Me.BtnCopyName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCopyName.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.copyicon
-        Me.BtnCopyName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnCopyName.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.copyiconpale
+        Me.BtnCopyName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.BtnCopyName.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnCopyName.Location = New System.Drawing.Point(847, 16)
         Me.BtnCopyName.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)

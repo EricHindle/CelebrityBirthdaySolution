@@ -107,6 +107,7 @@ Partial Class FrmDateCheck
         Me.BtnRmvBotsdId = New System.Windows.Forms.Button()
         Me.BtnUpdatePerson = New System.Windows.Forms.Button()
         Me.BtnRemoveRow = New System.Windows.Forms.Button()
+        Me.BtnWikiOpen = New System.Windows.Forms.Button()
         CType(Me.DgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.nudSelectCount, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -231,11 +232,11 @@ Partial Class FrmDateCheck
         Me.BtnWikiUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnWikiUpdate.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWikiUpdate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWikiUpdate.Location = New System.Drawing.Point(1256, 584)
+        Me.BtnWikiUpdate.Location = New System.Drawing.Point(1234, 585)
         Me.BtnWikiUpdate.Name = "BtnWikiUpdate"
-        Me.BtnWikiUpdate.Size = New System.Drawing.Size(74, 24)
+        Me.BtnWikiUpdate.Size = New System.Drawing.Size(43, 24)
         Me.BtnWikiUpdate.TabIndex = 17
-        Me.BtnWikiUpdate.Text = "Update"
+        Me.BtnWikiUpdate.Text = "Upd"
         Me.ToolTip1.SetToolTip(Me.BtnWikiUpdate, "Update WikiId for person")
         Me.BtnWikiUpdate.UseVisualStyleBackColor = True
         '
@@ -533,9 +534,9 @@ Partial Class FrmDateCheck
         Me.TxtWikiId.AllowDrop = True
         Me.TxtWikiId.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWikiId.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtWikiId.Location = New System.Drawing.Point(1074, 584)
+        Me.TxtWikiId.Location = New System.Drawing.Point(1045, 585)
         Me.TxtWikiId.Name = "TxtWikiId"
-        Me.TxtWikiId.Size = New System.Drawing.Size(176, 24)
+        Me.TxtWikiId.Size = New System.Drawing.Size(183, 24)
         Me.TxtWikiId.TabIndex = 148
         '
         'Label4
@@ -544,7 +545,7 @@ Partial Class FrmDateCheck
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label4.Location = New System.Drawing.Point(1034, 587)
+        Me.Label4.Location = New System.Drawing.Point(1045, 563)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(34, 19)
         Me.Label4.TabIndex = 147
@@ -1061,12 +1062,26 @@ Partial Class FrmDateCheck
         Me.BtnRemoveRow.Text = "Remove row"
         Me.BtnRemoveRow.UseVisualStyleBackColor = True
         '
+        'BtnWikiOpen
+        '
+        Me.BtnWikiOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnWikiOpen.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWikiOpen.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnWikiOpen.Location = New System.Drawing.Point(1283, 585)
+        Me.BtnWikiOpen.Name = "BtnWikiOpen"
+        Me.BtnWikiOpen.Size = New System.Drawing.Size(52, 24)
+        Me.BtnWikiOpen.TabIndex = 156
+        Me.BtnWikiOpen.Text = "Open"
+        Me.ToolTip1.SetToolTip(Me.BtnWikiOpen, "Update WikiId for person")
+        Me.BtnWikiOpen.UseVisualStyleBackColor = True
+        '
         'FrmDateCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1344, 690)
+        Me.Controls.Add(Me.BtnWikiOpen)
         Me.Controls.Add(Me.BtnCopyName)
         Me.Controls.Add(Me.BtnRemoveRow)
         Me.Controls.Add(Me.GroupBox1)
@@ -1206,4 +1221,5 @@ Partial Class FrmDateCheck
     Friend WithEvents LblMoveImage As Label
     Friend WithEvents LblUpdOldPost As Label
     Friend WithEvents BtnCopyName As Button
+    Friend WithEvents BtnWikiOpen As Button
 End Class

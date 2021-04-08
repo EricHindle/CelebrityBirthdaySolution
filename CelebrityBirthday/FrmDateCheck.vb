@@ -326,6 +326,12 @@ Public NotInheritable Class FrmDateCheck
             DisplayMessage(LblId.Text & "Wiki Id Updated to " & TxtWikiId.Text, True)
         End If
     End Sub
+    Private Sub BtnWikiOpen_Click(sender As Object, e As EventArgs) Handles BtnWikiOpen.Click
+        If Not String.IsNullOrEmpty(TxtWikiId.Text) Then
+            DisplayMessage("Opening Wikipedia", True)
+            Process.Start(My.Resources.WIKIURL & TxtWikiId.Text.Trim)
+        End If
+    End Sub
     Private Sub Date_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         ClearPersonDetails()
         DisplayMessage("")
@@ -780,6 +786,7 @@ Public NotInheritable Class FrmDateCheck
             Clipboard.SetText(DgvWarnings.SelectedRows(0).Cells(xName.Name).Value)
         End If
     End Sub
+
 
 #End Region
 End Class
