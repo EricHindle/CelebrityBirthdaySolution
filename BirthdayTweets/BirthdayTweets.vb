@@ -1,4 +1,5 @@
 ﻿Imports System.Collections.ObjectModel
+Imports System.Data.Common
 Imports System.Drawing
 Imports System.IO
 Imports System.Text
@@ -78,9 +79,7 @@ Public Class BirthdayTweets
         AddHandler Timer1.Elapsed, AddressOf Timer1_Tick
         LogUtil.InitialiseLogging()
         LogUtil.StartLogging()
-        Dim timerIntervalMinutes As Integer = GlobalSettings.GetSetting(TIMER_INTERVAL)
-        Timer1.Interval = timerIntervalMinutes * 60 * 1000
-        Timer1.Start()
+        StartTimer
     End Sub
     Protected Overrides Sub OnStop()
         LogUtil.Info("----- Stopping the Service -----")
@@ -103,6 +102,23 @@ Public Class BirthdayTweets
     End Sub
 #End Region
 #Region "timer"
+    Private Sub StartTimer()
+        Try
+            SetIntervalAndStartTimer(GlobalSettings.GetSetting(TIMER_INTERVAL))
+        Catch ex As DbException
+            StartSqlService()
+            Try
+                SetIntervalAndStartTimer(GlobalSettings.GetSetting(TIMER_INTERVAL))
+            Catch ex1 As DbException
+                SetIntervalAndStartTimer(60)
+                LogUtil.Exception("Database not available. Couldn't start SQL Server", ex1)
+            End Try
+        End Try
+    End Sub
+    Private Sub SetIntervalAndStartTimer(timerIntervalMinutes As Integer)
+        Timer1.Interval = timerIntervalMinutes * 60 * 1000
+        Timer1.Start()
+    End Sub
     Public Shared Sub Timer1_Tick(source As Object, e As ElapsedEventArgs)
         Try
             LogUtil.Info("----------------------------------------- start")
@@ -541,5 +557,24 @@ Public Class BirthdayTweets
         LogUtil.Info(CStr(oBotSDList.Count) & " same birthdays found")
         Return isOK
     End Function
+#End Region
+#Region "database"
+    Private Sub StartSqlService()
+        LogUtil.Info("Starting SQL Server", "BirthdayTweets")
+        Try
+            Dim procStartInfo As New ProcessStartInfo
+            With procStartInfo
+                .UseShellExecute = True
+                .FileName = "net.exe"
+                .Arguments = " start ""SQL Server (SQLEXPRESS)"""
+                .WindowStyle = ProcessWindowStyle.Normal
+                .Verb = "runas"
+            End With
+            Dim thisProcess As Process = Process.Start(procStartInfo)
+            thisProcess.WaitForExit(120000)
+        Catch ex As System.ComponentModel.Win32Exception
+            LogUtil.Exception("Error starting SQL Server", ex)
+        End Try
+    End Sub
 #End Region
 End Class

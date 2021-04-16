@@ -395,32 +395,34 @@ Public NotInheritable Class FrmDateCheck
         Dim _wikiBirthInfo As New WikiBirthInfo(Nothing, "")
         Dim _birthDate As Date? = Nothing
         Try
-
-            Dim _dates As List(Of String) = GetPersonDatesFromWiki(wikiId, _person)
-
+            Dim _dates As List(Of CbDate) = GetPersonDatesFromWiki(wikiId, _person)
             If _dates.Count > 0 Then
                 Try
-                    Dim firstPart As String = _dates(0).Trim
-                    firstPart = firstPart.Replace("N.", "").Replace("S.", "").Replace("(", "").Replace(")", "").Replace("O.", "").Replace(";", "").Replace("  ", " ")
-                    Dim DateParts As String() = Split(firstPart, " ")
-                    Dim DatePartsList As List(Of String) = DateParts.ToList
+                    If Not String.IsNullOrEmpty(_dates(0).DateString) Then
+                        Dim firstPart As String = _dates(0).DateString.Trim
+                        firstPart = firstPart.Replace("N.", "").Replace("S.", "").Replace("(", "").Replace(")", "").Replace("O.", "").Replace(";", "").Replace("  ", " ")
+                        Dim DateParts As String() = Split(firstPart, " ")
+                        Dim DatePartsList As List(Of String) = DateParts.ToList
 
-                    For bitNo As Integer = DatePartsList.Count - 1 To 0 Step -1
-                        If IsNumeric(DatePartsList(bitNo)) Then Exit For
-                        DatePartsList.RemoveAt(bitNo)
-                    Next
-                    If DatePartsList.Count = 0 Then
-                        _wikiBirthInfo.ErrorDesc = "No date present"
-                    Else
-                        Dim firstDate As String = If(DatePartsList.Count > 2, DateParts(DatePartsList.Count - 3), 1) & " " & If(DatePartsList.Count > 1, DatePartsList(DatePartsList.Count - 2), "January") & " " & If(DatePartsList.Count > 0, DatePartsList(DatePartsList.Count - 1), "1900")
-                        If IsDate(firstDate) Then
-                            _birthDate = CDate(firstDate)
+                        For bitNo As Integer = DatePartsList.Count - 1 To 0 Step -1
+                            If IsNumeric(DatePartsList(bitNo)) Then Exit For
+                            DatePartsList.RemoveAt(bitNo)
+                        Next
+                        If DatePartsList.Count = 0 Then
+                            _wikiBirthInfo.ErrorDesc = "No date present"
                         Else
-                            _wikiBirthInfo.ErrorDesc = "Not a date: " & firstDate
+                            Dim firstDate As String = If(DatePartsList.Count > 2, DateParts(DatePartsList.Count - 3), 1) & " " & If(DatePartsList.Count > 1, DatePartsList(DatePartsList.Count - 2), "January") & " " & If(DatePartsList.Count > 0, DatePartsList(DatePartsList.Count - 1), "1900")
+                            If IsDate(firstDate) Then
+                                _birthDate = CDate(firstDate)
+                            Else
+                                _wikiBirthInfo.ErrorDesc = "Not a date: " & firstDate
+                            End If
                         End If
+                    Else
+                        _wikiBirthInfo.ErrorDesc = "No date present"
                     End If
                 Catch ex As OverflowException
-                    _wikiBirthInfo.ErrorDesc = "Not a date: " & _dates(0)
+                    _wikiBirthInfo.ErrorDesc = "Not a date: " & _dates(0).DateString
                 End Try
             End If
 

@@ -217,6 +217,7 @@
       <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Domain\BornSameDay.vb" />
+    <Compile Include="Domain\CbDate.vb" />
     <Compile Include="Domain\ImageIdentity.vb" />
     <Compile Include="Domain\SocialMedia.vb" />
     <Compile Include="Facebook\FrmFacebookTest.Designer.vb">

@@ -1189,7 +1189,7 @@ Public NotInheritable Class FrmBotsd
             urlYear = If(_wpDate Is Nothing, "", Format(_wpDate, "yyyy"))
             imageLoadMonth = urlMonth
             imageLoadYear = urlYear
-            Dim _fullList As List(Of Person) = FindTodays(ThisDay, ThisMonth, False)
+            Dim _fullList As List(Of Person) = FindTodays(ThisDay, ThisMonth, False, True)
             DgvPairs.Rows.Clear()
 
             Dim lastYear As String = ""

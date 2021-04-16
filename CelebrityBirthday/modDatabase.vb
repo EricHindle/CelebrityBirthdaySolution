@@ -280,13 +280,19 @@ Module modDatabase
         End Try
         Return _List
     End Function
-    Public Function FindTodays(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean)
+    Public Function FindTodays(oDay As Integer, oMonth As Integer, isIgnoreNoTweet As Boolean, isIgnoreTwins As Boolean)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByDayAndMonth(oFullPersonTable, oDay, oMonth)
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-                If Not isTweetsOnly Or Not oRow.noTweet Then
-                    _List.Add(New Person(oRow))
+                If isIgnoreNoTweet And oRow.noTweet Then
+                    Continue For
+                Else
+                    If isIgnoreTwins And oRow.isTwin Then
+                        Continue For
+                    Else
+                        _List.Add(New Person(oRow))
+                    End If
                 End If
             Next
         Catch dbEx As DbException

@@ -180,7 +180,7 @@
         Get
             Dim _dob As Date? = Nothing
             Try
-                _dob = New Date(_birthYear, _birthMonth, _birthDay)
+                _dob = New Date(Math.Abs(IBirthYear), _birthMonth, _birthDay)
             Catch ex As ArgumentOutOfRangeException
                 LogUtil.Problem(Name & " Invalid date of birth", "Person")
             End Try

@@ -33,7 +33,7 @@ Public Class FrmDeathCheck
                 Dim _displayExtract As String = _wikiExtract.Substring(0, Math.Min(180, _wikiExtract.Length))
                 Dim isDateFound As Boolean = False
                 Dim isEndOfExtract As Boolean = String.IsNullOrEmpty(_wikiExtract)
-                Dim _dates As New List(Of String)
+                Dim _dates As New List(Of CbDate)
                 Do Until isDateFound Or isEndOfExtract
                     Dim _parts As List(Of String) = ParseStringWithBrackets(_wikiExtract)
                     If _parts.Count <> 3 Then
@@ -43,7 +43,7 @@ Public Class FrmDeathCheck
                         If _dates.Count > 0 Then
                             isDateFound = True
                             If IsDate(_dates(0)) Then
-                                Dim _dob As Date = CDate(_dates(0))
+                                Dim _dob As Date = _dates(0).DateValue
                                 If _person.DateOfBirth <> _dob Then
                                     isDateFound = False
                                     _wikiExtract = _parts(2)
@@ -68,7 +68,7 @@ Public Class FrmDeathCheck
                 'End If
                 Dim _dateOfDeath As String = Nothing
                 If _dates.Count > 1 Then
-                    _dateOfDeath = _dates(1)
+                    _dateOfDeath = _dates(1).DateString
                 End If
                 If _dateOfDeath IsNot Nothing Then
                     If IsDate(_dateOfDeath) Then
