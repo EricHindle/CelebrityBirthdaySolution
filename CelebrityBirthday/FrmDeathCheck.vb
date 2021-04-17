@@ -29,7 +29,7 @@ Public Class FrmDeathCheck
                 If String.IsNullOrEmpty(searchString) Then
                     searchString = _person.Name
                 End If
-                Dim _wikiExtract As String = GetWikiExtract(searchString)
+                Dim _wikiExtract As String = GetWikiExtract(searchString, 3)
                 Dim _displayExtract As String = _wikiExtract.Substring(0, Math.Min(180, _wikiExtract.Length))
                 Dim isDateFound As Boolean = False
                 Dim isEndOfExtract As Boolean = String.IsNullOrEmpty(_wikiExtract)

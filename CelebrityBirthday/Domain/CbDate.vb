@@ -44,6 +44,13 @@
             _isBce = value
         End Set
     End Property
+    Public Sub New()
+        _date = Date.MinValue
+        _isBce = False
+        _isOS = False
+        _dateString = ""
+        _isValidDate = False
+    End Sub
     Public Sub New(pDate As Date)
         _date = pDate
         _isBce = False

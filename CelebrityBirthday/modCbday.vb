@@ -390,15 +390,15 @@ Friend Module modCbday
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
-    Public Function GetWikiExtract(_searchName As String) As String
-        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, 2))
+    Public Function GetWikiExtract(_searchName As String, sentences As Integer) As String
+        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, sentences))
         Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
         Return RemoveSquareBrackets(FixQuotesAndHyphens(extract, True))
     End Function
     Public Function GetWikiDates(_dateString As String) As List(Of CbDate)
         Dim wikiDates As New List(Of CbDate)
         Dim _semiSplit As String() = Split(_dateString, ";")
-        Dim _possibleDates As String() = Nothing
+        Dim _possibleDates As New List(Of String)
         For Each _semi As String In _semiSplit
             _semi = _semi.Replace("c.", "").Replace(",", " ")
             'Dim _s1 As String() = Split(_semi, "born")
@@ -408,14 +408,14 @@ Friend Module modCbday
             'Dim _s4 As String() = Split(_s3(Math.Min(_s3.Length - 1, 1)), " in ")
             ''      LogUtil.Debug("_s4: " & Join(_s4, "|"))
             'Dim _s5 As String = _s4(0)
-
-            _possibleDates = Split(FixQuotesAndHyphens(_semi, True), " - ")
+            Dim _splitDates As String() = Split(FixQuotesAndHyphens(_semi, True), " - ")
+            _possibleDates.AddRange(_splitDates)
             '       LogUtil.Debug("_possibleDates: " & Join(_possibleDates, "|"))
-            If IsDate(_possibleDates(0).Trim) Then
-                Exit For
-            End If
+            'If IsDate(_possibleDates(0).Trim) Then
+            '    Exit For
+            'End If
         Next
-        If _possibleDates IsNot Nothing Then
+        If _possibleDates.Count > 0 Then
             For Each _possibleDate As String In _possibleDates
                 Dim foundDate As CbDate = New CbDate(_possibleDate.Trim)
                 If foundDate.IsValidDate Then
@@ -426,23 +426,35 @@ Friend Module modCbday
         End If
         Return wikiDates
     End Function
-
-    Public Function GetPersonDatesFromWiki(_wikiExtract As String, ByRef _person As Person) As List(Of CbDate)
+    Public Function GetPersonDatesFromWiki(ByVal _wikiExtract As String, ByRef _person As Person) As List(Of CbDate)
+        ' If first date of birth in extract matches dob of person then send back dates in those brackets
+        ' If not, look for more brackets. 
+        ' If no more brackets then send back dates in first set of brackets
+        ' Repeat with remaining extract
         Dim isDateFound As Boolean = False
+        Dim wasDateFound As Boolean = False
         Dim isEndOfExtract As Boolean = String.IsNullOrEmpty(_wikiExtract)
         Dim _dates As New List(Of CbDate)
+        Dim _savedDates As New List(Of CbDate)
         Do Until isDateFound Or isEndOfExtract
             Dim _parts As List(Of String) = ParseStringWithBrackets(_wikiExtract)
             If _parts.Count <> 3 Then
                 isEndOfExtract = True
             Else
                 '    LogUtil.Debug("_parts(1): " & _parts(1))
+
+                ' Returns a list of valid dates found in brackets
                 _dates = GetWikiDates(_parts(1))
                 If _dates.Count > 0 Then
                     isDateFound = True
+
                     Dim _dob As Date = _dates(0).DateValue
                     '        LogUtil.Debug("_dob: " & _dates(0).ToString)
                     If _person.DateOfBirth <> _dob Then
+                        If Not wasDateFound Then
+                            _savedDates = _dates
+                            wasDateFound = True
+                        End If
                         isDateFound = False
                         _wikiExtract = _parts(2)
                     End If
@@ -451,6 +463,9 @@ Friend Module modCbday
                 End If
             End If
         Loop
+        If Not isDateFound And wasDateFound Then
+            _dates = _savedDates
+        End If
         Return _dates
     End Function
 
