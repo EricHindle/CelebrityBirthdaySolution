@@ -18,20 +18,22 @@ Module modDatabase
 #End Region
 #Region "person"
     Public Function FindTodays(oDay As Integer, oMonth As Integer, isTwin As Boolean)
+        Const Psub As String = "FindTodays"
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByDayAndMonth(oFullPersonTable, oDay, oMonth, isTwin)
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
                 _List.Add(New Person(oRow))
             Next
-            LogUtil.Info(CStr(_List.Count) & " birthdays found (no twins)")
+            LogUtil.Info(CStr(_List.Count) & " birthdays found (no twins)", Psub)
         Catch dbEx As DbException
-            LogUtil.Exception("FindTodays", dbEx)
+            LogUtil.Exception("Finding today's birthdays DbException", dbEx, Psub)
         End Try
         Return _List
     End Function
 
     Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean, Optional isGetPhoto As Boolean = True) As List(Of Person)
+        Const Psub As String = "FindPeopleByDate"
         Dim oPersonList As New List(Of Person)
         Try
             oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
@@ -42,13 +44,14 @@ Module modDatabase
                 End If
             Next
         Catch dbEx As DbException
-            LogUtil.Exception("FindPeopleByDate", dbEx)
+            LogUtil.Exception("Find People DbException", dbEx, Psub)
         End Try
 
         Return oPersonList
     End Function
     Public Function FindBirthdays(oDay As Integer, oMonth As Integer) As List(Of Person)
-        LogUtil.Info("Birthdays")
+        Const Psub As String = "FindBirthdays"
+        LogUtil.Info("Finding list of people with birthdays", Psub)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
@@ -58,12 +61,13 @@ Module modDatabase
                 End If
             Next
         Catch dbEx As DbException
-            LogUtil.Exception("FindBirthdays", dbEx)
+            LogUtil.Exception("Finding birthdays DbException", dbEx, Psub)
         End Try
         Return _List
     End Function
     Public Function FindAnniversaries(oDay As Integer, oMonth As Integer) As List(Of Person)
-        LogUtil.Info("Anniversaries")
+        Const Psub As String = "FindAnniversaries"
+        LogUtil.Info("Finding list of people with anniversaries", Psub)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByAnniversary(oFullPersonTable, oDay, oMonth)
@@ -73,20 +77,21 @@ Module modDatabase
                 End If
             Next
         Catch dbEx As DbException
-            LogUtil.Exception("FindAnniversaries", dbEx)
+            LogUtil.Exception("Finding anniversaries DbException", dbEx, Psub)
         End Try
         Return _List
     End Function
 #End Region
 #Region "image"
     Public Function GetImageById(ByVal _id As Integer, Optional isGetPhoto As Boolean = True) As ImageIdentity
+        Const Psub As String = "GetImageById"
         Try
             Dim ict As Integer = oImgTa.FillById(oImgTable, _id)
             If ict = 1 Then
                 Return New ImageIdentity(oImgTable.Rows(0), isGetPhoto)
             End If
         Catch dbEx As DbException
-            LogUtil.Exception("GetImageById", dbEx)
+            LogUtil.Exception("Get Image DbException", dbEx, Psub)
         End Try
         Return New ImageIdentity
     End Function
@@ -104,6 +109,7 @@ Module modDatabase
 #End Region
 #Region "dates"
     Public Function GetAuthById(pId As String) As TwitterOAuth
+        Const Psub As String = "GetAuthById"
         Dim oTwAuth As TwitterOAuth = Nothing
         Try
             If oTwitterAuthTa.FillById(oTwitterAuthTable, pId) = 1 Then
@@ -114,14 +120,15 @@ Module modDatabase
                     .Verifier = If(oRow.IsVerifierNull, "", oRow.Verifier)
                 }
             Else
-                LogUtil.Problem("Twitter user " & pId & " not found in database")
+                LogUtil.Problem("Twitter user " & pId & " not found in database", Psub)
             End If
         Catch dbEx As DbException
-            LogUtil.Exception("GetAuthById", dbEx)
+            LogUtil.Exception("Get Auth DbException", dbEx, Psub)
         End Try
         Return oTwAuth
     End Function
     Public Function GetTwitterUsers() As List(Of String)
+        Const Psub As String = "GetTwitterUsers"
         Dim _list As New List(Of String)
         Try
             oTwitterAuthTa.Fill(oTwitterAuthTable)
@@ -129,16 +136,17 @@ Module modDatabase
                 _list.Add(oRow.Id)
             Next
         Catch dbEx As DbException
-            LogUtil.Exception("GetTwitterUsers", dbEx)
+            LogUtil.Exception("Get Twitter Users DbException", dbEx, Psub)
         End Try
         Return _list
     End Function
     Public Function InsertTweet(pText As String, pMonth As Integer?, pDay As Integer?, pSeq As Integer?, pId As String, pAccount As String, pType As String) As Boolean
+        Const Psub As String = "InsertTweet"
         Dim isOK As Boolean = False
         Try
             isOK = oTweetTa.InsertTweet(Now, If(String.IsNullOrEmpty(pText), "", pText), pMonth, pDay, pSeq, pId, pAccount, pType) = 1
         Catch dbEx As DbException
-            LogUtil.Exception("InsertTweet", dbEx)
+            LogUtil.Exception("Insert Tweet DbException", dbEx, Psub)
         End Try
         Return isOK
     End Function

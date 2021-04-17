@@ -107,6 +107,7 @@ Public Class ImageIdentity
         Return _imageFileName.Trim & _imageFileType.Trim
     End Function
     Private Function GetPhotoFromFile() As Image
+        Const Psub As String = "GetPhotoFromFile"
         Dim _imageFromFile As Image = New Bitmap(60, 60)
         If Not String.IsNullOrEmpty(_imageFileName) Then
             Dim _Filename As String = Path.Combine(My.Settings.ImgPath, _imageFileName & _imageFileType)
@@ -114,14 +115,14 @@ Public Class ImageIdentity
                 Try
                     _imageFromFile = Image.FromFile(_Filename)
                 Catch ex As OutOfMemoryException
-                    LogUtil.Exception("GetPhotoFromFile", ex)
+                    LogUtil.Exception("Out Of Memory Exception", ex, Psub)
                 Catch ex As FileNotFoundException
-                    LogUtil.Exception("GetPhotoFromFile", ex)
+                    LogUtil.Exception("File Not Found Exception", ex, Psub)
                 Catch ex As ArgumentException
-                    LogUtil.Exception("GetPhotoFromFile", ex)
+                    LogUtil.Exception("Argument Exception", ex, Psub)
                 End Try
             Else
-                LogUtil.Debug(_Filename & " does not exist")
+                LogUtil.Debug(_Filename & " does not exist", Psub)
             End If
         End If
         Return _imageFromFile

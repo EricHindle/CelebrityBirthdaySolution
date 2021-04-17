@@ -3,6 +3,7 @@ Imports System.Reflection
 Imports TweetSharp
 Module modTwitter
     Public Function PostMedia(pTwitterService As TwitterService, _filename As String) As TwitterUploadedMedia
+        Const Psub As String = "PostMedia"
         Dim _uploadOptions As New UploadMediaOptions
         Dim _mediaFile As New MediaFile With {
             .FileName = _filename
@@ -15,7 +16,7 @@ Module modTwitter
                 _twitterUplMedia = pTwitterService.UploadMedia(_uploadOptions)
             End Using
         Catch ex As IOException
-            LogUtil.Exception("PostMedia", ex)
+            LogUtil.Exception("Pos tMedia IOException", ex, Psub)
         End Try
         Return _twitterUplMedia
     End Function

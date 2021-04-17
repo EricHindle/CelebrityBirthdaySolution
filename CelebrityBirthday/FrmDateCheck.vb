@@ -4,10 +4,15 @@ Imports System.Text
 Structure WikiBirthInfo
     Private _birthDate As CbDate
     Private _errordesc As String
-    Sub New(pBirthDate As CbDate, pErrorDesc As String)
-        _birthDate = pBirthDate
-        _errordesc = pErrorDesc
-    End Sub
+    Private _wikiExtract As String
+    Public Property WikiExtract() As String
+        Get
+            Return _wikiExtract
+        End Get
+        Set(ByVal value As String)
+            _wikiExtract = value
+        End Set
+    End Property
     Public Property ErrorDesc() As String
         Get
             Return _errordesc
@@ -24,6 +29,11 @@ Structure WikiBirthInfo
             _birthDate = value
         End Set
     End Property
+    Sub New(pBirthDate As CbDate, pExtract As String, pErrorDesc As String)
+        _birthDate = pBirthDate
+        _wikiExtract = pExtract
+        _errordesc = pErrorDesc
+    End Sub
 End Structure
 Public NotInheritable Class FrmDateCheck
 #Region "variables"
@@ -86,8 +96,17 @@ Public NotInheritable Class FrmDateCheck
                     wikiId = _person.Social.WikiId
                 End If
                 Dim _wikiBirthInfo As WikiBirthInfo = GetWikiBirthDate(_person, wikiId)
-                Dim _dateOfBirth As Date? = _wikiBirthInfo.BirthDate.DateValue
-                Dim _desc As String = GetWikiText(3, _person.ForeName, _person.Surname, wikiId)
+                If _wikiBirthInfo.BirthDate.IsValidDate Then
+                    Dim _dateOfBirth As Date = _wikiBirthInfo.BirthDate.DateValue
+                    Dim _desc As String = GetWikiText(3, _person.ForeName, _person.Surname, wikiId)
+
+                Else
+
+                End If
+
+
+
+
                 If Not String.IsNullOrEmpty(_wikiBirthInfo.ErrorDesc) Then
                     _desc = _wikiBirthInfo.ErrorDesc
                 End If
@@ -392,10 +411,10 @@ Public NotInheritable Class FrmDateCheck
 #End Region
 #Region "subroutines"
     Private Shared Function GetWikiBirthDate(_person As Person, Optional wikiId As String = "") As WikiBirthInfo
-        Dim _wikiBirthInfo As New WikiBirthInfo(Nothing, "")
-        Dim _birthDate As Date? = Nothing
+        Dim _birthDate As CbDate = Nothing
+        Dim _wikiBirthInfo As New WikiBirthInfo(_birthDate, GetWikiExtract(wikiId), "")
         Try
-            Dim _dates As List(Of CbDate) = GetPersonDatesFromWiki(wikiId, _person)
+            Dim _dates As List(Of CbDate) = GetPersonDatesFromWiki(_wikiBirthInfo.WikiExtract, _person)
             If _dates.Count > 0 Then
                 Try
                     If Not String.IsNullOrEmpty(_dates(0).DateString) Then
@@ -413,7 +432,7 @@ Public NotInheritable Class FrmDateCheck
                         Else
                             Dim firstDate As String = If(DatePartsList.Count > 2, DateParts(DatePartsList.Count - 3), 1) & " " & If(DatePartsList.Count > 1, DatePartsList(DatePartsList.Count - 2), "January") & " " & If(DatePartsList.Count > 0, DatePartsList(DatePartsList.Count - 1), "1900")
                             If IsDate(firstDate) Then
-                                _birthDate = CDate(firstDate)
+                                _wikiBirthInfo.BirthDate = New CbDate(firstDate)
                             Else
                                 _wikiBirthInfo.ErrorDesc = "Not a date: " & firstDate
                             End If
@@ -424,6 +443,8 @@ Public NotInheritable Class FrmDateCheck
                 Catch ex As OverflowException
                     _wikiBirthInfo.ErrorDesc = "Not a date: " & _dates(0).DateString
                 End Try
+            Else
+                _wikiBirthInfo.ErrorDesc = "No dates found in wiki extract"
             End If
 
         Catch ex As ArgumentException
@@ -431,7 +452,6 @@ Public NotInheritable Class FrmDateCheck
         Catch ex As System.Security.SecurityException
             _wikiBirthInfo.ErrorDesc = ex.Message
         End Try
-        _wikiBirthInfo.BirthDate = New CbDate(_birthDate)
         Return _wikiBirthInfo
     End Function
     Private Sub DisplayMessage(oText As String, Optional isLogged As Boolean = False)

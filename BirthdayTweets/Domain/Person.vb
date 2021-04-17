@@ -178,23 +178,25 @@
     End Property
     Public ReadOnly Property DateOfBirth As Date?
         Get
+            Const Psub As String = "DateOfBirth"
             Dim _dob As Date? = Nothing
             Try
                 _dob = New Date(_birthYear, _birthMonth, _birthDay)
             Catch ex As ArgumentOutOfRangeException
-                LogUtil.Problem(Name & "Invalid date of birth")
+                LogUtil.Problem(Name & "Invalid date of birth", Psub)
             End Try
             Return _dob
         End Get
     End Property
     Public ReadOnly Property DateOfDeath As Date?
         Get
+            Const Psub As String = "DateOfDeath"
             Dim _dod As Date? = Nothing
             If _deathYear <> 0 Then
                 Try
                     _dod = New Date(_birthYear, _birthMonth, _birthDay)
                 Catch ex As ArgumentOutOfRangeException
-                    LogUtil.Problem(Name & "Invalid date of birth")
+                    LogUtil.Problem(Name & "Invalid date of death", psub)
                 End Try
             End If
             Return _dod

@@ -427,8 +427,7 @@ Friend Module modCbday
         Return wikiDates
     End Function
 
-    Public Function GetPersonDatesFromWiki(searchString As String, ByRef _person As Person) As List(Of CbDate)
-        Dim _wikiExtract As String = GetWikiExtract(searchString)
+    Public Function GetPersonDatesFromWiki(_wikiExtract As String, ByRef _person As Person) As List(Of CbDate)
         Dim isDateFound As Boolean = False
         Dim isEndOfExtract As Boolean = String.IsNullOrEmpty(_wikiExtract)
         Dim _dates As New List(Of CbDate)

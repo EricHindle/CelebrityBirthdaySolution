@@ -146,7 +146,7 @@ Public Class BirthdayTweets
                     If BuildPersonLists() Then
                         SendCbBirthdayTweets()
                         SendCbAnniversaryTweets()
-                        LogUtil.Info("CelebBirthday tweets complete")
+                        LogUtil.Info("CelebBirthday tweets complete", Psub)
                         SendHbBirthdayTweets()
                         SendHbAnniversaryTweets()
                         GlobalSettings.SetSetting(LAST_CELEB_TWEET, "date", todaysDate, "")
@@ -174,7 +174,7 @@ Public Class BirthdayTweets
         Catch ex As DbException
             LogUtil.Exception("Could not get data from dB", ex, Psub)
         Catch ex As ArgumentOutOfRangeException
-            LogUtil.Exception("Failed", ex, Psub)
+            LogUtil.Exception("Argument Out Of Range Exception", ex, Psub)
         End Try
         GetIntervalAndStartTimer(30)
         LogUtil.Info("Restarted timer", Psub)
@@ -359,7 +359,8 @@ Public Class BirthdayTweets
         Return _outString.ToString
     End Function
     Private Shared Function GenerateText(_imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer, _userType As TweetUserType) As String
-        LogUtil.Info("Generating text", "GenerateText")
+        Const Psub As String = "GenerateText"
+        LogUtil.Info("Generating text", Psub)
         Dim _outString As New StringBuilder
         _outString.Append(tweetHeaderDate).Append(LINEFEED).Append(LINEFEED)
         _outString.Append(GetHeading(_type)).Append(LINEFEED)
@@ -496,7 +497,7 @@ Public Class BirthdayTweets
                                                                                               FileIO.SearchOption.SearchTopLevelOnly,
                                                                                               {BIRTHDAY_FNAME & "*.jpg", ANNIV_FNAME & "*.jpg", BOTSD_FNAME & "*.jpg"})
             For Each _imageFile As String In _imageList
-                LogUtil.Info(_imageFile)
+                LogUtil.Info(_imageFile, Psub)
                 My.Computer.FileSystem.DeleteFile(_imageFile)
             Next
         Catch ex1 As ArgumentNullException
@@ -541,7 +542,7 @@ Public Class BirthdayTweets
                 End If
             Next
         Catch ex As ArgumentException
-            LogUtil.Exception("Exception getting unique filename", ex, Psub)
+            LogUtil.Exception("Get unique filename ArgumentException", ex, Psub)
         End Try
         Return newfilename
     End Function
@@ -559,7 +560,7 @@ Public Class BirthdayTweets
             LogUtil.Info("Selection Complete", Psub)
             isBuiltOk = True
         Catch ex As ArgumentOutOfRangeException
-            LogUtil.Exception("Exception building Person Lists", ex, Psub)
+            LogUtil.Exception("Build Person Lists ArgumentOutOfRangeException", ex, Psub)
             isBuiltOk = False
         End Try
         Return isBuiltOk

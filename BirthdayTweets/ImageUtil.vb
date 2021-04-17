@@ -47,6 +47,7 @@ Friend Module ImageUtil
     End Function
 
     Public Function ResizeImageToBitmap(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
+        Const Psub As String = "ResizeImageToBitmap"
         Dim targetBitmap As System.Drawing.Bitmap = New System.Drawing.Bitmap(targetWidth, targetHeight)
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
 
@@ -58,12 +59,13 @@ Friend Module ImageUtil
                 End Using
             End If
         Catch ex As ArgumentException
-            LogUtil.Exception("Save image error", ex, "ResizeImageToBitmap")
+            LogUtil.Exception("Save image ArgumentException", ex, Psub)
             MsgBox("resizeImageToBitmap:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
         End Try
         Return targetBitmap
     End Function
     Public Function ExtractCroppedAreaFromImage(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
+        Const Psub As String = "ExtractCroppedAreaFromImage"
         Dim targetBitmap As System.Drawing.Bitmap = New Bitmap(targetWidth, targetHeight)
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
 
@@ -75,7 +77,7 @@ Friend Module ImageUtil
                 End Using
             End If
         Catch ex As ArgumentNullException
-            LogUtil.Exception("Save image error", ex, "ExtractCroppedAreaFromImage")
+            LogUtil.Exception("Save image ArgumentNullException", ex, Psub)
             MsgBox("extractCroppedAreaFromImage:" & ex.Message, MsgBoxStyle.Exclamation, "Error")
         End Try
 
@@ -112,6 +114,7 @@ Friend Module ImageUtil
     End Function
 
     Public Function GenerateImage(imageTable As List(Of Person), widthImageCount As Integer, pHeight As Integer, pAlignType As AlignType) As Image
+        Const Psub As String = "GenerateImage"
         Dim mosaic As Image = New Bitmap(My.Resources.blank, Math.Max(60 * widthImageCount, 300), Math.Max((60 * pHeight) + 18, 80))
         Dim oGraphics As Graphics = Graphics.FromImage(mosaic)
         oGraphics.DrawImage(My.Resources.id, New Point(mosaic.Width - 125, mosaic.Height - 18))
@@ -124,7 +127,7 @@ Friend Module ImageUtil
                 Dim rowImageWidth As Integer = widthImageCount
                 Dim _image As Image = _person.Image.Photo
                 If _image Is Nothing Then
-                    LogUtil.Info("Image missing")
+                    LogUtil.Info("Image missing", Psub)
                 End If
                 _imgHPos += 1
                 If _imgHPos = widthImageCount Then
@@ -155,6 +158,7 @@ Friend Module ImageUtil
         Return _imageClone
     End Function
     Public Function SaveImage(_image As Image, ByVal targetFile As String) As Boolean
+        Const Psub As String = "SaveImage"
         Dim isSavedOk As Boolean = True
         Dim targetBitmap As System.Drawing.Bitmap = New Bitmap(_image)
         Try
@@ -163,10 +167,10 @@ Friend Module ImageUtil
             _encoderParameters.Dispose()
         Catch ex As ArgumentException
             isSavedOk = False
-            LogUtil.Exception("Save image error", ex, "SaveImage")
+            LogUtil.Exception("Save image ArgumentException", ex, Psub)
         Catch ex As Runtime.InteropServices.ExternalException
             isSavedOk = False
-            LogUtil.Exception("Save image error", ex, "SaveImage")
+            LogUtil.Exception("Save image ExternalException", ex, Psub)
         End Try
         Return isSavedOk
     End Function
