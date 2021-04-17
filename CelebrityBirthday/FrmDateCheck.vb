@@ -2,9 +2,9 @@
 Imports System.Text
 
 Structure WikiBirthInfo
-    Private _birthDate As Date?
+    Private _birthDate As CbDate
     Private _errordesc As String
-    Sub New(pBirthDate As Date?, pErrorDesc As String)
+    Sub New(pBirthDate As CbDate, pErrorDesc As String)
         _birthDate = pBirthDate
         _errordesc = pErrorDesc
     End Sub
@@ -16,11 +16,11 @@ Structure WikiBirthInfo
             _errordesc = value
         End Set
     End Property
-    Public Property BirthDate() As Date?
+    Public Property BirthDate() As CbDate
         Get
             Return _birthDate
         End Get
-        Set(ByVal value As Date?)
+        Set(ByVal value As CbDate)
             _birthDate = value
         End Set
     End Property
@@ -86,7 +86,7 @@ Public NotInheritable Class FrmDateCheck
                     wikiId = _person.Social.WikiId
                 End If
                 Dim _wikiBirthInfo As WikiBirthInfo = GetWikiBirthDate(_person, wikiId)
-                Dim _dateOfBirth As Date? = _wikiBirthInfo.BirthDate
+                Dim _dateOfBirth As Date? = _wikiBirthInfo.BirthDate.DateValue
                 Dim _desc As String = GetWikiText(3, _person.ForeName, _person.Surname, wikiId)
                 If Not String.IsNullOrEmpty(_wikiBirthInfo.ErrorDesc) Then
                     _desc = _wikiBirthInfo.ErrorDesc
@@ -431,7 +431,7 @@ Public NotInheritable Class FrmDateCheck
         Catch ex As System.Security.SecurityException
             _wikiBirthInfo.ErrorDesc = ex.Message
         End Try
-        _wikiBirthInfo.BirthDate = _birthDate
+        _wikiBirthInfo.BirthDate = New CbDate(_birthDate)
         Return _wikiBirthInfo
     End Function
     Private Sub DisplayMessage(oText As String, Optional isLogged As Boolean = False)

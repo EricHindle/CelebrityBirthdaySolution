@@ -92,6 +92,6 @@
     End Sub
 
     Private Sub FrmMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Debug("Closing", MyBase.Name)
+        LogUtil.Info("Closing", MyBase.Name)
     End Sub
 End Class

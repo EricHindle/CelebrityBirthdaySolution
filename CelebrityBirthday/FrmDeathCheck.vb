@@ -42,7 +42,7 @@ Public Class FrmDeathCheck
                         _dates = GetWikiDates(_parts(1))
                         If _dates.Count > 0 Then
                             isDateFound = True
-                            If IsDate(_dates(0)) Then
+                            If _dates(0).IsValidDate Then
                                 Dim _dob As Date = _dates(0).DateValue
                                 If _person.DateOfBirth <> _dob Then
                                     isDateFound = False

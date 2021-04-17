@@ -51,6 +51,18 @@
         _dateString = Format(_date, "dd MMMM yyyy")
         _isValidDate = True
     End Sub
+    Public Sub New(pDate As Date?)
+        If pDate.HasValue Then
+            _date = pDate.Value
+            _dateString = Format(_date, "dd MMMM yyyy")
+            _isValidDate = True
+        Else
+            _dateString = ""
+            _isValidDate = False
+        End If
+        _isBce = False
+        _isOS = False
+    End Sub
     Public Sub New(pDate As Date, pIsBce As Boolean, pIsOs As Boolean)
         _date = pDate
         _isBce = pIsBce
@@ -66,43 +78,33 @@
             _isValidDate = True
         Else
             _isValidDate = False
+            '    LogUtil.Debug("Invalid")
         End If
-        _isBce = pDate.ToLower.Contains("bc") Or pDate.Contains("bce")
-        _isOS = pDate.ToLower.Contains("os") Or pDate.Contains("o.s.")
+        Dim lowerDate As String = pDate.ToLower.Replace(".", "")
+        _isBce = lowerDate.Contains("bc") Or lowerDate.Contains("bce")
+        _isOS = lowerDate.Contains("os")
     End Sub
     Private Shared Function FindDateInString(_possibleDate As String) As Date?
         Dim foundDate As Date?
-        Dim _list1 As List(Of String) = ParseStringWithBrackets(_possibleDate)
-        Dim _d1 As String = _list1(0)
-        If _list1.Count = 3 Then
-            _d1 &= _list1(2)
-        End If
-        Dim _list2 As List(Of String) = ParseStringWithBrackets(_d1, 0, "[", "]")
-        Dim _d2 As String = _list2(0)
-        If _list2.Count = 3 Then
-            _d2 &= _list2(2)
-        End If
-        Dim _d3 As String = _d2.ToLower _
-                                .Replace(",", " ") _
-                                .Replace(". ", ".") _
-                                .Replace("os", "") _
-                                .Replace("o.s.", "") _
-                                .Replace("bc", "") _
-                                .Replace("b.c.", "") _
-                                .Replace("  ", " ") _
-                                .Replace(". ", ".") _
-                                .Replace("os", "") _
-                                .Trim
-        Dim _words As String() = Split(_d3, " ")
-        If _words.Length >= 3 Then
-            For w As Integer = 0 To _words.Length - 3
+        '   Dim stringDate As String = ""
+        Dim testString As String = _possibleDate.Replace(")", " ) ").Replace("]", " ] ").ToLower.Replace("  ", " ").Trim
+        Dim _words As List(Of String) = Split(testString, " ").ToList
+        For index As Integer = _words.Count - 1 To 0 Step -1
+            If String.IsNullOrEmpty(_words(index)) Then
+                _words.RemoveAt(index)
+            End If
+        Next
+        If _words.Count >= 3 Then
+            For w As Integer = 0 To _words.Count - 3
                 Dim _testDate As String = _words(w) & " " & _words(w + 1) & " " & _words(w + 2)
                 If IsDate(_testDate) Then
                     foundDate = CDate(_testDate)
+                    '    stringDate = _testDate
                     Exit For
                 End If
             Next
         End If
+        '   LogUtil.Debug("found date in " & _possibleDate & " : " & stringDate)
         Return foundDate
     End Function
 End Class

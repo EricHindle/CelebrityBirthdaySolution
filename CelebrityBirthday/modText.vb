@@ -64,5 +64,12 @@ Module modText
 
         Return MakeList(_pre, _inner, _post)
     End Function
-
+    Public Function RemoveValueInBrackets(ByVal _string As String, Optional ByVal _start As Integer = 0, Optional ByVal _openChar As Char = "("c, Optional ByVal _closeChar As Char = ")"c) As String
+        Dim _stringList As List(Of String) = ParseStringWithBrackets(_string, _start, _openChar, _closeChar)
+        Dim newstring As String = _stringList.First
+        If _stringList.Count = 3 Then
+            newstring &= _stringList.Last
+        End If
+        Return newString
+    End Function
 End Module
