@@ -400,7 +400,17 @@ Friend Module modCbday
         Dim _semiSplit As String() = Split(_dateString, ";")
         Dim _possibleDates As New List(Of String)
         For Each _semi As String In _semiSplit
-            _semi = _semi.Replace("c.", "").Replace(",", " ")
+
+            Dim isBracketsFound As Boolean = True
+
+            Do Until Not isBracketsFound
+                Dim _parts As List(Of String) = ParseStringWithBrackets(_semi)
+                isBracketsFound = _parts.Count = 3
+                If isBracketsFound Then
+                    _semi = _parts(0) & _parts(2)
+                End If
+            Loop
+            _semi = _semi.Replace("born", "").Replace("c.", "").Replace(",", " ")
             'Dim _s1 As String() = Split(_semi, "born")
             ''       LogUtil.Debug("_s1: " & Join(_s1, "|"))
             'Dim _s3 As String() = Split(_s1(Math.Min(_s1.Length - 1, 1)), " on ")

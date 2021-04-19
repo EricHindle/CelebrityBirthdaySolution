@@ -23,6 +23,7 @@ Partial Class FrmDeathCheck
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDeathCheck))
         Me.dgvWarnings = New System.Windows.Forms.DataGridView()
         Me.btnClose = New System.Windows.Forms.Button()
@@ -180,6 +181,8 @@ Partial Class FrmDeathCheck
         'xDesc
         '
         Me.xDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.xDesc.DefaultCellStyle = DataGridViewCellStyle1
         Me.xDesc.HeaderText = "Description"
         Me.xDesc.Name = "xDesc"
         Me.xDesc.ReadOnly = True
