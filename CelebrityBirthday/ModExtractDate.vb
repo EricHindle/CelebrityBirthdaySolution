@@ -10,9 +10,6 @@
                     Dim _semiSplit As String() = Split(_dateString, ";")
                     For Each _semi As String In _semiSplit
                         If Not String.IsNullOrEmpty(_semi) Then
-                            If _semi.Contains("c.") Then
-                                LogUtil.Debug("About")
-                            End If
                             Dim isInnerBracketsFound As Boolean = True
                             Dim isOs As Boolean = False
                             Do Until Not isInnerBracketsFound

@@ -2,7 +2,7 @@
 Imports System.Text
 
 Structure WikiBirthInfo
-    Private _birthDate As CbDate
+    Private _wikiDates As CbDates
     Private _errordesc As String
     Private _wikiExtract As String
     Public Property WikiExtract() As String
@@ -21,16 +21,16 @@ Structure WikiBirthInfo
             _errordesc = value
         End Set
     End Property
-    Public Property BirthDate() As CbDate
+    Public Property WikiDates() As CbDates
         Get
-            Return _birthDate
+            Return _wikiDates
         End Get
-        Set(ByVal value As CbDate)
-            _birthDate = value
+        Set(ByVal value As CbDates)
+            _wikiDates = value
         End Set
     End Property
-    Sub New(pBirthDate As CbDate, pExtract As String, pErrorDesc As String)
-        _birthDate = pBirthDate
+    Sub New(pBirthDate As CbDates, pExtract As String, pErrorDesc As String)
+        _wikiDates = pBirthDate
         _wikiExtract = pExtract
         _errordesc = pErrorDesc
     End Sub
@@ -97,8 +97,8 @@ Public NotInheritable Class FrmDateCheck
                 End If
                 Dim _wikiBirthInfo As WikiBirthInfo = GetWikiBirthDate(_person, wikiId)
                 Dim _desc As String
-                If _wikiBirthInfo.BirthDate IsNot Nothing AndAlso _wikiBirthInfo.BirthDate.IsValidDate Then
-                    Dim _dateOfBirth As Date = _wikiBirthInfo.BirthDate.DateValue
+                If _wikiBirthInfo.WikiDates IsNot Nothing AndAlso _wikiBirthInfo.WikiDates.BirthDate.IsValidDate Then
+                    Dim _dateOfBirth As Date = _wikiBirthInfo.WikiDates.BirthDate.DateValue
                     If _dateOfBirth <> _person.DateOfBirth Then
                         AddXRow(_person, Format(_dateOfBirth, "dd MMM yyyy"), _wikiBirthInfo.WikiExtract, wikiId)
                         personTable.Add(_person)
@@ -108,13 +108,10 @@ Public NotInheritable Class FrmDateCheck
                         End If
                     End If
                 Else
-                    _desc = _wikiBirthInfo.ErrorDesc
-                    AddXRow(_person, "", _wikiBirthInfo.WikiExtract, wikiId)
+                    _desc = "** " & _wikiBirthInfo.ErrorDesc & " **"
+                    AddXRow(_person, "", _desc & vbCrLf & _wikiBirthInfo.WikiExtract, wikiId)
                     personTable.Add(_person)
-
                 End If
-
-
             Catch ex As ArgumentException
                 LogUtil.Problem("Exception during list load : " & ex.Message)
                 If MsgBox(_person.Name & vbCrLf & "Exception during table load" & vbCrLf & ex.Message & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Error") = MsgBoxResult.No Then
@@ -407,53 +404,34 @@ Public NotInheritable Class FrmDateCheck
 #End Region
 #Region "subroutines"
     Private Shared Function GetWikiBirthDate(_person As Person, Optional wikiId As String = "") As WikiBirthInfo
-        Dim _birthDate As CbDate = Nothing
-        Dim _wikiBirthInfo As New WikiBirthInfo(_birthDate, GetWikiExtract(wikiId, 3), "")
-        Try
-            Dim _dates As List(Of CbDate) = GetPersonDatesFromWiki(_wikiBirthInfo.WikiExtract, _person)
-            If _dates.Count > 0 Then
-                Dim wikiDateOfBirth As CbDate = _dates(0)
-                Dim wikiDateOfDeath As CbDate = New CbDate()
-                If _dates.Count > 1 Then
-                    wikiDateOfDeath = _dates(1)
+        Dim _wikiBirthInfo As New WikiBirthInfo(Nothing, GetWikiExtract(wikiId, 3), "")
+        If String.IsNullOrEmpty(_wikiBirthInfo.WikiExtract.Trim) Then
+            _wikiBirthInfo.ErrorDesc = "No wiki extract available for " & _person.Name
+        Else
+            Dim _wikiExtract As String = _wikiBirthInfo.WikiExtract
+            Dim datesFound As CbDates = Nothing
+            Dim cbdates As List(Of CbDates) = ExtractCbdatesFromWikiExtract(_wikiExtract)
+            If cbdates.Count > 0 Then
+                If cbdates.Count = 1 Then
+                    datesFound = cbdates(0)
+                Else
+                    For Each _cbdates As CbDates In cbdates
+                        Dim _dob As Date = _cbdates.BirthDate.DateValue
+                        If _person.DateOfBirth = _dob Then
+                            datesFound = _cbdates
+                            Exit For
+                        End If
+                    Next
+                    If datesFound Is Nothing Then
+                        datesFound = cbdates(0)
+                    End If
                 End If
-                _wikiBirthInfo.BirthDate = wikiDateOfBirth
-                'Try
-                '    If Not String.IsNullOrEmpty(_dates(0).DateString) Then
-                '        Dim firstPart As String = _dates(0).DateString.Trim
-                '        firstPart = firstPart.Replace("N.", "").Replace("S.", "").Replace("(", "").Replace(")", "").Replace("O.", "").Replace(";", "").Replace("  ", " ")
-                '        Dim DateParts As String() = Split(firstPart, " ")
-                '        Dim DatePartsList As List(Of String) = DateParts.ToList
-
-                '        For bitNo As Integer = DatePartsList.Count - 1 To 0 Step -1
-                '            If IsNumeric(DatePartsList(bitNo)) Then Exit For
-                '            DatePartsList.RemoveAt(bitNo)
-                '        Next
-                '        If DatePartsList.Count = 0 Then
-                '            _wikiBirthInfo.ErrorDesc = "No date present"
-                '        Else
-                '            Dim firstDate As String = If(DatePartsList.Count > 2, DateParts(DatePartsList.Count - 3), 1) & " " & If(DatePartsList.Count > 1, DatePartsList(DatePartsList.Count - 2), "January") & " " & If(DatePartsList.Count > 0, DatePartsList(DatePartsList.Count - 1), "1900")
-                '            If IsDate(firstDate) Then
-                '                _wikiBirthInfo.BirthDate = New CbDate(firstDate)
-                '            Else
-                '                _wikiBirthInfo.ErrorDesc = "Not a date: " & firstDate
-                '            End If
-                '        End If
-                '    Else
-                '        _wikiBirthInfo.ErrorDesc = "No date present"
-                '    End If
-                'Catch ex As OverflowException
-                '    _wikiBirthInfo.ErrorDesc = "Not a date: " & _dates(0).DateString
-                'End Try
+                _wikiBirthInfo.WikiDates = datesFound
             Else
-                _wikiBirthInfo.ErrorDesc = "No dates found in wiki extract"
+                LogUtil.Problem("Cannot find dates for " & _person.Name)
+                _wikiBirthInfo.ErrorDesc = "Cannot find dates for " & _person.Name
             End If
-
-        Catch ex As ArgumentException
-            _wikiBirthInfo.ErrorDesc = ex.Message
-        Catch ex As System.Security.SecurityException
-            _wikiBirthInfo.ErrorDesc = ex.Message
-        End Try
+        End If
         Return _wikiBirthInfo
     End Function
     Private Sub DisplayMessage(oText As String, Optional isLogged As Boolean = False)

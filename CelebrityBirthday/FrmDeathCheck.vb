@@ -33,11 +33,9 @@ Public Class FrmDeathCheck
                 Dim datesFound As CbDates = Nothing
                 Dim cbdates As List(Of CbDates) = ExtractCbdatesFromWikiExtract(_wikiExtract)
                 If cbdates.Count = 1 Then
-                    LogUtil.Debug(cbdates(0).ToString)
                     datesFound = cbdates(0)
                 Else
                     For Each _cbdates As CbDates In cbdates
-                        LogUtil.Debug(_cbdates.ToString)
                         Dim _dob As Date = _cbdates.BirthDate.DateValue
                         If _person.DateOfBirth = _dob Then
                             datesFound = _cbdates
