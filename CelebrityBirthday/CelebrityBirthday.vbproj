@@ -218,6 +218,7 @@
     </Compile>
     <Compile Include="Domain\BornSameDay.vb" />
     <Compile Include="Domain\CbDate.vb" />
+    <Compile Include="Domain\CbDates.vb" />
     <Compile Include="Domain\ImageIdentity.vb" />
     <Compile Include="Domain\SocialMedia.vb" />
     <Compile Include="Facebook\FrmFacebookTest.Designer.vb">
@@ -331,6 +332,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Logging\LogUtil.vb" />
+    <Compile Include="ModExtractDate.vb" />
     <Compile Include="modGlobalConstants.vb" />
     <Compile Include="Twitter\modTwitter.vb" />
     <Compile Include="Twitter\FrmSendTwitter.Designer.vb">

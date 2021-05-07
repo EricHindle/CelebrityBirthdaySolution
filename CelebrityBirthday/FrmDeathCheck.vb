@@ -30,53 +30,28 @@ Public Class FrmDeathCheck
                     searchString = _person.Name
                 End If
                 Dim _wikiExtract As String = GetWikiExtract(searchString, 3)
-                Dim _displayExtract As String = _wikiExtract.Substring(0, Math.Min(180, _wikiExtract.Length))
-                Dim isDateFound As Boolean = False
-                Dim isEndOfExtract As Boolean = String.IsNullOrEmpty(_wikiExtract)
-                Dim _dates As New List(Of CbDate)
-                Do Until isDateFound Or isEndOfExtract
-                    Dim _parts As List(Of String) = ParseStringWithBrackets(_wikiExtract)
-                    If _parts.Count <> 3 Then
-                        isEndOfExtract = True
-                    Else
-                        _dates = GetWikiDates(_parts(1))
-                        If _dates.Count > 0 Then
-                            isDateFound = True
-                            If _dates(0).IsValidDate Then
-                                Dim _dob As Date = _dates(0).DateValue
-                                If _person.DateOfBirth <> _dob Then
-                                    isDateFound = False
-                                    _wikiExtract = _parts(2)
-                                End If
-                            End If
-                        Else
-                            _wikiExtract = _parts(2)
+                Dim datesFound As CbDates = Nothing
+                Dim cbdates As List(Of CbDates) = ExtractCbdatesFromWikiExtract(_wikiExtract)
+                If cbdates.Count = 1 Then
+                    LogUtil.Debug(cbdates(0).ToString)
+                    datesFound = cbdates(0)
+                Else
+                    For Each _cbdates As CbDates In cbdates
+                        LogUtil.Debug(_cbdates.ToString)
+                        Dim _dob As Date = _cbdates.BirthDate.DateValue
+                        If _person.DateOfBirth = _dob Then
+                            datesFound = _cbdates
+                            Exit For
                         End If
-                    End If
-                Loop
-                'If isDateFound Then
-                '    For Each d As String In _dates
-                '        If IsDate(d) Then
-                '            LogUtil.Info(_person.Name & " >> " & d, "frmDeathCheck")
-                '        Else
-                '            LogUtil.Info(_person.Name & " ?? " & d, "frmDeathCheck")
-                '        End If
-
-                '    Next
-                'Else
-                '    LogUtil.Info(_person.Name & " ** No date found" & _displayExtract, "frmDeathCheck")
-                'End If
-                Dim _dateOfDeath As String = Nothing
-                If _dates.Count > 1 Then
-                    _dateOfDeath = _dates(1).DateString
+                    Next
                 End If
-                If _dateOfDeath IsNot Nothing Then
-                    If IsDate(_dateOfDeath) Then
+                If datesFound IsNot Nothing Then
+                    If datesFound.DeathDate.IsValidDate Then
+                        Dim _dateOfDeath As String = datesFound.DeathDate.FormattedDateString
                         AddXRow(_person, _dateOfDeath, _wikiExtract)
-                    Else
-                        AddXRow(_person, "", _dateOfDeath)      ' Error
                     End If
                 End If
+
             Catch ex As DbException
                 If DisplayException(MethodBase.GetCurrentMethod(), ex, "dB", True) = MsgBoxResult.No Then Exit Sub
             End Try
