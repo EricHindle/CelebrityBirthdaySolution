@@ -1,4 +1,6 @@
 ﻿Module ModExtractDate
+    Private ReadOnly osTestStringValues As String() = {"os", "OS", "o s", "O S", "o.s.", "O.S.", "o. s.", "O. S."}
+    Private ReadOnly bceTestStringValues As String() = {"bc", "bce", "BC", "BCE"}
     Public Function ExtractCbdatesFromWikiExtract(wikiExtract As String) As List(Of CbDates)
         Dim cbdates As New List(Of CbDates)
         Dim _blocks As List(Of String) = ParseStringWithBrackets(wikiExtract)
@@ -23,10 +25,10 @@
                                 End If
                             Loop
                             Dim splitDates As String() = Split(FixQuotesAndHyphens(_semi, True), " - ", 2)
-                            Dim birthString As String = splitDates(0).ToLower.Replace("born", "").Replace("  ", " ").Trim
+                            Dim birthString As String = splitDates(0).ToLower.Replace(",", " ").Replace("born", "").Replace("  ", " ").Trim
                             Dim deathString As String = String.Empty
                             If splitDates.Length = 2 Then
-                                deathString = splitDates(1).ToLower.Replace("  ", " ").Trim
+                                deathString = splitDates(1).ToLower.Replace(",", " ").Replace("  ", " ").Trim
                             End If
                             Dim _cbDates As CbDates = BuildCbDatesFromStrings(birthString, deathString, isOs)
                             If _cbDates.BirthDate.IsValidDate Then
@@ -49,7 +51,6 @@
         Loop
         Return cbdates
     End Function
-
     Private Function BuildCbDatesFromStrings(birthString As String, deathString As String, isOsFound As Boolean) As CbDates
         Dim _cbDates As New CbDates With {
             .BirthDate = FindDateInString(birthString, isOsFound),
@@ -85,12 +86,24 @@
         End If
         Return _cbDate
     End Function
-
-    Private Function IsStringContainsBc(birthString As String) As Boolean
-        Return birthString.ToLower.Contains("bc")
+    Private Function IsStringContainsBc(dateString As String) As Boolean
+        Dim isBce As Boolean = False
+        For Each bceTestString In bceTestStringValues
+            If dateString.Contains(bceTestString) Then
+                isBce = True
+                dateString = dateString.Replace(bceTestString, "")
+            End If
+        Next
+        Return isBce
     End Function
-
-    Private Function IsStringContainsOs(birthString As String) As Boolean
-        Return birthString.ToLower.Contains("os") Or birthString.ToLower.Contains("o.s.")
+    Private Function IsStringContainsOs(ByRef dateString As String) As Boolean
+        Dim isOs As Boolean = False
+        For Each osTestString In osTestStringValues
+            If dateString.Contains(osTestString) Then
+                isOs = True
+                dateString = dateString.Replace(osTestString, "")
+            End If
+        Next
+        Return isOs
     End Function
 End Module

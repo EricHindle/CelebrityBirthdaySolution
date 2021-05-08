@@ -27,7 +27,7 @@
 #End Region
 #Region "methods"
     Public Overrides Function ToString() As String
-        Return "Birthdate : {" & BirthDate.ToString & "} Deathdate : {" & DeathDate.ToString & "}"
+        Return "{{Birthdate : " & BirthDate.ToString & "} {Deathdate : " & DeathDate.ToString & "}}"
     End Function
 #End Region
 End Class

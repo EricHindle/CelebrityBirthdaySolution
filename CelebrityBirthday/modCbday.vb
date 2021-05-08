@@ -8,15 +8,19 @@ Imports System.Reflection
 Friend Module modCbday
 #Region "constants"
     Private Const MODULE_NAME As String = "modCbday"
-#End Region
     Public Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Public Const TWEET_MAX_LEN As Integer = 280
     Public Const RTB_CONTROL_NAME As String = "RtbFile"
     Public Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
     Public Const TABPAGE_BASENAME As String = "TabPage_"
+    Private Const EM_CHARFROMPOS As Int32 = &HD7
+    Private ReadOnly osTestStringValues As String() = {"os", "OS", "o s", "O S", "o.s.", "O.S.", "o. s.", "O. S."}
+    Private ReadOnly bceTestStringValues As String() = {"bc", "bce", "BC", "BCE"}
     Public myCultureInfo As CultureInfo = CultureInfo.CurrentUICulture
     Public myStringFormatProvider As IFormatProvider = myCultureInfo.GetFormat(GetType(String))
+#End Region
+#Region "classes"
     Private Class NativeMethods
         Public Declare Function SendMessageLong Lib "user32" _
                         Alias "SendMessageA" (ByVal hWnd As IntPtr,
@@ -24,13 +28,27 @@ Friend Module modCbday
                                               ByVal wParam As Int32,
                                               ByVal lParam As Int32) As Long
     End Class
-    Private Structure POINTAPI
-        Public X As Integer
-        Public Y As Integer
-    End Structure
-    Private Const EM_CHARFROMPOS As Int32 = &HD7
+#End Region
+#Region "private variables"
     Dim _lookup As Dictionary(Of Char, String)
+#End Region
+#Region "subroutines"
+    Public Sub GetFormPos(ByRef oForm As Form, ByVal sPos As String)
+        If sPos = "max" Then
+            oForm.WindowState = FormWindowState.Maximized
+        ElseIf sPos = "min" Then
+            oForm.WindowState = FormWindowState.Minimized
+        Else
+            Dim pos As String() = sPos.Split("~")
+            If pos.Length = 4 Then
+                oForm.Top = CInt(pos(0))
+                oForm.Left = CInt(pos(1))
 
+            End If
+        End If
+    End Sub
+#End Region
+#Region "functions"
     Public Function ToSimpleCharacters(ByVal original As String) As String
         Dim rtnvalue As String = original
         If Not String.IsNullOrEmpty(original) Then
@@ -75,20 +93,6 @@ Friend Module modCbday
         End If
         Return sPos
     End Function
-    Public Sub GetFormPos(ByRef oForm As Form, ByVal sPos As String)
-        If sPos = "max" Then
-            oForm.WindowState = FormWindowState.Maximized
-        ElseIf sPos = "min" Then
-            oForm.WindowState = FormWindowState.Minimized
-        Else
-            Dim pos As String() = sPos.Split("~")
-            If pos.Length = 4 Then
-                oForm.Top = CInt(pos(0))
-                oForm.Left = CInt(pos(1))
-
-            End If
-        End If
-    End Sub
     Public Function RemoveBadCharacters(_text As String, unicode As Integer()) As String
         Dim _text2 As String = _text
         For Each c As Char In _text
@@ -100,7 +104,6 @@ Friend Module modCbday
         Next
         Return _text2
     End Function
-    ' Return the character position under the mouse.
     Public Function TextBoxCursorPos(ByRef oBox As TextBox,
         ByVal X As Single, ByVal Y As Single) As Long
         ' Convert screen coordinates into control coordinates.
@@ -111,18 +114,6 @@ Friend Module modCbday
         TextBoxCursorPos = NativeMethods.SendMessageLong(oBox.Handle,
             EM_CHARFROMPOS, 0&, CLng(pt.X + pt.Y * &H10000)) _
             And &HFFFF&
-    End Function
-    Public Function RemoveTags(ByVal sText As String) As String
-        Dim outText As New StringBuilder
-        Dim inTag As Boolean = False
-        For Each c As Char In sText
-            If c = "<" Then inTag = True
-            If Not inTag Then
-                outText.Append(c)
-            End If
-            If c = ">" Then inTag = False
-        Next
-        Return outText.ToString
     End Function
     Public Function CheckForChanges(_personTable As List(Of Person)) As Boolean
         Dim isUnsavedChanges As Boolean = False
@@ -141,13 +132,11 @@ Friend Module modCbday
         Dim sImgName As String = ToSimpleCharacters(If(String.IsNullOrEmpty(oForename), "", oForename & " ") & oSurname).Replace(" ", "-").Replace("'", "").Replace(".", "-").Replace("--", "-")
             Return sImgName
     End Function
-
     Public Function GetSourceControl(ByRef menuItem As Object) As Object
         Dim _menuItem As ToolStripMenuItem = CType(menuItem, ToolStripMenuItem)
         Dim menuStrip As ContextMenuStrip = CType(_menuItem.Owner, ContextMenuStrip)
         Return menuStrip.SourceControl
     End Function
-
     Public Function SaveImage(ByVal pUri As Uri, ByVal strFName As String) As Boolean
         LogUtil.Info("Saving Image from " & pUri.ToString & " to " & strFName, MODULE_NAME)
         Dim rtnval As Boolean = True
@@ -220,17 +209,12 @@ Friend Module modCbday
         If rtnval Then LogUtil.Info("Image save complete", MODULE_NAME)
         Return rtnval
     End Function
-
     Public Function GetGoogleSearchString(oText As String) As String
         Return My.Settings.googleImageSearch & oText.Replace(" ", "+")
     End Function
     Public Function GetWordPressMonthUrl(oLoadYear As String, oLoadMonth As String, oLoadDay As String, oSelDay As String, oSelMonth As String) As String
         Return My.Settings.WordPressMonthUrl.Replace("#m", oLoadMonth.ToLower(myCultureInfo)).Replace("#y", oLoadYear).Replace("#d", oLoadDay).Replace("#D", oSelDay).Replace("#M", oSelMonth)
     End Function
-    Public Function GetTwitterSearchString(oText As String) As String
-        Return My.Settings.TwitterSearchUrl & oText.Replace(" ", "+")
-    End Function
-
     Public Function GetWikiSearchString(oText As String) As String
         Return My.Settings.wikiSearchUrl & oText.Replace(" ", "+")
     End Function
@@ -263,7 +247,6 @@ Friend Module modCbday
         Loop
         Return newText
     End Function
-
     Public Function NavigateToUrl(pSearchString As String) As WebResponse
         Dim response As WebResponse = Nothing
         Try
@@ -395,88 +378,110 @@ Friend Module modCbday
         Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
         Return RemoveSquareBrackets(FixQuotesAndHyphens(extract, True))
     End Function
-    Public Function GetWikiDates(_dateString As String) As List(Of CbDate)
-        Dim wikiDates As New List(Of CbDate)
-        Dim _semiSplit As String() = Split(_dateString, ";")
-        Dim _possibleDates As New List(Of String)
-        For Each _semi As String In _semiSplit
-
-            Dim isBracketsFound As Boolean = True
-
-            Do Until Not isBracketsFound
-                Dim _parts As List(Of String) = ParseStringWithBrackets(_semi)
-                isBracketsFound = _parts.Count = 3
-                If isBracketsFound Then
-                    _semi = _parts(0) & _parts(2)
-                End If
-            Loop
-            _semi = _semi.Replace("born", "").Replace("c.", "").Replace(",", " ")
-            'Dim _s1 As String() = Split(_semi, "born")
-            ''       LogUtil.Debug("_s1: " & Join(_s1, "|"))
-            'Dim _s3 As String() = Split(_s1(Math.Min(_s1.Length - 1, 1)), " on ")
-            ''       LogUtil.Debug("_s3: " & Join(_s3, "|"))
-            'Dim _s4 As String() = Split(_s3(Math.Min(_s3.Length - 1, 1)), " in ")
-            ''      LogUtil.Debug("_s4: " & Join(_s4, "|"))
-            'Dim _s5 As String = _s4(0)
-            Dim _splitDates As String() = Split(FixQuotesAndHyphens(_semi, True), " - ")
-            _possibleDates.AddRange(_splitDates)
-            '       LogUtil.Debug("_possibleDates: " & Join(_possibleDates, "|"))
-            'If IsDate(_possibleDates(0).Trim) Then
-            '    Exit For
-            'End If
-        Next
-        If _possibleDates.Count > 0 Then
-            For Each _possibleDate As String In _possibleDates
-                Dim foundDate As CbDate = New CbDate(_possibleDate.Trim)
-                If foundDate.IsValidDate Then
-                    '       LogUtil.Debug("foundDate: " & foundDate.DateString)
-                    wikiDates.Add(foundDate)
-                End If
-            Next
-        End If
-        Return wikiDates
-    End Function
-    Public Function GetPersonDatesFromWiki(ByVal _wikiExtract As String, ByRef _person As Person) As List(Of CbDate)
-        ' If first date of birth in extract matches dob of person then send back dates in those brackets
-        ' If not, look for more brackets. 
-        ' If no more brackets then send back dates in first set of brackets
-        ' Repeat with remaining extract
-        Dim isDateFound As Boolean = False
-        Dim wasDateFound As Boolean = False
-        Dim isEndOfExtract As Boolean = String.IsNullOrEmpty(_wikiExtract)
-        Dim _dates As New List(Of CbDate)
-        Dim _savedDates As New List(Of CbDate)
-        Do Until isDateFound Or isEndOfExtract
-            Dim _parts As List(Of String) = ParseStringWithBrackets(_wikiExtract)
-            If _parts.Count <> 3 Then
-                isEndOfExtract = True
-            Else
-                '    LogUtil.Debug("_parts(1): " & _parts(1))
-
-                ' Returns a list of valid dates found in brackets
-                _dates = GetWikiDates(_parts(1))
-                If _dates.Count > 0 Then
-                    isDateFound = True
-
-                    Dim _dob As Date = _dates(0).DateValue
-                    '        LogUtil.Debug("_dob: " & _dates(0).ToString)
-                    If _person.DateOfBirth <> _dob Then
-                        If Not wasDateFound Then
-                            _savedDates = _dates
-                            wasDateFound = True
+    Public Function ExtractCbdatesFromWikiExtract(wikiExtract As String) As List(Of CbDates)
+        Dim cbdates As New List(Of CbDates)
+        Dim _blocks As List(Of String) = ParseStringWithBrackets(wikiExtract)
+        Dim isBracketsFound As Boolean = True
+        Do Until Not isBracketsFound
+            If _blocks.Count = 3 Then
+                Dim _dateString As String = _blocks(1)
+                If Not String.IsNullOrEmpty(_dateString) Then
+                    Dim _semiSplit As String() = Split(_dateString, ";")
+                    For Each _semi As String In _semiSplit
+                        If Not String.IsNullOrEmpty(_semi) Then
+                            Dim isInnerBracketsFound As Boolean = True
+                            Dim isOs As Boolean = False
+                            Do Until Not isInnerBracketsFound
+                                Dim testStringParts As List(Of String) = ParseStringWithBrackets(_semi)
+                                isInnerBracketsFound = testStringParts.Count = 3
+                                If isInnerBracketsFound Then
+                                    If IsStringContainsOs(testStringParts(1)) Then
+                                        isOs = True
+                                    End If
+                                    _semi = testStringParts(0) & testStringParts(2)
+                                End If
+                            Loop
+                            Dim splitDates As String() = Split(FixQuotesAndHyphens(_semi, True), " - ", 2)
+                            Dim birthString As String = splitDates(0).ToLower.Replace(",", " ").Replace("born", "").Replace("  ", " ").Trim
+                            Dim deathString As String = String.Empty
+                            If splitDates.Length = 2 Then
+                                deathString = splitDates(1).ToLower.Replace(",", " ").Replace("  ", " ").Trim
+                            End If
+                            Dim _cbDates As CbDates = BuildCbDatesFromStrings(birthString, deathString, isOs)
+                            If _cbDates.BirthDate.IsValidDate Then
+                                cbdates.Add(_cbDates)
+                            End If
+                        Else
                         End If
-                        isDateFound = False
-                        _wikiExtract = _parts(2)
-                    End If
+                    Next
                 Else
-                    _wikiExtract = _parts(2)
+                    LogUtil.Problem("Wiki extract has empty brackets", "ExtractCbdatesFromWikiExtract")
                 End If
+                _blocks = ParseStringWithBrackets(_blocks(2))
+            ElseIf _blocks.Count = 2 Then
+                isBracketsFound = False
+                LogUtil.Problem("Wiki extract has missing closing bracket", "ExtractCbdatesFromWikiExtract")
+                LogUtil.Problem(wikiExtract, "ExtractCbdatesFromWikiExtract")
+            ElseIf _blocks.Count = 1 Then
+                isBracketsFound = False
             End If
         Loop
-        If Not isDateFound And wasDateFound Then
-            _dates = _savedDates
-        End If
-        Return _dates
+        Return cbdates
     End Function
-
+    Private Function BuildCbDatesFromStrings(birthString As String, deathString As String, isOsFound As Boolean) As CbDates
+        Dim _cbDates As New CbDates With {
+            .BirthDate = FindDateInString(birthString, isOsFound),
+            .DeathDate = FindDateInString(deathString, False)
+        }
+        Return _cbDates
+    End Function
+    Private Function FindDateInString(possibleDateString As String, isOsFound As Boolean)
+        Dim _cbDate As New CbDate
+        Dim isOs As Boolean = IsStringContainsOs(possibleDateString) Or isOsFound
+        Dim isBc As Boolean = IsStringContainsBc(possibleDateString)
+        If IsDate(possibleDateString) Then
+            _cbDate.DateValue = CDate(possibleDateString)
+            _cbDate.DateString = possibleDateString
+            _cbDate.IsValidDate = True
+        Else
+            Dim _words As List(Of String) = Split(possibleDateString, " ").ToList
+            For index As Integer = _words.Count - 1 To 0 Step -1
+                If String.IsNullOrEmpty(_words(index).Trim) Then
+                    _words.RemoveAt(index)
+                End If
+            Next
+            If _words.Count >= 3 Then
+                For w As Integer = 0 To _words.Count - 3
+                    Dim _testDate As String = _words(w) & " " & _words(w + 1) & " " & _words(w + 2)
+                    If IsDate(_testDate) Then
+                        _cbDate.DateValue = CDate(_testDate)
+                        _cbDate.DateString = _testDate
+                        Exit For
+                    End If
+                Next
+            End If
+        End If
+        Return _cbDate
+    End Function
+    Private Function IsStringContainsBc(dateString As String) As Boolean
+        Dim isBce As Boolean = False
+        For Each bceTestString In bceTestStringValues
+            If dateString.Contains(bceTestString) Then
+                isBce = True
+                dateString = dateString.Replace(bceTestString, "")
+            End If
+        Next
+        Return isBce
+    End Function
+    Private Function IsStringContainsOs(ByRef dateString As String) As Boolean
+        Dim isOs As Boolean = False
+        For Each osTestString In osTestStringValues
+            If dateString.Contains(osTestString) Then
+                isOs = True
+                dateString = dateString.Replace(osTestString, "")
+            End If
+        Next
+        Return isOs
+    End Function
+#End Region
 End Module

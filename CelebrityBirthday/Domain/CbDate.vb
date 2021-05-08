@@ -106,7 +106,6 @@ Public Class CbDate
     Public Function FormattedDateString() As String
         Return If(_isOS, "O.S. ", "") & Format(_date, "dd MMMM yyyy") & If(_isBce, " BCE", "")
     End Function
-
     Private Shared Function FindDateInString(_possibleDate As String) As Date?
         Dim foundDate As Date?
         Dim testString As String = _possibleDate.Replace(")", " ) ").Replace("]", " ] ").ToLower.Replace("  ", " ").Trim
@@ -120,10 +119,8 @@ Public Class CbDate
         '   LogUtil.Debug("found date in " & _possibleDate & " : " & stringDate)
         Return foundDate
     End Function
-
     Public Overrides Function ToString() As String
         Dim cbDateString As New StringBuilder
-
         cbDateString.Append("{DateValue : ")
         If IsValidDate Then
             cbDateString.Append(FormattedDateString())
