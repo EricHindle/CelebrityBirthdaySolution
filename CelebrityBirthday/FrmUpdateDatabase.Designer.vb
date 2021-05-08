@@ -121,6 +121,8 @@ Partial Class FrmUpdateDatabase
         Me.BtnCopyName = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.cbIsTwin = New System.Windows.Forms.CheckBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.BtnViewAudit = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -128,6 +130,7 @@ Partial Class FrmUpdateDatabase
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbNoTweet
@@ -1346,12 +1349,36 @@ Partial Class FrmUpdateDatabase
         Me.cbIsTwin.Text = "is a twin"
         Me.cbIsTwin.UseVisualStyleBackColor = True
         '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.BtnViewAudit)
+        Me.GroupBox4.Location = New System.Drawing.Point(555, 841)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(200, 47)
+        Me.GroupBox4.TabIndex = 148
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Audit"
+        '
+        'BtnViewAudit
+        '
+        Me.BtnViewAudit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnViewAudit.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnViewAudit.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnViewAudit.Location = New System.Drawing.Point(126, 14)
+        Me.BtnViewAudit.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
+        Me.BtnViewAudit.Name = "BtnViewAudit"
+        Me.BtnViewAudit.Size = New System.Drawing.Size(64, 24)
+        Me.BtnViewAudit.TabIndex = 28
+        Me.BtnViewAudit.Text = "View"
+        Me.BtnViewAudit.UseVisualStyleBackColor = True
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1293, 923)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.cbIsTwin)
         Me.Controls.Add(Me.BtnCopyName)
         Me.Controls.Add(Me.GroupBox3)
@@ -1439,6 +1466,7 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1553,4 +1581,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents BtnCopyName As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents cbIsTwin As CheckBox
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents BtnViewAudit As Button
 End Class

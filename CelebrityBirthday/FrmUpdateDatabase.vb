@@ -10,6 +10,7 @@ Public NotInheritable Class FrmUpdateDatabase
     Private isGotBirthName As Boolean
     Private isGotStageName As Boolean
     Private ReadOnly trimChars As Char() = {".", ",", " "}
+    Private lastSelectedPerson As Person
 #End Region
 #Region "properties"
     Private _personId As Integer
@@ -26,7 +27,6 @@ Public NotInheritable Class FrmUpdateDatabase
 #Region "control handlers"
     Private Sub BtnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         CloseForm()
-
     End Sub
     Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles txtDesc.DragDrop,
                                                                                             txtDied.DragDrop,
@@ -100,6 +100,7 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub BtnClrNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClrNew.Click
         ClearDetails()
+        lastSelectedPerson = Nothing
     End Sub
     Private Sub BtnInsert_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInsert.Click
         ShowStatus("Inserting person in list",, True)
@@ -271,11 +272,12 @@ Public NotInheritable Class FrmUpdateDatabase
         ClearStatus()
         SwapText("Text")
         If lbPeople.SelectedIndex >= 0 Then
-            Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
-            LoadScreenFromPerson(oPerson)
-            ShowStatus("Selected " & oPerson.Name,, True)
+            lastSelectedPerson = personTable(lbPeople.SelectedIndex)
+            LoadScreenFromPerson(lastSelectedPerson)
+            ShowStatus("Selected " & lastSelectedPerson.Name,, True)
         Else
             ClearDetails()
+            lastSelectedPerson = Nothing
         End If
     End Sub
     Private Sub BtnUpdateSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateSel.Click
@@ -286,9 +288,15 @@ Public NotInheritable Class FrmUpdateDatabase
             Dim dbAction As String
             If oPerson.Id < 0 Then
                 Dim newId As Integer = InsertPerson(oPerson)
+                AuditUtil.AddDobChange(newId, Nothing, New Date?(New Date(CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay)))
                 dbAction = "Inserted on dB"
             Else
                 UpdatePerson(oPerson)
+                If lastSelectedPerson IsNot Nothing AndAlso oPerson.Id = lastSelectedPerson.Id Then
+                    If lastSelectedPerson.DateOfBirth <> oPerson.DateOfBirth Then
+                        AuditUtil.AddDobChange(oPerson.Id, New Date?(lastSelectedPerson.DateOfBirth), New Date?(oPerson.DateOfBirth))
+                    End If
+                End If
                 dbAction = "Updated on dB"
             End If
             lblID.Text = CStr(oPerson.Id)
@@ -708,7 +716,20 @@ Public NotInheritable Class FrmUpdateDatabase
         End Using
         ClearStatus()
     End Sub
-
+    Private Sub BtnCopyName_Click(sender As Object, e As EventArgs) Handles BtnCopyName.Click
+        txtName.SelectAll()
+        txtName.Copy()
+    End Sub
+    Private Sub BtnViewAudit_Click(sender As Object, e As EventArgs) Handles BtnViewAudit.Click
+        If lbPeople.SelectedIndex > -1 Then
+            Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
+            Using _audit As New FrmAuditList
+                _audit.DataType = "dob"
+                _audit.PersonId = oPerson.Id
+                _audit.ShowDialog()
+            End Using
+        End If
+    End Sub
 #End Region
 #Region "subroutines"
     'Form overrides dispose to clean up the component list.
@@ -794,6 +815,7 @@ Public NotInheritable Class FrmUpdateDatabase
             Dim dbAction As String = ""
             If oPerson.Id < 0 Then
                 Dim newId As Integer = InsertPerson(oPerson)
+                AuditUtil.AddDobChange(newId, Nothing, New Date?(New Date(CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay)))
                 dbAction = "Inserted on dB"
                 oPerson.Id = newId
             Else
@@ -801,6 +823,11 @@ Public NotInheritable Class FrmUpdateDatabase
                     dbAction = "Updated on dB"
                 End If
                 UpdatePerson(oPerson)
+                If lastSelectedPerson IsNot Nothing AndAlso oPerson.Id = lastSelectedPerson.Id Then
+                    If lastSelectedPerson.DateOfBirth <> oPerson.DateOfBirth Then
+                        AuditUtil.AddDobChange(oPerson.Id, New Date?(lastSelectedPerson.DateOfBirth), New Date?(oPerson.DateOfBirth))
+                    End If
+                End If
             End If
             If Not String.IsNullOrEmpty(dbAction) Then
                 ShowUpdated(oPerson, dbAction)
@@ -1182,10 +1209,5 @@ Public NotInheritable Class FrmUpdateDatabase
         Next
         Return isFound
     End Function
-
-    Private Sub BtnCopyName_Click(sender As Object, e As EventArgs) Handles BtnCopyName.Click
-        txtName.SelectAll()
-        txtName.Copy()
-    End Sub
 #End Region
 End Class

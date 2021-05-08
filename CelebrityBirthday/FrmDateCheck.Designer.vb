@@ -26,6 +26,14 @@ Partial Class FrmDateCheck
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDateCheck))
         Me.DgvWarnings = New System.Windows.Forms.DataGridView()
+        Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xWikiBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xWikiExtract = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xWikiId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xPersonDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xImg = New System.Windows.Forms.DataGridViewImageColumn()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.btnClose = New System.Windows.Forms.Button()
@@ -101,14 +109,7 @@ Partial Class FrmDateCheck
         Me.BtnRmvBotsdId = New System.Windows.Forms.Button()
         Me.BtnUpdatePerson = New System.Windows.Forms.Button()
         Me.BtnRemoveRow = New System.Windows.Forms.Button()
-        Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xWikiBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xWikiExtract = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xWikiId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xPersonDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xImg = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.BtnAuditView = New System.Windows.Forms.Button()
         CType(Me.DgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.nudSelectCount, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -135,6 +136,69 @@ Partial Class FrmDateCheck
         Me.DgvWarnings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvWarnings.Size = New System.Drawing.Size(781, 596)
         Me.DgvWarnings.TabIndex = 0
+        '
+        'xId
+        '
+        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xId.HeaderText = "Id"
+        Me.xId.Name = "xId"
+        Me.xId.ReadOnly = True
+        Me.xId.Width = 50
+        '
+        'xName
+        '
+        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xName.HeaderText = "Name"
+        Me.xName.Name = "xName"
+        Me.xName.ReadOnly = True
+        Me.xName.Width = 150
+        '
+        'xBirth
+        '
+        Me.xBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xBirth.HeaderText = "Birth Date"
+        Me.xBirth.Name = "xBirth"
+        Me.xBirth.ReadOnly = True
+        Me.xBirth.Width = 125
+        '
+        'xWikiBirth
+        '
+        Me.xWikiBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xWikiBirth.HeaderText = "Wiki Birth Date"
+        Me.xWikiBirth.Name = "xWikiBirth"
+        Me.xWikiBirth.ReadOnly = True
+        Me.xWikiBirth.Width = 125
+        '
+        'xWikiExtract
+        '
+        Me.xWikiExtract.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.xWikiExtract.DefaultCellStyle = DataGridViewCellStyle1
+        Me.xWikiExtract.HeaderText = "Description"
+        Me.xWikiExtract.Name = "xWikiExtract"
+        Me.xWikiExtract.ReadOnly = True
+        '
+        'xWikiId
+        '
+        Me.xWikiId.HeaderText = "WikiId"
+        Me.xWikiId.Name = "xWikiId"
+        Me.xWikiId.ReadOnly = True
+        Me.xWikiId.Visible = False
+        '
+        'xPersonDescription
+        '
+        Me.xPersonDescription.HeaderText = "Full Description"
+        Me.xPersonDescription.Name = "xPersonDescription"
+        Me.xPersonDescription.ReadOnly = True
+        Me.xPersonDescription.Visible = False
+        '
+        'xImg
+        '
+        Me.xImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xImg.HeaderText = "Img"
+        Me.xImg.Name = "xImg"
+        Me.xImg.ReadOnly = True
+        Me.xImg.Width = 65
         '
         'StatusStrip1
         '
@@ -214,7 +278,7 @@ Partial Class FrmDateCheck
         Me.TxtWiki.Multiline = True
         Me.TxtWiki.Name = "TxtWiki"
         Me.TxtWiki.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TxtWiki.Size = New System.Drawing.Size(289, 124)
+        Me.TxtWiki.Size = New System.Drawing.Size(289, 123)
         Me.TxtWiki.TabIndex = 63
         '
         'LblId
@@ -254,7 +318,7 @@ Partial Class FrmDateCheck
         Me.TxtFullDesc.Multiline = True
         Me.TxtFullDesc.Name = "TxtFullDesc"
         Me.TxtFullDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TxtFullDesc.Size = New System.Drawing.Size(289, 126)
+        Me.TxtFullDesc.Size = New System.Drawing.Size(289, 110)
         Me.TxtFullDesc.TabIndex = 59
         '
         'Label1
@@ -440,7 +504,7 @@ Partial Class FrmDateCheck
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.TxtWiki)
         Me.SplitContainer1.Size = New System.Drawing.Size(299, 274)
-        Me.SplitContainer1.SplitterDistance = 136
+        Me.SplitContainer1.SplitterDistance = 128
         Me.SplitContainer1.TabIndex = 144
         '
         'BtnCopyDate
@@ -463,7 +527,7 @@ Partial Class FrmDateCheck
         Me.BtnClearDetails.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClearDetails.Location = New System.Drawing.Point(1256, 333)
         Me.BtnClearDetails.Name = "BtnClearDetails"
-        Me.BtnClearDetails.Size = New System.Drawing.Size(76, 23)
+        Me.BtnClearDetails.Size = New System.Drawing.Size(76, 33)
         Me.BtnClearDetails.TabIndex = 146
         Me.BtnClearDetails.Text = "Clear"
         Me.ToolTip1.SetToolTip(Me.BtnClearDetails, "Clear perosn details")
@@ -1008,75 +1072,25 @@ Partial Class FrmDateCheck
         Me.BtnRemoveRow.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnRemoveRow.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRemoveRow.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRemoveRow.Location = New System.Drawing.Point(1245, 375)
+        Me.BtnRemoveRow.Location = New System.Drawing.Point(1245, 373)
         Me.BtnRemoveRow.Name = "BtnRemoveRow"
-        Me.BtnRemoveRow.Size = New System.Drawing.Size(86, 29)
+        Me.BtnRemoveRow.Size = New System.Drawing.Size(86, 33)
         Me.BtnRemoveRow.TabIndex = 19
         Me.BtnRemoveRow.Text = "Remove row"
         Me.BtnRemoveRow.UseVisualStyleBackColor = True
         '
-        'xId
+        'BtnAuditView
         '
-        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xId.HeaderText = "Id"
-        Me.xId.Name = "xId"
-        Me.xId.ReadOnly = True
-        Me.xId.Width = 50
-        '
-        'xName
-        '
-        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xName.HeaderText = "Name"
-        Me.xName.Name = "xName"
-        Me.xName.ReadOnly = True
-        Me.xName.Width = 150
-        '
-        'xBirth
-        '
-        Me.xBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xBirth.HeaderText = "Birth Date"
-        Me.xBirth.Name = "xBirth"
-        Me.xBirth.ReadOnly = True
-        Me.xBirth.Width = 125
-        '
-        'xWikiBirth
-        '
-        Me.xWikiBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xWikiBirth.HeaderText = "Wiki Birth Date"
-        Me.xWikiBirth.Name = "xWikiBirth"
-        Me.xWikiBirth.ReadOnly = True
-        Me.xWikiBirth.Width = 125
-        '
-        'xWikiExtract
-        '
-        Me.xWikiExtract.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.xWikiExtract.DefaultCellStyle = DataGridViewCellStyle1
-        Me.xWikiExtract.HeaderText = "Description"
-        Me.xWikiExtract.Name = "xWikiExtract"
-        Me.xWikiExtract.ReadOnly = True
-        '
-        'xWikiId
-        '
-        Me.xWikiId.HeaderText = "WikiId"
-        Me.xWikiId.Name = "xWikiId"
-        Me.xWikiId.ReadOnly = True
-        Me.xWikiId.Visible = False
-        '
-        'xPersonDescription
-        '
-        Me.xPersonDescription.HeaderText = "Full Description"
-        Me.xPersonDescription.Name = "xPersonDescription"
-        Me.xPersonDescription.ReadOnly = True
-        Me.xPersonDescription.Visible = False
-        '
-        'xImg
-        '
-        Me.xImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xImg.HeaderText = "Img"
-        Me.xImg.Name = "xImg"
-        Me.xImg.ReadOnly = True
-        Me.xImg.Width = 65
+        Me.BtnAuditView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnAuditView.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAuditView.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnAuditView.Location = New System.Drawing.Point(1186, 373)
+        Me.BtnAuditView.Name = "BtnAuditView"
+        Me.BtnAuditView.Size = New System.Drawing.Size(52, 33)
+        Me.BtnAuditView.TabIndex = 157
+        Me.BtnAuditView.Text = "Audit"
+        Me.ToolTip1.SetToolTip(Me.BtnAuditView, "Update WikiId for person")
+        Me.BtnAuditView.UseVisualStyleBackColor = True
         '
         'FrmDateCheck
         '
@@ -1084,6 +1098,7 @@ Partial Class FrmDateCheck
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1344, 690)
+        Me.Controls.Add(Me.BtnAuditView)
         Me.Controls.Add(Me.BtnWikiOpen)
         Me.Controls.Add(Me.BtnCopyName)
         Me.Controls.Add(Me.BtnRemoveRow)
@@ -1225,4 +1240,5 @@ Partial Class FrmDateCheck
     Friend WithEvents xWikiId As DataGridViewTextBoxColumn
     Friend WithEvents xPersonDescription As DataGridViewTextBoxColumn
     Friend WithEvents xImg As DataGridViewImageColumn
+    Friend WithEvents BtnAuditView As Button
 End Class

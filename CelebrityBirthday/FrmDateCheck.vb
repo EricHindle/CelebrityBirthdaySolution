@@ -610,6 +610,7 @@ Public NotInheritable Class FrmDateCheck
                 IsDate(TxtToDay.Text & "/" & TxtToMonth.Text & "/" & TxtToYear.Text) Then
                 DisplayMessage("Updating DoB and text for " & TxtFullName.Text, True)
                 UpdateDateOfBirth(oPerson.Id, toDate.Day, toDate.Month, toDate.Year, TxtFullDesc.Text)
+                AuditUtil.AddDobChange(oPerson.Id, fromDate, toDate)
                 oPerson = GetFullPersonById(oPerson.Id, False)
                 DisplayMessage("Updated " & CStr(oPerson.Id), True)
                 LblUpdPerson.Text = "done"
@@ -779,7 +780,16 @@ Public NotInheritable Class FrmDateCheck
             Clipboard.SetText(DgvWarnings.SelectedRows(0).Cells(xName.Name).Value)
         End If
     End Sub
-
-
+    Private Sub BtnAuditView_Click(sender As Object, e As EventArgs) Handles BtnAuditView.Click
+        If DgvWarnings.SelectedRows.Count > 0 Then
+            Dim tRow As DataGridViewRow = DgvWarnings.SelectedRows(0)
+            Dim oPersonId As Integer = tRow.Cells(xId.Name).Value
+            Using _audit As New FrmAuditList
+                _audit.DataType = "dob"
+                _audit.PersonId = oPersonId
+                _audit.ShowDialog()
+            End Using
+        End If
+    End Sub
 #End Region
 End Class
