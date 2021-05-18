@@ -30,12 +30,16 @@ Partial Class FrmFacebookTest
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TxtPAccessKey = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'BtnCancel
         '
         Me.BtnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCancel.Location = New System.Drawing.Point(712, 588)
+        Me.BtnCancel.Location = New System.Drawing.Point(715, 596)
         Me.BtnCancel.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(92, 40)
@@ -46,7 +50,7 @@ Partial Class FrmFacebookTest
         'BtnTest1
         '
         Me.BtnTest1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnTest1.Location = New System.Drawing.Point(32, 586)
+        Me.BtnTest1.Location = New System.Drawing.Point(35, 594)
         Me.BtnTest1.Name = "BtnTest1"
         Me.BtnTest1.Size = New System.Drawing.Size(75, 42)
         Me.BtnTest1.TabIndex = 1
@@ -58,15 +62,15 @@ Partial Class FrmFacebookTest
         Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RichTextBox1.Location = New System.Drawing.Point(20, 19)
+        Me.RichTextBox1.Location = New System.Drawing.Point(12, 12)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(815, 259)
+        Me.RichTextBox1.Size = New System.Drawing.Size(815, 360)
         Me.RichTextBox1.TabIndex = 2
         Me.RichTextBox1.Text = ""
         '
         'TxtUAccessKey
         '
-        Me.TxtUAccessKey.Location = New System.Drawing.Point(20, 319)
+        Me.TxtUAccessKey.Location = New System.Drawing.Point(35, 408)
         Me.TxtUAccessKey.Multiline = True
         Me.TxtUAccessKey.Name = "TxtUAccessKey"
         Me.TxtUAccessKey.Size = New System.Drawing.Size(772, 58)
@@ -78,7 +82,7 @@ Partial Class FrmFacebookTest
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(17, 388)
+        Me.Label1.Location = New System.Drawing.Point(32, 477)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(110, 17)
         Me.Label1.TabIndex = 4
@@ -87,7 +91,7 @@ Partial Class FrmFacebookTest
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(17, 299)
+        Me.Label2.Location = New System.Drawing.Point(32, 388)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(107, 17)
         Me.Label2.TabIndex = 6
@@ -95,7 +99,7 @@ Partial Class FrmFacebookTest
         '
         'TxtPAccessKey
         '
-        Me.TxtPAccessKey.Location = New System.Drawing.Point(20, 418)
+        Me.TxtPAccessKey.Location = New System.Drawing.Point(35, 507)
         Me.TxtPAccessKey.Multiline = True
         Me.TxtPAccessKey.Name = "TxtPAccessKey"
         Me.TxtPAccessKey.Size = New System.Drawing.Size(772, 58)
@@ -104,11 +108,38 @@ Partial Class FrmFacebookTest
     "AZCfJQf9LdBqzMQQQHtWAuNiXydXQ6j5PfgxYrYuVPtLSqqNW3RGHbWGzvcxSMN53qO5T44RA01sbZCZ" &
     "CbZCkqRZCdXQixb0cZB22CRiph" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button1.Location = New System.Drawing.Point(175, 594)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 42)
+        Me.Button1.TabIndex = 7
+        Me.Button1.Text = "Email Test"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 675)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(868, 22)
+        Me.StatusStrip1.TabIndex = 8
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'LblStatus
+        '
+        Me.LblStatus.Name = "LblStatus"
+        Me.LblStatus.Size = New System.Drawing.Size(23, 17)
+        Me.LblStatus.Text = "OK"
+        '
         'FrmFacebookTest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(868, 643)
+        Me.ClientSize = New System.Drawing.Size(868, 697)
+        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TxtPAccessKey)
         Me.Controls.Add(Me.Label1)
@@ -121,6 +152,8 @@ Partial Class FrmFacebookTest
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmFacebookTest"
         Me.Text = "FrmFacebookTest"
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -133,4 +166,7 @@ Partial Class FrmFacebookTest
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents TxtPAccessKey As TextBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents LblStatus As ToolStripStatusLabel
 End Class

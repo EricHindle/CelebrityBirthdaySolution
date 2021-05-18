@@ -60,7 +60,8 @@ Public Class BirthdayTweets
     'Private Const CELEB_USER As String = "FunsterMuddy"
     'Private Const HBURPDAY_USER As String = "FunsterMuddy"
     'Private Const BOTSD_USER As String = "FunsterMuddy"
-
+    Private Const EMAIL_TO_ADDRESS As String = "SendErrorTo"
+    Private Const EMAIL_FROM_ADDRESS As String = "SendEmailFrom"
     Private Const TWEET_FOOTER_LENGTH As Integer = 5
     Private Const NOT_DELETED As String = "File not deleted"
 #End Region
@@ -73,6 +74,8 @@ Public Class BirthdayTweets
     Private Shared todayMonth As String
     Private Shared tweetHeaderDate As String
     Private Shared ReadOnly oBotSDList As New List(Of List(Of Person))
+    Private Shared toAddr As String
+    Private Shared fromAddr As String
 #End Region
 #Region "service"
     Protected Overrides Sub OnStart(ByVal args() As String)
@@ -81,29 +84,34 @@ Public Class BirthdayTweets
         LogUtil.InitialiseLogging()
         LogUtil.StartLogging()
         GetIntervalAndStartTimer(5)
+        SendEmail("BirthdayTweets started", "The BirthdayTweets service has started")
     End Sub
     Protected Overrides Sub OnStop()
         Const Psub As String = "OnStop"
         LogUtil.Info("----- Stopping the Service -----", Psub)
         Timer1.Stop()
+        SendEmail("BirthdayTweets stopped", "The BirthdayTweets service has stopped")
     End Sub
 
     Protected Overrides Sub OnShutdown()
         Const Psub As String = "OnShutdown"
         LogUtil.Info("----- Shutdown detected -----", Psub)
         Timer1.Stop()
+        SendEmail("BirthdayTweets shut down", "The BirthdayTweets service has shut down")
     End Sub
 
     Protected Overrides Sub OnPause()
         Const Psub As String = "OnPause"
         LogUtil.Info("----- Service paused -----", Psub)
         Timer1.Stop()
+        SendEmail("BirthdayTweets paused", "The BirthdayTweets service has paused")
     End Sub
 
     Protected Overrides Sub OnContinue()
         Const Psub As String = "OnContinue"
         LogUtil.Info("----- Service continues -----", Psub)
         Timer1.Start()
+        SendEmail("BirthdayTweets continues", "The BirthdayTweets service has continued")
     End Sub
 #End Region
 #Region "timer"
@@ -152,9 +160,11 @@ Public Class BirthdayTweets
                             GlobalSettings.SetSetting(LAST_CELEB_TWEET, "date", todaysDate, "")
                         Else
                             LogUtil.Problem("CelebBirthday Tweets not sent - error", Psub)
+                            SendEmail("CelebBirthday Tweets error", "CelebBirthday Tweets not sent - error")
                         End If
                     Else
                         LogUtil.Problem("CelebBirthday Tweets not sent - selection error", Psub)
+                        SendEmail("CelebBirthday Tweets error", "CelebBirthday Tweets not sent - selection error")
                     End If
                 End If
             End If
@@ -169,9 +179,11 @@ Public Class BirthdayTweets
                             GlobalSettings.SetSetting(LAST_HBURP_TWEET, "date", todaysDate, "")
                         Else
                             LogUtil.Problem("HBurpday Birthday Tweets not sent - error", Psub)
+                            SendEmail("HBurpday Birthday Tweets error", "HBurpday Birthday Tweets not sent - error")
                         End If
                     Else
                         LogUtil.Problem("HBurpday Birthday Tweets not sent - selection error", Psub)
+                        SendEmail("HBurpday Birthday Tweets error", "HBurpday Birthday Tweets not sent - selection error")
                     End If
                 End If
             End If
@@ -186,21 +198,32 @@ Public Class BirthdayTweets
                             GlobalSettings.SetSetting(LAST_BOTSD_TWEET, "date", todaysDate, "")
                         Else
                             LogUtil.Problem("BotSD Tweets not sent - error", Psub)
+                            SendEmail("BotSD Tweets error", "BotSD Tweets not sent - error")
                         End If
                     Else
                         LogUtil.Problem("BotSD Tweets not sent - selection error", Psub)
+                        SendEmail("BotSD Tweets error", "BotSD Tweets not sent - selection error")
                     End If
                 End If
             End If
-
         Catch ex As DbException
             LogUtil.Exception("Could not get data from dB", ex, Psub)
+            SendEmail("BirthdayTweets Db exception", "Could not get data from dB" & vbCrLf & ex.Message)
         Catch ex As ArgumentOutOfRangeException
             LogUtil.Exception("Argument Out Of Range Exception", ex, Psub)
+            SendEmail("BirthdayTweets ArgumentOutOfRangeException exception", "Argument Out Of Range Exception" & vbCrLf & ex.Message)
         End Try
         GetIntervalAndStartTimer(30)
         LogUtil.Info("Restarted timer", Psub)
         LogUtil.Info("------------------------------------------- end", Psub)
+    End Sub
+    Private Shared Sub GetEmailSettings()
+        toAddr = GlobalSettings.GetSetting(EMAIL_TO_ADDRESS)
+        fromAddr = GlobalSettings.GetSetting(EMAIL_FROM_ADDRESS)
+    End Sub
+    Private Shared Sub SendEmail(strSubject As String, strBody As String)
+        GetEmailSettings()
+        '       EmailUtil.SendMail(fromAddr, toAddr, Array.Empty(Of String), strSubject, strBody)
     End Sub
 #End Region
 #Region "tweets"

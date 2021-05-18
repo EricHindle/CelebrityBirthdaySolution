@@ -1,5 +1,7 @@
 ﻿Imports Facebook
 Public NotInheritable Class FrmFacebookTest
+    Private Const EMAIL_TO_ADDRESS As String = "SendErrorTo"
+    Private Const EMAIL_FROM_ADDRESS As String = "SendEmailFrom"
     Private Sub BtnTest1_Click(sender As Object, e As EventArgs) Handles BtnTest1.Click
         Dim accessToken As String = "EAACHZBQRkG5wBADWZCSL1VkG7G0vfZCsNNXvr3egVqsrOxQpMMAZCSxK2LlChtPxPtCxvwMZCxb5Tr2lO7uWzooZCEzjP0ILNxbZAteDTUb5ZBUSdwTO9EWrJejZAl8tPxHxcDKb36bkr0DZAqzcZCYhJGnHOJBAZC9jnImRaR7YWfZAihgZDZD"
 
@@ -43,4 +45,13 @@ Public NotInheritable Class FrmFacebookTest
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Me.Close()
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LblStatus.Text = "Sending"
+        Dim toAddr As String = GlobalSettings.GetSetting(EMAIL_TO_ADDRESS)
+        Dim fromAddr As String = GlobalSettings.GetSetting(EMAIL_FROM_ADDRESS)
+        EmailUtil.SendMail(fromAddr, toAddr, Array.Empty(Of String), "Test email", "Testing")
+        LblStatus.Text = "Done"
+    End Sub
+
 End Class

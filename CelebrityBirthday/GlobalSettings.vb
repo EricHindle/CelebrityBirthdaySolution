@@ -48,6 +48,26 @@ Public NotInheritable Class GlobalSettings
         End Try
         Return rtnValue
     End Function
+    Public Shared Function GetBooleanSetting(ByVal settingName As String) As Boolean
+        Dim rtnBooleanValue As Boolean = False
+        Dim rtnValue As Object = GetSetting(settingName)
+        If rtnValue Is Nothing Then
+            LogUtil.Problem("Missing Global value " & settingName, "GetBooleanSetting")
+        Else
+            rtnBooleanValue = CBool(rtnValue)
+        End If
+        Return rtnBooleanValue
+    End Function
+    Public Shared Function GetIntegerSetting(ByVal settingName As String) As Integer
+        Dim rtnIntegerValue As Integer = 0
+        Dim rtnValue As Object = GetSetting(settingName)
+        If rtnValue Is Nothing Then
+            LogUtil.Problem("Missing Global value " & settingName, "GetIntegerSetting")
+        Else
+            rtnIntegerValue = CInt(rtnValue)
+        End If
+        Return rtnIntegerValue
+    End Function
 
     Public Shared Function SetSetting(ByVal settingName As String, ByVal settingType As String, ByVal settingValue As String, ByVal Optional settingGroup As String = "") As Boolean
         Dim rtnVal As Boolean = True
