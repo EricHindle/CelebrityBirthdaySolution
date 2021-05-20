@@ -223,7 +223,7 @@ Public Class BirthdayTweets
     Private Shared Sub GetEmailSettings()
         toAddr = GlobalSettings.GetSetting(EMAIL_TO_ADDRESS)
         fromAddr = GlobalSettings.GetSetting(EMAIL_FROM_ADDRESS)
-        fromName = GlobalSettings.GetSetting(EMAIL_FROM_ADDRESS)
+        fromName = GlobalSettings.GetSetting(EMAIL_FROM_NAME)
     End Sub
     Private Shared Sub SendEmail(strSubject As String, strBody As String)
         GetEmailSettings()
