@@ -6,8 +6,8 @@
 
 Imports System.IO
 Imports System.Net
+Imports System.Net.Mail
 Imports System.Net.Mime
-Imports System.Drawing
 
 ''' <summary>
 ''' Utility for sending emails
@@ -23,7 +23,6 @@ Public NotInheritable Class EmailUtil
     Private Const SMTP_PORT As String = "SMTPPort"
     Private Const SMTP_SSL As String = "SMTPEnableSSL"
     Private Const SEND_VIA As String = "SendMailViaSMTP"
-    Public Shared sOutlookSender As String = ""
 
     ''' <summary>
     ''' Send an email
@@ -77,42 +76,8 @@ Public NotInheritable Class EmailUtil
                                           Optional ByVal deliveryReportRequired As Boolean = False) As Boolean
         LogUtil.Info("Sending email by SMTP", SEND_VIA)
         Try
-
-            LogUtil.Info("test", SEND_VIA)
-            Try
-                Using e_mail As New Mail.MailMessage()
-                    e_mail.From = New Mail.MailAddress(strFromAddress) 'your email address
-                    e_mail.To.Add(New Mail.MailAddress(strToAddress)) 'email address of person to receive this email
-                    e_mail.Subject = strSubject 'the subject of the email
-                    e_mail.IsBodyHtml = False
-                    e_mail.Body = strBody 'the message body
-
-                    Using Smtp_Server As New Mail.SmtpClient("smtp.virginmedia.com", 465) 'Host Name and Port Number
-                        Smtp_Server.UseDefaultCredentials = False
-                        Smtp_Server.Credentials = New Net.NetworkCredential("netwyrks@ntlworld.com", "dkknet55EH")
-                        Smtp_Server.EnableSsl = True
-                        Smtp_Server.Send(e_mail)
-                    End Using
-                End Using
-            Catch error_t As Exception
-                LogUtil.Info("test failed", SEND_VIA)
-                LogUtil.Info(error_t.Message, SEND_VIA)
-            End Try
-
-
-
-
-
-
-
-
             Dim objMessage As Mail.MailMessage
             Dim objEmailClient As New Mail.SmtpClient
-
-            LogUtil.Info(strFromAddress)
-            LogUtil.Info(strToAddress)
-            LogUtil.Info(strSubject)
-            LogUtil.Info(strBody)
             If String.IsNullOrEmpty(strToAddress) Then
                 LogUtil.Problem("No 'To' email address specified", SEND_VIA)
                 Throw New ApplicationException("Error: No To address")
@@ -126,7 +91,6 @@ Public NotInheritable Class EmailUtil
                 ConvertBodyToHtml(strBody, oFont, objMessage)
                 objMessage.IsBodyHtml = True
             End If
-
             '
             ' Validate the parameters
             '
@@ -249,4 +213,42 @@ Public NotInheritable Class EmailUtil
 
         Return attachList
     End Function
+
+    Public Shared Function TestEmailSend(strFromAddress As String, strToAddress As String, strSubject As String, strBody As String, strName As String, strHost As String, strPort As Integer, strUserName As String, strPassword As String, strSsl As Boolean) As Boolean
+        '===============================================
+        LogUtil.Info("test", SEND_VIA)
+        LogUtil.Info(strFromAddress)
+        LogUtil.Info(strToAddress)
+        LogUtil.Info(strHost)
+        LogUtil.Info(strUserName)
+        LogUtil.Info(strPassword)
+        LogUtil.Info(CStr(strPort))
+        If strSsl Then LogUtil.Info("SSL enabled")
+        Try
+            Using e_mail As New Mail.MailMessage()
+                e_mail.From = New Mail.MailAddress(strFromAddress, strName) 'your email address
+                e_mail.To.Add(New Mail.MailAddress(strToAddress)) 'email address of person to receive this email
+                e_mail.Subject = strSubject 'the subject of the email
+                e_mail.IsBodyHtml = False
+                e_mail.Body = strBody 'the message body
+                e_mail.Sender = New Mail.MailAddress(strFromAddress, strName)
+                Using Smtp_Server As New Mail.SmtpClient(strHost, strPort) 'Host Name and Port Number
+                    Smtp_Server.UseDefaultCredentials = False
+                    Smtp_Server.Credentials = New Net.NetworkCredential(strUserName, strPassword)
+                    Smtp_Server.EnableSsl = strSsl
+                    Smtp_Server.DeliveryMethod = SmtpDeliveryMethod.Network
+                    Smtp_Server.Send(e_mail)
+                End Using
+            End Using
+        Catch error_t As SmtpException
+            LogUtil.Info("test failed", SEND_VIA)
+            LogUtil.Info(error_t.Message, SEND_VIA)
+            If error_t.InnerException IsNot Nothing Then
+                LogUtil.Info(error_t.InnerException.Message, SEND_VIA)
+            End If
+        End Try
+
+        '===============================================
+    End Function
+
 End Class

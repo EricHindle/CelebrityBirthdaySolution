@@ -38,22 +38,24 @@ Public NotInheritable Class EmailUtil
     ''' <param name="deleteAfterSubmit">Indicator to show if email should be retained in the outbox (and sent mail table)</param>
     ''' <returns>True if email sent OK</returns>
     ''' <remarks></remarks>
-    Public Shared Function SendMail(ByVal strFromName As String,
+    Public Shared Function SendMail(ByVal strFromAddr As String,
                                     ByVal strToName As String,
-                          ByVal strCC As String(),
-                          ByVal strSubject As String,
-                          ByVal strBody As String,
-                          Optional ByVal strFilenames As String() = Nothing,
-                          Optional ByVal bodyType As Integer = 1,
-                          Optional ByVal oFont As System.Drawing.Font = Nothing,
-                          Optional ByVal deleteAfterSubmit As Boolean = False,
-                          Optional ByVal readReceiptRequired As Boolean = False,
-                          Optional ByVal deliveryReportRequired As Boolean = False) As Boolean
-        Return SendMailViaSMTP(strFromName,
+                                      ByVal strCC As String(),
+                                      ByVal strSubject As String,
+                                      ByVal strBody As String,
+                                      Optional ByVal strFromName As String = Nothing,
+                                      Optional ByVal strFilenames As String() = Nothing,
+                                      Optional ByVal bodyType As Integer = 1,
+                                      Optional ByVal oFont As System.Drawing.Font = Nothing,
+                                      Optional ByVal deleteAfterSubmit As Boolean = False,
+                                      Optional ByVal readReceiptRequired As Boolean = False,
+                                      Optional ByVal deliveryReportRequired As Boolean = False) As Boolean
+        Return SendMailViaSMTP(strFromAddr,
                                strToName,
                                strCC,
                                strSubject,
                                strBody,
+                               strFromName,
                                strFilenames,
                                bodyType,
                                oFont,
@@ -69,6 +71,7 @@ Public NotInheritable Class EmailUtil
                                           ByVal strCC As String(),
                                           ByVal strSubject As String,
                                           ByVal strBody As String,
+                                          Optional ByVal strFromName As String = Nothing,
                                           Optional ByVal strFilenames As String() = Nothing,
                                           Optional ByVal bodyType As Integer = 1,
                                           Optional ByVal oFont As System.Drawing.Font = Nothing,
@@ -76,20 +79,18 @@ Public NotInheritable Class EmailUtil
                                           Optional ByVal readReceiptRequired As Boolean = False,
                                           Optional ByVal deliveryReportRequired As Boolean = False) As Boolean
         LogUtil.Info("Sending email by SMTP", SEND_VIA)
+        Dim isSentOK As Boolean
         Try
             Dim objMessage As Mail.MailMessage
             Dim objEmailClient As New Mail.SmtpClient
-
-            LogUtil.Info(strFromAddress)
-            LogUtil.Info(strToAddress)
-            LogUtil.Info(strSubject)
-            LogUtil.Info(strBody)
             If String.IsNullOrEmpty(strToAddress) Then
                 LogUtil.Problem("No 'To' email address specified", SEND_VIA)
                 Throw New ApplicationException("Error: No To address")
             End If
-            Dim strOnBehalfOf As String = strFromAddress
             objMessage = New Mail.MailMessage(strFromAddress, strToAddress, strSubject, strBody)
+            If Not String.IsNullOrEmpty(strFromName) Then
+                objMessage.From = New Mail.MailAddress(strFromAddress, strFromName)
+            End If
             Dim smtpUserName As String = GlobalSettings.GetSetting(SMTP_USERNAME)
             Dim smtpPassword As String = GlobalSettings.GetSetting(SMTP_PASSWORD)
             Dim bodyformat As Integer = bodyType
@@ -126,54 +127,37 @@ Public NotInheritable Class EmailUtil
                     End If
                 Next
             End If
-
             '
             ' Connect to the host
             '
-            LogUtil.Info("Setting host")
-            LogUtil.Info(strSmtpHost)
             objEmailClient.Host = strSmtpHost
-
             If GlobalSettings.GetBooleanSetting(SMTP_REQ_CRED) Then
-                LogUtil.Info("Setting credentials")
-                LogUtil.Info(smtpUserName)
-                LogUtil.Info(smtpPassword)
                 objEmailClient.Credentials = New NetworkCredential(smtpUserName, smtpPassword)
             End If
-
             Dim strSmtpPort As Integer = GlobalSettings.GetIntegerSetting(SMTP_PORT)
             If strSmtpPort > 0 Then
-                LogUtil.Info("Setting port")
-                LogUtil.Info(CStr(strSmtpPort))
                 objEmailClient.Port = strSmtpPort
             End If
-            If GlobalSettings.GetBooleanSetting(SMTP_SSL) Then
-                LogUtil.Info("SSL enabled")
-                objEmailClient.EnableSsl = True
-            End If
+            objEmailClient.EnableSsl = GlobalSettings.GetBooleanSetting(SMTP_SSL)
             '
             ' Send the email
             '
-
             objEmailClient.Send(objMessage)
-
             objMessage.Dispose()
             objMessage = Nothing
             objEmailClient = Nothing
-
-            Return True
-
+            isSentOK = True
         Catch mailex As Mail.SmtpFailedRecipientsException
             LogUtil.Exception("SmtpFailedRecipientsException occurred sending email : ", mailex, SEND_VIA)
-            Return False
+            isSentOK = False
         Catch ex As ApplicationException
             LogUtil.Exception("ApplicationException occurred sending email : ", ex, SEND_VIA)
-            Return False
+            isSentOK = False
         Catch exc As System.Net.Mail.SmtpException
             LogUtil.Exception("SmtpException occurred sending email : ", exc, SEND_VIA)
-            Return False
+            isSentOK = False
         End Try
-        Return False
+        Return isSentOK
     End Function
     Private Shared Sub ConvertBodyToHtml(ByVal strBody As String, ByVal oFont As Font, ByRef objMessage As Mail.MailMessage)
         Dim attachlist As ArrayList = ConvertToHtml(strBody, oFont)

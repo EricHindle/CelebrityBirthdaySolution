@@ -62,6 +62,7 @@ Public Class BirthdayTweets
     'Private Const BOTSD_USER As String = "FunsterMuddy"
     Private Const EMAIL_TO_ADDRESS As String = "SendErrorTo"
     Private Const EMAIL_FROM_ADDRESS As String = "SendEmailFrom"
+    Private Const EMAIL_FROM_NAME As String = "SendEmailName"
     Private Const TWEET_FOOTER_LENGTH As Integer = 5
     Private Const NOT_DELETED As String = "File not deleted"
 #End Region
@@ -76,6 +77,8 @@ Public Class BirthdayTweets
     Private Shared ReadOnly oBotSDList As New List(Of List(Of Person))
     Private Shared toAddr As String
     Private Shared fromAddr As String
+    Private Shared fromName As String
+
 #End Region
 #Region "service"
     Protected Overrides Sub OnStart(ByVal args() As String)
@@ -220,10 +223,11 @@ Public Class BirthdayTweets
     Private Shared Sub GetEmailSettings()
         toAddr = GlobalSettings.GetSetting(EMAIL_TO_ADDRESS)
         fromAddr = GlobalSettings.GetSetting(EMAIL_FROM_ADDRESS)
+        fromName = GlobalSettings.GetSetting(EMAIL_FROM_ADDRESS)
     End Sub
     Private Shared Sub SendEmail(strSubject As String, strBody As String)
         GetEmailSettings()
-        '       EmailUtil.SendMail(fromAddr, toAddr, Array.Empty(Of String), strSubject, strBody)
+        EmailUtil.SendMail(fromAddr, toAddr, Array.Empty(Of String), strSubject, strBody, fromName)
     End Sub
 #End Region
 #Region "tweets"
