@@ -1,5 +1,5 @@
 ﻿'
-' Copyright (c) 2020, Eric Hindle
+' Copyright (c) 2020,2021, Eric Hindle
 ' All rights reserved.
 '
 ' Author E Hindle
@@ -70,11 +70,17 @@ Public Class FrmLogViewer
                 logContents = LogUtil.GetLogContents
                 BtnClearLog.Enabled = True
             Else
-                logContents = My.Computer.FileSystem.ReadAllText(newLogFileName)
+                Try
+                    logContents = My.Computer.FileSystem.ReadAllText(newLogFileName).Replace(vbTab, " ")
+                Catch ex As System.IO.IOException
+                    logContents = newLogFileName & " cannot be opened" & vbCrLf & ex.Message
+                End Try
             End If
-            rtbLog.Text = logContents
-            currentDate = newDate
+        Else
+            logContents = newLogFileName & " cannot be found"
         End If
+        rtbLog.Text = logContents
+        currentDate = newDate
     End Sub
     Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
         LoadTodaysLog()

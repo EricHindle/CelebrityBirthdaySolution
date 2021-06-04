@@ -124,7 +124,7 @@ Public NotInheritable Class LogUtil
     Public Shared Function GetLogContents() As String
         Dim sLogFile As String = GetLogfileName()
         My.Application.Log.DefaultFileLogWriter.Close()
-        GetLogContents = My.Computer.FileSystem.ReadAllText(sLogFile)
+        GetLogContents = My.Computer.FileSystem.ReadAllText(sLogFile).Replace(vbTab, " ")
         My.Application.Log.DefaultFileLogWriter.Write("")
     End Function
 

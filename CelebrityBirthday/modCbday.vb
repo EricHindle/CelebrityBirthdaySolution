@@ -416,12 +416,13 @@ Friend Module modCbday
                     Next
                 Else
                     LogUtil.Problem("Wiki extract has empty brackets", "ExtractCbdatesFromWikiExtract")
+                    LogUtil.Problem(" ..>" & wikiExtract, "ExtractCbdatesFromWikiExtract")
                 End If
                 _blocks = ParseStringWithBrackets(_blocks(2))
             ElseIf _blocks.Count = 2 Then
                 isBracketsFound = False
                 LogUtil.Problem("Wiki extract has missing closing bracket", "ExtractCbdatesFromWikiExtract")
-                LogUtil.Problem(wikiExtract, "ExtractCbdatesFromWikiExtract")
+                LogUtil.Problem(" ..>" & wikiExtract, "ExtractCbdatesFromWikiExtract")
             ElseIf _blocks.Count = 1 Then
                 isBracketsFound = False
             End If
