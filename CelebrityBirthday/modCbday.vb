@@ -380,7 +380,7 @@ Friend Module modCbday
     End Function
     Public Function ExtractCbdatesFromWikiExtract(wikiExtract As String) As List(Of CbDates)
         Dim cbdates As New List(Of CbDates)
-        Dim _blocks As List(Of String) = ParseStringWithBrackets(wikiExtract)
+        Dim _blocks As List(Of String) = ParseStringWithBrackets(wikiExtract.Replace("()", ""))
         Dim isBracketsFound As Boolean = True
         Do Until Not isBracketsFound
             If _blocks.Count = 3 Then
