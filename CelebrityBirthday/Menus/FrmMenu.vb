@@ -72,6 +72,7 @@
         LblCelebrities.Text = System.String.Format(myStringFormatProvider, LblCelebrities.Text, CStr(CountPeople()))
         LogUtil.LogFolder = My.Settings.LogFolder
         LogUtil.StartLogging()
+
     End Sub
 
     Private Sub BtnMore_Click(sender As Object, e As EventArgs) Handles BtnMore.Click
@@ -93,5 +94,32 @@
 
     Private Sub FrmMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
+    End Sub
+
+    Private Sub FrmMenu_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Me.Refresh()
+        Dim args As String() = Environment.GetCommandLineArgs()
+        Dim isRunDeathCheck As Boolean = False
+        Dim isLeaveOpen As Boolean = False
+        If args.Length > 1 Then
+            For Each arg As String In args
+                Select Case arg
+                    Case "/d"
+                        isRunDeathCheck = True
+                    Case "/o"
+                        isLeaveOpen = True
+                End Select
+            Next
+            If isRunDeathCheck Then
+                Using _warning As New FrmDeathCheck
+                    _warning.Autorun = True
+                    _warning.LeaveOpen = isLeaveOpen
+                    _warning.ShowDialog()
+                End Using
+            End If
+            If Not isLeaveOpen Then
+                Me.Close()
+            End If
+        End If
     End Sub
 End Class

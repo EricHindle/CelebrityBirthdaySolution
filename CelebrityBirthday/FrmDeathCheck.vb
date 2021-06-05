@@ -4,6 +4,26 @@ Imports System.Net
 Imports System.Reflection
 
 Public Class FrmDeathCheck
+#Region "properties"
+    Private isAutorun As Boolean
+    Private isLeaveOpen As Boolean
+    Public Property LeaveOpen() As Boolean
+        Get
+            Return isLeaveOpen
+        End Get
+        Set(ByVal value As Boolean)
+            isLeaveOpen = value
+        End Set
+    End Property
+    Public Property Autorun() As Boolean
+        Get
+            Return isAutorun
+        End Get
+        Set(ByVal value As Boolean)
+            isAutorun = value
+        End Set
+    End Property
+#End Region
 #Region "variables"
     Private personTable As List(Of Person)
 #End Region
@@ -12,6 +32,52 @@ Public Class FrmDeathCheck
         Me.Close()
     End Sub
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+        RunDeathCheck
+    End Sub
+    Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvWarnings.CellDoubleClick
+        If e.RowIndex >= 0 And e.RowIndex < dgvWarnings.Rows.Count Then
+            Dim tRow As DataGridViewRow = dgvWarnings.Rows(e.RowIndex)
+            Dim _index As Integer = tRow.Cells(xId.Name).Value
+            DisplayMessage("Showing update form for " & tRow.Cells(xName.Name).Value, True)
+            Using _update As New FrmUpdateDatabase
+                _update.PersonId = _index
+                _update.ShowDialog()
+            End Using
+        End If
+    End Sub
+    Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
+        WriteFile()
+    End Sub
+    Private Sub FrmDeathCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
+    End Sub
+    Private Sub FrmDeathCheck_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        If isAutorun Then
+            Me.Refresh()
+            LogUtil.Info("Auto run", MyBase.Name)
+            RunDeathCheck()
+            WriteFile()
+            isAutorun = False
+            If Not isLeaveOpen Then
+                Me.Close()
+            End If
+        End If
+    End Sub
+    Private Sub FrmDeathCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
+    End Sub
+    Private Sub BtnDeathList_Click(sender As Object, e As EventArgs) Handles BtnDeathList.Click
+        LogUtil.Info("List of deaths", MyBase.Name)
+        Me.Hide()
+        Using _list As New FrmDeathList
+            _list.Year = Today.Year
+            _list.ShowDialog()
+        End Using
+        Me.Show()
+    End Sub
+#End Region
+#Region "subroutines"
+    Private Sub RunDeathCheck()
         DisplayMessage("Finding the living", True)
         personTable = FindLivingPeople(False)
         DisplayMessage("Found " & CStr(personTable.Count) & " people", True)
@@ -46,6 +112,7 @@ Public Class FrmDeathCheck
                 If datesFound IsNot Nothing Then
                     If datesFound.DeathDate.IsValidDate Then
                         Dim _dateOfDeath As String = datesFound.DeathDate.FormattedDateString
+                        LogUtil.Info(_person.Name & " died " & _dateOfDeath)
                         AddXRow(_person, _dateOfDeath, _wikiExtract)
                     End If
                 End If
@@ -55,18 +122,7 @@ Public Class FrmDeathCheck
             End Try
         Next
     End Sub
-    Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvWarnings.CellDoubleClick
-        If e.RowIndex >= 0 And e.RowIndex < dgvWarnings.Rows.Count Then
-            Dim tRow As DataGridViewRow = dgvWarnings.Rows(e.RowIndex)
-            Dim _index As Integer = tRow.Cells(xId.Name).Value
-            DisplayMessage("Showing update form for " & tRow.Cells(xName.Name).Value, True)
-            Using _update As New FrmUpdateDatabase
-                _update.PersonId = _index
-                _update.ShowDialog()
-            End Using
-        End If
-    End Sub
-    Private Sub BtnWrite_Click(sender As Object, e As EventArgs) Handles BtnWrite.Click
+    Private Sub WriteFile()
         Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "deadpeople.csv")
         DisplayMessage("Writing " & _filename, True)
         Using _outfile As New StreamWriter(_filename, True)
@@ -75,20 +131,6 @@ Public Class FrmDeathCheck
             Next
         End Using
     End Sub
-    Private Sub FrmDeathCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LogUtil.Info("Loading", MyBase.Name)
-    End Sub
-    Private Sub BtnDeathList_Click(sender As Object, e As EventArgs) Handles BtnDeathList.Click
-        LogUtil.Info("List of deaths", MyBase.Name)
-        Me.Hide()
-        Using _list As New FrmDeathList
-            _list.Year = Today.Year
-            _list.ShowDialog()
-        End Using
-        Me.Show()
-    End Sub
-#End Region
-#Region "subroutines"
     Private Shared Function GetWikiDeathDate(_parts As List(Of String)) As String
         Dim _deathDate As Date? = Nothing
         Dim _return As String = Nothing
@@ -150,10 +192,5 @@ Public Class FrmDeathCheck
         dgvWarnings.Refresh()
         Return _newRow
     End Function
-
-    Private Sub FrmDeathCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("Closing", MyBase.Name)
-    End Sub
-
 #End Region
 End Class
