@@ -98,6 +98,7 @@
 
     Private Sub FrmMenu_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.Refresh()
+        LogUtil.Info("Checking arguments", MyBase.Name)
         Dim args As String() = Environment.GetCommandLineArgs()
         Dim isRunDeathCheck As Boolean = False
         Dim isLeaveOpen As Boolean = False
@@ -105,12 +106,15 @@
             For Each arg As String In args
                 Select Case arg
                     Case "/d"
+                        LogUtil.Info("Death Check", MyBase.Name)
                         isRunDeathCheck = True
                     Case "/o"
+                        LogUtil.Info("Leave program open", MyBase.Name)
                         isLeaveOpen = True
                 End Select
             Next
             If isRunDeathCheck Then
+                LogUtil.Info("Autorun Death Check", MyBase.Name)
                 Using _warning As New FrmDeathCheck
                     _warning.Autorun = True
                     _warning.LeaveOpen = isLeaveOpen
@@ -118,6 +122,7 @@
                 End Using
             End If
             If Not isLeaveOpen Then
+                LogUtil.Info("Autorun complete. Closing program.", MyBase.Name)
                 Me.Close()
             End If
         End If

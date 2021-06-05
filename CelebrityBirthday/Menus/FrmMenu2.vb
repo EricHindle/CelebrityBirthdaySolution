@@ -15,6 +15,8 @@
         LogUtil.Info("Check deaths", MyBase.Name)
         Me.Hide()
         Using _warning As New FrmDeathCheck
+            _warning.Autorun = False
+            _warning.LeaveOpen = False
             _warning.ShowDialog()
         End Using
         Me.Show()

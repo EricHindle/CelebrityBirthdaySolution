@@ -23,7 +23,6 @@ Public NotInheritable Class EmailUtil
     Private Const SMTP_PORT As String = "SMTPPort"
     Private Const SMTP_SSL As String = "SMTPEnableSSL"
     Private Const SEND_VIA As String = "SendMailViaSMTP"
-    Public Shared sOutlookSender As String = ""
 
     ''' <summary>
     ''' Send an email
@@ -38,24 +37,22 @@ Public NotInheritable Class EmailUtil
     ''' <param name="deleteAfterSubmit">Indicator to show if email should be retained in the outbox (and sent mail table)</param>
     ''' <returns>True if email sent OK</returns>
     ''' <remarks></remarks>
-    Public Shared Function SendMail(ByVal strFromAddr As String,
+    Public Shared Function SendMail(ByVal strFromName As String,
                                     ByVal strToName As String,
-                                      ByVal strCC As String(),
-                                      ByVal strSubject As String,
-                                      ByVal strBody As String,
-                                      Optional ByVal strFromName As String = Nothing,
-                                      Optional ByVal strFilenames As String() = Nothing,
-                                      Optional ByVal bodyType As Integer = 1,
-                                      Optional ByVal oFont As System.Drawing.Font = Nothing,
-                                      Optional ByVal deleteAfterSubmit As Boolean = False,
-                                      Optional ByVal readReceiptRequired As Boolean = False,
-                                      Optional ByVal deliveryReportRequired As Boolean = False) As Boolean
-        Return SendMailViaSMTP(strFromAddr,
+                          ByVal strCC As String(),
+                          ByVal strSubject As String,
+                          ByVal strBody As String,
+                          Optional ByVal strFilenames As String() = Nothing,
+                          Optional ByVal bodyType As Integer = 1,
+                          Optional ByVal oFont As System.Drawing.Font = Nothing,
+                          Optional ByVal deleteAfterSubmit As Boolean = False,
+                          Optional ByVal readReceiptRequired As Boolean = False,
+                          Optional ByVal deliveryReportRequired As Boolean = False) As Boolean
+        Return SendMailViaSMTP(strFromName,
                                strToName,
                                strCC,
                                strSubject,
                                strBody,
-                               strFromName,
                                strFilenames,
                                bodyType,
                                oFont,
@@ -71,7 +68,6 @@ Public NotInheritable Class EmailUtil
                                           ByVal strCC As String(),
                                           ByVal strSubject As String,
                                           ByVal strBody As String,
-                                          Optional ByVal strFromName As String = Nothing,
                                           Optional ByVal strFilenames As String() = Nothing,
                                           Optional ByVal bodyType As Integer = 1,
                                           Optional ByVal oFont As System.Drawing.Font = Nothing,
@@ -79,7 +75,6 @@ Public NotInheritable Class EmailUtil
                                           Optional ByVal readReceiptRequired As Boolean = False,
                                           Optional ByVal deliveryReportRequired As Boolean = False) As Boolean
         LogUtil.Info("Sending email by SMTP", SEND_VIA)
-        Dim isSentOK As Boolean
         Try
             Dim objMessage As Mail.MailMessage
             Dim objEmailClient As New Mail.SmtpClient
@@ -87,10 +82,8 @@ Public NotInheritable Class EmailUtil
                 LogUtil.Problem("No 'To' email address specified", SEND_VIA)
                 Throw New ApplicationException("Error: No To address")
             End If
+            Dim strOnBehalfOf As String = strFromAddress
             objMessage = New Mail.MailMessage(strFromAddress, strToAddress, strSubject, strBody)
-            If Not String.IsNullOrEmpty(strFromName) Then
-                objMessage.From = New Mail.MailAddress(strFromAddress, strFromName)
-            End If
             Dim smtpUserName As String = GlobalSettings.GetSetting(SMTP_USERNAME)
             Dim smtpPassword As String = GlobalSettings.GetSetting(SMTP_PASSWORD)
             Dim bodyformat As Integer = bodyType
@@ -98,7 +91,6 @@ Public NotInheritable Class EmailUtil
                 ConvertBodyToHtml(strBody, oFont, objMessage)
                 objMessage.IsBodyHtml = True
             End If
-
             '
             ' Validate the parameters
             '
@@ -127,6 +119,7 @@ Public NotInheritable Class EmailUtil
                     End If
                 Next
             End If
+
             '
             ' Connect to the host
             '
@@ -160,18 +153,20 @@ Public NotInheritable Class EmailUtil
             objMessage.Dispose()
             objMessage = Nothing
             objEmailClient = Nothing
-            isSentOK = True
+
+            Return True
+
         Catch mailex As Mail.SmtpFailedRecipientsException
             LogUtil.Exception("SmtpFailedRecipientsException occurred sending email : ", mailex, SEND_VIA)
-            isSentOK = False
+            Return False
         Catch ex As ApplicationException
             LogUtil.Exception("ApplicationException occurred sending email : ", ex, SEND_VIA)
-            isSentOK = False
+            Return False
         Catch exc As System.Net.Mail.SmtpException
             LogUtil.Exception("SmtpException occurred sending email : ", exc, SEND_VIA)
-            isSentOK = False
+            Return False
         End Try
-        Return isSentOK
+        Return False
     End Function
     Private Shared Sub ConvertBodyToHtml(ByVal strBody As String, ByVal oFont As Font, ByRef objMessage As Mail.MailMessage)
         Dim attachlist As ArrayList = ConvertToHtml(strBody, oFont)
@@ -218,6 +213,7 @@ Public NotInheritable Class EmailUtil
 
         Return attachList
     End Function
+
     Public Shared Function TestEmailSend(strFromAddress As String, strToAddress As String, strSubject As String, strBody As String, strName As String, strHost As String, strPort As Integer, strUserName As String, strPassword As String, strSsl As Boolean) As Boolean
         '===============================================
         LogUtil.Info("test", SEND_VIA)
@@ -254,4 +250,5 @@ Public NotInheritable Class EmailUtil
 
         '===============================================
     End Function
+
 End Class

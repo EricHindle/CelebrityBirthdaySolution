@@ -26,6 +26,12 @@ Public Class FrmDeathCheck
 #End Region
 #Region "variables"
     Private personTable As List(Of Person)
+    Private toAddr As String
+    Private fromAddr As String
+    Private fromName As String
+    Private Const EMAIL_TO_ADDRESS As String = "SendErrorTo"
+    Private Const EMAIL_FROM_ADDRESS As String = "SendEmailFrom"
+    Private Const EMAIL_FROM_NAME As String = "SendEmailName"
 #End Region
 #Region "form event handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -56,7 +62,16 @@ Public Class FrmDeathCheck
             Me.Refresh()
             LogUtil.Info("Auto run", MyBase.Name)
             RunDeathCheck()
-            WriteFile()
+            Dim outputFile As String = WriteFile()
+            If dgvWarnings.Rows.Count > 0 Then
+                Try
+                    Dim deathList As String = My.Computer.FileSystem.ReadAllText(outputFile)
+                    Dim message As String = "Deaths found:" & vbCrLf & deathList
+                    SendEmail("Deaths found", message)
+                Catch ex As IOException
+                    LogUtil.Exception("Error retrieving file contents", ex, MyBase.Name)
+                End Try
+            End If
             isAutorun = False
             If Not isLeaveOpen Then
                 Me.Close()
@@ -122,15 +137,29 @@ Public Class FrmDeathCheck
             End Try
         Next
     End Sub
-    Private Sub WriteFile()
+    Private Function WriteFile() As String
         Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "deadpeople.csv")
         DisplayMessage("Writing " & _filename, True)
-        Using _outfile As New StreamWriter(_filename, True)
+        Try
+            Using _outfile As New StreamWriter(_filename, False)
+                WriteTableToFile(_outfile)
+            End Using
+        Catch ex As IOException
+            LogUtil.Exception("Error opening file", ex, MyBase.Name)
+        End Try
+        Return _filename
+    End Function
+
+    Private Sub WriteTableToFile(_outfile As StreamWriter)
+        Try
             For Each _row As DataGridViewRow In dgvWarnings.Rows
                 _outfile.WriteLine(_row.Cells(xId.Name).Value & "," & _row.Cells(xName.Name).Value & "," & _row.Cells(xBirth.Name).Value & "," & _row.Cells(xDeath.Name).Value)
             Next
-        End Using
+        Catch ex As IOException
+            LogUtil.Exception("Error writing file", ex, MyBase.Name)
+        End Try
     End Sub
+
     Private Shared Function GetWikiDeathDate(_parts As List(Of String)) As String
         Dim _deathDate As Date? = Nothing
         Dim _return As String = Nothing
@@ -192,5 +221,15 @@ Public Class FrmDeathCheck
         dgvWarnings.Refresh()
         Return _newRow
     End Function
+    Private Sub GetEmailSettings()
+        toAddr = GlobalSettings.GetSetting(EMAIL_TO_ADDRESS)
+        fromAddr = GlobalSettings.GetSetting(EMAIL_FROM_ADDRESS)
+        fromName = GlobalSettings.GetSetting(EMAIL_FROM_NAME)
+    End Sub
+
+    Private Sub SendEmail(strSubject As String, strBody As String)
+        GetEmailSettings()
+        EmailUtil.SendMail(fromAddr, toAddr, Array.Empty(Of String), strSubject, strBody, fromName)
+    End Sub
 #End Region
 End Class
