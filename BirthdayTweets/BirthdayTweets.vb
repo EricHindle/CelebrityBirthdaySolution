@@ -500,7 +500,7 @@ Public Class BirthdayTweets
         tweetLine.Append(_person.Name)
         Dim twitterHandle As String = If(_person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle), " @" & _person.Social.TwitterHandle, "")
         Dim _age As String = "(" & CStr(CalculateAge(_person)) & ")"
-        Dim _year As String = "(" & _person.BirthYear & If(_person.BirthYear < 0, "BCE", "") & ")"
+        Dim _year As String = "(" & _person.BirthYear.Trim("-") & If(_person.BirthYear < 0, "BCE", "") & ")"
         If _userType = TweetUserType.CelebBirthday Then
             If _type = TweetType.Birthday Then
                 tweetLine.Append(twitterHandle)
