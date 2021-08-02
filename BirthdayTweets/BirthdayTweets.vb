@@ -53,6 +53,7 @@ Public Class BirthdayTweets
 
     Private Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Private Const BIRTHDAY_HDR As String = "Happy birthday today to"
+    Private Const HBURPDAY_HDR As String = "Today's birthdays :-"
     Private Shared ReadOnly LINEFEED As String = Convert.ToChar(vbLf, myStringFormatProvider)
     Private Const CELEB_USER As String = "CelebBirthdayUK"
     Private Const HBURPDAY_USER As String = "HBurpday"
@@ -87,34 +88,34 @@ Public Class BirthdayTweets
         LogUtil.InitialiseLogging()
         LogUtil.StartLogging()
         GetIntervalAndStartTimer(5)
-        SendEmail("BirthdayTweets started", "The BirthdayTweets service has started")
+        SendEmail("BirthdayTweets started", "The BirthdayTweets service has started. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
     Protected Overrides Sub OnStop()
         Const Psub As String = "OnStop"
         LogUtil.Info("----- Stopping the Service -----", Psub)
         Timer1.Stop()
-        SendEmail("BirthdayTweets stopped", "The BirthdayTweets service has stopped")
+        SendEmail("BirthdayTweets stopped", "The BirthdayTweets service has stopped. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
 
     Protected Overrides Sub OnShutdown()
         Const Psub As String = "OnShutdown"
         LogUtil.Info("----- Shutdown detected -----", Psub)
         Timer1.Stop()
-        SendEmail("BirthdayTweets shut down", "The BirthdayTweets service has shut down")
+        SendEmail("BirthdayTweets shut down", "The BirthdayTweets service has shut down. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
 
     Protected Overrides Sub OnPause()
         Const Psub As String = "OnPause"
         LogUtil.Info("----- Service paused -----", Psub)
         Timer1.Stop()
-        SendEmail("BirthdayTweets paused", "The BirthdayTweets service has paused")
+        SendEmail("BirthdayTweets paused", "The BirthdayTweets service has paused. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
 
     Protected Overrides Sub OnContinue()
         Const Psub As String = "OnContinue"
         LogUtil.Info("----- Service continues -----", Psub)
         Timer1.Start()
-        SendEmail("BirthdayTweets continues", "The BirthdayTweets service has continued")
+        SendEmail("BirthdayTweets continues", "The BirthdayTweets service has continued. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
 #End Region
 #Region "timer"
@@ -249,7 +250,7 @@ Public Class BirthdayTweets
         Const Psub As String = "SendHbBirthdayTweets"
         Dim isSentOK As Boolean = True
         LogUtil.Info("Generating HBurpday birthday tweets", Psub)
-        Dim cbTweets As List(Of CbTweet) = GenerateTweets(oBirthdayList, TweetType.Birthday, TweetUserType.HBurpday, BIRTHDAY_HDR)
+        Dim cbTweets As List(Of CbTweet) = GenerateTweets(oBirthdayList, TweetType.Birthday, TweetUserType.HBurpday, HBURPDAY_HDR)
         LogUtil.Info("Sending HBurpday birthday tweets", Psub)
         For Each tweetToSend As CbTweet In cbTweets
             Dim imageFilename As String = SaveImage(tweetToSend, BIRTHDAY_FNAME)
@@ -433,7 +434,7 @@ Public Class BirthdayTweets
         LogUtil.Info("Generating text", Psub)
         Dim _outString As New StringBuilder
         _outString.Append(tweetHeaderDate).Append(LINEFEED).Append(LINEFEED)
-        _outString.Append(GetHeading(_type)).Append(LINEFEED)
+        _outString.Append(GetHeading(_type, _userType)).Append(LINEFEED)
         Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
         For Each _person As Person In _imageTable
             _outString.Append(GenerateTweetLine(_person, _type, _userType))
@@ -513,13 +514,17 @@ Public Class BirthdayTweets
         End If
         Return tweetLine.ToString
     End Function
-    Private Shared Function GetHeading(_type As TweetType) As String
+    Private Shared Function GetHeading(_type As TweetType, _userType As TweetUserType) As String
         Dim _header As String = ""
         If _type = TweetType.Anniversary Then
             _header = ANNIV_HDR
         End If
         If _type = TweetType.Birthday Then
-            _header = BIRTHDAY_HDR
+            If _userType = TweetUserType.HBurpday Then
+                _header = HBURPDAY_HDR
+            Else
+                _header = BIRTHDAY_HDR
+            End If
         End If
         Return _header
     End Function
