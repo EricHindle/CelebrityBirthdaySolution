@@ -1351,6 +1351,7 @@ Partial Class FrmUpdateDatabase
         '
         'GroupBox4
         '
+        Me.GroupBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.BtnViewAudit)
         Me.GroupBox4.Location = New System.Drawing.Point(555, 841)
         Me.GroupBox4.Name = "GroupBox4"
