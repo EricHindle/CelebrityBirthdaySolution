@@ -440,27 +440,25 @@ Friend Module modCbday
         Dim _cbDate As New CbDate
         Dim isOs As Boolean = IsStringContainsOs(possibleDateString) Or isOsFound
         Dim isBc As Boolean = IsStringContainsBc(possibleDateString)
-        If IsDate(possibleDateString) Then
-            _cbDate.DateValue = CDate(possibleDateString)
-            _cbDate.DateString = possibleDateString
-            _cbDate.IsValidDate = True
-        Else
-            Dim _words As List(Of String) = Split(possibleDateString, " ").ToList
-            For index As Integer = _words.Count - 1 To 0 Step -1
-                If String.IsNullOrEmpty(_words(index).Trim) Then
-                    _words.RemoveAt(index)
+        _cbDate.IsBce = isBc
+        _cbDate.IsOldStyle = isOs
+        Dim _words As List(Of String) = Split(possibleDateString, " ").ToList
+        For index As Integer = _words.Count - 1 To 0 Step -1
+            Dim testWord = _words(index).Trim.ToLower
+            If String.IsNullOrEmpty(testWord) OrElse testWord = "ad" OrElse testWord = "bc" Then
+                _words.RemoveAt(index)
+            End If
+        Next
+        If _words.Count >= 3 Then
+            For w As Integer = 0 To _words.Count - 3
+                Dim _testDate As String = _words(w) & " " & _words(w + 1) & " " & _words(w + 2).PadLeft(4, "0")
+                If IsDate(_testDate) Then
+                    _cbDate.DateValue = CDate(_testDate)
+                    _cbDate.DateString = _testDate
+                    _cbDate.IsValidDate = True
+                    Exit For
                 End If
             Next
-            If _words.Count >= 3 Then
-                For w As Integer = 0 To _words.Count - 3
-                    Dim _testDate As String = _words(w) & " " & _words(w + 1) & " " & _words(w + 2)
-                    If IsDate(_testDate) Then
-                        _cbDate.DateValue = CDate(_testDate)
-                        _cbDate.DateString = _testDate
-                        Exit For
-                    End If
-                Next
-            End If
         End If
         Return _cbDate
     End Function

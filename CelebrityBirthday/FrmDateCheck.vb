@@ -100,7 +100,8 @@ Public NotInheritable Class FrmDateCheck
                 If _wikiBirthInfo.WikiDates IsNot Nothing AndAlso _wikiBirthInfo.WikiDates.BirthDate.IsValidDate Then
                     Dim _dateOfBirth As Date = _wikiBirthInfo.WikiDates.BirthDate.DateValue
                     If _dateOfBirth <> _person.DateOfBirth Then
-                        AddXRow(_person, Format(_dateOfBirth, "dd MMM yyyy"), _wikiBirthInfo.WikiExtract, wikiId)
+                        Dim isAudit As Boolean = AuditUtil.GetDobChanges(_person.Id).Rows.Count > 0
+                        AddXRow(_person, Format(_dateOfBirth, "dd MMM yyyy"), _wikiBirthInfo.WikiExtract, wikiId, isAudit)
                         personTable.Add(_person)
                         _addedct += 1
                         If nudSelectCount.Value > 0 AndAlso _addedct = nudSelectCount.Value Then
@@ -109,7 +110,7 @@ Public NotInheritable Class FrmDateCheck
                     End If
                 Else
                     _desc = "** " & _wikiBirthInfo.ErrorDesc & " **"
-                    AddXRow(_person, "", _desc & vbCrLf & _wikiBirthInfo.WikiExtract, wikiId)
+                    AddXRow(_person, "", _desc & vbCrLf & _wikiBirthInfo.WikiExtract, wikiId, False)
                     personTable.Add(_person)
                 End If
             Catch ex As ArgumentException
@@ -439,7 +440,7 @@ Public NotInheritable Class FrmDateCheck
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(oText, MyBase.Name)
     End Sub
-    Private Function AddXRow(oPerson As Person, oDateOfBirth As String, oDesc As String, oWikiId As String) As DataGridViewRow
+    Private Function AddXRow(oPerson As Person, oDateOfBirth As String, oDesc As String, oWikiId As String, isAudit As Boolean) As DataGridViewRow
         Dim _newRow As DataGridViewRow = DgvWarnings.Rows(DgvWarnings.Rows.Add())
         _newRow.Height = If(ChkShowImage.Checked, 65, DgvWarnings.RowTemplate.Height)
         _newRow.Cells(xId.Name).Value = oPerson.Id
@@ -449,6 +450,7 @@ Public NotInheritable Class FrmDateCheck
         _newRow.Cells(xWikiExtract.Name).Value = If(String.IsNullOrEmpty(oDesc), "", oDesc)
         _newRow.Cells(xPersonDescription.Name).Value = oPerson.Description
         _newRow.Cells(xWikiId.Name).Value = If(String.IsNullOrEmpty(oWikiId), "", oWikiId)
+        _newRow.Cells(xAudit.Name).Value = If(isAudit, "*", "")
         Dim imageCell As DataGridViewImageCell = _newRow.Cells(xImg.Name)
         Dim oImageIdentity = GetImageById(oPerson.Id, True)
         If oImageIdentity IsNot Nothing Then
