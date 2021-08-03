@@ -111,7 +111,7 @@ Partial Class FrmMenu
         Me.Label1.Location = New System.Drawing.Point(152, 57)
         Me.Label1.Name = "Label1"
         Me.Label1.Padding = New System.Windows.Forms.Padding(10)
-        Me.Label1.Size = New System.Drawing.Size(201, 52)
+        Me.Label1.Size = New System.Drawing.Size(252, 60)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "Celebrity Birthdays"
         '
@@ -165,7 +165,7 @@ Partial Class FrmMenu
         Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Version.Location = New System.Drawing.Point(17, 640)
         Me.Version.Name = "Version"
-        Me.Version.Size = New System.Drawing.Size(152, 22)
+        Me.Version.Size = New System.Drawing.Size(180, 27)
         Me.Version.TabIndex = 12
         Me.Version.Text = "Version {0}.{1}.{2}.{3}"
         Me.Version.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -192,10 +192,10 @@ Partial Class FrmMenu
         '
         'FrmMenu
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 28.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(377, 671)
+        Me.ClientSize = New System.Drawing.Size(412, 671)
         Me.ControlBox = False
         Me.Controls.Add(Me.BtnBotsdWP)
         Me.Controls.Add(Me.LblCelebrities)

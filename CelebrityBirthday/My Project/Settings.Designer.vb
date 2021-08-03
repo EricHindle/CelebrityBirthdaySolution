@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -116,7 +116,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Images")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\Images")>  _
         Public Property ImgPath() As String
             Get
                 Return CType(Me("ImgPath"),String)
@@ -128,7 +128,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Images\new")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\Images\new")>  _
         Public Property NewImagePath() As String
             Get
                 Return CType(Me("NewImagePath"),String)
@@ -151,7 +151,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Twitter")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\Twitter")>  _
         Public Property TwitterFilePath() As String
             Get
                 Return CType(Me("TwitterFilePath"),String)
@@ -284,7 +284,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Twitter\Images")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\Twitter\Images")>  _
         Public Property twitterImageFolder() As String
             Get
                 Return CType(Me("twitterImageFolder"),String)
@@ -405,7 +405,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\BOTSD")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\BOTSD")>  _
         Public Property botsdFilePath() As String
             Get
                 Return CType(Me("botsdFilePath"),String)
@@ -453,7 +453,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Logs")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\Logs")>  _
         Public Property LogFolder() As String
             Get
                 Return CType(Me("LogFolder"),String)
@@ -465,7 +465,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Images\mosaics")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\Images\mosaics")>  _
         Public Property MosaicImagePath() As String
             Get
                 Return CType(Me("MosaicImagePath"),String)

@@ -71,7 +71,7 @@
         End If
         LblCelebrities.Text = System.String.Format(myStringFormatProvider, LblCelebrities.Text, CStr(CountPeople()))
         LogUtil.LogFolder = My.Settings.LogFolder
-        LogUtil.StartLogging()
+        '  LogUtil.StartLogging()
 
     End Sub
 
