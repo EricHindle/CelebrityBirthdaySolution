@@ -69,10 +69,15 @@
             My.Settings.callUpgrade = 1
             My.Settings.Save()
         End If
-        LblCelebrities.Text = System.String.Format(myStringFormatProvider, LblCelebrities.Text, CStr(CountPeople()))
         LogUtil.LogFolder = My.Settings.LogFolder
+        Dim celebCount As Integer = CountPeople()
+        If celebCount >= 0 Then
+            LblCelebrities.Text = System.String.Format(myStringFormatProvider, LblCelebrities.Text, CStr(celebCount))
+        Else
+            LogUtil.Fatal("Database not available", MyBase.Name)
+            Me.Close()
+        End If
         '  LogUtil.StartLogging()
-
     End Sub
 
     Private Sub BtnMore_Click(sender As Object, e As EventArgs) Handles BtnMore.Click

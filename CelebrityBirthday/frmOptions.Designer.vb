@@ -42,6 +42,8 @@ Partial Class FrmOptions
         Me.TxtWikiSearch = New System.Windows.Forms.TextBox()
         Me.txtTwitterSearch = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TxtLogFilePath = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.TxtTwitterImagePath = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -57,8 +59,7 @@ Partial Class FrmOptions
         Me.BtnAddWord = New System.Windows.Forms.Button()
         Me.LbSplitWords = New System.Windows.Forms.ListBox()
         Me.TxtSplitWords = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.TxtLogFilePath = New System.Windows.Forms.TextBox()
+        Me.chkSqlServer = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -252,6 +253,22 @@ Partial Class FrmOptions
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "File Paths"
         '
+        'TxtLogFilePath
+        '
+        Me.TxtLogFilePath.Location = New System.Drawing.Point(172, 158)
+        Me.TxtLogFilePath.Name = "TxtLogFilePath"
+        Me.TxtLogFilePath.Size = New System.Drawing.Size(333, 22)
+        Me.TxtLogFilePath.TabIndex = 11
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(13, 161)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(77, 14)
+        Me.Label12.TabIndex = 10
+        Me.Label12.Text = "Log File Path"
+        '
         'TxtTwitterImagePath
         '
         Me.TxtTwitterImagePath.Location = New System.Drawing.Point(172, 125)
@@ -424,21 +441,15 @@ Partial Class FrmOptions
         Me.TxtSplitWords.Size = New System.Drawing.Size(84, 22)
         Me.TxtSplitWords.TabIndex = 0
         '
-        'Label12
+        'chkSqlServer
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(13, 161)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(77, 14)
-        Me.Label12.TabIndex = 10
-        Me.Label12.Text = "Log File Path"
-        '
-        'TxtLogFilePath
-        '
-        Me.TxtLogFilePath.Location = New System.Drawing.Point(172, 158)
-        Me.TxtLogFilePath.Name = "TxtLogFilePath"
-        Me.TxtLogFilePath.Size = New System.Drawing.Size(333, 22)
-        Me.TxtLogFilePath.TabIndex = 11
+        Me.chkSqlServer.AutoSize = True
+        Me.chkSqlServer.Location = New System.Drawing.Point(418, 580)
+        Me.chkSqlServer.Name = "chkSqlServer"
+        Me.chkSqlServer.Size = New System.Drawing.Size(87, 18)
+        Me.chkSqlServer.TabIndex = 24
+        Me.chkSqlServer.Text = "SQL Server"
+        Me.chkSqlServer.UseVisualStyleBackColor = True
         '
         'FrmOptions
         '
@@ -446,6 +457,7 @@ Partial Class FrmOptions
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(549, 687)
+        Me.Controls.Add(Me.chkSqlServer)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.NudSentences)
         Me.Controls.Add(Me.Label9)
@@ -507,4 +519,5 @@ Partial Class FrmOptions
     Friend WithEvents BtnRmvWord As Button
     Friend WithEvents TxtLogFilePath As TextBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents chkSqlServer As CheckBox
 End Class

@@ -29,6 +29,7 @@ Public NotInheritable Class FrmOptions
             sb.Append(splitword).Append("~"c)
         Next
         My.Settings.SplitWords = sb.ToString.TrimEnd("~")
+        My.Settings.isSqlServer = chkSqlServer.Checked
         My.Settings.Save()
     End Sub
 
@@ -54,6 +55,7 @@ Public NotInheritable Class FrmOptions
         TxtWordPressDate.Text = My.Settings.WordPressMonthUrl
         TxtLogFilePath.Text = My.Settings.LogFolder
         NudSentences.Value = My.Settings.wikiSentences
+        chkSqlServer.Checked = My.Settings.isSqlServer
     End Sub
 
     Private Sub BtnResetForms_Click(sender As Object, e As EventArgs) Handles BtnResetForms.Click

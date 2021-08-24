@@ -36,37 +36,48 @@ Module modDatabase
         Return oTwta.DeleteTwitter(_id)
     End Function
     Public Function CountPeople() As Integer
-        Dim iCt As Integer = 0
+        Dim iCt As Integer
         Try
             iCt = oPersonTa.CountPeople
         Catch ex As DbException
-            StartSqlService()
-            Try
-                iCt = oPersonTa.CountPeople
-            Catch ex1 As DbException
-                DisplayException(MethodBase.GetCurrentMethod, ex1, MODULE_TYPE)
-            End Try
+            If StartSqlService() Then
+                Try
+                    iCt = oPersonTa.CountPeople
+                Catch ex1 As DbException
+                    DisplayException(MethodBase.GetCurrentMethod, ex1, MODULE_TYPE)
+                    iCt = -1
+                End Try
+            Else
+                iCt = -1
+            End If
         End Try
         Return iCt
     End Function
-    Private Sub StartSqlService()
-        LogUtil.Info("Starting SQL Server", MODULE_NAME)
-        Try
-            Dim procStartInfo As New ProcessStartInfo
-            With procStartInfo
-                .UseShellExecute = True
-                .FileName = "net.exe"
-                .Arguments = " start ""SQL Server (SQLEXPRESS)"""
-                .WindowStyle = ProcessWindowStyle.Normal
-                .Verb = "runas"
-            End With
-            Dim thisProcess As Process = Process.Start(procStartInfo)
-            thisProcess.WaitForExit(120000)
-        Catch ex As System.ComponentModel.Win32Exception
-            DisplayException(MethodBase.GetCurrentMethod, ex, "Win32")
-        End Try
-
-    End Sub
+    Private Function StartSqlService() As Boolean
+        Dim isOK As Boolean = True
+        If My.Settings.isSqlServer Then
+            LogUtil.Info("Starting SQL Server", MODULE_NAME)
+            Try
+                Dim procStartInfo As New ProcessStartInfo
+                With procStartInfo
+                    .UseShellExecute = True
+                    .FileName = "net.exe"
+                    .Arguments = " start ""SQL Server (SQLEXPRESS)"""
+                    .WindowStyle = ProcessWindowStyle.Normal
+                    .Verb = "runas"
+                End With
+                Dim thisProcess As Process = Process.Start(procStartInfo)
+                thisProcess.WaitForExit(120000)
+            Catch ex As System.ComponentModel.Win32Exception
+                DisplayException(MethodBase.GetCurrentMethod, ex, "Win32")
+                isOK = False
+            End Try
+        Else
+            LogUtil.Info("SQL Server not available", MODULE_NAME)
+            isOK = False
+        End If
+        Return isOK
+    End Function
     Public Function GetPersonById(ByVal _id As Integer) As Person
         Dim newPerson As Person = Nothing
         Try

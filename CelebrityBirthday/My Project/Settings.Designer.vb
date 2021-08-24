@@ -510,6 +510,18 @@ Namespace My
                 Me("auditformpos") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property isSqlServer() As Boolean
+            Get
+                Return CType(Me("isSqlServer"),Boolean)
+            End Get
+            Set
+                Me("isSqlServer") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
