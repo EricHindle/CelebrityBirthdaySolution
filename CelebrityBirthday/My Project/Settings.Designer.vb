@@ -522,6 +522,18 @@ Namespace My
                 Me("isSqlServer") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://localhost/test/hattyburpday.php")>  _
+        Public Property twitterAuthCallback() As String
+            Get
+                Return CType(Me("twitterAuthCallback"),String)
+            End Get
+            Set
+                Me("twitterAuthCallback") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

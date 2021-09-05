@@ -70,7 +70,7 @@ Partial Class FrmSendTwitter
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1156, 518)
+        Me.btnClose.Location = New System.Drawing.Point(1162, 559)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(162, 41)
@@ -81,14 +81,14 @@ Partial Class FrmSendTwitter
         'rtbTweetProgress
         '
         Me.rtbTweetProgress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.rtbTweetProgress.BackColor = System.Drawing.Color.Black
         Me.rtbTweetProgress.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbTweetProgress.ForeColor = System.Drawing.Color.White
         Me.rtbTweetProgress.Location = New System.Drawing.Point(569, 57)
         Me.rtbTweetProgress.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.rtbTweetProgress.Name = "rtbTweetProgress"
-        Me.rtbTweetProgress.Size = New System.Drawing.Size(271, 452)
+        Me.rtbTweetProgress.Size = New System.Drawing.Size(271, 493)
         Me.rtbTweetProgress.TabIndex = 23
         Me.rtbTweetProgress.Text = ""
         '
@@ -97,7 +97,7 @@ Partial Class FrmSendTwitter
         Me.BtnAuthenticate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnAuthenticate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAuthenticate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAuthenticate.Location = New System.Drawing.Point(855, 517)
+        Me.BtnAuthenticate.Location = New System.Drawing.Point(861, 558)
         Me.BtnAuthenticate.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnAuthenticate.Name = "BtnAuthenticate"
         Me.BtnAuthenticate.Size = New System.Drawing.Size(162, 41)
@@ -114,7 +114,7 @@ Partial Class FrmSendTwitter
         Me.RtbTweetText.Location = New System.Drawing.Point(23, 383)
         Me.RtbTweetText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RtbTweetText.Name = "RtbTweetText"
-        Me.RtbTweetText.Size = New System.Drawing.Size(420, 174)
+        Me.RtbTweetText.Size = New System.Drawing.Size(420, 215)
         Me.RtbTweetText.TabIndex = 26
         Me.RtbTweetText.Text = ""
         '
@@ -159,7 +159,7 @@ Partial Class FrmSendTwitter
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(449, 449)
+        Me.BtnSend.Location = New System.Drawing.Point(449, 490)
         Me.BtnSend.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnSend.Name = "BtnSend"
         Me.BtnSend.Size = New System.Drawing.Size(96, 60)
@@ -172,10 +172,10 @@ Partial Class FrmSendTwitter
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 581)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 622)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
-        Me.StatusStrip1.Size = New System.Drawing.Size(1332, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1338, 22)
         Me.StatusStrip1.TabIndex = 28
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -192,7 +192,7 @@ Partial Class FrmSendTwitter
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label1.Location = New System.Drawing.Point(851, 22)
+        Me.Label1.Location = New System.Drawing.Point(571, 15)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(71, 22)
         Me.Label1.TabIndex = 30
@@ -202,7 +202,7 @@ Partial Class FrmSendTwitter
         '
         Me.cmbTwitterUsers.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbTwitterUsers.FormattingEnabled = True
-        Me.cmbTwitterUsers.Location = New System.Drawing.Point(946, 20)
+        Me.cmbTwitterUsers.Location = New System.Drawing.Point(666, 13)
         Me.cmbTwitterUsers.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmbTwitterUsers.Name = "cmbTwitterUsers"
         Me.cmbTwitterUsers.Size = New System.Drawing.Size(257, 24)
@@ -243,13 +243,11 @@ Partial Class FrmSendTwitter
         '
         'TxtSurname
         '
-        Me.TxtSurname.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtSurname.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtSurname.Location = New System.Drawing.Point(329, 59)
         Me.TxtSurname.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TxtSurname.Name = "TxtSurname"
-        Me.TxtSurname.Size = New System.Drawing.Size(195, 26)
+        Me.TxtSurname.Size = New System.Drawing.Size(174, 26)
         Me.TxtSurname.TabIndex = 35
         '
         'TxtForename
@@ -264,14 +262,12 @@ Partial Class FrmSendTwitter
         'TxtName
         '
         Me.TxtName.AllowDrop = True
-        Me.TxtName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtName.ContextMenuStrip = Me.ContextMenuStrip1
         Me.TxtName.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtName.Location = New System.Drawing.Point(70, 18)
         Me.TxtName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TxtName.Name = "TxtName"
-        Me.TxtName.Size = New System.Drawing.Size(308, 26)
+        Me.TxtName.Size = New System.Drawing.Size(287, 26)
         Me.TxtName.TabIndex = 33
         '
         'PictureBox1
@@ -337,13 +333,12 @@ Partial Class FrmSendTwitter
         '
         'chkImages
         '
-        Me.chkImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkImages.AutoSize = True
         Me.chkImages.Checked = True
         Me.chkImages.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkImages.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.chkImages.Location = New System.Drawing.Point(1209, 22)
+        Me.chkImages.Location = New System.Drawing.Point(935, 15)
         Me.chkImages.Name = "chkImages"
         Me.chkImages.Size = New System.Drawing.Size(107, 23)
         Me.chkImages.TabIndex = 138
@@ -354,7 +349,7 @@ Partial Class FrmSendTwitter
         '
         Me.LblTweetLength.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.LblTweetLength.AutoSize = True
-        Me.LblTweetLength.Location = New System.Drawing.Point(463, 396)
+        Me.LblTweetLength.Location = New System.Drawing.Point(463, 437)
         Me.LblTweetLength.Name = "LblTweetLength"
         Me.LblTweetLength.Size = New System.Drawing.Size(16, 17)
         Me.LblTweetLength.TabIndex = 137
@@ -369,15 +364,14 @@ Partial Class FrmSendTwitter
         Me.WebBrowser1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(23, 25)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(466, 452)
+        Me.WebBrowser1.Size = New System.Drawing.Size(472, 493)
         Me.WebBrowser1.TabIndex = 139
         '
         'BtnClear
         '
-        Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClear.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClear.Location = New System.Drawing.Point(444, 12)
+        Me.BtnClear.Location = New System.Drawing.Point(423, 12)
         Me.BtnClear.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(80, 34)
@@ -402,7 +396,7 @@ Partial Class FrmSendTwitter
         Me.BtnClearImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnClearImages.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClearImages.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClearImages.Location = New System.Drawing.Point(569, 518)
+        Me.BtnClearImages.Location = New System.Drawing.Point(569, 559)
         Me.BtnClearImages.Name = "BtnClearImages"
         Me.BtnClearImages.Size = New System.Drawing.Size(142, 41)
         Me.BtnClearImages.TabIndex = 142
@@ -414,7 +408,7 @@ Partial Class FrmSendTwitter
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1332, 603)
+        Me.ClientSize = New System.Drawing.Size(1338, 644)
         Me.Controls.Add(Me.BtnClearImages)
         Me.Controls.Add(Me.BtnSaveImage)
         Me.Controls.Add(Me.BtnClear)

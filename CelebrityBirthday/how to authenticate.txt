@@ -1,0 +1,63 @@
+Headers -X-Pipe- = \\.\pipe\IISFCGI-1039a3a0-e100-49b5-911a-652a25270745 Ersprofile = C:\ProgramData Ta = C:\Windows\system32\config\systemprofile\AppData\Roaming Ool-Config = C:\inetpub\temp\apppools\DefaultAppPool\DefaultAppPool.config Ool-Id = DefaultAppPool Nprogramfiles = C:\Program Files\Common Files Nprogramfiles(x86) = C:\Program Files (x86)\Common Files Nprogramw6432 = C:\Program Files\Common Files Tername = LAPTOP-11NSK703 Ec = C:\Windows\system32\cmd.exe Rdata = C:\Windows\System32\Drivers\DriverData Appdata = C:\Windows\system32\config\systemprofile\AppData\Local R-Of-Processors = 8 = Windows_NT = C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\dotnet\;C:\php-7.4.21;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps Xt = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC Ssor-Architecture = AMD64 Ssor-Identifier = Intel64 Family 6 Model 165 Stepping 2, GenuineIntel Ssor-Level = 6 Ssor-Revision = a502 Amdata = C:\ProgramData Amfiles = C:\Program Files Amfiles(x86) = C:\Program Files (x86) Amw6432 = C:\Program Files Ulepath = C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\PowerShell\Modules\ C = C:\Users\Public Mdrive = C: Mroot = C:\Windows = C:\Windows\TEMP = C:\Windows\TEMP Omain = WORKGROUP Ame = LAPTOP-11NSK703$ Rofile = C:\Windows\system32\config\systemprofile Comcomntools = C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\ R = C:\Windows Path-Info = /test/hattyburpday.php = /test/hattyburpday.php R-Software = Microsoft-IIS/10.0 R-Protocol = HTTP/1.1 R-Port-Secure = 0 R-Port = 80 R-Name = localhost T-Name = /test/hattyburpday.php T-Filename = D:\test\hattyburpday.php St-Uri = /test/hattyburpday.php?oauth_token=a9Nd8wAAAAAA-fG-AAABe7bZTYc&oauth_verifier=0J58Xt41HpgeDV1asmlBA9zN9gOYn8HC St-Method = GET E-User = E-Port = 56466 E-Host = ::1 E-Addr = ::1 -String = oauth_token=a9Nd8wAAAAAA-fG-AAABe7bZTYc&oauth_verifier=0J58Xt41HpgeDV1asmlBA9zN9gOYn8HC Translated = D:\test\hattyburpday.php -User = -Addr = ::1 Nce-Meta-Path = /LM/W3SVC/1 Nce-Name = DEFAULT WEB SITE Nce-Id = 1 -Server-Subject = -Server-Issuer = -Secretkeysize = -Keysize = = off Ay-Interface = CGI/1.1 Ent-Root = C:\inetpub\wwwroot Nt-Type = Nt-Length = 0 Subject = Serialnumber = Issuer = Flags = Cookie = User = Password = Type = Physical-Path = C:\inetpub\wwwroot\ Md-Path = /LM/W3SVC/1/ROOT User-Agent = Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; McAfee) Host = localhost Accept-Language = en-GB,en-US;q=0.7,en;q=0.3 Accept-Encoding = gzip, deflate Accept = image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/xaml+xml, application/x-ms-xbap, application/x-mfe-ipt, */* Connection = Keep-Alive Role = RESPONDER Elf = /test/hattyburpday.php St-Time-Float = 1630860307.0804 St-Time = 1630860307 
+
+Output 
+
+
+Entering GetAuthToken 05:09:59
+Beginning GetAuthToken 05:09:59
+Getting nonce 05:09:59
+Building parameters 05:09:59
+Building POST 05:09:59
+POST&https%3A%2F%2Fapi.twitter.com%2Foauth%2Frequest_token&oauth_callback%3Dhttp%253A%252F%252Flocalhost%252Ftest%252Fhattyburpday.php%26oauth_consumer_key%3Dz0vL7gbnQvd5JtbDnWFIabLsx%26oauth_nonce%3D7f1d58e7ca544d5690bdcb90df818f50%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1630863899%26oauth_version%3D1.0
+Building Signature 05:09:59
+Building header 05:09:59
+Adding header 05:09:59
+Posting 05:09:59
+Back from POST 05:09:59
+Getting response 05:09:59
+Back from getting response 05:09:59
+Getting tokens 05:09:59
+oauth_token = a9Nd8wAAAAAA-fG-AAABe7bZTYc
+oauth_token_secret = AsUsS628ZzfnAbTIa991fKlQ59I991ww
+oauth_callback_confirmed = true
+Got tokens 05:09:59
+a9Nd8wAAAAAA-fG-AAABe7bZTYc
+AsUsS628ZzfnAbTIa991fKlQ59I991ww
+Finished GetAuthToken 05:09:59
+True
+Back from GetAuthToken 05:09:59
+Entering Authenticate 05:09:59
+Navigating
+False
+Back from Authenticate 05:09:59
+
+a9Nd8wAAAAAA-fG-AAABe7bZTYc
+AsUsS628ZzfnAbTIa991fKlQ59I991ww
+0J58Xt41HpgeDV1asmlBA9zN9gOYn8HC
+
+
+https://api.twitter.com/oauth/access_token?oauth_token=a9Nd8wAAAAAA-fG-AAABe7bZTYc&oauth_verifier=0J58Xt41HpgeDV1asmlBA9zN9gOYn8HC
+
+
+
+
+Authenticate an account:
+
+Step 1 get auth token and secret
+Step 2 get validation code from message sent to call back
+Step 3 use auth token and verifier in https://api.twitter.com/oauth/access_token?oauth_token=a9Nd8wAAAAAA-fG-AAABe7bZTYc&oauth_verifier=0J58Xt41HpgeDV1asmlBA9zN9gOYn8HC
+ to get verified auth code and secret.
+
+
+
+
+
+
+
+
+
+
+
+
+
+oauth_token=1434505937042264069-NrrSkPLv8MwRgpwaPnzrrEloIvcIql&oauth_token_secret=gPWYBT4lcksSXFTBd9mkQiOBCy4xhfMkhUG7JJEl90Jyx&user_id=1434505937042264069&screen_name=WhosBrownBread

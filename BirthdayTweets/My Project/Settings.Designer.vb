@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -67,7 +67,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Logs")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\Logs")>  _
         Public Property LogFolder() As String
             Get
                 Return CType(Me("LogFolder"),String)
@@ -91,7 +91,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Images")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\Images")>  _
         Public Property ImgPath() As String
             Get
                 Return CType(Me("ImgPath"),String)
@@ -103,7 +103,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("F:\CelebrityBirthday\Twitter\Images")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\Twitter\Images")>  _
         Public Property TwitterImgPath() As String
             Get
                 Return CType(Me("TwitterImgPath"),String)

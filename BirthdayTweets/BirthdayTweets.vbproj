@@ -114,6 +114,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="CelebrityBirthdayDataSet.vb">
+      <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Domain\BornSameDay.vb" />
     <Compile Include="Domain\ImageIdentity.vb" />
     <Compile Include="Domain\Person.vb" />

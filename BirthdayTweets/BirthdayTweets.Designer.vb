@@ -17,6 +17,15 @@ Partial Class BirthdayTweets
     End Sub
 
     ' The main entry point for the process
+    'Shared Sub Main()
+    '    LogUtil.InitialiseLogging()
+    '    LogUtil.StartLogging()
+    '    LogUtil.Info("Starting Manually")
+    '    Timer1 = New Timers.Timer
+    '    BirthdayTweets.Timer1_Tick(Nothing, Nothing)
+    '    LogUtil.Info("Run Complete")
+
+    'End Sub
     <MTAThread()>
     <System.Diagnostics.DebuggerNonUserCode()>
     Shared Sub Main()

@@ -50,6 +50,7 @@ Public Class FrmSendTwitter
         Authenticate()
         WriteTrace(isDone)
         WriteTrace("Back from Authenticate " & Format(Now, "hh:MM:ss"))
+
     End Sub
     Private Sub FrmSendTwitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)

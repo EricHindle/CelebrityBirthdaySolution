@@ -11,10 +11,12 @@ Public Class BirthdayTweets
         Birthday
         Anniversary
         Full
+        Death
     End Enum
     Private Enum TweetUserType
         CelebBirthday
         HBurpday
+        BrownBread
     End Enum
 #End Region
 #Region "classes"
@@ -44,20 +46,24 @@ Public Class BirthdayTweets
     Private Const LAST_CELEB_TWEET As String = "LastCelebTweet"
     Private Const LAST_HBURP_TWEET As String = "LastHburpTweet"
     Private Const LAST_BOTSD_TWEET As String = "LastBotsdTweet"
+    Private Const LAST_BBREAD_TWEET As String = "LastBrownBreadTweet"
 
     Private Const TWEET_TIME As String = "TweetTime"
     Private Const TIMER_INTERVAL As String = "ServiceTimerInterval"
     Private Const BIRTHDAY_FNAME As String = "Birthdays_"
     Private Const ANNIV_FNAME As String = "Anniv_"
     Private Const BOTSD_FNAME As String = "Botsd_"
+    Private Const BBREAD_FNAME As String = "BBread_"
 
     Private Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Private Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Private Const HBURPDAY_HDR As String = "Today's birthdays :-"
+    Private Const BBREAD_HDR As String = "People who died on this day :"
     Private Shared ReadOnly LINEFEED As String = Convert.ToChar(vbLf, myStringFormatProvider)
     Private Const CELEB_USER As String = "CelebBirthdayUK"
     Private Const HBURPDAY_USER As String = "HBurpday"
     Private Const BOTSD_USER As String = "NotTwins1"
+    Private Const BBREAD_USER As String = "WhosBrownBread"
     'Private Const CELEB_USER As String = "FunsterMuddy"
     'Private Const HBURPDAY_USER As String = "FunsterMuddy"
     'Private Const BOTSD_USER As String = "FunsterMuddy"
@@ -71,6 +77,7 @@ Public Class BirthdayTweets
     Public Shared Timer1 As System.Timers.Timer
     Private Shared oBirthdayList As New List(Of Person)
     Private Shared oAnniversaryList As New List(Of Person)
+    Private Shared oDeathList As New List(Of Person)
     Private Shared ReadOnly tw As New TwitterOAuth
     Private Shared todayDay As String
     Private Shared todayMonth As String
@@ -96,27 +103,25 @@ Public Class BirthdayTweets
         Timer1.Stop()
         SendEmail("BirthdayTweets stopped", "The BirthdayTweets service has stopped. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
-
     Protected Overrides Sub OnShutdown()
         Const Psub As String = "OnShutdown"
         LogUtil.Info("----- Shutdown detected -----", Psub)
         Timer1.Stop()
         SendEmail("BirthdayTweets shut down", "The BirthdayTweets service has shut down. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
-
     Protected Overrides Sub OnPause()
         Const Psub As String = "OnPause"
         LogUtil.Info("----- Service paused -----", Psub)
         Timer1.Stop()
         SendEmail("BirthdayTweets paused", "The BirthdayTweets service has paused. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
-
     Protected Overrides Sub OnContinue()
         Const Psub As String = "OnContinue"
         LogUtil.Info("----- Service continues -----", Psub)
         Timer1.Start()
         SendEmail("BirthdayTweets continues", "The BirthdayTweets service has continued. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
+
 #End Region
 #Region "timer"
     Private Shared Sub GetIntervalAndStartTimer(interval As Integer)
@@ -138,7 +143,6 @@ Public Class BirthdayTweets
     End Sub
     Public Shared Sub Timer1_Tick(source As Object, e As ElapsedEventArgs)
         Const Psub As String = "Timer1_Tick"
-
         Try
             LogUtil.Info("----------------------------------------- tick", Psub)
             Timer1.Stop()
@@ -148,6 +152,8 @@ Public Class BirthdayTweets
             Dim celebLastTweetDate As Date = GlobalSettings.GetSetting(LAST_CELEB_TWEET)
             Dim hburpLastTweetDate As Date = GlobalSettings.GetSetting(LAST_HBURP_TWEET)
             Dim botsdLastTweetDate As Date = GlobalSettings.GetSetting(LAST_BOTSD_TWEET)
+            Dim bbreadLastTweetDate As Date = GlobalSettings.GetSetting(LAST_BBREAD_TWEET)
+
             Dim todaysDate As String = Format(Now, "yyyy-MM-dd")
             todayDay = Format(Now, "dd")
             todayMonth = Format(Now, "MMMM")
@@ -191,7 +197,6 @@ Public Class BirthdayTweets
                     End If
                 End If
             End If
-
             If botsdLastTweetDate < Today.Date Then
                 If Now > tweetTime Then
                     LogUtil.Info("Sending botsd tweets for " & todaysDate, Psub)
@@ -207,6 +212,24 @@ Public Class BirthdayTweets
                     Else
                         LogUtil.Problem("BotSD Tweets not sent - selection error", Psub)
                         SendEmail("BotSD Tweets error", "BotSD Tweets not sent - selection error")
+                    End If
+                End If
+            End If
+            If bbreadLastTweetDate < Today.Date Then
+                If Now > tweetTime Then
+                    LogUtil.Info("Sending bbread tweets for " & todaysDate, Psub)
+                    LogUtil.Info("Selecting people", Psub)
+                    If BuildBrownBreadList Then
+                        If SendBbreadTweets(todayDay, todayMonth) Then
+                            LogUtil.Info("BrownBread tweets complete", Psub)
+                            GlobalSettings.SetSetting(LAST_BBREAD_TWEET, "date", todaysDate, "")
+                        Else
+                            LogUtil.Problem("BrownBread Tweets not sent - error", Psub)
+                            SendEmail("BrownBread Tweets error", "BotSD Tweets not sent - error")
+                        End If
+                    Else
+                        LogUtil.Problem("BrownBread Tweets not sent - selection error", Psub)
+                        SendEmail("BrownBread Tweets error", "BotSD Tweets not sent - selection error")
                     End If
                 End If
             End If
@@ -298,6 +321,20 @@ Public Class BirthdayTweets
         For Each tweetToSend As CbTweet In cbTweets
             Dim imageFilename As String = SaveImage(tweetToSend, BOTSD_FNAME)
             If Not SendTheTweet(tweetToSend, BOTSD_USER, imageFilename) Then
+                isSentOK = False
+            End If
+        Next
+        Return isSentOK
+    End Function
+    Private Shared Function SendBbreadTweets(oDay As String, oMonth As String) As Boolean
+        Const Psub As String = "SendBbreadTweets"
+        Dim isSentOK As Boolean = True
+        LogUtil.Info("Generating Brown Bread tweets", Psub)
+        Dim cbTweets As List(Of CbTweet) = GenerateTweets(oDeathList, TweetType.Death, TweetUserType.BrownBread, BBREAD_HDR)
+        LogUtil.Info("Sending Brown Bread tweets", Psub)
+        For Each tweetToSend As CbTweet In cbTweets
+            Dim imageFilename As String = SaveImage(tweetToSend, BBREAD_FNAME)
+            If Not SendTheTweet(tweetToSend, BBREAD_USER, imageFilename) Then
                 isSentOK = False
             End If
         Next
@@ -501,6 +538,7 @@ Public Class BirthdayTweets
         Dim twitterHandle As String = If(_person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle), " @" & _person.Social.TwitterHandle, "")
         Dim _age As String = "(" & CStr(CalculateAge(_person)) & ")"
         Dim _year As String = "(" & _person.BirthYear.Trim("-") & If(_person.BirthYear < 0, "BCE", "") & ")"
+        Dim _deathYear As String = "(" & CStr(_person.DeathYear).Trim("-") & If(_person.DeathYear < 0, "BCE", "") & ")"
         If _userType = TweetUserType.CelebBirthday Then
             If _type = TweetType.Birthday Then
                 tweetLine.Append(twitterHandle)
@@ -511,6 +549,8 @@ Public Class BirthdayTweets
             ElseIf _type = TweetType.Anniversary Then
                 tweetLine.Append(" "c).Append(_year)
             End If
+        ElseIf _userType = TweetUserType.BrownBread Then
+            tweetLine.Append(" "c).Append(_deathYear)
         End If
         Return tweetLine.ToString
     End Function
@@ -525,6 +565,10 @@ Public Class BirthdayTweets
             Else
                 _header = BIRTHDAY_HDR
             End If
+        End If
+
+        If _type = TweetType.Death Then
+            _header = BBREAD_HDR
         End If
         Return _header
     End Function
@@ -669,6 +713,22 @@ Public Class BirthdayTweets
         End If
         LogUtil.Info(CStr(oBotSDList.Count) & " same birthdays found", Psub)
         Return isOK
+    End Function
+    Private Shared Function BuildBrownBreadList() As Boolean
+        Const Psub As String = "BuildBrownBreadList"
+        LogUtil.Info("Building brown bread lists", Psub)
+        Dim isBuiltOk As Boolean
+        Try
+            Dim _day As Integer = Today.Day
+            Dim _mth As Integer = Today.Month
+            oDeathList = FindDeaths(_day, _mth)
+            LogUtil.Info("Selection Complete", Psub)
+            isBuiltOk = True
+        Catch ex As ArgumentOutOfRangeException
+            LogUtil.Exception("Build Death Lists ArgumentOutOfRangeException", ex, Psub)
+            isBuiltOk = False
+        End Try
+        Return isBuiltOk
     End Function
 #End Region
 End Class

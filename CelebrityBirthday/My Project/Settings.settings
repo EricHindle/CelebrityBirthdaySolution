@@ -124,5 +124,8 @@
     <Setting Name="isSqlServer" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="twitterAuthCallback" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost/test/hattyburpday.php</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

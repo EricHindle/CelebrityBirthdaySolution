@@ -81,6 +81,22 @@ Module modDatabase
         End Try
         Return _List
     End Function
+    Public Function FindDeaths(oDay As Integer, omonth As Integer) As List(Of Person)
+        Const Psub As String = "FindAnniversaries"
+        LogUtil.Info("Finding list of people who have died", Psub)
+        Dim _List As New List(Of Person)
+        Try
+            oFullPersonTa.FillByDeaths(oFullPersonTable, omonth, oDay)
+            For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
+                If Not oRow.noTweet Then
+                    _List.Add(New Person(oRow))
+                End If
+            Next
+        Catch dbEx As DbException
+            LogUtil.Exception("Finding deaths DbException", dbEx, Psub)
+        End Try
+        Return _List
+    End Function
 #End Region
 #Region "image"
     Public Function GetImageById(ByVal _id As Integer, Optional isGetPhoto As Boolean = True) As ImageIdentity

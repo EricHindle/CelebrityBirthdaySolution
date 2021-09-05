@@ -30,6 +30,7 @@ Public NotInheritable Class FrmOptions
         Next
         My.Settings.SplitWords = sb.ToString.TrimEnd("~")
         My.Settings.isSqlServer = chkSqlServer.Checked
+        My.Settings.twitterAuthCallback = TxtCallback.Text
         My.Settings.Save()
     End Sub
 
@@ -43,6 +44,7 @@ Public NotInheritable Class FrmOptions
         For Each splitWord As String In Split(My.Settings.SplitWords, "~")
             LbSplitWords.Items.Add(splitWord)
         Next
+        TxtCallback.Text = My.Settings.twitterAuthCallback
         txtNewImagePath.Text = My.Settings.NewImagePath
         txtImagePath.Text = My.Settings.ImgPath
         txtTwitterFilePath.Text = My.Settings.TwitterFilePath
