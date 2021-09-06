@@ -58,7 +58,7 @@ Public Class BirthdayTweets
     Private Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Private Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Private Const HBURPDAY_HDR As String = "Today's birthdays :-"
-    Private Const BBREAD_HDR As String = "People who died on this day :"
+    Private Const BBREAD_HDR As String = "Remembering those who died on this day :"
     Private Shared ReadOnly LINEFEED As String = Convert.ToChar(vbLf, myStringFormatProvider)
     Private Const CELEB_USER As String = "CelebBirthdayUK"
     Private Const HBURPDAY_USER As String = "HBurpday"

@@ -11,16 +11,16 @@
       <Value Profile="(Default)">Data Source=NETWYRKS_6-PC\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Security Info=True;User ID=sa;Password=dkk.sql</Value>
     </Setting>
     <Setting Name="LogFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\CelebrityBirthday\Logs</Value>
+      <Value Profile="(Default)">F:\CelebrityBirthday\Logs</Value>
     </Setting>
     <Setting Name="TimerInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="ImgPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\CelebrityBirthday\Images</Value>
+      <Value Profile="(Default)">F:\CelebrityBirthday\Images</Value>
     </Setting>
     <Setting Name="TwitterImgPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\CelebrityBirthday\Twitter\Images</Value>
+      <Value Profile="(Default)">F:\CelebrityBirthday\Twitter\Images</Value>
     </Setting>
   </Settings>
 </SettingsFile>
