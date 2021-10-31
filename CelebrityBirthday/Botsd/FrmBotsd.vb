@@ -19,6 +19,7 @@ Public NotInheritable Class FrmBotsd
     Private imageLoadYear As String
     Private WpNumber As Integer
     Private isBuildingPairs As Boolean
+    Private lastSelectedDate As DateTime
 #End Region
 #Region "properites"
     Private _day As Integer
@@ -280,7 +281,13 @@ Public NotInheritable Class FrmBotsd
         cboDay.SelectedIndex = Today.Day - 1
         cboMonth.SelectedIndex = Today.Month - 1
     End Sub
+    Private Sub BtnNextDay_Click(sender As Object, e As EventArgs) Handles BtnNextDay.Click
+        lastSelectedDate = DateAdd(DateInterval.Day, 1, lastSelectedDate)
+        cboDay.SelectedIndex = lastSelectedDate.Day - 1
+        cboMonth.SelectedIndex = lastSelectedDate.Month - 1
+    End Sub
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
+        lastSelectedDate = New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
         SelectPairs()
     End Sub
     Private Sub BtnAlterPostNo_Click(sender As Object, e As EventArgs) Handles BtnAlterPostNo.Click

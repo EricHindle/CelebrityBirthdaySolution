@@ -129,6 +129,7 @@ Partial Class FrmBotsd
         Me.BtnRmvPostDetails = New System.Windows.Forms.Button()
         Me.ChkHandles = New System.Windows.Forms.CheckBox()
         Me.BtnFb = New System.Windows.Forms.Button()
+        Me.BtnNextDay = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1286,12 +1287,25 @@ Partial Class FrmBotsd
         Me.BtnFb.Text = "Facebook"
         Me.BtnFb.UseVisualStyleBackColor = True
         '
+        'BtnNextDay
+        '
+        Me.BtnNextDay.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNextDay.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnNextDay.Location = New System.Drawing.Point(97, 16)
+        Me.BtnNextDay.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.BtnNextDay.Name = "BtnNextDay"
+        Me.BtnNextDay.Size = New System.Drawing.Size(30, 30)
+        Me.BtnNextDay.TabIndex = 65
+        Me.BtnNextDay.Text = ">"
+        Me.BtnNextDay.UseVisualStyleBackColor = True
+        '
         'FrmBotsd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1392, 677)
+        Me.Controls.Add(Me.BtnNextDay)
         Me.Controls.Add(Me.BtnFb)
         Me.Controls.Add(Me.ChkHandles)
         Me.Controls.Add(Me.BtnRmvPostDetails)
@@ -1466,4 +1480,5 @@ Partial Class FrmBotsd
     Friend WithEvents LblSeq6 As Label
     Friend WithEvents LblSeq5 As Label
     Friend WithEvents BtnFb As Button
+    Friend WithEvents BtnNextDay As Button
 End Class
