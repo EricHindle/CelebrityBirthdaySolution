@@ -26,7 +26,6 @@ Public NotInheritable Class LogUtil
         My.Application.Log.DefaultFileLogWriter.LogFileCreationSchedule = Logging.LogFileCreationScheduleOption.Daily
         If _LogFolder IsNot Nothing Then
             My.Application.Log.DefaultFileLogWriter.CustomLocation = _LogFolder
-            '   My.Application.Log.DefaultFileLogWriter.CustomLocation = "D:\celebritybirthdays\logs"
         End If
         My.Application.Log.DefaultFileLogWriter.Append = True
         My.Application.Log.DefaultFileLogWriter.AutoFlush = True
