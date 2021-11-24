@@ -29,8 +29,8 @@ Partial Class SplashScreen1
     Private Sub InitializeComponent()
         Me.MainLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
         Me.DetailsLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
-        Me.Version = New System.Windows.Forms.Label()
         Me.Copyright = New System.Windows.Forms.Label()
+        Me.Version = New System.Windows.Forms.Label()
         Me.ApplicationTitle = New System.Windows.Forms.Label()
         Me.MainLayoutPanel.SuspendLayout()
         Me.DetailsLayoutPanel.SuspendLayout()
@@ -71,19 +71,6 @@ Partial Class SplashScreen1
         Me.DetailsLayoutPanel.Size = New System.Drawing.Size(241, 79)
         Me.DetailsLayoutPanel.TabIndex = 1
         '
-        'Version
-        '
-        Me.Version.BackColor = System.Drawing.Color.Transparent
-        Me.Version.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Version.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Version.Location = New System.Drawing.Point(3, 0)
-        Me.Version.Name = "Version"
-        Me.Version.Size = New System.Drawing.Size(241, 39)
-        Me.Version.TabIndex = 1
-        Me.Version.Text = "Version {0}.{1}.{2}.{3}"
-        Me.Version.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'Copyright
         '
         Me.Copyright.BackColor = System.Drawing.Color.Transparent
@@ -97,15 +84,28 @@ Partial Class SplashScreen1
         Me.Copyright.Text = "Copyright"
         Me.Copyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'Version
+        '
+        Me.Version.BackColor = System.Drawing.Color.Transparent
+        Me.Version.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Version.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Version.Location = New System.Drawing.Point(3, 0)
+        Me.Version.Name = "Version"
+        Me.Version.Size = New System.Drawing.Size(241, 39)
+        Me.Version.TabIndex = 1
+        Me.Version.Text = "Version {0}.{1}.{2}.{3}"
+        Me.Version.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'ApplicationTitle
         '
         Me.ApplicationTitle.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ApplicationTitle.BackColor = System.Drawing.Color.Transparent
         Me.ApplicationTitle.Font = New System.Drawing.Font("Papyrus", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ApplicationTitle.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.ApplicationTitle.Location = New System.Drawing.Point(268, 27)
+        Me.ApplicationTitle.Location = New System.Drawing.Point(268, 13)
         Me.ApplicationTitle.Name = "ApplicationTitle"
-        Me.ApplicationTitle.Size = New System.Drawing.Size(219, 164)
+        Me.ApplicationTitle.Size = New System.Drawing.Size(219, 191)
         Me.ApplicationTitle.TabIndex = 0
         Me.ApplicationTitle.Text = "Application Title"
         Me.ApplicationTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft

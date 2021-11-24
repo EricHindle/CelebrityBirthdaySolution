@@ -5,6 +5,24 @@ Structure WikiBirthInfo
     Private _wikiDates As CbDates
     Private _errordesc As String
     Private _wikiExtract As String
+    Private _isNoExtract As Boolean
+    Private _isNoDates As Boolean
+    Public Property IsNoDates() As Boolean
+        Get
+            Return _isNoDates
+        End Get
+        Set(ByVal value As Boolean)
+            _isNoDates = value
+        End Set
+    End Property
+    Public Property IsNoExtract() As Boolean
+        Get
+            Return _isNoExtract
+        End Get
+        Set(ByVal value As Boolean)
+            _isNoExtract = value
+        End Set
+    End Property
     Public Property WikiExtract() As String
         Get
             Return _wikiExtract
@@ -33,6 +51,9 @@ Structure WikiBirthInfo
         _wikiDates = pBirthDate
         _wikiExtract = pExtract
         _errordesc = pErrorDesc
+        _isNoExtract = False
+        _isNoDates = False
+
     End Sub
 End Structure
 Public NotInheritable Class FrmDateCheck
@@ -109,9 +130,12 @@ Public NotInheritable Class FrmDateCheck
                         End If
                     End If
                 Else
-                    _desc = "** " & _wikiBirthInfo.ErrorDesc & " **"
-                    AddXRow(_person, "", _desc & vbCrLf & _wikiBirthInfo.WikiExtract, wikiId, False)
-                    personTable.Add(_person)
+                    If ChkNoExtract.Checked And _wikiBirthInfo.IsNoExtract Then
+                        AddErrorRow(_person, wikiId, _wikiBirthInfo)
+                    End If
+                    If ChkNoDates.Checked And _wikiBirthInfo.IsNoDates Then
+                        AddErrorRow(_person, wikiId, _wikiBirthInfo)
+                    End If
                 End If
             Catch ex As ArgumentException
                 LogUtil.Problem("Exception during list load : " & ex.Message)
@@ -124,6 +148,13 @@ Public NotInheritable Class FrmDateCheck
         DisplayMessage("Selection complete")
         isLoadingTable = False
     End Sub
+
+    Private Sub AddErrorRow(_person As Person, wikiId As String, _wikiBirthInfo As WikiBirthInfo)
+        Dim _desc As String = "** " & _wikiBirthInfo.ErrorDesc & " **"
+        AddXRow(_person, "", _desc & vbCrLf & _wikiBirthInfo.WikiExtract, wikiId, False)
+        personTable.Add(_person)
+    End Sub
+
     Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvWarnings.CellDoubleClick
         If e.RowIndex >= 0 And e.RowIndex < DgvWarnings.Rows.Count Then
             Dim tRow As DataGridViewRow = DgvWarnings.Rows(e.RowIndex)
@@ -408,6 +439,7 @@ Public NotInheritable Class FrmDateCheck
         Dim _wikiBirthInfo As New WikiBirthInfo(Nothing, GetWikiExtract(wikiId, 3), "")
         If String.IsNullOrEmpty(_wikiBirthInfo.WikiExtract.Trim) Then
             _wikiBirthInfo.ErrorDesc = "No wiki extract available for " & _person.Name
+            _wikiBirthInfo.IsNoExtract = True
         Else
             Dim _wikiExtract As String = _wikiBirthInfo.WikiExtract
             Dim datesFound As CbDates = Nothing
@@ -431,6 +463,7 @@ Public NotInheritable Class FrmDateCheck
             Else
                 LogUtil.Problem("Cannot find dates for " & _person.Name)
                 _wikiBirthInfo.ErrorDesc = "Cannot find dates for " & _person.Name
+                _wikiBirthInfo.IsNoDates = True
             End If
         End If
         Return _wikiBirthInfo

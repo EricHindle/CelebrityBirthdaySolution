@@ -26,6 +26,15 @@ Partial Class FrmDateCheck
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDateCheck))
         Me.DgvWarnings = New System.Windows.Forms.DataGridView()
+        Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xWikiBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xWikiExtract = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xWikiId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xPersonDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xAudit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.xImg = New System.Windows.Forms.DataGridViewImageColumn()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.btnClose = New System.Windows.Forms.Button()
@@ -102,15 +111,8 @@ Partial Class FrmDateCheck
         Me.BtnRmvBotsdId = New System.Windows.Forms.Button()
         Me.BtnUpdatePerson = New System.Windows.Forms.Button()
         Me.BtnRemoveRow = New System.Windows.Forms.Button()
-        Me.xId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xWikiBirth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xWikiExtract = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xWikiId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xPersonDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xAudit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.xImg = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.ChkNoExtract = New System.Windows.Forms.CheckBox()
+        Me.ChkNoDates = New System.Windows.Forms.CheckBox()
         CType(Me.DgvWarnings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.nudSelectCount, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -138,6 +140,77 @@ Partial Class FrmDateCheck
         Me.DgvWarnings.Size = New System.Drawing.Size(781, 596)
         Me.DgvWarnings.TabIndex = 0
         '
+        'xId
+        '
+        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xId.HeaderText = "Id"
+        Me.xId.Name = "xId"
+        Me.xId.ReadOnly = True
+        Me.xId.Width = 50
+        '
+        'xName
+        '
+        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xName.HeaderText = "Name"
+        Me.xName.Name = "xName"
+        Me.xName.ReadOnly = True
+        Me.xName.Width = 150
+        '
+        'xBirth
+        '
+        Me.xBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xBirth.HeaderText = "Birth Date"
+        Me.xBirth.Name = "xBirth"
+        Me.xBirth.ReadOnly = True
+        Me.xBirth.Width = 125
+        '
+        'xWikiBirth
+        '
+        Me.xWikiBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xWikiBirth.HeaderText = "Wiki Birth Date"
+        Me.xWikiBirth.Name = "xWikiBirth"
+        Me.xWikiBirth.ReadOnly = True
+        Me.xWikiBirth.Width = 125
+        '
+        'xWikiExtract
+        '
+        Me.xWikiExtract.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.xWikiExtract.DefaultCellStyle = DataGridViewCellStyle1
+        Me.xWikiExtract.HeaderText = "Description"
+        Me.xWikiExtract.Name = "xWikiExtract"
+        Me.xWikiExtract.ReadOnly = True
+        '
+        'xWikiId
+        '
+        Me.xWikiId.HeaderText = "WikiId"
+        Me.xWikiId.Name = "xWikiId"
+        Me.xWikiId.ReadOnly = True
+        Me.xWikiId.Visible = False
+        '
+        'xPersonDescription
+        '
+        Me.xPersonDescription.HeaderText = "Full Description"
+        Me.xPersonDescription.Name = "xPersonDescription"
+        Me.xPersonDescription.ReadOnly = True
+        Me.xPersonDescription.Visible = False
+        '
+        'xAudit
+        '
+        Me.xAudit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xAudit.HeaderText = ""
+        Me.xAudit.Name = "xAudit"
+        Me.xAudit.ReadOnly = True
+        Me.xAudit.Width = 40
+        '
+        'xImg
+        '
+        Me.xImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.xImg.HeaderText = "Img"
+        Me.xImg.Name = "xImg"
+        Me.xImg.ReadOnly = True
+        Me.xImg.Width = 65
+        '
         'StatusStrip1
         '
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
@@ -162,9 +235,9 @@ Partial Class FrmDateCheck
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1181, 625)
+        Me.btnClose.Location = New System.Drawing.Point(1234, 625)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(139, 33)
+        Me.btnClose.Size = New System.Drawing.Size(101, 33)
         Me.btnClose.TabIndex = 14
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
@@ -187,7 +260,7 @@ Partial Class FrmDateCheck
         Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnStart.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnStart.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnStart.Location = New System.Drawing.Point(783, 625)
+        Me.BtnStart.Location = New System.Drawing.Point(743, 625)
         Me.BtnStart.Name = "BtnStart"
         Me.BtnStart.Size = New System.Drawing.Size(139, 33)
         Me.BtnStart.TabIndex = 16
@@ -309,7 +382,7 @@ Partial Class FrmDateCheck
         'TxtToYear
         '
         Me.TxtToYear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtToYear.Location = New System.Drawing.Point(1272, 446)
+        Me.TxtToYear.Location = New System.Drawing.Point(1287, 446)
         Me.TxtToYear.Name = "TxtToYear"
         Me.TxtToYear.Size = New System.Drawing.Size(48, 20)
         Me.TxtToYear.TabIndex = 68
@@ -416,7 +489,7 @@ Partial Class FrmDateCheck
         Me.BtnToWordPress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnToWordPress.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToWordPress.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnToWordPress.Location = New System.Drawing.Point(1196, 473)
+        Me.BtnToWordPress.Location = New System.Drawing.Point(1200, 473)
         Me.BtnToWordPress.Name = "BtnToWordPress"
         Me.BtnToWordPress.Size = New System.Drawing.Size(135, 33)
         Me.BtnToWordPress.TabIndex = 143
@@ -463,7 +536,7 @@ Partial Class FrmDateCheck
         Me.BtnClearDetails.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClearDetails.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClearDetails.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClearDetails.Location = New System.Drawing.Point(1256, 333)
+        Me.BtnClearDetails.Location = New System.Drawing.Point(1259, 333)
         Me.BtnClearDetails.Name = "BtnClearDetails"
         Me.BtnClearDetails.Size = New System.Drawing.Size(76, 33)
         Me.BtnClearDetails.TabIndex = 146
@@ -570,7 +643,7 @@ Partial Class FrmDateCheck
         Me.BtnBotSD.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBotSD.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBotSD.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnBotSD.Location = New System.Drawing.Point(1196, 526)
+        Me.BtnBotSD.Location = New System.Drawing.Point(1200, 526)
         Me.BtnBotSD.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnBotSD.Name = "BtnBotSD"
         Me.BtnBotSD.Size = New System.Drawing.Size(135, 33)
@@ -584,7 +657,7 @@ Partial Class FrmDateCheck
         Me.ChkShowImage.AutoSize = True
         Me.ChkShowImage.Checked = True
         Me.ChkShowImage.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ChkShowImage.Location = New System.Drawing.Point(937, 633)
+        Me.ChkShowImage.Location = New System.Drawing.Point(897, 633)
         Me.ChkShowImage.Name = "ChkShowImage"
         Me.ChkShowImage.Size = New System.Drawing.Size(90, 17)
         Me.ChkShowImage.TabIndex = 152
@@ -1023,83 +1096,36 @@ Partial Class FrmDateCheck
         Me.BtnRemoveRow.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnRemoveRow.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRemoveRow.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRemoveRow.Location = New System.Drawing.Point(1245, 373)
+        Me.BtnRemoveRow.Location = New System.Drawing.Point(1249, 373)
         Me.BtnRemoveRow.Name = "BtnRemoveRow"
         Me.BtnRemoveRow.Size = New System.Drawing.Size(86, 33)
         Me.BtnRemoveRow.TabIndex = 19
         Me.BtnRemoveRow.Text = "Remove row"
         Me.BtnRemoveRow.UseVisualStyleBackColor = True
         '
-        'xId
+        'ChkNoExtract
         '
-        Me.xId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xId.HeaderText = "Id"
-        Me.xId.Name = "xId"
-        Me.xId.ReadOnly = True
-        Me.xId.Width = 50
+        Me.ChkNoExtract.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ChkNoExtract.AutoSize = True
+        Me.ChkNoExtract.Location = New System.Drawing.Point(993, 633)
+        Me.ChkNoExtract.Name = "ChkNoExtract"
+        Me.ChkNoExtract.Size = New System.Drawing.Size(106, 17)
+        Me.ChkNoExtract.TabIndex = 158
+        Me.ChkNoExtract.Text = "Show No Extract"
+        Me.ChkNoExtract.UseVisualStyleBackColor = True
         '
-        'xName
+        'ChkNoDates
         '
-        Me.xName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xName.HeaderText = "Name"
-        Me.xName.Name = "xName"
-        Me.xName.ReadOnly = True
-        Me.xName.Width = 150
-        '
-        'xBirth
-        '
-        Me.xBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xBirth.HeaderText = "Birth Date"
-        Me.xBirth.Name = "xBirth"
-        Me.xBirth.ReadOnly = True
-        Me.xBirth.Width = 125
-        '
-        'xWikiBirth
-        '
-        Me.xWikiBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xWikiBirth.HeaderText = "Wiki Birth Date"
-        Me.xWikiBirth.Name = "xWikiBirth"
-        Me.xWikiBirth.ReadOnly = True
-        Me.xWikiBirth.Width = 125
-        '
-        'xWikiExtract
-        '
-        Me.xWikiExtract.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.xWikiExtract.DefaultCellStyle = DataGridViewCellStyle1
-        Me.xWikiExtract.HeaderText = "Description"
-        Me.xWikiExtract.Name = "xWikiExtract"
-        Me.xWikiExtract.ReadOnly = True
-        '
-        'xWikiId
-        '
-        Me.xWikiId.HeaderText = "WikiId"
-        Me.xWikiId.Name = "xWikiId"
-        Me.xWikiId.ReadOnly = True
-        Me.xWikiId.Visible = False
-        '
-        'xPersonDescription
-        '
-        Me.xPersonDescription.HeaderText = "Full Description"
-        Me.xPersonDescription.Name = "xPersonDescription"
-        Me.xPersonDescription.ReadOnly = True
-        Me.xPersonDescription.Visible = False
-        '
-        'xAudit
-        '
-        Me.xAudit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xAudit.HeaderText = ""
-        Me.xAudit.Name = "xAudit"
-        Me.xAudit.ReadOnly = True
-        Me.xAudit.Width = 40
-        '
-        'xImg
-        '
-        Me.xImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.xImg.HeaderText = "Img"
-        Me.xImg.Name = "xImg"
-        Me.xImg.ReadOnly = True
-        Me.xImg.Width = 65
+        Me.ChkNoDates.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ChkNoDates.AutoSize = True
+        Me.ChkNoDates.Checked = True
+        Me.ChkNoDates.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ChkNoDates.Location = New System.Drawing.Point(1105, 633)
+        Me.ChkNoDates.Name = "ChkNoDates"
+        Me.ChkNoDates.Size = New System.Drawing.Size(101, 17)
+        Me.ChkNoDates.TabIndex = 159
+        Me.ChkNoDates.Text = "Show No Dates"
+        Me.ChkNoDates.UseVisualStyleBackColor = True
         '
         'FrmDateCheck
         '
@@ -1107,6 +1133,8 @@ Partial Class FrmDateCheck
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1344, 690)
+        Me.Controls.Add(Me.ChkNoDates)
+        Me.Controls.Add(Me.ChkNoExtract)
         Me.Controls.Add(Me.BtnAuditView)
         Me.Controls.Add(Me.BtnWikiOpen)
         Me.Controls.Add(Me.BtnCopyName)
@@ -1251,4 +1279,6 @@ Partial Class FrmDateCheck
     Friend WithEvents xPersonDescription As DataGridViewTextBoxColumn
     Friend WithEvents xAudit As DataGridViewTextBoxColumn
     Friend WithEvents xImg As DataGridViewImageColumn
+    Friend WithEvents ChkNoExtract As CheckBox
+    Friend WithEvents ChkNoDates As CheckBox
 End Class
