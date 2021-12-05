@@ -13,10 +13,10 @@ Public Class DlgShowText
 #End Region
 #Region "properties"
 
-    Private _msg As String
-    Private _font As Font = LblMessage.Font
-    Private _backcolour As Color = LblMessage.BackColor
-    Private _forecolour As Color = LblMessage.ForeColor
+    Private _msg As String = ""
+    Private _font As Font
+    Private _backcolour As Color = Color.Black
+    Private _forecolour As Color = Color.White
     Private _style As MessageStyle = MessageStyle.none
     Public Property Style() As MessageStyle
         Get
@@ -66,6 +66,8 @@ Public Class DlgShowText
     End Sub
 
     Private Sub DlgShowText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If _font Is Nothing Then _font = LblMessage.Font
+
         LblMessage.Text = _msg
         Select Case _style
             Case MessageStyle.plain

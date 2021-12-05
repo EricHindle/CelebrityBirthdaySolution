@@ -1115,8 +1115,6 @@ Partial Class FrmDateCheck
         '
         Me.ChkNoDates.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ChkNoDates.AutoSize = True
-        Me.ChkNoDates.Checked = True
-        Me.ChkNoDates.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ChkNoDates.Location = New System.Drawing.Point(1105, 744)
         Me.ChkNoDates.Name = "ChkNoDates"
         Me.ChkNoDates.Size = New System.Drawing.Size(101, 17)

@@ -1047,7 +1047,7 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub ShowButtonToUpdateBotsdList()
         BtnUpdOldBotsdList.Visible = True
-        SetButton(abBotsdUpdUrl, My.Settings.botsdWordPressUrl & Format(fromDate, "MMMM") & "/",, False)
+        SetButton(abBotsdListUrl, My.Settings.botsdWordPressUrl & Format(fromDate, "MMMM") & "/",, False)
     End Sub
     Private Sub ShowButtonToUpdateBotsdPost(oBotsdRow As CelebrityBirthdayDataSet.BotSDRow)
         BtnUpdOldBotsdPost.Visible = True
