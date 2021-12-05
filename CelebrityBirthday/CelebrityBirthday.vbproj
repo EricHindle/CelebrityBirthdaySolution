@@ -232,6 +232,12 @@
     <Compile Include="CelebrityBirthdayDataSet.vb">
       <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DlgShowText.Designer.vb">
+      <DependentUpon>DlgShowText.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DlgShowText.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Domain\BornSameDay.vb" />
     <Compile Include="Domain\CbDate.vb" />
     <Compile Include="Domain\CbDates.vb" />
@@ -427,6 +433,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Botsd\FrmRmvPost.resx">
       <DependentUpon>FrmRmvPost.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgShowText.resx">
+      <DependentUpon>DlgShowText.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Facebook\FrmFacebookTest.resx">
       <DependentUpon>FrmFacebookTest.vb</DependentUpon>

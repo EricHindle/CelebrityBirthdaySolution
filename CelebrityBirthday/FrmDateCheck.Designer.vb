@@ -75,23 +75,23 @@ Partial Class FrmDateCheck
         Me.BtnBotSD = New System.Windows.Forms.Button()
         Me.ChkShowImage = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.LblUpdNewPost = New System.Windows.Forms.Label()
-        Me.LblMoveImage = New System.Windows.Forms.Label()
-        Me.LblUpdOldPost = New System.Windows.Forms.Label()
-        Me.LblAddImage = New System.Windows.Forms.Label()
-        Me.LblImageName = New System.Windows.Forms.Label()
-        Me.LblRmvImage = New System.Windows.Forms.Label()
-        Me.LblNewBotsdUrl = New System.Windows.Forms.Label()
-        Me.LblNewListUrl = New System.Windows.Forms.Label()
-        Me.LblReseqNew = New System.Windows.Forms.Label()
-        Me.LblReseqOld = New System.Windows.Forms.Label()
-        Me.LblUpdPerson = New System.Windows.Forms.Label()
-        Me.LblBotsdListUrl = New System.Windows.Forms.Label()
-        Me.LblBotsdUpdUrl = New System.Windows.Forms.Label()
-        Me.LblBotsdUrl = New System.Windows.Forms.Label()
-        Me.LblBotsdId = New System.Windows.Forms.Label()
-        Me.LblOthPersonId = New System.Windows.Forms.Label()
-        Me.LblBotsdPostNo = New System.Windows.Forms.Label()
+        Me.BtnBotsdPostNo = New System.Windows.Forms.Button()
+        Me.BtnOthPersonId = New System.Windows.Forms.Button()
+        Me.BtnBotsdId = New System.Windows.Forms.Button()
+        Me.BtnBotsdUrl = New System.Windows.Forms.Button()
+        Me.BtnUpdPerson = New System.Windows.Forms.Button()
+        Me.BtnBotsdUpdUrl = New System.Windows.Forms.Button()
+        Me.BtnBotsdListUrl = New System.Windows.Forms.Button()
+        Me.BtnReseqOld = New System.Windows.Forms.Button()
+        Me.BtnReseqNew = New System.Windows.Forms.Button()
+        Me.BtnNewBotsdUrl = New System.Windows.Forms.Button()
+        Me.BtnNewListUrl = New System.Windows.Forms.Button()
+        Me.BtnRmvImage = New System.Windows.Forms.Button()
+        Me.BtnUpdOldPost = New System.Windows.Forms.Button()
+        Me.BtnAddImg = New System.Windows.Forms.Button()
+        Me.BtnMoveImg = New System.Windows.Forms.Button()
+        Me.BtnUpdNewPost = New System.Windows.Forms.Button()
+        Me.BtnImgDesc = New System.Windows.Forms.Button()
         Me.BtnReseqNewGroup = New System.Windows.Forms.Button()
         Me.BtnUpdOldBotsdPost = New System.Windows.Forms.Button()
         Me.BtnRmvRow = New System.Windows.Forms.Button()
@@ -137,7 +137,7 @@ Partial Class FrmDateCheck
         Me.DgvWarnings.ReadOnly = True
         Me.DgvWarnings.RowHeadersVisible = False
         Me.DgvWarnings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvWarnings.Size = New System.Drawing.Size(781, 596)
+        Me.DgvWarnings.Size = New System.Drawing.Size(781, 707)
         Me.DgvWarnings.TabIndex = 0
         '
         'xId
@@ -216,7 +216,7 @@ Partial Class FrmDateCheck
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 668)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 779)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1344, 22)
         Me.StatusStrip1.TabIndex = 15
@@ -226,16 +226,18 @@ Partial Class FrmDateCheck
         '
         Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.lblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.lblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(3, 17)
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.lblStatus.Size = New System.Drawing.Size(9, 17)
         '
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1234, 625)
+        Me.btnClose.Location = New System.Drawing.Point(1234, 736)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(101, 33)
         Me.btnClose.TabIndex = 14
@@ -245,13 +247,13 @@ Partial Class FrmDateCheck
         'BtnWikiUpdate
         '
         Me.BtnWikiUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnWikiUpdate.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWikiUpdate.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWikiUpdate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWikiUpdate.Location = New System.Drawing.Point(1234, 585)
+        Me.BtnWikiUpdate.Location = New System.Drawing.Point(1048, 650)
         Me.BtnWikiUpdate.Name = "BtnWikiUpdate"
-        Me.BtnWikiUpdate.Size = New System.Drawing.Size(43, 24)
+        Me.BtnWikiUpdate.Size = New System.Drawing.Size(92, 24)
         Me.BtnWikiUpdate.TabIndex = 17
-        Me.BtnWikiUpdate.Text = "Upd"
+        Me.BtnWikiUpdate.Text = "Update"
         Me.ToolTip1.SetToolTip(Me.BtnWikiUpdate, "Update WikiId for person")
         Me.BtnWikiUpdate.UseVisualStyleBackColor = True
         '
@@ -260,7 +262,7 @@ Partial Class FrmDateCheck
         Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnStart.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnStart.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnStart.Location = New System.Drawing.Point(743, 625)
+        Me.BtnStart.Location = New System.Drawing.Point(743, 736)
         Me.BtnStart.Name = "BtnStart"
         Me.BtnStart.Size = New System.Drawing.Size(139, 33)
         Me.BtnStart.TabIndex = 16
@@ -271,11 +273,11 @@ Partial Class FrmDateCheck
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label2.Location = New System.Drawing.Point(1196, 421)
+        Me.Label2.Location = New System.Drawing.Point(1200, 481)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(58, 22)
+        Me.Label2.Size = New System.Drawing.Size(50, 17)
         Me.Label2.TabIndex = 65
         Me.Label2.Text = "To this"
         '
@@ -289,7 +291,7 @@ Partial Class FrmDateCheck
         Me.TxtWiki.Multiline = True
         Me.TxtWiki.Name = "TxtWiki"
         Me.TxtWiki.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TxtWiki.Size = New System.Drawing.Size(289, 123)
+        Me.TxtWiki.Size = New System.Drawing.Size(289, 153)
         Me.TxtWiki.TabIndex = 63
         '
         'LblId
@@ -307,12 +309,12 @@ Partial Class FrmDateCheck
         'BtnSingleUpdate
         '
         Me.BtnSingleUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnSingleUpdate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSingleUpdate.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSingleUpdate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSingleUpdate.Location = New System.Drawing.Point(1045, 373)
+        Me.BtnSingleUpdate.Location = New System.Drawing.Point(1048, 426)
         Me.BtnSingleUpdate.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnSingleUpdate.Name = "BtnSingleUpdate"
-        Me.BtnSingleUpdate.Size = New System.Drawing.Size(135, 33)
+        Me.BtnSingleUpdate.Size = New System.Drawing.Size(135, 49)
         Me.BtnSingleUpdate.TabIndex = 60
         Me.BtnSingleUpdate.Text = "Start Update"
         Me.ToolTip1.SetToolTip(Me.BtnSingleUpdate, "Update Date of Birth and Text for person")
@@ -329,7 +331,7 @@ Partial Class FrmDateCheck
         Me.TxtFullDesc.Multiline = True
         Me.TxtFullDesc.Name = "TxtFullDesc"
         Me.TxtFullDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TxtFullDesc.Size = New System.Drawing.Size(289, 110)
+        Me.TxtFullDesc.Size = New System.Drawing.Size(289, 135)
         Me.TxtFullDesc.TabIndex = 59
         '
         'Label1
@@ -338,7 +340,7 @@ Partial Class FrmDateCheck
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label1.Location = New System.Drawing.Point(597, 631)
+        Me.Label1.Location = New System.Drawing.Point(597, 742)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(52, 22)
         Me.Label1.TabIndex = 58
@@ -356,7 +358,7 @@ Partial Class FrmDateCheck
         'nudSelectCount
         '
         Me.nudSelectCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.nudSelectCount.Location = New System.Drawing.Point(655, 632)
+        Me.nudSelectCount.Location = New System.Drawing.Point(655, 743)
         Me.nudSelectCount.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.nudSelectCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudSelectCount.Name = "nudSelectCount"
@@ -366,25 +368,28 @@ Partial Class FrmDateCheck
         'TxtToDay
         '
         Me.TxtToDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtToDay.Location = New System.Drawing.Point(1196, 446)
+        Me.TxtToDay.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtToDay.Location = New System.Drawing.Point(1200, 506)
         Me.TxtToDay.Name = "TxtToDay"
-        Me.TxtToDay.Size = New System.Drawing.Size(32, 20)
+        Me.TxtToDay.Size = New System.Drawing.Size(32, 24)
         Me.TxtToDay.TabIndex = 66
         '
         'TxtToMonth
         '
         Me.TxtToMonth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtToMonth.Location = New System.Drawing.Point(1234, 446)
+        Me.TxtToMonth.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtToMonth.Location = New System.Drawing.Point(1238, 506)
         Me.TxtToMonth.Name = "TxtToMonth"
-        Me.TxtToMonth.Size = New System.Drawing.Size(32, 20)
+        Me.TxtToMonth.Size = New System.Drawing.Size(32, 24)
         Me.TxtToMonth.TabIndex = 67
         '
         'TxtToYear
         '
         Me.TxtToYear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtToYear.Location = New System.Drawing.Point(1287, 446)
+        Me.TxtToYear.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtToYear.Location = New System.Drawing.Point(1276, 507)
         Me.TxtToYear.Name = "TxtToYear"
-        Me.TxtToYear.Size = New System.Drawing.Size(48, 20)
+        Me.TxtToYear.Size = New System.Drawing.Size(48, 24)
         Me.TxtToYear.TabIndex = 68
         '
         'BtnToday
@@ -392,7 +397,7 @@ Partial Class FrmDateCheck
         Me.BtnToday.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnToday.Location = New System.Drawing.Point(180, 627)
+        Me.BtnToday.Location = New System.Drawing.Point(180, 738)
         Me.BtnToday.Name = "BtnToday"
         Me.BtnToday.Size = New System.Drawing.Size(72, 28)
         Me.BtnToday.TabIndex = 136
@@ -406,7 +411,7 @@ Partial Class FrmDateCheck
         Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
-        Me.cboMonth.Location = New System.Drawing.Point(368, 628)
+        Me.cboMonth.Location = New System.Drawing.Point(368, 739)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(207, 27)
         Me.cboMonth.TabIndex = 135
@@ -417,7 +422,7 @@ Partial Class FrmDateCheck
         Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(281, 628)
+        Me.cboDay.Location = New System.Drawing.Point(281, 739)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(71, 27)
         Me.cboDay.TabIndex = 134
@@ -425,9 +430,9 @@ Partial Class FrmDateCheck
         'BtnFromWordPress
         '
         Me.BtnFromWordPress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnFromWordPress.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnFromWordPress.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnFromWordPress.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnFromWordPress.Location = New System.Drawing.Point(1045, 473)
+        Me.BtnFromWordPress.Location = New System.Drawing.Point(1048, 537)
         Me.BtnFromWordPress.Name = "BtnFromWordPress"
         Me.BtnFromWordPress.Size = New System.Drawing.Size(135, 33)
         Me.BtnFromWordPress.TabIndex = 137
@@ -440,7 +445,7 @@ Partial Class FrmDateCheck
         Me.BtnAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnAll.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAll.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAll.Location = New System.Drawing.Point(12, 627)
+        Me.BtnAll.Location = New System.Drawing.Point(12, 738)
         Me.BtnAll.Name = "BtnAll"
         Me.BtnAll.Size = New System.Drawing.Size(72, 28)
         Me.BtnAll.TabIndex = 138
@@ -451,45 +456,48 @@ Partial Class FrmDateCheck
         'TxtFromYear
         '
         Me.TxtFromYear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtFromYear.Location = New System.Drawing.Point(1121, 447)
+        Me.TxtFromYear.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtFromYear.Location = New System.Drawing.Point(1125, 507)
         Me.TxtFromYear.Name = "TxtFromYear"
-        Me.TxtFromYear.Size = New System.Drawing.Size(48, 20)
+        Me.TxtFromYear.Size = New System.Drawing.Size(48, 24)
         Me.TxtFromYear.TabIndex = 142
         '
         'TxtFromMonth
         '
         Me.TxtFromMonth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtFromMonth.Location = New System.Drawing.Point(1083, 447)
+        Me.TxtFromMonth.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtFromMonth.Location = New System.Drawing.Point(1087, 507)
         Me.TxtFromMonth.Name = "TxtFromMonth"
-        Me.TxtFromMonth.Size = New System.Drawing.Size(32, 20)
+        Me.TxtFromMonth.Size = New System.Drawing.Size(32, 24)
         Me.TxtFromMonth.TabIndex = 141
         '
         'TxtFromDay
         '
         Me.TxtFromDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtFromDay.Location = New System.Drawing.Point(1045, 446)
+        Me.TxtFromDay.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtFromDay.Location = New System.Drawing.Point(1048, 506)
         Me.TxtFromDay.Name = "TxtFromDay"
-        Me.TxtFromDay.Size = New System.Drawing.Size(32, 20)
+        Me.TxtFromDay.Size = New System.Drawing.Size(32, 24)
         Me.TxtFromDay.TabIndex = 140
         '
         'Label3
         '
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label3.Location = New System.Drawing.Point(1045, 421)
+        Me.Label3.Location = New System.Drawing.Point(1048, 481)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(69, 22)
+        Me.Label3.Size = New System.Drawing.Size(70, 17)
         Me.Label3.TabIndex = 139
         Me.Label3.Text = "From this"
         '
         'BtnToWordPress
         '
         Me.BtnToWordPress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnToWordPress.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnToWordPress.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToWordPress.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnToWordPress.Location = New System.Drawing.Point(1200, 473)
+        Me.BtnToWordPress.Location = New System.Drawing.Point(1200, 537)
         Me.BtnToWordPress.Name = "BtnToWordPress"
         Me.BtnToWordPress.Size = New System.Drawing.Size(135, 33)
         Me.BtnToWordPress.TabIndex = 143
@@ -514,16 +522,16 @@ Partial Class FrmDateCheck
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.TxtWiki)
-        Me.SplitContainer1.Size = New System.Drawing.Size(299, 274)
-        Me.SplitContainer1.SplitterDistance = 128
+        Me.SplitContainer1.Size = New System.Drawing.Size(299, 329)
+        Me.SplitContainer1.SplitterDistance = 153
         Me.SplitContainer1.TabIndex = 144
         '
         'BtnCopyDate
         '
         Me.BtnCopyDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCopyDate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCopyDate.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyDate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnCopyDate.Location = New System.Drawing.Point(1045, 333)
+        Me.BtnCopyDate.Location = New System.Drawing.Point(1048, 382)
         Me.BtnCopyDate.Name = "BtnCopyDate"
         Me.BtnCopyDate.Size = New System.Drawing.Size(135, 33)
         Me.BtnCopyDate.TabIndex = 145
@@ -534,11 +542,11 @@ Partial Class FrmDateCheck
         'BtnClearDetails
         '
         Me.BtnClearDetails.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClearDetails.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClearDetails.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClearDetails.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClearDetails.Location = New System.Drawing.Point(1259, 333)
+        Me.BtnClearDetails.Location = New System.Drawing.Point(1267, 382)
         Me.BtnClearDetails.Name = "BtnClearDetails"
-        Me.BtnClearDetails.Size = New System.Drawing.Size(76, 33)
+        Me.BtnClearDetails.Size = New System.Drawing.Size(65, 33)
         Me.BtnClearDetails.TabIndex = 146
         Me.BtnClearDetails.Text = "Clear"
         Me.ToolTip1.SetToolTip(Me.BtnClearDetails, "Clear perosn details")
@@ -548,21 +556,21 @@ Partial Class FrmDateCheck
         '
         Me.TxtWikiId.AllowDrop = True
         Me.TxtWikiId.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtWikiId.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtWikiId.Location = New System.Drawing.Point(1045, 585)
+        Me.TxtWikiId.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtWikiId.Location = New System.Drawing.Point(1048, 620)
         Me.TxtWikiId.Name = "TxtWikiId"
-        Me.TxtWikiId.Size = New System.Drawing.Size(183, 24)
+        Me.TxtWikiId.Size = New System.Drawing.Size(161, 24)
         Me.TxtWikiId.TabIndex = 148
         '
         'Label4
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label4.Location = New System.Drawing.Point(1045, 563)
+        Me.Label4.Location = New System.Drawing.Point(1048, 600)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(34, 19)
+        Me.Label4.Size = New System.Drawing.Size(36, 17)
         Me.Label4.TabIndex = 147
         Me.Label4.Text = "Wiki"
         '
@@ -571,7 +579,7 @@ Partial Class FrmDateCheck
         Me.BtnMonth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnMonth.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnMonth.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnMonth.Location = New System.Drawing.Point(102, 627)
+        Me.BtnMonth.Location = New System.Drawing.Point(102, 738)
         Me.BtnMonth.Name = "BtnMonth"
         Me.BtnMonth.Size = New System.Drawing.Size(72, 28)
         Me.BtnMonth.TabIndex = 151
@@ -582,13 +590,13 @@ Partial Class FrmDateCheck
         'BtnCopyName
         '
         Me.BtnCopyName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCopyName.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCopyName.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyName.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnCopyName.Image = Global.CelebrityBirthday.My.Resources.Resources.copyiconpale
         Me.BtnCopyName.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnCopyName.Location = New System.Drawing.Point(1186, 333)
+        Me.BtnCopyName.Location = New System.Drawing.Point(1246, 686)
         Me.BtnCopyName.Name = "BtnCopyName"
-        Me.BtnCopyName.Size = New System.Drawing.Size(64, 33)
+        Me.BtnCopyName.Size = New System.Drawing.Size(68, 33)
         Me.BtnCopyName.TabIndex = 155
         Me.BtnCopyName.Text = "Name"
         Me.BtnCopyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -598,26 +606,26 @@ Partial Class FrmDateCheck
         'BtnWikiOpen
         '
         Me.BtnWikiOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnWikiOpen.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWikiOpen.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWikiOpen.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWikiOpen.Location = New System.Drawing.Point(1283, 585)
+        Me.BtnWikiOpen.Location = New System.Drawing.Point(1246, 632)
         Me.BtnWikiOpen.Name = "BtnWikiOpen"
-        Me.BtnWikiOpen.Size = New System.Drawing.Size(52, 24)
+        Me.BtnWikiOpen.Size = New System.Drawing.Size(89, 42)
         Me.BtnWikiOpen.TabIndex = 156
-        Me.BtnWikiOpen.Text = "Open"
+        Me.BtnWikiOpen.Text = "Open wiki"
         Me.ToolTip1.SetToolTip(Me.BtnWikiOpen, "Update WikiId for person")
         Me.BtnWikiOpen.UseVisualStyleBackColor = True
         '
         'BtnAuditView
         '
         Me.BtnAuditView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnAuditView.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAuditView.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAuditView.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAuditView.Location = New System.Drawing.Point(1186, 373)
+        Me.BtnAuditView.Location = New System.Drawing.Point(1188, 426)
         Me.BtnAuditView.Name = "BtnAuditView"
-        Me.BtnAuditView.Size = New System.Drawing.Size(52, 33)
+        Me.BtnAuditView.Size = New System.Drawing.Size(52, 49)
         Me.BtnAuditView.TabIndex = 157
-        Me.BtnAuditView.Text = "Audit"
+        Me.BtnAuditView.Text = "View Audit"
         Me.ToolTip1.SetToolTip(Me.BtnAuditView, "Update WikiId for person")
         Me.BtnAuditView.UseVisualStyleBackColor = True
         '
@@ -625,14 +633,14 @@ Partial Class FrmDateCheck
         '
         Me.BtnWpDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnWpDesc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.BtnWpDesc.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWpDesc.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWpDesc.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnWpDesc.Image = Global.CelebrityBirthday.My.Resources.Resources.copyiconpale
         Me.BtnWpDesc.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnWpDesc.Location = New System.Drawing.Point(1045, 526)
+        Me.BtnWpDesc.Location = New System.Drawing.Point(1048, 686)
         Me.BtnWpDesc.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnWpDesc.Name = "BtnWpDesc"
-        Me.BtnWpDesc.Size = New System.Drawing.Size(135, 33)
+        Me.BtnWpDesc.Size = New System.Drawing.Size(161, 33)
         Me.BtnWpDesc.TabIndex = 149
         Me.BtnWpDesc.Text = "Get Description"
         Me.BtnWpDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -641,12 +649,12 @@ Partial Class FrmDateCheck
         'BtnBotSD
         '
         Me.BtnBotSD.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnBotSD.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBotSD.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBotSD.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnBotSD.Location = New System.Drawing.Point(1200, 526)
+        Me.BtnBotSD.Location = New System.Drawing.Point(1234, 577)
         Me.BtnBotSD.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnBotSD.Name = "BtnBotSD"
-        Me.BtnBotSD.Size = New System.Drawing.Size(135, 33)
+        Me.BtnBotSD.Size = New System.Drawing.Size(101, 33)
         Me.BtnBotSD.TabIndex = 150
         Me.BtnBotSD.Text = "BotSD"
         Me.BtnBotSD.UseVisualStyleBackColor = True
@@ -657,7 +665,7 @@ Partial Class FrmDateCheck
         Me.ChkShowImage.AutoSize = True
         Me.ChkShowImage.Checked = True
         Me.ChkShowImage.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ChkShowImage.Location = New System.Drawing.Point(897, 633)
+        Me.ChkShowImage.Location = New System.Drawing.Point(897, 744)
         Me.ChkShowImage.Name = "ChkShowImage"
         Me.ChkShowImage.Size = New System.Drawing.Size(90, 17)
         Me.ChkShowImage.TabIndex = 152
@@ -668,23 +676,23 @@ Partial Class FrmDateCheck
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.LblUpdNewPost)
-        Me.GroupBox1.Controls.Add(Me.LblMoveImage)
-        Me.GroupBox1.Controls.Add(Me.LblUpdOldPost)
-        Me.GroupBox1.Controls.Add(Me.LblAddImage)
-        Me.GroupBox1.Controls.Add(Me.LblImageName)
-        Me.GroupBox1.Controls.Add(Me.LblRmvImage)
-        Me.GroupBox1.Controls.Add(Me.LblNewBotsdUrl)
-        Me.GroupBox1.Controls.Add(Me.LblNewListUrl)
-        Me.GroupBox1.Controls.Add(Me.LblReseqNew)
-        Me.GroupBox1.Controls.Add(Me.LblReseqOld)
-        Me.GroupBox1.Controls.Add(Me.LblUpdPerson)
-        Me.GroupBox1.Controls.Add(Me.LblBotsdListUrl)
-        Me.GroupBox1.Controls.Add(Me.LblBotsdUpdUrl)
-        Me.GroupBox1.Controls.Add(Me.LblBotsdUrl)
-        Me.GroupBox1.Controls.Add(Me.LblBotsdId)
-        Me.GroupBox1.Controls.Add(Me.LblOthPersonId)
-        Me.GroupBox1.Controls.Add(Me.LblBotsdPostNo)
+        Me.GroupBox1.Controls.Add(Me.BtnBotsdPostNo)
+        Me.GroupBox1.Controls.Add(Me.BtnOthPersonId)
+        Me.GroupBox1.Controls.Add(Me.BtnBotsdId)
+        Me.GroupBox1.Controls.Add(Me.BtnBotsdUrl)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdPerson)
+        Me.GroupBox1.Controls.Add(Me.BtnBotsdUpdUrl)
+        Me.GroupBox1.Controls.Add(Me.BtnBotsdListUrl)
+        Me.GroupBox1.Controls.Add(Me.BtnReseqOld)
+        Me.GroupBox1.Controls.Add(Me.BtnReseqNew)
+        Me.GroupBox1.Controls.Add(Me.BtnNewBotsdUrl)
+        Me.GroupBox1.Controls.Add(Me.BtnNewListUrl)
+        Me.GroupBox1.Controls.Add(Me.BtnRmvImage)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdOldPost)
+        Me.GroupBox1.Controls.Add(Me.BtnAddImg)
+        Me.GroupBox1.Controls.Add(Me.BtnMoveImg)
+        Me.GroupBox1.Controls.Add(Me.BtnUpdNewPost)
+        Me.GroupBox1.Controls.Add(Me.BtnImgDesc)
         Me.GroupBox1.Controls.Add(Me.BtnReseqNewGroup)
         Me.GroupBox1.Controls.Add(Me.BtnUpdOldBotsdPost)
         Me.GroupBox1.Controls.Add(Me.BtnRmvRow)
@@ -707,386 +715,375 @@ Partial Class FrmDateCheck
         Me.GroupBox1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.GroupBox1.Location = New System.Drawing.Point(799, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(228, 596)
+        Me.GroupBox1.Size = New System.Drawing.Size(228, 707)
         Me.GroupBox1.TabIndex = 154
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Checklist"
         '
-        'LblUpdNewPost
+        'BtnBotsdPostNo
         '
-        Me.LblUpdNewPost.AutoSize = True
-        Me.LblUpdNewPost.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUpdNewPost.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblUpdNewPost.Location = New System.Drawing.Point(152, 494)
-        Me.LblUpdNewPost.Name = "LblUpdNewPost"
-        Me.LblUpdNewPost.Size = New System.Drawing.Size(65, 14)
-        Me.LblUpdNewPost.TabIndex = 36
-        Me.LblUpdNewPost.Text = "updnewcb"
+        Me.BtnBotsdPostNo.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBotsdPostNo.Location = New System.Drawing.Point(152, 29)
+        Me.BtnBotsdPostNo.Name = "BtnBotsdPostNo"
+        Me.BtnBotsdPostNo.Size = New System.Drawing.Size(70, 23)
+        Me.BtnBotsdPostNo.TabIndex = 53
+        Me.BtnBotsdPostNo.Text = "dbUpd"
+        Me.BtnBotsdPostNo.UseVisualStyleBackColor = True
         '
-        'LblMoveImage
+        'BtnOthPersonId
         '
-        Me.LblMoveImage.AutoSize = True
-        Me.LblMoveImage.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblMoveImage.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblMoveImage.Location = New System.Drawing.Point(154, 463)
-        Me.LblMoveImage.Name = "LblMoveImage"
-        Me.LblMoveImage.Size = New System.Drawing.Size(56, 14)
-        Me.LblMoveImage.TabIndex = 35
-        Me.LblMoveImage.Text = "moveimg"
+        Me.BtnOthPersonId.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnOthPersonId.Location = New System.Drawing.Point(152, 67)
+        Me.BtnOthPersonId.Name = "BtnOthPersonId"
+        Me.BtnOthPersonId.Size = New System.Drawing.Size(70, 23)
+        Me.BtnOthPersonId.TabIndex = 52
+        Me.BtnOthPersonId.Text = "dbUpd"
+        Me.BtnOthPersonId.UseVisualStyleBackColor = True
         '
-        'LblUpdOldPost
+        'BtnBotsdId
         '
-        Me.LblUpdOldPost.AutoSize = True
-        Me.LblUpdOldPost.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUpdOldPost.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblUpdOldPost.Location = New System.Drawing.Point(152, 401)
-        Me.LblUpdOldPost.Name = "LblUpdOldPost"
-        Me.LblUpdOldPost.Size = New System.Drawing.Size(56, 14)
-        Me.LblUpdOldPost.TabIndex = 34
-        Me.LblUpdOldPost.Text = "rmvoldcb"
+        Me.BtnBotsdId.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBotsdId.Location = New System.Drawing.Point(152, 105)
+        Me.BtnBotsdId.Name = "BtnBotsdId"
+        Me.BtnBotsdId.Size = New System.Drawing.Size(70, 23)
+        Me.BtnBotsdId.TabIndex = 51
+        Me.BtnBotsdId.Text = "dbUpd"
+        Me.BtnBotsdId.UseVisualStyleBackColor = True
         '
-        'LblAddImage
+        'BtnBotsdUrl
         '
-        Me.LblAddImage.AutoSize = True
-        Me.LblAddImage.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblAddImage.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblAddImage.Location = New System.Drawing.Point(152, 432)
-        Me.LblAddImage.Name = "LblAddImage"
-        Me.LblAddImage.Size = New System.Drawing.Size(46, 14)
-        Me.LblAddImage.TabIndex = 33
-        Me.LblAddImage.Text = "addimg"
+        Me.BtnBotsdUrl.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBotsdUrl.Location = New System.Drawing.Point(152, 143)
+        Me.BtnBotsdUrl.Name = "BtnBotsdUrl"
+        Me.BtnBotsdUrl.Size = New System.Drawing.Size(70, 23)
+        Me.BtnBotsdUrl.TabIndex = 50
+        Me.BtnBotsdUrl.Text = "webUpd"
+        Me.BtnBotsdUrl.UseVisualStyleBackColor = True
         '
-        'LblImageName
+        'BtnUpdPerson
         '
-        Me.LblImageName.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblImageName.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblImageName.Location = New System.Drawing.Point(152, 525)
-        Me.LblImageName.Name = "LblImageName"
-        Me.LblImageName.Size = New System.Drawing.Size(70, 14)
-        Me.LblImageName.TabIndex = 32
-        Me.LblImageName.Text = "imagedesc"
+        Me.BtnUpdPerson.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdPerson.Location = New System.Drawing.Point(152, 181)
+        Me.BtnUpdPerson.Name = "BtnUpdPerson"
+        Me.BtnUpdPerson.Size = New System.Drawing.Size(70, 23)
+        Me.BtnUpdPerson.TabIndex = 49
+        Me.BtnUpdPerson.Text = "dbUpd"
+        Me.BtnUpdPerson.UseVisualStyleBackColor = True
         '
-        'LblRmvImage
+        'BtnBotsdUpdUrl
         '
-        Me.LblRmvImage.AutoSize = True
-        Me.LblRmvImage.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblRmvImage.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblRmvImage.Location = New System.Drawing.Point(152, 370)
-        Me.LblRmvImage.Name = "LblRmvImage"
-        Me.LblRmvImage.Size = New System.Drawing.Size(58, 14)
-        Me.LblRmvImage.TabIndex = 31
-        Me.LblRmvImage.Text = "rmvoldpic"
+        Me.BtnBotsdUpdUrl.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBotsdUpdUrl.Location = New System.Drawing.Point(152, 219)
+        Me.BtnBotsdUpdUrl.Name = "BtnBotsdUpdUrl"
+        Me.BtnBotsdUpdUrl.Size = New System.Drawing.Size(70, 23)
+        Me.BtnBotsdUpdUrl.TabIndex = 48
+        Me.BtnBotsdUpdUrl.Text = "webUpd"
+        Me.BtnBotsdUpdUrl.UseVisualStyleBackColor = True
         '
-        'LblNewBotsdUrl
+        'BtnBotsdListUrl
         '
-        Me.LblNewBotsdUrl.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblNewBotsdUrl.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblNewBotsdUrl.Location = New System.Drawing.Point(152, 308)
-        Me.LblNewBotsdUrl.Name = "LblNewBotsdUrl"
-        Me.LblNewBotsdUrl.Size = New System.Drawing.Size(70, 14)
-        Me.LblNewBotsdUrl.TabIndex = 29
-        Me.LblNewBotsdUrl.Text = "updnewpost"
+        Me.BtnBotsdListUrl.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBotsdListUrl.Location = New System.Drawing.Point(152, 257)
+        Me.BtnBotsdListUrl.Name = "BtnBotsdListUrl"
+        Me.BtnBotsdListUrl.Size = New System.Drawing.Size(70, 23)
+        Me.BtnBotsdListUrl.TabIndex = 47
+        Me.BtnBotsdListUrl.Text = "webUpd"
+        Me.BtnBotsdListUrl.UseVisualStyleBackColor = True
         '
-        'LblNewListUrl
+        'BtnReseqOld
         '
-        Me.LblNewListUrl.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblNewListUrl.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblNewListUrl.Location = New System.Drawing.Point(152, 340)
-        Me.LblNewListUrl.Name = "LblNewListUrl"
-        Me.LblNewListUrl.Size = New System.Drawing.Size(70, 14)
-        Me.LblNewListUrl.TabIndex = 28
-        Me.LblNewListUrl.Text = "updnewlist"
+        Me.BtnReseqOld.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReseqOld.Location = New System.Drawing.Point(152, 295)
+        Me.BtnReseqOld.Name = "BtnReseqOld"
+        Me.BtnReseqOld.Size = New System.Drawing.Size(70, 23)
+        Me.BtnReseqOld.TabIndex = 46
+        Me.BtnReseqOld.Text = "dbUpd"
+        Me.BtnReseqOld.UseVisualStyleBackColor = True
         '
-        'LblReseqNew
+        'BtnReseqNew
         '
-        Me.LblReseqNew.AutoSize = True
-        Me.LblReseqNew.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblReseqNew.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblReseqNew.Location = New System.Drawing.Point(152, 277)
-        Me.LblReseqNew.Name = "LblReseqNew"
-        Me.LblReseqNew.Size = New System.Drawing.Size(44, 14)
-        Me.LblReseqNew.TabIndex = 27
-        Me.LblReseqNew.Text = "reseqn"
+        Me.BtnReseqNew.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReseqNew.Location = New System.Drawing.Point(152, 333)
+        Me.BtnReseqNew.Name = "BtnReseqNew"
+        Me.BtnReseqNew.Size = New System.Drawing.Size(70, 23)
+        Me.BtnReseqNew.TabIndex = 45
+        Me.BtnReseqNew.Text = "dbUpd"
+        Me.BtnReseqNew.UseVisualStyleBackColor = True
         '
-        'LblReseqOld
+        'BtnNewBotsdUrl
         '
-        Me.LblReseqOld.AutoSize = True
-        Me.LblReseqOld.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblReseqOld.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblReseqOld.Location = New System.Drawing.Point(152, 246)
-        Me.LblReseqOld.Name = "LblReseqOld"
-        Me.LblReseqOld.Size = New System.Drawing.Size(44, 14)
-        Me.LblReseqOld.TabIndex = 26
-        Me.LblReseqOld.Text = "reseqo"
+        Me.BtnNewBotsdUrl.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNewBotsdUrl.Location = New System.Drawing.Point(152, 371)
+        Me.BtnNewBotsdUrl.Name = "BtnNewBotsdUrl"
+        Me.BtnNewBotsdUrl.Size = New System.Drawing.Size(70, 23)
+        Me.BtnNewBotsdUrl.TabIndex = 44
+        Me.BtnNewBotsdUrl.Text = "webUpd"
+        Me.BtnNewBotsdUrl.UseVisualStyleBackColor = True
         '
-        'LblUpdPerson
+        'BtnNewListUrl
         '
-        Me.LblUpdPerson.AutoSize = True
-        Me.LblUpdPerson.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUpdPerson.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblUpdPerson.Location = New System.Drawing.Point(154, 153)
-        Me.LblUpdPerson.Name = "LblUpdPerson"
-        Me.LblUpdPerson.Size = New System.Drawing.Size(65, 14)
-        Me.LblUpdPerson.TabIndex = 25
-        Me.LblUpdPerson.Text = "updperson"
+        Me.BtnNewListUrl.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNewListUrl.Location = New System.Drawing.Point(152, 409)
+        Me.BtnNewListUrl.Name = "BtnNewListUrl"
+        Me.BtnNewListUrl.Size = New System.Drawing.Size(70, 23)
+        Me.BtnNewListUrl.TabIndex = 43
+        Me.BtnNewListUrl.Text = "webUpd"
+        Me.BtnNewListUrl.UseVisualStyleBackColor = True
         '
-        'LblBotsdListUrl
+        'BtnRmvImage
         '
-        Me.LblBotsdListUrl.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblBotsdListUrl.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblBotsdListUrl.Location = New System.Drawing.Point(152, 215)
-        Me.LblBotsdListUrl.Name = "LblBotsdListUrl"
-        Me.LblBotsdListUrl.Size = New System.Drawing.Size(70, 14)
-        Me.LblBotsdListUrl.TabIndex = 24
-        Me.LblBotsdListUrl.Text = "updoldlist"
+        Me.BtnRmvImage.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvImage.Location = New System.Drawing.Point(152, 447)
+        Me.BtnRmvImage.Name = "BtnRmvImage"
+        Me.BtnRmvImage.Size = New System.Drawing.Size(70, 23)
+        Me.BtnRmvImage.TabIndex = 42
+        Me.BtnRmvImage.Text = "webUpd"
+        Me.BtnRmvImage.UseVisualStyleBackColor = True
         '
-        'LblBotsdUpdUrl
+        'BtnUpdOldPost
         '
-        Me.LblBotsdUpdUrl.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblBotsdUpdUrl.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblBotsdUpdUrl.Location = New System.Drawing.Point(152, 184)
-        Me.LblBotsdUpdUrl.Name = "LblBotsdUpdUrl"
-        Me.LblBotsdUpdUrl.Size = New System.Drawing.Size(70, 14)
-        Me.LblBotsdUpdUrl.TabIndex = 23
-        Me.LblBotsdUpdUrl.Text = "updoldpost"
+        Me.BtnUpdOldPost.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdOldPost.Location = New System.Drawing.Point(152, 485)
+        Me.BtnUpdOldPost.Name = "BtnUpdOldPost"
+        Me.BtnUpdOldPost.Size = New System.Drawing.Size(70, 23)
+        Me.BtnUpdOldPost.TabIndex = 41
+        Me.BtnUpdOldPost.Text = "webUpd"
+        Me.BtnUpdOldPost.UseVisualStyleBackColor = True
         '
-        'LblBotsdUrl
+        'BtnAddImg
         '
-        Me.LblBotsdUrl.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblBotsdUrl.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblBotsdUrl.Location = New System.Drawing.Point(152, 122)
-        Me.LblBotsdUrl.Name = "LblBotsdUrl"
-        Me.LblBotsdUrl.Size = New System.Drawing.Size(70, 14)
-        Me.LblBotsdUrl.TabIndex = 22
-        Me.LblBotsdUrl.Text = "rmvpost"
+        Me.BtnAddImg.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAddImg.Location = New System.Drawing.Point(152, 523)
+        Me.BtnAddImg.Name = "BtnAddImg"
+        Me.BtnAddImg.Size = New System.Drawing.Size(70, 23)
+        Me.BtnAddImg.TabIndex = 40
+        Me.BtnAddImg.Text = "webUpd"
+        Me.BtnAddImg.UseVisualStyleBackColor = True
         '
-        'LblBotsdId
+        'BtnMoveImg
         '
-        Me.LblBotsdId.AutoSize = True
-        Me.LblBotsdId.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblBotsdId.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblBotsdId.Location = New System.Drawing.Point(152, 91)
-        Me.LblBotsdId.Name = "LblBotsdId"
-        Me.LblBotsdId.Size = New System.Drawing.Size(44, 14)
-        Me.LblBotsdId.TabIndex = 21
-        Me.LblBotsdId.Text = "rmvrec"
+        Me.BtnMoveImg.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnMoveImg.Location = New System.Drawing.Point(152, 561)
+        Me.BtnMoveImg.Name = "BtnMoveImg"
+        Me.BtnMoveImg.Size = New System.Drawing.Size(70, 23)
+        Me.BtnMoveImg.TabIndex = 39
+        Me.BtnMoveImg.Text = "webUpd"
+        Me.BtnMoveImg.UseVisualStyleBackColor = True
         '
-        'LblOthPersonId
+        'BtnUpdNewPost
         '
-        Me.LblOthPersonId.AutoSize = True
-        Me.LblOthPersonId.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblOthPersonId.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblOthPersonId.Location = New System.Drawing.Point(152, 60)
-        Me.LblOthPersonId.Name = "LblOthPersonId"
-        Me.LblOthPersonId.Size = New System.Drawing.Size(55, 14)
-        Me.LblOthPersonId.TabIndex = 20
-        Me.LblOthPersonId.Text = "rmvothid"
+        Me.BtnUpdNewPost.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdNewPost.Location = New System.Drawing.Point(152, 598)
+        Me.BtnUpdNewPost.Name = "BtnUpdNewPost"
+        Me.BtnUpdNewPost.Size = New System.Drawing.Size(70, 23)
+        Me.BtnUpdNewPost.TabIndex = 38
+        Me.BtnUpdNewPost.Text = "webUpd"
+        Me.BtnUpdNewPost.UseVisualStyleBackColor = True
         '
-        'LblBotsdPostNo
+        'BtnImgDesc
         '
-        Me.LblBotsdPostNo.AutoSize = True
-        Me.LblBotsdPostNo.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblBotsdPostNo.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LblBotsdPostNo.Location = New System.Drawing.Point(152, 29)
-        Me.LblBotsdPostNo.Name = "LblBotsdPostNo"
-        Me.LblBotsdPostNo.Size = New System.Drawing.Size(36, 14)
-        Me.LblBotsdPostNo.TabIndex = 19
-        Me.LblBotsdPostNo.Text = "rmvid"
+        Me.BtnImgDesc.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnImgDesc.Location = New System.Drawing.Point(152, 637)
+        Me.BtnImgDesc.Name = "BtnImgDesc"
+        Me.BtnImgDesc.Size = New System.Drawing.Size(70, 23)
+        Me.BtnImgDesc.TabIndex = 37
+        Me.BtnImgDesc.Text = "webUpd"
+        Me.BtnImgDesc.UseVisualStyleBackColor = True
         '
         'BtnReseqNewGroup
         '
-        Me.BtnReseqNewGroup.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReseqNewGroup.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnReseqNewGroup.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnReseqNewGroup.Location = New System.Drawing.Point(6, 273)
+        Me.BtnReseqNewGroup.Location = New System.Drawing.Point(6, 329)
         Me.BtnReseqNewGroup.Name = "BtnReseqNewGroup"
-        Me.BtnReseqNewGroup.Size = New System.Drawing.Size(140, 25)
+        Me.BtnReseqNewGroup.Size = New System.Drawing.Size(140, 29)
         Me.BtnReseqNewGroup.TabIndex = 18
         Me.BtnReseqNewGroup.Text = "Reseq new grp"
         Me.BtnReseqNewGroup.UseVisualStyleBackColor = True
         '
         'BtnUpdOldBotsdPost
         '
-        Me.BtnUpdOldBotsdPost.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdOldBotsdPost.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdOldBotsdPost.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdOldBotsdPost.Location = New System.Drawing.Point(6, 180)
+        Me.BtnUpdOldBotsdPost.Location = New System.Drawing.Point(6, 215)
         Me.BtnUpdOldBotsdPost.Name = "BtnUpdOldBotsdPost"
-        Me.BtnUpdOldBotsdPost.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdOldBotsdPost.Size = New System.Drawing.Size(140, 29)
         Me.BtnUpdOldBotsdPost.TabIndex = 17
         Me.BtnUpdOldBotsdPost.Text = "Update old botsd post"
         Me.BtnUpdOldBotsdPost.UseVisualStyleBackColor = True
         '
         'BtnRmvRow
         '
-        Me.BtnRmvRow.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvRow.Font = New System.Drawing.Font("Arial", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRmvRow.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRmvRow.Location = New System.Drawing.Point(6, 552)
+        Me.BtnRmvRow.Location = New System.Drawing.Point(6, 671)
         Me.BtnRmvRow.Name = "BtnRmvRow"
-        Me.BtnRmvRow.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvRow.Size = New System.Drawing.Size(140, 29)
         Me.BtnRmvRow.TabIndex = 16
         Me.BtnRmvRow.Text = "Remove row"
         Me.BtnRmvRow.UseVisualStyleBackColor = True
         '
         'BtnUpdCbPicDesc
         '
-        Me.BtnUpdCbPicDesc.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdCbPicDesc.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdCbPicDesc.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdCbPicDesc.Location = New System.Drawing.Point(6, 521)
+        Me.BtnUpdCbPicDesc.Location = New System.Drawing.Point(6, 633)
         Me.BtnUpdCbPicDesc.Name = "BtnUpdCbPicDesc"
-        Me.BtnUpdCbPicDesc.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdCbPicDesc.Size = New System.Drawing.Size(140, 29)
         Me.BtnUpdCbPicDesc.TabIndex = 15
         Me.BtnUpdCbPicDesc.Text = "Update picture desc"
         Me.BtnUpdCbPicDesc.UseVisualStyleBackColor = True
         '
         'BtnUpdNewCbPage
         '
-        Me.BtnUpdNewCbPage.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdNewCbPage.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdNewCbPage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdNewCbPage.Location = New System.Drawing.Point(6, 490)
+        Me.BtnUpdNewCbPage.Location = New System.Drawing.Point(6, 595)
         Me.BtnUpdNewCbPage.Name = "BtnUpdNewCbPage"
-        Me.BtnUpdNewCbPage.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdNewCbPage.Size = New System.Drawing.Size(140, 29)
         Me.BtnUpdNewCbPage.TabIndex = 14
         Me.BtnUpdNewCbPage.Text = "Update new CB page"
         Me.BtnUpdNewCbPage.UseVisualStyleBackColor = True
         '
         'BtnAddCbPic
         '
-        Me.BtnAddCbPic.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAddCbPic.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAddCbPic.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAddCbPic.Location = New System.Drawing.Point(6, 428)
+        Me.BtnAddCbPic.Location = New System.Drawing.Point(6, 519)
         Me.BtnAddCbPic.Name = "BtnAddCbPic"
-        Me.BtnAddCbPic.Size = New System.Drawing.Size(140, 25)
+        Me.BtnAddCbPic.Size = New System.Drawing.Size(140, 29)
         Me.BtnAddCbPic.TabIndex = 13
         Me.BtnAddCbPic.Text = "Add CB picture"
         Me.BtnAddCbPic.UseVisualStyleBackColor = True
         '
         'BtnRmvOldPicture
         '
-        Me.BtnRmvOldPicture.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvOldPicture.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRmvOldPicture.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRmvOldPicture.Location = New System.Drawing.Point(6, 366)
+        Me.BtnRmvOldPicture.Location = New System.Drawing.Point(6, 443)
         Me.BtnRmvOldPicture.Name = "BtnRmvOldPicture"
-        Me.BtnRmvOldPicture.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvOldPicture.Size = New System.Drawing.Size(140, 29)
         Me.BtnRmvOldPicture.TabIndex = 12
         Me.BtnRmvOldPicture.Text = "Remove old picture"
         Me.BtnRmvOldPicture.UseVisualStyleBackColor = True
         '
         'BtnUpdOldCbPage
         '
-        Me.BtnUpdOldCbPage.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdOldCbPage.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdOldCbPage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdOldCbPage.Location = New System.Drawing.Point(6, 397)
+        Me.BtnUpdOldCbPage.Location = New System.Drawing.Point(6, 481)
         Me.BtnUpdOldCbPage.Name = "BtnUpdOldCbPage"
-        Me.BtnUpdOldCbPage.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdOldCbPage.Size = New System.Drawing.Size(140, 29)
         Me.BtnUpdOldCbPage.TabIndex = 11
         Me.BtnUpdOldCbPage.Text = "Update old CB Page"
         Me.BtnUpdOldCbPage.UseVisualStyleBackColor = True
         '
         'BtnMoveCbPic
         '
-        Me.BtnMoveCbPic.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnMoveCbPic.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnMoveCbPic.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnMoveCbPic.Location = New System.Drawing.Point(6, 459)
+        Me.BtnMoveCbPic.Location = New System.Drawing.Point(6, 557)
         Me.BtnMoveCbPic.Name = "BtnMoveCbPic"
-        Me.BtnMoveCbPic.Size = New System.Drawing.Size(140, 25)
+        Me.BtnMoveCbPic.Size = New System.Drawing.Size(140, 29)
         Me.BtnMoveCbPic.TabIndex = 10
         Me.BtnMoveCbPic.Text = "Move CB picture"
         Me.BtnMoveCbPic.UseVisualStyleBackColor = True
         '
         'BtnUpdNewBotsdList
         '
-        Me.BtnUpdNewBotsdList.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdNewBotsdList.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdNewBotsdList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdNewBotsdList.Location = New System.Drawing.Point(6, 335)
+        Me.BtnUpdNewBotsdList.Location = New System.Drawing.Point(6, 405)
         Me.BtnUpdNewBotsdList.Name = "BtnUpdNewBotsdList"
-        Me.BtnUpdNewBotsdList.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdNewBotsdList.Size = New System.Drawing.Size(140, 29)
         Me.BtnUpdNewBotsdList.TabIndex = 8
         Me.BtnUpdNewBotsdList.Text = "Update new botsd list"
         Me.BtnUpdNewBotsdList.UseVisualStyleBackColor = True
         '
         'BtnUpdateNewBotsdPost
         '
-        Me.BtnUpdateNewBotsdPost.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdateNewBotsdPost.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdateNewBotsdPost.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdateNewBotsdPost.Location = New System.Drawing.Point(6, 304)
+        Me.BtnUpdateNewBotsdPost.Location = New System.Drawing.Point(6, 367)
         Me.BtnUpdateNewBotsdPost.Name = "BtnUpdateNewBotsdPost"
-        Me.BtnUpdateNewBotsdPost.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdateNewBotsdPost.Size = New System.Drawing.Size(140, 29)
         Me.BtnUpdateNewBotsdPost.TabIndex = 7
         Me.BtnUpdateNewBotsdPost.Text = "Upd new botsd post"
         Me.BtnUpdateNewBotsdPost.UseVisualStyleBackColor = True
         '
         'BtnReseqOldGroup
         '
-        Me.BtnReseqOldGroup.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReseqOldGroup.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnReseqOldGroup.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnReseqOldGroup.Location = New System.Drawing.Point(6, 242)
+        Me.BtnReseqOldGroup.Location = New System.Drawing.Point(6, 291)
         Me.BtnReseqOldGroup.Name = "BtnReseqOldGroup"
-        Me.BtnReseqOldGroup.Size = New System.Drawing.Size(140, 25)
+        Me.BtnReseqOldGroup.Size = New System.Drawing.Size(140, 29)
         Me.BtnReseqOldGroup.TabIndex = 6
         Me.BtnReseqOldGroup.Text = "Reseq old grp"
         Me.BtnReseqOldGroup.UseVisualStyleBackColor = True
         '
         'BtnUpdOldBotsdList
         '
-        Me.BtnUpdOldBotsdList.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdOldBotsdList.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdOldBotsdList.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdOldBotsdList.Location = New System.Drawing.Point(6, 211)
+        Me.BtnUpdOldBotsdList.Location = New System.Drawing.Point(6, 253)
         Me.BtnUpdOldBotsdList.Name = "BtnUpdOldBotsdList"
-        Me.BtnUpdOldBotsdList.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdOldBotsdList.Size = New System.Drawing.Size(140, 29)
         Me.BtnUpdOldBotsdList.TabIndex = 5
         Me.BtnUpdOldBotsdList.Text = "Update old botsd list"
         Me.BtnUpdOldBotsdList.UseVisualStyleBackColor = True
         '
         'BtnRmvOldBotsdPost
         '
-        Me.BtnRmvOldBotsdPost.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvOldBotsdPost.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRmvOldBotsdPost.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRmvOldBotsdPost.Location = New System.Drawing.Point(6, 118)
+        Me.BtnRmvOldBotsdPost.Location = New System.Drawing.Point(6, 139)
         Me.BtnRmvOldBotsdPost.Name = "BtnRmvOldBotsdPost"
-        Me.BtnRmvOldBotsdPost.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvOldBotsdPost.Size = New System.Drawing.Size(140, 29)
         Me.BtnRmvOldBotsdPost.TabIndex = 4
-        Me.BtnRmvOldBotsdPost.Text = "Remove old botsd post"
+        Me.BtnRmvOldBotsdPost.Text = "Remove old post"
         Me.BtnRmvOldBotsdPost.UseVisualStyleBackColor = True
         '
         'BtnRmvBotsdRecord
         '
-        Me.BtnRmvBotsdRecord.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvBotsdRecord.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRmvBotsdRecord.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRmvBotsdRecord.Location = New System.Drawing.Point(6, 87)
+        Me.BtnRmvBotsdRecord.Location = New System.Drawing.Point(6, 101)
         Me.BtnRmvBotsdRecord.Name = "BtnRmvBotsdRecord"
-        Me.BtnRmvBotsdRecord.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvBotsdRecord.Size = New System.Drawing.Size(140, 29)
         Me.BtnRmvBotsdRecord.TabIndex = 3
         Me.BtnRmvBotsdRecord.Text = "Remove botsd rec"
         Me.BtnRmvBotsdRecord.UseVisualStyleBackColor = True
         '
         'BtnRmvOtherBotsdId
         '
-        Me.BtnRmvOtherBotsdId.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvOtherBotsdId.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRmvOtherBotsdId.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRmvOtherBotsdId.Location = New System.Drawing.Point(6, 56)
+        Me.BtnRmvOtherBotsdId.Location = New System.Drawing.Point(6, 63)
         Me.BtnRmvOtherBotsdId.Name = "BtnRmvOtherBotsdId"
-        Me.BtnRmvOtherBotsdId.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvOtherBotsdId.Size = New System.Drawing.Size(140, 29)
         Me.BtnRmvOtherBotsdId.TabIndex = 2
         Me.BtnRmvOtherBotsdId.Text = "Remove other botsd id"
         Me.BtnRmvOtherBotsdId.UseVisualStyleBackColor = True
         '
         'BtnRmvBotsdId
         '
-        Me.BtnRmvBotsdId.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvBotsdId.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRmvBotsdId.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnRmvBotsdId.Location = New System.Drawing.Point(6, 25)
         Me.BtnRmvBotsdId.Name = "BtnRmvBotsdId"
-        Me.BtnRmvBotsdId.Size = New System.Drawing.Size(140, 25)
+        Me.BtnRmvBotsdId.Size = New System.Drawing.Size(140, 29)
         Me.BtnRmvBotsdId.TabIndex = 1
         Me.BtnRmvBotsdId.Text = "Remove botsd id"
         Me.BtnRmvBotsdId.UseVisualStyleBackColor = True
         '
         'BtnUpdatePerson
         '
-        Me.BtnUpdatePerson.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdatePerson.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdatePerson.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdatePerson.Location = New System.Drawing.Point(6, 149)
+        Me.BtnUpdatePerson.Location = New System.Drawing.Point(6, 177)
         Me.BtnUpdatePerson.Name = "BtnUpdatePerson"
-        Me.BtnUpdatePerson.Size = New System.Drawing.Size(140, 25)
+        Me.BtnUpdatePerson.Size = New System.Drawing.Size(140, 29)
         Me.BtnUpdatePerson.TabIndex = 0
         Me.BtnUpdatePerson.Text = "Update Person"
         Me.BtnUpdatePerson.UseVisualStyleBackColor = True
@@ -1094,11 +1091,11 @@ Partial Class FrmDateCheck
         'BtnRemoveRow
         '
         Me.BtnRemoveRow.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnRemoveRow.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRemoveRow.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRemoveRow.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRemoveRow.Location = New System.Drawing.Point(1249, 373)
+        Me.BtnRemoveRow.Location = New System.Drawing.Point(1245, 425)
         Me.BtnRemoveRow.Name = "BtnRemoveRow"
-        Me.BtnRemoveRow.Size = New System.Drawing.Size(86, 33)
+        Me.BtnRemoveRow.Size = New System.Drawing.Size(86, 50)
         Me.BtnRemoveRow.TabIndex = 19
         Me.BtnRemoveRow.Text = "Remove row"
         Me.BtnRemoveRow.UseVisualStyleBackColor = True
@@ -1107,7 +1104,7 @@ Partial Class FrmDateCheck
         '
         Me.ChkNoExtract.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ChkNoExtract.AutoSize = True
-        Me.ChkNoExtract.Location = New System.Drawing.Point(993, 633)
+        Me.ChkNoExtract.Location = New System.Drawing.Point(993, 744)
         Me.ChkNoExtract.Name = "ChkNoExtract"
         Me.ChkNoExtract.Size = New System.Drawing.Size(106, 17)
         Me.ChkNoExtract.TabIndex = 158
@@ -1120,7 +1117,7 @@ Partial Class FrmDateCheck
         Me.ChkNoDates.AutoSize = True
         Me.ChkNoDates.Checked = True
         Me.ChkNoDates.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ChkNoDates.Location = New System.Drawing.Point(1105, 633)
+        Me.ChkNoDates.Location = New System.Drawing.Point(1105, 744)
         Me.ChkNoDates.Name = "ChkNoDates"
         Me.ChkNoDates.Size = New System.Drawing.Size(101, 17)
         Me.ChkNoDates.TabIndex = 159
@@ -1132,7 +1129,7 @@ Partial Class FrmDateCheck
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1344, 690)
+        Me.ClientSize = New System.Drawing.Size(1344, 801)
         Me.Controls.Add(Me.ChkNoDates)
         Me.Controls.Add(Me.ChkNoExtract)
         Me.Controls.Add(Me.BtnAuditView)
@@ -1174,6 +1171,7 @@ Partial Class FrmDateCheck
         Me.Controls.Add(Me.BtnWikiUpdate)
         Me.Controls.Add(Me.BtnStart)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MinimumSize = New System.Drawing.Size(1360, 840)
         Me.Name = "FrmDateCheck"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Date Check"
@@ -1188,7 +1186,6 @@ Partial Class FrmDateCheck
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1250,23 +1247,6 @@ Partial Class FrmDateCheck
     Friend WithEvents BtnUpdOldBotsdPost As Button
     Friend WithEvents BtnReseqNewGroup As Button
     Friend WithEvents BtnRemoveRow As Button
-    Friend WithEvents LblOthPersonId As Label
-    Friend WithEvents LblBotsdPostNo As Label
-    Friend WithEvents LblBotsdId As Label
-    Friend WithEvents LblBotsdUrl As Label
-    Friend WithEvents LblBotsdUpdUrl As Label
-    Friend WithEvents LblBotsdListUrl As Label
-    Friend WithEvents LblUpdPerson As Label
-    Friend WithEvents LblReseqNew As Label
-    Friend WithEvents LblReseqOld As Label
-    Friend WithEvents LblNewListUrl As Label
-    Friend WithEvents LblNewBotsdUrl As Label
-    Friend WithEvents LblRmvImage As Label
-    Friend WithEvents LblImageName As Label
-    Friend WithEvents LblAddImage As Label
-    Friend WithEvents LblUpdNewPost As Label
-    Friend WithEvents LblMoveImage As Label
-    Friend WithEvents LblUpdOldPost As Label
     Friend WithEvents BtnCopyName As Button
     Friend WithEvents BtnWikiOpen As Button
     Friend WithEvents BtnAuditView As Button
@@ -1281,4 +1261,21 @@ Partial Class FrmDateCheck
     Friend WithEvents xImg As DataGridViewImageColumn
     Friend WithEvents ChkNoExtract As CheckBox
     Friend WithEvents ChkNoDates As CheckBox
+    Friend WithEvents BtnBotsdPostNo As Button
+    Friend WithEvents BtnOthPersonId As Button
+    Friend WithEvents BtnBotsdId As Button
+    Friend WithEvents BtnBotsdUrl As Button
+    Friend WithEvents BtnUpdPerson As Button
+    Friend WithEvents BtnBotsdUpdUrl As Button
+    Friend WithEvents BtnBotsdListUrl As Button
+    Friend WithEvents BtnReseqOld As Button
+    Friend WithEvents BtnReseqNew As Button
+    Friend WithEvents BtnNewBotsdUrl As Button
+    Friend WithEvents BtnNewListUrl As Button
+    Friend WithEvents BtnRmvImage As Button
+    Friend WithEvents BtnUpdOldPost As Button
+    Friend WithEvents BtnAddImg As Button
+    Friend WithEvents BtnMoveImg As Button
+    Friend WithEvents BtnUpdNewPost As Button
+    Friend WithEvents BtnImgDesc As Button
 End Class

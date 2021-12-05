@@ -62,7 +62,7 @@ Public Class TwitterOAuth
             _verifier = value
         End Set
     End Property
-    Private _callbackUrl As Uri = New Uri(My.Settings.twitterAuthCallback)
+    Private _callbackUrl As New Uri(My.Settings.twitterAuthCallback)
     Public Property CallbackUrl() As Uri
         Get
             Return _callbackUrl
