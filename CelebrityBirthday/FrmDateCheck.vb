@@ -127,7 +127,7 @@ Public NotInheritable Class FrmDateCheck
     Private abNewBotsdUrl As CheckListActionButton
     Private abRmvImage As CheckListActionButton
     Private abAddImg As CheckListActionButton
-    Private abImgName As CheckListActionButton
+    Private abImgDesc As CheckListActionButton
     Private abUpdNewPost As CheckListActionButton
     Private abUpdOldPost As CheckListActionButton
     Private abMoveImg As CheckListActionButton
@@ -568,7 +568,7 @@ Public NotInheritable Class FrmDateCheck
         UnsetButton(abNewBotsdUrl)
         UnsetButton(abRmvImage)
         UnsetButton(abAddImg)
-        UnsetButton(abImgName)
+        UnsetButton(abImgDesc)
         UnsetButton(abUpdNewPost)
         UnsetButton(abUpdOldPost)
         UnsetButton(abMoveImg)
@@ -784,13 +784,13 @@ Public NotInheritable Class FrmDateCheck
             End If
             Dim _selMonth As String = Format(toDate, "MMMM")
             Dim _selDay As String = CStr(toDate.Day)
-            Dim sUrl As String = GetWordPressMonthUrl(newPageLoadYear, newPageLoadMonth, newPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo)) & BtnImgDesc.Text & "/"
+            Dim sUrl As String = GetWordPressMonthUrl(newPageLoadYear, newPageLoadMonth, newPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo)) & abImgDesc.ActionText & "/"
             Process.Start(sUrl)
-            SetButton(abImgName,, "Done")
+            SetButton(abImgDesc,, "Done")
         Catch ex As InvalidOperationException
-            SetErrorResult(abImgName, ex.Message)
+            SetErrorResult(abImgDesc, ex.Message)
         Catch ex As ComponentModel.Win32Exception
-            SetErrorResult(abImgName, ex.Message)
+            SetErrorResult(abImgDesc, ex.Message)
         End Try
     End Sub
     Private Sub BtnUpdNewCbPage_Click(sender As Object, e As EventArgs) Handles BtnUpdNewCbPage.Click, BtnAddCbPic.Click, BtnMoveCbPic.Click
@@ -928,10 +928,10 @@ Public NotInheritable Class FrmDateCheck
         End If
     End Sub
     Private Sub BtnImgName_Click(sender As Object, e As EventArgs) Handles BtnImgDesc.Click
-        If String.IsNullOrEmpty(abImgName.ResultText) Then
-            SetOKResult(abImgName, "Picture description updated")
+        If String.IsNullOrEmpty(abImgDesc.ResultText) Then
+            SetOKResult(abImgDesc, "Picture description updated")
         Else
-            DisplayMessage(abImgName)
+            DisplayMessage(abImgDesc)
         End If
     End Sub
     Private Sub BtnRmvImage_Click(sender As Object, e As EventArgs) Handles BtnRmvImage.Click
@@ -1007,7 +1007,7 @@ Public NotInheritable Class FrmDateCheck
         abNewBotsdUrl = New CheckListActionButton(BtnNewBotsdUrl, "")
         abRmvImage = New CheckListActionButton(BtnRmvImage, "")
         abAddImg = New CheckListActionButton(BtnAddImg, "")
-        abImgName = New CheckListActionButton(BtnImgDesc, "")
+        abImgDesc = New CheckListActionButton(BtnImgDesc, "")
         abUpdNewPost = New CheckListActionButton(BtnUpdNewPost, "")
         abUpdOldPost = New CheckListActionButton(BtnUpdOldPost, "")
         abMoveImg = New CheckListActionButton(BtnMoveImg, "")
@@ -1018,7 +1018,7 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub ShowButtonToUpdatePictureDescription(oPerson As Person)
         BtnUpdCbPicDesc.Visible = True
-        SetButton(abImgName, oPerson.Image.ImageFileName)
+        SetButton(abImgDesc, oPerson.Image.ImageFileName)
     End Sub
     Private Sub ShowButtonToAddPicture()
         BtnAddCbPic.Visible = True
