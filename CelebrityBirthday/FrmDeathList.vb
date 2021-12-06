@@ -1,4 +1,11 @@
-﻿Public NotInheritable Class FrmDeathList
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public NotInheritable Class FrmDeathList
     Private _year As Integer
     Public Property Year() As Integer
         Get

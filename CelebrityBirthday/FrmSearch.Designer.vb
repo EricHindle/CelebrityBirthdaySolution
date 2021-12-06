@@ -130,7 +130,7 @@ Partial Class FrmSearch
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClose.Location = New System.Drawing.Point(1081, 481)
         Me.BtnClose.Name = "BtnClose"
@@ -141,7 +141,7 @@ Partial Class FrmSearch
         '
         'BtnSearchByName
         '
-        Me.BtnSearchByName.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSearchByName.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearchByName.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSearchByName.Location = New System.Drawing.Point(15, 61)
         Me.BtnSearchByName.Name = "BtnSearchByName"
@@ -152,7 +152,7 @@ Partial Class FrmSearch
         '
         'BtnSearchById
         '
-        Me.BtnSearchById.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSearchById.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearchById.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSearchById.Location = New System.Drawing.Point(15, 19)
         Me.BtnSearchById.Name = "BtnSearchById"
@@ -186,7 +186,7 @@ Partial Class FrmSearch
         '
         'BtnFindInWiki
         '
-        Me.BtnFindInWiki.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnFindInWiki.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnFindInWiki.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnFindInWiki.Location = New System.Drawing.Point(15, 19)
         Me.BtnFindInWiki.Name = "BtnFindInWiki"
@@ -216,7 +216,7 @@ Partial Class FrmSearch
         '
         'BtnDbUpdate
         '
-        Me.BtnDbUpdate.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDbUpdate.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDbUpdate.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnDbUpdate.Location = New System.Drawing.Point(15, 19)
         Me.BtnDbUpdate.Name = "BtnDbUpdate"
@@ -228,7 +228,7 @@ Partial Class FrmSearch
         'BtnClear
         '
         Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClear.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClear.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClear.Location = New System.Drawing.Point(1081, 12)
         Me.BtnClear.Name = "BtnClear"
@@ -253,7 +253,7 @@ Partial Class FrmSearch
         '
         'BtnWordPress
         '
-        Me.BtnWordPress.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWordPress.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWordPress.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnWordPress.Location = New System.Drawing.Point(15, 145)
         Me.BtnWordPress.Name = "BtnWordPress"
@@ -264,7 +264,7 @@ Partial Class FrmSearch
         '
         'BtnTweet
         '
-        Me.BtnTweet.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnTweet.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnTweet.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnTweet.Location = New System.Drawing.Point(15, 103)
         Me.BtnTweet.Name = "BtnTweet"
@@ -275,7 +275,7 @@ Partial Class FrmSearch
         '
         'BtnImgUpdate
         '
-        Me.BtnImgUpdate.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnImgUpdate.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnImgUpdate.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnImgUpdate.Location = New System.Drawing.Point(15, 61)
         Me.BtnImgUpdate.Name = "BtnImgUpdate"

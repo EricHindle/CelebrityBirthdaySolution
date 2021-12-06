@@ -371,7 +371,7 @@ Public Class frmTwitterOutput
         Dim _newButton As New System.Windows.Forms.Button()
         With _newButton
             .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            .Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             .ForeColor = System.Drawing.Color.RoyalBlue
             .Location = New System.Drawing.Point(287, 397)
             .Name = BUTTON_CONTROL_NAME & _index

@@ -42,7 +42,7 @@ Partial Class FrmWordPress
         'btnCopyExcerpt
         '
         Me.btnCopyExcerpt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCopyExcerpt.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCopyExcerpt.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCopyExcerpt.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnCopyExcerpt.Location = New System.Drawing.Point(399, 115)
         Me.btnCopyExcerpt.Name = "btnCopyExcerpt"
@@ -54,7 +54,7 @@ Partial Class FrmWordPress
         'btnCopyFull
         '
         Me.btnCopyFull.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCopyFull.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCopyFull.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCopyFull.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnCopyFull.Location = New System.Drawing.Point(399, 236)
         Me.btnCopyFull.Name = "btnCopyFull"
@@ -117,7 +117,7 @@ Partial Class FrmWordPress
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClose.Location = New System.Drawing.Point(937, 555)
         Me.BtnClose.Name = "BtnClose"
@@ -198,7 +198,7 @@ Partial Class FrmWordPress
         'BtnBrowser
         '
         Me.BtnBrowser.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnBrowser.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBrowser.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowser.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnBrowser.Location = New System.Drawing.Point(707, 555)
         Me.BtnBrowser.Name = "BtnBrowser"

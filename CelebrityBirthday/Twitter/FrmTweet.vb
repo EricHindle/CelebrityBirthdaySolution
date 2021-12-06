@@ -289,7 +289,7 @@ Public NotInheritable Class FrmTweet
         Dim _button As New Button
         With _button
             .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            .Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             .ForeColor = System.Drawing.Color.RoyalBlue
             .Location = New System.Drawing.Point(_locationX, _locationY)
             .Name = _buttonNameBase & _index

@@ -235,7 +235,7 @@ Partial Class FrmDateCheck
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnClose.Location = New System.Drawing.Point(1234, 736)
         Me.btnClose.Name = "btnClose"
@@ -260,7 +260,7 @@ Partial Class FrmDateCheck
         'BtnStart
         '
         Me.BtnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnStart.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnStart.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnStart.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnStart.Location = New System.Drawing.Point(743, 736)
         Me.BtnStart.Name = "BtnStart"
@@ -298,11 +298,11 @@ Partial Class FrmDateCheck
         '
         Me.LblId.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblId.AutoSize = True
-        Me.LblId.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblId.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblId.ForeColor = System.Drawing.Color.RoyalBlue
         Me.LblId.Location = New System.Drawing.Point(1041, 12)
         Me.LblId.Name = "LblId"
-        Me.LblId.Size = New System.Drawing.Size(17, 21)
+        Me.LblId.Size = New System.Drawing.Size(15, 16)
         Me.LblId.TabIndex = 61
         Me.LblId.Text = "0"
         '
@@ -338,11 +338,11 @@ Partial Class FrmDateCheck
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label1.Location = New System.Drawing.Point(597, 742)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(52, 22)
+        Me.Label1.Size = New System.Drawing.Size(46, 17)
         Me.Label1.TabIndex = 58
         Me.Label1.Text = "Count"
         '
@@ -395,7 +395,7 @@ Partial Class FrmDateCheck
         'BtnToday
         '
         Me.BtnToday.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnToday.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnToday.Location = New System.Drawing.Point(180, 738)
         Me.BtnToday.Name = "BtnToday"
@@ -443,7 +443,7 @@ Partial Class FrmDateCheck
         'BtnAll
         '
         Me.BtnAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnAll.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAll.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAll.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnAll.Location = New System.Drawing.Point(12, 738)
         Me.BtnAll.Name = "BtnAll"
@@ -577,7 +577,7 @@ Partial Class FrmDateCheck
         'BtnMonth
         '
         Me.BtnMonth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnMonth.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnMonth.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnMonth.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnMonth.Location = New System.Drawing.Point(102, 738)
         Me.BtnMonth.Name = "BtnMonth"
@@ -665,6 +665,8 @@ Partial Class FrmDateCheck
         Me.ChkShowImage.AutoSize = True
         Me.ChkShowImage.Checked = True
         Me.ChkShowImage.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ChkShowImage.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkShowImage.ForeColor = System.Drawing.Color.RoyalBlue
         Me.ChkShowImage.Location = New System.Drawing.Point(897, 744)
         Me.ChkShowImage.Name = "ChkShowImage"
         Me.ChkShowImage.Size = New System.Drawing.Size(90, 17)
@@ -711,7 +713,7 @@ Partial Class FrmDateCheck
         Me.GroupBox1.Controls.Add(Me.BtnRmvOtherBotsdId)
         Me.GroupBox1.Controls.Add(Me.BtnRmvBotsdId)
         Me.GroupBox1.Controls.Add(Me.BtnUpdatePerson)
-        Me.GroupBox1.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.GroupBox1.Location = New System.Drawing.Point(799, 12)
         Me.GroupBox1.Name = "GroupBox1"
@@ -1104,6 +1106,8 @@ Partial Class FrmDateCheck
         '
         Me.ChkNoExtract.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ChkNoExtract.AutoSize = True
+        Me.ChkNoExtract.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkNoExtract.ForeColor = System.Drawing.Color.RoyalBlue
         Me.ChkNoExtract.Location = New System.Drawing.Point(993, 744)
         Me.ChkNoExtract.Name = "ChkNoExtract"
         Me.ChkNoExtract.Size = New System.Drawing.Size(106, 17)
@@ -1115,9 +1119,11 @@ Partial Class FrmDateCheck
         '
         Me.ChkNoDates.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ChkNoDates.AutoSize = True
+        Me.ChkNoDates.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkNoDates.ForeColor = System.Drawing.Color.RoyalBlue
         Me.ChkNoDates.Location = New System.Drawing.Point(1105, 744)
         Me.ChkNoDates.Name = "ChkNoDates"
-        Me.ChkNoDates.Size = New System.Drawing.Size(101, 17)
+        Me.ChkNoDates.Size = New System.Drawing.Size(99, 17)
         Me.ChkNoDates.TabIndex = 159
         Me.ChkNoDates.Text = "Show No Dates"
         Me.ChkNoDates.UseVisualStyleBackColor = True
