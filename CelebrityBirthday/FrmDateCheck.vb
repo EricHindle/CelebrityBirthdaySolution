@@ -399,23 +399,13 @@ Public NotInheritable Class FrmDateCheck
         Dim wpText As String = ""
         Dim oPerson As Person = GetPersonById(CInt(LblId.Text))
         If oPerson IsNot Nothing Then
-            ShowStatus("Generating WordPress description for " & TxtFullName.Text, True)
-            Dim sBorn As String = ""
-            If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
-                sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
-            End If
-            Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
-            Dim sText As New StringBuilder
-            With sText
-                .Append(TxtFullDesc.Text)
-                .Append(sBorn)
-                .Append(If(oPerson.DeathYear = 0, "", sDied))
-            End With
-            wpText = sText.ToString
+            wpText = GetPictureText(oPerson)
         End If
         Clipboard.SetText(wpText)
         oPerson.Dispose()
     End Sub
+
+
     Private Sub BtnBotSD_Click(sender As Object, e As EventArgs) Handles BtnBotSD.Click
         ShowStatus("Born on the same day update", True)
         Using _botsd As New FrmBotsd
@@ -440,6 +430,23 @@ Public NotInheritable Class FrmDateCheck
     End Sub
 #End Region
 #Region "subroutines"
+    Private Function GetPictureText(oPerson As Person) As String
+        Dim wpText As String
+        ShowStatus("Generating WordPress description for " & TxtFullName.Text, True)
+        Dim sBorn As String = ""
+        If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
+            sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
+        End If
+        Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+        Dim sText As New StringBuilder
+        With sText
+            .Append(TxtFullDesc.Text)
+            .Append(sBorn)
+            .Append(If(oPerson.DeathYear = 0, "", sDied))
+        End With
+        wpText = sText.ToString
+        Return wpText
+    End Function
     Private Shared Function GetWikiBirthDate(_person As Person, Optional wikiId As String = "") As WikiBirthInfo
         Dim _wikiBirthInfo As New WikiBirthInfo(Nothing, GetWikiExtract(wikiId, 3), "")
         If String.IsNullOrEmpty(_wikiBirthInfo.WikiExtract.Trim) Then
@@ -771,6 +778,10 @@ Public NotInheritable Class FrmDateCheck
     Private Sub BtnUpdCbPicDesc_Click(sender As Object, e As EventArgs) Handles BtnUpdCbPicDesc.Click
         ShowStatus("Updating CB image description")
         Try
+            Dim oPerson As Person = personTable(DgvWarnings.SelectedRows(0).Index)
+            If oPerson IsNot Nothing Then
+                Clipboard.SetText(GetPictureText(oPerson))
+            End If
             Dim _selMonth As String = Format(toDate, "MMMM")
             Dim _selDay As String = CStr(toDate.Day)
             Dim sUrl As String = GetWordPressMonthUrl(newPageLoadYear, newPageLoadMonth, newPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo)) & BtnImgDesc.Text & "/"
