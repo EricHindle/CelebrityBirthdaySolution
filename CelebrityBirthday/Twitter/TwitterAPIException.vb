@@ -1,7 +1,14 @@
-﻿<Serializable>
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+<Serializable>
 Public Class TwitterAPIException
     Inherits System.Exception
-
+#Region "constructors"
     Public Sub New()
     End Sub
     Public Sub New(Message As String)
@@ -13,7 +20,11 @@ Public Class TwitterAPIException
     Public Sub New(InnerException As Exception)
         MyBase.New(Nothing, InnerException)
     End Sub
-
+    Protected Sub New(serializationInfo As Runtime.Serialization.SerializationInfo, streamingContext As Runtime.Serialization.StreamingContext)
+        Throw New NotImplementedException()
+    End Sub
+#End Region
+#Region "properties"
     Private _url As Uri
     Public Property Url() As Uri
         Get
@@ -63,8 +74,6 @@ Public Class TwitterAPIException
             _status = value
         End Set
     End Property
+#End Region
 
-    Protected Sub New(serializationInfo As Runtime.Serialization.SerializationInfo, streamingContext As Runtime.Serialization.StreamingContext)
-        Throw New NotImplementedException()
-    End Sub
 End Class

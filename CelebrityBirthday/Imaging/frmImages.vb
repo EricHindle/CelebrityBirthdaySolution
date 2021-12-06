@@ -1,19 +1,17 @@
-﻿Imports System.IO
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
 
+Imports System.IO
 Public NotInheritable Class FrmImages
 #Region "constants"
     Private Const SEP As String = "/"
 #End Region
 #Region "properties"
     Private _personId As Integer
-    Public Property PersonId() As Integer
-        Get
-            Return _personId
-        End Get
-        Set(ByVal value As Integer)
-            _personId = value
-        End Set
-    End Property
     Private _imagefile As String
     Public Property ImageFile() As String
         Get
@@ -23,8 +21,15 @@ Public NotInheritable Class FrmImages
             _imagefile = value
         End Set
     End Property
+    Public Property PersonId() As Integer
+        Get
+            Return _personId
+        End Get
+        Set(ByVal value As Integer)
+            _personId = value
+        End Set
+    End Property
 #End Region
-
 #Region "variables"
     Private bLoadingPerson As Boolean
     Private personTable As ArrayList
@@ -59,15 +64,6 @@ Public NotInheritable Class FrmImages
             ReplaceImageFile(_savedFile)
         End If
     End Sub
-
-    Private Sub ReplaceImageFile(savedFile As String)
-        If MsgBox("Use new saved file?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "New image") = MsgBoxResult.Yes Then
-            txtImgName.Text = Path.GetFileNameWithoutExtension(savedFile)
-            TxtImageFilename.Text = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.Text)
-            PictureBox2.ImageLocation = TxtImageFilename.Text
-        End If
-    End Sub
-
     Private Sub BirthDate_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         lblStatus.Text = String.Empty
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
@@ -197,6 +193,13 @@ Public NotInheritable Class FrmImages
     End Sub
 #End Region
 #Region "subroutines"
+    Private Sub ReplaceImageFile(savedFile As String)
+        If MsgBox("Use new saved file?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "New image") = MsgBoxResult.Yes Then
+            txtImgName.Text = Path.GetFileNameWithoutExtension(savedFile)
+            TxtImageFilename.Text = Path.Combine(My.Settings.ImgPath, txtImgName.Text & cbImgType.Text)
+            PictureBox2.ImageLocation = TxtImageFilename.Text
+        End If
+    End Sub
     Private Sub CloseForm()
         Me.Close()
     End Sub

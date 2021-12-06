@@ -1,19 +1,26 @@
-﻿Imports System.Text
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Text
 Imports System.Reflection
-
 Public NotInheritable Class FrmRmvPost
-
+#Region "form control handlers"
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
-
     Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
         LblMessage.Text = ""
         If Not String.IsNullOrEmpty(TxtExistingNo.Text) AndAlso IsNumeric(TxtExistingNo.Text) Then
+            LogUtil.Info("Removing BotSD Post", MyBase.Name)
             Dim _postNo As Integer = CInt(TxtExistingNo.Text)
             Dim postRows As DataRowCollection = GetBotsdViewByPostNo(_postNo)
             Dim postRowDetails As New StringBuilder
+            LogUtil.Info("Removing Id from social media records", MyBase.Name)
             For Each postRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In postRows
                 postRowDetails.Clear()
                 Dim updCt As Integer = 0
@@ -34,6 +41,7 @@ Public NotInheritable Class FrmRmvPost
                 End If
                 LblMessage.Text &= postRowDetails.ToString & vbCrLf
             Next
+            LogUtil.Info("Deleting BotSD record", MyBase.Name)
             Dim delCt As Integer = DeleteBotsdByPostNo(_postNo)
             postRowDetails.Clear()
             postRowDetails.Append("Post ").Append(_postNo)
@@ -47,7 +55,6 @@ Public NotInheritable Class FrmRmvPost
             MsgBox("Must supply existing and new numbers", MsgBoxStyle.Exclamation, "Error")
         End If
     End Sub
-
     Private Sub BtnCheck_Click(sender As Object, e As EventArgs) Handles BtnCheck.Click
         LblMessage.Text = ""
         If Not String.IsNullOrEmpty(TxtExistingNo.Text) AndAlso IsNumeric(TxtExistingNo.Text) Then
@@ -75,12 +82,11 @@ Public NotInheritable Class FrmRmvPost
             LblMessage.Text = My.Resources.SUPPLY_POST_NO
         End If
     End Sub
-
     Private Sub FrmRmvPost_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
     End Sub
-
     Private Sub FrmRmvPost_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
     End Sub
+#End Region
 End Class

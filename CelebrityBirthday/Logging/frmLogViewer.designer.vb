@@ -47,7 +47,7 @@ Partial Class FrmLogViewer
         '
         Me.OK_Button.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.OK_Button.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.OK_Button.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OK_Button.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.OK_Button.ForeColor = System.Drawing.Color.RoyalBlue
         Me.OK_Button.Location = New System.Drawing.Point(743, 534)
         Me.OK_Button.Margin = New System.Windows.Forms.Padding(2)
@@ -136,7 +136,7 @@ Partial Class FrmLogViewer
         Me.btnNoZoom.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnNoZoom.AutoSize = True
         Me.btnNoZoom.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.btnNoZoom.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNoZoom.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNoZoom.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnNoZoom.Location = New System.Drawing.Point(393, 536)
         Me.btnNoZoom.Margin = New System.Windows.Forms.Padding(2)
@@ -151,7 +151,7 @@ Partial Class FrmLogViewer
         '
         Me.BtnClearLog.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnClearLog.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnClearLog.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClearLog.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClearLog.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClearLog.Location = New System.Drawing.Point(14, 534)
         Me.BtnClearLog.Margin = New System.Windows.Forms.Padding(2)
@@ -166,7 +166,7 @@ Partial Class FrmLogViewer
         Me.BtnPrevFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnPrevFile.AutoSize = True
         Me.BtnPrevFile.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnPrevFile.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPrevFile.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPrevFile.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnPrevFile.Location = New System.Drawing.Point(489, 536)
         Me.BtnPrevFile.Margin = New System.Windows.Forms.Padding(2)
@@ -181,7 +181,7 @@ Partial Class FrmLogViewer
         Me.BtnNextFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnNextFile.AutoSize = True
         Me.BtnNextFile.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnNextFile.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNextFile.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnNextFile.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnNextFile.Location = New System.Drawing.Point(610, 537)
         Me.BtnNextFile.Margin = New System.Windows.Forms.Padding(2)
@@ -196,7 +196,7 @@ Partial Class FrmLogViewer
         Me.BtnToday.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnToday.AutoSize = True
         Me.BtnToday.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnToday.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnToday.Location = New System.Drawing.Point(534, 537)
         Me.BtnToday.Margin = New System.Windows.Forms.Padding(2)

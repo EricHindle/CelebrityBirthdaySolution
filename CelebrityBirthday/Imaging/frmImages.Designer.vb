@@ -106,7 +106,7 @@ Partial Class FrmImages
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClose.Location = New System.Drawing.Point(883, 564)
         Me.BtnClose.Name = "BtnClose"
@@ -138,7 +138,7 @@ Partial Class FrmImages
         'BtnPicSave
         '
         Me.BtnPicSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnPicSave.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPicSave.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPicSave.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnPicSave.Location = New System.Drawing.Point(913, 245)
         Me.BtnPicSave.Name = "BtnPicSave"
@@ -151,6 +151,7 @@ Partial Class FrmImages
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label12.Location = New System.Drawing.Point(340, 219)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(117, 13)
@@ -161,6 +162,7 @@ Partial Class FrmImages
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label13.Location = New System.Drawing.Point(340, 349)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(79, 13)
@@ -171,6 +173,7 @@ Partial Class FrmImages
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label1.Location = New System.Drawing.Point(337, 61)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 14)
@@ -257,6 +260,7 @@ Partial Class FrmImages
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label5.Location = New System.Drawing.Point(337, 179)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(101, 14)
@@ -266,7 +270,7 @@ Partial Class FrmImages
         'BtnLoadDateUpdate
         '
         Me.BtnLoadDateUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnLoadDateUpdate.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnLoadDateUpdate.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLoadDateUpdate.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnLoadDateUpdate.Location = New System.Drawing.Point(913, 99)
         Me.BtnLoadDateUpdate.Name = "BtnLoadDateUpdate"
@@ -310,6 +314,7 @@ Partial Class FrmImages
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label9.Location = New System.Drawing.Point(337, 136)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(73, 14)
@@ -320,6 +325,7 @@ Partial Class FrmImages
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label8.Location = New System.Drawing.Point(337, 105)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(76, 14)
@@ -328,7 +334,7 @@ Partial Class FrmImages
         '
         'BtnFindImage
         '
-        Me.BtnFindImage.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnFindImage.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnFindImage.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnFindImage.Location = New System.Drawing.Point(349, 538)
         Me.BtnFindImage.Name = "BtnFindImage"
@@ -341,6 +347,7 @@ Partial Class FrmImages
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label4.Location = New System.Drawing.Point(337, 23)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(18, 14)
@@ -359,7 +366,7 @@ Partial Class FrmImages
         'BtnClear
         '
         Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClear.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClear.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClear.Location = New System.Drawing.Point(913, 16)
         Me.BtnClear.Name = "BtnClear"
@@ -408,7 +415,7 @@ Partial Class FrmImages
         '
         'BtnSearchByName
         '
-        Me.BtnSearchByName.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSearchByName.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearchByName.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSearchByName.Location = New System.Drawing.Point(650, 550)
         Me.BtnSearchByName.Name = "BtnSearchByName"
@@ -419,7 +426,7 @@ Partial Class FrmImages
         '
         'BtnSearchById
         '
-        Me.BtnSearchById.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSearchById.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearchById.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSearchById.Location = New System.Drawing.Point(512, 564)
         Me.BtnSearchById.Name = "BtnSearchById"
@@ -518,6 +525,7 @@ Partial Class FrmImages
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label7.Location = New System.Drawing.Point(337, 484)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(125, 14)
@@ -527,6 +535,7 @@ Partial Class FrmImages
         'lblWpDateMsg
         '
         Me.lblWpDateMsg.AutoSize = True
+        Me.lblWpDateMsg.ForeColor = System.Drawing.Color.RoyalBlue
         Me.lblWpDateMsg.Location = New System.Drawing.Point(691, 485)
         Me.lblWpDateMsg.Name = "lblWpDateMsg"
         Me.lblWpDateMsg.Size = New System.Drawing.Size(157, 14)
@@ -639,6 +648,7 @@ Partial Class FrmImages
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TxtForename)
         Me.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmImages"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

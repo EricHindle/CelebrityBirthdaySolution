@@ -1,4 +1,11 @@
-﻿Public Class SocialMedia
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class SocialMedia
     Private _id As Integer
     Private _twitterHandle As String
     Private _noTweet As Boolean

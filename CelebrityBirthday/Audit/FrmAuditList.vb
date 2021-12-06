@@ -1,6 +1,16 @@
-﻿Public Class FrmAuditList
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class FrmAuditList
+#Region "variables"
     Private oTable As CelebrityBirthdayDataSet.AuditDataTable
     Private oPerson As Person
+#End Region
+#Region "properties"
     Private _personId As Integer
     Private _dataType As String
     Public Property DataType() As String
@@ -19,7 +29,9 @@
             _personId = value
         End Set
     End Property
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
+#End Region
+#Region "form control handlers"
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
     End Sub
     Private Sub FrmAuditList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -39,6 +51,8 @@
         End If
         LoadAuditView()
     End Sub
+#End Region
+#Region "subroutines"
     Private Sub LoadAuditView()
         DgvAudit.Rows.Clear()
         For Each oAuditRow As CelebrityBirthdayDataSet.AuditRow In oTable.Rows
@@ -49,4 +63,5 @@
             oViewRow.Cells(aud_date.Name).Value = If(oAuditRow.IschangedateNull, "", CStr(oAuditRow.changedate))
         Next
     End Sub
+#End Region
 End Class

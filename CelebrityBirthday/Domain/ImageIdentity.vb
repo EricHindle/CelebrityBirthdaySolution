@@ -1,4 +1,11 @@
-﻿Imports System.IO
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.IO
 Imports System.Reflection
 
 Public Class ImageIdentity

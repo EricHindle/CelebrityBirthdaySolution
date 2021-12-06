@@ -1,9 +1,10 @@
-﻿'
-' Copyright (c) 2021 Eric Hindle
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
-' Created May 2021
+'
+
 Public NotInheritable Class AuditUtil
     Private Shared ReadOnly auditTa As New CelebrityBirthdayDataSetTableAdapters.AuditTableAdapter
     Private Shared ReadOnly auditTable As New CelebrityBirthdayDataSet.AuditDataTable

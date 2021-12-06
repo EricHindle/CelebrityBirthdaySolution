@@ -1,5 +1,11 @@
-﻿Imports System.IO
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
 
+Imports System.IO
 Public Class FrmImageStore
 #Region "variables"
     Dim sImagePath As String
@@ -122,7 +128,7 @@ Public Class FrmImageStore
     Private Sub BtnEditImage_Click(sender As Object, e As EventArgs) Handles BtnEditImage.Click
         _savedImage = Nothing
         LogUtil.Info("Editing image " & _latestSavedFile, MyBase.Name)
-        Using _editImage As New frmImageCapture
+        Using _editImage As New FrmImageCapture
             _editImage.ImageFile = _latestSavedFile
             _editImage.Forename = TxtForename.Text
             _editImage.Surname = TxtSurname.Text
@@ -169,7 +175,6 @@ Public Class FrmImageStore
             PictureBox1.Image = Clipboard.GetImage
         End If
     End Sub
-
 #End Region
 #Region "functions"
     Private Sub OpenImageSearch()

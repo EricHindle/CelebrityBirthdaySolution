@@ -1,4 +1,11 @@
-﻿Imports System.IO
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.IO
 Imports System.Security
 
 Public Class frmTwitterOutput
@@ -77,6 +84,17 @@ Public Class frmTwitterOutput
             dtpTo.Value = dtpFrom.Value
         End If
     End Sub
+    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        TcFileTabs.TabPages.Clear()
+        tvBirthday.Nodes.Clear()
+    End Sub
+    Private Sub TvAnniv_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck
+        If e.Action <> TreeViewAction.Unknown Then
+            If e.Node.Nodes.Count > 0 Then
+                CheckAllChildNodes(e.Node, e.Node.Checked)
+            End If
+        End If
+    End Sub
 
 #End Region
 #Region "tree subroutines"
@@ -137,13 +155,6 @@ Public Class frmTwitterOutput
         Dim _age As Integer = CalculateAge(oPerson, ChkAtNextBirthday.Checked)
         Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
         _ageNode.Checked = (_type = "Birthday")
-    End Sub
-    Private Sub TvAnniv_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles tvBirthday.AfterCheck
-        If e.Action <> TreeViewAction.Unknown Then
-            If e.Node.Nodes.Count > 0 Then
-                CheckAllChildNodes(e.Node, e.Node.Checked)
-            End If
-        End If
     End Sub
     Private Sub CheckAllChildNodes(ByRef _treeNode As TreeNode, ByRef nodeChecked As Boolean)
         For Each _node As TreeNode In _treeNode.Nodes
@@ -391,11 +402,5 @@ Public Class frmTwitterOutput
         lblStatus.Text = _text
         StatusStrip1.Refresh()
     End Sub
-
-    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
-        TcFileTabs.TabPages.Clear()
-        tvBirthday.Nodes.Clear()
-    End Sub
-
 #End Region
 End Class

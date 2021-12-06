@@ -53,7 +53,7 @@ Partial Class FrmAlterPostNo
         'OK_Button
         '
         Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.OK_Button.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OK_Button.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.OK_Button.ForeColor = System.Drawing.Color.RoyalBlue
         Me.OK_Button.Location = New System.Drawing.Point(3, 4)
         Me.OK_Button.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -67,7 +67,7 @@ Partial Class FrmAlterPostNo
         '
         Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cancel_Button.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cancel_Button.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Cancel_Button.Location = New System.Drawing.Point(88, 4)
         Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -80,33 +80,33 @@ Partial Class FrmAlterPostNo
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label1.Location = New System.Drawing.Point(34, 39)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(142, 22)
+        Me.Label1.Size = New System.Drawing.Size(138, 17)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Existing Post number"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label2.Location = New System.Drawing.Point(34, 83)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(120, 22)
+        Me.Label2.Size = New System.Drawing.Size(117, 17)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "New Post number"
         '
         'chkAlterNextPostNo
         '
         Me.chkAlterNextPostNo.AutoSize = True
-        Me.chkAlterNextPostNo.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkAlterNextPostNo.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkAlterNextPostNo.ForeColor = System.Drawing.Color.RoyalBlue
         Me.chkAlterNextPostNo.Location = New System.Drawing.Point(38, 141)
         Me.chkAlterNextPostNo.Name = "chkAlterNextPostNo"
-        Me.chkAlterNextPostNo.Size = New System.Drawing.Size(317, 26)
+        Me.chkAlterNextPostNo.Size = New System.Drawing.Size(323, 21)
         Me.chkAlterNextPostNo.TabIndex = 3
         Me.chkAlterNextPostNo.Text = "Existing number becomes next available number"
         Me.chkAlterNextPostNo.UseVisualStyleBackColor = True

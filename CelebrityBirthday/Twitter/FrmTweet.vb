@@ -1,4 +1,11 @@
-﻿Imports System.Collections.ObjectModel
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Collections.ObjectModel
 Imports System.IO
 Imports System.Reflection
 Imports System.Text
@@ -50,30 +57,6 @@ Public NotInheritable Class FrmTweet
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
-    End Sub
-    Private Sub Horizontal_ValueChanged(sender As Object, e As System.EventArgs)
-        If Not IsNoGenerate Then
-            Dim _nud As NumericUpDown = TryCast(sender, NumericUpDown)
-            Dim _sp As SplitterPanel = TryCast(_nud.Parent, SplitterPanel)
-            If _sp IsNot Nothing Then
-                Dim _sc As SplitContainer = TryCast(_sp.Parent, SplitContainer)
-                If _sc IsNot Nothing Then
-                    Dim _tabpage As TabPage = TryCast(_sc.Parent, TabPage)
-                    If _tabpage IsNot Nothing Then
-                        Dim _index As Integer = _tabpage.TabIndex
-                        Dim pbControl As PictureBox = GetPictureBoxFromPage(_tabpage)
-                        GeneratePicture(pbControl, oTweetLists(_index), _nud.Value)
-                    End If
-                End If
-            End If
-        End If
-    End Sub
-    Private Sub RtbTextChanged(sender As Object, e As EventArgs)
-        TxtStats.Text = ""
-        For Each _page As TabPage In TabControl1.TabPages
-            Dim _rtb As RichTextBox = GetRichTextBoxFromPage(_page)
-            TxtStats.Text &= If(_rtb.TextLength >= TWEET_MAX_LEN, "** ", "") & _rtb.TextLength & vbCrLf
-        Next
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         ClearImages(False)
@@ -191,6 +174,30 @@ Public NotInheritable Class FrmTweet
     End Sub
 #End Region
 #Region "Form subroutines"
+    Private Sub Horizontal_ValueChanged(sender As Object, e As System.EventArgs)
+        If Not IsNoGenerate Then
+            Dim _nud As NumericUpDown = TryCast(sender, NumericUpDown)
+            Dim _sp As SplitterPanel = TryCast(_nud.Parent, SplitterPanel)
+            If _sp IsNot Nothing Then
+                Dim _sc As SplitContainer = TryCast(_sp.Parent, SplitContainer)
+                If _sc IsNot Nothing Then
+                    Dim _tabpage As TabPage = TryCast(_sc.Parent, TabPage)
+                    If _tabpage IsNot Nothing Then
+                        Dim _index As Integer = _tabpage.TabIndex
+                        Dim pbControl As PictureBox = GetPictureBoxFromPage(_tabpage)
+                        GeneratePicture(pbControl, oTweetLists(_index), _nud.Value)
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+    Private Sub RtbTextChanged(sender As Object, e As EventArgs)
+        TxtStats.Text = ""
+        For Each _page As TabPage In TabControl1.TabPages
+            Dim _rtb As RichTextBox = GetRichTextBoxFromPage(_page)
+            TxtStats.Text &= If(_rtb.TextLength >= TWEET_MAX_LEN, "** ", "") & _rtb.TextLength & vbCrLf
+        Next
+    End Sub
     Private Sub SelectPeople()
         If BuildTrees() Then
             GenerateAllTweets()

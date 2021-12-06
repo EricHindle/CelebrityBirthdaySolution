@@ -34,12 +34,12 @@ Partial Class FrmRmvPost
         'OK_Button
         '
         Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.OK_Button.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OK_Button.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.OK_Button.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.OK_Button.Location = New System.Drawing.Point(29, 239)
+        Me.OK_Button.Location = New System.Drawing.Point(29, 219)
         Me.OK_Button.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(78, 28)
+        Me.OK_Button.Size = New System.Drawing.Size(78, 48)
         Me.OK_Button.TabIndex = 0
         Me.OK_Button.Text = "Delete"
         Me.OK_Button.UseVisualStyleBackColor = True
@@ -48,12 +48,12 @@ Partial Class FrmRmvPost
         '
         Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cancel_Button.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cancel_Button.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Cancel_Button.Location = New System.Drawing.Point(288, 239)
+        Me.Cancel_Button.Location = New System.Drawing.Point(288, 231)
         Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(78, 28)
+        Me.Cancel_Button.Size = New System.Drawing.Size(78, 36)
         Me.Cancel_Button.TabIndex = 1
         Me.Cancel_Button.Text = "Close"
         Me.Cancel_Button.UseVisualStyleBackColor = True
@@ -68,23 +68,23 @@ Partial Class FrmRmvPost
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label1.Location = New System.Drawing.Point(47, 40)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(144, 22)
+        Me.Label1.Size = New System.Drawing.Size(137, 17)
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Deleted Post number"
         '
         'BtnCheck
         '
         Me.BtnCheck.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.BtnCheck.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCheck.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCheck.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnCheck.Location = New System.Drawing.Point(29, 193)
+        Me.BtnCheck.Location = New System.Drawing.Point(29, 144)
         Me.BtnCheck.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnCheck.Name = "BtnCheck"
-        Me.BtnCheck.Size = New System.Drawing.Size(78, 28)
+        Me.BtnCheck.Size = New System.Drawing.Size(78, 48)
         Me.BtnCheck.TabIndex = 7
         Me.BtnCheck.Text = "Check"
         Me.BtnCheck.UseVisualStyleBackColor = True

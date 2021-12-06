@@ -96,7 +96,7 @@ Partial Class frmTwitterOutput
         'btnWrite
         '
         Me.btnWrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnWrite.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnWrite.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnWrite.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnWrite.Location = New System.Drawing.Point(820, 413)
         Me.btnWrite.Name = "btnWrite"
@@ -108,7 +108,7 @@ Partial Class frmTwitterOutput
         'btnSelect
         '
         Me.btnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSelect.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSelect.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnSelect.Location = New System.Drawing.Point(820, 11)
         Me.btnSelect.Name = "btnSelect"
@@ -120,7 +120,7 @@ Partial Class frmTwitterOutput
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnClose.Location = New System.Drawing.Point(820, 604)
         Me.btnClose.Name = "btnClose"
@@ -134,7 +134,7 @@ Partial Class frmTwitterOutput
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.rbDailyFile)
         Me.GroupBox1.Controls.Add(Me.rbSingleFile)
-        Me.GroupBox1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.GroupBox1.Location = New System.Drawing.Point(820, 58)
         Me.GroupBox1.Name = "GroupBox1"
@@ -170,7 +170,7 @@ Partial Class frmTwitterOutput
         Me.GroupBox2.Controls.Add(Me.rbBoth)
         Me.GroupBox2.Controls.Add(Me.rbAnnivOnly)
         Me.GroupBox2.Controls.Add(Me.rbBirthdaysOnly)
-        Me.GroupBox2.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox2.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.ForeColor = System.Drawing.Color.RoyalBlue
         Me.GroupBox2.Location = New System.Drawing.Point(820, 152)
         Me.GroupBox2.Name = "GroupBox2"
@@ -306,7 +306,7 @@ Partial Class frmTwitterOutput
         'BtnRewrite
         '
         Me.BtnRewrite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnRewrite.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRewrite.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRewrite.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnRewrite.Location = New System.Drawing.Point(72, 497)
         Me.BtnRewrite.Name = "BtnRewrite"
@@ -318,7 +318,7 @@ Partial Class frmTwitterOutput
         'BtnCopyselected
         '
         Me.BtnCopyselected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCopyselected.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCopyselected.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyselected.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnCopyselected.Location = New System.Drawing.Point(820, 538)
         Me.BtnCopyselected.Name = "BtnCopyselected"
@@ -353,7 +353,7 @@ Partial Class frmTwitterOutput
         Me.GroupBox3.Controls.Add(Me.ChkAtNextBirthday)
         Me.GroupBox3.Controls.Add(Me.rbTwitter)
         Me.GroupBox3.Controls.Add(Me.rbAge)
-        Me.GroupBox3.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox3.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox3.ForeColor = System.Drawing.Color.RoyalBlue
         Me.GroupBox3.Location = New System.Drawing.Point(820, 293)
         Me.GroupBox3.Name = "GroupBox3"
@@ -387,7 +387,7 @@ Partial Class frmTwitterOutput
         'BtnClear
         '
         Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClear.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClear.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClear.Location = New System.Drawing.Point(820, 471)
         Me.BtnClear.Name = "BtnClear"
@@ -401,7 +401,7 @@ Partial Class frmTwitterOutput
         Me.ChkAtNextBirthday.AutoSize = True
         Me.ChkAtNextBirthday.Checked = True
         Me.ChkAtNextBirthday.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ChkAtNextBirthday.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkAtNextBirthday.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ChkAtNextBirthday.ForeColor = System.Drawing.Color.RoyalBlue
         Me.ChkAtNextBirthday.Location = New System.Drawing.Point(18, 46)
         Me.ChkAtNextBirthday.Name = "ChkAtNextBirthday"

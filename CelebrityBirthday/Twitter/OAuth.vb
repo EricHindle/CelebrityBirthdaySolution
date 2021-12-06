@@ -1,4 +1,11 @@
-﻿Imports System.Security.Cryptography
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Security.Cryptography
 Imports System.Text
 Imports System.Web
 Public Class OAuth

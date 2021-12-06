@@ -91,12 +91,12 @@ Partial Class FrmMenu2
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.White
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label1.Font = New System.Drawing.Font("Papyrus", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label1.Location = New System.Drawing.Point(135, 47)
+        Me.Label1.Location = New System.Drawing.Point(124, 51)
         Me.Label1.Name = "Label1"
         Me.Label1.Padding = New System.Windows.Forms.Padding(10)
-        Me.Label1.Size = New System.Drawing.Size(201, 52)
+        Me.Label1.Size = New System.Drawing.Size(216, 49)
         Me.Label1.TabIndex = 17
         Me.Label1.Text = "Celebrity Birthdays"
         '
@@ -203,7 +203,7 @@ Partial Class FrmMenu2
         '
         'FrmMenu2
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 19.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(352, 633)
@@ -218,7 +218,7 @@ Partial Class FrmMenu2
         Me.Controls.Add(Me.BtnSendTweet)
         Me.Controls.Add(Me.BtnTwitter)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Font = New System.Drawing.Font("Papyrus", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(6)

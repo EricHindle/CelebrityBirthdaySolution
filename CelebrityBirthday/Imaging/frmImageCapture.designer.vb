@@ -11,7 +11,7 @@ Partial Class FrmImageCapture
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmImageCapture))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmImageCapture))
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.BtnClose = New System.Windows.Forms.Button()
@@ -82,7 +82,7 @@ Partial Class FrmImageCapture
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.Location = New System.Drawing.Point(847, 457)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 34)
@@ -116,7 +116,7 @@ Partial Class FrmImageCapture
         '
         'Label1
         '
-        Me.Label1.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(132, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 27)
@@ -138,7 +138,7 @@ Partial Class FrmImageCapture
         'BtnClear
         '
         Me.BtnClear.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnClear.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClear.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.Location = New System.Drawing.Point(12, 144)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(89, 57)
@@ -149,7 +149,7 @@ Partial Class FrmImageCapture
         'lblCroppedImage
         '
         Me.lblCroppedImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblCroppedImage.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCroppedImage.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCroppedImage.Location = New System.Drawing.Point(765, 9)
         Me.lblCroppedImage.Name = "lblCroppedImage"
         Me.lblCroppedImage.Size = New System.Drawing.Size(140, 27)
@@ -160,7 +160,7 @@ Partial Class FrmImageCapture
         'BtnLoadImage
         '
         Me.BtnLoadImage.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnLoadImage.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnLoadImage.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLoadImage.Location = New System.Drawing.Point(12, 52)
         Me.BtnLoadImage.Name = "BtnLoadImage"
         Me.BtnLoadImage.Size = New System.Drawing.Size(89, 56)
@@ -172,7 +172,7 @@ Partial Class FrmImageCapture
         '
         Me.BtnSaveCroppedImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSaveCroppedImage.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnSaveCroppedImage.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSaveCroppedImage.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSaveCroppedImage.Location = New System.Drawing.Point(760, 216)
         Me.BtnSaveCroppedImage.Name = "BtnSaveCroppedImage"
         Me.BtnSaveCroppedImage.Size = New System.Drawing.Size(162, 32)
@@ -217,10 +217,10 @@ Partial Class FrmImageCapture
         '
         Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.Location = New System.Drawing.Point(12, 70)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(68, 19)
+        Me.Label6.Size = New System.Drawing.Size(63, 14)
         Me.Label6.TabIndex = 36
         Me.Label6.Text = "Brightness"
         '
@@ -242,10 +242,10 @@ Partial Class FrmImageCapture
         '
         Me.btnReset.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnReset.AutoSize = True
-        Me.btnReset.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReset.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnReset.Location = New System.Drawing.Point(17, 10)
         Me.btnReset.Name = "btnReset"
-        Me.btnReset.Size = New System.Drawing.Size(60, 19)
+        Me.btnReset.Size = New System.Drawing.Size(53, 14)
         Me.btnReset.TabIndex = 38
         Me.btnReset.Text = "Contrast"
         '
@@ -265,7 +265,7 @@ Partial Class FrmImageCapture
         '
         'BtnResetAdjustments
         '
-        Me.BtnResetAdjustments.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnResetAdjustments.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnResetAdjustments.Location = New System.Drawing.Point(12, 136)
         Me.BtnResetAdjustments.Name = "BtnResetAdjustments"
         Me.BtnResetAdjustments.Size = New System.Drawing.Size(75, 32)
@@ -288,13 +288,13 @@ Partial Class FrmImageCapture
         Me.pnlAdjustImage.Size = New System.Drawing.Size(100, 180)
         Me.pnlAdjustImage.TabIndex = 40
         '
-        'nudSaveSize
+        'NudSaveSize
         '
         Me.NudSaveSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NudSaveSize.Location = New System.Drawing.Point(833, 175)
         Me.NudSaveSize.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
         Me.NudSaveSize.Minimum = New Decimal(New Integer() {60, 0, 0, 0})
-        Me.NudSaveSize.Name = "nudSaveSize"
+        Me.NudSaveSize.Name = "NudSaveSize"
         Me.NudSaveSize.Size = New System.Drawing.Size(58, 23)
         Me.NudSaveSize.TabIndex = 42
         Me.NudSaveSize.Value = New Decimal(New Integer() {60, 0, 0, 0})
@@ -303,10 +303,10 @@ Partial Class FrmImageCapture
         '
         Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Papyrus", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(756, 177)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(66, 21)
+        Me.Label5.Size = New System.Drawing.Size(62, 16)
         Me.Label5.TabIndex = 43
         Me.Label5.Text = "Save size"
         '
@@ -341,10 +341,10 @@ Partial Class FrmImageCapture
         '
         Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.Location = New System.Drawing.Point(15, 79)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(53, 19)
+        Me.Label7.Size = New System.Drawing.Size(51, 14)
         Me.Label7.TabIndex = 44
         Me.Label7.Text = "Pen size"
         '
@@ -352,10 +352,10 @@ Partial Class FrmImageCapture
         '
         Me.rbYellow.AutoSize = True
         Me.rbYellow.Checked = True
-        Me.rbYellow.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbYellow.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbYellow.Location = New System.Drawing.Point(71, 48)
         Me.rbYellow.Name = "rbYellow"
-        Me.rbYellow.Size = New System.Drawing.Size(65, 23)
+        Me.rbYellow.Size = New System.Drawing.Size(61, 18)
         Me.rbYellow.TabIndex = 3
         Me.rbYellow.TabStop = True
         Me.rbYellow.Text = "Yellow"
@@ -364,10 +364,10 @@ Partial Class FrmImageCapture
         'rbRed
         '
         Me.rbRed.AutoSize = True
-        Me.rbRed.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbRed.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbRed.Location = New System.Drawing.Point(71, 22)
         Me.rbRed.Name = "rbRed"
-        Me.rbRed.Size = New System.Drawing.Size(50, 23)
+        Me.rbRed.Size = New System.Drawing.Size(46, 18)
         Me.rbRed.TabIndex = 2
         Me.rbRed.Text = "Red"
         Me.rbRed.UseVisualStyleBackColor = True
@@ -375,10 +375,10 @@ Partial Class FrmImageCapture
         'rbWhite
         '
         Me.rbWhite.AutoSize = True
-        Me.rbWhite.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbWhite.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbWhite.Location = New System.Drawing.Point(8, 48)
         Me.rbWhite.Name = "rbWhite"
-        Me.rbWhite.Size = New System.Drawing.Size(60, 23)
+        Me.rbWhite.Size = New System.Drawing.Size(58, 18)
         Me.rbWhite.TabIndex = 1
         Me.rbWhite.Text = "White"
         Me.rbWhite.UseVisualStyleBackColor = True
@@ -386,10 +386,10 @@ Partial Class FrmImageCapture
         'rbBlack
         '
         Me.rbBlack.AutoSize = True
-        Me.rbBlack.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbBlack.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbBlack.Location = New System.Drawing.Point(8, 22)
         Me.rbBlack.Name = "rbBlack"
-        Me.rbBlack.Size = New System.Drawing.Size(60, 23)
+        Me.rbBlack.Size = New System.Drawing.Size(52, 18)
         Me.rbBlack.TabIndex = 0
         Me.rbBlack.Text = "Black"
         Me.rbBlack.UseVisualStyleBackColor = True
@@ -397,7 +397,7 @@ Partial Class FrmImageCapture
         'BtnSave
         '
         Me.BtnSave.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnSave.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSave.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSave.Location = New System.Drawing.Point(12, 239)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(89, 57)
@@ -430,7 +430,7 @@ Partial Class FrmImageCapture
         Me.BtnResize.Text = "*"
         Me.BtnResize.UseVisualStyleBackColor = True
         '
-        'frmImageCapture
+        'FrmImageCapture
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -463,8 +463,9 @@ Partial Class FrmImageCapture
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmImageCapture"
+        Me.Name = "FrmImageCapture"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Image Capture"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         CType(Me.PicCapture, System.ComponentModel.ISupportInitialize).EndInit()

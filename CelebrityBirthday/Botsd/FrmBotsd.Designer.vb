@@ -130,6 +130,7 @@ Partial Class FrmBotsd
         Me.ChkHandles = New System.Windows.Forms.CheckBox()
         Me.BtnFb = New System.Windows.Forms.Button()
         Me.BtnNextDay = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -219,7 +220,7 @@ Partial Class FrmBotsd
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnClose.Location = New System.Drawing.Point(1210, 606)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -232,7 +233,7 @@ Partial Class FrmBotsd
         'BtnSend
         '
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSend.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSend.Location = New System.Drawing.Point(1060, 407)
         Me.BtnSend.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -258,11 +259,11 @@ Partial Class FrmBotsd
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label2.Location = New System.Drawing.Point(731, 25)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(42, 19)
+        Me.Label2.Size = New System.Drawing.Size(40, 14)
         Me.Label2.TabIndex = 10
         Me.Label2.Text = "Width"
         '
@@ -487,7 +488,7 @@ Partial Class FrmBotsd
         'BtnUpdate1
         '
         Me.BtnUpdate1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnUpdate1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdate1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnUpdate1.Location = New System.Drawing.Point(239, 21)
         Me.BtnUpdate1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -549,7 +550,7 @@ Partial Class FrmBotsd
         'BtnUpdate2
         '
         Me.BtnUpdate2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnUpdate2.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate2.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdate2.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnUpdate2.Location = New System.Drawing.Point(239, 22)
         Me.BtnUpdate2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -599,7 +600,7 @@ Partial Class FrmBotsd
         'BtnGenerate
         '
         Me.BtnGenerate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnGenerate.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnGenerate.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGenerate.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnGenerate.Location = New System.Drawing.Point(895, 359)
         Me.BtnGenerate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -612,7 +613,7 @@ Partial Class FrmBotsd
         'BtnSwap
         '
         Me.BtnSwap.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnSwap.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSwap.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSwap.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSwap.Location = New System.Drawing.Point(259, 407)
         Me.BtnSwap.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -637,7 +638,7 @@ Partial Class FrmBotsd
         '
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label3.Location = New System.Drawing.Point(849, 415)
         Me.Label3.Name = "Label3"
@@ -651,7 +652,7 @@ Partial Class FrmBotsd
         Me.chkImages.AutoSize = True
         Me.chkImages.Checked = True
         Me.chkImages.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkImages.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkImages.ForeColor = System.Drawing.Color.RoyalBlue
         Me.chkImages.Location = New System.Drawing.Point(730, 330)
         Me.chkImages.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -664,22 +665,22 @@ Partial Class FrmBotsd
         'LblDay
         '
         Me.LblDay.AutoSize = True
-        Me.LblDay.Font = New System.Drawing.Font("Papyrus", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDay.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblDay.ForeColor = System.Drawing.Color.RoyalBlue
         Me.LblDay.Location = New System.Drawing.Point(412, 15)
         Me.LblDay.Name = "LblDay"
-        Me.LblDay.Size = New System.Drawing.Size(24, 30)
+        Me.LblDay.Size = New System.Drawing.Size(20, 23)
         Me.LblDay.TabIndex = 47
         Me.LblDay.Text = "1"
         '
         'LblMonth
         '
         Me.LblMonth.AutoSize = True
-        Me.LblMonth.Font = New System.Drawing.Font("Papyrus", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblMonth.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblMonth.ForeColor = System.Drawing.Color.RoyalBlue
         Me.LblMonth.Location = New System.Drawing.Point(481, 15)
         Me.LblMonth.Name = "LblMonth"
-        Me.LblMonth.Size = New System.Drawing.Size(80, 30)
+        Me.LblMonth.Size = New System.Drawing.Size(76, 23)
         Me.LblMonth.TabIndex = 48
         Me.LblMonth.Text = "January"
         '
@@ -726,7 +727,7 @@ Partial Class FrmBotsd
         'BtnUpdate3
         '
         Me.BtnUpdate3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnUpdate3.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate3.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdate3.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnUpdate3.Location = New System.Drawing.Point(239, 21)
         Me.BtnUpdate3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -816,7 +817,7 @@ Partial Class FrmBotsd
         'BtnUpdate4
         '
         Me.BtnUpdate4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnUpdate4.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate4.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdate4.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnUpdate4.Location = New System.Drawing.Point(239, 22)
         Me.BtnUpdate4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -881,7 +882,7 @@ Partial Class FrmBotsd
         '
         Me.rbImageCentre.AutoSize = True
         Me.rbImageCentre.Checked = True
-        Me.rbImageCentre.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageCentre.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbImageCentre.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbImageCentre.Location = New System.Drawing.Point(23, 71)
         Me.rbImageCentre.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -895,7 +896,7 @@ Partial Class FrmBotsd
         'rbImageRight
         '
         Me.rbImageRight.AutoSize = True
-        Me.rbImageRight.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageRight.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbImageRight.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbImageRight.Location = New System.Drawing.Point(23, 44)
         Me.rbImageRight.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -908,7 +909,7 @@ Partial Class FrmBotsd
         'rbImageLeft
         '
         Me.rbImageLeft.AutoSize = True
-        Me.rbImageLeft.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageLeft.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbImageLeft.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbImageLeft.Location = New System.Drawing.Point(23, 16)
         Me.rbImageLeft.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -921,7 +922,7 @@ Partial Class FrmBotsd
         'BtnGenWp
         '
         Me.BtnGenWp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnGenWp.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnGenWp.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGenWp.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnGenWp.Location = New System.Drawing.Point(12, 409)
         Me.BtnGenWp.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -934,7 +935,7 @@ Partial Class FrmBotsd
         'BtnClearImages
         '
         Me.BtnClearImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnClearImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClearImages.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClearImages.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClearImages.Location = New System.Drawing.Point(730, 407)
         Me.BtnClearImages.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -947,7 +948,7 @@ Partial Class FrmBotsd
         'BtnSaveImage
         '
         Me.BtnSaveImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnSaveImage.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSaveImage.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSaveImage.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSaveImage.Location = New System.Drawing.Point(730, 359)
         Me.BtnSaveImage.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -960,7 +961,7 @@ Partial Class FrmBotsd
         'BtnWpPost
         '
         Me.BtnWpPost.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnWpPost.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnWpPost.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWpPost.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnWpPost.Location = New System.Drawing.Point(12, 457)
         Me.BtnWpPost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -973,7 +974,7 @@ Partial Class FrmBotsd
         'BtnCopyAll
         '
         Me.BtnCopyAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnCopyAll.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCopyAll.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyAll.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnCopyAll.Location = New System.Drawing.Point(1060, 359)
         Me.BtnCopyAll.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -985,7 +986,7 @@ Partial Class FrmBotsd
         '
         'BtnToday
         '
-        Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnToday.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnToday.Location = New System.Drawing.Point(16, 16)
         Me.BtnToday.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -1019,7 +1020,7 @@ Partial Class FrmBotsd
         '
         'BtnSelect
         '
-        Me.BtnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSelect.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSelect.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSelect.Location = New System.Drawing.Point(365, 54)
         Me.BtnSelect.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -1032,7 +1033,7 @@ Partial Class FrmBotsd
         'BtnAtoZ
         '
         Me.BtnAtoZ.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnAtoZ.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAtoZ.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAtoZ.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnAtoZ.Location = New System.Drawing.Point(12, 505)
         Me.BtnAtoZ.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -1045,7 +1046,7 @@ Partial Class FrmBotsd
         'BtnRemove
         '
         Me.BtnRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnRemove.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRemove.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRemove.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnRemove.Location = New System.Drawing.Point(374, 407)
         Me.BtnRemove.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -1058,7 +1059,7 @@ Partial Class FrmBotsd
         'BtnAlterPostNo
         '
         Me.BtnAlterPostNo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnAlterPostNo.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAlterPostNo.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAlterPostNo.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnAlterPostNo.Location = New System.Drawing.Point(12, 551)
         Me.BtnAlterPostNo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -1111,7 +1112,7 @@ Partial Class FrmBotsd
         'BtnUpdate6
         '
         Me.BtnUpdate6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnUpdate6.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate6.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdate6.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnUpdate6.Location = New System.Drawing.Point(239, 21)
         Me.BtnUpdate6.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -1201,7 +1202,7 @@ Partial Class FrmBotsd
         'BtnUpdate5
         '
         Me.BtnUpdate5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnUpdate5.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate5.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUpdate5.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnUpdate5.Location = New System.Drawing.Point(239, 20)
         Me.BtnUpdate5.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -1251,7 +1252,7 @@ Partial Class FrmBotsd
         'BtnRmvPostDetails
         '
         Me.BtnRmvPostDetails.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnRmvPostDetails.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRmvPostDetails.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRmvPostDetails.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnRmvPostDetails.Location = New System.Drawing.Point(12, 599)
         Me.BtnRmvPostDetails.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -1265,7 +1266,7 @@ Partial Class FrmBotsd
         '
         Me.ChkHandles.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ChkHandles.AutoSize = True
-        Me.ChkHandles.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkHandles.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ChkHandles.ForeColor = System.Drawing.Color.RoyalBlue
         Me.ChkHandles.Location = New System.Drawing.Point(867, 330)
         Me.ChkHandles.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -1278,7 +1279,7 @@ Partial Class FrmBotsd
         'BtnFb
         '
         Me.BtnFb.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnFb.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnFb.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnFb.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnFb.Location = New System.Drawing.Point(609, 407)
         Me.BtnFb.Name = "BtnFb"
@@ -1289,7 +1290,7 @@ Partial Class FrmBotsd
         '
         'BtnNextDay
         '
-        Me.BtnNextDay.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNextDay.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnNextDay.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnNextDay.Location = New System.Drawing.Point(97, 16)
         Me.BtnNextDay.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -1297,6 +1298,7 @@ Partial Class FrmBotsd
         Me.BtnNextDay.Size = New System.Drawing.Size(30, 30)
         Me.BtnNextDay.TabIndex = 65
         Me.BtnNextDay.Text = ">"
+        Me.ToolTip1.SetToolTip(Me.BtnNextDay, "Next Day")
         Me.BtnNextDay.UseVisualStyleBackColor = True
         '
         'FrmBotsd
@@ -1481,4 +1483,5 @@ Partial Class FrmBotsd
     Friend WithEvents LblSeq5 As Label
     Friend WithEvents BtnFb As Button
     Friend WithEvents BtnNextDay As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

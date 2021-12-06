@@ -1,7 +1,14 @@
-﻿Imports System.Drawing.Drawing2D
-Imports System.Drawing.Imaging
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
 
+Imports System.Drawing.Drawing2D
+Imports System.Drawing.Imaging
 Friend Module ImageUtil
+#Region "enums"
     Public Enum ImageType
         JPEG
         GIF
@@ -14,12 +21,13 @@ Friend Module ImageUtil
         Open
         Save
     End Enum
-
     Public Enum AlignType
         Right
         Left
         Centre
     End Enum
+#End Region
+#Region "variables"
     Private ReadOnly imageFilter As String() = {"jpeg files (*.jpg;*.jpeg;*.jpe;*.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif",
                                              "gif files (*.gif)|*.gif",
                                              "bmp files (*.bmp;*.dib;*.rle)|*.bmp;*.dib;*.rle",
@@ -27,7 +35,8 @@ Friend Module ImageUtil
                                              "png files (*.png)|*.png",
                                              "all files (*.*)|*.*"}
     Private ReadOnly sImageCacheFolder As String
-
+#End Region
+#Region "functions"
     Public Function ConvertImageTypeToFormat(ByVal imgType As ImageType) As Imaging.ImageFormat
         Dim iFormat As Imaging.ImageFormat = Imaging.ImageFormat.Jpeg
         Select Case imgType
@@ -179,7 +188,6 @@ Friend Module ImageUtil
         oEncoderParameters.Param(0) = oEncoderParameter
         Return oEncoderParameters
     End Function
-
     Public Sub GenerateImage(oPictureBox As PictureBox, imageTable As List(Of Person), widthImageCount As Integer, pHeight As Integer, pAlignType As AlignType)
         Dim mosaic As Image = New Bitmap(My.Resources.blank, Math.Max(60 * widthImageCount, 300), Math.Max((60 * pHeight) + 18, 80))
         Dim oGraphics As Graphics = Graphics.FromImage(mosaic)
@@ -219,5 +227,5 @@ Friend Module ImageUtil
         If oPictureBox IsNot Nothing Then oPictureBox.Image = mosaic.Clone
         mosaic.Dispose()
     End Sub
-
+#End Region
 End Module

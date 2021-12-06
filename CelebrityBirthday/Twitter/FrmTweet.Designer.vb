@@ -100,9 +100,11 @@ Partial Class FrmTweet
         '
         Me.LblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.LblStatus.Name = "LblStatus"
-        Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.LblStatus.Size = New System.Drawing.Size(3, 17)
+        Me.LblStatus.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.LblStatus.Size = New System.Drawing.Size(9, 17)
         '
         'PictureBox1
         '
@@ -137,7 +139,7 @@ Partial Class FrmTweet
         'BtnSaveImage
         '
         Me.BtnSaveImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnSaveImage.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSaveImage.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSaveImage.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSaveImage.Location = New System.Drawing.Point(1189, 140)
         Me.BtnSaveImage.Name = "BtnSaveImage"
@@ -149,11 +151,11 @@ Partial Class FrmTweet
         'LblImageCount
         '
         Me.LblImageCount.AutoSize = True
-        Me.LblImageCount.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblImageCount.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblImageCount.ForeColor = System.Drawing.Color.RoyalBlue
         Me.LblImageCount.Location = New System.Drawing.Point(306, 269)
         Me.LblImageCount.Name = "LblImageCount"
-        Me.LblImageCount.Size = New System.Drawing.Size(63, 22)
+        Me.LblImageCount.Size = New System.Drawing.Size(64, 17)
         Me.LblImageCount.TabIndex = 6
         Me.LblImageCount.Text = "0 Images"
         '
@@ -181,7 +183,7 @@ Partial Class FrmTweet
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnClose.Location = New System.Drawing.Point(1189, 716)
         Me.btnClose.Name = "btnClose"
@@ -205,11 +207,11 @@ Partial Class FrmTweet
         '
         Me.RbSplitImages.AutoSize = True
         Me.RbSplitImages.Checked = True
-        Me.RbSplitImages.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RbSplitImages.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbSplitImages.ForeColor = System.Drawing.Color.RoyalBlue
         Me.RbSplitImages.Location = New System.Drawing.Point(23, 44)
         Me.RbSplitImages.Name = "RbSplitImages"
-        Me.RbSplitImages.Size = New System.Drawing.Size(100, 22)
+        Me.RbSplitImages.Size = New System.Drawing.Size(97, 17)
         Me.RbSplitImages.TabIndex = 1
         Me.RbSplitImages.TabStop = True
         Me.RbSplitImages.Text = "Twitter Images"
@@ -218,11 +220,11 @@ Partial Class FrmTweet
         'RbSingleImage
         '
         Me.RbSingleImage.AutoSize = True
-        Me.RbSingleImage.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RbSingleImage.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbSingleImage.ForeColor = System.Drawing.Color.RoyalBlue
         Me.RbSingleImage.Location = New System.Drawing.Point(23, 16)
         Me.RbSingleImage.Name = "RbSingleImage"
-        Me.RbSingleImage.Size = New System.Drawing.Size(92, 22)
+        Me.RbSingleImage.Size = New System.Drawing.Size(86, 17)
         Me.RbSingleImage.TabIndex = 0
         Me.RbSingleImage.Text = "Single Image"
         Me.RbSingleImage.UseVisualStyleBackColor = True
@@ -276,7 +278,7 @@ Partial Class FrmTweet
         'BtnSend
         '
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnSend.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSend.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSend.Location = New System.Drawing.Point(206, 576)
         Me.BtnSend.Name = "BtnSend"
@@ -300,7 +302,7 @@ Partial Class FrmTweet
         'BtnCopyselected
         '
         Me.BtnCopyselected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCopyselected.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCopyselected.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyselected.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnCopyselected.Location = New System.Drawing.Point(1189, 220)
         Me.BtnCopyselected.Name = "BtnCopyselected"
@@ -330,7 +332,7 @@ Partial Class FrmTweet
         'BtnCopyAll
         '
         Me.BtnCopyAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCopyAll.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCopyAll.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyAll.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnCopyAll.Location = New System.Drawing.Point(1189, 181)
         Me.BtnCopyAll.Name = "BtnCopyAll"
@@ -352,11 +354,11 @@ Partial Class FrmTweet
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label1.Location = New System.Drawing.Point(754, 10)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(78, 22)
+        Me.Label1.Size = New System.Drawing.Size(69, 17)
         Me.Label1.TabIndex = 24
         Me.Label1.Text = "per Tweet"
         '
@@ -372,7 +374,7 @@ Partial Class FrmTweet
         '
         'BtnToday
         '
-        Me.BtnToday.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnToday.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnToday.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnToday.Location = New System.Drawing.Point(14, 7)
         Me.BtnToday.Name = "BtnToday"
@@ -393,7 +395,7 @@ Partial Class FrmTweet
         '
         'btnSelect
         '
-        Me.btnSelect.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSelect.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSelect.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnSelect.Location = New System.Drawing.Point(280, 67)
         Me.btnSelect.Name = "btnSelect"
@@ -434,11 +436,11 @@ Partial Class FrmTweet
         '
         Me.rbImageCentre.AutoSize = True
         Me.rbImageCentre.Checked = True
-        Me.rbImageCentre.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageCentre.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbImageCentre.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbImageCentre.Location = New System.Drawing.Point(23, 66)
         Me.rbImageCentre.Name = "rbImageCentre"
-        Me.rbImageCentre.Size = New System.Drawing.Size(92, 22)
+        Me.rbImageCentre.Size = New System.Drawing.Size(88, 17)
         Me.rbImageCentre.TabIndex = 2
         Me.rbImageCentre.TabStop = True
         Me.rbImageCentre.Text = "ImageCentre"
@@ -447,11 +449,11 @@ Partial Class FrmTweet
         'rbImageRight
         '
         Me.rbImageRight.AutoSize = True
-        Me.rbImageRight.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageRight.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbImageRight.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbImageRight.Location = New System.Drawing.Point(23, 41)
         Me.rbImageRight.Name = "rbImageRight"
-        Me.rbImageRight.Size = New System.Drawing.Size(84, 22)
+        Me.rbImageRight.Size = New System.Drawing.Size(83, 17)
         Me.rbImageRight.TabIndex = 1
         Me.rbImageRight.Text = "Image Right"
         Me.rbImageRight.UseVisualStyleBackColor = True
@@ -459,11 +461,11 @@ Partial Class FrmTweet
         'rbImageLeft
         '
         Me.rbImageLeft.AutoSize = True
-        Me.rbImageLeft.Font = New System.Drawing.Font("Papyrus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbImageLeft.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbImageLeft.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbImageLeft.Location = New System.Drawing.Point(23, 16)
         Me.rbImageLeft.Name = "rbImageLeft"
-        Me.rbImageLeft.Size = New System.Drawing.Size(77, 22)
+        Me.rbImageLeft.Size = New System.Drawing.Size(74, 17)
         Me.rbImageLeft.TabIndex = 0
         Me.rbImageLeft.Text = "ImageLeft"
         Me.rbImageLeft.UseVisualStyleBackColor = True
@@ -485,11 +487,11 @@ Partial Class FrmTweet
         Me.ChkAtNextBirthday.AutoSize = True
         Me.ChkAtNextBirthday.Checked = True
         Me.ChkAtNextBirthday.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ChkAtNextBirthday.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkAtNextBirthday.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ChkAtNextBirthday.ForeColor = System.Drawing.Color.RoyalBlue
         Me.ChkAtNextBirthday.Location = New System.Drawing.Point(28, 72)
         Me.ChkAtNextBirthday.Name = "ChkAtNextBirthday"
-        Me.ChkAtNextBirthday.Size = New System.Drawing.Size(103, 22)
+        Me.ChkAtNextBirthday.Size = New System.Drawing.Size(104, 17)
         Me.ChkAtNextBirthday.TabIndex = 37
         Me.ChkAtNextBirthday.Text = "at next birthday"
         Me.ChkAtNextBirthday.UseVisualStyleBackColor = True
@@ -497,11 +499,11 @@ Partial Class FrmTweet
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RadioButton1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RadioButton1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.RadioButton1.Location = New System.Drawing.Point(16, 105)
         Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(59, 23)
+        Me.RadioButton1.Size = New System.Drawing.Size(54, 18)
         Me.RadioButton1.TabIndex = 36
         Me.RadioButton1.Text = "None"
         Me.RadioButton1.UseVisualStyleBackColor = True
@@ -510,11 +512,11 @@ Partial Class FrmTweet
         '
         Me.rbHandles.AutoSize = True
         Me.rbHandles.Checked = True
-        Me.rbHandles.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbHandles.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbHandles.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbHandles.Location = New System.Drawing.Point(16, 14)
         Me.rbHandles.Name = "rbHandles"
-        Me.rbHandles.Size = New System.Drawing.Size(119, 23)
+        Me.rbHandles.Size = New System.Drawing.Size(112, 18)
         Me.rbHandles.TabIndex = 34
         Me.rbHandles.TabStop = True
         Me.rbHandles.Text = "Twitter Handles"
@@ -523,11 +525,11 @@ Partial Class FrmTweet
         'rbAges
         '
         Me.rbAges.AutoSize = True
-        Me.rbAges.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbAges.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbAges.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbAges.Location = New System.Drawing.Point(16, 44)
         Me.rbAges.Name = "rbAges"
-        Me.rbAges.Size = New System.Drawing.Size(87, 23)
+        Me.rbAges.Size = New System.Drawing.Size(77, 18)
         Me.rbAges.TabIndex = 35
         Me.rbAges.Text = "Age/Year"
         Me.rbAges.UseVisualStyleBackColor = True
@@ -544,11 +546,11 @@ Partial Class FrmTweet
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label3.Location = New System.Drawing.Point(10, 24)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(62, 19)
+        Me.Label3.Size = New System.Drawing.Size(52, 14)
         Me.Label3.TabIndex = 32
         Me.Label3.Text = "Send As"
         '
@@ -557,11 +559,11 @@ Partial Class FrmTweet
         Me.chkImages.AutoSize = True
         Me.chkImages.Checked = True
         Me.chkImages.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkImages.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkImages.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkImages.ForeColor = System.Drawing.Color.RoyalBlue
         Me.chkImages.Location = New System.Drawing.Point(24, 75)
         Me.chkImages.Name = "chkImages"
-        Me.chkImages.Size = New System.Drawing.Size(107, 23)
+        Me.chkImages.Size = New System.Drawing.Size(109, 18)
         Me.chkImages.TabIndex = 0
         Me.chkImages.Text = "Include Images"
         Me.chkImages.UseVisualStyleBackColor = True
@@ -581,7 +583,7 @@ Partial Class FrmTweet
         '
         'BtnReGen
         '
-        Me.BtnReGen.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReGen.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnReGen.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnReGen.Location = New System.Drawing.Point(280, 123)
         Me.BtnReGen.Name = "BtnReGen"
@@ -593,11 +595,11 @@ Partial Class FrmTweet
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label4.Location = New System.Drawing.Point(1063, 11)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(78, 22)
+        Me.Label4.Size = New System.Drawing.Size(69, 17)
         Me.Label4.TabIndex = 34
         Me.Label4.Text = "per Tweet"
         '
@@ -614,28 +616,28 @@ Partial Class FrmTweet
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label5.Location = New System.Drawing.Point(613, 11)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(73, 22)
+        Me.Label5.Size = New System.Drawing.Size(65, 17)
         Me.Label5.TabIndex = 35
         Me.Label5.Text = "Birthdays"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label6.Location = New System.Drawing.Point(899, 12)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(96, 22)
+        Me.Label6.Size = New System.Drawing.Size(87, 17)
         Me.Label6.TabIndex = 36
         Me.Label6.Text = "Anniversaries"
         '
         'BtnTotd
         '
-        Me.BtnTotd.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnTotd.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnTotd.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnTotd.Location = New System.Drawing.Point(259, 205)
         Me.BtnTotd.Name = "BtnTotd"
@@ -647,7 +649,7 @@ Partial Class FrmTweet
         'BtnUncheck
         '
         Me.BtnUncheck.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnUncheck.Font = New System.Drawing.Font("Papyrus", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUncheck.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUncheck.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnUncheck.Location = New System.Drawing.Point(14, 719)
         Me.BtnUncheck.Name = "BtnUncheck"
@@ -659,7 +661,7 @@ Partial Class FrmTweet
         'BtnDeleteImages
         '
         Me.BtnDeleteImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnDeleteImages.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDeleteImages.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDeleteImages.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnDeleteImages.Location = New System.Drawing.Point(951, 716)
         Me.BtnDeleteImages.Name = "BtnDeleteImages"
@@ -670,7 +672,7 @@ Partial Class FrmTweet
         '
         'BtnNext
         '
-        Me.BtnNext.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNext.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnNext.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnNext.Location = New System.Drawing.Point(452, 7)
         Me.BtnNext.Name = "BtnNext"
@@ -682,7 +684,7 @@ Partial Class FrmTweet
         'BtnExplorer
         '
         Me.BtnExplorer.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnExplorer.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnExplorer.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnExplorer.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnExplorer.Location = New System.Drawing.Point(501, 716)
         Me.BtnExplorer.Name = "BtnExplorer"
@@ -694,7 +696,7 @@ Partial Class FrmTweet
         'BtnTweetDeck
         '
         Me.BtnTweetDeck.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnTweetDeck.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnTweetDeck.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnTweetDeck.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnTweetDeck.Location = New System.Drawing.Point(656, 716)
         Me.BtnTweetDeck.Name = "BtnTweetDeck"

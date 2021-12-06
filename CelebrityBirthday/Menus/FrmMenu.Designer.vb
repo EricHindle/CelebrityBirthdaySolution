@@ -42,6 +42,7 @@ Partial Class FrmMenu
         '
         'BtnDatabase
         '
+        Me.BtnDatabase.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDatabase.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnDatabase.Location = New System.Drawing.Point(21, 263)
         Me.BtnDatabase.Name = "BtnDatabase"
@@ -52,6 +53,7 @@ Partial Class FrmMenu
         '
         'BtnImages
         '
+        Me.BtnImages.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnImages.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnImages.Location = New System.Drawing.Point(202, 263)
         Me.BtnImages.Name = "BtnImages"
@@ -62,6 +64,7 @@ Partial Class FrmMenu
         '
         'BtnPictures
         '
+        Me.BtnPictures.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPictures.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnPictures.Location = New System.Drawing.Point(202, 409)
         Me.BtnPictures.Name = "BtnPictures"
@@ -72,6 +75,7 @@ Partial Class FrmMenu
         '
         'BtnOptions
         '
+        Me.BtnOptions.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnOptions.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnOptions.Location = New System.Drawing.Point(21, 481)
         Me.BtnOptions.Name = "BtnOptions"
@@ -82,6 +86,7 @@ Partial Class FrmMenu
         '
         'BtnSearch
         '
+        Me.BtnSearch.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearch.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnSearch.Location = New System.Drawing.Point(21, 190)
         Me.BtnSearch.Name = "BtnSearch"
@@ -93,6 +98,7 @@ Partial Class FrmMenu
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnClose.Location = New System.Drawing.Point(202, 571)
         Me.BtnClose.Name = "BtnClose"
@@ -106,17 +112,18 @@ Partial Class FrmMenu
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.White
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label1.Font = New System.Drawing.Font("Papyrus", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label1.Location = New System.Drawing.Point(152, 57)
         Me.Label1.Name = "Label1"
         Me.Label1.Padding = New System.Windows.Forms.Padding(10)
-        Me.Label1.Size = New System.Drawing.Size(252, 60)
+        Me.Label1.Size = New System.Drawing.Size(216, 49)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "Celebrity Birthdays"
         '
         'BtnWordPress
         '
+        Me.BtnWordPress.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWordPress.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnWordPress.Location = New System.Drawing.Point(202, 336)
         Me.BtnWordPress.Name = "BtnWordPress"
@@ -127,6 +134,7 @@ Partial Class FrmMenu
         '
         'BtnTweet
         '
+        Me.BtnTweet.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnTweet.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnTweet.Location = New System.Drawing.Point(21, 336)
         Me.BtnTweet.Name = "BtnTweet"
@@ -148,6 +156,7 @@ Partial Class FrmMenu
         '
         'BtnMore
         '
+        Me.BtnMore.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnMore.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnMore.Location = New System.Drawing.Point(202, 481)
         Me.BtnMore.Name = "BtnMore"
@@ -161,11 +170,11 @@ Partial Class FrmMenu
         Me.Version.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Version.AutoSize = True
         Me.Version.BackColor = System.Drawing.Color.Transparent
-        Me.Version.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Version.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Version.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Version.Location = New System.Drawing.Point(17, 640)
         Me.Version.Name = "Version"
-        Me.Version.Size = New System.Drawing.Size(180, 27)
+        Me.Version.Size = New System.Drawing.Size(156, 17)
         Me.Version.TabIndex = 12
         Me.Version.Text = "Version {0}.{1}.{2}.{3}"
         Me.Version.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -181,7 +190,7 @@ Partial Class FrmMenu
         '
         'BtnBotsdWP
         '
-        Me.BtnBotsdWP.Font = New System.Drawing.Font("Papyrus", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBotsdWP.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBotsdWP.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnBotsdWP.Location = New System.Drawing.Point(21, 409)
         Me.BtnBotsdWP.Name = "BtnBotsdWP"
@@ -192,7 +201,7 @@ Partial Class FrmMenu
         '
         'FrmMenu
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 28.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(412, 671)
@@ -211,7 +220,7 @@ Partial Class FrmMenu
         Me.Controls.Add(Me.BtnPictures)
         Me.Controls.Add(Me.BtnImages)
         Me.Controls.Add(Me.BtnDatabase)
-        Me.Font = New System.Drawing.Font("Papyrus", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)

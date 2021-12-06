@@ -1,15 +1,23 @@
-﻿Imports System.IO
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.IO
 
 Public Class FrmMosaic
+#Region "properties"
     Dim _width As Integer
     Dim _height As Integer
     Dim isChangingSize As Boolean = False
     Private _imageList As New List(Of Person)
+#End Region
+#Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
-
     End Sub
-
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         DisplayStatus("Saving File")
         Dim _path As String = My.Settings.MosaicImagePath
@@ -20,19 +28,6 @@ Public Class FrmMosaic
         ImageUtil.SaveImageFromPictureBox(PictureBox1, (_width * 60), (_height * 60), _fileName)
         DisplayStatus("File saved : " & _fileName)
     End Sub
-
-    Private Sub DisplayStatus(_text As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = True)
-        If isAppend Then
-            lblStatus.Text &= _text
-        Else
-            lblStatus.Text = _text
-        End If
-        If isLogged Then
-            LogUtil.Info(_text, "FrmMosaic")
-        End If
-        StatusStrip1.Refresh()
-    End Sub
-
     Private Sub GenerateImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
         DisplayStatus("Generating Image")
         Dim _mosaic As Image = New Bitmap(My.Resources.blank, 60 * _width, 60 * _height)
@@ -63,7 +58,6 @@ Public Class FrmMosaic
         LblImgShown.Refresh()
         DisplayStatus("Image complete")
     End Sub
-
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
         Dim ct As Integer = 0
         DisplayStatus("Selecting Images")
@@ -101,9 +95,7 @@ Public Class FrmMosaic
         GenerateImage(PictureBox1, _imageList, _width, _height)
         _PersonTable.Dispose()
         _PersonTa.Dispose()
-
     End Sub
-
     Private Sub NudWidth_ValueChanged(sender As Object, e As EventArgs) Handles NudWidth.ValueChanged
         If Not isChangingSize Then
             isChangingSize = True
@@ -147,20 +139,31 @@ Public Class FrmMosaic
             GenerateImage(PictureBox1, _imageList, _width, _height)
         End If
     End Sub
-
     Private Sub FrmMosaic_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
         For Each _person As Person In _imageList
             _person.Dispose()
         Next
     End Sub
-
     Private Sub FrmMosaic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
     End Sub
-
     Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
         CboDay.SelectedIndex = Today.Day
         cboMonth.SelectedIndex = Today.Month - 1
     End Sub
+#End Region
+#Region "subroutines"
+    Private Sub DisplayStatus(_text As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = True)
+        If isAppend Then
+            lblStatus.Text &= _text
+        Else
+            lblStatus.Text = _text
+        End If
+        If isLogged Then
+            LogUtil.Info(_text, "FrmMosaic")
+        End If
+        StatusStrip1.Refresh()
+    End Sub
+#End Region
 End Class

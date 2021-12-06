@@ -1,4 +1,11 @@
-﻿Public Class CbDates
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class CbDates
 #Region "properties"
     Private _birthdate As CbDate
     Private _deathDate As CbDate

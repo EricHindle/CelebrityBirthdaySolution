@@ -59,6 +59,7 @@ Partial Class FrmFacebookTest
         'BtnCancel
         '
         Me.BtnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnCancel.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnCancel.Location = New System.Drawing.Point(990, 596)
         Me.BtnCancel.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnCancel.Name = "BtnCancel"
@@ -70,6 +71,7 @@ Partial Class FrmFacebookTest
         'BtnTest1
         '
         Me.BtnTest1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnTest1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.BtnTest1.Location = New System.Drawing.Point(12, 595)
         Me.BtnTest1.Name = "BtnTest1"
         Me.BtnTest1.Size = New System.Drawing.Size(75, 42)
@@ -104,6 +106,7 @@ Partial Class FrmFacebookTest
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label1.Location = New System.Drawing.Point(12, 478)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(110, 17)
@@ -114,6 +117,7 @@ Partial Class FrmFacebookTest
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label2.Location = New System.Drawing.Point(12, 389)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(107, 17)
@@ -135,6 +139,7 @@ Partial Class FrmFacebookTest
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Button1.Location = New System.Drawing.Point(541, 398)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(85, 31)
@@ -228,6 +233,7 @@ Partial Class FrmFacebookTest
         '
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label3.Location = New System.Drawing.Point(538, 15)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(40, 17)
@@ -238,6 +244,7 @@ Partial Class FrmFacebookTest
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
+        Me.Label4.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label4.Location = New System.Drawing.Point(538, 117)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(55, 17)
@@ -248,6 +255,7 @@ Partial Class FrmFacebookTest
         '
         Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
+        Me.Label5.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label5.Location = New System.Drawing.Point(538, 83)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(24, 17)
@@ -258,6 +266,7 @@ Partial Class FrmFacebookTest
         '
         Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
+        Me.Label6.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label6.Location = New System.Drawing.Point(538, 242)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(36, 17)
@@ -268,6 +277,7 @@ Partial Class FrmFacebookTest
         '
         Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label7.Location = New System.Drawing.Point(538, 151)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(40, 17)
@@ -278,6 +288,7 @@ Partial Class FrmFacebookTest
         '
         Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label8.AutoSize = True
+        Me.Label8.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label8.Location = New System.Drawing.Point(538, 276)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(34, 17)
@@ -288,6 +299,7 @@ Partial Class FrmFacebookTest
         '
         Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
+        Me.Label9.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label9.Location = New System.Drawing.Point(538, 344)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(66, 17)
@@ -298,6 +310,7 @@ Partial Class FrmFacebookTest
         '
         Me.Label10.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label10.AutoSize = True
+        Me.Label10.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label10.Location = New System.Drawing.Point(538, 310)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(69, 17)
@@ -308,6 +321,7 @@ Partial Class FrmFacebookTest
         '
         Me.cbSSL.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbSSL.AutoSize = True
+        Me.cbSSL.ForeColor = System.Drawing.Color.RoyalBlue
         Me.cbSSL.Location = New System.Drawing.Point(615, 371)
         Me.cbSSL.Name = "cbSSL"
         Me.cbSSL.Size = New System.Drawing.Size(94, 21)
@@ -333,9 +347,10 @@ Partial Class FrmFacebookTest
         '
         'Button2
         '
+        Me.Button2.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Button2.Location = New System.Drawing.Point(881, 341)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(63, 23)
+        Me.Button2.Size = New System.Drawing.Size(63, 31)
         Me.Button2.TabIndex = 28
         Me.Button2.Text = "gmail"
         Me.Button2.UseVisualStyleBackColor = True
@@ -378,7 +393,7 @@ Partial Class FrmFacebookTest
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmFacebookTest"
-        Me.Text = "FrmFacebookTest"
+        Me.Text = "Facebook Test"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)

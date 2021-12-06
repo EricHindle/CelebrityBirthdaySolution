@@ -1,4 +1,12 @@
-﻿Public Class FrmMenu
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class FrmMenu
+#Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
     End Sub
@@ -10,7 +18,6 @@
         End Using
         Me.Show()
     End Sub
-
     Private Sub BtnDatabase_Click(sender As Object, e As EventArgs) Handles BtnDatabase.Click
         Me.Hide()
         Using _database As New FrmUpdateDatabase
@@ -63,23 +70,6 @@
         Version.Text = System.String.Format(myStringFormatProvider, Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
         InitialiseApplication()
     End Sub
-    Private Sub InitialiseApplication()
-        If My.Settings.callUpgrade = 0 Then
-            My.Settings.Upgrade()
-            My.Settings.callUpgrade = 1
-            My.Settings.Save()
-        End If
-        LogUtil.LogFolder = My.Settings.LogFolder
-        Dim celebCount As Integer = CountPeople()
-        If celebCount >= 0 Then
-            LblCelebrities.Text = System.String.Format(myStringFormatProvider, LblCelebrities.Text, CStr(celebCount))
-        Else
-            LogUtil.Fatal("Database not available", MyBase.Name)
-            Me.Close()
-        End If
-        '  LogUtil.StartLogging()
-    End Sub
-
     Private Sub BtnMore_Click(sender As Object, e As EventArgs) Handles BtnMore.Click
         Me.Hide()
         Using _menu2 As New FrmMenu2
@@ -87,7 +77,6 @@
         End Using
         Me.Show()
     End Sub
-
     Private Sub BtnBotsdWP_Click(sender As Object, e As EventArgs) Handles BtnBotsdWP.Click
         Me.Hide()
         Using _botsd As New FrmBotsd
@@ -96,11 +85,9 @@
         End Using
         Me.Show()
     End Sub
-
     Private Sub FrmMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
     End Sub
-
     Private Sub FrmMenu_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.Refresh()
         LogUtil.Info("Checking arguments", MyBase.Name)
@@ -132,4 +119,22 @@
             End If
         End If
     End Sub
+#End Region
+#Region "subroutines"
+    Private Sub InitialiseApplication()
+        If My.Settings.callUpgrade = 0 Then
+            My.Settings.Upgrade()
+            My.Settings.callUpgrade = 1
+            My.Settings.Save()
+        End If
+        LogUtil.LogFolder = My.Settings.LogFolder
+        Dim celebCount As Integer = CountPeople()
+        If celebCount >= 0 Then
+            LblCelebrities.Text = System.String.Format(myStringFormatProvider, LblCelebrities.Text, CStr(celebCount))
+        Else
+            LogUtil.Fatal("Database not available", MyBase.Name)
+            Me.Close()
+        End If
+    End Sub
+#End Region
 End Class

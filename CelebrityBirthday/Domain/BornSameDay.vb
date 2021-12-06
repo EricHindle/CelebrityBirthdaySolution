@@ -1,4 +1,11 @@
-﻿Public Class BornSameDay
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class BornSameDay
     Private _id As Integer
     Private _day As Integer
     Private _month As Integer

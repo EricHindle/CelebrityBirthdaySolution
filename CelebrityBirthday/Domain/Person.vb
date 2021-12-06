@@ -1,4 +1,11 @@
-﻿Public Class Person
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class Person
     Implements IDisposable
 #Region "properties"
     Private _id As Integer

@@ -24,15 +24,15 @@ Partial Class FrmAuditList
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmAuditList))
         Me.DgvAudit = New System.Windows.Forms.DataGridView()
+        Me.aud_datatype = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.aud_before = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.aud_after = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.aud_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.LblDataType = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LblName = New System.Windows.Forms.Label()
         Me.BtnClose = New System.Windows.Forms.Button()
-        Me.aud_datatype = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.aud_before = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.aud_after = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.aud_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvAudit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -48,8 +48,34 @@ Partial Class FrmAuditList
         Me.DgvAudit.Location = New System.Drawing.Point(12, 52)
         Me.DgvAudit.Name = "DgvAudit"
         Me.DgvAudit.RowHeadersVisible = False
-        Me.DgvAudit.Size = New System.Drawing.Size(724, 417)
+        Me.DgvAudit.Size = New System.Drawing.Size(799, 320)
         Me.DgvAudit.TabIndex = 0
+        '
+        'aud_datatype
+        '
+        Me.aud_datatype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.aud_datatype.HeaderText = "Type"
+        Me.aud_datatype.Name = "aud_datatype"
+        Me.aud_datatype.Width = 120
+        '
+        'aud_before
+        '
+        Me.aud_before.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.aud_before.HeaderText = "Before"
+        Me.aud_before.Name = "aud_before"
+        '
+        'aud_after
+        '
+        Me.aud_after.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.aud_after.HeaderText = "After"
+        Me.aud_after.Name = "aud_after"
+        '
+        'aud_date
+        '
+        Me.aud_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.aud_date.HeaderText = "Change Date"
+        Me.aud_date.Name = "aud_date"
+        Me.aud_date.Width = 150
         '
         'FlowLayoutPanel1
         '
@@ -102,40 +128,14 @@ Partial Class FrmAuditList
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnClose.Font = New System.Drawing.Font("Papyrus", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(661, 475)
+        Me.BtnClose.Location = New System.Drawing.Point(736, 378)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 38)
         Me.BtnClose.TabIndex = 2
         Me.BtnClose.Text = "Close"
         Me.BtnClose.UseVisualStyleBackColor = True
-        '
-        'aud_datatype
-        '
-        Me.aud_datatype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.aud_datatype.HeaderText = "Type"
-        Me.aud_datatype.Name = "aud_datatype"
-        Me.aud_datatype.Width = 120
-        '
-        'aud_before
-        '
-        Me.aud_before.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.aud_before.HeaderText = "Before"
-        Me.aud_before.Name = "aud_before"
-        '
-        'aud_after
-        '
-        Me.aud_after.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.aud_after.HeaderText = "After"
-        Me.aud_after.Name = "aud_after"
-        '
-        'aud_date
-        '
-        Me.aud_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.aud_date.HeaderText = "Change Date"
-        Me.aud_date.Name = "aud_date"
-        Me.aud_date.Width = 150
         '
         'FrmAuditList
         '
@@ -143,7 +143,7 @@ Partial Class FrmAuditList
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.CancelButton = Me.BtnClose
-        Me.ClientSize = New System.Drawing.Size(748, 525)
+        Me.ClientSize = New System.Drawing.Size(823, 428)
         Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.DgvAudit)

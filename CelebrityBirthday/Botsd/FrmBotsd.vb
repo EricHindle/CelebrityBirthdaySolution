@@ -1,4 +1,11 @@
-﻿Imports System.Collections.ObjectModel
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 Imports System.Data.Common
 Imports System.IO

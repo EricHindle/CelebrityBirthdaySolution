@@ -1,4 +1,12 @@
-﻿Public Class FrmMenu2
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class FrmMenu2
+#Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         LogUtil.Info("Closing", MyBase.Name)
         Me.Close()
@@ -40,7 +48,7 @@
     Private Sub BtnImageEditing_Click(sender As Object, e As EventArgs) Handles BtnImageEditing.Click
         LogUtil.Info("Image editing", MyBase.Name)
         Me.Hide()
-        Using _imgEditForm As New frmImageCapture
+        Using _imgEditForm As New FrmImageCapture
             _imgEditForm.ShowDialog()
         End Using
         Me.Show()
@@ -63,12 +71,11 @@
     End Sub
     Private Sub BtnViewLog_Click(sender As Object, e As EventArgs) Handles BtnViewLog.Click
         Me.Hide()
-        Using _logView As New frmLogViewer
+        Using _logView As New FrmLogViewer
             _logView.ShowDialog()
         End Using
-        Me.show
+        Me.Show()
     End Sub
-
     Private Sub BtnDeadList_Click(sender As Object, e As EventArgs) Handles BtnDeadList.Click
         LogUtil.Info("List of deaths", MyBase.Name)
         Me.Hide()
@@ -78,7 +85,6 @@
         End Using
         Me.Show()
     End Sub
-
     Private Sub BtnTest_Click_1(sender As Object, e As EventArgs) Handles BtnTest.Click
         LogUtil.Info("Testing", MyBase.Name)
         Me.Hide()
@@ -87,4 +93,5 @@
         End Using
         Me.Show()
     End Sub
+#End Region
 End Class

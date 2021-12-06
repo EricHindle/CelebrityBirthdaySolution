@@ -1,22 +1,30 @@
-﻿Imports System.IO
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.IO
 Imports System.Text
 
 Public NotInheritable Class FrmBotsdPost
-
-#Region "variables"
-    Private oAlsoFileName As String
-    Private ReadOnly charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c, "("c, "."c}
+#Region "structure"
     Private Structure UndoData
         Public undoName As String
         Public undoWikiUrl As String
         Public undoDesc As String
         Public undoList As List(Of DataGridViewRow)
     End Structure
-
+#End Region
+#Region "variables"
+    Private oAlsoFileName As String
+    Private ReadOnly charsToTrim() As Char = {" "c, ","c, ";"c, "."c, "["c, "("c, "."c}
     Private ReadOnly UndoDataList As New List(Of UndoData)
 #End Region
 #Region "properties"
     Private oNewPostNo As Integer
+    Private oPostText As String
     Public Property NewPostNo() As Integer
         Get
             Return oNewPostNo
@@ -25,7 +33,6 @@ Public NotInheritable Class FrmBotsdPost
             oNewPostNo = value
         End Set
     End Property
-    Private oPostText As String
     Public Property PostText() As String
         Get
             Return oPostText
@@ -210,14 +217,6 @@ Public NotInheritable Class FrmBotsdPost
     Private Sub NudSentences_ValueChanged(sender As Object, e As EventArgs) Handles NudSentences.ValueChanged
         ExtractNewDescription()
     End Sub
-    Private Sub ExtractNewDescription()
-        If DgvAlso.SelectedRows.Count = 1 AndAlso Not String.IsNullOrEmpty(TxtWiki.Text) Then
-            ExtractAlsoValues()
-            Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
-            ReplaceRowValues(oRow)
-        End If
-    End Sub
-
     Private Sub BtnSearch1_Click(sender As Object, e As EventArgs) Handles BtnSearch1.Click
         Dim sUrl As String = My.Resources.WIKI_SEARCH.Replace("~date", LblDay.Text & "+" & LblMonth.Text & "+" & LblYear.Text)
         Process.Start(sUrl)
@@ -317,9 +316,35 @@ Public NotInheritable Class FrmBotsdPost
     Private Sub BtnClearList_Click(sender As Object, e As EventArgs) Handles BtnClearList.Click
         DgvAlso.Rows.Clear()
     End Sub
+    Private Sub ChkAnd_CheckedChanged(sender As Object, e As EventArgs) Handles ChkAnd.CheckedChanged
+        If ChkAnd.Checked Then
+            CbSplit.SelectedIndex = CbSplit.FindString(" and")
+        End If
+    End Sub
+    Private Sub BtnRemoveStart_Click(sender As Object, e As EventArgs) Handles BtnRemoveStart.Click
+        If TxtDesc.SelectedText.Length > 0 Then
+            RemoveSelectedText(True)
+        Else
+            GetSplitPart(1)
+            If ChkAnd.Checked And CbSplit.Text.Trim = "and" Then
+                MoveAnd()
+            End If
+        End If
+        ChkAnd.Checked = False
+    End Sub
+    Private Sub BtnClearDesc_Click(sender As Object, e As EventArgs) Handles BtnClearDesc.Click
+        TxtDesc.Text = ""
+    End Sub
 
 #End Region
 #Region "subroutines"
+    Private Sub ExtractNewDescription()
+        If DgvAlso.SelectedRows.Count = 1 AndAlso Not String.IsNullOrEmpty(TxtWiki.Text) Then
+            ExtractAlsoValues()
+            Dim oRow As DataGridViewRow = DgvAlso.SelectedRows(0)
+            ReplaceRowValues(oRow)
+        End If
+    End Sub
     Private Function GenerateAlsos() As String
         DisplayStatus("Generating Text")
         Dim sb As New StringBuilder
@@ -536,27 +561,5 @@ Public NotInheritable Class FrmBotsdPost
         Dim returnUrl As String = "https://" & If(splitUrl.Length < 2, splitUrl(0), splitUrl(1))
         Return returnUrl
     End Function
-
-    Private Sub ChkAnd_CheckedChanged(sender As Object, e As EventArgs) Handles ChkAnd.CheckedChanged
-        If ChkAnd.Checked Then
-            CbSplit.SelectedIndex = CbSplit.FindString(" and")
-        End If
-    End Sub
-
-    Private Sub BtnRemoveStart_Click(sender As Object, e As EventArgs) Handles BtnRemoveStart.Click
-        If TxtDesc.SelectedText.Length > 0 Then
-            RemoveSelectedText(True)
-        Else
-            GetSplitPart(1)
-            If ChkAnd.Checked And CbSplit.Text.Trim = "and" Then
-                MoveAnd()
-            End If
-        End If
-        ChkAnd.Checked = False
-    End Sub
-
-    Private Sub BtnClearDesc_Click(sender As Object, e As EventArgs) Handles BtnClearDesc.Click
-        TxtDesc.Text = ""
-    End Sub
 #End Region
 End Class

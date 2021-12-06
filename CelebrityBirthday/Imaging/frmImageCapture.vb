@@ -1,8 +1,14 @@
-﻿Imports System.Drawing.Drawing2D
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Drawing.Drawing2D
 Imports System.IO
 Imports System.Drawing.Imaging
 Imports System.Reflection
-
 Public NotInheritable Class FrmImageCapture
 #Region "Constants"
 
@@ -68,7 +74,7 @@ Public NotInheritable Class FrmImageCapture
         End Set
     End Property
 #End Region
-#Region "Form"
+#Region "Form control handlers"
     Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.capformpos)
@@ -428,7 +434,6 @@ Public NotInheritable Class FrmImageCapture
         End Try
 
     End Sub
-
     'Form overrides dispose to clean up the component list.
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try

@@ -1,4 +1,11 @@
-﻿Imports System.Collections.ObjectModel
+﻿' Hindleware
+' Copyright (c) 2021, Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Collections.ObjectModel
 Imports System.Collections.Specialized
 Imports System.IO
 Imports System.Net
@@ -250,12 +257,6 @@ Public Class FrmSendTwitter
             End If
         End If
     End Sub
-#End Region
-#Region "subroutines"
-    Private Sub Authenticate()
-        WriteTrace("Navigating")
-        WebBrowser1.Navigate(New Uri("https://api.twitter.com/oauth/authorize?oauth_token=" & tw.Token))
-    End Sub
     Private Async Sub WebBrowser1_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles WebBrowser1.DocumentCompleted
         WriteTrace("Browser document complete")
         WriteTrace("Looking for Verifier")
@@ -291,6 +292,15 @@ Public Class FrmSendTwitter
             WriteTrace(ex.Message)
         End Try
         WriteTrace("Browser finished")
+    End Sub
+    Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
+        RtbTweetText.Text = GetWikiText(NudSentences.Value)
+    End Sub
+#End Region
+#Region "subroutines"
+    Private Sub Authenticate()
+        WriteTrace("Navigating")
+        WebBrowser1.Navigate(New Uri("https://api.twitter.com/oauth/authorize?oauth_token=" & tw.Token))
     End Sub
     Private Shared Function GetTwitterName(_innerHtml As String) As String
         Dim _pos1 As Integer = _innerHtml.IndexOf("span class=""name""", StringComparison.CurrentCultureIgnoreCase) + 18
@@ -480,9 +490,6 @@ Public Class FrmSendTwitter
         Dim _person As New Person(TxtForename.Text, TxtSurname.Text, "", "", 0, 0, 0, 0, 0, 0, "", "", _imageidentity, Nothing)
         Dim _pictureList As New List(Of Person) From {_person}
         ImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, ImageUtil.AlignType.Centre)
-    End Sub
-    Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
-        RtbTweetText.Text = GetWikiText(NudSentences.Value)
     End Sub
     Private Function GetWikiText(_sentences As Integer) As String
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(TxtName.Text, _sentences))
