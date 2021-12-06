@@ -962,11 +962,11 @@ Public NotInheritable Class FrmDateCheck
             DisplayMessage(abBotsdUpdUrl)
         End If
     End Sub
-    Private Sub SetErrorResult(resultButton As CheckListActionButton, msgText As String)
+    Private Sub SetErrorResult(ByRef resultButton As CheckListActionButton, msgText As String)
         ShowStatus(msgText, True)
         SetButtonResult(resultButton, msgText, "err", DlgShowText.MessageStyle.warn)
     End Sub
-    Private Sub SetOKResult(resultButton As CheckListActionButton, msgText As String)
+    Private Sub SetOKResult(ByRef resultButton As CheckListActionButton, msgText As String)
         ShowStatus(msgText, True)
         SetButtonResult(resultButton, msgText, "OK", DlgShowText.MessageStyle.plain)
     End Sub
