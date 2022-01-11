@@ -8,7 +8,7 @@
 Imports System.IO
 Imports System.Security
 
-Public Class frmTwitterOutput
+Public Class FrmTwitterOutput
 #Region "variables"
 #End Region
 #Region "constants"

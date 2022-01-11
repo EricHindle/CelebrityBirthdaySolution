@@ -136,5 +136,6 @@ Public Class FrmMenu
             Me.Close()
         End If
     End Sub
+
 #End Region
 End Class

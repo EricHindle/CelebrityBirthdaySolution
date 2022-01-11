@@ -199,7 +199,7 @@ Public Class Person
             Dim _dod As Date? = Nothing
             If _deathYear <> 0 Then
                 Try
-                    _dod = New Date(_birthYear, _birthMonth, _birthDay)
+                    _dod = New Date(_deathYear, _deathMonth, _deathday)
                 Catch ex As ArgumentOutOfRangeException
                     LogUtil.Problem(Name & " Invalid date of death", "Person")
                 End Try

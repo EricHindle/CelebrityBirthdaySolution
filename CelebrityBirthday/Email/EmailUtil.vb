@@ -24,7 +24,6 @@ Public NotInheritable Class EmailUtil
     Private Const SMTP_PORT As String = "SMTPPort"
     Private Const SMTP_SSL As String = "SMTPEnableSSL"
     Private Const SEND_VIA As String = "SendMailViaSMTP"
-    Public Shared sOutlookSender As String = ""
 
     ''' <summary>
     ''' Send an email

@@ -492,7 +492,7 @@ Public NotInheritable Class FrmDateCheck
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(oText, MyBase.Name)
     End Sub
-    Private Sub DisplayMessage(oButton As CheckListActionButton)
+    Private Shared Sub DisplayMessage(oButton As CheckListActionButton)
         Using _msgbox As New DlgShowText
             _msgbox.Message = oButton.ResultText
             _msgbox.Style = oButton.ResultStyle

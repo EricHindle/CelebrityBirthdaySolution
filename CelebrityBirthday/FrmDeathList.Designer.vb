@@ -46,6 +46,7 @@ Partial Class FrmDeathList
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ChkShowImage = New System.Windows.Forms.CheckBox()
+        Me.BtnBBTweet = New System.Windows.Forms.Button()
         CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -63,6 +64,7 @@ Partial Class FrmDeathList
         Me.DgvPeople.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tId, Me.tForename, Me.tSurname, Me.tDeathDay, Me.tDeathMonth, Me.tDeathYear, Me.tYearsDead, Me.tAge, Me.tShortDesc, Me.tBirthDay, Me.tBirthMonth, Me.tBirthYear, Me.tBirthPlace, Me.tBirthName, Me.tImg})
         Me.DgvPeople.Location = New System.Drawing.Point(14, 13)
         Me.DgvPeople.Margin = New System.Windows.Forms.Padding(4)
+        Me.DgvPeople.MultiSelect = False
         Me.DgvPeople.Name = "DgvPeople"
         Me.DgvPeople.RowHeadersVisible = False
         Me.DgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -177,7 +179,7 @@ Partial Class FrmDeathList
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(1175, 508)
+        Me.BtnClose.Location = New System.Drawing.Point(1175, 506)
         Me.BtnClose.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(162, 36)
@@ -249,11 +251,25 @@ Partial Class FrmDeathList
         Me.ChkShowImage.Text = "Show Images"
         Me.ChkShowImage.UseVisualStyleBackColor = True
         '
+        'BtnBBTweet
+        '
+        Me.BtnBBTweet.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnBBTweet.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBBTweet.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnBBTweet.Location = New System.Drawing.Point(515, 506)
+        Me.BtnBBTweet.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnBBTweet.Name = "BtnBBTweet"
+        Me.BtnBBTweet.Size = New System.Drawing.Size(162, 36)
+        Me.BtnBBTweet.TabIndex = 20
+        Me.BtnBBTweet.Text = "BB Tweet"
+        Me.BtnBBTweet.UseVisualStyleBackColor = True
+        '
         'FrmDeathList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1351, 572)
+        Me.Controls.Add(Me.BtnBBTweet)
         Me.Controls.Add(Me.ChkShowImage)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Label1)
@@ -298,4 +314,5 @@ Partial Class FrmDeathList
     Friend WithEvents tBirthName As DataGridViewTextBoxColumn
     Friend WithEvents tImg As DataGridViewImageColumn
     Friend WithEvents ChkShowImage As CheckBox
+    Friend WithEvents BtnBBTweet As Button
 End Class

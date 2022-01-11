@@ -267,7 +267,7 @@ Friend Module modCbday
         Dim _extract As String = ""
         Dim wikipage As String
         Try
-            Dim sr As System.IO.StreamReader = New System.IO.StreamReader(pResponse.GetResponseStream())
+            Dim sr As New System.IO.StreamReader(pResponse.GetResponseStream())
             wikipage = sr.ReadToEnd
             Dim jss As New JavaScriptSerializer()
             Dim extractDictionary As Dictionary(Of String, Object) = jss.Deserialize(Of Dictionary(Of String, Object))(wikipage)
@@ -356,7 +356,7 @@ Friend Module modCbday
     Public Function CalculateAge(oPerson As Person, Optional isNextBirthday As Boolean = True) As Integer
         Dim _years As Integer = 0
         If oPerson.BirthYear > 0 Then
-            Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
+            Dim _dob As New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
             Dim _thisMonth As Integer = Today.Month
             Dim _thisDay As Integer = Today.Day
             _years = DateDiff(DateInterval.Year, _dob, Today)

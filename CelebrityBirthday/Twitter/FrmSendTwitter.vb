@@ -496,5 +496,9 @@ Public Class FrmSendTwitter
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
+
+    Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles TxtName.TextChanged
+
+    End Sub
 #End Region
 End Class

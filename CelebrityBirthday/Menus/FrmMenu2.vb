@@ -11,7 +11,7 @@ Public Class FrmMenu2
         LogUtil.Info("Closing", MyBase.Name)
         Me.Close()
     End Sub
-    Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnSendTweet.Click
+    Private Sub BtnSendTweet_Click(sender As Object, e As EventArgs) Handles BtnSendTweet.Click
         Me.Hide()
         LogUtil.Info("Single Tweet", MyBase.Name)
         Using _sendTwitter As New FrmSendTwitter

@@ -356,6 +356,12 @@
     </Compile>
     <Compile Include="Logging\LogUtil.vb" />
     <Compile Include="modGlobalConstants.vb" />
+    <Compile Include="Twitter\FrmSendBBTweet.Designer.vb">
+      <DependentUpon>FrmSendBBTweet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Twitter\FrmSendBBTweet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Twitter\modTwitter.vb" />
     <Compile Include="Twitter\FrmSendTwitter.Designer.vb">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>
@@ -491,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Logging\frmLogViewer.resx">
       <DependentUpon>frmLogViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Twitter\FrmSendBBTweet.resx">
+      <DependentUpon>FrmSendBBTweet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\FrmSendTwitter.resx">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>

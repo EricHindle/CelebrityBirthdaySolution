@@ -109,4 +109,15 @@ Public NotInheritable Class FrmDeathList
             tRow.Height = If(ChkShowImage.Checked, 65, DgvPeople.RowTemplate.Height)
         Next
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnBBTweet.Click
+        If DgvPeople.SelectedRows.Count = 1 Then
+            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
+            Dim oPerson As Person = GetPersonById(oRow.Cells(tId.Name).Value)
+            Using _sendTwitter As New FrmSendBBTweet
+                _sendTwitter.DeadPerson = oPerson
+                _sendTwitter.ShowDialog()
+            End Using
+        End If
+    End Sub
 End Class

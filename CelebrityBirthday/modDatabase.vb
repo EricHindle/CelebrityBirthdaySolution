@@ -541,7 +541,6 @@ Module modDatabase
     End Function
     Public Function InsertTweet(pText As String, pMonth As Integer?, pDay As Integer?, pSeq As Integer?, pId As String, pAccount As String, pType As String) As Boolean
         Dim isOK As Boolean = False
-
         Try
             isOK = oTweetTa.InsertTweet(Now, If(String.IsNullOrEmpty(pText), "", pText), pMonth, pDay, pSeq, pId, pAccount, pType) = 1
         Catch dbEx As DbException
