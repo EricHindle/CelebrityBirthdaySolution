@@ -50,7 +50,8 @@ Public Class FrmSendBBTweet
             TxtForename.Text = _deadPerson.ForeName
             TxtSurname.Text = _deadPerson.Surname
         End If
-        LblImageName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
+
+        LblImageName.Text = _deadPerson.Image.ImageFileName
         Dim thumbnailImage As String = Path.Combine(My.Settings.ImgPath, LblImageName.Text) & ".jpg"
         If My.Computer.FileSystem.FileExists(thumbnailImage) Then
             PictureBox1.ImageLocation = thumbnailImage
