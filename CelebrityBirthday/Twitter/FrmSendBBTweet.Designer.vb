@@ -59,7 +59,6 @@ Partial Class FrmSendBBTweet
         '
         'LblTweetLength
         '
-        Me.LblTweetLength.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.LblTweetLength.AutoSize = True
         Me.LblTweetLength.Location = New System.Drawing.Point(20, 288)
         Me.LblTweetLength.Name = "LblTweetLength"
@@ -174,7 +173,7 @@ Partial Class FrmSendBBTweet
         Me.lblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(9, 17)
+        Me.lblStatus.Size = New System.Drawing.Size(10, 17)
         '
         'TxtSurname
         '

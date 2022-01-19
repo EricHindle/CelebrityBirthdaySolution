@@ -6,6 +6,7 @@
 '
 
 Public NotInheritable Class FrmDeathList
+#Region "properties"
     Private _year As Integer
     Public Property Year() As Integer
         Get
@@ -15,14 +16,57 @@ Public NotInheritable Class FrmDeathList
             _year = value
         End Set
     End Property
+#End Region
+#Region "variables"
 
+#End Region
+#Region "form control handlers"
     Private Sub FrmDeathList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info(My.Resources.LOADING_TABLE, MyBase.Name)
         nudYear.Value = _year
         nudYear.Maximum = _year
         FillGrid(_year)
     End Sub
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
+        Me.Close()
+    End Sub
+    Private Sub FrmDeathList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
+    End Sub
+    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
+        FillGrid(nudYear.Value)
+    End Sub
+    Private Sub DgvPeople_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvPeople.CellDoubleClick
+        If e.RowIndex >= 0 And e.RowIndex < DgvPeople.Rows.Count Then
+            Dim tRow As DataGridViewRow = DgvPeople.Rows(e.RowIndex)
+            Dim _index As Integer = tRow.Cells(tId.Name).Value
+            Using _update As New FrmUpdateDatabase
+                _update.PersonId = _index
+                _update.ShowDialog()
+            End Using
+        End If
+    End Sub
+    Private Sub ChkShowImage_CheckedChanged(sender As Object, e As EventArgs) Handles ChkShowImage.CheckedChanged
+        DgvPeople.Columns().Item(tImg.Name).Visible = ChkShowImage.Checked
+        For Each tRow As DataGridViewRow In DgvPeople.Rows
+            tRow.Height = If(ChkShowImage.Checked, 65, DgvPeople.RowTemplate.Height)
+        Next
+    End Sub
+    Private Sub BtnBBTweet_Click(sender As Object, e As EventArgs) Handles BtnBBTweet.Click
+        If DgvPeople.SelectedRows.Count = 1 Then
+            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
+            Dim oPerson As Person = GetPersonById(oRow.Cells(tId.Name).Value)
+            Using _sendTwitter As New FrmSendBBTweet
+                _sendTwitter.DeadPerson = oPerson
+                _sendTwitter.ShowDialog()
+            End Using
+        End If
+    End Sub
+
+#End Region
+#Region "subroutines"
     Private Sub FillGrid(_year As Integer)
+        DisplayAndLog("Filling table")
         Dim oTable As CelebrityBirthdayDataSet.PersonDataTable = GetPeopleByDeathYear(_year)
         DgvPeople.Rows.Clear()
         For Each oRow As CelebrityBirthdayDataSet.PersonRow In oTable.Rows
@@ -66,59 +110,12 @@ Public NotInheritable Class FrmDeathList
                 oImageIdentity.Dispose()
             End If
         Next
+        DisplayAndLog("Search complete")
     End Sub
-
     Private Shared Sub ColourRow(oRow As DataGridViewRow)
         For Each oCell As DataGridViewCell In oRow.Cells
             oCell.Style.BackColor = Color.LightSteelBlue
         Next
-    End Sub
-
-    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
-        LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
-        StatusStrip1.Refresh()
-        If isLogged Then LogUtil.Info(pText, MyBase.Name)
-    End Sub
-
-    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
-    End Sub
-
-    Private Sub FrmDeathList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("...Closing", MyBase.Name)
-    End Sub
-
-    Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
-        FillGrid(nudYear.Value)
-    End Sub
-
-    Private Sub DgvPeople_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvPeople.CellDoubleClick
-        If e.RowIndex >= 0 And e.RowIndex < DgvPeople.Rows.Count Then
-            Dim tRow As DataGridViewRow = DgvPeople.Rows(e.RowIndex)
-            Dim _index As Integer = tRow.Cells(tId.Name).Value
-            Using _update As New FrmUpdateDatabase
-                _update.PersonId = _index
-                _update.ShowDialog()
-            End Using
-        End If
-    End Sub
-
-    Private Sub ChkShowImage_CheckedChanged(sender As Object, e As EventArgs) Handles ChkShowImage.CheckedChanged
-        DgvPeople.Columns().Item(tImg.Name).Visible = ChkShowImage.Checked
-        For Each tRow As DataGridViewRow In DgvPeople.Rows
-            tRow.Height = If(ChkShowImage.Checked, 65, DgvPeople.RowTemplate.Height)
-        Next
-    End Sub
-
-    Private Sub BtnBBTweet_Click(sender As Object, e As EventArgs) Handles BtnBBTweet.Click
-        If DgvPeople.SelectedRows.Count = 1 Then
-            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
-            Dim oPerson As Person = GetPersonById(oRow.Cells(tId.Name).Value)
-            Using _sendTwitter As New FrmSendBBTweet
-                _sendTwitter.DeadPerson = oPerson
-                _sendTwitter.ShowDialog()
-            End Using
-        End If
     End Sub
     Private Sub DisplayAndLog(pText As String)
         ShowProgress(pText, LblStatus, True, MyBase.Name)
@@ -126,4 +123,6 @@ Public NotInheritable Class FrmDeathList
     Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
         ShowProgress(pText, LblStatus, True, MyBase.Name,, isMessagebox)
     End Sub
+
+#End Region
 End Class

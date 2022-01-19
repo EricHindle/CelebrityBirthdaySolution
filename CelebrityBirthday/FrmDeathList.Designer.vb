@@ -224,6 +224,8 @@ Partial Class FrmDeathList
         '
         'StatusStrip1
         '
+        Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 550)
         Me.StatusStrip1.Name = "StatusStrip1"
@@ -237,7 +239,7 @@ Partial Class FrmDeathList
         Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
         Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
-        Me.LblStatus.Name = "lblStatus"
+        Me.LblStatus.Name = "LblStatus"
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.LblStatus.Size = New System.Drawing.Size(10, 17)
         '
@@ -270,6 +272,7 @@ Partial Class FrmDeathList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1351, 572)
         Me.Controls.Add(Me.BtnBBTweet)
         Me.Controls.Add(Me.ChkShowImage)
