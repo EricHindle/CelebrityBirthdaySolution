@@ -43,9 +43,34 @@ Friend Module modCbday
             If pos.Length = 4 Then
                 oForm.Top = CInt(pos(0))
                 oForm.Left = CInt(pos(1))
-
             End If
         End If
+    End Sub
+    Public Sub ShowStatus(pText As String, Optional pStatus As ToolStripStatusLabel = Nothing, Optional isLogged As Boolean = True, Optional pSource As String = "", Optional pEx As Exception = Nothing, Optional isAppend As Boolean = False, Optional isMessageBox As Boolean = False, Optional pBoxStyle As MsgBoxStyle = MsgBoxStyle.OkOnly)
+        If pStatus IsNot Nothing AndAlso pStatus.GetType Is GetType(ToolStripStatusLabel) Then
+            pStatus.Text = If(isAppend, pStatus.Text, "") & pText
+            pStatus.Owner.Refresh()
+        End If
+        If isLogged Then
+            If pEx Is Nothing Then
+                LogUtil.Info(pText, pSource)
+            Else
+                LogUtil.Exception(pText, pEx, pSource)
+            End If
+        End If
+        If isMessageBox Then
+            Dim _message As String = pText & If(pEx Is Nothing, "", vbCrLf & pEx.Message)
+            MsgBox(_message, pBoxStyle, "Status")
+        End If
+    End Sub
+    Public Sub ShowProgress(pText As String, Optional pStatus As ToolStripStatusLabel = Nothing, Optional isLogged As Boolean = True, Optional pSource As String = "", Optional isAppend As Boolean = False, Optional isMessageBox As Boolean = False)
+        ShowStatus(pText, pStatus, isLogged, pSource,, isAppend, isMessageBox)
+    End Sub
+    Public Sub AppendProgress(pText As String, Optional pStatus As ToolStripStatusLabel = Nothing)
+        ShowStatus(pText, pStatus, False,,, True)
+    End Sub
+    Public Sub ClearStatus(pStatus As ToolStripStatusLabel)
+        ShowStatus("", pStatus, False)
     End Sub
 #End Region
 #Region "functions"

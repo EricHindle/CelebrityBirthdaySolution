@@ -103,7 +103,7 @@ Public NotInheritable Class FrmUpdateDatabase
         lastSelectedPerson = Nothing
     End Sub
     Private Sub BtnInsert_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInsert.Click
-        ShowStatus("Inserting person in list",, True)
+        ShowProgress("Inserting person in list", lblStatus, True, MyBase.Name)
         TidyText()
         If txtYear.TextLength = 0 OrElse Not IsNumeric(txtYear.TextLength) Then
             MsgBox("No birth year", MsgBoxStyle.Exclamation, "Error")
@@ -151,15 +151,13 @@ Public NotInheritable Class FrmUpdateDatabase
                     lbPeople.SelectedIndex = p
                     LblSortSeq.Text = CStr(newPerson.Sortseq)
                 Else
-                    ShowStatus(newPerson.Name & " not inserted", False, True)
+                    ShowStatus(newPerson.Name & " not inserted", lblStatus, True, MyBase.Name)
                 End If
                 newPerson.Dispose()
             Catch ex As DbException
-                MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
-                ShowStatus(ex.Message,, True)
+                ShowStatus("Error on insert", lblStatus, True, MyBase.Name, ex, MyBase.Name, True, MsgBoxStyle.Exclamation)
             Catch ex As ArgumentException
-                MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
-                ShowStatus(ex.Message,, True)
+                ShowStatus("Error on insert", lblStatus, True, MyBase.Name, ex, MyBase.Name, True, MsgBoxStyle.Exclamation)
             End Try
         Else
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
@@ -198,7 +196,7 @@ Public NotInheritable Class FrmUpdateDatabase
         UpdateAll()
     End Sub
     Private Sub BtnLoadTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoadTable.Click, cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
-        ClearStatus()
+        ClearStatus(lblStatus)
         LblUpdated.Visible = False
         LbUpdateList.Items.Clear()
         LbUpdateList.Visible = False
@@ -208,9 +206,8 @@ Public NotInheritable Class FrmUpdateDatabase
             End If
         End If
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
-            ShowStatus("Loading Table From Database",, True)
+            ShowProgress("Loading Table From Database", lblStatus, True, MyBase.Name)
             LogUtil.Info(cboDay.SelectedItem & " " & cboMonth.SelectedItem, MyBase.Name)
-            StatusStrip1.Refresh()
             personTable = New List(Of Person)
             lbPeople.Items.Clear()
             Dim selectedIndex As Integer = -1
@@ -243,16 +240,16 @@ Public NotInheritable Class FrmUpdateDatabase
                     TxtPageLoadMth.Text = If(oDrow.IsuploadmonthNull, "", oDrow.uploadmonth)
                     TxtPageLoadDay.Text = If(oDrow.IsuploaddayNull, "", oDrow.uploadday)
                 End If
-                AppendStatus(" - Complete")
+                AppendProgress(" - Complete", lblStatus)
             Else
-                AppendStatus(" - No data", True)
+                AppendProgress(" - No data", lblStatus)
             End If
             lbPeople.SelectedIndex = selectedIndex
             findPersonInList = -1
         End If
     End Sub
     Private Sub BtnReloadSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadSel.Click
-        ShowStatus("Loading Item From Database",, True)
+        ShowProgress("Loading Item From Database", lblStatus, True, MyBase.Name)
         Me.Refresh()
         If lbPeople.SelectedIndex >= 0 And lbPeople.SelectedIndex < lbPeople.Items.Count Then
             If personTable(lbPeople.SelectedIndex) IsNot Nothing Then
@@ -266,24 +263,24 @@ Public NotInheritable Class FrmUpdateDatabase
                 End If
             End If
         End If
-        AppendStatus(" - Complete", True)
+        AppendProgress(" - Complete", lblStatus)
     End Sub
     Private Sub LbPeople_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbPeople.SelectedIndexChanged
-        ClearStatus()
+        ClearStatus(lblStatus)
         SwapText("Text")
         If lbPeople.SelectedIndex >= 0 Then
             lastSelectedPerson = personTable(lbPeople.SelectedIndex)
             LoadScreenFromPerson(lastSelectedPerson)
-            ShowStatus("Selected " & lastSelectedPerson.Name,, True)
+            ShowProgress("Selected " & lastSelectedPerson.Name, lblStatus, True, MyBase.Name)
         Else
             ClearDetails()
             lastSelectedPerson = Nothing
         End If
     End Sub
     Private Sub BtnUpdateSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateSel.Click
-        ClearStatus()
+        ClearStatus(lblStatus)
         If lbPeople.SelectedIndex >= 0 Then
-            ShowStatus("Updating database with selected person", , True)
+            ShowProgress("Updating database with selected person", lblStatus, True, MyBase.Name)
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             Dim dbAction As String
             If oPerson.Id < 0 Then
@@ -302,16 +299,15 @@ Public NotInheritable Class FrmUpdateDatabase
             lblID.Text = CStr(oPerson.Id)
             ShowUpdated(oPerson, dbAction)
             oPerson.UnsavedChanges = False
-            AppendStatus(" - Complete")
+            AppendProgress(" - Complete", lblStatus)
         End If
     End Sub
     Private Sub BtnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
-        ShowStatus("Updating person in list", , True)
-        ClearStatus()
+        ShowProgress("Updating person in list", lblStatus, True, MyBase.Name)
         TidyText()
         If lblID.Text.Length > 0 Then
             If String.IsNullOrEmpty(txtSurname.Text) Then
-                ShowStatus("No surname for " & txtForename.Text,, True)
+                ShowProgress("No surname for " & txtForename.Text, lblStatus, True, MyBase.Name)
                 MsgBox("No surname", MsgBoxStyle.Exclamation, "Warning")
             End If
             Dim id As Integer = CInt(lblID.Text)
@@ -335,7 +331,7 @@ Public NotInheritable Class FrmUpdateDatabase
                     Dim p As Integer = lbPeople.SelectedIndex
                     DisplayPersonList()
                     lbPeople.SelectedIndex = p
-                    ShowStatus("Updated list",, True)
+                    ShowProgress("Updated list", lblStatus, True, MyBase.Name)
                     Exit For
                 End If
             Next
@@ -401,7 +397,7 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub BtnWiki_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWiki.Click
         If Not String.IsNullOrEmpty(TxtWikiId.Text) Then
-            ShowStatus("Opening Wikipedia", , True)
+            ShowProgress("Opening Wikipedia", lblStatus, True)
             Process.Start(My.Resources.WIKIURL & TxtWikiId.Text.Trim)
         End If
     End Sub
@@ -516,24 +512,24 @@ Public NotInheritable Class FrmUpdateDatabase
                 MsgBox("DEAD. Expired and gone to meet their maker. Pushing up the daisies." _
                     & vbCrLf & "Bereft of life, they rest in peace. Shuffled off this mortal coil" _
                     & vbCrLf & "Run down the curtain and joined the choir invisible.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly)
-                ShowStatus("Dead")
+                ShowProgress("Dead", lblStatus, True, MyBase.Name)
                 txtTwitter.Text = ""
             Else
                 twitterSearchName = oPerson.Name
             End If
         End If
         If Not String.IsNullOrEmpty(twitterSearchName) Then
-            ShowStatus("Opening Twitter", , True)
+            ShowProgress("Opening Twitter", lblStatus, True)
             Dim sUrl As String = My.Settings.TwitterSearchUrl & twitterSearchName.Replace(" ", "+")
             Process.Start(sUrl)
         End If
     End Sub
     Private Sub BtnGetWikiText_Click(sender As Object, e As EventArgs) Handles BtnGetWikiText.Click
-        ShowStatus("Getting wiki text", , True)
+        ShowProgress("Getting wiki text", lblStatus, True)
         txtDesc.Text = GetWikiText(NudSentences.Value, txtForename.Text, txtSurname.Text, TxtWikiId.Text)
     End Sub
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
-        ShowStatus("WordPress",, True)
+        ShowProgress("WordPress", lblStatus, True)
         If CheckForChanges(personTable) Then
             If MsgBox("Save unsaved changes now?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Unsaved Changes") = MsgBoxResult.Yes Then
                 UpdateAll()
@@ -545,7 +541,7 @@ Public NotInheritable Class FrmUpdateDatabase
             _wordpress.ShowDialog()
         End Using
 
-        ClearStatus()
+        ClearStatus(lblStatus)
     End Sub
     Private Sub BtnImageLoadUpd_Click(sender As Object, e As EventArgs) Handles BtnImageLoadUpd.Click
         LogUtil.Info("Update WP image load date on Dates table", MyBase.Name)
@@ -559,19 +555,19 @@ Public NotInheritable Class FrmUpdateDatabase
         Try
             Dim _id As Integer = CInt(lblID.Text)
             If lbPeople.SelectedIndex > -1 AndAlso _id > -1 Then
-                ShowStatus("Images",, True)
+                ShowProgress("Images", lblStatus, True)
                 Using _update As New FrmImages
                     _update.PersonId = CInt(lblID.Text)
                     _update.ShowDialog()
                     PictureBox1.ImageLocation = _update.ImageFile
                     personTable(lbPeople.SelectedIndex).Image = GetImageById(_id, False)
                 End Using
-                ShowStatus("")
+                ClearStatus(lblStatus)
             Else
-                ShowStatus("No person selected")
+                ShowProgress("No person selected", lblStatus, True, MyBase.Name)
             End If
         Catch ex As InvalidCastException
-            ShowStatus("No person selected")
+            ShowProgress("No person selected", lblStatus, True, MyBase.Name)
         End Try
 
     End Sub
@@ -671,16 +667,16 @@ Public NotInheritable Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub BtnRmvBotsd_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsd.Click
-        ShowStatus("Removing BotSD id", False, True)
+        ShowProgress("Removing BotSD id", lblStatus, True, MyBase.Name)
         If lbPeople.SelectedIndex >= 0 Then
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             Dim oSocial As SocialMedia = oPerson.Social
             If oSocial IsNot Nothing Then
                 If oSocial.Botsd > 0 Then
                     UpdateBotsdId(oPerson.Id, 0)
-                    ShowStatus("Removed BotSD Id from person " & CStr(oPerson.Id) & " " & oPerson.Surname, False, True)
+                    ShowProgress("Removed BotSD Id from person " & CStr(oPerson.Id) & " " & oPerson.Surname, lblStatus, True, MyBase.Name)
                     lblBotsdId.Text = 0
-                    ShowStatus("Checking post", False, True)
+                    ShowProgress("Checking post", lblStatus, True, MyBase.Name)
                     Dim oBotsdRow As CelebrityBirthdayDataSet.BotSDRow = GetBotsd(oSocial.Botsd)
                     If oBotsdRow IsNot Nothing Then
                         Dim oRows As DataRowCollection = GetBotsdViewByPostNo(oBotsdRow.btsdPostNo)
@@ -688,22 +684,22 @@ Public NotInheritable Class FrmUpdateDatabase
                             Dim oViewRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow = oRows(0)
                             If oViewRow.IspersonIdNull Then
                                 DeleteBotsdByPostNo(oViewRow.btsdPostNo)
-                                ShowStatus("Removed BotSD post " & CStr(oViewRow.btsdPostNo) & "with no persons", False, True)
+                                ShowProgress("Removed BotSD post " & CStr(oViewRow.btsdPostNo) & "with no persons", lblStatus, True, MyBase.Name)
                             End If
                         End If
                     End If
                 Else
-                    ShowStatus("No BotSD id to remove", False, True)
+                    ShowProgress("No BotSD id to remove", lblStatus, True, MyBase.Name)
                 End If
             Else
-                ShowStatus("No social details", False, True)
+                ShowProgress("No social details", lblStatus, True, MyBase.Name)
             End If
         Else
-            ShowStatus("No person selected", False, True)
+            ShowProgress("No person selected", lblStatus, True, MyBase.Name)
         End If
     End Sub
     Private Sub BtnUpdBotsd_Click(sender As Object, e As EventArgs) Handles BtnUpdBotsd.Click
-        ShowStatus("Born On The Same Day", False, True)
+        ShowProgress("Born On The Same Day", lblStatus, True, MyBase.Name)
         Using _botsd As New FrmBotsd
             _botsd.ThisDay = cboDay.SelectedIndex + 1
             _botsd.ThisMonth = cboMonth.SelectedIndex + 1
@@ -714,7 +710,7 @@ Public NotInheritable Class FrmUpdateDatabase
                 lblBotsdId.Text = CStr(selectedPerson.Social.Botsd)
             End If
         End Using
-        ClearStatus()
+        ClearStatus(lblStatus)
     End Sub
     Private Sub BtnCopyName_Click(sender As Object, e As EventArgs) Handles BtnCopyName.Click
         txtName.SelectAll()
@@ -802,7 +798,7 @@ Public NotInheritable Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub UpdateAll()
-        ShowStatus("Updating all changes onto database",, True)
+        ShowProgress("Updating all changes onto database", lblStatus, True, MyBase.Name)
         Dim lastYear As String = ""
         Dim iSeq As Integer = 0
         For Each oPerson As Person In personTable
@@ -835,7 +831,7 @@ Public NotInheritable Class FrmUpdateDatabase
 
             oPerson.UnsavedChanges = False
         Next
-        AppendStatus(" - Complete")
+        AppendProgress(" - Complete", lblStatus)
     End Sub
     Private Sub TidyAndFix()
         isGotBirthName = False
@@ -900,7 +896,7 @@ Public NotInheritable Class FrmUpdateDatabase
             cboDay.SelectedIndex = oPerson.BirthDay - 1
             cboMonth.SelectedIndex = oPerson.BirthMonth - 1
         Else
-            ShowStatus("Id not found")
+            ShowProgress("Id not found", lblStatus, True, MyBase.Name)
         End If
         oPerson.Dispose()
     End Sub
@@ -934,17 +930,6 @@ Public NotInheritable Class FrmUpdateDatabase
         End If
         txtWiki.Text = GetWikiText(NudSentences.Value, oPerson.ForeName, oPerson.Surname, TxtWikiId.Text)
         bLoadingPerson = False
-    End Sub
-    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
-        lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
-        StatusStrip1.Refresh()
-        If isLogged Then LogUtil.Info(pText, MyBase.Name)
-    End Sub
-    Private Sub AppendStatus(pText As String, Optional isLogged As Boolean = False)
-        ShowStatus(pText, True, isLogged)
-    End Sub
-    Private Sub ClearStatus()
-        ShowStatus("", False)
     End Sub
     Private Sub RemoveMiddleWordsToolStripMenuItem1_Click(sender As Object, e As EventArgs)
         If txtDesc.SelectionLength > 0 Then
