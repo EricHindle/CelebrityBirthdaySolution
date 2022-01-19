@@ -155,6 +155,8 @@ Partial Class FrmDeathCheck
         '
         Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.lblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.lblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.lblStatus.Size = New System.Drawing.Size(6, 17)

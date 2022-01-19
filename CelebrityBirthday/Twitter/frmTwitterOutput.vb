@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -99,7 +99,7 @@ Public Class FrmTwitterOutput
 #End Region
 #Region "tree subroutines"
     Private Sub BuildTrees()
-        DisplayMessage("Selecting...")
+        DisplayAndLog("Selecting...")
         Dim oBirthdayList As New List(Of Person)
         Dim oAnniversaryList As New List(Of Person)
         tvBirthday.Nodes.Clear()
@@ -127,7 +127,7 @@ Public Class FrmTwitterOutput
                 oPerson.Dispose()
             Next
         End If
-        DisplayMessage("Selection Complete")
+        DisplayAndLog("Selection Complete")
     End Sub
     Private Sub AddTypeNode(oBirthdayTable As List(Of Person), testDate As Date, newDateNode As TreeNode, _type As String)
         Dim newBirthdayNode As TreeNode = newDateNode.Nodes.Add(Format(testDate, "MMMM dd") & _type, _type)
@@ -167,14 +167,14 @@ Public Class FrmTwitterOutput
 #End Region
 #Region "file subroutines"
     Private Sub WriteFiles()
-        DisplayMessage("Writing...")
+        DisplayAndLog("Writing...")
         Dim TwitterFilenameA As String = Format(dtpFrom.Value, "MMM-dd") & "_" & Format(dtpTo.Value, "MMM-dd") & "_Anniversary.txt"
         Dim TwitterFilenameB As String = Format(dtpFrom.Value, "MMM-dd") & "_" & Format(dtpTo.Value, "MMM-dd") & "_Birthday.txt"
         Dim TwitterFilename As String = TwitterFilenameB
         DeleteExistingFile(TwitterFilenameA, TwitterFilenameB)
         Dim currentDate As String = ""
         WriteDates(TwitterFilenameA, TwitterFilenameB, TwitterFilename, currentDate)
-        DisplayMessage("Files complete")
+        DisplayAndLog("Files complete")
     End Sub
     Private Sub WriteDates(TwitterFilenameA As String, TwitterFilenameB As String, ByRef TwitterFilename As String, ByRef currentDate As String)
         Dim fileCount As Integer = 0
@@ -191,7 +191,7 @@ Public Class FrmTwitterOutput
                     Using _outfile As New StreamWriter(_filename, True)
                         WriteTypes(_datenode, _outfile)
                     End Using
-                    DisplayMessage("Written file " & _filename)
+                    DisplayAndLog("Written file " & _filename)
                     If _controls.Any() Then
                         LoadRtb(TryCast(_controls(0), RichTextBox), _filename)
                     End If
@@ -319,7 +319,7 @@ Public Class FrmTwitterOutput
                 Else
                     My.Computer.FileSystem.DeleteFile(Path.Combine(My.Settings.TwitterFilePath, TwitterFilenameB))
                 End If
-                DisplayMessage("Deleted old file")
+                DisplayAndLog("Deleted old file")
             End If
         Catch ex As IOException
         Catch ex As ArgumentException
@@ -398,9 +398,15 @@ Public Class FrmTwitterOutput
     End Function
 #End Region
 #Region "general subroutines"
-    Private Sub DisplayMessage(_text As String)
-        lblStatus.Text = _text
-        StatusStrip1.Refresh()
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
     End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
+    'Private Sub DisplayMessage(_text As String)
+    '    lblStatus.Text = _text
+    '    StatusStrip1.Refresh()
+    'End Sub
 #End Region
 End Class

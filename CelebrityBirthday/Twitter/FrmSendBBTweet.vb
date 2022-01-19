@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -25,7 +25,6 @@ Public Class FrmSendBBTweet
     End Property
 #End Region
 #Region "variables"
-    Private isDone As Boolean
     Private ReadOnly tw As New TwitterOAuth
     Private ReadOnly oSender As String = "WhosBrownBread"
     Private ReadOnly vowels As Char() = {"a"c, "e"c, "i"c, "o"c, "u"c}
@@ -67,36 +66,25 @@ Public Class FrmSendBBTweet
         End If
         Dim tweetText As New StringBuilder
         tweetText.Append(_deadPerson.ShortDesc.Trim(".")) _
-            .Append(" ") _
-        .Append(_deadPerson.Name) _
-        .Append(" has died aged ") _
+                .Append(" "c) _
+                .Append(_deadPerson.Name) _
+                .Append(" has died aged ") _
                 .Append(CStr(CalculateAge())) _
                 .Append("."c) _
                 .Append(vbCrLf).Append(vbCrLf)
-
         tweetText.Append(desc) _
                 .Append(vbCrLf).Append(vbCrLf)
-
         tweetText.Append(_deadPerson.Name) _
                 .Append(" "c) _
                 .Append(Format(_birthDate, "dd/MM/yyyy")) _
                 .Append(" - ") _
                 .Append(Format(_deathDate, "dd/MM/yyyy")) _
                 .Append(vbCrLf)
-
-
-
-
         RtbTweetText.Text = tweetText.ToString
     End Sub
-    Private Function ShortdescStartsWithVowel(shortDesc As String) As Boolean
-        Return shortDesc.ToLower.IndexOfAny(vowels) >= 0
-    End Function
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         Dim isOkToSend As Boolean = True
-        'If cmbTwitterUsers.SelectedIndex >= 0 Then
         Dim _auth As TwitterOAuth = GetAuthById(oSender)
-        ' Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
         If _auth IsNot Nothing Then
             If String.IsNullOrEmpty(_auth.Verifier) Then
                 isOkToSend = False
@@ -116,13 +104,10 @@ Public Class FrmSendBBTweet
         Else
             isOkToSend = False
         End If
-        'End If
         WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
-        isDone = False
         If isOkToSend Then
             SendTheTweet()
         End If
-        WriteTrace(isDone)
         WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
     End Sub
     Private Sub FrmSendTwitter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -186,9 +171,18 @@ Public Class FrmSendBBTweet
     End Sub
 #End Region
 #Region "subroutines"
+    Private Function ShortdescStartsWithVowel(shortDesc As String) As Boolean
+        Return shortDesc.ToLower.IndexOfAny(vowels) >= 0
+    End Function
+
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
     Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False)
         rtbTweetProgress.Text &= vbCrLf & sText
-        If isStatus Then ShowStatus(sText)
         LogUtil.Info(sText, MyBase.Name)
     End Sub
     Private Sub SendTheTweet()
@@ -223,21 +217,18 @@ Public Class FrmSendBBTweet
         End If
         If Not String.IsNullOrEmpty(_mediaId) Then
             InsertTweet(_imageFile, Today.Month + 1, Today.Day + 1, 1, _mediaId, oSender, "I")
+            WriteTrace("Updated Tweet database", True)
             sto.MediaIds = {_mediaId}
         End If
         WriteTrace("Sending tweet")
         Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
         If _twitterStatus IsNot Nothing Then
-            InsertTweet(sto.Status, Today.Month + 1, Today.Day + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
             WriteTrace("OK: " & _twitterStatus.Id, True)
+            InsertTweet(sto.Status, Today.Month + 1, Today.Day + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
+            WriteTrace("Updated Tweet database", True)
         Else
-            ' tweet failed
-            WriteTrace("Failed", True)
+            WriteTrace("Tweet Failed", True)
         End If
-    End Sub
-    Private Sub ShowStatus(pText As String)
-        lblStatus.Text = pText
-        StatusStrip1.Refresh()
     End Sub
     Private Shared Function StatusToString(pStatus As TweetSharp.TwitterStatus) As String
         Dim statusText As New StringBuilder()

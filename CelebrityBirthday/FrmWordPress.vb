@@ -246,6 +246,11 @@ Public NotInheritable Class FrmWordPress
             MyBase.Dispose(disposing)
         End Try
     End Sub
-
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
 #End Region
 End Class

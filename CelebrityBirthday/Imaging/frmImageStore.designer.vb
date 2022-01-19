@@ -35,7 +35,7 @@ Partial Class FrmImageStore
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.PasteImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.PicStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TxtForename = New System.Windows.Forms.TextBox()
         Me.TxtSurname = New System.Windows.Forms.TextBox()
         Me.BtnEditImage = New System.Windows.Forms.Button()
@@ -149,20 +149,23 @@ Partial Class FrmImageStore
         '
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStatus})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 639)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1022, 22)
         Me.StatusStrip1.TabIndex = 76
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'PicStatus
+        'LblStatus
         '
-        Me.PicStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
-        Me.PicStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PicStatus.Name = "PicStatus"
-        Me.PicStatus.Size = New System.Drawing.Size(63, 17)
-        Me.PicStatus.Text = "No Picture"
+        Me.LblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
+        Me.LblStatus.Name = "lblStatus"
+        Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.LblStatus.Size = New System.Drawing.Size(63, 17)
+        Me.LblStatus.Text = "No Picture"
         '
         'TxtForename
         '
@@ -286,7 +289,7 @@ Partial Class FrmImageStore
     Friend WithEvents btnGetImage As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents StatusStrip1 As StatusStrip
-    Friend WithEvents PicStatus As ToolStripStatusLabel
+    Friend WithEvents LblStatus As ToolStripStatusLabel
     Friend WithEvents TxtForename As TextBox
     Friend WithEvents TxtSurname As TextBox
     Friend WithEvents BtnEditImage As Button

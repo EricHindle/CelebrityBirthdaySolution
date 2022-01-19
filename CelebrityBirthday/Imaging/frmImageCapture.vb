@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -234,27 +234,26 @@ Public NotInheritable Class FrmImageCapture
                 LogUtil.Info("Saving image from picture box", MyBase.Name)
                 ImageUtil.SaveImageFromPictureBox(_pictureBox, _width, _height, imageFileName, ImageUtil.ImageType.JPEG)
                 imageFile = imageFileName
-                DisplayStatus(SAVED_MESSAGE & imageFileName, False,,, True)
+                DisplayAndLog(SAVED_MESSAGE & imageFileName)
             Else
-                DisplayStatus(NOT_SAVED_MESSAGE, False,,, True)
+                DisplayAndLog(NOT_SAVED_MESSAGE)
             End If
         Catch ex As ArgumentException
-            LogUtil.Exception(NOT_SAVED_MESSAGE, ex, MyBase.Name)
-            DisplayStatus(NOT_SAVED_MESSAGE, True, ex)
+            ShowStatus(NOT_SAVED_MESSAGE, lblStatus,, MyBase.Name, ex)
         End Try
         Return imageFile
     End Function
-    Private Sub DisplayStatus(ByVal sText As String, isMessageBox As Boolean, Optional ex As Exception = Nothing, Optional _style As MsgBoxStyle = MsgBoxStyle.Exclamation, Optional isLogged As Boolean = False)
-        lblStatus.Text = sText
-        StatusStrip1.Refresh()
-        If isLogged Then
-            LogUtil.Info(sText, MyBase.Name)
-        End If
-        If isMessageBox Then
-            Dim _message As String = sText & If(ex Is Nothing, "", vbCrLf & ex.Message)
-            MsgBox(_message, _style, "Information")
-        End If
-    End Sub
+    'Private Sub DisplayStatus(ByVal sText As String, isMessageBox As Boolean, Optional ex As Exception = Nothing, Optional _style As MsgBoxStyle = MsgBoxStyle.Exclamation, Optional isLogged As Boolean = False)
+    '    lblStatus.Text = sText
+    '    StatusStrip1.Refresh()
+    '    If isLogged Then
+    '        LogUtil.Info(sText, MyBase.Name)
+    '    End If
+    '    If isMessageBox Then
+    '        Dim _message As String = sText & If(ex Is Nothing, "", vbCrLf & ex.Message)
+    '        MsgBox(_message, _style, "Information")
+    '    End If
+    'End Sub
     Private Sub DisplayRawImage(ByRef oImage As Image)
         LogUtil.Info("Loading raw image", MyBase.Name)
         Dim sizeMessage As String = ""
@@ -264,7 +263,7 @@ Public NotInheritable Class FrmImageCapture
         End If
         sizeMessage += CStr(oImage.Size.Width) & " x " & CStr(oImage.Size.Height)
         If oImage.Size.Height > STD_CAP_HEIGHT Or oImage.Size.Width > STD_CAP_WIDTH Then
-            Dim _newLocation As Point = New Point(10, 10)
+            Dim _newLocation As New Point(10, 10)
             Me.Location = _newLocation
             Me.Height = iStartHeight + oImage.Size.Height - STD_CAP_HEIGHT
             Me.Width = iStartWidth + oImage.Size.Width - STD_CAP_WIDTH
@@ -272,8 +271,14 @@ Public NotInheritable Class FrmImageCapture
         PicCapture.Image = oImage.Clone
         ClearCropSelection()
         If PicCapture.Image IsNot Nothing Then
-            DisplayStatus("Image file loaded, " & sizeMessage, False,,, True)
+            DisplayAndLog("Image file loaded, " & sizeMessage)
         End If
+    End Sub
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
     End Sub
 #End Region
 #Region "Image Cropping"
@@ -295,16 +300,16 @@ Public NotInheritable Class FrmImageCapture
                 PicCapture.CreateGraphics.DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight)
             End If
         Catch exc As ArgumentNullException
-            DisplayStatus("MouseMove exception", True, exc)
+            ShowStatus("MouseMove exception", lblStatus,, MyBase.Name, exc)
         End Try
     End Sub
     Private Sub PicCapture_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PicCapture.MouseUp
         Try
             Cursor = Cursors.Default
             CaptureCroppedArea()
-            DisplayStatus(IMG_AREA_SEL, False)
+            ShowProgress(IMG_AREA_SEL, lblStatus, False)
         Catch exc As ArgumentException
-            DisplayStatus("MouseUp exception", True, exc)
+            ShowStatus("MouseUp exception", lblStatus,, MyBase.Name, exc)
         End Try
     End Sub
     Private Sub ClearCropSelection()
@@ -325,7 +330,7 @@ Public NotInheritable Class FrmImageCapture
             PreviewPictureBox.Image = ImageUtil.ResizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
             pnlAdjustImage.Enabled = True
         Catch exc As ArgumentException
-            DisplayStatus("CaptureCroppedArea exception", True, exc)
+            ShowStatus("CaptureCroppedArea exception", lblStatus,, MyBase.Name, exc)
         End Try
     End Sub
     Private Function ShrinkImage(ByVal sourceImage As Image) As Bitmap
@@ -348,7 +353,7 @@ Public NotInheritable Class FrmImageCapture
             LogUtil.Info("Shrinking ratio = " & CStr(imageShrinkRatio), MyBase.Name)
             _newBitmap = ImageUtil.ResizeImageToBitmap(sourceImage, targetWidth, targetHeight)
         Catch exc As ArithmeticException
-            DisplayStatus("ShrinkImage exception", True, exc,, True)
+            ShowStatus("ShrinkImage exception", lblStatus,, MyBase.Name, exc,, True)
         End Try
         Return _newBitmap
     End Function
@@ -406,7 +411,7 @@ Public NotInheritable Class FrmImageCapture
         Dim oColourMatrix As New ColorMatrix(GetColourMatrix)
         oImageAttributes.SetColorMatrix(oColourMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap)
         Dim oSourceBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
-        Dim oTargetBitmap As System.Drawing.Bitmap = New Bitmap(PreviewPictureBox.Image.Width, PreviewPictureBox.Image.Height)
+        Dim oTargetBitmap As New Bitmap(PreviewPictureBox.Image.Width, PreviewPictureBox.Image.Height)
         Dim oGraphics As Graphics = ImageUtil.InitialiseGraphics(oTargetBitmap)
         oGraphics.DrawImage(oSourceBitMap, oPoints, oRectangle, GraphicsUnit.Pixel, oImageAttributes)
         PreviewPictureBox.Image = oTargetBitmap
@@ -430,7 +435,7 @@ Public NotInheritable Class FrmImageCapture
                 CaptureCroppedArea()
             End If
         Catch ex As ArgumentException
-            DisplayStatus("Error resizing cropped image", True, ex)
+            ShowStatus("Error resizing cropped image", lblStatus,, MyBase.Name, ex)
         End Try
 
     End Sub

@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -110,7 +110,7 @@ Public NotInheritable Class FrmDeathList
         Next
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnBBTweet.Click
+    Private Sub BtnBBTweet_Click(sender As Object, e As EventArgs) Handles BtnBBTweet.Click
         If DgvPeople.SelectedRows.Count = 1 Then
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
             Dim oPerson As Person = GetPersonById(oRow.Cells(tId.Name).Value)
@@ -119,5 +119,11 @@ Public NotInheritable Class FrmDeathList
                 _sendTwitter.ShowDialog()
             End Using
         End If
+    End Sub
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, LblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, LblStatus, True, MyBase.Name,, isMessagebox)
     End Sub
 End Class

@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -77,8 +77,8 @@ Public NotInheritable Class FrmTweet
         My.Settings.twitterimagepos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
-    Private Sub BtnCopyselected_Click(sender As Object, e As EventArgs) Handles BtnCopyselected.Click, CopyToolStripMenuItem.Click
-        LogUtil.Info("Copy selected text", MyBase.Name)
+    Private Sub Btnopyselected_Click(sender As Object, e As EventArgs) Handles BtnCopyselected.Click, CopyToolStripMenuItem.Click
+        DisplayAndLog("Copy selected text")
         Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
         My.Computer.Clipboard.Clear()
         If _rtb IsNot Nothing AndAlso Not String.IsNullOrEmpty(_rtb.SelectedText) Then
@@ -86,7 +86,7 @@ Public NotInheritable Class FrmTweet
         End If
     End Sub
     Private Sub BtnCopyAll_Click(sender As Object, e As EventArgs) Handles BtnCopyAll.Click
-        LogUtil.Info("Copy text", MyBase.Name)
+        DisplayAndLog("Copy text")
         Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
         My.Computer.Clipboard.Clear()
         If _rtb IsNot Nothing Then
@@ -105,7 +105,7 @@ Public NotInheritable Class FrmTweet
         cboMonth.SelectedIndex = Today.Month - 1
     End Sub
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
-        LogUtil.Info("Selecting people", MyBase.Name)
+        DisplayAndLog("Selecting people")
         SelectPeople()
     End Sub
     Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
@@ -161,7 +161,7 @@ Public NotInheritable Class FrmTweet
         End If
     End Sub
     Private Sub BtnExplorer_Click(sender As Object, e As EventArgs) Handles BtnExplorer.Click
-        LogUtil.Info("Opening explorer", MyBase.Name)
+        DisplayAndLog("Opening explorer")
         Dim p As New ProcessStartInfo With {
             .FileName = "explorer.exe",
             .Arguments = My.Settings.twitterImageFolder
@@ -169,8 +169,14 @@ Public NotInheritable Class FrmTweet
         Process.Start(p)
     End Sub
     Private Sub BtnTweetDeck_Click(sender As Object, e As EventArgs) Handles BtnTweetDeck.Click
-        LogUtil.Info("Opening tweetdeck", MyBase.Name)
-        Process.Start(My.Resources.TWEETDECKURL)
+        DisplayAndLog("Opening tweetdeck")
+        Try
+            Process.Start(My.Resources.TWEETDECKURL)
+        Catch ex As InvalidOperationException
+            ShowStatus("Error opening tweetdeck", LblStatus, True, MyBase.Name, ex)
+        Catch ex As ComponentModel.Win32Exception
+            ShowStatus("Error opening tweetdeck", LblStatus, True, MyBase.Name, ex)
+        End Try
     End Sub
 #End Region
 #Region "Form subroutines"
@@ -202,25 +208,14 @@ Public NotInheritable Class FrmTweet
         If BuildTrees() Then
             GenerateAllTweets()
         Else
-            DisplayStatus("No people selected")
+            DisplayAndLog("No people selected")
         End If
     End Sub
     Private Sub SaveImages()
-        LogUtil.Info("Saving tweet images", MyBase.Name)
+        DisplayAndLog("Saving tweet images")
         For Each _page As TabPage In TabControl1.TabPages
             SaveImage(_page)
         Next
-    End Sub
-    Private Sub DisplayStatus(_text As String, Optional _isAppend As Boolean = False, Optional isLogged As Boolean = False)
-        If _isAppend Then
-            LblStatus.Text &= _text
-        Else
-            LblStatus.Text = _text
-        End If
-        StatusStrip1.Refresh()
-        If isLogged Then
-            LogUtil.Info(LblStatus.Text, MyBase.Name)
-        End If
     End Sub
     Private Sub BtnSendClick(sender As Object, e As EventArgs)
         If cmbTwitterUsers.SelectedIndex >= 0 Then
@@ -239,13 +234,12 @@ Public NotInheritable Class FrmTweet
             cmbTwitterUsers.Items.Add(_user)
         Next
     End Sub
-    Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False, Optional isLogged As Boolean = False)
+    Private Sub WriteTrace(sText As String, Optional isLogged As Boolean = False)
         rtbTweet.Text &= vbCrLf & sText
-        If isStatus Then DisplayStatus(sText)
         If isLogged Then LogUtil.Info(sText, MyBase.Name)
     End Sub
     Private Function SaveImage(_page As TabPage) As String
-        DisplayStatus("Saving File")
+        DisplayAndLog("Saving File")
         Dim _path As String = My.Settings.twitterImageFolder
         If Not My.Computer.FileSystem.DirectoryExists(_path) Then
             My.Computer.FileSystem.CreateDirectory(_path)
@@ -257,7 +251,7 @@ Public NotInheritable Class FrmTweet
         End If
         Dim _pictureBox As PictureBox = GetPictureBoxFromPage(_page)
         ImageUtil.SaveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, _fileName)
-        DisplayStatus("File saved")
+        DisplayAndLog("File saved")
         Return _fileName
     End Function
     Private Function NewSplitContainer(_index As Integer, _width As Integer, _height As Integer) As SplitContainer
@@ -407,9 +401,9 @@ Public NotInheritable Class FrmTweet
         End If
         Return Nothing
     End Function
-    Private Shared Sub ClearImages(Optional isConfirm As Boolean = True)
+    Private Sub ClearImages(Optional isConfirm As Boolean = True)
         If Not isConfirm OrElse MsgBox("Confirm delete tweet images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-            LogUtil.Info("Deleting tweet images", "FrmTweet")
+            DisplayAndLog("Deleting tweet images")
             Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder,
                                                                                               FileIO.SearchOption.SearchTopLevelOnly,
                                                                                               {[Enum].GetName(GetType(TweetType), TweetType.Anniversary) & "*.*", [Enum].GetName(GetType(TweetType), TweetType.Birthday) & "*.*", My.Resources.TOTD & "*.*"})
@@ -452,27 +446,33 @@ Public NotInheritable Class FrmTweet
             MyBase.Dispose(disposing)
         End Try
     End Sub
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, LblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, LblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
 #End Region
 #Region "Tree subroutines"
     Private Function BuildTrees() As Boolean
-        LogUtil.Info("Building trees", MyBase.Name)
+        DisplayAndLog("Building trees")
         isBuildingTrees = True
         Dim isBuiltOk As Boolean = False
-        DisplayStatus("Selecting...")
+        DisplayAndLog("Selecting...")
         tvBirthday.Nodes.Clear()
         personTable.Clear()
         Try
             If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
                 Dim _day As Integer = cboDay.SelectedIndex + 1
                 Dim _mth As Integer = cboMonth.SelectedIndex + 1
-                Dim testDate As Date = New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
+                Dim testDate As New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
                 personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, True)
                 oBirthdayList = FindBirthdays(_day, _mth, True)
                 oAnniversaryList = FindAnniversaries(_day, _mth, True)
                 LblImageCount.Text = CStr(personTable.Count) + " people selected"
                 AddTypeNode(oAnniversaryList, testDate, tvBirthday, My.Resources.ANNIVERSARY)
                 AddTypeNode(oBirthdayList, testDate, tvBirthday, My.Resources.BIRTHDAY)
-                DisplayStatus("Selection Complete")
+                DisplayAndLog("Selection Complete")
                 isBuiltOk = True
             Else
                 MsgBox("Select a date", MsgBoxStyle.Exclamation, "Error")
@@ -524,7 +524,7 @@ Public NotInheritable Class FrmTweet
         Return _text.ToString
     End Function
     Private Sub GenerateAllTweets()
-        DisplayStatus("Generating all tweets",, True)
+        DisplayAndLog("Generating all tweets")
         TxtStats.Text = ""
         If cboDay.SelectedIndex > -1 AndAlso cboMonth.SelectedIndex > -1 Then
             TabControl1.TabPages.Clear()
@@ -556,7 +556,7 @@ Public NotInheritable Class FrmTweet
                 oTweetLists.AddRange(_annivImageTweets)
                 GenerateTweets(oTweetLists, _imageStart, TweetType.ANNIVERSARY)
             End If
-            DisplayStatus("Images Complete")
+            DisplayAndLog("Images Complete")
         Else
             MsgBox("Select some people", MsgBoxStyle.Exclamation, "Error")
         End If
@@ -565,7 +565,7 @@ Public NotInheritable Class FrmTweet
         For _personIndex As Integer = _listStart To _tweetLists.Count - 1
 
             Dim _personList As List(Of Person) = _tweetLists(_personIndex)
-            DisplayStatus(">" & CStr(_personIndex), True)
+            DisplayAndLog(">" & CStr(_personIndex))
             Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, [Enum].GetName(GetType(TweetType), _tweetType) & "_" & CStr(_personIndex - _listStart + 1))
             Dim pbControl As PictureBox = GetPictureBoxFromPage(newTweetTabPage)
             Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
@@ -590,7 +590,7 @@ Public NotInheritable Class FrmTweet
         Next
     End Sub
     Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer)
-        LogUtil.Info("Generating text", MyBase.Name)
+        DisplayAndLog("Generating text")
         Dim _outString As New StringBuilder
         _outString.Append(cboMonth.SelectedItem).Append(" "c).Append(cboDay.SelectedItem).Append(LINE_FEED).Append(LINE_FEED)
         _outString.Append(GetHeading(_type)).Append(LINE_FEED)
@@ -622,7 +622,7 @@ Public NotInheritable Class FrmTweet
         _textBox.Text = _outString.ToString.Trim(LINE_FEED)
     End Sub
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
-        LogUtil.Info("Generating picture", MyBase.Name)
+        DisplayAndLog("Generating picture")
         If _imageTable.Count > 0 Then
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
             GenerateTweetImage(_pictureBox, _imageTable, _width, _height)
@@ -641,18 +641,18 @@ Public NotInheritable Class FrmTweet
                 pAlignType = ImageUtil.AlignType.Centre
         End Select
         ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, pAlignType)
-        DisplayStatus("Image complete", False)
+        DisplayAndLog("Image complete")
     End Sub
     Private Sub SendTweet(_filename As String)
         Dim isOkToSend As Boolean = True
         If cmbTwitterUsers.SelectedIndex >= 0 Then
             isOkToSend = SetupOAuth(isOkToSend)
         End If
-        WriteTrace("Entering SendTweet " & Format(Now, "hh:mm:ss"),, True)
+        WriteTrace("Entering SendTweet " & Format(Now, "hh:mm:ss"), True)
         If isOkToSend Then
             SendTheTweet(GetRichTextBoxFromPage(TabControl1.SelectedTab).Text, _filename)
         End If
-        WriteTrace("Back from SendTweet " & Format(Now, "hh:mm:ss"),, True)
+        WriteTrace("Back from SendTweet " & Format(Now, "hh:mm:ss"), True)
     End Sub
     Private Function SetupOAuth(isOkToSend As Boolean) As Boolean
         Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
@@ -679,7 +679,7 @@ Public NotInheritable Class FrmTweet
         Return isOkToSend
     End Function
     Private Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
-        DisplayStatus("Sending Tweet as " & cmbTwitterUsers.SelectedItem,, True)
+        DisplayAndLog("Sending Tweet as " & cmbTwitterUsers.SelectedItem)
         Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim sto = New SendTweetOptions
         Dim msg = _tweetText
@@ -690,10 +690,10 @@ Public NotInheritable Class FrmTweet
             If _twitterUplMedia IsNot Nothing Then
                 Dim _uploadedSize As Long = _twitterUplMedia.Size
                 Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-                WriteTrace("Image upload size: " & CStr(_uploadedSize), False, True)
+                WriteTrace("Image upload size: " & CStr(_uploadedSize), True)
                 _mediaId = _twitterUplMedia.Media_Id
             Else
-                WriteTrace("No image upload", False, True)
+                WriteTrace("No image upload", True)
             End If
         End If
         If Not String.IsNullOrEmpty(_mediaId) Then
@@ -703,10 +703,10 @@ Public NotInheritable Class FrmTweet
         Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
         If _twitterStatus IsNot Nothing Then
             InsertTweet(sto.Status, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
-            WriteTrace("OK: " & _twitterStatus.Id, True, True)
+            WriteTrace("OK: " & _twitterStatus.Id, True)
         Else
             ' tweet failed
-            WriteTrace("Failed", True, True)
+            WriteTrace("Failed", True)
         End If
     End Sub
     Private Sub GetAuthData()
@@ -802,7 +802,7 @@ Public NotInheritable Class FrmTweet
         Return _header
     End Function
     Private Function CreateNewTweetTabPage(_index As Integer, _tabTitle As String) As TabPage
-        LogUtil.Info("New tab " & _tabTitle, MyBase.Name)
+        DisplayAndLog("New tab " & _tabTitle)
         Dim newTabpage As New TabPage
         Dim tabTitle As String = _tabTitle
         With newTabpage

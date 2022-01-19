@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -74,17 +74,15 @@ Public Class FrmImageStore
                     End If
                     _latestSavedFile = strFName
                     lblImageFile.Text = strFName
-                    ShowStatus("Saving " & strFName,, True)
-                    Me.Refresh()
+                    DisplayAndLog("Saving " & strFName)
                     PictureBox1.Image.Save(strFName, Imaging.ImageFormat.Jpeg)
-                    PicStatus.Text = "Saved " & strFName
+                    DisplayAndLog("Saved " & strFName)
                     isSaved = True
                 Else
                     MsgBox("No name entered. Cannot save to file.", MsgBoxStyle.Exclamation, "Missing name")
                 End If
             Catch ex As ArgumentException
                 If DisplayException("Argument", ex) = MsgBoxResult.No Then Exit Sub
-                PicStatus.Text = ex.Message
             End Try
         Else
             MsgBox("No image. Cannot save to file.", MsgBoxStyle.Exclamation, "Missing image")
@@ -180,21 +178,30 @@ Public Class FrmImageStore
     Private Sub OpenImageSearch()
         Dim _name As String = If(String.IsNullOrEmpty(TxtForename.Text.Trim), "", TxtForename.Text.Trim & " ") & TxtSurname.Text.Trim
         If Not String.IsNullOrEmpty(_name) Then
-            ShowStatus("Opening Google image search for " & _name,, True)
+            DisplayAndLog("Opening Google image search for " & _name)
             Dim sUrl As String = GetGoogleSearchString(_name)
-            Process.Start(sUrl)
+            Try
+                Process.Start(sUrl)
+            Catch ex As InvalidOperationException
+                ShowStatus("Error opening Google image search", LblStatus, True, MyBase.Name, ex)
+            Catch ex As ComponentModel.Win32Exception
+                ShowStatus("Error opening Google image search", LblStatus, True, MyBase.Name, ex)
+            End Try
         Else
-            ShowStatus("Enter name to search for")
+            ShowProgress("Enter name to search for", LblStatus, False)
         End If
     End Sub
-    Private Shared Function DisplayException(sType As String, ByVal ex As Exception) As MsgBoxResult
-        LogUtil.Exception(sType & " Exception", ex, "frmImageStore")
-        Return MsgBox("Exception: " & ex.Message & vbCrLf & If(ex.InnerException Is Nothing, "", ex.InnerException.Message) & vbCrLf & "OK to continue?", MsgBoxStyle.YesNo, "Exception")
+    Private Function DisplayException(sType As String, ByVal ex As Exception) As MsgBoxResult
+        Return ShowStatus(sType & " Exception. OK to continue?",
+                          LblStatus,
+                          True, MyBase.Name, ex,,
+                          True, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo)
     End Function
-    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
-        PicStatus.Text = If(isAppend, PicStatus.Text, "") & pText
-        StatusStrip1.Refresh()
-        If isLogged Then LogUtil.Info(pText, MyBase.Name)
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, LblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, LblStatus, True, MyBase.Name,, isMessagebox)
     End Sub
 #End Region
 End Class

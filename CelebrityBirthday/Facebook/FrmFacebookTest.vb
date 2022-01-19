@@ -56,8 +56,7 @@ Public NotInheritable Class FrmFacebookTest
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        LblStatus.Text = "Sending"
-        StatusStrip1.Refresh()
+        DisplayAndLog("Sending")
         EmailUtil.TestEmailSend(TxtFrom.Text.Trim,
                                 TxtTo.Text.Trim,
                                 TxtSubject.Text.Trim,
@@ -68,7 +67,7 @@ Public NotInheritable Class FrmFacebookTest
                                 TxtUsername.Text.Trim,
                                 TxtPassword.Text.Trim,
                                 cbSSL.Checked)
-        LblStatus.Text = "Done"
+        DisplayAndLog("Done")
     End Sub
 
     Private Sub FrmFacebookTest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -100,5 +99,11 @@ Public NotInheritable Class FrmFacebookTest
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         TxtPassword.Text = TxtGmail.Text
+    End Sub
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, LblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, LblStatus, True, MyBase.Name,, isMessagebox)
     End Sub
 End Class

@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -85,7 +85,7 @@ Public NotInheritable Class FrmBotsd
                 If MsgBox("No image to send. OK to continue?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "No image") = MsgBoxResult.Yes Then
                     chkImages.Checked = False
                 Else
-                    DisplayStatus("Tweet not sent - no image")
+                    DisplayAndLog("Tweet not sent - no image")
                     Exit Sub
                 End If
             End If
@@ -93,7 +93,7 @@ Public NotInheritable Class FrmBotsd
         If cmbTwitterUsers.SelectedIndex >= 0 Then
             SendTweet(_imageFilename)
         Else
-            DisplayStatus("Select Sender")
+            DisplayAndLog("Select Sender")
         End If
     End Sub
     Private Sub BtnSwap_Click(sender As Object, e As EventArgs) Handles BtnSwap.Click
@@ -172,7 +172,7 @@ Public NotInheritable Class FrmBotsd
         If UpdateShortDesc(_pickPerson1) = 1 Then
             WriteTrace("Updated person 1", True)
         Else
-            DisplayStatus("Updated failed")
+            WriteTrace("Update person 1 failed", True)
         End If
         _pickPerson1.Dispose()
     End Sub
@@ -183,7 +183,7 @@ Public NotInheritable Class FrmBotsd
         If UpdateShortDesc(_pickPerson2) = 1 Then
             WriteTrace("Updated person 2", True)
         Else
-            DisplayStatus("Updated failed")
+            WriteTrace("Update person 2 failed", True)
         End If
         _pickPerson2.Dispose()
     End Sub
@@ -194,7 +194,7 @@ Public NotInheritable Class FrmBotsd
         If UpdateShortDesc(_pickPerson3) = 1 Then
             WriteTrace("Updated person 3", True)
         Else
-            DisplayStatus("Updated failed")
+            WriteTrace("Update person 3 failed", True)
         End If
         _pickPerson3.Dispose()
     End Sub
@@ -205,7 +205,7 @@ Public NotInheritable Class FrmBotsd
         If UpdateShortDesc(_pickPerson4) = 1 Then
             WriteTrace("Updated person 4", True)
         Else
-            DisplayStatus("Updated failed")
+            WriteTrace("Update person 4 failed", True)
         End If
         _pickPerson4.Dispose()
     End Sub
@@ -216,7 +216,7 @@ Public NotInheritable Class FrmBotsd
         If UpdateShortDesc(_pickPerson5) = 1 Then
             WriteTrace("Updated person 5", True)
         Else
-            DisplayStatus("Updated failed")
+            WriteTrace("Update person 5 failed", True)
         End If
         _pickPerson5.Dispose()
     End Sub
@@ -227,7 +227,7 @@ Public NotInheritable Class FrmBotsd
         If UpdateShortDesc(_pickPerson6) = 1 Then
             WriteTrace("Updated person 6", True)
         Else
-            DisplayStatus("Updated failed")
+            WriteTrace("Update person 6 failed", True)
         End If
         _pickPerson6.Dispose()
     End Sub
@@ -301,12 +301,12 @@ Public NotInheritable Class FrmBotsd
         SelectPairs()
     End Sub
     Private Sub BtnAlterPostNo_Click(sender As Object, e As EventArgs) Handles BtnAlterPostNo.Click
-        DisplayStatus("Altering post number", True)
+        DisplayAndLog("Altering post number")
         Using _alterPost As New FrmAlterPostNo
             _alterPost.ShowDialog()
             UpdatePostNumbers()
         End Using
-        ClearStatus()
+        ClearStatus(LblStatus)
     End Sub
     Private Sub BtnRemove_Click(sender As Object, e As EventArgs) Handles BtnRemove.Click
         If DgvPairs.SelectedRows.Count = 1 Then
@@ -388,7 +388,7 @@ Public NotInheritable Class FrmBotsd
         End If
     End Sub
     Private Sub BtnAtoZ_Click(sender As Object, e As EventArgs) Handles BtnAtoZ.Click
-        DisplayStatus("Generating A to Z", True)
+        DisplayAndLog("Generating A to Z")
         Dim oRows As DataRowCollection = GetBotsdIndex()
         Dim currentLetter As String = String.Empty
         Dim indexText As New StringBuilder
@@ -399,12 +399,12 @@ Public NotInheritable Class FrmBotsd
                     Dim errorMsg As String
                     If oRow.IsidNull() Then
                         errorMsg = "Missing person records " & CStr(oRow.btsdId) & " " & CStr(oRow.btsdDay) & "/" & CStr(oRow.btsdMonth) & "/" & CStr(oRow.btsdYear) & " " & oRow.btsdUrl
-                        DisplayStatus(errorMsg, True)
+                        DisplayAndLog(errorMsg)
                         Continue For
                     Else
                         errorMsg = "Empty surname for " & CStr(oRow.id) & " " & oRow.forename & " " & CStr(oRow.birthday) & "/" & CStr(oRow.birthmonth) & "/" & CStr(oRow.birthyear)
                         surnameInitial = "z"
-                        DisplayStatus(errorMsg, True)
+                        DisplayAndLog(errorMsg)
                     End If
                 Else
                     surnameInitial = oRow.surname.Substring(0, 1)
@@ -433,14 +433,14 @@ Public NotInheritable Class FrmBotsd
             _text.rtbText.Text = indexText.ToString
             _text.ShowDialog()
         End Using
-        ClearStatus()
+        ClearStatus(LblStatus)
     End Sub
     Private Sub BtnRmvPostDetails_Click(sender As Object, e As EventArgs) Handles BtnRmvPostDetails.Click
-        DisplayStatus("Remove post details", True)
+        DisplayAndLog("Remove post details")
         Using _rmvPost As New FrmRmvPost
             _rmvPost.ShowDialog()
         End Using
-        ClearStatus()
+        ClearStatus(LblStatus)
     End Sub
     Private Sub ChkHandles_CheckedChanged(sender As Object, e As EventArgs) Handles ChkHandles.CheckedChanged
         GeneratePair()
@@ -453,16 +453,16 @@ Public NotInheritable Class FrmBotsd
             End If
             SaveImageGroup()
             CopyAllText()
-            DisplayStatus("Ready to post")
+            ShowProgress("Ready to post", LblStatus, False)
         Else
-            DisplayStatus("No row selected")
+            ShowProgress("No row selected", LblStatus, False)
         End If
     End Sub
 
 #End Region
 #Region "subroutines"
     Private Function SaveImage() As String
-        DisplayStatus("Saving File")
+        DisplayAndLog("Saving File")
         Dim _path As String = My.Settings.botsdFilePath
         If Not My.Computer.FileSystem.DirectoryExists(_path) Then
             My.Computer.FileSystem.CreateDirectory(_path)
@@ -473,7 +473,7 @@ Public NotInheritable Class FrmBotsd
             _fileName = GetUniqueFname(_fileName)
         End If
         ImageUtil.SaveImageFromPictureBox(PictureBox1, PictureBox1.Width, PictureBox1.Height, _fileName)
-        DisplayStatus("File saved")
+        DisplayAndLog("File saved")
         Return _fileName
     End Function
     Private Sub FillTwitterUserList()
@@ -532,7 +532,7 @@ Public NotInheritable Class FrmBotsd
 
     End Sub
     Private Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
-        DisplayStatus("Sending Tweet")
+        DisplayAndLog("Sending Tweet")
         Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim sto = New SendTweetOptions
         Dim msg = _tweetText
@@ -565,21 +565,7 @@ Public NotInheritable Class FrmBotsd
     End Sub
     Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False, Optional isLogged As Boolean = True)
         rtbTweet.Text &= vbCrLf & sText
-        If isStatus Then DisplayStatus(sText, False, isLogged)
-    End Sub
-    Private Sub DisplayStatus(pText As String, isAppend As Boolean, isLogged As Boolean)
-        LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
-        StatusStrip1.Refresh()
-        If isLogged Then LogUtil.Info(pText, MyBase.Name)
-    End Sub
-    Private Sub DisplayStatus(pText As String, Optional isLogged As Boolean = False)
-        DisplayStatus(pText, False, isLogged)
-    End Sub
-    Private Sub DisplayStatus(pText As String)
-        DisplayStatus(pText, False, False)
-    End Sub
-    Private Sub ClearStatus()
-        DisplayStatus("")
+        If isStatus Then DisplayAndLog(sText)
     End Sub
     Private Sub GetAuthData()
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
@@ -631,7 +617,7 @@ Public NotInheritable Class FrmBotsd
         DgvPairs.Sort(DgvPairs.Columns(0), ListSortDirection.Ascending)
     End Sub
     Private Sub GeneratePair()
-        DisplayStatus("Generate tweet", True)
+        DisplayAndLog("Generate tweet")
         ClearPersonDetails()
         If DgvPairs.SelectedRows.Count = 1 Then
             Try
@@ -699,9 +685,9 @@ Public NotInheritable Class FrmBotsd
                 End If
                 GeneratePicture(PictureBox1, _imageList, NudPic1Horizontal.Value)
                 GenerateText(_imageList)
-                ClearStatus()
+                ClearStatus(LblStatus)
             Catch ex As DbException
-                DisplayStatus("Person exception")
+                ShowStatus("Person exception", LblStatus, True, MyBase.Name, ex)
             End Try
         End If
     End Sub
@@ -748,7 +734,7 @@ Public NotInheritable Class FrmBotsd
         rtbFile1.Text = _outString.ToString
     End Sub
     Private Sub GenerateWordpress()
-        DisplayStatus("Generating WordPress list entry", True)
+        DisplayAndLog("Generating WordPress list entry")
         Dim sb As New StringBuilder
         With sb
             .Append(WP_PARA).Append(vbCrLf)
@@ -828,7 +814,7 @@ Public NotInheritable Class FrmBotsd
             oTextForm.rtbText.Text = sb.ToString
             oTextForm.ShowDialog()
         End Using
-        ClearStatus()
+        ClearStatus(LblStatus)
     End Sub
     Private Function GetImageLink(oPerson As Person) As String
         Dim oImage As ImageIdentity = oPerson.Image
@@ -929,7 +915,7 @@ Public NotInheritable Class FrmBotsd
         If DgvPairs.SelectedRows.Count = 0 Then
             Exit Sub
         End If
-        DisplayStatus("Generating WordPress post", True)
+        DisplayAndLog("Generating WordPress post")
         Dim sb As New StringBuilder
         Dim titleSb As New StringBuilder
         Dim thisWpNumber As String = DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value
@@ -948,9 +934,9 @@ Public NotInheritable Class FrmBotsd
         Try
             Process.Start(openUrl)
         Catch ex As InvalidOperationException
-            DisplayStatus(My.Resources.WPOPENERR & openUrl, False)
+            ShowStatus(My.Resources.WPOPENERR & openUrl, LblStatus, True, MyBase.Name, ex)
         Catch ex As ComponentModel.Win32Exception
-            DisplayStatus(My.Resources.WPOPENERR & openUrl, False)
+            ShowStatus(My.Resources.WPOPENERR & openUrl, LblStatus, True, MyBase.Name, ex)
         End Try
 
         Try
@@ -1080,7 +1066,7 @@ Public NotInheritable Class FrmBotsd
             If _pickPerson4 IsNot Nothing Then _pickPerson4.Dispose()
             If _pickPerson5 IsNot Nothing Then _pickPerson5.Dispose()
             If _pickPerson6 IsNot Nothing Then _pickPerson6.Dispose()
-            ClearStatus()
+            ClearStatus(LblStatus)
         Catch ex As DbException
             DisplayException(MethodBase.GetCurrentMethod, ex, "Db")
         End Try
@@ -1183,7 +1169,7 @@ Public NotInheritable Class FrmBotsd
         PictureBox1.Image = Nothing
     End Sub
     Private Sub UpdatePostNumbers()
-        DisplayStatus("Updating post numbers", True)
+        DisplayAndLog("Updating post numbers")
         For Each oRow As DataGridViewRow In DgvPairs.Rows
             Try
                 If oRow.Cells(pairId1.Name).Value IsNot Nothing Then
@@ -1203,10 +1189,10 @@ Public NotInheritable Class FrmBotsd
                 DisplayException(MethodBase.GetCurrentMethod(), ex, "Conversion")
             End Try
         Next
-        ClearStatus()
+        ClearStatus(LblStatus)
     End Sub
     Private Sub SelectPairs()
-        DisplayStatus("Selecting...", True)
+        ShowProgress("Selecting...", LblStatus, False)
         rtbFile1.Text = ""
         isBuildingPairs = True
         ClearPersonDetails()
@@ -1253,7 +1239,7 @@ Public NotInheritable Class FrmBotsd
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Error")
             Me.Close()
         End Try
-        ClearStatus()
+        ClearStatus(LblStatus)
         isBuildingPairs = False
     End Sub
     Private Sub CopyAllText()
@@ -1277,6 +1263,11 @@ Public NotInheritable Class FrmBotsd
             Next
         End If
     End Sub
-
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, LblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, LblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
 #End Region
 End Class

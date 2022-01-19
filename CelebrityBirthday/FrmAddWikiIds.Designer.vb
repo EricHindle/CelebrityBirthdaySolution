@@ -160,17 +160,19 @@ Partial Class FrmAddWikiIds
         '
         Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.lblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.lblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(5, 17)
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.lblStatus.Size = New System.Drawing.Size(10, 17)
         '
-        'nudSelectCount
+        'NudSelectCount
         '
         Me.NudSelectCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.NudSelectCount.Location = New System.Drawing.Point(275, 496)
         Me.NudSelectCount.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.NudSelectCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
-        Me.NudSelectCount.Name = "nudSelectCount"
+        Me.NudSelectCount.Name = "NudSelectCount"
         Me.NudSelectCount.Size = New System.Drawing.Size(65, 24)
         Me.NudSelectCount.TabIndex = 23
         '
@@ -201,7 +203,7 @@ Partial Class FrmAddWikiIds
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label1.Location = New System.Drawing.Point(150, 498)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(119, 22)
+        Me.Label1.Size = New System.Drawing.Size(104, 17)
         Me.Label1.TabIndex = 28
         Me.Label1.Text = "Selection Count"
         '
@@ -236,7 +238,7 @@ Partial Class FrmAddWikiIds
         Me.LblId.ForeColor = System.Drawing.Color.RoyalBlue
         Me.LblId.Location = New System.Drawing.Point(12, 353)
         Me.LblId.Name = "LblId"
-        Me.LblId.Size = New System.Drawing.Size(17, 21)
+        Me.LblId.Size = New System.Drawing.Size(15, 16)
         Me.LblId.TabIndex = 31
         Me.LblId.Text = "0"
         '
@@ -278,7 +280,7 @@ Partial Class FrmAddWikiIds
         Me.Label2.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label2.Location = New System.Drawing.Point(721, 489)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 22)
+        Me.Label2.Size = New System.Drawing.Size(55, 17)
         Me.Label2.TabIndex = 52
         Me.Label2.Text = "Use this"
         '

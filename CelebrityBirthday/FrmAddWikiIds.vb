@@ -18,7 +18,7 @@ Public Class FrmAddWikiIds
         isLoadingTable = True
         dgvWikiIds.Rows.Clear()
         ClearPersonDetails()
-        DisplayMessage("Finding everybody")
+        DisplayAndLog("Finding everybody")
         Try
             personTable = FindEverybody()
         Catch ex As DbException
@@ -30,10 +30,10 @@ Public Class FrmAddWikiIds
         Dim totalPeople As Integer = personTable.Count
         Dim _ct As Integer = 0
         Dim _addedCt As Integer = 0
-        DisplayMessage("Found " & CStr(totalPeople) & " people")
+        DisplayAndLog("Found " & CStr(totalPeople) & " people")
         For Each _person In personTable
             _ct += 1
-            DisplayMessage(CStr(_ct) & " of " & CStr(totalPeople))
+            ShowProgress(CStr(_ct) & " of " & CStr(totalPeople), lblStatus, False)
             If String.IsNullOrEmpty(_person.Social.WikiId) Then
                 Dim searchName As String = If(String.IsNullOrEmpty(_person.ForeName), "", _person.ForeName.Trim & " ") & _person.Surname.Trim
                 FindPossibleWikiIds(_addedCt, _person, searchName)
@@ -52,7 +52,7 @@ Public Class FrmAddWikiIds
             End If
             _person.Dispose()
         Next
-        DisplayMessage("Find Complete")
+        DisplayAndLog("Find Complete")
         dgvWikiIds.ClearSelection()
         isLoadingTable = False
     End Sub
@@ -100,7 +100,7 @@ Public Class FrmAddWikiIds
             End If
             If Not String.IsNullOrEmpty(pWikiId) Then
                 UpdateWikiId(pPersonId, pWikiId)
-                DisplayMessage("Updated " & pWikiId)
+                DisplayAndLog("Updated " & pWikiId)
                 ClearPersonDetails()
             End If
         End If
@@ -109,7 +109,7 @@ Public Class FrmAddWikiIds
         Dim ict As Integer = 0
         For Each oRow As DataGridViewRow In dgvWikiIds.Rows
             ict += 1
-            DisplayMessage(CStr(ict))
+            ShowProgress(CStr(ict), lblStatus, False)
             If oRow.Cells(xExclude.Name).Value = False Then
                 If GetSocialMedia(oRow.Cells(xId.Name).Value).Id < 0 Then
                     InsertSocialMedia(oRow.Cells(xId.Name).Value, "", False, oRow.Cells(xDesc.Name).Value, 0, False)
@@ -144,17 +144,17 @@ Public Class FrmAddWikiIds
         End If
         Return isAdded
     End Function
-    Private Sub DisplayMessage(oText As String)
-        lblStatus.Text = oText
-        StatusStrip1.Refresh()
-    End Sub
+    'Private Sub DisplayMessage(oText As String)
+    '    lblStatus.Text = oText
+    '    StatusStrip1.Refresh()
+    'End Sub
     Public Shared Function GetDataFromResponse(ByRef pResponse As WebResponse, ByRef pContinue As String) As List(Of String)
         Dim oExtract As String
         Dim wikipage As String
         Dim titleList As New List(Of String)
         If pResponse IsNot Nothing Then
             Try
-                Dim sr As System.IO.StreamReader = New System.IO.StreamReader(pResponse.GetResponseStream())
+                Dim sr As New System.IO.StreamReader(pResponse.GetResponseStream())
                 wikipage = sr.ReadToEnd
                 Dim jss As New JavaScriptSerializer()
                 Dim extractDictionary As Dictionary(Of String, Object) = jss.Deserialize(Of Dictionary(Of String, Object))(wikipage)
@@ -213,6 +213,17 @@ Public Class FrmAddWikiIds
         Else
             txtWiki.Text = ""
         End If
+    End Sub
+
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
+
+    Private Sub FrmAddWikiIds_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
     End Sub
 #End Region
 End Class

@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -427,11 +427,10 @@ Public Class FrmSendTwitter
     End Sub
     Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False)
         rtbTweetProgress.Text &= vbCrLf & sText
-        If isStatus Then ShowStatus(sText)
         LogUtil.Info(sText, MyBase.Name)
     End Sub
     Private Sub SendTheTweet()
-        ShowStatus("Sending Tweet")
+        DisplayAndLog("Sending Tweet")
         Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim sto = New SendTweetOptions
         Dim msg = RtbTweetText.Text
@@ -464,16 +463,13 @@ Public Class FrmSendTwitter
         End If
         Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
         If _twitterStatus IsNot Nothing Then
-            InsertTweet(sto.Status, Today.Month + 1, Today.Day + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
             WriteTrace("OK: " & _twitterStatus.Id, True)
+            InsertTweet(sto.Status, Today.Month + 1, Today.Day + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
+            WriteTrace("Inserted tweet database record")
         Else
             ' tweet failed
-            WriteTrace("Failed", True)
+            WriteTrace("Tweet Failed", True)
         End If
-    End Sub
-    Private Sub ShowStatus(pText As String)
-        lblStatus.Text = pText
-        StatusStrip1.Refresh()
     End Sub
     Private Shared Function StatusToString(pStatus As TweetSharp.TwitterStatus) As String
         Dim statusText As New StringBuilder()
@@ -490,15 +486,18 @@ Public Class FrmSendTwitter
         Dim _person As New Person(TxtForename.Text, TxtSurname.Text, "", "", 0, 0, 0, 0, 0, 0, "", "", _imageidentity, Nothing)
         Dim _pictureList As New List(Of Person) From {_person}
         ImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, ImageUtil.AlignType.Centre)
+        WriteTrace("Generated image")
     End Sub
     Private Function GetWikiText(_sentences As Integer) As String
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(TxtName.Text, _sentences))
         Dim extract As String = GetExtractFromResponse(_response)
         Return extract
     End Function
-
-    Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles TxtName.TextChanged
-
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
     End Sub
 #End Region
 End Class

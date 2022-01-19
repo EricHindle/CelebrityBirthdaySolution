@@ -228,6 +228,11 @@
     Private Sub BtnSplitNameText_Click(sender As Object, e As EventArgs) Handles BtnSplitNameText.Click
         SplitNameText()
     End Sub
-
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, LblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, LblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
 #End Region
 End Class

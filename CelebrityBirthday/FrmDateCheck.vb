@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -154,14 +154,14 @@ Public NotInheritable Class FrmDateCheck
         Try
             If cboDay.SelectedIndex < 0 And cboMonth.SelectedIndex < 0 Then
                 If MsgBox("Do you really want to select all persons?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Check") = MsgBoxResult.Yes Then
-                    ShowStatus("Finding everybody", True)
+                    DisplayAndLog("Finding everybody")
                     personList = FindEverybody()
                 End If
             ElseIf cboDay.SelectedIndex < 0 Then
-                ShowStatus("Finding persons for " & CStr(cboMonth.SelectedItem), True)
+                DisplayAndLog("Finding persons for " & CStr(cboMonth.SelectedItem))
                 personList = FindPeopleByDate(-1, cboMonth.SelectedIndex + 1, False, False)
             Else
-                ShowStatus("Finding persons for " & CStr(cboDay.SelectedIndex + 1) & "/" & CStr(cboMonth.SelectedIndex + 1), True)
+                DisplayAndLog("Finding persons for " & CStr(cboDay.SelectedIndex + 1) & "/" & CStr(cboMonth.SelectedIndex + 1))
                 personList = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False)
             End If
         Catch ex As DbException
@@ -173,7 +173,7 @@ Public NotInheritable Class FrmDateCheck
         Dim totalPeople As Integer = personList.Count
         Dim _ct As Integer = 0
         Dim _addedct As Integer = 0
-        ShowStatus("Found " & CStr(totalPeople) & " people", True)
+        DisplayAndLog("Found " & CStr(totalPeople) & " people")
         personTable.Clear()
         For Each _person In personList
             _ct += 1
@@ -360,7 +360,7 @@ Public NotInheritable Class FrmDateCheck
                 TxtFullDesc.Text = personStringList(0) & "(" & wikiStringList(1) & ")" & personStringList(2)
             End If
         End If
-        ShowStatus("Date copied to full desc", True)
+        DisplayAndLog("Date copied to full desc")
     End Sub
     Private Sub BtnClearDetails_Click(sender As Object, e As EventArgs) Handles BtnClearDetails.Click
         ClearPersonDetails()
@@ -370,26 +370,26 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub BtnWikiUpdate_Click(sender As Object, e As EventArgs) Handles BtnWikiUpdate.Click
         If isWikiIdChanged Then
-            ShowStatus("Updating wiki id", True)
+            DisplayAndLog("Updating wiki id")
             UpdateWikiId(CInt(LblId.Text), TxtWikiId.Text)
-            ShowStatus(LblId.Text & "Wiki Id Updated to " & TxtWikiId.Text, True)
+            DisplayAndLog(LblId.Text & "Wiki Id Updated to " & TxtWikiId.Text)
         End If
     End Sub
     Private Sub BtnWikiOpen_Click(sender As Object, e As EventArgs) Handles BtnWikiOpen.Click
         If Not String.IsNullOrEmpty(TxtWikiId.Text) Then
-            ShowStatus("Opening Wikipedia", True)
+            DisplayAndLog("Opening Wikipedia")
             Try
                 Process.Start(My.Resources.WIKIURL & TxtWikiId.Text.Trim)
             Catch ex As InvalidOperationException
-                ShowStatus("Error opening wiki " & TxtWikiId.Text, True)
+                ShowStatus("Error opening wiki " & TxtWikiId.Text, lblStatus, True, MyBase.Name, ex)
             Catch ex As ComponentModel.Win32Exception
-                ShowStatus("Error opening wiki " & TxtWikiId.Text, True)
+                ShowStatus("Error opening wiki " & TxtWikiId.Text, lblStatus, True, MyBase.Name, ex)
             End Try
         End If
     End Sub
     Private Sub Date_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         ClearPersonDetails()
-        ShowStatus("")
+        ClearStatus(lblStatus)
     End Sub
     Private Sub FrmDateCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
@@ -414,7 +414,7 @@ Public NotInheritable Class FrmDateCheck
 
 
     Private Sub BtnBotSD_Click(sender As Object, e As EventArgs) Handles BtnBotSD.Click
-        ShowStatus("Born on the same day update", True)
+        DisplayAndLog("Born on the same day update")
         Using _botsd As New FrmBotsd
             If cboDay.SelectedIndex < 0 Then
                 _botsd.ThisDay = toDate.Day
@@ -424,7 +424,7 @@ Public NotInheritable Class FrmDateCheck
             _botsd.ThisMonth = cboMonth.SelectedIndex + 1
             _botsd.ShowDialog()
         End Using
-        ShowStatus("")
+        ClearStatus(lblStatus)
     End Sub
     Private Sub BtnMonth_Click(sender As Object, e As EventArgs) Handles BtnMonth.Click
         cboDay.SelectedIndex = -1
@@ -439,7 +439,7 @@ Public NotInheritable Class FrmDateCheck
 #Region "subroutines"
     Private Function GetPictureText(oPerson As Person) As String
         Dim wpText As String
-        ShowStatus("Generating WordPress description for " & TxtFullName.Text, True)
+        DisplayAndLog("Generating WordPress description for " & TxtFullName.Text)
         Dim sBorn As String = ""
         If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
             sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
@@ -487,11 +487,11 @@ Public NotInheritable Class FrmDateCheck
         End If
         Return _wikiBirthInfo
     End Function
-    Private Sub ShowStatus(oText As String, Optional isLogged As Boolean = False)
-        lblStatus.Text = oText
-        StatusStrip1.Refresh()
-        If isLogged Then LogUtil.Info(oText, MyBase.Name)
-    End Sub
+    'Private Sub ShowStatus(oText As String, Optional isLogged As Boolean = False)
+    '    lblStatus.Text = oText
+    '    StatusStrip1.Refresh()
+    '    If isLogged Then LogUtil.Info(oText, MyBase.Name)
+    'End Sub
     Private Shared Sub DisplayMessage(oButton As CheckListActionButton)
         Using _msgbox As New DlgShowText
             _msgbox.Message = oButton.ResultText
@@ -535,13 +535,13 @@ Public NotInheritable Class FrmDateCheck
         isWikiIdChanged = False
     End Sub
     Private Sub OpenWordPress(pDay As Integer, pMonth As Integer)
-        ShowStatus("Opening WordPress form for " & CStr(pDay) & "/" & CStr(pMonth), True)
+        DisplayAndLog("Opening WordPress form for " & CStr(pDay) & "/" & CStr(pMonth))
         Using _wordpress As New FrmWordPress
             _wordpress.DaySelection = pDay
             _wordpress.MonthSelection = pMonth
             _wordpress.ShowDialog()
         End Using
-        ShowStatus("")
+        ClearStatus(lblStatus)
     End Sub
     Private Sub ResetChecklistButtons()
         BtnRmvBotsdId.Visible = False
@@ -626,7 +626,7 @@ Public NotInheritable Class FrmDateCheck
 #End Region
 #Region "checklist"
     Private Sub BtnRmvBotsdId_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsdId.Click
-        ShowStatus("Removing BotSD id", True)
+        DisplayAndLog("Removing BotSD id")
         If DgvWarnings.SelectedRows.Count = 1 Then
             Dim oPerson As Person = personTable(DgvWarnings.SelectedRows(0).Index)
             Dim oSocial As SocialMedia = oPerson.Social
@@ -646,7 +646,7 @@ Public NotInheritable Class FrmDateCheck
 
     End Sub
     Private Sub BtnRmvOtherBotsdId_Click(sender As Object, e As EventArgs) Handles BtnRmvOtherBotsdId.Click
-        ShowStatus("Removing other BotSD id", True)
+        DisplayAndLog("Removing other BotSD id")
         Dim _actionText As String = abOthPersonId.ActionText
         If Not String.IsNullOrEmpty(_actionText) AndAlso IsNumeric(_actionText) Then
             UpdateBotsdId(CInt(_actionText), 0)
@@ -656,7 +656,7 @@ Public NotInheritable Class FrmDateCheck
         End If
     End Sub
     Private Sub BtnRmvBotsdRecord_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsdRecord.Click
-        ShowStatus("Removing BotSD record", True)
+        DisplayAndLog("Removing BotSD record")
         Dim _actionText As String = abBotsdId.ActionText
         If Not String.IsNullOrEmpty(_actionText) AndAlso IsNumeric(_actionText) Then
             Dim botsdId As Integer = CInt(_actionText)
@@ -682,7 +682,7 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub BtnUpdOldBotsdList_Click(sender As Object, e As EventArgs) Handles BtnUpdOldBotsdList.Click
         Dim msgText As String = "Opening old BotSD list for amendment"
-        ShowStatus(msgText, True)
+        DisplayAndLog(msgText)
         Try
             Process.Start(abBotsdListUrl.ActionText)
             SetButton(abBotsdListUrl, , "Done")
@@ -704,7 +704,7 @@ Public NotInheritable Class FrmDateCheck
                 Not String.IsNullOrEmpty(TxtToMonth.Text) And
                 Not String.IsNullOrEmpty(TxtToDay.Text) And
                 IsDate(TxtToDay.Text & "/" & TxtToMonth.Text & "/" & TxtToYear.Text) Then
-                ShowStatus("Updating DoB and text for " & TxtFullName.Text, True)
+                DisplayAndLog("Updating DoB and text for " & TxtFullName.Text)
                 If UpdateDateOfBirth(oPerson.Id, toDate.Day, toDate.Month, toDate.Year, TxtFullDesc.Text) = 1 Then
                     AuditUtil.AddDobChange(oPerson.Id, fromDate, toDate)
                     SetOKResult(abUpdPerson, "Updated " & CStr(oPerson.Id))
@@ -717,7 +717,7 @@ Public NotInheritable Class FrmDateCheck
         End If
     End Sub
     Private Sub BtnReseqOldGroup_Click(sender As Object, e As EventArgs) Handles BtnReseqOldGroup.Click
-        ShowStatus("Resequencing old BotSD group", True)
+        DisplayAndLog("Resequencing old BotSD group")
         Dim oldGroup As CelebrityBirthdayDataSet.PersonDataTable
         oldGroup = GetPeopleByDateofBirth(fromDate.Year, fromDate.Month, fromDate.Day)
         Dim newSeq As Integer = 0
@@ -852,7 +852,7 @@ Public NotInheritable Class FrmDateCheck
         Next
         Dim msgText As String = "Resequenced new BotSD group"
         SetButtonResult(abReseqNew, msgText, "OK")
-        ShowStatus(msgText, True)
+        DisplayAndLog(msgText)
     End Sub
     Private Sub BtnRemoveRow_Click(sender As Object, e As EventArgs) Handles BtnRemoveRow.Click
         RemoveSelectedRow()
@@ -970,11 +970,11 @@ Public NotInheritable Class FrmDateCheck
         End If
     End Sub
     Private Sub SetErrorResult(ByRef resultButton As CheckListActionButton, msgText As String)
-        ShowStatus(msgText, True)
+        DisplayAndLog(msgText)
         SetButtonResult(resultButton, msgText, "err", DlgShowText.MessageStyle.warn)
     End Sub
     Private Sub SetOKResult(ByRef resultButton As CheckListActionButton, msgText As String)
-        ShowStatus(msgText, True)
+        DisplayAndLog(msgText)
         SetButtonResult(resultButton, msgText, "OK", DlgShowText.MessageStyle.plain)
     End Sub
     Private Function GetPersonContext() As String
@@ -1113,6 +1113,12 @@ Public NotInheritable Class FrmDateCheck
             pButton.ActionButton.Visible = False
         End If
         pButton.ActionText = ""
+    End Sub
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
     End Sub
 #End Region
 End Class

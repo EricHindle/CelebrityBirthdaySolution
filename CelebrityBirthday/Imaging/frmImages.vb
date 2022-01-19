@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -65,9 +65,9 @@ Public NotInheritable Class FrmImages
         End If
     End Sub
     Private Sub BirthDate_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
-        lblStatus.Text = String.Empty
+        ClearStatus(lblStatus)
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
-            lblStatus.Text = My.Resources.LOADING_TABLE
+            DisplayAndLog(My.Resources.LOADING_TABLE)
             Me.Refresh()
             personTable = New ArrayList
             ListBoxPeople.Items.Clear()
@@ -85,7 +85,7 @@ Public NotInheritable Class FrmImages
                 TxtWpLoadYear.Text = String.Empty
                 lblWpDateMsg.Text = My.Resources.NO_LOAD_DATE
             End If
-            lblStatus.Text += " - Complete"
+            AppendProgress(" - Complete", lblStatus)
         End If
     End Sub
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
@@ -115,7 +115,7 @@ Public NotInheritable Class FrmImages
         bLoadingPeople = False
     End Sub
     Private Sub LbPeople_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBoxPeople.SelectedIndexChanged
-        lblStatus.Text = String.Empty
+        ClearStatus(lblStatus)
         bLoadingPerson = True
         If ListBoxPeople.SelectedIndex >= 0 Then
             Dim oPerson As Person = personTable(ListBoxPeople.SelectedIndex)
@@ -219,11 +219,11 @@ Public NotInheritable Class FrmImages
         Dim oPerson As Person = GetFullPersonById(oId)
         If oPerson IsNot Nothing Then
             LoadScreenFromPerson(oPerson)
-            Dim _dob As Date = New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
+            Dim _dob As New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
             cboDay.SelectedIndex = CStr(_dob.Day) - 1
             cboMonth.SelectedIndex = cboMonth.FindString(Format(_dob, "MMMM"))
         Else
-            lblStatus.Text = My.Resources.ID_NOT_FOUND
+            DisplayAndLog(My.Resources.ID_NOT_FOUND)
         End If
         oPerson.Dispose()
         Return
@@ -254,8 +254,7 @@ Public NotInheritable Class FrmImages
                 End If
                 PictureBox2.ImageLocation = storedImageName
             Catch ex As ArgumentException
-                LogUtil.Exception("Error loading person", ex, MyBase.Name)
-                lblStatus.Text = ex.Message
+                ShowStatus("Error loading person", lblStatus, True, MyBase.Name, ex)
             End Try
         End If
     End Sub
@@ -277,6 +276,12 @@ Public NotInheritable Class FrmImages
         Finally
             MyBase.Dispose(disposing)
         End Try
+    End Sub
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
     End Sub
 #End Region
 End Class

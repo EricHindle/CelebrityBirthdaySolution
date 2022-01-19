@@ -198,7 +198,7 @@ Module modDatabase
         Try
             oPersonTa.FillByMonthDay(modDatabase.oPersonTable, oMonth, oDay)
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In modDatabase.oPersonTable.Rows
-                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id, isGetPhoto))
+                Dim oPerson As New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id, isGetPhoto))
                 oPersonTable.Add(oPerson)
             Next
         Catch dbEx As DbException
@@ -211,7 +211,7 @@ Module modDatabase
         Try
             oPersonTa.FillByName(oPersonTable, oForename, oSurname)
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+                Dim oPerson As New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
                 oPersonList.Add(oPerson)
             Next
         Catch dbEx As DbException
@@ -224,7 +224,7 @@ Module modDatabase
         Try
             oPersonTa.FillByPersonLikeName(oPersonTable, oForename, oSurname)
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+                Dim oPerson As New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
                 oPersonList.Add(oPerson)
             Next
         Catch dbEx As DbException
@@ -237,7 +237,7 @@ Module modDatabase
         Try
             oPersonTa.FillByPersonLikeName(oPersonTable, oForename, oSurname)
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
-                Dim oPerson As Person = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+                Dim oPerson As New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
                 oPersonList.Add(oPerson)
             Next
         Catch dbEx As DbException
@@ -411,7 +411,7 @@ Module modDatabase
 #Region "social media"
     Public Function GetSocialMedia(ByVal _id As Integer) As SocialMedia
         Dim tCt As Integer = oTwta.FillById(oTwtable, _id)
-        Dim oSocial As SocialMedia = New SocialMedia
+        Dim oSocial As New SocialMedia
         If tCt = 1 Then
             oSocial = New SocialMedia(oTwtable.Rows(0))
         End If

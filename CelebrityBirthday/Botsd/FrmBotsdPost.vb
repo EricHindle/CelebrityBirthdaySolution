@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -248,7 +248,7 @@ Public NotInheritable Class FrmBotsdPost
     End Sub
     Private Sub BtnLoadList_Click(sender As Object, e As EventArgs) Handles BtnLoadList.Click
         If My.Computer.FileSystem.FileExists(oAlsoFileName) Then
-            DisplayStatus("Loading List")
+            DisplayAndLog("Loading List")
             Using _inputFile As New StreamReader(oAlsoFileName)
                 Dim _inputline As String = _inputFile.ReadLine
                 Do While _inputline IsNot Nothing
@@ -262,9 +262,9 @@ Public NotInheritable Class FrmBotsdPost
                     _inputline = _inputFile.ReadLine
                 Loop
             End Using
-            DisplayStatus("Loaded List")
+            DisplayAndLog("Loaded List")
         Else
-            DisplayStatus(oAlsoFileName & " not found")
+            ShowProgress(oAlsoFileName & " not found", lblStatus, True, MyBase.Name)
         End If
     End Sub
     Private Sub BtnSaveList_Click(sender As Object, e As EventArgs) Handles BtnSaveList.Click
@@ -345,9 +345,11 @@ Public NotInheritable Class FrmBotsdPost
         Try
             Process.Start(openUrl)
         Catch ex As InvalidOperationException
-            DisplayStatus(My.Resources.WPOPENERR & openUrl, False)
+            ShowProgress(My.Resources.WPOPENERR, lblStatus, False)
+            ShowStatus(My.Resources.WPOPENERR & openUrl, , True, MyBase.Name, ex)
         Catch ex As ComponentModel.Win32Exception
-            DisplayStatus(My.Resources.WPOPENERR & openUrl, False)
+            ShowProgress(My.Resources.WPOPENERR, lblStatus, False)
+            ShowStatus(My.Resources.WPOPENERR & openUrl, , True, MyBase.Name, ex)
         End Try
     End Sub
 
@@ -361,7 +363,7 @@ Public NotInheritable Class FrmBotsdPost
         End If
     End Sub
     Private Function GenerateAlsos() As String
-        DisplayStatus("Generating Text")
+        DisplayAndLog("Generating Text")
         Dim sb As New StringBuilder
         sb.Append(vbCrLf).Append(WP_PARA).Append(vbCrLf)
         For Each oRow As DataGridViewRow In DgvAlso.Rows
@@ -388,7 +390,7 @@ Public NotInheritable Class FrmBotsdPost
             End If
         Next
         sb.Append(WP_END_PARA)
-        DisplayStatus("Generated Text")
+        DisplayAndLog("Generated Text")
         Return sb.ToString
     End Function
     Private Function GenAlsoFileName() As String
@@ -401,7 +403,7 @@ Public NotInheritable Class FrmBotsdPost
         Return _fileName
     End Function
     Private Sub SaveList()
-        DisplayStatus("Saving List")
+        DisplayAndLog("Saving List")
         Using _outputfile As New StreamWriter(oAlsoFileName, False)
             For Each oRow As DataGridViewRow In DgvAlso.Rows
                 If Not String.IsNullOrEmpty(oRow.Cells(alsoName.Name).Value) Then
@@ -413,11 +415,7 @@ Public NotInheritable Class FrmBotsdPost
                 End If
             Next
         End Using
-        DisplayStatus("Saved List")
-    End Sub
-    Private Sub DisplayStatus(pText As String, Optional isAppend As Boolean = False)
-        lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
-        StatusStrip1.Refresh()
+        DisplayAndLog("Saved List")
     End Sub
     Private Function TidyDescription(_string As String) As String
         Return _string.Replace(My.Resources.BREAK, "").Replace(My.Resources.NON_BREAKING_SPACE, " ").Replace("  ", " ").Trim(charsToTrim)
@@ -447,7 +445,7 @@ Public NotInheritable Class FrmBotsdPost
     End Sub
     Private Sub ExtractAlsoValues()
         If TxtWiki.Text.StartsWith("http", True, myCultureInfo) Then
-            Dim _uri As Uri = New Uri(TxtWiki.Text)
+            Dim _uri As New Uri(TxtWiki.Text)
             Dim wikiId As String = _uri.LocalPath.Split("/").Last
             TxtName.Text = ParseStringWithBrackets(wikiId.Replace("_", " "))(0)
             Dim wikiDesc As String = RetrieveWikiDesc(wikiId, NudSentences.Value)
@@ -475,13 +473,13 @@ Public NotInheritable Class FrmBotsdPost
                     ReplaceRowValues(oRow)
                     DgvAlso.ClearSelection()
                     oRow.Selected = True
-                    DisplayStatus("Person added")
+                    ShowProgress("Person added", lblStatus, False)
                 Else
                     DgvAlso.ClearSelection()
                     If selectedRow >= 0 AndAlso selectedRow < DgvAlso.Rows.Count Then
                         DgvAlso.Rows(selectedRow).Selected = True
                     End If
-                    DisplayStatus("Person not added")
+                    ShowProgress("Person not added", lblStatus, False)
                 End If
             End If
         End If
@@ -576,6 +574,11 @@ Public NotInheritable Class FrmBotsdPost
         Dim returnUrl As String = "https://" & If(splitUrl.Length < 2, splitUrl(0), splitUrl(1))
         Return returnUrl
     End Function
-
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
 #End Region
 End Class

@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021, Eric Hindle
+' Copyright (c) 2021-22, Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -19,17 +19,17 @@ Public Class FrmMosaic
         Me.Close()
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
-        DisplayStatus("Saving File")
+        DisplayAndLog("Saving File")
         Dim _path As String = My.Settings.MosaicImagePath
         If Not My.Computer.FileSystem.DirectoryExists(_path) Then
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
         Dim _fileName As String = Path.Combine(_path, cboMonth.SelectedItem & If(CboDay.SelectedIndex > 0, CboDay.SelectedItem, "") & "_mosaic_" & If(chkBotSD.Checked, "botsd_", "") & CStr(nudSkip.Value + 1) & "-" & CStr(nudSkip.Value + NudHeight.Value) & ".jpg")
         ImageUtil.SaveImageFromPictureBox(PictureBox1, (_width * 60), (_height * 60), _fileName)
-        DisplayStatus("File saved : " & _fileName)
+        DisplayAndLog("File saved : " & _fileName)
     End Sub
     Private Sub GenerateImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
-        DisplayStatus("Generating Image")
+        DisplayAndLog("Generating Image")
         Dim _mosaic As Image = New Bitmap(My.Resources.blank, 60 * _width, 60 * _height)
         Dim oGraphics As Graphics = Graphics.FromImage(_mosaic)
         oGraphics.DrawImage(My.Resources.id, New Point(_mosaic.Width - 60, _mosaic.Height - 60))
@@ -56,11 +56,10 @@ Public Class FrmMosaic
         _pictureBox.Image = _mosaic
         LblImgShown.Text = CStr(_width * _height)
         LblImgShown.Refresh()
-        DisplayStatus("Image complete")
+        DisplayAndLog("Image complete")
     End Sub
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
-        Dim ct As Integer = 0
-        DisplayStatus("Selecting Images")
+        DisplayAndLog("Selecting Images")
         _imageList = New List(Of Person)
         Dim _PersonTa As New CelebrityBirthdayDataSetTableAdapters.FullPersonTableAdapter
         Dim _PersonTable As New CelebrityBirthdayDataSet.FullPersonDataTable
@@ -74,14 +73,10 @@ Public Class FrmMosaic
                     _PersonTa.FillByMonth(_PersonTable, cboMonth.SelectedIndex + 1)
                 End If
             Else
-                DisplayStatus("No month selected")
+                ShowProgress("No month selected", lblStatus, False)
             End If
         End If
         For Each _personRow As CelebrityBirthdayDataSet.FullPersonRow In _PersonTable
-            ct += 1
-            'If ct > 850 Then
-            '    logutil.debug(_person.Name & " " & Format(_person.DateOfBirth, "dd MMM yyyy"))
-            'End If
             _imageList.Add(New Person(_personRow))
         Next
         _height = Int(Math.Sqrt(_imageList.Count))
@@ -107,8 +102,7 @@ Public Class FrmMosaic
                     NudHeight.Value = _height
                     GenerateImage(PictureBox1, _imageList, _width, _height)
                 Catch ex As ArithmeticException
-                    DisplayStatus("Exception occurred")
-                    LogUtil.Exception("Error", ex, "FrmMosaic")
+                    ShowStatus("Arithmetic Exception.", lblStatus, True, MyBase.Name, ex,, True)
                 End Try
             End If
             isChangingSize = False
@@ -125,8 +119,7 @@ Public Class FrmMosaic
                     NudWidth.Value = _width
                     GenerateImage(PictureBox1, _imageList, _width, _height)
                 Catch ex As ArithmeticException
-                    DisplayStatus("Exception occurred")
-                    LogUtil.Exception("Error", ex, "FrmMosaic")
+                    ShowStatus("Arithmetic Exception.", lblStatus, True, MyBase.Name, ex,, True)
                 End Try
             End If
             isChangingSize = False
@@ -154,16 +147,11 @@ Public Class FrmMosaic
     End Sub
 #End Region
 #Region "subroutines"
-    Private Sub DisplayStatus(_text As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = True)
-        If isAppend Then
-            lblStatus.Text &= _text
-        Else
-            lblStatus.Text = _text
-        End If
-        If isLogged Then
-            LogUtil.Info(_text, "FrmMosaic")
-        End If
-        StatusStrip1.Refresh()
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
     End Sub
 #End Region
 End Class

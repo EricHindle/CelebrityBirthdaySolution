@@ -71,12 +71,12 @@ Partial Class FrmImageCapture
         'lblStatus
         '
         Me.lblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.lblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
         Me.lblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
-        Me.lblStatus.Margin = New System.Windows.Forms.Padding(10, 3, 0, 2)
         Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.lblStatus.Size = New System.Drawing.Size(20, 19)
-        Me.lblStatus.Text = "   "
         '
         'BtnClose
         '

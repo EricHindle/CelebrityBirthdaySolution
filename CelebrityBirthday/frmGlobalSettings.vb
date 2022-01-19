@@ -104,6 +104,11 @@ Public Class FrmGlobalSettings
     Private Sub FrmGlobalSettings_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
         LogUtil.Info("Closing", MyBase.Name)
     End Sub
-
+    Private Sub DisplayAndLog(pText As String)
+        ShowProgress(pText, lblStatus, True, MyBase.Name)
+    End Sub
+    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
+        ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
 #End Region
 End Class
