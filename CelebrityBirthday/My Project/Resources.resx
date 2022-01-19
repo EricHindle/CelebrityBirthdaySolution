@@ -244,4 +244,10 @@
   <data name="copyiconpale" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\copyiconpale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="WPPOSTURL" xml:space="preserve">
+    <value>https://wordpress.com/post/bornonthesameday.wordpress.com</value>
+  </data>
+  <data name="WPOPENERR" xml:space="preserve">
+    <value>Error opening WordPress </value>
+  </data>
 </root>

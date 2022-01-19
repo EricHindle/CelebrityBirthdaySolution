@@ -938,6 +938,21 @@ Public NotInheritable Class FrmBotsd
         If String.IsNullOrEmpty(thisWpNumber) Then
             thisWpNumber = CStr(WpNumber)
         End If
+
+        Dim openUrl As String = My.Resources.WPPOSTURL
+
+        If Not String.IsNullOrEmpty(thisUrl) Then
+            openUrl = thisUrl
+        End If
+
+        Try
+            Process.Start(openUrl)
+        Catch ex As InvalidOperationException
+            DisplayStatus(My.Resources.WPOPENERR & openUrl, False)
+        Catch ex As ComponentModel.Win32Exception
+            DisplayStatus(My.Resources.WPOPENERR & openUrl, False)
+        End Try
+
         Try
             titleSb.Append("#"c).Append(thisWpNumber).Append(" "c)
             Dim titleDate As String = ""

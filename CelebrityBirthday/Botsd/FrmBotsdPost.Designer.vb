@@ -41,7 +41,6 @@ Partial Class FrmBotsdPost
         Me.BtnCopyTitle = New System.Windows.Forms.Button()
         Me.LblWpPostNo = New System.Windows.Forms.Label()
         Me.TxtUrl = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnPosted = New System.Windows.Forms.Button()
         Me.BtnPasteUrl = New System.Windows.Forms.Button()
         Me.DgvAlso = New System.Windows.Forms.DataGridView()
@@ -82,6 +81,7 @@ Partial Class FrmBotsdPost
         Me.BtnSearch2 = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BtnOpenUrl = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.DgvAlso, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -234,18 +234,6 @@ Partial Class FrmBotsdPost
         Me.TxtUrl.Name = "TxtUrl"
         Me.TxtUrl.Size = New System.Drawing.Size(939, 24)
         Me.TxtUrl.TabIndex = 43
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label1.Location = New System.Drawing.Point(16, 638)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(33, 17)
-        Me.Label1.TabIndex = 44
-        Me.Label1.Text = "URL"
         '
         'BtnPosted
         '
@@ -755,12 +743,22 @@ Partial Class FrmBotsdPost
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(537, 43)
         Me.TableLayoutPanel1.TabIndex = 70
         '
+        'BtnOpenUrl
+        '
+        Me.BtnOpenUrl.Location = New System.Drawing.Point(18, 634)
+        Me.BtnOpenUrl.Name = "BtnOpenUrl"
+        Me.BtnOpenUrl.Size = New System.Drawing.Size(45, 31)
+        Me.BtnOpenUrl.TabIndex = 71
+        Me.BtnOpenUrl.Text = "URL"
+        Me.BtnOpenUrl.UseVisualStyleBackColor = True
+        '
         'FrmBotsdPost
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1267, 736)
+        Me.Controls.Add(Me.BtnOpenUrl)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.BtnSearch2)
         Me.Controls.Add(Me.BtnSearch1)
@@ -769,7 +767,6 @@ Partial Class FrmBotsdPost
         Me.Controls.Add(Me.BtnGenerate)
         Me.Controls.Add(Me.BtnPasteUrl)
         Me.Controls.Add(Me.BtnPosted)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtUrl)
         Me.Controls.Add(Me.LblWpPostNo)
         Me.Controls.Add(Me.BtnCopyTitle)
@@ -818,7 +815,6 @@ Partial Class FrmBotsdPost
     Friend WithEvents BtnCopyTitle As Button
     Friend WithEvents LblWpPostNo As Label
     Friend WithEvents TxtUrl As TextBox
-    Friend WithEvents Label1 As Label
     Friend WithEvents BtnPosted As Button
     Friend WithEvents BtnPasteUrl As Button
     Friend WithEvents DgvAlso As DataGridView
@@ -859,4 +855,5 @@ Partial Class FrmBotsdPost
     Friend WithEvents BtnRemoveStart As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents BtnClearDesc As Button
+    Friend WithEvents BtnOpenUrl As Button
 End Class

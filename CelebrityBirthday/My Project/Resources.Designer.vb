@@ -441,11 +441,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Error opening WordPress .
+        '''</summary>
+        Friend ReadOnly Property WPOPENERR() As String
+            Get
+                Return ResourceManager.GetString("WPOPENERR", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to https://celebritybirthday.wordpress.com/.
         '''</summary>
         Friend ReadOnly Property WPPAGEURL() As String
             Get
                 Return ResourceManager.GetString("WPPAGEURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to https://wordpress.com/post/bornonthesameday.wordpress.com.
+        '''</summary>
+        Friend ReadOnly Property WPPOSTURL() As String
+            Get
+                Return ResourceManager.GetString("WPPOSTURL", resourceCulture)
             End Get
         End Property
     End Module

@@ -335,6 +335,21 @@ Public NotInheritable Class FrmBotsdPost
     Private Sub BtnClearDesc_Click(sender As Object, e As EventArgs) Handles BtnClearDesc.Click
         TxtDesc.Text = ""
     End Sub
+    Private Sub BtnOpenUrl_Click(sender As Object, e As EventArgs) Handles BtnOpenUrl.Click
+        Dim openUrl As String = My.Resources.WPPOSTURL
+
+        If Not String.IsNullOrEmpty(TxtUrl.Text) Then
+            openUrl = TxtUrl.Text
+        End If
+
+        Try
+            Process.Start(openUrl)
+        Catch ex As InvalidOperationException
+            DisplayStatus(My.Resources.WPOPENERR & openUrl, False)
+        Catch ex As ComponentModel.Win32Exception
+            DisplayStatus(My.Resources.WPOPENERR & openUrl, False)
+        End Try
+    End Sub
 
 #End Region
 #Region "subroutines"
@@ -561,5 +576,6 @@ Public NotInheritable Class FrmBotsdPost
         Dim returnUrl As String = "https://" & If(splitUrl.Length < 2, splitUrl(0), splitUrl(1))
         Return returnUrl
     End Function
+
 #End Region
 End Class
