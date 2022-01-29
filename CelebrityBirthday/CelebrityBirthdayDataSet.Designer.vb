@@ -9542,31 +9542,28 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(5) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT bday, bmonth, uploadyear, uploadmonth, amended, uploadday, uploadtype FROM"& _ 
-                " Dates"
+            Me._commandCollection(0).CommandText = "SELECT        bday, bmonth, uploadyear, uploadmonth, amended, uploadday, uploadty"& _ 
+                "pe"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Dates"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
-            Me._commandCollection(1).CommandText = "SELECT        bday, bmonth, uploadyear, uploadmonth, amended, uploadday, uploadty"& _ 
-                "pe"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Dates"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (bday = @day) AND (bmonth = @month) AND "& _ 
-                "(uploadtype = @type)"
+            Me._commandCollection(1).CommandText = "SELECT amended, bday, bmonth, uploadday, uploadmonth, uploadtype, uploadyear FROM"& _ 
+                " Dates WHERE (bday = @day) AND (bmonth = @month) AND (uploadtype = @type)"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 2, 0, "bday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 2, 0, "bmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@type", Global.System.Data.SqlDbType.NChar, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "uploadtype", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT        bday, bmonth, uploadyear, uploadmonth, amended, uploadday, uploadty"& _ 
-                "pe"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Dates"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (bday = @day) AND (bmonth = @month) AND "& _ 
-                "(uploadtype = N'I')"
+            Me._commandCollection(2).CommandText = "SELECT amended, bday, bmonth, uploadday, uploadmonth, uploadtype, uploadyear FROM"& _ 
+                " Dates WHERE (bday = @day) AND (bmonth = @month) AND (uploadtype = N'I')"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 2, 0, "bday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 2, 0, "bmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT        bday, bmonth, uploadyear, uploadmonth, amended, uploadday, uploadty"& _ 
-                "pe"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Dates"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (bday = @day) AND (bmonth = @month) AND "& _ 
-                "(uploadtype = N'P')"
+            Me._commandCollection(3).CommandText = "SELECT amended, bday, bmonth, uploadday, uploadmonth, uploadtype, uploadyear FROM"& _ 
+                " Dates WHERE (bday = @day) AND (bmonth = @month) AND (uploadtype = N'P')"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 2, 0, "bday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 2, 0, "bmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -9700,198 +9697,6 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(dataRows)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_bday As Decimal, ByVal Original_bmonth As Decimal, ByVal Original_uploadyear As String, ByVal Original_uploadmonth As String, ByVal Original_amended As Global.System.Nullable(Of Boolean), ByVal Original_uploadday As String, ByVal Original_uploadtype As String) As Integer
-            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_bday,Decimal)
-            Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_bmonth,Decimal)
-            If (Original_uploadyear Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(3).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_uploadyear,String)
-            End If
-            If (Original_uploadmonth Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(5).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_uploadmonth,String)
-            End If
-            If (Original_amended.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_amended.Value,Boolean)
-            Else
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(7).Value = Global.System.DBNull.Value
-            End If
-            If (Original_uploadday Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(9).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(Original_uploadday,String)
-            End If
-            If (Original_uploadtype Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_uploadtype")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_uploadtype,String)
-            End If
-            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
-            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
-                        <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.DeleteCommand.Connection.Open
-            End If
-            Try 
-                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
-                Return returnValue
-            Finally
-                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.DeleteCommand.Connection.Close
-                End If
-            End Try
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal bday As Decimal, ByVal bmonth As Decimal, ByVal uploadyear As String, ByVal uploadmonth As String, ByVal amended As Global.System.Nullable(Of Boolean), ByVal uploadday As String, ByVal uploadtype As String) As Integer
-            Me.Adapter.InsertCommand.Parameters(0).Value = CType(bday,Decimal)
-            Me.Adapter.InsertCommand.Parameters(1).Value = CType(bmonth,Decimal)
-            If (uploadyear Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(uploadyear,String)
-            End If
-            If (uploadmonth Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(uploadmonth,String)
-            End If
-            If (amended.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(amended.Value,Boolean)
-            Else
-                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
-            End If
-            If (uploadday Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(uploadday,String)
-            End If
-            If (uploadtype Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("uploadtype")
-            Else
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(uploadtype,String)
-            End If
-            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
-            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
-                        <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.InsertCommand.Connection.Open
-            End If
-            Try 
-                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
-                Return returnValue
-            Finally
-                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.InsertCommand.Connection.Close
-                End If
-            End Try
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal bday As Decimal, ByVal bmonth As Decimal, ByVal uploadyear As String, ByVal uploadmonth As String, ByVal amended As Global.System.Nullable(Of Boolean), ByVal uploadday As String, ByVal uploadtype As String, ByVal Original_bday As Decimal, ByVal Original_bmonth As Decimal, ByVal Original_uploadyear As String, ByVal Original_uploadmonth As String, ByVal Original_amended As Global.System.Nullable(Of Boolean), ByVal Original_uploadday As String, ByVal Original_uploadtype As String) As Integer
-            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(bday,Decimal)
-            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(bmonth,Decimal)
-            If (uploadyear Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(uploadyear,String)
-            End If
-            If (uploadmonth Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(uploadmonth,String)
-            End If
-            If (amended.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(amended.Value,Boolean)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
-            End If
-            If (uploadday Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(uploadday,String)
-            End If
-            If (uploadtype Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("uploadtype")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(uploadtype,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_bday,Decimal)
-            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_bmonth,Decimal)
-            If (Original_uploadyear Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_uploadyear,String)
-            End If
-            If (Original_uploadmonth Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_uploadmonth,String)
-            End If
-            If (Original_amended.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_amended.Value,Boolean)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
-            End If
-            If (Original_uploadday Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_uploadday,String)
-            End If
-            If (Original_uploadtype Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_uploadtype")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_uploadtype,String)
-            End If
-            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
-            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
-                        <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.UpdateCommand.Connection.Open
-            End If
-            Try 
-                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
-                Return returnValue
-            Finally
-                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.UpdateCommand.Connection.Close
-                End If
-            End Try
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal uploadyear As String, ByVal uploadmonth As String, ByVal amended As Global.System.Nullable(Of Boolean), ByVal uploadday As String, ByVal uploadtype As String, ByVal Original_bday As Decimal, ByVal Original_bmonth As Decimal, ByVal Original_uploadyear As String, ByVal Original_uploadmonth As String, ByVal Original_amended As Global.System.Nullable(Of Boolean), ByVal Original_uploadday As String, ByVal Original_uploadtype As String) As Integer
-            Return Me.Update(Original_bday, Original_bmonth, uploadyear, uploadmonth, amended, uploadday, uploadtype, Original_bday, Original_bmonth, Original_uploadyear, Original_uploadmonth, Original_amended, Original_uploadday, Original_uploadtype)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

@@ -236,6 +236,8 @@ Partial Class FrmBackup
         '
         Me.chkAddDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkAddDate.AutoSize = True
+        Me.chkAddDate.Checked = True
+        Me.chkAddDate.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkAddDate.ForeColor = System.Drawing.Color.RoyalBlue
         Me.chkAddDate.Location = New System.Drawing.Point(628, 555)
         Me.chkAddDate.Name = "chkAddDate"

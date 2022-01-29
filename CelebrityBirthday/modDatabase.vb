@@ -40,7 +40,13 @@ Module modDatabase
         Return oBotsdTa.GetData
     End Function
     Public Function GetDatesTable() As CelebrityBirthdayDataSet.DatesDataTable
-        Return oDatesTa.GetData
+        Dim ds As New CelebrityBirthdayDataSet
+        Dim dt As New CelebrityBirthdayDataSet.DatesDataTable
+        ds.Tables.Add(dt)
+        ds.EnforceConstraints = False
+        Dim da As New CelebrityBirthdayDataSetTableAdapters.DatesTableAdapter
+        da.Fill(dt)
+        Return dt
     End Function
     Public Function GetImageTable() As CelebrityBirthdayDataSet.ImageDataTable
         Return oImgTa.GetData
