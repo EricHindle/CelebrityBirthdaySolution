@@ -534,6 +534,30 @@ Namespace My
                 Me("twitterAuthCallback") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property backupformpos() As String
+            Get
+                Return CType(Me("backupformpos"),String)
+            End Get
+            Set
+                Me("backupformpos") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("E:\CelebrityBirthday\Backup")>  _
+        Public Property backuppath() As String
+            Get
+                Return CType(Me("backuppath"),String)
+            End Get
+            Set
+                Me("backuppath") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -127,5 +127,11 @@
     <Setting Name="twitterAuthCallback" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost/test/hattyburpday.php</Value>
     </Setting>
+    <Setting Name="backupformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="backuppath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">E:\CelebrityBirthday\Backup</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -25,8 +25,41 @@ Module modDatabase
     Private ReadOnly oBotsdTable As New CelebrityBirthdayDataSet.BotSDDataTable
     Private ReadOnly oBotsdViewTa As New CelebrityBirthdayDataSetTableAdapters.BornOnTheSameDayTableAdapter
     Private ReadOnly oBotsdViewTable As New CelebrityBirthdayDataSet.BornOnTheSameDayDataTable
+    Private ReadOnly oAuditTa As New CelebrityBirthdayDataSetTableAdapters.AuditTableAdapter
+    Private ReadOnly oSettingsTa As New CelebrityBirthdayDataSetTableAdapters.SettingsTableAdapter
+    Private ReadOnly oSocialMediaTa As New CelebrityBirthdayDataSetTableAdapters.SocialMediaTableAdapter
+#End Region
+#Region "backup"
+    Public Function GetPersonTable() As CelebrityBirthdayDataSet.PersonDataTable
+        Return oPersonTa.GetData()
+    End Function
+    Public Function GetAuditTable() As CelebrityBirthdayDataSet.AuditDataTable
+        Return oAuditTa.GetData
+    End Function
+    Public Function GetBotSDTable() As CelebrityBirthdayDataSet.BotSDDataTable
+        Return oBotsdTa.GetData
+    End Function
+    Public Function GetDatesTable() As CelebrityBirthdayDataSet.DatesDataTable
+        Return oDatesTa.GetData
+    End Function
+    Public Function GetImageTable() As CelebrityBirthdayDataSet.ImageDataTable
+        Return oImgTa.GetData
+    End Function
+    Public Function GetSettingsTable() As CelebrityBirthdayDataSet.SettingsDataTable
+        Return oSettingsTa.GetData
+    End Function
+    Public Function GetSocialMediaTable() As CelebrityBirthdayDataSet.SocialMediaDataTable
+        Return oSocialMediaTa.GetData
+    End Function
+    Public Function GetTweetsTable() As CelebrityBirthdayDataSet.TweetsDataTable
+        Return oTweetTa.GetData
+    End Function
+    Public Function GetTwitterAuthTable() As CelebrityBirthdayDataSet.TwitterAuthDataTable
+        Return oTwitterAuthTa.GetData
+    End Function
 #End Region
 #Region "person"
+
     Public Function DeletePerson(ByVal _id As Integer)
         LogUtil.Info("Deleting person " & CStr(_id), MODULE_NAME)
         Return oPersonTa.DeletePerson(_id)

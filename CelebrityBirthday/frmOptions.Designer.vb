@@ -47,6 +47,8 @@ Partial Class FrmOptions
         Me.TxtTwitterImagePath = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TxtCallback = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.TxtWordPressDate = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtWikiExtract = New System.Windows.Forms.TextBox()
@@ -60,8 +62,7 @@ Partial Class FrmOptions
         Me.LbSplitWords = New System.Windows.Forms.ListBox()
         Me.TxtSplitWords = New System.Windows.Forms.TextBox()
         Me.chkSqlServer = New System.Windows.Forms.CheckBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.TxtCallback = New System.Windows.Forms.TextBox()
+        Me.BtnBackup = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -157,7 +158,7 @@ Partial Class FrmOptions
         Me.BtnResetForms.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnResetForms.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnResetForms.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnResetForms.Location = New System.Drawing.Point(16, 615)
+        Me.BtnResetForms.Location = New System.Drawing.Point(16, 595)
         Me.BtnResetForms.Name = "BtnResetForms"
         Me.BtnResetForms.Size = New System.Drawing.Size(86, 60)
         Me.BtnResetForms.TabIndex = 9
@@ -312,6 +313,25 @@ Partial Class FrmOptions
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "URLs"
         '
+        'TxtCallback
+        '
+        Me.TxtCallback.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtCallback.Location = New System.Drawing.Point(172, 327)
+        Me.TxtCallback.Name = "TxtCallback"
+        Me.TxtCallback.Size = New System.Drawing.Size(231, 22)
+        Me.TxtCallback.TabIndex = 23
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Enabled = False
+        Me.Label13.Location = New System.Drawing.Point(16, 330)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(125, 14)
+        Me.Label13.TabIndex = 22
+        Me.Label13.Text = "Twitter Auth Callback"
+        '
         'TxtWordPressDate
         '
         Me.TxtWordPressDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -355,7 +375,7 @@ Partial Class FrmOptions
         Me.BtnGlobalSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnGlobalSettings.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGlobalSettings.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 615)
+        Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 595)
         Me.BtnGlobalSettings.Name = "BtnGlobalSettings"
         Me.BtnGlobalSettings.Size = New System.Drawing.Size(86, 60)
         Me.BtnGlobalSettings.TabIndex = 20
@@ -366,7 +386,7 @@ Partial Class FrmOptions
         '
         Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(225, 615)
+        Me.Label9.Location = New System.Drawing.Point(373, 611)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(89, 14)
         Me.Label9.TabIndex = 21
@@ -375,7 +395,7 @@ Partial Class FrmOptions
         'NudSentences
         '
         Me.NudSentences.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.NudSentences.Location = New System.Drawing.Point(329, 613)
+        Me.NudSentences.Location = New System.Drawing.Point(477, 609)
         Me.NudSentences.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudSentences.Name = "NudSentences"
@@ -449,31 +469,24 @@ Partial Class FrmOptions
         '
         Me.chkSqlServer.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.chkSqlServer.AutoSize = True
-        Me.chkSqlServer.Location = New System.Drawing.Point(422, 614)
+        Me.chkSqlServer.Location = New System.Drawing.Point(420, 637)
         Me.chkSqlServer.Name = "chkSqlServer"
         Me.chkSqlServer.Size = New System.Drawing.Size(87, 18)
         Me.chkSqlServer.TabIndex = 24
         Me.chkSqlServer.Text = "SQL Server"
         Me.chkSqlServer.UseVisualStyleBackColor = True
         '
-        'Label13
+        'BtnBackup
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Enabled = False
-        Me.Label13.Location = New System.Drawing.Point(16, 330)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(125, 14)
-        Me.Label13.TabIndex = 22
-        Me.Label13.Text = "Twitter Auth Callback"
-        '
-        'TxtCallback
-        '
-        Me.TxtCallback.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtCallback.Location = New System.Drawing.Point(172, 327)
-        Me.TxtCallback.Name = "TxtCallback"
-        Me.TxtCallback.Size = New System.Drawing.Size(231, 22)
-        Me.TxtCallback.TabIndex = 23
+        Me.BtnBackup.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnBackup.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBackup.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnBackup.Location = New System.Drawing.Point(216, 595)
+        Me.BtnBackup.Name = "BtnBackup"
+        Me.BtnBackup.Size = New System.Drawing.Size(86, 60)
+        Me.BtnBackup.TabIndex = 25
+        Me.BtnBackup.Text = "Backup"
+        Me.BtnBackup.UseVisualStyleBackColor = True
         '
         'FrmOptions
         '
@@ -481,6 +494,7 @@ Partial Class FrmOptions
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(549, 722)
+        Me.Controls.Add(Me.BtnBackup)
         Me.Controls.Add(Me.chkSqlServer)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.NudSentences)
@@ -546,4 +560,5 @@ Partial Class FrmOptions
     Friend WithEvents chkSqlServer As CheckBox
     Friend WithEvents TxtCallback As TextBox
     Friend WithEvents Label13 As Label
+    Friend WithEvents BtnBackup As Button
 End Class

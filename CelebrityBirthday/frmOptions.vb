@@ -100,4 +100,10 @@ Public NotInheritable Class FrmOptions
     Private Sub FrmOptions_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
     End Sub
+
+    Private Sub BtnBackup_Click(sender As Object, e As EventArgs) Handles BtnBackup.Click
+        Using _backup As New FrmBackup
+            _backup.ShowDialog()
+        End Using
+    End Sub
 End Class
