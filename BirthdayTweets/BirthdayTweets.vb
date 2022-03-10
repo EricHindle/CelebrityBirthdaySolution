@@ -66,6 +66,7 @@ Public Class BirthdayTweets
     'Private Const CELEB_USER As String = "FunsterMuddy"
     'Private Const HBURPDAY_USER As String = "FunsterMuddy"
     'Private Const BOTSD_USER As String = "FunsterMuddy"
+    'Private Const BBREAD_USER As String = "FunsterMuddy"
     Private Const EMAIL_TO_ADDRESS As String = "SendErrorTo"
     Private Const EMAIL_FROM_ADDRESS As String = "SendEmailFrom"
     Private Const EMAIL_FROM_NAME As String = "SendEmailName"
