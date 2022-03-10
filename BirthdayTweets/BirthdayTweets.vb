@@ -40,7 +40,6 @@ Public Class BirthdayTweets
             End Set
         End Property
     End Class
-
 #End Region
 #Region "constants"
     Private Const LAST_CELEB_TWEET As String = "LastCelebTweet"
@@ -86,7 +85,6 @@ Public Class BirthdayTweets
     Private Shared toAddr As String
     Private Shared fromAddr As String
     Private Shared fromName As String
-
 #End Region
 #Region "service"
     Protected Overrides Sub OnStart(ByVal args() As String)
@@ -121,7 +119,6 @@ Public Class BirthdayTweets
         Timer1.Start()
         SendEmail("BirthdayTweets continues", "The BirthdayTweets service has continued. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
     End Sub
-
 #End Region
 #Region "timer"
     Private Shared Sub GetIntervalAndStartTimer(interval As Integer)
@@ -535,23 +532,27 @@ Public Class BirthdayTweets
     Private Shared Function GenerateTweetLine(_person As Person, _type As TweetType, _userType As TweetUserType) As String
         Dim tweetLine As New StringBuilder
         tweetLine.Append(_person.Name)
-        Dim twitterHandle As String = If(_person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle), " @" & _person.Social.TwitterHandle, "")
-        Dim _age As String = "(" & CStr(CalculateAge(_person)) & ")"
-        Dim _year As String = "(" & _person.BirthYear.Trim("-") & If(_person.BirthYear < 0, "BCE", "") & ")"
-        Dim _deathYear As String = "(" & CStr(_person.DeathYear).Trim("-") & If(_person.DeathYear < 0, "BCE", "") & ")"
-        If _userType = TweetUserType.CelebBirthday Then
-            If _type = TweetType.Birthday Then
-                tweetLine.Append(twitterHandle)
+        Try
+            Dim twitterHandle As String = If(_person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle), " @" & _person.Social.TwitterHandle, "")
+            Dim _age As String = "(" & CStr(CalculateAge(_person)) & ")"
+            Dim _year As String = "(" & _person.BirthYear.Trim("-") & If(_person.BirthYear < 0, "BCE", "") & ")"
+            Dim _deathYear As String = "(" & CStr(_person.DeathYear).Trim("-") & If(_person.DeathYear < 0, "BCE", "") & ")"
+            If _userType = TweetUserType.CelebBirthday Then
+                If _type = TweetType.Birthday Then
+                    tweetLine.Append(twitterHandle)
+                End If
+            ElseIf _userType = TweetUserType.HBurpday Then
+                If _type = TweetType.Birthday Then
+                    tweetLine.Append(" "c).Append(_age)
+                ElseIf _type = TweetType.Anniversary Then
+                    tweetLine.Append(" "c).Append(_year)
+                End If
+            ElseIf _userType = TweetUserType.BrownBread Then
+                tweetLine.Append(" "c).Append(_deathYear)
             End If
-        ElseIf _userType = TweetUserType.HBurpday Then
-            If _type = TweetType.Birthday Then
-                tweetLine.Append(" "c).Append(_age)
-            ElseIf _type = TweetType.Anniversary Then
-                tweetLine.Append(" "c).Append(_year)
-            End If
-        ElseIf _userType = TweetUserType.BrownBread Then
-            tweetLine.Append(" "c).Append(_deathYear)
-        End If
+        Catch ex As Exception
+            LogUtil.Exception("Error", ex, "GenerateTweetLine")
+        End Try
         Return tweetLine.ToString
     End Function
     Private Shared Function GetHeading(_type As TweetType, _userType As TweetUserType) As String
