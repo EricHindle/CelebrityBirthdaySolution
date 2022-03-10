@@ -177,7 +177,7 @@ Public NotInheritable Class FrmDateCheck
         personTable.Clear()
         For Each _person In personList
             _ct += 1
-            ShowStatus(CStr(_ct) & " of " & CStr(totalPeople))
+            ShowStatus(CStr(_ct) & " of " & CStr(totalPeople), lblStatus, False)
             Try
                 Dim wikiId As String = ""
                 If _person.Social IsNot Nothing Then
@@ -211,7 +211,7 @@ Public NotInheritable Class FrmDateCheck
             End Try
         Next
         DgvWarnings.ClearSelection()
-        ShowStatus("Selection complete")
+        ShowStatus("Selection complete", lblStatus,, MyBase.Name)
         isLoadingTable = False
     End Sub
     Private Sub DgvWarnings_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvWarnings.CellDoubleClick
@@ -310,7 +310,7 @@ Public NotInheritable Class FrmDateCheck
             Try
                 oNewGroup = GetPeopleByDateofBirth(toDate.Year, toDate.Month, toDate.Day)
             Catch ex As Exception
-                ShowStatus("Invalid To Date")
+                ShowStatus("Invalid To Date", lblStatus,, MyBase.Name)
             End Try
             ' If this person will be in a BotSD group
             If oNewGroup.Rows.Count > 0 Then
@@ -670,7 +670,7 @@ Public NotInheritable Class FrmDateCheck
         End If
     End Sub
     Private Sub BtnRmvOldBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnRmvOldBotsdPost.Click
-        ShowStatus("Opening old BotSD post for removal")
+        ShowStatus("Opening old BotSD post for removal", lblStatus, , MyBase.Name)
         Try
             Process.Start(abBotsdUrl.ActionText)
             SetButton(abBotsdUrl,, "Done")
@@ -728,7 +728,7 @@ Public NotInheritable Class FrmDateCheck
         SetOKResult(abReseqOld, "Resequenced old BotSD group")
     End Sub
     Private Sub BtnUpdateNewBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnUpdateNewBotsdPost.Click
-        ShowStatus("Opening new BotSD post for amendment")
+        ShowStatus("Opening new BotSD post for amendment", lblStatus, , MyBase.Name)
         Try
             If Not String.IsNullOrEmpty(abNewBotsdUrl.ActionText) Then
                 Process.Start(abNewBotsdUrl.ActionText)
@@ -748,7 +748,7 @@ Public NotInheritable Class FrmDateCheck
         End Using
     End Sub
     Private Sub BtnUpdNewBotsdList_Click(sender As Object, e As EventArgs) Handles BtnUpdNewBotsdList.Click
-        ShowStatus("Opening new BotSD list for amendment")
+        ShowStatus("Opening new BotSD list for amendment", lblStatus,, MyBase.Name)
         Try
             Process.Start(abNewListUrl.ActionText)
             SetButton(abNewListUrl,, "Done")
@@ -764,7 +764,7 @@ Public NotInheritable Class FrmDateCheck
         End Using
     End Sub
     Private Sub BtnOldPostOrPicture_Click(sender As Object, e As EventArgs) Handles BtnRmvOldPicture.Click, BtnUpdOldCbPage.Click
-        ShowStatus("Updating old CB post")
+        ShowStatus("Updating old CB post", lblStatus, , MyBase.Name)
         Try
             Dim _selMonth As String = Format(fromDate, "MMMM")
             Dim _selDay As String = CStr(fromDate.Day)
@@ -783,7 +783,7 @@ Public NotInheritable Class FrmDateCheck
 
     End Sub
     Private Sub BtnUpdCbPicDesc_Click(sender As Object, e As EventArgs) Handles BtnUpdCbPicDesc.Click
-        ShowStatus("Updating CB image description")
+        ShowStatus("Updating CB image description", lblStatus,, MyBase.Name)
         Try
             Dim oPerson As Person = personTable(DgvWarnings.SelectedRows(0).Index)
             If oPerson IsNot Nothing Then
@@ -801,7 +801,7 @@ Public NotInheritable Class FrmDateCheck
         End Try
     End Sub
     Private Sub BtnUpdNewCbPage_Click(sender As Object, e As EventArgs) Handles BtnUpdNewCbPage.Click, BtnAddCbPic.Click, BtnMoveCbPic.Click
-        ShowStatus("Updating new CB post")
+        ShowStatus("Updating new CB post", lblStatus,, MyBase.Name)
         TxtWiki.Text = GetPersonContext()
         Try
             Dim _selMonth As String = Format(toDate, "MMMM")
@@ -827,7 +827,7 @@ Public NotInheritable Class FrmDateCheck
         ResetChecklistButtons()
     End Sub
     Private Sub BtnUpdOldBotsdPost_Click(sender As Object, e As EventArgs) Handles BtnUpdOldBotsdPost.Click
-        ShowStatus("Opening old BotSD post for amendment")
+        ShowStatus("Opening old BotSD post for amendment", lblStatus, , MyBase.Name)
         Try
             Process.Start(abBotsdUpdUrl.ActionText)
             SetButton(abBotsdUpdUrl,, "Done")
