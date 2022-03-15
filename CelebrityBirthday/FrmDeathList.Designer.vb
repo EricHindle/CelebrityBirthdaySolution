@@ -286,6 +286,7 @@ Partial Class FrmDeathList
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "FrmDeathList"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Death List"
         CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudYear, System.ComponentModel.ISupportInitialize).EndInit()

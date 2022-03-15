@@ -133,5 +133,8 @@
     <Setting Name="backuppath" Type="System.String" Scope="User">
       <Value Profile="(Default)">E:\CelebrityBirthday\Backup</Value>
     </Setting>
+    <Setting Name="deadlistformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

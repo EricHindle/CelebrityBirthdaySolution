@@ -26,12 +26,15 @@ Public NotInheritable Class FrmDeathList
         nudYear.Value = _year
         nudYear.Maximum = _year
         FillGrid(_year)
+        GetFormPos(Me, My.Settings.deadlistformpos)
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
     End Sub
     Private Sub FrmDeathList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
+        My.Settings.deadlistformpos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles BtnSelect.Click
         FillGrid(nudYear.Value)

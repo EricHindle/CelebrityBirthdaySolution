@@ -57,13 +57,18 @@
         If DgvPeople.SelectedRows.Count = 1 Then
             ShowStatus("Opening update form", True)
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
-            Using _update As New FrmUpdateDatabase
-                _update.PersonId = oRow.Cells(SelPersonId.Name).Value
-                _update.ShowDialog()
-            End Using
+            OpenUpdateForm(oRow)
         End If
         ShowStatus("")
     End Sub
+
+    Private Sub OpenUpdateForm(oRow As DataGridViewRow)
+        Using _update As New FrmUpdateDatabase
+            _update.PersonId = oRow.Cells(SelPersonId.Name).Value
+            _update.ShowDialog()
+        End Using
+    End Sub
+
     Private Sub BtnFindInWiki_Click(sender As Object, e As EventArgs) Handles BtnFindInWiki.Click
         If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
             ShowStatus("Opening Wikipedia", True)
@@ -233,6 +238,13 @@
     End Sub
     Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
         ShowProgress(pText, LblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
+
+    Private Sub DgvPeople_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvPeople.CellDoubleClick
+        If e.RowIndex >= 0 And e.RowIndex < DgvPeople.Rows.Count Then
+            Dim tRow As DataGridViewRow = DgvPeople.Rows(e.RowIndex)
+            OpenUpdateForm(tRow)
+        End If
     End Sub
 #End Region
 End Class
