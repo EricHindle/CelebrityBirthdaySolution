@@ -93,8 +93,34 @@ Public Class BirthdayTweets
         AddHandler Timer1.Elapsed, AddressOf Timer1_Tick
         LogUtil.InitialiseLogging()
         LogUtil.StartLogging()
-        GetIntervalAndStartTimer(5)
-        SendEmail("BirthdayTweets started", "The BirthdayTweets service has started. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
+        StartTimer(2)
+        Dim sConnection As String() = Split(My.Settings.CelebrityBirthdayConnectionString, ";")
+        Dim serverName As String = ""
+        Dim dbName As String = ""
+        For Each oConn As String In sConnection
+            Dim nvp As String() = Split(oConn, "=")
+            If nvp.GetUpperBound(0) = 1 Then
+                Select Case nvp(0)
+                    Case "Data Source"
+                        serverName = nvp(1)
+                    Case "Initial Catalog"
+                        dbName = nvp(1)
+                End Select
+            End If
+        Next
+        Dim _runtime As List(Of String) = {My.Application.Info.Title & " version " & My.Application.Info.Version.ToString,
+                                            "Computer name : " & My.Computer.Name,
+                                            "Data connection: ",
+                                            "   server=" & serverName,
+                                            "   database=" & dbName,
+                                            "Application path is " & My.Application.Info.DirectoryPath}.ToList
+
+        Dim sbBody As New StringBuilder("The BirthdayTweets service has started. " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
+        For Each _rt As String In _runtime
+            sbBody.Append(vbCrLf).Append(_rt)
+            LogUtil.Info(_rt, "OnStart")
+        Next
+        SendEmail("BirthdayTweets started", sbBody.ToString)
     End Sub
     Protected Overrides Sub OnStop()
         Const Psub As String = "OnStop"
@@ -131,11 +157,10 @@ Public Class BirthdayTweets
             LogUtil.Exception("Could not get interval setting from dB", ex, Psub)
         End Try
         StartTimer(interval)
-        LogUtil.Info("Timer started with interval " & CStr(interval) & " minutes", Psub)
     End Sub
     Private Shared Sub StartTimer(timerIntervalMinutes As Integer)
         Const Psub As String = "StartTimer"
-        LogUtil.Info("Starting timer", Psub)
+        LogUtil.Info("Starting timer with interval " & CStr(timerIntervalMinutes) & " minutes", Psub)
         Timer1.Interval = timerIntervalMinutes * 60 * 1000
         Timer1.Start()
     End Sub

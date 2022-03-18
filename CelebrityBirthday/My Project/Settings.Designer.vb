@@ -138,17 +138,6 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=NETWYRKS_6-PC\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Se"& _ 
-            "curity Info=True;User ID=sa;Password=dkk.sql")>  _
-        Public ReadOnly Property CelebrityBirthdayConnectionString() As String
-            Get
-                Return CType(Me("CelebrityBirthdayConnectionString"),String)
-            End Get
-        End Property
-        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("D:\CelebrityBirthday\Twitter")>  _
@@ -569,6 +558,17 @@ Namespace My
             Set
                 Me("deadlistformpos") = value
             End Set
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-11NSK703\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist "& _ 
+            "Security Info=True;User ID=sa;Password=dkk.sql")>  _
+        Public ReadOnly Property CelebrityBirthdayConnectionString() As String
+            Get
+                Return CType(Me("CelebrityBirthdayConnectionString"),String)
+            End Get
         End Property
     End Class
 End Namespace

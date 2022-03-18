@@ -97,7 +97,7 @@
       <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <HintPath>..\packages\TweetMoaSharp.6.0.0\lib\4.5\Hammock.ClientProfile.dll</HintPath>
+      <HintPath>..\packages\TweetMoaSharp.6.0.2\lib\4.5\Hammock.ClientProfile.dll</HintPath>
     </Reference>
     <Reference Include="Interop.InetCtlsObjects">
       <HintPath>..\..\CommonInstallationFiles\Interop.InetCtlsObjects.dll</HintPath>
@@ -187,8 +187,8 @@
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="TweetSharp, Version=6.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <HintPath>..\packages\TweetMoaSharp.6.0.0\lib\4.5\TweetSharp.dll</HintPath>
+    <Reference Include="TweetSharp, Version=6.0.2.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetMoaSharp.6.0.2\lib\4.5\TweetSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

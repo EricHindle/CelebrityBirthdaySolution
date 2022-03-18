@@ -23,14 +23,6 @@
     <Setting Name="NewImagePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\CelebrityBirthday\Images\new</Value>
     </Setting>
-    <Setting Name="CelebrityBirthdayConnectionString" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=NETWYRKS_6-PC\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Security Info=True;User ID=sa;Password=dkk.sql&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=NETWYRKS_6-PC\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Security Info=True;User ID=sa;Password=dkk.sql</Value>
-    </Setting>
     <Setting Name="TwitterFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\CelebrityBirthday\Twitter</Value>
     </Setting>
@@ -135,6 +127,14 @@
     </Setting>
     <Setting Name="deadlistformpos" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CelebrityBirthdayConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=LAPTOP-11NSK703\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Security Info=True;User ID=sa;Password=dkk.sql&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=LAPTOP-11NSK703\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Security Info=True;User ID=sa;Password=dkk.sql</Value>
     </Setting>
   </Settings>
 </SettingsFile>

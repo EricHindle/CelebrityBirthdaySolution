@@ -128,6 +128,30 @@ Public Class FrmMenu
             My.Settings.Save()
         End If
         LogUtil.LogFolder = My.Settings.LogFolder
+        LogUtil.StartLogging()
+        Dim sConnection As String() = Split(My.Settings.CelebrityBirthdayConnectionString, ";")
+        Dim serverName As String = ""
+        Dim dbName As String = ""
+        For Each oConn As String In sConnection
+            Dim nvp As String() = Split(oConn, "=")
+            If nvp.GetUpperBound(0) = 1 Then
+                Select Case nvp(0)
+                    Case "Data Source"
+                        serverName = nvp(1)
+                    Case "Initial Catalog"
+                        dbName = nvp(1)
+                End Select
+            End If
+        Next
+        Dim _runtime As List(Of String) = {My.Application.Info.Title & " version " & My.Application.Info.Version.ToString,
+                                            "Computer name : " & My.Computer.Name,
+                                            "Data connection: ",
+                                            "   server=" & serverName,
+                                            "   database=" & dbName,
+                                            "Application path is " & My.Application.Info.DirectoryPath}.ToList
+        For Each _rt As String In _runtime
+            LogUtil.Info(_rt, MyBase.Name)
+        Next
         Dim celebCount As Integer = CountPeople()
         If celebCount >= 0 Then
             LblCelebrities.Text = System.String.Format(myStringFormatProvider, LblCelebrities.Text, CStr(celebCount))
