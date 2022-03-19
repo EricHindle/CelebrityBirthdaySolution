@@ -42,10 +42,10 @@ Public NotInheritable Class LogUtil
         End If
     End Sub
     Public Shared Sub StartLogging()
-        Info("=".PadRight(40, "="))
-        Info(My.Application.Info.Title & " version " & My.Application.Info.Version.ToString)
-        Info(My.Application.Info.Copyright)
-        Info("Logging started at " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
+        ShowProgress("=".PadRight(40, "="))
+        ShowProgress(My.Application.Info.Title & " version " & My.Application.Info.Version.ToString)
+        ShowProgress(My.Application.Info.Copyright)
+        ShowProgress("Logging started at " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
         If IsDebugOn Then
             Info("Debug is ON")
         End If
@@ -115,21 +115,15 @@ Public NotInheritable Class LogUtil
     Public Shared Function GetLogfileName(newDate As Date) As String
         Return Path.Combine(LogUtil.LogFolder, My.Application.Log.DefaultFileLogWriter.BaseFileName & "-" & Format(newDate, "yyyy-MM-dd") & ".log")
     End Function
-    Public Shared Sub ClearLogFile()
-        Dim sLogFile As String = GetLogfileName()
-        My.Application.Log.DefaultFileLogWriter.Close()
-        Using sr As New StreamWriter(sLogFile, False)
-            sr.Write("")
-        End Using
-        StartLogging()
-        LogUtil.Info("Log file cleared by " & My.User.Name & " on " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
-    End Sub
     Public Shared Function GetLogContents() As String
         Dim sLogFile As String = GetLogfileName()
         My.Application.Log.DefaultFileLogWriter.Close()
         GetLogContents = My.Computer.FileSystem.ReadAllText(sLogFile).Replace(vbTab, " ")
         My.Application.Log.DefaultFileLogWriter.Write("")
     End Function
-
+    Public Shared Sub ShowProgress(sText As String, Optional psub As String = "")
+        Info(sText, psub)
+        Console.WriteLine(sText)
+    End Sub
 #End Region
 End Class

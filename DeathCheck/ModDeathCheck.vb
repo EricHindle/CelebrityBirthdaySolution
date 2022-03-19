@@ -1,7 +1,5 @@
 ﻿Imports System.Data.Common
-Imports System.Globalization
 Imports System.IO
-Imports System.Net
 Imports System.Reflection
 
 Module ModDeathCheck
@@ -13,7 +11,7 @@ Module ModDeathCheck
     Private Const EMAIL_TO_ADDRESS As String = "SendErrorTo"
     Private Const EMAIL_FROM_ADDRESS As String = "SendEmailFrom"
     Private Const EMAIL_FROM_NAME As String = "SendEmailName"
-    Private deadList As New List(Of Person)
+    Private ReadOnly deadList As New List(Of Person)
 #End Region
     Sub Main()
         InitialiseApplication()
@@ -32,10 +30,11 @@ Module ModDeathCheck
     End Sub
 
     Private Sub CloseApplication()
-        LogUtil.Info("End of Run", "CloseApplication")
+        LogUtil.ShowProgress("End of Run", "CloseApplication")
     End Sub
 
     Private Sub InitialiseApplication()
+        LogUtil.LogFolder = My.Settings.LogFolder
         LogUtil.InitialiseLogging()
         LogUtil.StartLogging()
         Dim sConnection As String() = Split(My.Settings.CelebrityBirthdayConnectionString, ";")
@@ -58,20 +57,23 @@ Module ModDeathCheck
                                             "   database=" & dbName,
                                             "Application path is " & My.Application.Info.DirectoryPath}.ToList
         For Each _rt As String In _runtime
-            LogUtil.Info(_rt, "InitialiseApplication")
+            LogUtil.ShowProgress(_rt, "InitialiseApplication")
         Next
 
     End Sub
     Private Sub RunDeathCheck()
         Dim pSub As String = "RunDeathCheck"
-        LogUtil.Info("Finding the living", pSub)
+        LogUtil.ShowProgress("Finding the living", pSub)
         personTable = FindLivingPeople(False)
-        LogUtil.Info("Found " & CStr(personTable.Count) & " people", pSub)
+        LogUtil.ShowProgress("Found " & CStr(personTable.Count) & " people", pSub)
         Dim countText As String = "{0} of " & CStr(personTable.Count)
         Dim iCt As Integer = 0
         For Each _person In personTable
             Try
                 iCt += 1
+                If iCt = Int(iCt / 500) * 500 Then
+                    LogUtil.ShowProgress(CStr(iCt) & " records processed", pSub)
+                End If
                 Dim searchString As String = ""
                 If _person.Social IsNot Nothing Then
                     searchString = _person.Social.WikiId
@@ -96,7 +98,7 @@ Module ModDeathCheck
                 If datesFound IsNot Nothing Then
                     If datesFound.DeathDate.IsValidDate Then
                         Dim _dateOfDeath As String = datesFound.DeathDate.FormattedDateString
-                        LogUtil.Info(_person.Name & " died " & _dateOfDeath)
+                        LogUtil.ShowProgress(_person.Name & " died " & _dateOfDeath, pSub)
                         deadList.Add(_person)
                     End If
                 End If
@@ -108,7 +110,7 @@ Module ModDeathCheck
     End Sub
     Private Function WriteFile() As String
         Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "deadpeople.csv")
-        LogUtil.Info("Writing " & _filename, True)
+        LogUtil.ShowProgress("Writing " & _filename, True)
         Try
             Using _outfile As New StreamWriter(_filename, False)
                 WriteListToFile(_outfile)

@@ -1,5 +1,4 @@
-﻿
-Imports System.Data.Common
+﻿Imports System.Data.Common
 ''' <summary>
 ''' Options and settings to be used by all users
 ''' </summary>
@@ -67,12 +66,4 @@ Public NotInheritable Class GlobalSettings
         End If
         Return rtnIntegerValue
     End Function
-
-
-    Public Shared Sub LoadGlobalSettings()
-        My.Settings.Save()
-    End Sub
-
-
-
 End Class

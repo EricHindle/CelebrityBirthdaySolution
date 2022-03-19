@@ -3,21 +3,13 @@ Imports System.Reflection
 
 Module modDatabase
 #Region "constants"
-    Private Const MODULE_NAME As String = "modDatabase"
     Private Const MODULE_TYPE As String = "Database"
 #End Region
 #Region "data"
-
-
     Private ReadOnly oFullPersonTa As New CelebrityBirthdayDataSetTableAdapters.FullPersonTableAdapter
     Private ReadOnly oFullPersonTable As New CelebrityBirthdayDataSet.FullPersonDataTable
-
 #End Region
-
 #Region "person"
-
-
-
     Public Function FindLivingPeople(Optional isIncludeImage As Boolean = True) As List(Of Person)
         Dim _List As New List(Of Person)
         Try
@@ -33,7 +25,5 @@ Module modDatabase
         End Try
         Return _List
     End Function
-
 #End Region
-
 End Module
