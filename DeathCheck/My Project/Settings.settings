@@ -1,0 +1,44 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="LogFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\CelebrityBirthday\Logs</Value>
+    </Setting>
+    <Setting Name="CelebrityBirthdayConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=LAPTOP-11NSK703\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Security Info=True;User ID=sa;Password=dkk.sql&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=LAPTOP-11NSK703\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Security Info=True;User ID=sa;Password=dkk.sql</Value>
+    </Setting>
+    <Setting Name="TwitterFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\CelebrityBirthday\Twitter</Value>
+    </Setting>
+    <Setting Name="googleImageSearch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.google.com/search?tbm=isch&amp;q=</Value>
+    </Setting>
+    <Setting Name="WordPressUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://celebritybirthday.files.wordpress.com/</Value>
+    </Setting>
+    <Setting Name="wikiSearchUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://en.wikipedia.org/w/index.php?search=</Value>
+    </Setting>
+    <Setting Name="TwitterSearchUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://twitter.com/search?f=user&amp;src=typed_query&amp;q=</Value>
+    </Setting>
+    <Setting Name="wikiExtractSearch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://en.wikipedia.org/w/api.php?action=query&amp;prop=extracts&amp;exintro=&amp;exsentences=#&amp;explaintext=&amp;redirects=&amp;formatversion=2&amp;format=json&amp;titles=</Value>
+    </Setting>
+    <Setting Name="wikiSentences" Type="System.String" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="WordPressMonthUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://celebritybirthday.wordpress.com/#y/#m/#d/#D-#M/</Value>
+    </Setting>
+    <Setting Name="wikiTitleSearch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://en.wikipedia.org/w/api.php?action=query&amp;list=allpages&amp;redirects=&amp;formatversion=2&amp;format=json&amp;apfrom=#f&amp;apto=#t</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

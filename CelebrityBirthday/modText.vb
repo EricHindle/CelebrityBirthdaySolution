@@ -6,14 +6,14 @@ Module modText
     Public Function ParseStringWithString(source As String, _chars As String) As List(Of String)
         Return Split(source.Trim(_chars), _chars).ToList()
     End Function
-    Public Function MakeList(ByVal _string1 As String, ByVal _string2 As String, ByVal _string3 As String) As List(Of String)
-        Dim _return As New List(Of String) From {
-            _string1,
-            _string2,
-            _string3
-        }
-        Return _return
-    End Function
+    'Public Function MakeList(ByVal _string1 As String, ByVal _string2 As String, ByVal _string3 As String) As List(Of String)
+    '    Dim _return As New List(Of String) From {
+    '        _string1,
+    '        _string2,
+    '        _string3
+    '    }
+    '    Return _return
+    'End Function
     Public Function FixQuotesAndHyphens(ByVal _text As String, ByVal Optional isSpreadHyphens As Boolean = False) As String
         Dim textWithFixedQuotes As String = _text.Trim(vbCrLf).Replace(Chr(147), """").Replace(Chr(148), """")
         Dim textWithFixedHyphens = textWithFixedQuotes.Replace(Chr(150), "-").Replace("—", "-")
@@ -62,7 +62,7 @@ Module modText
             Return _return
         End Try
 
-        Return MakeList(_pre, _inner, _post)
+        Return {_pre, _inner, _post}.ToList
     End Function
     Public Function RemoveValueInBrackets(ByVal _string As String, Optional ByVal _start As Integer = 0, Optional ByVal _openChar As Char = "("c, Optional ByVal _closeChar As Char = ")"c) As String
         Dim _stringList As List(Of String) = ParseStringWithBrackets(_string, _start, _openChar, _closeChar)
