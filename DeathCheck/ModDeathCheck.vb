@@ -109,14 +109,15 @@ Module ModDeathCheck
         Next
     End Sub
     Private Function WriteFile() As String
+        Dim pSub = "WriteFile"
         Dim _filename As String = Path.Combine(My.Settings.TwitterFilePath, "deadpeople.csv")
-        LogUtil.ShowProgress("Writing " & _filename, True)
+        LogUtil.ShowProgress("Writing " & _filename, pSub)
         Try
             Using _outfile As New StreamWriter(_filename, False)
                 WriteListToFile(_outfile)
             End Using
         Catch ex As IOException
-            LogUtil.Exception("Error opening file", ex, "WriteFile")
+            LogUtil.Exception("Error opening file", ex, pSub)
         End Try
         Return _filename
     End Function
