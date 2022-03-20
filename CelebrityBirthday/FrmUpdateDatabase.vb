@@ -547,6 +547,8 @@ Public NotInheritable Class FrmUpdateDatabase
         Using _wordpress As New FrmWordPress
             _wordpress.DaySelection = cboDay.SelectedIndex + 1
             _wordpress.MonthSelection = cboMonth.SelectedIndex + 1
+            _wordpress.SelectedName = txtName.Text
+            _wordpress.SelectedDescription = MakeDescription()
             _wordpress.ShowDialog()
         End Using
 
@@ -622,8 +624,13 @@ Public NotInheritable Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub BtnWpDesc_Click(sender As Object, e As EventArgs) Handles BtnWpDesc.Click
-        Dim wpText As String = ""
         Clipboard.Clear()
+        Dim wpText As String = MakeDescription()
+        If Not String.IsNullOrEmpty(wpText) Then Clipboard.SetText(wpText)
+    End Sub
+
+    Private Function MakeDescription() As String
+        Dim wpText As String = ""
         If lbPeople.SelectedIndex >= 0 Then
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             LogUtil.Info("Generating WordPress description for " & oPerson.Name, MyBase.Name)
@@ -639,9 +646,10 @@ Public NotInheritable Class FrmUpdateDatabase
                 .Append(If(oPerson.DeathYear = 0, "", sDied))
             End With
             wpText = sText.ToString
-            If Not String.IsNullOrEmpty(wpText) Then Clipboard.SetText(wpText)
         End If
-    End Sub
+        Return wpText
+    End Function
+
     Private Sub PasteIntoDesc_Click(MenuItem As Object, e As EventArgs) Handles PasteIntoDesc.Click
         GetSourceControl(MenuItem).Copy()
         txtDesc.Paste()

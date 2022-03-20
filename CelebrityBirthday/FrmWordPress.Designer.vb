@@ -28,6 +28,10 @@ Partial Class FrmWordPress
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtnGetName = New System.Windows.Forms.Button()
+        Me.BtnGetDescription = New System.Windows.Forms.Button()
+        Me.TxtSelectedName = New System.Windows.Forms.TextBox()
+        Me.TxtSelectedDescription = New System.Windows.Forms.TextBox()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -44,7 +48,7 @@ Partial Class FrmWordPress
         Me.btnCopyExcerpt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCopyExcerpt.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCopyExcerpt.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCopyExcerpt.Location = New System.Drawing.Point(399, 115)
+        Me.btnCopyExcerpt.Location = New System.Drawing.Point(440, 95)
         Me.btnCopyExcerpt.Name = "btnCopyExcerpt"
         Me.btnCopyExcerpt.Size = New System.Drawing.Size(61, 29)
         Me.btnCopyExcerpt.TabIndex = 65
@@ -56,7 +60,7 @@ Partial Class FrmWordPress
         Me.btnCopyFull.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCopyFull.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCopyFull.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCopyFull.Location = New System.Drawing.Point(399, 236)
+        Me.btnCopyFull.Location = New System.Drawing.Point(440, 268)
         Me.btnCopyFull.Name = "btnCopyFull"
         Me.btnCopyFull.Size = New System.Drawing.Size(61, 31)
         Me.btnCopyFull.TabIndex = 62
@@ -66,30 +70,26 @@ Partial Class FrmWordPress
         'txtCurrentExcerpt
         '
         Me.txtCurrentExcerpt.AllowDrop = True
-        Me.txtCurrentExcerpt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCurrentExcerpt.Dock = System.Windows.Forms.DockStyle.Left
         Me.txtCurrentExcerpt.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCurrentExcerpt.Location = New System.Drawing.Point(-2, 3)
+        Me.txtCurrentExcerpt.Location = New System.Drawing.Point(0, 0)
         Me.txtCurrentExcerpt.Multiline = True
         Me.txtCurrentExcerpt.Name = "txtCurrentExcerpt"
         Me.txtCurrentExcerpt.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCurrentExcerpt.Size = New System.Drawing.Size(395, 161)
+        Me.txtCurrentExcerpt.Size = New System.Drawing.Size(434, 146)
         Me.txtCurrentExcerpt.TabIndex = 58
         Me.txtCurrentExcerpt.WordWrap = False
         '
         'txtCurrentText
         '
         Me.txtCurrentText.AllowDrop = True
-        Me.txtCurrentText.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCurrentText.Dock = System.Windows.Forms.DockStyle.Left
         Me.txtCurrentText.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCurrentText.Location = New System.Drawing.Point(3, 6)
+        Me.txtCurrentText.Location = New System.Drawing.Point(0, 0)
         Me.txtCurrentText.Multiline = True
         Me.txtCurrentText.Name = "txtCurrentText"
         Me.txtCurrentText.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCurrentText.Size = New System.Drawing.Size(390, 284)
+        Me.txtCurrentText.Size = New System.Drawing.Size(434, 330)
         Me.txtCurrentText.TabIndex = 57
         Me.txtCurrentText.WordWrap = False
         '
@@ -110,18 +110,18 @@ Partial Class FrmWordPress
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.txtCurrentExcerpt)
         Me.SplitContainer1.Panel2.Controls.Add(Me.btnCopyExcerpt)
-        Me.SplitContainer1.Size = New System.Drawing.Size(508, 516)
-        Me.SplitContainer1.SplitterDistance = 298
+        Me.SplitContainer1.Size = New System.Drawing.Size(508, 488)
+        Me.SplitContainer1.SplitterDistance = 334
         Me.SplitContainer1.TabIndex = 68
         '
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(937, 555)
+        Me.BtnClose.Location = New System.Drawing.Point(935, 566)
         Me.BtnClose.Name = "BtnClose"
-        Me.BtnClose.Size = New System.Drawing.Size(75, 33)
+        Me.BtnClose.Size = New System.Drawing.Size(75, 43)
         Me.BtnClose.TabIndex = 69
         Me.BtnClose.Text = "Close"
         Me.BtnClose.UseVisualStyleBackColor = True
@@ -132,7 +132,7 @@ Partial Class FrmWordPress
         Me.cboMonth.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
-        Me.cboMonth.Location = New System.Drawing.Point(88, 561)
+        Me.cboMonth.Location = New System.Drawing.Point(89, 507)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(207, 27)
         Me.cboMonth.TabIndex = 84
@@ -143,7 +143,7 @@ Partial Class FrmWordPress
         Me.cboDay.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(11, 561)
+        Me.cboDay.Location = New System.Drawing.Point(12, 507)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(71, 27)
         Me.cboDay.TabIndex = 83
@@ -152,7 +152,7 @@ Partial Class FrmWordPress
         '
         Me.txtLoadMth.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtLoadMth.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadMth.Location = New System.Drawing.Point(430, 566)
+        Me.txtLoadMth.Location = New System.Drawing.Point(66, 566)
         Me.txtLoadMth.Name = "txtLoadMth"
         Me.txtLoadMth.Size = New System.Drawing.Size(48, 22)
         Me.txtLoadMth.TabIndex = 85
@@ -161,7 +161,7 @@ Partial Class FrmWordPress
         '
         Me.txtLoadYr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtLoadYr.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadYr.Location = New System.Drawing.Point(484, 566)
+        Me.txtLoadYr.Location = New System.Drawing.Point(120, 566)
         Me.txtLoadYr.Name = "txtLoadYr"
         Me.txtLoadYr.Size = New System.Drawing.Size(71, 22)
         Me.txtLoadYr.TabIndex = 86
@@ -182,7 +182,7 @@ Partial Class FrmWordPress
         'SplitContainer2.Panel2
         '
         Me.SplitContainer2.Panel2.Controls.Add(Me.WebBrowser1)
-        Me.SplitContainer2.Size = New System.Drawing.Size(1000, 516)
+        Me.SplitContainer2.Size = New System.Drawing.Size(1000, 488)
         Me.SplitContainer2.SplitterDistance = 508
         Me.SplitContainer2.TabIndex = 87
         '
@@ -192,17 +192,17 @@ Partial Class FrmWordPress
         Me.WebBrowser1.Location = New System.Drawing.Point(0, 0)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(484, 512)
+        Me.WebBrowser1.Size = New System.Drawing.Size(484, 484)
         Me.WebBrowser1.TabIndex = 0
         '
         'BtnBrowser
         '
-        Me.BtnBrowser.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnBrowser.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBrowser.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnBrowser.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowser.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnBrowser.Location = New System.Drawing.Point(707, 555)
+        Me.BtnBrowser.Location = New System.Drawing.Point(383, 529)
         Me.BtnBrowser.Name = "BtnBrowser"
-        Me.BtnBrowser.Size = New System.Drawing.Size(106, 33)
+        Me.BtnBrowser.Size = New System.Drawing.Size(106, 58)
         Me.BtnBrowser.TabIndex = 88
         Me.BtnBrowser.Text = "Open Browser"
         Me.BtnBrowser.UseVisualStyleBackColor = True
@@ -211,7 +211,7 @@ Partial Class FrmWordPress
         '
         Me.TxtLoadDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TxtLoadDay.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtLoadDay.Location = New System.Drawing.Point(376, 565)
+        Me.TxtLoadDay.Location = New System.Drawing.Point(12, 565)
         Me.TxtLoadDay.Name = "TxtLoadDay"
         Me.TxtLoadDay.Size = New System.Drawing.Size(48, 22)
         Me.TxtLoadDay.TabIndex = 89
@@ -235,17 +235,58 @@ Partial Class FrmWordPress
         Me.lblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(3, 17)
+        Me.lblStatus.Size = New System.Drawing.Size(10, 17)
         '
         'Label1
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(374, 548)
+        Me.Label1.Location = New System.Drawing.Point(10, 548)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(94, 14)
         Me.Label1.TabIndex = 91
         Me.Label1.Text = "Page Load Date"
+        '
+        'BtnGetName
+        '
+        Me.BtnGetName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnGetName.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.copyicon
+        Me.BtnGetName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnGetName.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnGetName.Location = New System.Drawing.Point(805, 511)
+        Me.BtnGetName.Name = "BtnGetName"
+        Me.BtnGetName.Size = New System.Drawing.Size(30, 30)
+        Me.BtnGetName.TabIndex = 92
+        Me.BtnGetName.UseVisualStyleBackColor = True
+        '
+        'BtnGetDescription
+        '
+        Me.BtnGetDescription.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnGetDescription.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.copyicon
+        Me.BtnGetDescription.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnGetDescription.Location = New System.Drawing.Point(841, 579)
+        Me.BtnGetDescription.Name = "BtnGetDescription"
+        Me.BtnGetDescription.Size = New System.Drawing.Size(30, 30)
+        Me.BtnGetDescription.TabIndex = 93
+        Me.BtnGetDescription.UseVisualStyleBackColor = True
+        '
+        'TxtSelectedName
+        '
+        Me.TxtSelectedName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TxtSelectedName.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtSelectedName.Location = New System.Drawing.Point(526, 511)
+        Me.TxtSelectedName.Name = "TxtSelectedName"
+        Me.TxtSelectedName.Size = New System.Drawing.Size(263, 27)
+        Me.TxtSelectedName.TabIndex = 94
+        '
+        'TxtSelectedDescription
+        '
+        Me.TxtSelectedDescription.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TxtSelectedDescription.Location = New System.Drawing.Point(526, 544)
+        Me.TxtSelectedDescription.Multiline = True
+        Me.TxtSelectedDescription.Name = "TxtSelectedDescription"
+        Me.TxtSelectedDescription.Size = New System.Drawing.Size(309, 65)
+        Me.TxtSelectedDescription.TabIndex = 95
         '
         'FrmWordPress
         '
@@ -253,6 +294,10 @@ Partial Class FrmWordPress
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1024, 634)
+        Me.Controls.Add(Me.TxtSelectedDescription)
+        Me.Controls.Add(Me.TxtSelectedName)
+        Me.Controls.Add(Me.BtnGetDescription)
+        Me.Controls.Add(Me.BtnGetName)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.TxtLoadDay)
@@ -300,4 +345,8 @@ Partial Class FrmWordPress
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblStatus As ToolStripStatusLabel
     Friend WithEvents Label1 As Label
+    Friend WithEvents BtnGetName As Button
+    Friend WithEvents BtnGetDescription As Button
+    Friend WithEvents TxtSelectedName As TextBox
+    Friend WithEvents TxtSelectedDescription As TextBox
 End Class

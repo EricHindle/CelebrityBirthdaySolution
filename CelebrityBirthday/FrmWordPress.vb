@@ -24,6 +24,24 @@ Public NotInheritable Class FrmWordPress
 #Region "properties"
     Private _daySelection As Integer
     Private _monthSelection As Integer
+    Private _selectedName As String
+    Private _selectedDescription As String
+    Public Property SelectedDescription() As String
+        Get
+            Return _selectedDescription
+        End Get
+        Set(ByVal value As String)
+            _selectedDescription = value
+        End Set
+    End Property
+    Public Property SelectedName() As String
+        Get
+            Return _selectedName
+        End Get
+        Set(ByVal value As String)
+            _selectedName = value
+        End Set
+    End Property
     Public Property MonthSelection() As Integer
         Get
             Return _monthSelection
@@ -44,9 +62,11 @@ Public NotInheritable Class FrmWordPress
 #Region "form control handlers"
     Private Sub BtnCopyFull_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyFull.Click
         My.Computer.Clipboard.SetText(txtCurrentText.Text)
+        ShowStatus("WordPress Text copied")
     End Sub
     Private Sub BtnCopyExcerpt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyExcerpt.Click
         My.Computer.Clipboard.SetText(txtCurrentExcerpt.Text)
+        ShowStatus("WordPress List copied")
     End Sub
     Private Sub BtnLoadTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
@@ -67,6 +87,8 @@ Public NotInheritable Class FrmWordPress
         If Not String.IsNullOrEmpty(_daySelection) AndAlso Not String.IsNullOrEmpty(_monthSelection) Then
             cboDay.SelectedIndex = _daySelection - 1
             cboMonth.SelectedIndex = _monthSelection - 1
+            TxtSelectedDescription.Text = _selectedDescription
+            TxtSelectedName.Text = _selectedName
         End If
         GetFormPos(Me, My.Settings.wprformpos)
     End Sub
@@ -251,6 +273,18 @@ Public NotInheritable Class FrmWordPress
     End Sub
     Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
         ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
+
+    Private Sub BtnGetName_Click(sender As Object, e As EventArgs) Handles BtnGetName.Click
+        Clipboard.Clear()
+        If Not String.IsNullOrEmpty(TxtSelectedName.Text) Then Clipboard.SetText(TxtSelectedName.Text)
+        ShowStatus("Name copied")
+    End Sub
+
+    Private Sub BtnGetDescription_Click(sender As Object, e As EventArgs) Handles BtnGetDescription.Click
+        Clipboard.Clear()
+        If Not String.IsNullOrEmpty(TxtSelectedDescription.Text) Then Clipboard.SetText(TxtSelectedDescription.Text)
+        ShowStatus("Description copied")
     End Sub
 #End Region
 End Class
