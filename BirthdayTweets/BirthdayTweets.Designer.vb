@@ -16,32 +16,22 @@ Partial Class BirthdayTweets
         End Try
     End Sub
 
-    ' The main entry point for the process
+    '<MTAThread()>
+    '<System.Diagnostics.DebuggerNonUserCode()>
     'Shared Sub Main()
-    '    LogUtil.InitialiseLogging()
-    '    LogUtil.StartLogging()
-    '    LogUtil.Info("Starting Manually")
-    '    Timer1 = New Timers.Timer
-    '    BirthdayTweets.Timer1_Tick(Nothing, Nothing)
-    '    LogUtil.Info("Run Complete")
+    '    Dim ServicesToRun() As System.ServiceProcess.ServiceBase
 
+    '    ' More than one NT Service may run within the same process. To add
+    '    ' another service to this process, change the following line to
+    '    ' create a second service object. For example,
+    '    '
+    '    '   ServicesToRun = New System.ServiceProcess.ServiceBase () {New Service1, New MySecondUserService}
+    '    '
+    '    ServicesToRun = New System.ServiceProcess.ServiceBase() {New BirthdayTweets}
+
+    '    ServicesToRun(0).CanPauseAndContinue = True
+    '    System.ServiceProcess.ServiceBase.Run(ServicesToRun)
     'End Sub
-    <MTAThread()>
-    <System.Diagnostics.DebuggerNonUserCode()>
-    Shared Sub Main()
-        Dim ServicesToRun() As System.ServiceProcess.ServiceBase
-
-        ' More than one NT Service may run within the same process. To add
-        ' another service to this process, change the following line to
-        ' create a second service object. For example,
-        '
-        '   ServicesToRun = New System.ServiceProcess.ServiceBase () {New Service1, New MySecondUserService}
-        '
-        ServicesToRun = New System.ServiceProcess.ServiceBase() {New BirthdayTweets}
-
-        ServicesToRun(0).CanPauseAndContinue = True
-        System.ServiceProcess.ServiceBase.Run(ServicesToRun)
-    End Sub
 
     'Required by the Component Designer
     Private components As System.ComponentModel.IContainer

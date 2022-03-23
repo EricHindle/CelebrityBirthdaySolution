@@ -25,7 +25,7 @@ Module modDatabase
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
                 _List.Add(New Person(oRow))
             Next
-            LogUtil.Info(CStr(_List.Count) & " birthdays found (no twins)", Psub)
+            LogUtil.ShowProgress(CStr(_List.Count) & " birthdays found (no twins)", Psub)
         Catch dbEx As DbException
             LogUtil.Exception("Finding today's birthdays DbException", dbEx, Psub)
         End Try
@@ -51,7 +51,7 @@ Module modDatabase
     End Function
     Public Function FindBirthdays(oDay As Integer, oMonth As Integer) As List(Of Person)
         Const Psub As String = "FindBirthdays"
-        LogUtil.Info("Finding list of people with birthdays", Psub)
+        LogUtil.ShowProgress("Finding list of people with birthdays", Psub)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
@@ -67,7 +67,7 @@ Module modDatabase
     End Function
     Public Function FindAnniversaries(oDay As Integer, oMonth As Integer) As List(Of Person)
         Const Psub As String = "FindAnniversaries"
-        LogUtil.Info("Finding list of people with anniversaries", Psub)
+        LogUtil.ShowProgress("Finding list of people with anniversaries", Psub)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByAnniversary(oFullPersonTable, oDay, oMonth)
@@ -83,7 +83,7 @@ Module modDatabase
     End Function
     Public Function FindDeaths(oDay As Integer, omonth As Integer) As List(Of Person)
         Const Psub As String = "FindAnniversaries"
-        LogUtil.Info("Finding list of people who have died", Psub)
+        LogUtil.ShowProgress("Finding list of people who have died", Psub)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByDeaths(oFullPersonTable, omonth, oDay)

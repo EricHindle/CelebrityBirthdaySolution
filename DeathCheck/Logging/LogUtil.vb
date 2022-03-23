@@ -4,6 +4,7 @@
 '
 ' Author Eric Hindle
 ' Created Aug 2020
+Imports System.ComponentModel
 Imports System.IO
 Imports System.Threading
 Public NotInheritable Class LogUtil
@@ -52,6 +53,8 @@ Public NotInheritable Class LogUtil
     End Sub
     Public Shared Sub StopLogging()
         If isConfigured Then
+            Info("Logging stopped at " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
+            Info("=".PadRight(40, "="))
             My.Application.Log.DefaultFileLogWriter.Flush()
             My.Application.Log.DefaultFileLogWriter.Close()
             isConfigured = False
@@ -71,10 +74,15 @@ Public NotInheritable Class LogUtil
         If Not String.IsNullOrEmpty(errorCode) Then
             sPrefix += "Error code: " & errorCode & " "
         End If
-        My.Application.Log.WriteEntry(sPrefix & sText, severity)
+        Try
+            My.Application.Log.WriteEntry(sPrefix & sText, severity)
+        Catch ex As InvalidEnumArgumentException
+        Catch ex As Security.SecurityException
+        End Try
     End Sub
     Public Shared Sub AddExceptionLog(ByVal ex As Exception, ByVal sText As String, Optional ByVal eventType As TraceEventType = TraceEventType.Error, Optional ByVal sSub As String = "", Optional ByVal errorCode As String = Nothing, Optional ByRef padCt As Integer = 0)
         InitialiseLogging()
+        Dim exMessage As String = If(ex Is Nothing, "no excepion message", ex.Message)
         AddLog(sText, eventType, sSub, errorCode, padCt)
         If ex IsNot Nothing Then
             AddLog("Exception - " & ex.Message, eventType, sSub, errorCode, padCt)

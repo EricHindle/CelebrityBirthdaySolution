@@ -838,6 +838,12 @@
         "Entry"
         {
         "MsmKey" = "8:_93B3C0B3B601B460B47D49256DBDC5CF"
+        "OwnerKey" = "8:_E2F51DF4D7F14BD497967F0C4EB80464"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_93B3C0B3B601B460B47D49256DBDC5CF"
         "OwnerKey" = "8:_F09979E49B920ABAEA3B7CF4829B327B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -903,14 +909,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_AF1A06BDDAA0CD4CC6384F83A47D57C5"
-        "OwnerKey" = "8:_D45E564116E443A5815B939302B8E6B8"
+        "MsmKey" = "8:_AB75224104AA4EA2B9F724C125686FFE"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_AF1A06BDDAA0CD4CC6384F83A47D57C5"
         "OwnerKey" = "8:_4DD4E93E770243449C822F8ECEB694E3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AF1A06BDDAA0CD4CC6384F83A47D57C5"
+        "OwnerKey" = "8:_E2F51DF4D7F14BD497967F0C4EB80464"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AF1A06BDDAA0CD4CC6384F83A47D57C5"
+        "OwnerKey" = "8:_D45E564116E443A5815B939302B8E6B8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1144,6 +1162,12 @@
         "Entry"
         {
         "MsmKey" = "8:_D3FEA41718975591945AD8852894CE1A"
+        "OwnerKey" = "8:_E2F51DF4D7F14BD497967F0C4EB80464"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D3FEA41718975591945AD8852894CE1A"
         "OwnerKey" = "8:_F09979E49B920ABAEA3B7CF4829B327B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1229,6 +1253,12 @@
         {
         "MsmKey" = "8:_DFE18EA33EA4B725BF8B7D0336C2D511"
         "OwnerKey" = "8:_D45E564116E443A5815B939302B8E6B8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E2F51DF4D7F14BD497967F0C4EB80464"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1335,6 +1365,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_F09979E49B920ABAEA3B7CF4829B327B"
+        "OwnerKey" = "8:_E2F51DF4D7F14BD497967F0C4EB80464"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F0B56F9FE9F03167E8D068C4D814E637"
         "OwnerKey" = "8:_544DF4ABD5DB68D3658184C896D495AD"
         "MsmSig" = "8:_UNDEFINED"
@@ -1420,7 +1456,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4DD4E93E770243449C822F8ECEB694E3"
+        "OwnerKey" = "8:_E2F51DF4D7F14BD497967F0C4EB80464"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1577,12 +1613,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DFE18EA33EA4B725BF8B7D0336C2D511"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AF1A06BDDAA0CD4CC6384F83A47D57C5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2237,6 +2267,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_5A7E5703322E3283C9077000A797225B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_4DD4E93E770243449C822F8ECEB694E3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AF1A06BDDAA0CD4CC6384F83A47D57C5"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -5113,6 +5155,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AB75224104AA4EA2B9F724C125686FFE"
+            {
+            "SourcePath" = "8:..\\CelebrityBirthday\\images\\bcake.ico"
+            "TargetName" = "8:bcake.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_3FAAFC6696C94CB78D7585C4184052B0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AF1A06BDDAA0CD4CC6384F83A47D57C5"
             {
             "AssemblyRegister" = "3:1"
@@ -6968,7 +7030,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:CelebrityBirthday"
         "ProductCode" = "8:{DEABBB2D-CD93-42AF-844B-7EB46EF9E7A1}"
-        "PackageCode" = "8:{0850BFFA-DC6F-483F-9606-32C472DCEF13}"
+        "PackageCode" = "8:{D008E05D-33A1-4311-B124-4F2BE626BB1D}"
         "UpgradeCode" = "8:{468C0A34-5E55-4989-9007-4D7F24BE0298}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -7100,6 +7162,34 @@
             "Folder" = "8:_76F3601DDB5547CF84CC061BAE8CF1C0"
             "WorkingFolder" = "8:_3FAAFC6696C94CB78D7585C4184052B0"
             "Icon" = "8:_C19254637C384F8CAC1E814A83A5D0D0"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2EE7066074974D5CA47D22A8E5DC0261"
+            {
+            "Name" = "8:BirthdayTweets"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_E2F51DF4D7F14BD497967F0C4EB80464"
+            "Folder" = "8:_443AFFA64AF94261B1C51E83EE77902D"
+            "WorkingFolder" = "8:_3FAAFC6696C94CB78D7585C4184052B0"
+            "Icon" = "8:_AB75224104AA4EA2B9F724C125686FFE"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5B90056F742648D287C3362C8A302003"
+            {
+            "Name" = "8:BirthdayTweets"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_E2F51DF4D7F14BD497967F0C4EB80464"
+            "Folder" = "8:_76F3601DDB5547CF84CC061BAE8CF1C0"
+            "WorkingFolder" = "8:_3FAAFC6696C94CB78D7585C4184052B0"
+            "Icon" = "8:_AB75224104AA4EA2B9F724C125686FFE"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6F9B365FEC9642759166DDFBE748DB68"
@@ -7594,6 +7684,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{B42750C3-E6E8-4607-8FA2-B117D0159EE5}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E2F51DF4D7F14BD497967F0C4EB80464"
+            {
+            "SourcePath" = "8:..\\BirthdayTweets\\obj\\Debug\\BirthdayTweets.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_3FAAFC6696C94CB78D7585C4184052B0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{183E0597-882F-4863-8790-27A0754C3DBF}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

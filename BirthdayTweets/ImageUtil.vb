@@ -127,7 +127,7 @@ Friend Module ImageUtil
                 Dim rowImageWidth As Integer = widthImageCount
                 Dim _image As Image = _person.Image.Photo
                 If _image Is Nothing Then
-                    LogUtil.Info("Image missing", Psub)
+                    LogUtil.ShowProgress("Image missing", Psub)
                 End If
                 _imgHPos += 1
                 If _imgHPos = widthImageCount Then

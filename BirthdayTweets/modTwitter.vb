@@ -20,14 +20,14 @@ Module modTwitter
                     _twitterUplMedia = pTwitterService.UploadMedia(_uploadOptions)
                     _tries += 1
                     If _twitterUplMedia Is Nothing Then
-                        LogUtil.Info("Twitter media upload failed", Psub)
+                        LogUtil.ShowProgress("Twitter media upload failed", Psub)
                         If _tries < tryLimit Then
-                            LogUtil.Info("Trying again.", Psub)
+                            LogUtil.ShowProgress("Trying again.", Psub)
                         Else
-                            LogUtil.Info("No more tries", Psub)
+                            LogUtil.ShowProgress("No more tries", Psub)
                         End If
                     Else
-                        LogUtil.Info("Twitter media upload complete", Psub)
+                        LogUtil.ShowProgress("Twitter media upload complete", Psub)
                         Exit Do
                     End If
                 End Using

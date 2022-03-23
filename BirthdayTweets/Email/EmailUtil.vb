@@ -78,7 +78,7 @@ Public NotInheritable Class EmailUtil
                                           Optional ByVal deleteAfterSubmit As Boolean = False,
                                           Optional ByVal readReceiptRequired As Boolean = False,
                                           Optional ByVal deliveryReportRequired As Boolean = False) As Boolean
-        LogUtil.Info("Sending email by SMTP", SEND_VIA)
+        LogUtil.ShowProgress("Sending email by SMTP", SEND_VIA)
         Dim isSentOK As Boolean
         Try
             Dim objMessage As Mail.MailMessage
@@ -120,7 +120,7 @@ Public NotInheritable Class EmailUtil
             If strFilenames IsNot Nothing AndAlso strFilenames.Length > 0 Then
                 For Each strFilename As String In strFilenames
                     If My.Computer.FileSystem.FileExists(strFilename) Then
-                        LogUtil.Info("Adding attachment " & strFilename, SEND_VIA)
+                        LogUtil.ShowProgress("Adding attachment " & strFilename, SEND_VIA)
                         objMessage.Attachments.Add(New Mail.Attachment(strFilename))
                     Else
                         LogUtil.Problem("Cannot find attachment " & strFilename, SEND_VIA)

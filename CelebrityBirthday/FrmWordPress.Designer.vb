@@ -253,7 +253,7 @@ Partial Class FrmWordPress
         Me.BtnGetName.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.copyicon
         Me.BtnGetName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnGetName.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGetName.Location = New System.Drawing.Point(805, 511)
+        Me.BtnGetName.Location = New System.Drawing.Point(526, 506)
         Me.BtnGetName.Name = "BtnGetName"
         Me.BtnGetName.Size = New System.Drawing.Size(30, 30)
         Me.BtnGetName.TabIndex = 92
@@ -264,7 +264,7 @@ Partial Class FrmWordPress
         Me.BtnGetDescription.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnGetDescription.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.copyicon
         Me.BtnGetDescription.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnGetDescription.Location = New System.Drawing.Point(841, 579)
+        Me.BtnGetDescription.Location = New System.Drawing.Point(526, 540)
         Me.BtnGetDescription.Name = "BtnGetDescription"
         Me.BtnGetDescription.Size = New System.Drawing.Size(30, 30)
         Me.BtnGetDescription.TabIndex = 93
@@ -274,7 +274,8 @@ Partial Class FrmWordPress
         '
         Me.TxtSelectedName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TxtSelectedName.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtSelectedName.Location = New System.Drawing.Point(526, 511)
+        Me.TxtSelectedName.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.TxtSelectedName.Location = New System.Drawing.Point(562, 507)
         Me.TxtSelectedName.Name = "TxtSelectedName"
         Me.TxtSelectedName.Size = New System.Drawing.Size(263, 27)
         Me.TxtSelectedName.TabIndex = 94
@@ -282,7 +283,8 @@ Partial Class FrmWordPress
         'TxtSelectedDescription
         '
         Me.TxtSelectedDescription.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtSelectedDescription.Location = New System.Drawing.Point(526, 544)
+        Me.TxtSelectedDescription.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.TxtSelectedDescription.Location = New System.Drawing.Point(562, 540)
         Me.TxtSelectedDescription.Multiline = True
         Me.TxtSelectedDescription.Name = "TxtSelectedDescription"
         Me.TxtSelectedDescription.Size = New System.Drawing.Size(309, 65)

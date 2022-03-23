@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{183E0597-882F-4863-8790-27A0754C3DBF}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <StartupObject>Sub Main</StartupObject>
     <RootNamespace>BirthdayTweets</RootNamespace>
     <AssemblyName>BirthdayTweets</AssemblyName>
