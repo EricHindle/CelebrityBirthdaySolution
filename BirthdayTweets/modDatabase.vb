@@ -32,6 +32,24 @@ Module modDatabase
         Return _List
     End Function
 
+    Public Function FindRandomBirthday() As Person
+        Const Psub As String = "FindRandom"
+        Dim _person As New Person
+        Try
+            Dim _month As Integer = Today.Month
+            Dim _day As Integer = Today.Day
+            oFullPersonTa.FillByRandom(oFullPersonTable, _month, _day)
+            If oFullPersonTable.Rows.Count > 0 Then
+                Dim _row As CelebrityBirthdayDataSet.FullPersonRow = oFullPersonTable.Rows(0)
+                _person = New Person(_row, True)
+            End If
+            LogUtil.ShowProgress(_person.Name & " birthday found", Psub)
+        Catch dbEx As DbException
+            LogUtil.Exception("Finding random birthday DbException", dbEx, Psub)
+        End Try
+        Return _person
+    End Function
+
     Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean, Optional isGetPhoto As Boolean = True) As List(Of Person)
         Const Psub As String = "FindPeopleByDate"
         Dim oPersonList As New List(Of Person)
