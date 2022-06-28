@@ -136,5 +136,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=LAPTOP-11NSK703\SQLEXPRESS;Initial Catalog=CelebrityBirthday;Persist Security Info=True;User ID=sa;Password=dkk.sql</Value>
     </Setting>
+    <Setting Name="fileRetentionPeriod" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

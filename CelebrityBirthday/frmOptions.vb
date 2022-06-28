@@ -1,4 +1,5 @@
-﻿Imports System.Text
+﻿Imports System.IO
+Imports System.Text
 
 Public NotInheritable Class FrmOptions
 
@@ -31,6 +32,7 @@ Public NotInheritable Class FrmOptions
         My.Settings.SplitWords = sb.ToString.TrimEnd("~")
         My.Settings.isSqlServer = chkSqlServer.Checked
         My.Settings.twitterAuthCallback = TxtCallback.Text
+        My.Settings.fileRetentionPeriod = NudRetention.Value
         My.Settings.Save()
     End Sub
 
@@ -58,6 +60,7 @@ Public NotInheritable Class FrmOptions
         TxtLogFilePath.Text = My.Settings.LogFolder
         NudSentences.Value = My.Settings.wikiSentences
         chkSqlServer.Checked = My.Settings.isSqlServer
+        NudRetention.Value = My.Settings.fileRetentionPeriod
     End Sub
 
     Private Sub BtnResetForms_Click(sender As Object, e As EventArgs) Handles BtnResetForms.Click
@@ -105,5 +108,40 @@ Public NotInheritable Class FrmOptions
         Using _backup As New FrmBackup
             _backup.ShowDialog()
         End Using
+    End Sub
+
+    Private Sub BtnHousekeeping_Click(sender As Object, e As EventArgs) Handles BtnHousekeeping.Click
+        Dim twitterImageFolder As String = My.Settings.twitterImageFolder
+        Dim logFolder As String = My.Settings.LogFolder
+        Dim retentionPeriod As Integer = My.Settings.fileRetentionPeriod
+        TidyFiles(twitterImageFolder, "*.*", retentionPeriod)
+        TidyFiles(logFolder, "*.*", retentionPeriod)
+        MsgBox("Tidy complete", MsgBoxStyle.Information, "Housekeeping")
+    End Sub
+    Public Sub TidyFiles(ByVal sFolder As String, ByVal sPattern As String, ByVal iRetain As Integer, Optional ByVal bSubfolders As Boolean = False)
+        Dim oDirInfo As DirectoryInfo = My.Computer.FileSystem.GetDirectoryInfo(sFolder)
+        LogUtil.Info("Tidying files in " & sFolder & " older than " & iRetain & " days", "TidyFiles")
+        Try
+            Dim oFileList As FileInfo() = oDirInfo.GetFiles(sPattern, If(bSubfolders, SearchOption.AllDirectories, SearchOption.TopDirectoryOnly))
+            For Each oFileInfo As FileInfo In oFileList
+                If (oFileInfo.Attributes And FileAttributes.ReadOnly) = 0 _
+                       And (oFileInfo.Attributes And FileAttributes.Hidden) = 0 _
+                       And (oFileInfo.Attributes And FileAttributes.System) = 0 _
+                       And (oFileInfo.Attributes And FileAttributes.Directory) = 0 Then
+                    Dim oDate As Date = oFileInfo.LastWriteTime
+                    Dim iDaysOld As Integer = DateDiff("d", oDate, Now)
+                    If iDaysOld >= iRetain Then
+                        Try
+                            My.Computer.FileSystem.DeleteFile(oFileInfo.FullName)
+                            LogUtil.Info(oFileInfo.Name & " - " & CStr(iDaysOld) & " days old - deleted", "TidyFiles")
+                        Catch ex As Exception
+                            LogUtil.Exception("Unable to remove " & oFileInfo.FullName, ex, "TidyFiles")
+                        End Try
+                    End If
+                End If
+            Next
+        Catch ex As Exception
+            LogUtil.Exception("Problem tidying files", ex, "TidyFiles")
+        End Try
     End Sub
 End Class

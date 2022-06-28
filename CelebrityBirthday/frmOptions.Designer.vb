@@ -63,10 +63,16 @@ Partial Class FrmOptions
         Me.TxtSplitWords = New System.Windows.Forms.TextBox()
         Me.chkSqlServer = New System.Windows.Forms.CheckBox()
         Me.BtnBackup = New System.Windows.Forms.Button()
+        Me.BtnHousekeeping = New System.Windows.Forms.Button()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.NudRetention = New System.Windows.Forms.NumericUpDown()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        CType(Me.NudRetention, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnCancel
@@ -207,7 +213,7 @@ Partial Class FrmOptions
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtImageSearch.Location = New System.Drawing.Point(172, 29)
         Me.TxtImageSearch.Name = "TxtImageSearch"
-        Me.TxtImageSearch.Size = New System.Drawing.Size(231, 22)
+        Me.TxtImageSearch.Size = New System.Drawing.Size(375, 22)
         Me.TxtImageSearch.TabIndex = 14
         '
         'TxtWordPress
@@ -216,7 +222,7 @@ Partial Class FrmOptions
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWordPress.Location = New System.Drawing.Point(172, 68)
         Me.TxtWordPress.Name = "TxtWordPress"
-        Me.TxtWordPress.Size = New System.Drawing.Size(231, 22)
+        Me.TxtWordPress.Size = New System.Drawing.Size(375, 22)
         Me.TxtWordPress.TabIndex = 15
         '
         'TxtWikiSearch
@@ -225,7 +231,7 @@ Partial Class FrmOptions
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWikiSearch.Location = New System.Drawing.Point(172, 107)
         Me.TxtWikiSearch.Name = "TxtWikiSearch"
-        Me.TxtWikiSearch.Size = New System.Drawing.Size(231, 22)
+        Me.TxtWikiSearch.Size = New System.Drawing.Size(375, 22)
         Me.TxtWikiSearch.TabIndex = 16
         '
         'txtTwitterSearch
@@ -234,7 +240,7 @@ Partial Class FrmOptions
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTwitterSearch.Location = New System.Drawing.Point(172, 146)
         Me.txtTwitterSearch.Name = "txtTwitterSearch"
-        Me.txtTwitterSearch.Size = New System.Drawing.Size(231, 22)
+        Me.txtTwitterSearch.Size = New System.Drawing.Size(375, 22)
         Me.txtTwitterSearch.TabIndex = 17
         '
         'GroupBox1
@@ -308,7 +314,7 @@ Partial Class FrmOptions
         Me.GroupBox2.Controls.Add(Me.TxtImageSearch)
         Me.GroupBox2.Location = New System.Drawing.Point(118, 216)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(419, 366)
+        Me.GroupBox2.Size = New System.Drawing.Size(563, 366)
         Me.GroupBox2.TabIndex = 19
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "URLs"
@@ -319,7 +325,7 @@ Partial Class FrmOptions
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtCallback.Location = New System.Drawing.Point(172, 327)
         Me.TxtCallback.Name = "TxtCallback"
-        Me.TxtCallback.Size = New System.Drawing.Size(231, 22)
+        Me.TxtCallback.Size = New System.Drawing.Size(375, 22)
         Me.TxtCallback.TabIndex = 23
         '
         'Label13
@@ -339,7 +345,7 @@ Partial Class FrmOptions
         Me.TxtWordPressDate.Location = New System.Drawing.Point(172, 182)
         Me.TxtWordPressDate.Multiline = True
         Me.TxtWordPressDate.Name = "TxtWordPressDate"
-        Me.TxtWordPressDate.Size = New System.Drawing.Size(231, 36)
+        Me.TxtWordPressDate.Size = New System.Drawing.Size(375, 36)
         Me.TxtWordPressDate.TabIndex = 21
         '
         'Label11
@@ -358,7 +364,7 @@ Partial Class FrmOptions
         Me.TxtWikiExtract.Location = New System.Drawing.Point(172, 233)
         Me.TxtWikiExtract.Multiline = True
         Me.TxtWikiExtract.Name = "TxtWikiExtract"
-        Me.TxtWikiExtract.Size = New System.Drawing.Size(231, 61)
+        Me.TxtWikiExtract.Size = New System.Drawing.Size(375, 61)
         Me.TxtWikiExtract.TabIndex = 19
         '
         'Label8
@@ -375,7 +381,7 @@ Partial Class FrmOptions
         Me.BtnGlobalSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnGlobalSettings.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGlobalSettings.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGlobalSettings.Location = New System.Drawing.Point(108, 595)
+        Me.BtnGlobalSettings.Location = New System.Drawing.Point(119, 595)
         Me.BtnGlobalSettings.Name = "BtnGlobalSettings"
         Me.BtnGlobalSettings.Size = New System.Drawing.Size(86, 60)
         Me.BtnGlobalSettings.TabIndex = 20
@@ -386,7 +392,7 @@ Partial Class FrmOptions
         '
         Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(373, 611)
+        Me.Label9.Location = New System.Drawing.Point(501, 608)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(89, 14)
         Me.Label9.TabIndex = 21
@@ -395,7 +401,7 @@ Partial Class FrmOptions
         'NudSentences
         '
         Me.NudSentences.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.NudSentences.Location = New System.Drawing.Point(477, 609)
+        Me.NudSentences.Location = New System.Drawing.Point(605, 606)
         Me.NudSentences.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NudSentences.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudSentences.Name = "NudSentences"
@@ -469,7 +475,7 @@ Partial Class FrmOptions
         '
         Me.chkSqlServer.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.chkSqlServer.AutoSize = True
-        Me.chkSqlServer.Location = New System.Drawing.Point(420, 637)
+        Me.chkSqlServer.Location = New System.Drawing.Point(548, 634)
         Me.chkSqlServer.Name = "chkSqlServer"
         Me.chkSqlServer.Size = New System.Drawing.Size(87, 18)
         Me.chkSqlServer.TabIndex = 24
@@ -481,19 +487,60 @@ Partial Class FrmOptions
         Me.BtnBackup.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnBackup.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBackup.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnBackup.Location = New System.Drawing.Point(216, 595)
+        Me.BtnBackup.Location = New System.Drawing.Point(222, 595)
         Me.BtnBackup.Name = "BtnBackup"
         Me.BtnBackup.Size = New System.Drawing.Size(86, 60)
         Me.BtnBackup.TabIndex = 25
         Me.BtnBackup.Text = "Backup"
         Me.BtnBackup.UseVisualStyleBackColor = True
         '
+        'BtnHousekeeping
+        '
+        Me.BtnHousekeeping.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnHousekeeping.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnHousekeeping.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnHousekeeping.Location = New System.Drawing.Point(31, 92)
+        Me.BtnHousekeeping.Name = "BtnHousekeeping"
+        Me.BtnHousekeeping.Size = New System.Drawing.Size(86, 35)
+        Me.BtnHousekeeping.TabIndex = 26
+        Me.BtnHousekeeping.Text = "Run now"
+        Me.BtnHousekeeping.UseVisualStyleBackColor = True
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.Label14)
+        Me.GroupBox4.Controls.Add(Me.NudRetention)
+        Me.GroupBox4.Controls.Add(Me.BtnHousekeeping)
+        Me.GroupBox4.Location = New System.Drawing.Point(548, 12)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(133, 133)
+        Me.GroupBox4.TabIndex = 27
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Housekeeping"
+        '
+        'NudRetention
+        '
+        Me.NudRetention.Location = New System.Drawing.Point(42, 46)
+        Me.NudRetention.Name = "NudRetention"
+        Me.NudRetention.Size = New System.Drawing.Size(54, 22)
+        Me.NudRetention.TabIndex = 27
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(18, 29)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(99, 14)
+        Me.Label14.TabIndex = 28
+        Me.Label14.Text = "Retention period"
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(549, 722)
+        Me.ClientSize = New System.Drawing.Size(693, 722)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.BtnBackup)
         Me.Controls.Add(Me.chkSqlServer)
         Me.Controls.Add(Me.GroupBox3)
@@ -517,6 +564,9 @@ Partial Class FrmOptions
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        CType(Me.NudRetention, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -561,4 +611,8 @@ Partial Class FrmOptions
     Friend WithEvents TxtCallback As TextBox
     Friend WithEvents Label13 As Label
     Friend WithEvents BtnBackup As Button
+    Friend WithEvents BtnHousekeeping As Button
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents NudRetention As NumericUpDown
 End Class
