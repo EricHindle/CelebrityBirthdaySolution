@@ -38,6 +38,7 @@ Partial Class FrmSendBBTweet
         Me.TxtSurname = New System.Windows.Forms.TextBox()
         Me.TxtForename = New System.Windows.Forms.TextBox()
         Me.BtnSend = New System.Windows.Forms.Button()
+        Me.TxtSuffix = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -206,11 +207,19 @@ Partial Class FrmSendBBTweet
         Me.BtnSend.Text = "Send"
         Me.BtnSend.UseVisualStyleBackColor = True
         '
+        'TxtSuffix
+        '
+        Me.TxtSuffix.Location = New System.Drawing.Point(355, 103)
+        Me.TxtSuffix.Name = "TxtSuffix"
+        Me.TxtSuffix.Size = New System.Drawing.Size(79, 20)
+        Me.TxtSuffix.TabIndex = 176
+        '
         'FrmSendBBTweet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(725, 540)
+        Me.Controls.Add(Me.TxtSuffix)
         Me.Controls.Add(Me.chkImages)
         Me.Controls.Add(Me.LblTweetLength)
         Me.Controls.Add(Me.PictureBox2)
@@ -251,4 +260,5 @@ Partial Class FrmSendBBTweet
     Friend WithEvents TxtSurname As TextBox
     Friend WithEvents TxtForename As TextBox
     Friend WithEvents BtnSend As Button
+    Friend WithEvents TxtSuffix As TextBox
 End Class

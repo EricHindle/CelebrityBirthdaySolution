@@ -41,6 +41,7 @@ Public Class FrmSendBBTweet
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
+        TxtSuffix.Text = ".jpg"
         If _deadPerson IsNot Nothing Then
             _shortDesc = _deadPerson.ShortDesc
             _longDesc = _deadPerson.Description
@@ -264,5 +265,13 @@ Public Class FrmSendBBTweet
         End If
         Return bdiff
     End Function
+
+    Private Sub TxtSuffix_TextChanged(sender As Object, e As EventArgs) Handles TxtSuffix.TextChanged
+        Dim thumbnailImage As String = Path.Combine(My.Settings.ImgPath, LblImageName.Text) & TxtSuffix.Text
+        If My.Computer.FileSystem.FileExists(thumbnailImage) Then
+            PictureBox1.ImageLocation = thumbnailImage
+            CreateTwitterImage(thumbnailImage)
+        End If
+    End Sub
 #End Region
 End Class
