@@ -306,6 +306,12 @@
     <Compile Include="Imaging\FrmImageCapture.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Imaging\FrmImageCheck.Designer.vb">
+      <DependentUpon>FrmImageCheck.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Imaging\FrmImageCheck.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Imaging\FrmImages.Designer.vb">
       <DependentUpon>FrmImages.vb</DependentUpon>
     </Compile>
@@ -482,6 +488,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Imaging\FrmImageCapture.resx">
       <DependentUpon>FrmImageCapture.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Imaging\FrmImageCheck.resx">
+      <DependentUpon>FrmImageCheck.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Imaging\FrmImages.resx">
       <DependentUpon>FrmImages.vb</DependentUpon>

@@ -16,6 +16,7 @@ Public Class FrmBackup
 #Region "form control handlers"
     Private Sub FrmBackup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Backup")
+        PbCopyProgress.Visible = False
         InitialiseData()
         GetFormPos(Me, My.Settings.backupformpos)
         TxtBackupPath.Text = My.Settings.BackupPath
@@ -132,6 +133,15 @@ Public Class FrmBackup
     End Function
     Private Sub ImageBackup()
         AddProgress("Image backup ======")
+        PbCopyProgress.Value = 0
+        PbCopyProgress.Visible = True
+        Dim _selct As Integer = 0
+        For Each oNode As TreeNode In TvImages.Nodes(0).Nodes
+            If oNode.Checked Then
+                _selct += 1
+            End If
+        Next
+        PbCopyProgress.Maximum = _selct
         For Each oNode As TreeNode In TvImages.Nodes(0).Nodes
             If oNode.Checked Then
                 Dim _filename As String = oNode.Text
@@ -142,13 +152,24 @@ Public Class FrmBackup
                     My.Computer.FileSystem.CopyFile(_fullname, _destination, True)
                     AddProgress(_filename & " copied")
                 End If
+                PbCopyProgress.Value += 1
                 oNode.Checked = False
             End If
         Next
         TvImages.Nodes(0).Checked = False
+        PbCopyProgress.Visible = False
     End Sub
     Private Sub DataTableBackup()
         AddProgress("Data backup ======")
+        PbCopyProgress.Visible = True
+        PbCopyProgress.Value = 0
+        Dim _selct As Integer = 0
+        For Each oNode As TreeNode In TvDatatables.Nodes(0).Nodes
+            If oNode.Checked Then
+                _selct += 1
+            End If
+        Next
+        PbCopyProgress.Maximum = _selct
         For Each oNode As TreeNode In TvDatatables.Nodes(0).Nodes
             If oNode.Checked Then
                 AddProgress(oNode.Text)
@@ -176,6 +197,7 @@ Public Class FrmBackup
             End If
         Next
         TvDatatables.Nodes(0).Checked = False
+        PbCopyProgress.Visible = False
     End Sub
     Private Sub AddProgress(pText As String)
         LogUtil.Info(pText, MyBase.Name)
@@ -191,6 +213,7 @@ Public Class FrmBackup
         AddProgress("Writing " & sBackupFile)
         backupDataTable.WriteXml(sBackupFile)
         AddProgress("Writing " & sBackupFile & " complete")
+        PbCopyProgress.Value += 1
     End Sub
     Public Sub InitialiseData()
         tableList.Add("Audit")

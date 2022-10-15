@@ -40,8 +40,10 @@ Partial Class FrmBackup
         Me.BtnSelectPath = New System.Windows.Forms.Button()
         Me.chkAddDate = New System.Windows.Forms.CheckBox()
         Me.BtnSelectAll = New System.Windows.Forms.Button()
+        Me.PbCopyProgress = New System.Windows.Forms.ToolStripProgressBar()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -97,6 +99,7 @@ Partial Class FrmBackup
         '
         'StatusStrip1
         '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PbCopyProgress})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 601)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1103, 22)
@@ -258,6 +261,13 @@ Partial Class FrmBackup
         Me.BtnSelectAll.Text = "Select All"
         Me.BtnSelectAll.UseVisualStyleBackColor = True
         '
+        'PbCopyProgress
+        '
+        Me.PbCopyProgress.Maximum = 20000
+        Me.PbCopyProgress.Name = "PbCopyProgress"
+        Me.PbCopyProgress.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.PbCopyProgress.Size = New System.Drawing.Size(306, 16)
+        '
         'FrmBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
@@ -280,6 +290,8 @@ Partial Class FrmBackup
         Me.Text = "Backup"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -311,4 +323,5 @@ Partial Class FrmBackup
     Friend WithEvents BtnSelectPath As Button
     Friend WithEvents chkAddDate As CheckBox
     Friend WithEvents BtnSelectAll As Button
+    Friend WithEvents PbCopyProgress As ToolStripProgressBar
 End Class

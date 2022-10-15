@@ -477,9 +477,13 @@ Friend Module modCbday
             If String.IsNullOrEmpty(testWord) OrElse testWord = "ad" OrElse testWord = "bc" Then
                 _words.RemoveAt(index)
             End If
+
         Next
         If _words.Count >= 3 Then
             For w As Integer = 0 To _words.Count - 3
+                If WordEndsWith(_words(w)) Then
+                    _words(w) = _words(w).Substring(0, _words(w).Length - 2)
+                End If
                 Dim _testDate As String = _words(w) & " " & _words(w + 1) & " " & _words(w + 2).PadLeft(4, "0")
                 If IsDate(_testDate) Then
                     _cbDate.DateValue = CDate(_testDate)
@@ -491,6 +495,11 @@ Friend Module modCbday
         End If
         Return _cbDate
     End Function
+
+    Private Function WordEndsWith(sText As String) As Boolean
+        Return sText.EndsWith("st") OrElse sText.EndsWith("nd") OrElse sText.EndsWith("rd") OrElse sText.EndsWith("th")
+    End Function
+
     Private Function IsStringContainsBc(dateString As String) As Boolean
         Dim isBce As Boolean = False
         For Each bceTestString In bceTestStringValues

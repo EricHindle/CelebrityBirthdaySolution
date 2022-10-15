@@ -88,9 +88,12 @@ Public Class FrmMenu2
     Private Sub BtnTest_Click_1(sender As Object, e As EventArgs) Handles BtnTest.Click
         LogUtil.Info("Testing", MyBase.Name)
         Me.Hide()
-        Using _fbtest As New FrmFacebookTest
-            _fbtest.ShowDialog()
+        Using _imgCheck As New FrmImageCheck
+            _imgCheck.showdialog
         End Using
+        'Using _fbtest As New FrmFacebookTest
+        '    _fbtest.ShowDialog()
+        'End Using
         Me.Show()
     End Sub
 #End Region

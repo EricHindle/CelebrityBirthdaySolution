@@ -117,6 +117,14 @@ Module modDatabase
         End If
         Return isOK
     End Function
+    Public Function GetAllPersons() As List(Of Person)
+        Dim _list As New List(Of Person)
+        oFullPersonTa.Fill(oFullPersonTable)
+        For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
+            _list.Add(New Person(oRow, True))
+        Next
+        Return _list
+    End Function
     Public Function GetPersonById(ByVal _id As Integer) As Person
         Dim newPerson As Person = Nothing
         Try
