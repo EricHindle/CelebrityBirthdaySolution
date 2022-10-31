@@ -14488,21 +14488,23 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
-            Me._commandCollection(1).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
-                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
-                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
-                " wikiId, isTwin, celebtype FROM FullPerson WHERE (birthday = @birthday) AND (bir"& _ 
-                "thmonth = @birthmonth) AND (deathyear <> 0) ORDER BY birthyear"
+            Me._commandCollection(1).CommandText = "SELECT        longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, su"& _ 
+                "rname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deat"& _ 
+                "hday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"          "& _ 
+                "               imgfilename, botsd, wikiId, isTwin, celebtype"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Fu"& _ 
+                "llPerson"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (birthday = @birthday) AND (birthmonth = @birthmonth) AND"& _ 
+                " (deathyear <> 0) AND (celebtype <> 2)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY birthyear"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@birthday", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@birthmonth", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, surname, "& _ 
-                "forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deathday, i"& _ 
-                "mgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, imgfilename, botsd,"& _ 
-                " wikiId, isTwin, celebtype FROM FullPerson WHERE (birthmonth = @month) AND (birt"& _ 
-                "hday = @day) AND (deathyear = 0) ORDER BY birthyear"
+            Me._commandCollection(2).CommandText = "SELECT        longdesc, shortdesc, deathyear, birthday, birthmonth, birthyear, su"& _ 
+                "rname, forename, id, sortseq, dateadded, birthplace, birthname, deathmonth, deat"& _ 
+                "hday, imgfiletype, imgloadyr, imgloadmonth, twitterHandle, noTweet, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"          "& _ 
+                "               imgfilename, botsd, wikiId, isTwin, celebtype"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Fu"& _ 
+                "llPerson"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (birthmonth = @month) AND (birthday = @day) AND (deathyea"& _ 
+                "r = 0) AND (celebtype <> 2)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY birthyear"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@month", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthmonth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
