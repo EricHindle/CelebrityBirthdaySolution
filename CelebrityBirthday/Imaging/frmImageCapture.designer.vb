@@ -46,6 +46,7 @@ Partial Class FrmImageCapture
         Me.TxtSurname = New System.Windows.Forms.TextBox()
         Me.TxtForename = New System.Windows.Forms.TextBox()
         Me.BtnResize = New System.Windows.Forms.Button()
+        Me.lblSize = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PicCapture, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PreviewPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,10 +62,10 @@ Partial Class FrmImageCapture
         '
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 494)
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus, Me.lblSize})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 482)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(934, 24)
+        Me.StatusStrip1.Size = New System.Drawing.Size(939, 22)
         Me.StatusStrip1.TabIndex = 7
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -76,14 +77,14 @@ Partial Class FrmImageCapture
         Me.lblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(20, 19)
+        Me.lblStatus.Size = New System.Drawing.Size(10, 17)
         '
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnClose.Location = New System.Drawing.Point(847, 457)
+        Me.BtnClose.Location = New System.Drawing.Point(852, 443)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 34)
         Me.BtnClose.TabIndex = 6
@@ -95,7 +96,7 @@ Partial Class FrmImageCapture
         Me.BtnRotate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnRotate.BackColor = System.Drawing.Color.White
         Me.BtnRotate.Image = Global.CelebrityBirthday.My.Resources.Resources.refresh
-        Me.BtnRotate.Location = New System.Drawing.Point(662, 384)
+        Me.BtnRotate.Location = New System.Drawing.Point(667, 370)
         Me.BtnRotate.Name = "BtnRotate"
         Me.BtnRotate.Size = New System.Drawing.Size(42, 43)
         Me.BtnRotate.TabIndex = 41
@@ -129,7 +130,7 @@ Partial Class FrmImageCapture
         Me.PreviewPictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PreviewPictureBox.BackColor = System.Drawing.Color.LightSteelBlue
         Me.PreviewPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PreviewPictureBox.Location = New System.Drawing.Point(805, 40)
+        Me.PreviewPictureBox.Location = New System.Drawing.Point(810, 40)
         Me.PreviewPictureBox.Name = "PreviewPictureBox"
         Me.PreviewPictureBox.Size = New System.Drawing.Size(60, 60)
         Me.PreviewPictureBox.TabIndex = 29
@@ -150,7 +151,7 @@ Partial Class FrmImageCapture
         '
         Me.lblCroppedImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblCroppedImage.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCroppedImage.Location = New System.Drawing.Point(765, 9)
+        Me.lblCroppedImage.Location = New System.Drawing.Point(770, 9)
         Me.lblCroppedImage.Name = "lblCroppedImage"
         Me.lblCroppedImage.Size = New System.Drawing.Size(140, 27)
         Me.lblCroppedImage.TabIndex = 10
@@ -173,7 +174,7 @@ Partial Class FrmImageCapture
         Me.BtnSaveCroppedImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSaveCroppedImage.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.BtnSaveCroppedImage.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSaveCroppedImage.Location = New System.Drawing.Point(760, 216)
+        Me.BtnSaveCroppedImage.Location = New System.Drawing.Point(765, 216)
         Me.BtnSaveCroppedImage.Name = "BtnSaveCroppedImage"
         Me.BtnSaveCroppedImage.Size = New System.Drawing.Size(162, 32)
         Me.BtnSaveCroppedImage.TabIndex = 5
@@ -197,7 +198,7 @@ Partial Class FrmImageCapture
         Me.lblFilename.AutoSize = True
         Me.lblFilename.Location = New System.Drawing.Point(295, 14)
         Me.lblFilename.Name = "lblFilename"
-        Me.lblFilename.Size = New System.Drawing.Size(20, 16)
+        Me.lblFilename.Size = New System.Drawing.Size(19, 16)
         Me.lblFilename.TabIndex = 31
         Me.lblFilename.Text = "..."
         '
@@ -206,7 +207,7 @@ Partial Class FrmImageCapture
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label4.Location = New System.Drawing.Point(734, 386)
+        Me.Label4.Location = New System.Drawing.Point(739, 372)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(171, 41)
         Me.Label4.TabIndex = 32
@@ -283,7 +284,7 @@ Partial Class FrmImageCapture
         Me.pnlAdjustImage.Controls.Add(Me.TbBrightness)
         Me.pnlAdjustImage.Controls.Add(Me.Label6)
         Me.pnlAdjustImage.Controls.Add(Me.TbContrast)
-        Me.pnlAdjustImage.Location = New System.Drawing.Point(645, 39)
+        Me.pnlAdjustImage.Location = New System.Drawing.Point(650, 39)
         Me.pnlAdjustImage.Name = "pnlAdjustImage"
         Me.pnlAdjustImage.Size = New System.Drawing.Size(100, 180)
         Me.pnlAdjustImage.TabIndex = 40
@@ -291,7 +292,7 @@ Partial Class FrmImageCapture
         'NudSaveSize
         '
         Me.NudSaveSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.NudSaveSize.Location = New System.Drawing.Point(833, 175)
+        Me.NudSaveSize.Location = New System.Drawing.Point(838, 175)
         Me.NudSaveSize.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
         Me.NudSaveSize.Minimum = New Decimal(New Integer() {60, 0, 0, 0})
         Me.NudSaveSize.Name = "NudSaveSize"
@@ -304,9 +305,9 @@ Partial Class FrmImageCapture
         Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(756, 177)
+        Me.Label5.Location = New System.Drawing.Point(761, 177)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(62, 16)
+        Me.Label5.Size = New System.Drawing.Size(61, 16)
         Me.Label5.TabIndex = 43
         Me.Label5.Text = "Save size"
         '
@@ -319,7 +320,7 @@ Partial Class FrmImageCapture
         Me.GroupBox1.Controls.Add(Me.rbRed)
         Me.GroupBox1.Controls.Add(Me.rbWhite)
         Me.GroupBox1.Controls.Add(Me.rbBlack)
-        Me.GroupBox1.Location = New System.Drawing.Point(770, 254)
+        Me.GroupBox1.Location = New System.Drawing.Point(775, 254)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(143, 115)
         Me.GroupBox1.TabIndex = 44
@@ -351,13 +352,11 @@ Partial Class FrmImageCapture
         'rbYellow
         '
         Me.rbYellow.AutoSize = True
-        Me.rbYellow.Checked = True
         Me.rbYellow.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbYellow.Location = New System.Drawing.Point(71, 48)
         Me.rbYellow.Name = "rbYellow"
         Me.rbYellow.Size = New System.Drawing.Size(61, 18)
         Me.rbYellow.TabIndex = 3
-        Me.rbYellow.TabStop = True
         Me.rbYellow.Text = "Yellow"
         Me.rbYellow.UseVisualStyleBackColor = True
         '
@@ -386,11 +385,13 @@ Partial Class FrmImageCapture
         'rbBlack
         '
         Me.rbBlack.AutoSize = True
+        Me.rbBlack.Checked = True
         Me.rbBlack.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbBlack.Location = New System.Drawing.Point(8, 22)
         Me.rbBlack.Name = "rbBlack"
         Me.rbBlack.Size = New System.Drawing.Size(52, 18)
         Me.rbBlack.TabIndex = 0
+        Me.rbBlack.TabStop = True
         Me.rbBlack.Text = "Black"
         Me.rbBlack.UseVisualStyleBackColor = True
         '
@@ -423,19 +424,24 @@ Partial Class FrmImageCapture
         '
         Me.BtnResize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnResize.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnResize.Location = New System.Drawing.Point(897, 174)
+        Me.BtnResize.Location = New System.Drawing.Point(902, 174)
         Me.BtnResize.Name = "BtnResize"
         Me.BtnResize.Size = New System.Drawing.Size(25, 23)
         Me.BtnResize.TabIndex = 82
         Me.BtnResize.Text = "*"
         Me.BtnResize.UseVisualStyleBackColor = True
         '
+        'lblSize
+        '
+        Me.lblSize.Name = "lblSize"
+        Me.lblSize.Size = New System.Drawing.Size(0, 17)
+        '
         'FrmImageCapture
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(934, 518)
+        Me.ClientSize = New System.Drawing.Size(939, 504)
         Me.Controls.Add(Me.BtnResize)
         Me.Controls.Add(Me.TxtSurname)
         Me.Controls.Add(Me.TxtForename)
@@ -462,7 +468,9 @@ Partial Class FrmImageCapture
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(1900, 1000)
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(955, 543)
         Me.Name = "FrmImageCapture"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Image Capture"
@@ -516,4 +524,5 @@ Partial Class FrmImageCapture
     Friend WithEvents nudPenSize As NumericUpDown
     Friend WithEvents Label7 As Label
     Friend WithEvents BtnResize As Button
+    Friend WithEvents lblSize As ToolStripStatusLabel
 End Class

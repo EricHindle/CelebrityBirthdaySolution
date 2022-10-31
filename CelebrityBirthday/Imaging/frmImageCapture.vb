@@ -16,8 +16,8 @@ Public NotInheritable Class FrmImageCapture
     Private Const NOT_SAVED_MESSAGE As String = "Image not saved"
     Private Const STD_CAP_WIDTH As Integer = 500
     Private Const STD_CAP_HEIGHT As Integer = 400
-    Private Const MAX_IMG_WIDTH As Integer = 1200
-    Private Const MAX_IMG_HEIGHT As Integer = 900
+    Private Const MAX_IMG_WIDTH As Integer = 1450
+    Private Const MAX_IMG_HEIGHT As Integer = 850
     Private Const IMG_AREA_SEL As String = "Image area selected"
     Private Const IMG_SHRUNK As String = "Image shrunk to "
 
@@ -77,7 +77,6 @@ Public NotInheritable Class FrmImageCapture
 #Region "Form control handlers"
     Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
-        GetFormPos(Me, My.Settings.capformpos)
         iStartHeight = Me.Size.Height
         iStartWidth = Me.Size.Width
         cropBitmap = Nothing
@@ -218,8 +217,6 @@ Public NotInheritable Class FrmImageCapture
     End Sub
     Private Sub FrmImageCapture_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
-        My.Settings.capformpos = SetFormPos(Me)
-        My.Settings.Save()
     End Sub
 
 #End Region
@@ -265,8 +262,10 @@ Public NotInheritable Class FrmImageCapture
         If oImage.Size.Height > STD_CAP_HEIGHT Or oImage.Size.Width > STD_CAP_WIDTH Then
             Dim _newLocation As New Point(10, 10)
             Me.Location = _newLocation
-            Me.Height = iStartHeight + oImage.Size.Height - STD_CAP_HEIGHT
-            Me.Width = iStartWidth + oImage.Size.Width - STD_CAP_WIDTH
+            Dim newHeight As Integer = iStartHeight + oImage.Size.Height - STD_CAP_HEIGHT
+            Dim newWidth As Integer = iStartWidth + oImage.Size.Width - STD_CAP_WIDTH
+            Me.Height = Math.Min(Me.MaximumSize.Height, newHeight)
+            Me.Width = Math.Min(Me.MaximumSize.Width, newWidth)
         End If
         PicCapture.Image = oImage.Clone
         ClearCropSelection()
@@ -454,5 +453,6 @@ Public NotInheritable Class FrmImageCapture
             MyBase.Dispose(disposing)
         End Try
     End Sub
+
 #End Region
 End Class
