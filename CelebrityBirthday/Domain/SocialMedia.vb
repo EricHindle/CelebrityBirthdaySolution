@@ -12,6 +12,15 @@ Public Class SocialMedia
     Private _wikiId As String
     Private _botsd As Integer
     Private _isTwin As Boolean
+    Private _celebrityType As Integer
+    Public Property CelebrityType() As Integer
+        Get
+            Return _celebrityType
+        End Get
+        Set(ByVal value As Integer)
+            _celebrityType = value
+        End Set
+    End Property
     Public Property IsTwin() As Boolean
         Get
             Return _isTwin
@@ -66,11 +75,12 @@ Public Class SocialMedia
         _noTweet = False
         _wikiId = ""
         _botsd = 0
+        _celebrityType = 0
     End Sub
     Public Sub New()
         Initialise()
     End Sub
-    Public Sub New(pId As Integer, pTwitterHandle As String, pNoTweet As Boolean, pWikiId As String, pBotsd As Integer, pIsTwin As Boolean)
+    Public Sub New(pId As Integer, pTwitterHandle As String, pNoTweet As Boolean, pWikiId As String, pBotsd As Integer, pIsTwin As Boolean, pCelebType As Integer)
         Initialise()
         _id = pId
         _twitterHandle = pTwitterHandle
@@ -78,6 +88,7 @@ Public Class SocialMedia
         _wikiId = pWikiId
         _botsd = pBotsd
         _isTwin = pIsTwin
+        _celebrityType = pCelebType
     End Sub
     Public Sub New(pSocialMedia As SocialMedia)
         Initialise()
@@ -88,6 +99,7 @@ Public Class SocialMedia
             _wikiId = pSocialMedia.WikiId
             _botsd = pSocialMedia.Botsd
             _isTwin = pSocialMedia.IsTwin
+            _celebrityType = pSocialMedia.CelebrityType
         End If
     End Sub
     Public Sub New(pSocialMedia As CelebrityBirthdayDataSet.SocialMediaRow)
@@ -99,6 +111,7 @@ Public Class SocialMedia
             _wikiId = If(pSocialMedia.IswikiIdNull, "", pSocialMedia.wikiId)
             _botsd = If(pSocialMedia.IsbotsdNull, 0, pSocialMedia.botsd)
             _isTwin = If(pSocialMedia.IsisTwinNull, 0, pSocialMedia.isTwin)
+            _celebrityType = If(pSocialMedia.IscelebtypeNull, 0, pSocialMedia.celebtype)
         End If
     End Sub
 

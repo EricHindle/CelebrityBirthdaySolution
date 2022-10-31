@@ -192,6 +192,8 @@ Public Class FrmBackup
                         BackupTable(GetTweetsTable)
                     Case "TwitterAuth"
                         BackupTable(GetTwitterAuthTable)
+                    Case "CelebrityTypes"
+                        BackupTable(GetCelebrityTypesTable)
                 End Select
                 oNode.Checked = False
             End If
@@ -225,6 +227,7 @@ Public Class FrmBackup
         tableList.Add("SocialMedia")
         tableList.Add("Tweets")
         tableList.Add("TwitterAuth")
+        tableList.Add("CelebrityTypes")
     End Sub
     Public Sub FillTableTree(ByRef tvtables As TreeView)
         tvtables.Nodes.Clear()

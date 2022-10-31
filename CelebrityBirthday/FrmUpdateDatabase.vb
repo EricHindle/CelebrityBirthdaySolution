@@ -124,7 +124,7 @@ Public NotInheritable Class FrmUpdateDatabase
                                                 TxtBirthName.Text.Trim,
                                                 TxtBirthPlace.Text.Trim,
                                                 New ImageIdentity(),
-                                                New SocialMedia(-1, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, 0, cbIsTwin.Checked)) With {
+                                                New SocialMedia(-1, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, 0, cbIsTwin.Checked, cbCelebType.SelectedValue)) With {
                                                 .UnsavedChanges = True
                                                 }
                 If Not IsInList(newPerson) Then
@@ -326,7 +326,7 @@ Public NotInheritable Class FrmUpdateDatabase
                     oPerson.BirthPlace = TxtBirthPlace.Text.Trim
                     oPerson.BirthName = TxtBirthName.Text.Trim
                     oPerson.UnsavedChanges = True
-                    oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd, cbIsTwin.Checked)
+                    oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd, cbIsTwin.Checked, cbCelebType.SelectedValue)
                     ShowUpdated(oPerson, "Updated")
                     Dim p As Integer = lbPeople.SelectedIndex
                     DisplayPersonList()
@@ -359,6 +359,9 @@ Public NotInheritable Class FrmUpdateDatabase
         bLoadingPerson = False
         rtbDesc.AllowDrop = True
         rtbDesc.EnableAutoDragDrop = True
+        cbCelebType.DataSource = GetCelebrityTypes()
+        Me.cbCelebType.ValueMember = "celebTypeId"
+                Me.cbCelebType.DisplayMember = "celebTypeDesc"
         ResetBackgroundColors()
         If _personId > 0 Then
             LoadScreenFromId(_personId)
@@ -944,6 +947,7 @@ Public NotInheritable Class FrmUpdateDatabase
             TxtWikiId.Text = oPerson.Social.WikiId
             lblBotsdId.Text = oPerson.Social.Botsd
             cbIsTwin.Checked = oPerson.Social.IsTwin
+            cbCelebType.SelectedValue = oPerson.Social.CelebrityType
         End If
         txtWiki.Text = GetWikiText(NudSentences.Value, oPerson.ForeName, oPerson.Surname, TxtWikiId.Text)
         bLoadingPerson = False

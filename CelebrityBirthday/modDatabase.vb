@@ -28,6 +28,8 @@ Module modDatabase
     Private ReadOnly oAuditTa As New CelebrityBirthdayDataSetTableAdapters.AuditTableAdapter
     Private ReadOnly oSettingsTa As New CelebrityBirthdayDataSetTableAdapters.SettingsTableAdapter
     Private ReadOnly oSocialMediaTa As New CelebrityBirthdayDataSetTableAdapters.SocialMediaTableAdapter
+    Private ReadOnly oCelebTypeTa As New CelebrityBirthdayDataSetTableAdapters.CelebrityTypesTableAdapter
+    Private ReadOnly oCelebTypeTable As New CelebrityBirthdayDataSet.CelebrityTypesDataTable
 #End Region
 #Region "backup"
     Public Function GetPersonTable() As CelebrityBirthdayDataSet.PersonDataTable
@@ -464,15 +466,15 @@ Module modDatabase
         End If
         Return oSocial
     End Function
-    Public Sub InsertSocialMedia(_id As Integer, _twitterHandle As String, _isNoTweet As Boolean, _wikiId As String, _botsd As Integer, _isTwin As Boolean)
+    Public Sub InsertSocialMedia(_id As Integer, _twitterHandle As String, _isNoTweet As Boolean, _wikiId As String, _botsd As Integer, _isTwin As Boolean, _celebType As Integer)
         LogUtil.Info("Inserting social media for " & CStr(_id), MODULE_NAME)
-        oTwta.InsertTwitter(_id, _twitterHandle, _isNoTweet, _wikiId, _botsd, _isTwin)
+        oTwta.InsertTwitter(_id, _twitterHandle, _isNoTweet, _wikiId, _botsd, _isTwin, _celebType)
     End Sub
     Public Sub UpdateSocialMedia(ByRef _person As Person)
         DeleteSocialMedia(_person.Id)
         Dim _social As SocialMedia = _person.Social
         If _social IsNot Nothing Then
-            InsertSocialMedia(_person.Id, _social.TwitterHandle, _social.IsNoTweet, _social.WikiId, _social.Botsd, _social.IsTwin)
+            InsertSocialMedia(_person.Id, _social.TwitterHandle, _social.IsNoTweet, _social.WikiId, _social.Botsd, _social.IsTwin, _social.CelebrityType)
         End If
     End Sub
     Public Sub UpdateWikiId(pPersonId As Integer, pWikiId As String)
@@ -498,6 +500,13 @@ Module modDatabase
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
         End Try
         Return iCt
+    End Function
+    Public Function GetCelebrityTypes() As CelebrityBirthdayDataSet.CelebrityTypesDataTable
+        oCelebTypeTa.Fill(oCelebTypeTable)
+        Return oCelebTypeTable
+    End Function
+    Public Function GetCelebrityTypesTable() As CelebrityBirthdayDataSet.CelebrityTypesDataTable
+        Return oCelebTypeTa.GetData
     End Function
 #End Region
 #Region "dates"
