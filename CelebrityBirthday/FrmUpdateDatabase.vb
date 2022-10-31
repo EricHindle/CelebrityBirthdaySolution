@@ -800,6 +800,7 @@ Public NotInheritable Class FrmUpdateDatabase
         cbNoTweet.Checked = False
         cbIsTwin.Checked = False
         TxtWikiId.Text = ""
+        cbCelebType.SelectedIndex = 0
         ResetBackgroundColors()
         bLoadingPerson = False
     End Sub
