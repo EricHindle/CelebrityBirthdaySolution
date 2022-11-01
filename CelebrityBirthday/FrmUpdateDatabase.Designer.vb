@@ -142,7 +142,7 @@ Partial Class FrmUpdateDatabase
         '
         'cbNoTweet
         '
-        Me.cbNoTweet.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbNoTweet.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cbNoTweet.AutoSize = True
         Me.cbNoTweet.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbNoTweet.ForeColor = System.Drawing.Color.RoyalBlue
@@ -176,7 +176,7 @@ Partial Class FrmUpdateDatabase
         Me.txtTwitter.Location = New System.Drawing.Point(163, 611)
         Me.txtTwitter.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.txtTwitter.Name = "txtTwitter"
-        Me.txtTwitter.Size = New System.Drawing.Size(237, 26)
+        Me.txtTwitter.Size = New System.Drawing.Size(349, 26)
         Me.txtTwitter.TabIndex = 11
         '
         'Label16

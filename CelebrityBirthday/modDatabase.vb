@@ -294,13 +294,15 @@ Module modDatabase
         End Try
         Return oPersonList
     End Function
-    Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean, Optional isGetPhoto As Boolean = True) As List(Of Person)
+    Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean, Optional isGetPhoto As Boolean = True, Optional isNoForNow As Boolean = False) As List(Of Person)
         Dim oPersonList As New List(Of Person)
         Try
             oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
                 Dim _socialMedia As SocialMedia = GetSocialMedia(oRow.id)
-                If Not isTweetsOnly Or Not _socialMedia.IsNoTweet Then
+                Dim _celebType As Integer = _socialMedia.CelebrityType
+                Dim _celebTypeOk As Boolean = (isNoForNow = False Or _celebType <> 2) And _celebType <> 4
+                If _celebTypeOk And (Not isTweetsOnly Or Not _socialMedia.IsNoTweet) Then
                     oPersonList.Add(New Person(oRow, _socialMedia, GetImageById(oRow.id, isGetPhoto)))
                 End If
             Next
