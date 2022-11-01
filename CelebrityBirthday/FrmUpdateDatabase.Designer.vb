@@ -146,7 +146,7 @@ Partial Class FrmUpdateDatabase
         Me.cbNoTweet.AutoSize = True
         Me.cbNoTweet.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbNoTweet.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.cbNoTweet.Location = New System.Drawing.Point(409, 618)
+        Me.cbNoTweet.Location = New System.Drawing.Point(163, 646)
         Me.cbNoTweet.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.cbNoTweet.Name = "cbNoTweet"
         Me.cbNoTweet.Size = New System.Drawing.Size(110, 22)
@@ -1082,12 +1082,12 @@ Partial Class FrmUpdateDatabase
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtWiki.ContextMenuStrip = Me.ContextMenuStrip1
         Me.txtWiki.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtWiki.Location = New System.Drawing.Point(37, 732)
+        Me.txtWiki.Location = New System.Drawing.Point(37, 746)
         Me.txtWiki.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.txtWiki.Multiline = True
         Me.txtWiki.Name = "txtWiki"
         Me.txtWiki.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtWiki.Size = New System.Drawing.Size(433, 122)
+        Me.txtWiki.Size = New System.Drawing.Size(433, 108)
         Me.txtWiki.TabIndex = 49
         '
         'Label4
@@ -1095,7 +1095,7 @@ Partial Class FrmUpdateDatabase
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(30, 695)
+        Me.Label4.Location = New System.Drawing.Point(30, 711)
         Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(29, 14)
@@ -1143,7 +1143,7 @@ Partial Class FrmUpdateDatabase
         Me.TxtWikiId.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWikiId.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtWikiId.Location = New System.Drawing.Point(82, 692)
+        Me.TxtWikiId.Location = New System.Drawing.Point(82, 708)
         Me.TxtWikiId.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.TxtWikiId.Name = "TxtWikiId"
         Me.TxtWikiId.Size = New System.Drawing.Size(389, 24)
@@ -1155,7 +1155,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnPasteWikiId.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.paste
         Me.BtnPasteWikiId.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnPasteWikiId.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPasteWikiId.Location = New System.Drawing.Point(477, 685)
+        Me.BtnPasteWikiId.Location = New System.Drawing.Point(477, 701)
         Me.BtnPasteWikiId.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPasteWikiId.Name = "BtnPasteWikiId"
         Me.BtnPasteWikiId.Size = New System.Drawing.Size(35, 37)
@@ -1266,7 +1266,7 @@ Partial Class FrmUpdateDatabase
         Me.BtnDateCopy.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDateCopy.ForeColor = System.Drawing.Color.Black
         Me.BtnDateCopy.Image = Global.CelebrityBirthday.My.Resources.Resources.copyiconpale
-        Me.BtnDateCopy.Location = New System.Drawing.Point(477, 733)
+        Me.BtnDateCopy.Location = New System.Drawing.Point(477, 746)
         Me.BtnDateCopy.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnDateCopy.Name = "BtnDateCopy"
         Me.BtnDateCopy.Size = New System.Drawing.Size(35, 37)
@@ -1387,7 +1387,7 @@ Partial Class FrmUpdateDatabase
         Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(33, 655)
+        Me.Label9.Location = New System.Drawing.Point(34, 678)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(102, 18)
         Me.Label9.TabIndex = 149
@@ -1395,12 +1395,13 @@ Partial Class FrmUpdateDatabase
         '
         'cbCelebType
         '
-        Me.cbCelebType.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cbCelebType.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbCelebType.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbCelebType.FormattingEnabled = True
-        Me.cbCelebType.Location = New System.Drawing.Point(162, 652)
+        Me.cbCelebType.Location = New System.Drawing.Point(163, 675)
         Me.cbCelebType.Name = "cbCelebType"
-        Me.cbCelebType.Size = New System.Drawing.Size(238, 26)
+        Me.cbCelebType.Size = New System.Drawing.Size(309, 26)
         Me.cbCelebType.TabIndex = 150
         '
         'CelebrityBirthdayDataSet
