@@ -113,11 +113,12 @@ Friend Module ImageUtil
         Return oEncoderParameters
     End Function
 
-    Public Function GenerateImage(imageTable As List(Of Person), widthImageCount As Integer, pHeight As Integer, pAlignType As AlignType) As Image
+    Public Function GenerateImage(imageTable As List(Of Person), widthImageCount As Integer, pHeight As Integer, pAlignType As AlignType, _tweetType As BirthdayTweets.TweetType) As Image
         Const Psub As String = "GenerateImage"
         Dim mosaic As Image = New Bitmap(My.Resources.blank, Math.Max(60 * widthImageCount, 300), Math.Max((60 * pHeight) + 18, 80))
         Dim oGraphics As Graphics = Graphics.FromImage(mosaic)
-        oGraphics.DrawImage(My.Resources.id, New Point(mosaic.Width - 125, mosaic.Height - 18))
+        Dim _idImage As Bitmap = If(_tweetType = BirthdayTweets.TweetType.ForNow, My.Resources.idfn, My.Resources.id)
+        oGraphics.DrawImage(_idImage, New Point(mosaic.Width - 125, mosaic.Height - 18))
         If imageTable IsNot Nothing Then
             Dim lastWidth As Integer = imageTable.Count Mod widthImageCount
             Dim _imgHPos As Integer = -1

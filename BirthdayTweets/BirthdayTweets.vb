@@ -6,17 +6,20 @@ Imports System.Text
 Imports TweetSharp
 Public Class BirthdayTweets
 #Region "enum"
-    Private Enum TweetType
+    Public Enum TweetType
         Birthday
         Anniversary
         Full
         Death
+        ForNow
+        BotSD
         Test
     End Enum
-    Private Enum TweetUserType
+    Public Enum TweetUserType
         CelebBirthday
         HBurpday
         BrownBread
+        ForNowCeleb
         Test
     End Enum
 #End Region
@@ -47,22 +50,26 @@ Public Class BirthdayTweets
     Private Const LAST_HBURP_TWEET As String = "LastHburpTweet"
     Private Const LAST_BOTSD_TWEET As String = "LastBotsdTweet"
     Private Const LAST_BBREAD_TWEET As String = "LastBrownBreadTweet"
+    Private Const LAST_FORNOW_TWEET As String = "LastForNowTweet"
     Private Const TWEET_TIME As String = "TweetTime"
     Private Const TIMER_INTERVAL As String = "ServiceTimerInterval"
     Private Const BIRTHDAY_FNAME As String = "Birthdays_"
     Private Const ANNIV_FNAME As String = "Anniv_"
     Private Const BOTSD_FNAME As String = "Botsd_"
     Private Const BBREAD_FNAME As String = "BBread_"
+    Private Const FORNOW_FNAME As String = "ForNow_"
     Private Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Private Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Private Const HBURPDAY_HDR As String = "Today's birthdays :-"
     Private Const BBREAD_HDR As String = "Remembering those who died on this day :"
+    Private Const FORNOW_HDR As String = "A very Happy Birthday! today to"
     Private Const TEST_HDR As String = "Born on this day:"
     Private Shared ReadOnly LINEFEED As String = Convert.ToChar(vbLf, myStringFormatProvider)
     Private Const CELEB_USER_KEY As String = "CELEB_USER"
     Private Const HBURPDAY_USER_KEY As String = "HBURPDAY_USER"
     Private Const BOTSD_USER_KEY As String = "BOTSD_USER"
     Private Const BBREAD_USER_KEY As String = "BBREAD_USER"
+    Private Const FORNOW_USER_KEY As String = "FORNOW_USER"
     Private Const EMAIL_TO_ADDRESS As String = "SendErrorTo"
     Private Const EMAIL_FROM_ADDRESS As String = "SendEmailFrom"
     Private Const EMAIL_FROM_NAME As String = "SendEmailName"
@@ -74,10 +81,12 @@ Public Class BirthdayTweets
     Private Shared hburpdayUser As String = "HBurpday"
     Private Shared botsdUser As String = "NotTwins1"
     Private Shared bbreadUser As String = "WhosBrownBread"
+    Private Shared fornowUser As String = "CelebfnBirthday"
     Private Shared testUser As String = "FunsterMuddy"
     Private Shared oBirthdayList As New List(Of Person)
     Private Shared oAnniversaryList As New List(Of Person)
     Private Shared oDeathList As New List(Of Person)
+    Private Shared oForNowList As New List(Of Person)
     Private Shared ReadOnly tw As New TwitterOAuth
     Private Shared todayDay As String
     Private Shared todayMonth As String
@@ -102,6 +111,7 @@ Public Class BirthdayTweets
         hburpdayUser = GlobalSettings.GetSetting(HBURPDAY_USER_KEY)
         bbreadUser = GlobalSettings.GetSetting(BBREAD_USER_KEY)
         botsdUser = GlobalSettings.GetSetting(BOTSD_USER_KEY)
+        fornowUser = GlobalSettings.GetSetting(FORNOW_USER_KEY)
     End Sub
     Public Shared Sub SendAllTweets()
         Const Psub As String = "SendAllTweets"
@@ -113,7 +123,9 @@ Public Class BirthdayTweets
             Dim hburpLastTweetDate As Date = GlobalSettings.GetSetting(LAST_HBURP_TWEET)
             Dim botsdLastTweetDate As Date = GlobalSettings.GetSetting(LAST_BOTSD_TWEET)
             Dim bbreadLastTweetDate As Date = GlobalSettings.GetSetting(LAST_BBREAD_TWEET)
+            Dim fornowLastTweetDate As Date = GlobalSettings.GetSetting(LAST_FORNOW_TWEET)
             Dim todaysDate As String = Format(Now, "yyyy-MM-dd")
+
             todayDay = Format(Now, "dd")
             todayMonth = Format(Now, "MMMM")
             tweetHeaderDate = todayMonth & " " & todayDay
@@ -201,6 +213,24 @@ Public Class BirthdayTweets
                         End If
                     End If
                 End If
+                'If fornowLastTweetDate < Today.Date Then
+                '    If Now > tweetTime Then
+                '        LogUtil.ShowProgress("Sending fornow tweets for " & todaysDate, Psub)
+                '        LogUtil.ShowProgress("Selecting people", Psub)
+                '        If BuildForNowList Then
+                '            If SendForNowTweets(todayDay, todayMonth) Then
+                '                LogUtil.ShowProgress("ForNow tweets complete", Psub)
+                '                GlobalSettings.SetSetting(LAST_FORNOW_TWEET, "date", todaysDate, "")
+                '            Else
+                '                LogUtil.Problem("ForNow Tweets not sent - error", Psub)
+                '                SendEmail("ForNow Tweets error", "ForNow Tweets not sent - error")
+                '            End If
+                '        Else
+                '            LogUtil.Problem("ForNow Tweets not sent - selection error", Psub)
+                '            SendEmail("ForNow Tweets error", "ForNow Tweets not sent - selection error")
+                '        End If
+                '    End If
+                'End If
             Else
                 LogUtil.ShowProgress("Test Tweet failed", Psub)
                 LogUtil.ShowProgress("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! failed", Psub)
@@ -329,11 +359,32 @@ Public Class BirthdayTweets
         Next
         Return isSentOK
     End Function
+    Private Shared Function SendForNowTweets(oDay As String, oMonth As String) As Boolean
+        Const Psub As String = "SendForNowTweets"
+        Dim isSentOK As Boolean = True
+        LogUtil.ShowProgress("Generating For Now tweets", Psub)
+        Dim cbTweets As New List(Of CbTweet)
+        For Each oFnCeleb As Person In oForNowList
+            Dim _fnList As New List(Of Person) From {
+                oFnCeleb
+            }
+            cbTweets.AddRange(GenerateTweets(_fnList, TweetType.ForNow, TweetUserType.ForNowCeleb, FORNOW_HDR))
+        Next
+        LogUtil.ShowProgress("Sending For Now tweets", Psub)
+        For Each tweetToSend As CbTweet In cbTweets
+            Dim imageFilename As String = SaveImage(tweetToSend, FORNOW_FNAME)
+            If Not SendTheTweet(tweetToSend, fornowUser, imageFilename) Then
+                isSentOK = False
+            End If
+        Next
+
+        Return isSentOK
+    End Function
     Private Shared Function GenerateBotSDTweets(oBotSDList As List(Of List(Of Person))) As List(Of CbTweet)
         Dim cbTweets As New List(Of CbTweet)
         For Each oPersonList As List(Of Person) In oBotSDList
             Dim _cbTweet As New CbTweet With {
-          .TweetImage = GeneratePicture(oPersonList, oPersonList.Count),
+          .TweetImage = GeneratePicture(oPersonList, oPersonList.Count, TweetType.BotSD),
           .TweetText = GenerateBotsdText(oPersonList)
           }
             cbTweets.Add(_cbTweet)
@@ -363,7 +414,7 @@ Public Class BirthdayTweets
             End If
             Dim _width As Integer = colCt
             Dim _cbTweet As New CbTweet With {
-                .TweetImage = GeneratePicture(_personlist, _width),
+                .TweetImage = GeneratePicture(_personlist, _width, _tweetType),
                 .TweetText = GenerateText(_personlist, _tweetType, tweetIndex, tweetLists.Count, _tweetUserType)
             }
             cbTweets.Add(_cbTweet)
@@ -471,13 +522,13 @@ Public Class BirthdayTweets
         End If
         Return _outString.ToString.Trim(LINEFEED)
     End Function
-    Private Shared Function GeneratePicture(_imageTable As List(Of Person), _width As Integer) As Image
+    Private Shared Function GeneratePicture(_imageTable As List(Of Person), _width As Integer, _tweetType As TweetType) As Image
         Const Psub As String = "GeneratePicture"
         LogUtil.ShowProgress("Generating picture", Psub)
         Dim _image As Image
         If _imageTable.Count > 0 Then
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
-            _image = ImageUtil.GenerateImage(_imageTable, _width, _height, ImageUtil.AlignType.Centre)
+            _image = ImageUtil.GenerateImage(_imageTable, _width, _height, ImageUtil.AlignType.Centre, _tweetType)
         Else
             _image = Nothing
         End If
@@ -525,6 +576,7 @@ Public Class BirthdayTweets
         tweetLine.Append(_person.Name)
         Try
             Dim twitterHandle As String = If(_person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle), " @" & _person.Social.TwitterHandle, "")
+            Dim nameHashTag As String = "#" & _person.Name.Replace(" ", "")
             Dim _age As String = "(" & CStr(CalculateAge(_person)) & ")"
             Dim _year As String = "(" & _person.BirthYear.Trim("-") & If(_person.BirthYear < 0, "BCE", "") & ")"
             Dim _deathYear As String = "(" & CStr(_person.DeathYear).Trim("-") & If(_person.DeathYear < 0, "BCE", "") & ")"
@@ -542,6 +594,8 @@ Public Class BirthdayTweets
                 tweetLine.Append(" "c).Append(_deathYear)
             ElseIf _userType = TweetUserType.Test Then
                 tweetLine.Append(" "c).Append(_year)
+            ElseIf _userType = TweetUserType.ForNowCeleb Then
+                tweetLine.Append(LINEFEED).Append(LINEFEED).Append(twitterHandle).Append(" "c).Append(nameHashTag)
             End If
         Catch ex As Exception
             LogUtil.Exception("Error", ex, "GenerateTweetLine")
@@ -565,6 +619,9 @@ Public Class BirthdayTweets
         End If
         If _type = TweetType.Test Then
             _header = TEST_HDR
+        End If
+        If _type = TweetType.ForNow Then
+            _header = FORNOW_HDR
         End If
         Return _header
     End Function
@@ -616,7 +673,7 @@ Public Class BirthdayTweets
         Try
             Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.TwitterImgPath,
                                                                                               FileIO.SearchOption.SearchTopLevelOnly,
-                                                                                              {BIRTHDAY_FNAME & "*.jpg", ANNIV_FNAME & "*.jpg", BOTSD_FNAME & "*.jpg"})
+                                                                                              {BIRTHDAY_FNAME & "*.jpg", ANNIV_FNAME & "*.jpg", BOTSD_FNAME & "*.jpg", FORNOW_FNAME & "*.jpg", BBREAD_FNAME & "*.jpg"})
             For Each _imageFile As String In _imageList
                 LogUtil.ShowProgress(_imageFile, Psub)
                 My.Computer.FileSystem.DeleteFile(_imageFile)
@@ -721,6 +778,22 @@ Public Class BirthdayTweets
             isBuiltOk = True
         Catch ex As ArgumentOutOfRangeException
             LogUtil.Exception("Build Death Lists ArgumentOutOfRangeException", ex, Psub)
+            isBuiltOk = False
+        End Try
+        Return isBuiltOk
+    End Function
+    Private Shared Function BuildForNowList() As Boolean
+        Const Psub As String = "BuildForNowList"
+        LogUtil.ShowProgress("Building for now lists", Psub)
+        Dim isBuiltOk As Boolean
+        Try
+            Dim _day As Integer = Today.Day
+            Dim _mth As Integer = Today.Month
+            oForNowList = FindForNowBirthdays(_day, _mth)
+            LogUtil.ShowProgress("Selection Complete", Psub)
+            isBuiltOk = True
+        Catch ex As ArgumentOutOfRangeException
+            LogUtil.Exception("Build For Now ArgumentOutOfRangeException", ex, Psub)
             isBuiltOk = False
         End Try
         Return isBuiltOk

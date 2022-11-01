@@ -201,6 +201,7 @@
   <ItemGroup>
     <Content Include="bcake.ico" />
     <Content Include="cake.ico" />
+    <None Include="Resources\idfn.jpg" />
     <None Include="packages.config" />
     <None Include="Resources\NoImage.png" />
     <None Include="Resources\id.jpg" />

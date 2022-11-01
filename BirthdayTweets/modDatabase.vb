@@ -100,7 +100,7 @@ Module modDatabase
         Return _List
     End Function
     Public Function FindDeaths(oDay As Integer, omonth As Integer) As List(Of Person)
-        Const Psub As String = "FindAnniversaries"
+        Const Psub As String = "FindDeaths"
         LogUtil.ShowProgress("Finding list of people who have died", Psub)
         Dim _List As New List(Of Person)
         Try
@@ -112,6 +112,22 @@ Module modDatabase
             Next
         Catch dbEx As DbException
             LogUtil.Exception("Finding deaths DbException", dbEx, Psub)
+        End Try
+        Return _List
+    End Function
+    Public Function FindForNowBirthdays(oDay As Integer, omonth As Integer) As List(Of Person)
+        Const Psub As String = "FindForNowBirthdays"
+        LogUtil.ShowProgress("Finding list of people who are famous for now", Psub)
+        Dim _List As New List(Of Person)
+        Try
+            oFullPersonTa.FillByFnBirthday(oFullPersonTable, omonth, oDay)
+            For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
+                If Not oRow.noTweet Then
+                    _List.Add(New Person(oRow))
+                End If
+            Next
+        Catch dbEx As DbException
+            LogUtil.Exception("Finding fornow DbException", dbEx, Psub)
         End Try
         Return _List
     End Function
