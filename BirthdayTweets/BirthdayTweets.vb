@@ -3,6 +3,7 @@ Imports System.Data.Common
 Imports System.Drawing
 Imports System.IO
 Imports System.Text
+Imports System.Text.RegularExpressions
 Imports TweetSharp
 Public Class BirthdayTweets
 #Region "enum"
@@ -62,7 +63,8 @@ Public Class BirthdayTweets
     Private Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Private Const HBURPDAY_HDR As String = "Today's birthdays :-"
     Private Const BBREAD_HDR As String = "Remembering those who died on this day :"
-    Private Const FORNOW_HDR As String = "A very Happy Birthday! today to"
+    Private Const FORNOW_HDR As String = "🎂 A very happy birthday today to"
+    Private Shared BCAKE As String = "🎂"
     Private Const TEST_HDR As String = "Born on this day:"
     Private Shared ReadOnly LINEFEED As String = Convert.ToChar(vbLf, myStringFormatProvider)
     Private Const CELEB_USER_KEY As String = "CELEB_USER"
@@ -618,7 +620,7 @@ Public Class BirthdayTweets
             _header = BBREAD_HDR
         End If
         If _type = TweetType.Test Then
-            _header = TEST_HDR
+            _header = BCAKE & " " & TEST_HDR
         End If
         If _type = TweetType.ForNow Then
             _header = FORNOW_HDR
