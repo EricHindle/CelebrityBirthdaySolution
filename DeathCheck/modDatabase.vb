@@ -1,4 +1,11 @@
-﻿Imports System.Data.Common
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Data.Common
 Imports System.Reflection
 
 Module modDatabase

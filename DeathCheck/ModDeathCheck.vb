@@ -1,4 +1,11 @@
-﻿Imports System.Data.Common
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Data.Common
 Imports System.IO
 Imports System.Reflection
 
@@ -65,14 +72,14 @@ Module ModDeathCheck
         Dim pSub As String = "RunDeathCheck"
         LogUtil.ShowProgress("Finding the living", pSub)
         personTable = FindLivingPeople(False)
-        LogUtil.ShowProgress("Found " & CStr(personTable.Count) & " people", pSub)
-        Dim countText As String = "{0} of " & CStr(personTable.Count)
+        LogUtil.ShowProgress("Found " & personTable.Count & " people", pSub)
+        Dim countText As String = "{0} of " & personTable.Count
         Dim iCt As Integer = 0
         For Each _person In personTable
             Try
                 iCt += 1
                 If iCt = Int(iCt / 500) * 500 Then
-                    LogUtil.ShowProgress(CStr(iCt) & " records processed", pSub)
+                    LogUtil.ShowProgress(iCt & " records processed", pSub)
                 End If
                 Dim searchString As String = ""
                 If _person.Social IsNot Nothing Then
@@ -133,7 +140,7 @@ Module ModDeathCheck
     Private Sub WriteListToFile(_outfile As StreamWriter)
         Try
             For Each _person As Person In deadList
-                _outfile.WriteLine(CStr(_person.Id) & "," & _person.Name & "," & Format(_person.DateOfBirth, "dd MMM yyyy") & "," & Format(_person.DateOfDeath, "dd MMM yyyy"))
+                _outfile.WriteLine(_person.Id & "," & _person.Name & "," & Format(_person.DateOfBirth, "dd MMM yyyy") & "," & Format(_person.DateOfDeath, "dd MMM yyyy"))
             Next
         Catch ex As IOException
             LogUtil.Exception("Error writing file", ex, "WriteListToFile")

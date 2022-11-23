@@ -1,8 +1,15 @@
-﻿Imports System.Text
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
 Imports System.Globalization
-Imports System.Net
 Imports System.IO
+Imports System.Net
 Imports System.Reflection
+Imports System.Text
 Imports System.Web.Script.Serialization
 
 Friend Module modCbday
@@ -60,7 +67,7 @@ Friend Module modCbday
     End Function
 
     Public Function GetWikiExtractString(oText As String, Optional sentences As Integer = 2) As String
-        Return My.Settings.wikiExtractSearch.Replace("#", CStr(sentences)) & oText.Replace(" ", "+")
+        Return My.Settings.wikiExtractSearch.Replace("#", sentences) & oText.Replace(" ", "+")
     End Function
     Public Function RemoveSquareBrackets(ByVal _text As String) As String
         Dim newText As String = _text.Trim(vbCrLf)

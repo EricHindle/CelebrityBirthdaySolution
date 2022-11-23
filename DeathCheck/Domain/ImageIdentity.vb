@@ -1,13 +1,11 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
 '
 
 Imports System.Drawing
-Imports System.IO
-Imports System.Reflection
 
 Public Class ImageIdentity
     Implements IDisposable

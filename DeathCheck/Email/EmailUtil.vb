@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -8,7 +8,6 @@
 Imports System.Drawing
 Imports System.IO
 Imports System.Net
-Imports System.Net.Mail
 Imports System.Net.Mime
 
 ''' <summary>
@@ -145,7 +144,7 @@ Public NotInheritable Class EmailUtil
             Dim strSmtpPort As Integer = GlobalSettings.GetIntegerSetting(SMTP_PORT)
             If strSmtpPort > 0 Then
                 LogUtil.Info("Setting port")
-                LogUtil.Info(CStr(strSmtpPort))
+                LogUtil.Info(strSmtpPort)
                 objEmailClient.Port = strSmtpPort
             End If
             If GlobalSettings.GetBooleanSetting(SMTP_SSL) Then

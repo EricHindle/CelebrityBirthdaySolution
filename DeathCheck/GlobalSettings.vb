@@ -1,4 +1,10 @@
-﻿Imports System.Data.Common
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
 ''' <summary>
 ''' Options and settings to be used by all users
 ''' </summary>
