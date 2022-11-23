@@ -175,6 +175,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="CelebrityBirthdayDataSet.xsc">
       <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
     </None>

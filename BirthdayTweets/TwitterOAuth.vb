@@ -1,8 +1,15 @@
-﻿Imports System.Collections.Specialized
+﻿' Hindleware
+' Copyright (c) 2020-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Collections.Specialized
 Imports System.IO
+Imports System.Net
 Imports System.Text
 Imports System.Web
-Imports System.Net
 ''' <summary>
 ''' A class for implementing OAuth authentication via Twitter.
 ''' </summary>
@@ -62,7 +69,7 @@ Public Class TwitterOAuth
             _verifier = value
         End Set
     End Property
-    Private _callbackUrl As Uri = New Uri("http://www.netwyrks.co.uk/hattyburpday")
+    Private _callbackUrl As New Uri("http://www.netwyrks.co.uk/hattyburpday")
     Public Property CallbackUrl() As Uri
         Get
             Return _callbackUrl
@@ -76,7 +83,7 @@ Public Class TwitterOAuth
     End Sub
     Public Sub New(ByVal ConsumerKey As String, ByVal ConsumerKeySecret As String)
         Me.ConsumerKey = ConsumerKey
-        Me.ConsumerSecret = ConsumerKeySecret
+        ConsumerSecret = ConsumerKeySecret
     End Sub
     Public Sub New(ByVal ConsumerKey As String, ByVal ConsumerKeySecret As String, ByVal Token As String, ByVal TokenSecret As String)
         With Me
@@ -88,7 +95,7 @@ Public Class TwitterOAuth
     End Sub
     Public Sub New(ByVal ConsumerKey As String, ByVal ConsumerKeySecret As String, ByVal CallbackUrl As Uri)
         Me.ConsumerKey = ConsumerKey
-        Me.ConsumerSecret = ConsumerKeySecret
+        ConsumerSecret = ConsumerKeySecret
         Me.CallbackUrl = CallbackUrl
     End Sub
     Public Function GetAuthorizationLink() As String
@@ -97,7 +104,7 @@ Public Class TwitterOAuth
         If Response.Length > 0 Then
             Dim qs As NameValueCollection = HttpUtility.ParseQueryString(Response)
             If qs("oauth_token") IsNot Nothing Then
-                Me.Token = qs("oauth_token")
+                Token = qs("oauth_token")
                 ReturnValue = String.Concat(AUTHORIZE, "?oauth_token=", qs("oauth_token"))
             End If
         End If
@@ -109,7 +116,7 @@ Public Class TwitterOAuth
         If Response.Length > 0 Then
             Dim qs As NameValueCollection = HttpUtility.ParseQueryString(Response)
             If qs("oauth_token") IsNot Nothing Then
-                Me.Token = qs("oauth_token")
+                Token = qs("oauth_token")
                 ReturnValue = String.Concat(AUTHENTICATE, "?oauth_token=", qs("oauth_token"))
             End If
         End If
@@ -196,7 +203,7 @@ Public Class TwitterOAuth
         Dim requestUri As New Uri(url)
         Dim nonce As String = GenerateNonce()
         Dim TimeStamp As String = GenerateTimeStamp()
-        Dim Sig As String = GenerateSignature(requestUri, Me.ConsumerKey, Me.ConsumerSecret, Me.Token, Me.TokenSecret, RequestMethod.ToString, TimeStamp, nonce, New Uri(outURL), QueryString, CallbackUrl, Verifier)
+        Dim Sig As String = GenerateSignature(requestUri, ConsumerKey, ConsumerSecret, Token, TokenSecret, RequestMethod.ToString, TimeStamp, nonce, New Uri(outURL), QueryString, CallbackUrl, Verifier)
         QueryString &= "&oauth_signature=" + OAuthUrlEncode(Sig).ToString
         PostData = QueryString
         QueryString = String.Empty
@@ -220,7 +227,6 @@ Public Class TwitterOAuth
             PostData = "OAuth " & PostData
 
             request.Headers(HttpRequestHeader.Authorization) = PostData
-
 
             Dim sbPostData As New StringBuilder
             Dim boundary As String = Guid.NewGuid.ToString
@@ -295,7 +301,6 @@ Public Class TwitterOAuth
             Throw tax
         End Try
 
-
     End Function
     Public Function OAuthWebRequest(ByVal RequestMethod As Method, ByVal pUri As Uri, ByVal PostData As String) As String
         Dim url As String = If(pUri IsNot Nothing, pUri.ToString, "")
@@ -327,7 +332,7 @@ Public Class TwitterOAuth
         Dim RequestUri As New Uri(url)
         Dim Nonce As String = GenerateNonce()
         Dim TimeStamp As String = GenerateTimeStamp()
-        Dim Sig As String = GenerateSignature(RequestUri, Me.ConsumerKey, Me.ConsumerSecret, Me.Token, Me.TokenSecret, RequestMethod.ToString, TimeStamp, Nonce, New Uri(OutURL), QueryString, CallbackUrl, Verifier)
+        Dim Sig As String = GenerateSignature(RequestUri, ConsumerKey, ConsumerSecret, Token, TokenSecret, RequestMethod.ToString, TimeStamp, Nonce, New Uri(OutURL), QueryString, CallbackUrl, Verifier)
         QueryString &= "&oauth_signature=" + OAuthUrlEncode(Sig).ToString
         If RequestMethod = OAuth.Method.POST Then
             PostData = QueryString
@@ -404,7 +409,7 @@ Public Class TwitterOAuth
         If Response.Length > 0 Then
             Dim qs As NameValueCollection = HttpUtility.ParseQueryString(Response)
             If qs("oauth_token") IsNot Nothing Then
-                Me.Token = qs("oauth_token")
+                Token = qs("oauth_token")
                 ReturnValue = String.Concat(AUTHORIZE, "?oauth_token=", qs("oauth_token"))
             End If
         End If
@@ -484,7 +489,7 @@ Public Class TwitterOAuth
         Dim RequestUri As New Uri(url)
         Dim Nonce As String = GenerateNonce()
         Dim TimeStamp As String = GenerateTimeStamp()
-        Dim Sig As String = GenerateSignatureCB(RequestUri, Me.ConsumerKey, Me.ConsumerSecret, Me.Token, Me.TokenSecret, RequestMethod.ToString, TimeStamp, Nonce, New Uri(OutURL), QueryString, CallbackUrl, Verifier)
+        Dim Sig As String = GenerateSignatureCB(RequestUri, ConsumerKey, ConsumerSecret, Token, TokenSecret, RequestMethod.ToString, TimeStamp, Nonce, New Uri(OutURL), QueryString, CallbackUrl, Verifier)
         QueryString &= "&oauth_signature=" + OAuthUrlEncode(Sig).ToString
         If RequestMethod = OAuth.Method.POST Then
             PostData = QueryString

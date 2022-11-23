@@ -1,9 +1,15 @@
-﻿Imports System.Collections.ObjectModel
+﻿' Hindleware
+' Copyright (c) 2020-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Collections.ObjectModel
 Imports System.Data.Common
 Imports System.Drawing
 Imports System.IO
 Imports System.Text
-Imports System.Text.RegularExpressions
 Imports TweetSharp
 Public Class BirthdayTweets
 #Region "enum"
@@ -64,7 +70,7 @@ Public Class BirthdayTweets
     Private Const HBURPDAY_HDR As String = "Today's birthdays :-"
     Private Const BBREAD_HDR As String = "Remembering those who died on this day :"
     Private Const FORNOW_HDR As String = "🎂 A very happy birthday today to"
-    Private Shared BCAKE As String = "🎂"
+    Private Shared ReadOnly BCAKE As String = "🎂"
     Private Const TEST_HDR As String = "Born on this day:"
     Private Shared ReadOnly LINEFEED As String = Convert.ToChar(vbLf, myStringFormatProvider)
     Private Const CELEB_USER_KEY As String = "CELEB_USER"
@@ -84,7 +90,7 @@ Public Class BirthdayTweets
     Private Shared botsdUser As String = "NotTwins1"
     Private Shared bbreadUser As String = "WhosBrownBread"
     Private Shared fornowUser As String = "CelebfnBirthday"
-    Private Shared testUser As String = "FunsterMuddy"
+    Private Shared ReadOnly testUser As String = "FunsterMuddy"
     Private Shared oBirthdayList As New List(Of Person)
     Private Shared oAnniversaryList As New List(Of Person)
     Private Shared oDeathList As New List(Of Person)
@@ -131,7 +137,7 @@ Public Class BirthdayTweets
             todayDay = Format(Now, "dd")
             todayMonth = Format(Now, "MMMM")
             tweetHeaderDate = todayMonth & " " & todayDay
-            Dim tweetTime As DateTime = CDate(todaysDate & " " & GlobalSettings.GetSetting(TWEET_TIME))
+            Dim tweetTime As Date = todaysDate & " " & GlobalSettings.GetSetting(TWEET_TIME)
             Dim networkOK As Boolean = False
             Dim testCount As Integer = 0
             Do Until networkOK Or testCount > 10
@@ -402,7 +408,7 @@ Public Class BirthdayTweets
         Dim cbTweets As New List(Of CbTweet)
         For Each _personlist As List(Of Person) In tweetLists
             tweetIndex += 1
-            LogUtil.ShowProgress("Tweet " & CStr(tweetIndex), pSub)
+            LogUtil.ShowProgress("Tweet " & tweetIndex, pSub)
             Dim personCt As Integer = _personlist.Count
             Dim colCt As Integer
             If personCt <= 12 Then
@@ -425,7 +431,7 @@ Public Class BirthdayTweets
     End Function
     Private Shared Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As TweetType, _userType As TweetUserType) As List(Of List(Of Person))
         Const pSub As String = "SplitIntoTweets"
-        LogUtil.ShowProgress("Splitting " & CStr(oPersonlist.Count) & " persons into tweets", pSub)
+        LogUtil.ShowProgress("Splitting " & oPersonlist.Count & " persons into tweets", pSub)
         Dim availableLength As Integer = TWEET_MAX_LEN - _headerLength
         Dim totalLengthOfTweet As Integer = 0
         Dim numberOfTweets As Integer = GuessNumberOfTweets(oPersonlist, _type, availableLength, totalLengthOfTweet, _userType)
@@ -450,7 +456,7 @@ Public Class BirthdayTweets
             endIndex -= _rangeCount
         Loop
         ListOfLists.Reverse()
-        LogUtil.ShowProgress("Split into " & CStr(ListOfLists.Count) & " tweets", pSub)
+        LogUtil.ShowProgress("Split into " & ListOfLists.Count & " tweets", pSub)
         Return ListOfLists
     End Function
     Private Shared Function BuildList(oPersonList As List(Of Person)) As List(Of Person)
@@ -514,7 +520,7 @@ Public Class BirthdayTweets
         Dim _outString As New StringBuilder
         _outString.Append(tweetHeaderDate).Append(LINEFEED).Append(LINEFEED)
         _outString.Append(GetHeading(_type, _userType)).Append(LINEFEED)
-        Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
+        Dim _footer As String = If(_numberOfLists > 1, _index & "/" & _numberOfLists, "")
         For Each _person As Person In _imageTable
             _outString.Append(GenerateTweetLine(_person, _type, _userType))
             _outString.Append(LINEFEED)
@@ -551,7 +557,7 @@ Public Class BirthdayTweets
             If _twitterUplMedia IsNot Nothing Then
                 Dim _uploadedSize As Long = _twitterUplMedia.Size
                 Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-                LogUtil.ShowProgress("Image upload size: " & CStr(_uploadedSize), Psub)
+                LogUtil.ShowProgress("Image upload size: " & _uploadedSize, Psub)
                 _mediaId = _twitterUplMedia.Media_Id
                 isImageSentOk = True
             Else
@@ -579,7 +585,7 @@ Public Class BirthdayTweets
         Try
             Dim twitterHandle As String = If(_person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle), " @" & _person.Social.TwitterHandle, "")
             Dim nameHashTag As String = "#" & _person.Name.Replace(" ", "")
-            Dim _age As String = "(" & CStr(CalculateAge(_person)) & ")"
+            Dim _age As String = "(" & CalculateAge(_person) & ")"
             Dim _year As String = "(" & _person.BirthYear.Trim("-") & If(_person.BirthYear < 0, "BCE", "") & ")"
             Dim _deathYear As String = "(" & CStr(_person.DeathYear).Trim("-") & If(_person.DeathYear < 0, "BCE", "") & ")"
             If _userType = TweetUserType.CelebBirthday Then
@@ -715,7 +721,7 @@ Public Class BirthdayTweets
         If pPath Is Nothing Then pPath = Path.GetDirectoryName(filename)
         Try
             For subs As Integer = 0 To 999
-                newfilename = Path.Combine(pPath, Path.GetFileNameWithoutExtension(filename) & "_" & CStr(subs) & Path.GetExtension(filename))
+                newfilename = Path.Combine(pPath, Path.GetFileNameWithoutExtension(filename) & "_" & subs & Path.GetExtension(filename))
                 If My.Computer.FileSystem.FileExists(newfilename) = False Then
                     Exit For
                 End If
@@ -765,7 +771,7 @@ Public Class BirthdayTweets
         If _sameYearList.Count > 1 Then
             oBotSDList.Add(_sameYearList)
         End If
-        LogUtil.ShowProgress(CStr(oBotSDList.Count) & " same birthdays found", Psub)
+        LogUtil.ShowProgress(oBotSDList.Count & " same birthdays found", Psub)
         Return isOK
     End Function
     Private Shared Function BuildBrownBreadList() As Boolean

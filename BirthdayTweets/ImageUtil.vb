@@ -1,4 +1,11 @@
-﻿Imports System.Drawing
+﻿' Hindleware
+' Copyright (c) 2020-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
 
@@ -48,7 +55,7 @@ Friend Module ImageUtil
 
     Public Function ResizeImageToBitmap(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
         Const Psub As String = "ResizeImageToBitmap"
-        Dim targetBitmap As System.Drawing.Bitmap = New System.Drawing.Bitmap(targetWidth, targetHeight)
+        Dim targetBitmap As New System.Drawing.Bitmap(targetWidth, targetHeight)
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
 
         Dim oGraphics As Graphics = InitialiseGraphics(targetBitmap)
@@ -66,7 +73,7 @@ Friend Module ImageUtil
     End Function
     Public Function ExtractCroppedAreaFromImage(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
         Const Psub As String = "ExtractCroppedAreaFromImage"
-        Dim targetBitmap As System.Drawing.Bitmap = New Bitmap(targetWidth, targetHeight)
+        Dim targetBitmap As New Bitmap(targetWidth, targetHeight)
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
 
         Dim oGraphics As Graphics = InitialiseGraphics(targetBitmap)
@@ -161,7 +168,7 @@ Friend Module ImageUtil
     Public Function SaveImage(_image As Image, ByVal targetFile As String) As Boolean
         Const Psub As String = "SaveImage"
         Dim isSavedOk As Boolean = True
-        Dim targetBitmap As System.Drawing.Bitmap = New Bitmap(_image)
+        Dim targetBitmap As New Bitmap(_image)
         Try
             Dim _encoderParameters As EncoderParameters = GetEncoderParameters()
             targetBitmap.Save(targetFile, GetCodecInfo(ImageType.JPEG), _encoderParameters)

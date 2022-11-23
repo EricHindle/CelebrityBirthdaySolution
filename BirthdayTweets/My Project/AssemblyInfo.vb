@@ -1,4 +1,10 @@
-﻿Imports System
+﻿' Hindleware
+' Copyright (c) 2020-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -31,5 +37,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("2.1.1.*")>
-<Assembly: AssemblyFileVersion("2.1.1.0")>
+<Assembly: AssemblyVersion("2.2.0.*")>
+<Assembly: AssemblyFileVersion("2.2.0.0")>

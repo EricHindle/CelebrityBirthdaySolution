@@ -1,5 +1,11 @@
-﻿Imports System.Data.Common
-Imports System.Reflection
+﻿' Hindleware
+' Copyright (c) 2020-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Data.Common
 
 Module modDatabase
 #Region "data"
@@ -25,7 +31,7 @@ Module modDatabase
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
                 _List.Add(New Person(oRow))
             Next
-            LogUtil.ShowProgress(CStr(_List.Count) & " birthdays found (no twins)", Psub)
+            LogUtil.ShowProgress(_List.Count & " birthdays found (no twins)", Psub)
         Catch dbEx As DbException
             LogUtil.Exception("Finding today's birthdays DbException", dbEx, Psub)
         End Try
@@ -149,7 +155,7 @@ Module modDatabase
 #Region "social media"
     Public Function GetSocialMedia(ByVal _id As Integer) As SocialMedia
         Dim tCt As Integer = oTwta.FillById(oTwtable, _id)
-        Dim oSocial As SocialMedia = New SocialMedia
+        Dim oSocial As New SocialMedia
         If tCt = 1 Then
             oSocial = New SocialMedia(oTwtable.Rows(0))
         End If

@@ -1,4 +1,10 @@
-﻿Imports System.ComponentModel
+﻿' Hindleware
+' Copyright (c) 2020-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
 Imports System.Configuration.Install
 
 Public Class ProjectInstaller

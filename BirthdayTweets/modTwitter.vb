@@ -1,12 +1,18 @@
-﻿Imports System.IO
-Imports System.Reflection
+﻿' Hindleware
+' Copyright (c) 2020-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.IO
 Imports TweetSharp
 Module modTwitter
     Public Function PostMedia(pTwitterService As TwitterService, _filename As String) As TwitterUploadedMedia
         Const Psub As String = "PostMedia"
         Dim _uploadOptions As New UploadMediaOptions
         Dim tryLimit As Integer = Math.Max(1, GlobalSettings.GetIntegerSetting("TwitterImageRetryLimit"))
-        LogUtil.Debug("TwitterImageRetryLimit " & CStr(tryLimit), Psub)
+        LogUtil.Debug("TwitterImageRetryLimit " & tryLimit, Psub)
         Dim _mediaFile As New MediaFile With {
             .FileName = _filename
         }

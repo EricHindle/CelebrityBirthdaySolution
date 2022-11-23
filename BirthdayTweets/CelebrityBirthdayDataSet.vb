@@ -1,9 +1,12 @@
-﻿
-
+﻿' Hindleware
+' Copyright (c) 2020-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
 
 Partial Public Class CelebrityBirthdayDataSet
 End Class
-
 
 Partial Public Class CelebrityBirthdayDataSet
 End Class
