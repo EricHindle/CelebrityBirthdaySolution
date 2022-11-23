@@ -1,4 +1,11 @@
-﻿Public NotInheritable Class SplashScreen1
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public NotInheritable Class SplashScreen1
     Private Sub SplashScreen1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not String.IsNullOrEmpty(My.Application.Info.Title) Then
             ApplicationTitle.Text = My.Application.Info.Title

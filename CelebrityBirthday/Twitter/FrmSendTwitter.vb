@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -43,7 +43,7 @@ Public Class FrmSendTwitter
 #End Region
 #Region "form handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Async Sub BtnAuthenticate_Click(sender As Object, e As EventArgs) Handles BtnAuthenticate.Click
         Label7.Text = "Check Twitter User"
@@ -119,7 +119,7 @@ Public Class FrmSendTwitter
     Private Sub SelectAllToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectAllToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(sender)
 
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             If _textBox IsNot Nothing Then
                 _textBox.SelectAll()
@@ -129,7 +129,7 @@ Public Class FrmSendTwitter
     End Sub
     Private Sub PasteToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Paste()
         End If
@@ -137,7 +137,7 @@ Public Class FrmSendTwitter
     End Sub
     Private Sub ClearToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles ClearToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Text = ""
         End If
@@ -180,7 +180,7 @@ Public Class FrmSendTwitter
     End Sub
     Private Sub RtbTweetText_TextChanged(sender As Object, e As EventArgs) Handles RtbTweetText.TextChanged
         Dim _tweetLength As Integer = RtbTweetText.Text.Replace(vbCr, "").Length
-        LblTweetLength.Text = If(_tweetLength > 280, "** ", "") & CStr(_tweetLength)
+        LblTweetLength.Text = If(_tweetLength > 280, "** ", "") & _tweetLength
     End Sub
     Private Sub BtnImage_Click(sender As Object, e As EventArgs) Handles BtnImage.Click
         If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
@@ -450,7 +450,7 @@ Public Class FrmSendTwitter
                 If _twitterUplMedia IsNot Nothing Then
                     Dim _uploadedSize As Long = _twitterUplMedia.Size
                     Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-                    WriteTrace("Image upload size: " & CStr(_uploadedSize), False)
+                    WriteTrace("Image upload size: " & _uploadedSize, False)
                     _mediaId = _twitterUplMedia.Media_Id
                 Else
                     WriteTrace("No image upload", False)

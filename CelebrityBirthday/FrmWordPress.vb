@@ -1,4 +1,11 @@
-﻿Imports System.Text
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Text
 
 Public NotInheritable Class FrmWordPress
 #Region "constants"
@@ -93,7 +100,7 @@ Public NotInheritable Class FrmWordPress
         GetFormPos(Me, My.Settings.wprformpos)
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
+        Close()
     End Sub
 #End Region
 #Region "subroutines"
@@ -118,7 +125,7 @@ Public NotInheritable Class FrmWordPress
             If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
                 sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
             End If
-            Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+            Dim sDied As String = " (d. " & Math.Abs(oPerson.DeathYear) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
             With newText
                 .Append(A_TAG_START)
                 .Append(urlYear)

@@ -1,4 +1,11 @@
-﻿Module modGlobalConstants
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Module modGlobalConstants
 #Region "constants"
     Public Const WP_A_HREF As String = "<a href="
     Public Const WP_END_A As String = "</a>"

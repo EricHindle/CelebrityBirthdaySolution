@@ -1,4 +1,11 @@
-﻿Imports System.Data.Common
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Data.Common
 Imports System.IO
 Imports System.Net
 Imports System.Reflection
@@ -12,7 +19,7 @@ Public Class FrmAddWikiIds
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         isLoadingTable = True
@@ -30,10 +37,10 @@ Public Class FrmAddWikiIds
         Dim totalPeople As Integer = personTable.Count
         Dim _ct As Integer = 0
         Dim _addedCt As Integer = 0
-        DisplayAndLog("Found " & CStr(totalPeople) & " people")
+        DisplayAndLog("Found " & totalPeople & " people")
         For Each _person In personTable
             _ct += 1
-            ShowProgress(CStr(_ct) & " of " & CStr(totalPeople), lblStatus, False)
+            ShowProgress(_ct & " of " & totalPeople, lblStatus, False)
             If String.IsNullOrEmpty(_person.Social.WikiId) Then
                 Dim searchName As String = If(String.IsNullOrEmpty(_person.ForeName), "", _person.ForeName.Trim & " ") & _person.Surname.Trim
                 FindPossibleWikiIds(_addedCt, _person, searchName)
@@ -90,7 +97,7 @@ Public Class FrmAddWikiIds
         End If
     End Sub
     Private Sub BtnSingleUpdate_Click(sender As Object, e As EventArgs) Handles BtnSingleUpdate.Click
-        Dim pPersonId As Integer = CInt(LblId.Text)
+        Dim pPersonId As Integer = LblId.Text
         Dim pWikiId As String = ""
         If pPersonId > 0 Then
             If Not String.IsNullOrEmpty(TxtUseThis.Text) Then
@@ -109,7 +116,7 @@ Public Class FrmAddWikiIds
         Dim ict As Integer = 0
         For Each oRow As DataGridViewRow In dgvWikiIds.Rows
             ict += 1
-            ShowProgress(CStr(ict), lblStatus, False)
+            ShowProgress(ict, lblStatus, False)
             If oRow.Cells(xExclude.Name).Value = False Then
                 If GetSocialMedia(oRow.Cells(xId.Name).Value).Id < 0 Then
                     InsertSocialMedia(oRow.Cells(xId.Name).Value, "", False, oRow.Cells(xDesc.Name).Value, 0, False, 0)

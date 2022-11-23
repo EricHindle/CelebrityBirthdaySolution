@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -56,7 +56,7 @@ Public NotInheritable Class FrmTweet
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         ClearImages(False)
@@ -122,7 +122,7 @@ Public NotInheritable Class FrmTweet
                     If _personNode.Checked Then
                         For Each _detailNode As TreeNode In _personNode.Nodes
                             If _detailNode.Name = "id" Then
-                                Dim _person As Person = GetFullPersonById(CInt(_detailNode.Text))
+                                Dim _person As Person = GetFullPersonById(_detailNode.Text)
                                 rtbControl.Text = BuildTweetText(_person)
                                 Dim _pictureList As New List(Of Person) From {_person}
                                 GeneratePicture(pbControl, _pictureList, 1)
@@ -263,10 +263,10 @@ Public NotInheritable Class FrmTweet
         With _splitContainer
             .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
             .Location = New System.Drawing.Point(9, 6)
-            .Name = "SplitContainer" & CStr(_index)
-            .Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                Or System.Windows.Forms.AnchorStyles.Left) _
-                Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            .Name = "SplitContainer" & _index
+            .Anchor = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom _
+                Or System.Windows.Forms.AnchorStyles.Left _
+                Or System.Windows.Forms.AnchorStyles.Right
             .Panel1.BackColor = Color.AliceBlue
             .Panel1.Controls.Add(NewNumericUpDown(_index, 47, 521))
             .Panel1.Controls.Add(NewLabel(_index, 3, 522, "Width", "Label1"))
@@ -282,8 +282,8 @@ Public NotInheritable Class FrmTweet
     Private Shared Function NewButton(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _buttonNameBase As String) As Button
         Dim _button As New Button
         With _button
-            .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            .Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .Anchor = System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right
+            .Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0)
             .ForeColor = System.Drawing.Color.RoyalBlue
             .Location = New System.Drawing.Point(_locationX, _locationY)
             .Name = _buttonNameBase & _index
@@ -296,7 +296,7 @@ Public NotInheritable Class FrmTweet
     Private Shared Function NewLabel(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _labelNameBase As String) As Label
         Dim _label1 As New Label
         With _label1
-            .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            .Anchor = System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left
             .AutoSize = True
             .Location = New System.Drawing.Point(_locationX, _locationY)
             .Name = _labelNameBase & _index
@@ -319,7 +319,7 @@ Public NotInheritable Class FrmTweet
     Private Function NewNumericUpDown(_index As String, _locationX As Integer, _locationY As Integer) As NumericUpDown
         Dim _nud As New NumericUpDown
         With _nud
-            .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            .Anchor = System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left
             .Location = New System.Drawing.Point(_locationX, _locationY)
             .Minimum = New Decimal(New Integer() {1, 0, 0, 0})
             .Name = NUD_BASENAME & _index
@@ -333,10 +333,10 @@ Public NotInheritable Class FrmTweet
     Private Function NewRichTextBox(_index As String, _width As Integer, _height As Integer) As RichTextBox
         Dim _newRtb As New System.Windows.Forms.RichTextBox()
         With _newRtb
-            .Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-           Or System.Windows.Forms.AnchorStyles.Left) _
-           Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            .Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .Anchor = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom _
+           Or System.Windows.Forms.AnchorStyles.Left _
+           Or System.Windows.Forms.AnchorStyles.Right
+            .Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0)
             .Location = New System.Drawing.Point(3, 3)
             .Name = RTB_CONTROL_NAME & _index
             .Size = New System.Drawing.Size(_width, _height)
@@ -349,7 +349,7 @@ Public NotInheritable Class FrmTweet
     Private Shared Function GetPictureBoxFromPage(_tabpage As TabPage) As PictureBox
         Dim _index As Integer = _tabpage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
-        Dim _controls As Control() = _sc.Panel1.Controls.Find(PICBOX_BASENAME & CStr(_index), False)
+        Dim _controls As Control() = _sc.Panel1.Controls.Find(PICBOX_BASENAME & _index, False)
         If _controls.Any() Then
             For _controlIndex = 0 To _controls.GetUpperBound(0)
                 If TryCast(_controls(_controlIndex), PictureBox) IsNot Nothing Then
@@ -363,7 +363,7 @@ Public NotInheritable Class FrmTweet
     Private Shared Function GetNudFromPage(_tabpage As TabPage) As NumericUpDown
         Dim _index As Integer = _tabpage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
-        Dim _controls As Control() = _sc.Panel1.Controls.Find(NUD_BASENAME & CStr(_index), False)
+        Dim _controls As Control() = _sc.Panel1.Controls.Find(NUD_BASENAME & _index, False)
         If _controls.Any() Then
             For _controlIndex = 0 To _controls.GetUpperBound(0)
                 If TryCast(_controls(0), NumericUpDown) IsNot Nothing Then
@@ -375,7 +375,7 @@ Public NotInheritable Class FrmTweet
         Return Nothing
     End Function
     Private Shared Function GetRichTextBoxFromPage(_tabPage As TabPage) As RichTextBox
-        Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)
+        Dim _tabName As String = RTB_CONTROL_NAME & _tabPage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabPage)
         Dim _controls As Control() = _sc.Panel2.Controls.Find(_tabName, False)
         If _controls.Any() Then
@@ -389,7 +389,7 @@ Public NotInheritable Class FrmTweet
         Return Nothing
     End Function
     Private Shared Function GetSplitContainerFromPage(_tabPage As TabPage) As SplitContainer
-        Dim _tabName As String = SC_BASENAME & CStr(_tabPage.TabIndex)
+        Dim _tabName As String = SC_BASENAME & _tabPage.TabIndex
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
         If _controls.Any() Then
             For _controlIndex = 0 To _controls.GetUpperBound(0)
@@ -499,7 +499,7 @@ Public NotInheritable Class FrmTweet
 #Region "Tweet subroutines"
     Private Shared Function BuildTweetText(ByRef _person As Person) As String
         Dim _text As New StringBuilder
-        Dim _died As String = " (d. " & CStr(Math.Abs(_person.DeathYear)) & If(_person.DeathYear < 0, " BCE", "") & ")"
+        Dim _died As String = " (d. " & Math.Abs(_person.DeathYear) & If(_person.DeathYear < 0, " BCE", "") & ")"
         _text.Append("Born on ").Append(Format(_person.DateOfBirth, "d MMMM yyyy")) _
             .Append(vbCrLf) _
             .Append(vbCrLf) _
@@ -539,7 +539,7 @@ Public NotInheritable Class FrmTweet
                         If _nameNode.Checked Then
                             For Each _dataNode As TreeNode In _nameNode.Nodes
                                 If _dataNode.Name = "id" Then
-                                    _selectedPersons.Add(GetPersonById(CInt(_dataNode.Text)))
+                                    _selectedPersons.Add(GetPersonById(_dataNode.Text))
                                 End If
                             Next
                         End If
@@ -565,8 +565,8 @@ Public NotInheritable Class FrmTweet
         For _personIndex As Integer = _listStart To _tweetLists.Count - 1
 
             Dim _personList As List(Of Person) = _tweetLists(_personIndex)
-            DisplayAndLog(">" & CStr(_personIndex))
-            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, [Enum].GetName(GetType(TweetType), _tweetType) & "_" & CStr(_personIndex - _listStart + 1))
+            DisplayAndLog(">" & _personIndex)
+            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, [Enum].GetName(GetType(TweetType), _tweetType) & "_" & (_personIndex - _listStart + 1))
             Dim pbControl As PictureBox = GetPictureBoxFromPage(newTweetTabPage)
             Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
             IsNoGenerate = True
@@ -594,15 +594,15 @@ Public NotInheritable Class FrmTweet
         Dim _outString As New StringBuilder
         _outString.Append(cboMonth.SelectedItem).Append(" "c).Append(cboDay.SelectedItem).Append(LINE_FEED).Append(LINE_FEED)
         _outString.Append(GetHeading(_type)).Append(LINE_FEED)
-        Dim _footer As String = If(_numberOfLists > 1, CStr(_index) & "/" & CStr(_numberOfLists), "")
+        Dim _footer As String = If(_numberOfLists > 1, _index & "/" & _numberOfLists, "")
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
             If rbAges.Checked Then
                 If _type = TweetType.BIRTHDAY Then
-                    _outString.Append(" (" & CStr(CalculateAge(_person, ChkAtNextBirthday.Checked)) & ")")
+                    _outString.Append(" (" & CalculateAge(_person, ChkAtNextBirthday.Checked) & ")")
                 Else
-                    Dim _yr As Integer = CInt(_person.BirthYear)
-                    Dim _birthyear As String = CStr(Math.Abs(_yr))
+                    Dim _yr As Integer = _person.BirthYear
+                    Dim _birthyear As String = Math.Abs(_yr)
                     If _yr < 0 Then
                         _birthyear &= " BCE"
                     End If
@@ -690,7 +690,7 @@ Public NotInheritable Class FrmTweet
             If _twitterUplMedia IsNot Nothing Then
                 Dim _uploadedSize As Long = _twitterUplMedia.Size
                 Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-                WriteTrace("Image upload size: " & CStr(_uploadedSize), True)
+                WriteTrace("Image upload size: " & _uploadedSize, True)
                 _mediaId = _twitterUplMedia.Media_Id
             Else
                 WriteTrace("No image upload", True)
@@ -736,7 +736,7 @@ Public NotInheritable Class FrmTweet
                 _rangeCount = Math.Min(_numberOfNamesThisTweet, _endIndex + 1)
                 _range = oPersonlist.GetRange(_endIndex - _rangeCount + 1, _rangeCount)
             Loop
-            _lengthsText = CStr(_totalLengthOfTweet) & vbCrLf & _lengthsText
+            _lengthsText = _totalLengthOfTweet & vbCrLf & _lengthsText
             ListOfLists.Add(BuildList(_range))
             _endIndex -= _rangeCount
         Loop
@@ -809,7 +809,7 @@ Public NotInheritable Class FrmTweet
             .Text = tabTitle
             .TabIndex = _index
             '   .Location = New System.Drawing.Point(4, 22)
-            .Name = "ImageTabPage_" & CStr(_index)
+            .Name = "ImageTabPage_" & _index
             .Padding = New System.Windows.Forms.Padding(3)
             .Size = New System.Drawing.Size(698, 574)
             .BackColor = Color.AliceBlue

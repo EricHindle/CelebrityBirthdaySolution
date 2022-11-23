@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -16,7 +16,7 @@ Public Class FrmMosaic
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         DisplayAndLog("Saving File")
@@ -25,7 +25,7 @@ Public Class FrmMosaic
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
         Dim _fileName As String = Path.Combine(_path, cboMonth.SelectedItem & If(CboDay.SelectedIndex > 0, CboDay.SelectedItem, "") & "_mosaic_" & If(chkBotSD.Checked, "botsd_", "") & CStr(nudSkip.Value + 1) & "-" & CStr(nudSkip.Value + NudHeight.Value) & ".jpg")
-        ImageUtil.SaveImageFromPictureBox(PictureBox1, (_width * 60), (_height * 60), _fileName)
+        ImageUtil.SaveImageFromPictureBox(PictureBox1, _width * 60, _height * 60, _fileName)
         DisplayAndLog("File saved : " & _fileName)
     End Sub
     Private Sub GenerateImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)

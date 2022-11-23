@@ -1,4 +1,11 @@
-﻿Imports System.IO
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.IO
 Imports System.Reflection
 
 Public Class FrmBackup
@@ -28,7 +35,7 @@ Public Class FrmBackup
         TvImages.ExpandAll()
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub TvDatatables_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles TvDatatables.AfterCheck, TvImages.AfterCheck
         Dim node As TreeNode = e.Node

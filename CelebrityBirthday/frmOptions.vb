@@ -1,15 +1,22 @@
-﻿Imports System.IO
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.IO
 Imports System.Text
 
 Public NotInheritable Class FrmOptions
 
     Private Sub BtnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        Me.Close()
+        Close()
     End Sub
 
     Private Sub BtnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         SaveOptions()
-        Me.Close()
+        Close()
     End Sub
 
     Private Sub SaveOptions()
@@ -82,12 +89,12 @@ Public NotInheritable Class FrmOptions
     End Sub
 
     Private Sub BtnGlobalSettings_Click(sender As Object, e As EventArgs) Handles BtnGlobalSettings.Click
-        Me.Hide()
+        Hide()
 
         Using _settings As New FrmGlobalSettings
             _settings.ShowDialog()
         End Using
-        Me.Show()
+        Show()
     End Sub
 
     Private Sub BtnAddWord_Click(sender As Object, e As EventArgs) Handles BtnAddWord.Click
@@ -133,7 +140,7 @@ Public NotInheritable Class FrmOptions
                     If iDaysOld >= iRetain Then
                         Try
                             My.Computer.FileSystem.DeleteFile(oFileInfo.FullName)
-                            LogUtil.Info(oFileInfo.Name & " - " & CStr(iDaysOld) & " days old - deleted", "TidyFiles")
+                            LogUtil.Info(oFileInfo.Name & " - " & iDaysOld & " days old - deleted", "TidyFiles")
                         Catch ex As Exception
                             LogUtil.Exception("Unable to remove " & oFileInfo.FullName, ex, "TidyFiles")
                         End Try

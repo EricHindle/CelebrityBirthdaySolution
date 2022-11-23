@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -32,7 +32,7 @@ Public Class FrmSendBBTweet
 #End Region
 #Region "form handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub FrmSendTwitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
@@ -127,7 +127,7 @@ Public Class FrmSendBBTweet
     End Sub
     Private Sub RtbTweetText_TextChanged(sender As Object, e As EventArgs) Handles RtbTweetText.TextChanged
         Dim _tweetLength As Integer = RtbTweetText.Text.Replace(vbCr, "").Length
-        LblTweetLength.Text = If(_tweetLength > 280, "** ", "") & CStr(_tweetLength)
+        LblTweetLength.Text = If(_tweetLength > 280, "** ", "") & _tweetLength
     End Sub
     Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtName.DragDrop,
                                                                                             TxtForename.DragDrop,
@@ -218,7 +218,7 @@ Public Class FrmSendBBTweet
                 If _twitterUplMedia IsNot Nothing Then
                     Dim _uploadedSize As Long = _twitterUplMedia.Size
                     Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-                    WriteTrace("Image upload size: " & CStr(_uploadedSize))
+                    WriteTrace("Image upload size: " & _uploadedSize)
                     _mediaId = _twitterUplMedia.Media_Id
                 Else
                     WriteTrace("No image upload")
@@ -261,7 +261,7 @@ Public Class FrmSendBBTweet
         Dim bdiff As Integer = 0
         If _birthDate < _deathDate Then
             bdiff = DateDiff(DateInterval.Year, _birthDate, _deathDate)
-            If (_birthDate > _deathDate.AddYears(-bdiff)) Then bdiff -= 1
+            If _birthDate > _deathDate.AddYears(-bdiff) Then bdiff -= 1
         End If
         Return bdiff
     End Function

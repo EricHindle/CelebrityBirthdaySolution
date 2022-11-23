@@ -1,4 +1,11 @@
-﻿Public Class FrmSearch
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class FrmSearch
 #Region "variables"
     Private bLoadingPeople As Boolean
 #End Region
@@ -27,7 +34,7 @@
             Next
             DgvPeople.ClearSelection()
             bLoadingPeople = False
-            ShowStatus("Search complete - found " & CStr(selectedPersons.Count) & " records", True)
+            ShowStatus("Search complete - found " & selectedPersons.Count & " records", True)
         Else
             ShowStatus("No name supplied")
         End If
@@ -47,7 +54,7 @@
     Private Sub BtnSearchById_Click(sender As Object, e As EventArgs) Handles BtnSearchById.Click
         If Not String.IsNullOrEmpty(txtId.Text) Then
             ShowStatus("Searching for " & txtId.Text, True)
-            LoadScreenFromId(CInt(txtId.Text))
+            LoadScreenFromId(txtId.Text)
             ShowStatus("Search complete")
         Else
             ShowStatus("No id supplied")
@@ -93,7 +100,7 @@
 #End Region
 #Region "subroutines"
     Private Sub CloseForm()
-        Me.Close()
+        Close()
     End Sub
     Private Sub LoadScreenFromId(ByVal oId As Integer)
         Dim oPerson As Person

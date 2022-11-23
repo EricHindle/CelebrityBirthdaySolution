@@ -1,6 +1,13 @@
-﻿Imports System.Text
-Imports System.IO
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
 Imports System.Data.Common
+Imports System.IO
+Imports System.Text
 
 Public NotInheritable Class FrmUpdateDatabase
 #Region "variables"
@@ -118,9 +125,9 @@ Public NotInheritable Class FrmUpdateDatabase
                                                 cboDay.SelectedIndex + 1,
                                                 cboMonth.SelectedIndex + 1,
                                                 txtYear.Text.Trim,
-                                                CInt("0" & txtDied.Text.Trim),
-                                                CInt("0" & txtDthMth.Text.Trim),
-                                                CInt("0" & txtDthDay.Text.Trim),
+                                                "0" & txtDied.Text.Trim,
+                                                "0" & txtDthMth.Text.Trim,
+                                                "0" & txtDthDay.Text.Trim,
                                                 TxtBirthName.Text.Trim,
                                                 TxtBirthPlace.Text.Trim,
                                                 New ImageIdentity(),
@@ -169,7 +176,7 @@ Public NotInheritable Class FrmUpdateDatabase
         If lbPeople.SelectedIndex >= 0 Then
             oPerson = personTable(lbPeople.SelectedIndex)
             If oPerson.Id > 0 Then
-                LogUtil.Info("Deleting person " & CStr(oPerson.Id) & " " & oPerson.Name, MyBase.Name)
+                LogUtil.Info("Deleting person " & oPerson.Id & " " & oPerson.Name, MyBase.Name)
                 DeleteSocialMedia(oPerson.Id)
                 DeleteImage(oPerson.Id)
                 DeletePerson(oPerson.Id)
@@ -250,7 +257,7 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub BtnReloadSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadSel.Click
         DisplayAndLog("Loading Item From Database")
-        Me.Refresh()
+        Refresh()
         If lbPeople.SelectedIndex >= 0 And lbPeople.SelectedIndex < lbPeople.Items.Count Then
             If personTable(lbPeople.SelectedIndex) IsNot Nothing Then
                 Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
@@ -285,7 +292,7 @@ Public NotInheritable Class FrmUpdateDatabase
             Dim dbAction As String
             If oPerson.Id < 0 Then
                 Dim newId As Integer = InsertPerson(oPerson)
-                AuditUtil.AddDobChange(newId, Nothing, New Date?(New Date(CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay)))
+                AuditUtil.AddDobChange(newId, Nothing, New Date?(New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)))
                 dbAction = "Inserted on dB"
             Else
                 UpdatePerson(oPerson)
@@ -310,7 +317,7 @@ Public NotInheritable Class FrmUpdateDatabase
                 DisplayAndLog("No surname for " & txtForename.Text, True)
                 MsgBox("No surname", MsgBoxStyle.Exclamation, "Warning")
             End If
-            Dim id As Integer = CInt(lblID.Text)
+            Dim id As Integer = lblID.Text
             For Each oPerson As Person In personTable
                 If oPerson.Id = id Then
                     Dim CurrentSocialMedia As SocialMedia = oPerson.Social
@@ -360,8 +367,8 @@ Public NotInheritable Class FrmUpdateDatabase
         rtbDesc.AllowDrop = True
         rtbDesc.EnableAutoDragDrop = True
         cbCelebType.DataSource = GetCelebrityTypes()
-        Me.cbCelebType.ValueMember = "celebTypeId"
-                Me.cbCelebType.DisplayMember = "celebTypeDesc"
+        cbCelebType.ValueMember = "celebTypeId"
+        cbCelebType.DisplayMember = "celebTypeDesc"
         ResetBackgroundColors()
         If _personId > 0 Then
             LoadScreenFromId(_personId)
@@ -426,7 +433,7 @@ Public NotInheritable Class FrmUpdateDatabase
     Private Sub SelectAllToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectAllToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(sender)
 
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             If _textBox IsNot Nothing Then
                 _textBox.SelectAll()
@@ -436,7 +443,7 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub PasteToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Paste()
         End If
@@ -444,28 +451,28 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub LowercaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles LowercaseToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = _textBox.SelectedText.ToLower(myCultureInfo)
         End If
     End Sub
     Private Sub UpperCaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles UpperCaseToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = _textBox.SelectedText.ToUpper(myCultureInfo)
         End If
     End Sub
     Private Sub TitleCaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles TitleCaseToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = StrConv(_textBox.SelectedText, VbStrConv.ProperCase)
         End If
     End Sub
     Private Sub ClearToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles ClearToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Text = ""
         End If
@@ -567,7 +574,7 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
         Try
-            Dim _id As Integer = CInt(lblID.Text)
+            Dim _id As Integer = lblID.Text
             If lbPeople.SelectedIndex > -1 AndAlso _id > -1 Then
                 DisplayAndLog("Images")
                 Using _update As New FrmImages
@@ -641,7 +648,7 @@ Public NotInheritable Class FrmUpdateDatabase
             If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
                 sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
             End If
-            Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+            Dim sDied As String = " (d. " & Math.Abs(oPerson.DeathYear) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
             Dim sText As New StringBuilder
             With sText
                 .Append(oPerson.Description)
@@ -694,7 +701,7 @@ Public NotInheritable Class FrmUpdateDatabase
             If oSocial IsNot Nothing Then
                 If oSocial.Botsd > 0 Then
                     UpdateBotsdId(oPerson.Id, 0)
-                    DisplayAndLog("Removed BotSD Id from person " & CStr(oPerson.Id) & " " & oPerson.Surname)
+                    DisplayAndLog("Removed BotSD Id from person " & oPerson.Id & " " & oPerson.Surname)
                     lblBotsdId.Text = 0
                     DisplayAndLog("Checking post")
                     Dim oBotsdRow As CelebrityBirthdayDataSet.BotSDRow = GetBotsd(oSocial.Botsd)
@@ -704,7 +711,7 @@ Public NotInheritable Class FrmUpdateDatabase
                             Dim oViewRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow = oRows(0)
                             If oViewRow.IspersonIdNull Then
                                 DeleteBotsdByPostNo(oViewRow.btsdPostNo)
-                                DisplayAndLog("Removed BotSD post " & CStr(oViewRow.btsdPostNo) & "with no persons")
+                                DisplayAndLog("Removed BotSD post " & oViewRow.btsdPostNo & "with no persons")
                             End If
                         End If
                     End If
@@ -771,9 +778,9 @@ Public NotInheritable Class FrmUpdateDatabase
         Select Case resp
             Case MsgBoxResult.Yes
                 UpdateAll()
-                Me.Close()
+                Close()
             Case MsgBoxResult.No
-                Me.Close()
+                Close()
             Case MsgBoxResult.Cancel
             Case Else
         End Select
@@ -832,7 +839,7 @@ Public NotInheritable Class FrmUpdateDatabase
             Dim dbAction As String = ""
             If oPerson.Id < 0 Then
                 Dim newId As Integer = InsertPerson(oPerson)
-                AuditUtil.AddDobChange(newId, Nothing, New Date?(New Date(CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay)))
+                AuditUtil.AddDobChange(newId, Nothing, New Date?(New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)))
                 dbAction = "Inserted on dB"
                 oPerson.Id = newId
             Else
@@ -887,7 +894,7 @@ Public NotInheritable Class FrmUpdateDatabase
             isBC = True
         End If
         If IsDate(_deathDate) Then
-            Dim d1 As Date = CDate(_deathDate)
+            Dim d1 As Date = _deathDate
             txtDthDay.Text = Format(d1, "dd")
             txtDthMth.Text = Format(d1, "MM")
             Dim _inx = Len(_deathDate) - 1
@@ -929,7 +936,7 @@ Public NotInheritable Class FrmUpdateDatabase
         txtSurname.Text = oPerson.Surname
         txtDesc.Text = oPerson.Description
         TxtShortDesc.Text = oPerson.ShortDesc
-        txtYear.Text = CStr(oPerson.BirthYear)
+        txtYear.Text = oPerson.BirthYear
         LblSortSeq.Text = CStr(oPerson.Sortseq)
         txtDied.Text = CStr(oPerson.DeathYear)
         txtDthDay.Text = CStr(oPerson.DeathDay)
@@ -1044,8 +1051,8 @@ Public NotInheritable Class FrmUpdateDatabase
     End Function
     Private Function ExtractNameandPlace(_words As List(Of String), _phraseNumber As Integer) As Boolean
         Dim isExtract As Boolean = False
-        Dim isNamePart As Boolean = (_phraseNumber = 1)
-        Dim isPlacePart As Boolean = (_phraseNumber = 3)
+        Dim isNamePart As Boolean = _phraseNumber = 1
+        Dim isPlacePart As Boolean = _phraseNumber = 3
         Dim _name As String = ""
         Dim _place As String = ""
         For Each _word As String In _words
@@ -1189,7 +1196,7 @@ Public NotInheritable Class FrmUpdateDatabase
         thisperson.Dispose()
     End Sub
     Private Sub ResetBackgroundColors()
-        For Each _control As Control In Me.Controls
+        For Each _control As Control In Controls
             Dim _textbox As TextBox = TryCast(_control, TextBox)
             If _textbox IsNot Nothing Then
                 _textbox.BackColor = SystemColors.Window

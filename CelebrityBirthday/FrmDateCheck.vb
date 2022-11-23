@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -141,7 +141,7 @@ Public NotInheritable Class FrmDateCheck
 #End Region
 #Region "form event handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         ResetChecklistButtons()
@@ -149,7 +149,7 @@ Public NotInheritable Class FrmDateCheck
         isLoadingTable = True
         DgvWarnings.Columns().Item(xImg.Name).Visible = ChkShowImage.Checked
         DgvWarnings.Rows.Clear()
-        Me.Refresh()
+        Refresh()
         personList = New List(Of Person)
         Try
             If cboDay.SelectedIndex < 0 And cboMonth.SelectedIndex < 0 Then
@@ -161,7 +161,7 @@ Public NotInheritable Class FrmDateCheck
                 DisplayAndLog("Finding persons for " & CStr(cboMonth.SelectedItem))
                 personList = FindPeopleByDate(-1, cboMonth.SelectedIndex + 1, False, False)
             Else
-                DisplayAndLog("Finding persons for " & CStr(cboDay.SelectedIndex + 1) & "/" & CStr(cboMonth.SelectedIndex + 1))
+                DisplayAndLog("Finding persons for " & (cboDay.SelectedIndex + 1) & "/" & (cboMonth.SelectedIndex + 1))
                 personList = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False)
             End If
         Catch ex As DbException
@@ -173,11 +173,11 @@ Public NotInheritable Class FrmDateCheck
         Dim totalPeople As Integer = personList.Count
         Dim _ct As Integer = 0
         Dim _addedct As Integer = 0
-        DisplayAndLog("Found " & CStr(totalPeople) & " people")
+        DisplayAndLog("Found " & totalPeople & " people")
         personTable.Clear()
         For Each _person In personList
             _ct += 1
-            ShowStatus(CStr(_ct) & " of " & CStr(totalPeople), lblStatus, False)
+            ShowStatus(_ct & " of " & totalPeople, lblStatus, False)
             Try
                 Dim wikiId As String = ""
                 If _person.Social IsNot Nothing Then
@@ -337,10 +337,10 @@ Public NotInheritable Class FrmDateCheck
         End If
     End Sub
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnFromWordPress.Click
-        OpenWordPress(CInt(TxtFromDay.Text), CInt(TxtFromMonth.Text))
+        OpenWordPress(TxtFromDay.Text, TxtFromMonth.Text)
     End Sub
     Private Sub BtnToWordPress_Click(sender As Object, e As EventArgs) Handles BtnToWordPress.Click
-        OpenWordPress(CInt(TxtToDay.Text), CInt(TxtToMonth.Text))
+        OpenWordPress(TxtToDay.Text, TxtToMonth.Text)
     End Sub
     Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
         cboDay.SelectedIndex = Today.Day - 1
@@ -371,7 +371,7 @@ Public NotInheritable Class FrmDateCheck
     Private Sub BtnWikiUpdate_Click(sender As Object, e As EventArgs) Handles BtnWikiUpdate.Click
         If isWikiIdChanged Then
             DisplayAndLog("Updating wiki id")
-            UpdateWikiId(CInt(LblId.Text), TxtWikiId.Text)
+            UpdateWikiId(LblId.Text, TxtWikiId.Text)
             DisplayAndLog(LblId.Text & "Wiki Id Updated to " & TxtWikiId.Text)
         End If
     End Sub
@@ -404,14 +404,13 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub BtnWpDesc_Click(sender As Object, e As EventArgs) Handles BtnWpDesc.Click
         Dim wpText As String = ""
-        Dim oPerson As Person = GetPersonById(CInt(LblId.Text))
+        Dim oPerson As Person = GetPersonById(LblId.Text)
         If oPerson IsNot Nothing Then
             wpText = GetPictureText(oPerson)
         End If
         Clipboard.SetText(wpText)
         oPerson.Dispose()
     End Sub
-
 
     Private Sub BtnBotSD_Click(sender As Object, e As EventArgs) Handles BtnBotSD.Click
         DisplayAndLog("Born on the same day update")
@@ -444,7 +443,7 @@ Public NotInheritable Class FrmDateCheck
         If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
             sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
         End If
-        Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+        Dim sDied As String = " (d. " & Math.Abs(oPerson.DeathYear) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
         Dim sText As New StringBuilder
         With sText
             .Append(TxtFullDesc.Text)
@@ -535,7 +534,7 @@ Public NotInheritable Class FrmDateCheck
         isWikiIdChanged = False
     End Sub
     Private Sub OpenWordPress(pDay As Integer, pMonth As Integer)
-        DisplayAndLog("Opening WordPress form for " & CStr(pDay) & "/" & CStr(pMonth))
+        DisplayAndLog("Opening WordPress form for " & pDay & "/" & pMonth)
         Using _wordpress As New FrmWordPress
             _wordpress.DaySelection = pDay
             _wordpress.MonthSelection = pMonth
@@ -633,7 +632,7 @@ Public NotInheritable Class FrmDateCheck
             If oSocial IsNot Nothing Then
                 If oSocial.Botsd > 0 Then
                     UpdateBotsdId(oPerson.Id, 0)
-                    SetOKResult(abBotsdPostNo, "Removed BotSD Id from person " & CStr(oPerson.Id) & " " & oPerson.Surname)
+                    SetOKResult(abBotsdPostNo, "Removed BotSD Id from person " & oPerson.Id & " " & oPerson.Surname)
                 Else
                     SetErrorResult(abBotsdPostNo, "No BotSD id to remove")
                 End If
@@ -649,8 +648,8 @@ Public NotInheritable Class FrmDateCheck
         DisplayAndLog("Removing other BotSD id")
         Dim _actionText As String = abOthPersonId.ActionText
         If Not String.IsNullOrEmpty(_actionText) AndAlso IsNumeric(_actionText) Then
-            UpdateBotsdId(CInt(_actionText), 0)
-            SetOKResult(abOthPersonId, "Removed BotSD Id from person " & CStr(_actionText))
+            UpdateBotsdId(_actionText, 0)
+            SetOKResult(abOthPersonId, "Removed BotSD Id from person " & _actionText)
         Else
             SetErrorResult(abOthPersonId, "No person identified")
         End If
@@ -659,7 +658,7 @@ Public NotInheritable Class FrmDateCheck
         DisplayAndLog("Removing BotSD record")
         Dim _actionText As String = abBotsdId.ActionText
         If Not String.IsNullOrEmpty(_actionText) AndAlso IsNumeric(_actionText) Then
-            Dim botsdId As Integer = CInt(_actionText)
+            Dim botsdId As Integer = _actionText
             If DeleteBotsdById(botsdId) = 1 Then
                 SetOKResult(abBotsdId, "Botsd record deleted")
             Else
@@ -707,7 +706,7 @@ Public NotInheritable Class FrmDateCheck
                 DisplayAndLog("Updating DoB and text for " & TxtFullName.Text)
                 If UpdateDateOfBirth(oPerson.Id, toDate.Day, toDate.Month, toDate.Year, TxtFullDesc.Text) = 1 Then
                     AuditUtil.AddDobChange(oPerson.Id, fromDate, toDate)
-                    SetOKResult(abUpdPerson, "Updated " & CStr(oPerson.Id))
+                    SetOKResult(abUpdPerson, "Updated " & oPerson.Id)
                 Else
                     SetErrorResult(abUpdPerson, "Person update failed")
                 End If
@@ -767,7 +766,7 @@ Public NotInheritable Class FrmDateCheck
         ShowStatus("Updating old CB post", lblStatus, , MyBase.Name)
         Try
             Dim _selMonth As String = Format(fromDate, "MMMM")
-            Dim _selDay As String = CStr(fromDate.Day)
+            Dim _selDay As String = fromDate.Day
             Dim sUrl As String = GetWordPressMonthUrl(oldPageLoadYear, oldPageLoadMonth, oldPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo))
             Process.Start(sUrl)
             SetButton(abRmvImage,, "Done")
@@ -790,7 +789,7 @@ Public NotInheritable Class FrmDateCheck
                 Clipboard.SetText(GetPictureText(oPerson))
             End If
             Dim _selMonth As String = Format(toDate, "MMMM")
-            Dim _selDay As String = CStr(toDate.Day)
+            Dim _selDay As String = toDate.Day
             Dim sUrl As String = GetWordPressMonthUrl(newPageLoadYear, newPageLoadMonth, newPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo)) & abImgDesc.ActionText & "/"
             Process.Start(sUrl)
             SetButton(abImgDesc,, "Done")
@@ -805,7 +804,7 @@ Public NotInheritable Class FrmDateCheck
         TxtWiki.Text = GetPersonContext()
         Try
             Dim _selMonth As String = Format(toDate, "MMMM")
-            Dim _selDay As String = CStr(toDate.Day)
+            Dim _selDay As String = toDate.Day
             Dim sUrl As String = GetWordPressMonthUrl(newPageLoadYear, newPageLoadMonth, newPageLoadDay, _selDay, _selMonth.ToLower(myCultureInfo))
             Process.Start(sUrl)
             If Not String.IsNullOrEmpty(abAddImg.ActionText) Then
@@ -982,14 +981,14 @@ Public NotInheritable Class FrmDateCheck
         If DgvWarnings.SelectedRows.Count = 1 Then
             Dim _name As String = DgvWarnings.SelectedRows(0).Cells(xName.Name).Value
             Dim personTable As List(Of Person) = FindPeopleByDate(toDate.Day, toDate.Month, False, False)
-            Dim thisPerson As Person = GetPersonById(CInt(LblId.Text))
+            Dim thisPerson As Person = GetPersonById(LblId.Text)
             Dim _index As Integer = personTable.FindIndex(Function(_person As Person) _person.Name = _name)
             If _index > 0 Then
-                _list.Append(CStr(personTable(_index - 1).BirthYear)).Append(" "c).Append(personTable(_index - 1).Name).Append(vbCrLf)
+                _list.Append(personTable(_index - 1).BirthYear).Append(" "c).Append(personTable(_index - 1).Name).Append(vbCrLf)
             End If
-            _list.Append(CStr(personTable(_index).BirthYear)).Append(" "c).Append(personTable(_index).Name).Append(vbCrLf)
+            _list.Append(personTable(_index).BirthYear).Append(" "c).Append(personTable(_index).Name).Append(vbCrLf)
             If _index < personTable.Count - 1 Then
-                _list.Append(CStr(personTable(_index + 1).BirthYear)).Append(" "c).Append(personTable(_index + 1).Name).Append(vbCrLf)
+                _list.Append(personTable(_index + 1).BirthYear).Append(" "c).Append(personTable(_index + 1).Name).Append(vbCrLf)
             End If
         End If
         Return _list.ToString
@@ -1061,7 +1060,7 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub ShowButtonToUpdatePerson(oPerson As Person)
         BtnUpdatePerson.Visible = True
-        SetButton(abUpdPerson, CStr(oPerson.Id),, False)
+        SetButton(abUpdPerson, oPerson.Id,, False)
     End Sub
     Private Sub ShowButtonToUpdateBotsdList()
         BtnUpdOldBotsdList.Visible = True
@@ -1077,15 +1076,15 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub ShowButtonToRemoveBotsdRecord(oBotsdId As Integer)
         BtnRmvBotsdRecord.Visible = True
-        SetButton(abBotsdId, CStr(oBotsdId),, False)
+        SetButton(abBotsdId, oBotsdId,, False)
     End Sub
     Private Sub ShowButtonToRemoveOtherBotsdId(otherBotsd As List(Of Integer))
         BtnRmvOtherBotsdId.Visible = True
-        SetButton(abOthPersonId, CStr(otherBotsd(0)),, False)
+        SetButton(abOthPersonId, otherBotsd(0),, False)
     End Sub
     Private Sub ShowButtonToRemoveBotsdId(oBotsdPostNo As Integer)
         BtnRmvBotsdId.Visible = True
-        SetButton(abBotsdPostNo, "#" & CStr(oBotsdPostNo),, False)
+        SetButton(abBotsdPostNo, "#" & oBotsdPostNo,, False)
     End Sub
     Private Shared Sub SetButton(ByRef pButton As CheckListActionButton, Optional pActionText As String = Nothing, Optional pButtonText As String = "", Optional pEnabled As Boolean = True)
         If pButton.ActionButton IsNot Nothing Then

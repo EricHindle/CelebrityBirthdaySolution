@@ -1,4 +1,11 @@
-﻿Imports System.Data.Common
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Data.Common
 Imports System.Reflection
 
 Module modDatabase
@@ -69,11 +76,11 @@ Module modDatabase
 #Region "person"
 
     Public Function DeletePerson(ByVal _id As Integer)
-        LogUtil.Info("Deleting person " & CStr(_id), MODULE_NAME)
+        LogUtil.Info("Deleting person " & _id, MODULE_NAME)
         Return oPersonTa.DeletePerson(_id)
     End Function
     Public Function DeleteSocialMedia(ByVal _id As Integer) As Integer
-        LogUtil.Info("Deleting social media for " & CStr(_id), MODULE_NAME)
+        LogUtil.Info("Deleting social media for " & _id, MODULE_NAME)
         Return oTwta.DeleteTwitter(_id)
     End Function
     Public Function CountPeople() As Integer
@@ -169,7 +176,7 @@ Module modDatabase
             LogUtil.Info("Inserting " & oPerson.Name, MODULE_NAME)
             newId = oPersonTa.InsertPerson(oPerson.ForeName,
                                                 oPerson.Surname,
-                                                CInt(oPerson.BirthYear),
+                                                oPerson.BirthYear,
                                                 oPerson.BirthMonth,
                                                 oPerson.BirthDay,
                                                 oPerson.DeathYear,
@@ -194,7 +201,7 @@ Module modDatabase
             LogUtil.Info("Updating " & oPerson.Name, MODULE_NAME)
             iCt = oPersonTa.UpdatePerson(oPerson.ForeName,
                                               oPerson.Surname,
-                                              CInt(oPerson.BirthYear),
+                                              oPerson.BirthYear,
                                               oPerson.BirthMonth,
                                               oPerson.BirthDay,
                                               oPerson.DeathYear,
@@ -225,7 +232,7 @@ Module modDatabase
     Public Function UpdateSortSeq(ByVal personId As Integer, ByVal newSortSeq As Integer) As Integer
         Dim iCt As Integer = -1
         Try
-            LogUtil.Info("Updating sort sequence for " & CStr(personId), MODULE_NAME)
+            LogUtil.Info("Updating sort sequence for " & personId, MODULE_NAME)
             iCt = oPersonTa.UpdateSortSeq(newSortSeq, personId)
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
@@ -235,7 +242,7 @@ Module modDatabase
     Public Function UpdateDateOfBirth(ByVal oPersonId As Integer, oDay As Integer, oMonth As Integer, oYear As Integer, oDesc As String) As Integer
         Dim iCt As Integer = -1
         Try
-            LogUtil.Info("Updating date of birth for " & CStr(oPersonId), MODULE_NAME)
+            LogUtil.Info("Updating date of birth for " & oPersonId, MODULE_NAME)
             iCt = oPersonTa.UpdateDoB(oYear, oMonth, oDay, oDesc, oPersonId)
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
@@ -431,7 +438,7 @@ Module modDatabase
     Public Function InsertImage(oId As Integer, imgFileName As String, imgFileType As String, loadMonth As String, loadYear As String) As Integer
         Dim iCt As Integer = -1
         Try
-            LogUtil.Info("Inserting image for " & CStr(oId), MODULE_NAME)
+            LogUtil.Info("Inserting image for " & oId, MODULE_NAME)
             iCt = oImgTa.InsertImage(oId, imgFileName, imgFileType, loadYear, loadMonth)
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
@@ -441,7 +448,7 @@ Module modDatabase
     Public Function UpdateImage(oId As Integer, imgFileName As String, imgFileType As String, loadMonth As String, loadYear As String) As Integer
         Dim iCt As Integer = -1
         Try
-            LogUtil.Info("Updating image for " & CStr(oId), MODULE_NAME)
+            LogUtil.Info("Updating image for " & oId, MODULE_NAME)
             iCt = oImgTa.UpdateImage(imgFileName, imgFileType, loadYear, loadMonth, oId)
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
@@ -451,7 +458,7 @@ Module modDatabase
     Public Function DeleteImage(oId As Integer) As Integer
         Dim iCt As Integer = -1
         Try
-            LogUtil.Info("Deleting image for " & CStr(oId), MODULE_NAME)
+            LogUtil.Info("Deleting image for " & oId, MODULE_NAME)
             iCt = oImgTa.DeleteImage(oId)
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
@@ -469,7 +476,7 @@ Module modDatabase
         Return oSocial
     End Function
     Public Sub InsertSocialMedia(_id As Integer, _twitterHandle As String, _isNoTweet As Boolean, _wikiId As String, _botsd As Integer, _isTwin As Boolean, _celebType As Integer)
-        LogUtil.Info("Inserting social media for " & CStr(_id), MODULE_NAME)
+        LogUtil.Info("Inserting social media for " & _id, MODULE_NAME)
         oTwta.InsertTwitter(_id, _twitterHandle, _isNoTweet, _wikiId, _botsd, _isTwin, _celebType)
     End Sub
     Public Sub UpdateSocialMedia(ByRef _person As Person)
@@ -486,7 +493,7 @@ Module modDatabase
     Public Function UpdateBotsdId(ByVal oSocial As SocialMedia) As Integer
         Dim iCt As Integer = -1
         Try
-            LogUtil.Info("Updating BotSD id on social media for " & CStr(oSocial.Id), MODULE_NAME)
+            LogUtil.Info("Updating BotSD id on social media for " & oSocial.Id, MODULE_NAME)
             iCt = oTwta.UpdateBotsd(oSocial.Botsd, oSocial.Id)
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
@@ -496,7 +503,7 @@ Module modDatabase
     Public Function UpdateBotsdId(ByVal _personId As Integer, ByVal _btsdId As Integer) As Integer
         Dim iCt As Integer = -1
         Try
-            LogUtil.Info("Updating BotSD id on social media for " & CStr(_personId), MODULE_NAME)
+            LogUtil.Info("Updating BotSD id on social media for " & _personId, MODULE_NAME)
             iCt = oTwta.UpdateBotsd(_btsdId, _personId)
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
@@ -537,7 +544,7 @@ Module modDatabase
             Dim oDateRow As CelebrityBirthdayDataSet.DatesRow
             If iCt = 1 Then
                 oDateRow = oDatesTable.Rows(0)
-                loadDate = New Date(CInt(oDateRow.uploadyear), CInt(oDateRow.uploadmonth), CInt(oDateRow.uploadday))
+                loadDate = New Date(oDateRow.uploadyear, oDateRow.uploadmonth, oDateRow.uploadday)
             End If
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)

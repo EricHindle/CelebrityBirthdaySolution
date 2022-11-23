@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -125,7 +125,7 @@ Friend Module ImageUtil
         Return sFilename
     End Function
     Public Function ResizeImageToBitmap(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
-        Dim targetBitmap As System.Drawing.Bitmap = New System.Drawing.Bitmap(targetWidth, targetHeight)
+        Dim targetBitmap As New System.Drawing.Bitmap(targetWidth, targetHeight)
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
 
         Dim oGraphics As Graphics = InitialiseGraphics(targetBitmap)
@@ -142,7 +142,7 @@ Friend Module ImageUtil
         Return targetBitmap
     End Function
     Public Function ExtractCroppedAreaFromImage(ByVal sourceImage As System.Drawing.Image, ByVal targetWidth As Integer, targetHeight As Integer, Optional ByVal sourceOriginX As Integer = 0, Optional ByVal sourceOriginY As Integer = 0) As Bitmap
-        Dim targetBitmap As System.Drawing.Bitmap = New Bitmap(targetWidth, targetHeight)
+        Dim targetBitmap As New Bitmap(targetWidth, targetHeight)
         Dim targetRectangle As New Rectangle(sourceOriginX, sourceOriginY, targetWidth, targetHeight)
 
         Dim oGraphics As Graphics = InitialiseGraphics(targetBitmap)

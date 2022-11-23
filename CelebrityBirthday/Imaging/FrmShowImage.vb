@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -26,10 +26,10 @@ Public NotInheritable Class FrmShowImage
         PictureBox2.ImageLocation = Nothing
     End Sub
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.DoubleClick
-        Me.Close()
+        Close()
     End Sub
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
-        Me.Close()
+        Close()
     End Sub
 #End Region
 End Class

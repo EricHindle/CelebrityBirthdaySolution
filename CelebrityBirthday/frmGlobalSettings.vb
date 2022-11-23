@@ -1,4 +1,11 @@
-﻿Imports System.Data.Common
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Data.Common
 ''' <summary>
 ''' Form to maintain Global Settings values
 ''' </summary>
@@ -30,7 +37,7 @@ Public Class FrmGlobalSettings
     End Sub
 
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
     End Sub
 
     Private Sub ClearForm()

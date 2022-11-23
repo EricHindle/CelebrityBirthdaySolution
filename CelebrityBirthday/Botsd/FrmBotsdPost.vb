@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -44,8 +44,8 @@ Public NotInheritable Class FrmBotsdPost
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Close()
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Close()
     End Sub
     Private Sub FrmText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
@@ -73,7 +73,7 @@ Public NotInheritable Class FrmBotsdPost
     Private Sub SelectAllToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectAllToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(sender)
 
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             If _textBox IsNot Nothing Then
                 _textBox.SelectAll()
@@ -82,35 +82,35 @@ Public NotInheritable Class FrmBotsdPost
     End Sub
     Private Sub PasteToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Paste()
         End If
     End Sub
     Private Sub LowercaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles LowercaseToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = _textBox.SelectedText.ToLower(myCultureInfo)
         End If
     End Sub
     Private Sub UpperCaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles UpperCaseToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = _textBox.SelectedText.ToUpper(myCultureInfo)
         End If
     End Sub
     Private Sub TitleCaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles TitleCaseToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = StrConv(_textBox.SelectedText, VbStrConv.ProperCase)
         End If
     End Sub
     Private Sub ClearToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles ClearToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Text = ""
         End If
@@ -124,8 +124,8 @@ Public NotInheritable Class FrmBotsdPost
         TxtTitle.Copy()
     End Sub
     Private Sub BtnPosted_Click(sender As Object, e As EventArgs) Handles BtnPosted.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Close()
+        DialogResult = System.Windows.Forms.DialogResult.OK
+        Close()
     End Sub
     Private Sub BtnPasteUrl_Click(sender As Object, e As EventArgs) Handles BtnPasteUrl.Click
         TxtUrl.Text = Clipboard.GetText

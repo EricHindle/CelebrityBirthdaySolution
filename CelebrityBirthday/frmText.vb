@@ -1,6 +1,13 @@
-﻿Public Class FrmText
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class FrmText
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
+        Close()
     End Sub
 
     Private Sub FrmText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -22,7 +29,7 @@
     Private Sub SelectAllToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectAllToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(sender)
 
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             If _textBox IsNot Nothing Then
                 _textBox.SelectAll()
@@ -32,7 +39,7 @@
     End Sub
     Private Sub PasteToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Paste()
         End If
@@ -40,28 +47,28 @@
     End Sub
     Private Sub LowercaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles LowercaseToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = _textBox.SelectedText.ToLower(myCultureInfo)
         End If
     End Sub
     Private Sub UpperCaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles UpperCaseToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = _textBox.SelectedText.ToUpper(myCultureInfo)
         End If
     End Sub
     Private Sub TitleCaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles TitleCaseToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = StrConv(_textBox.SelectedText, VbStrConv.ProperCase)
         End If
     End Sub
     Private Sub ClearToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles ClearToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Text = ""
         End If

@@ -1,13 +1,13 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
 '
 
 Imports System.Drawing.Drawing2D
-Imports System.IO
 Imports System.Drawing.Imaging
+Imports System.IO
 Imports System.Reflection
 Public NotInheritable Class FrmImageCapture
 #Region "Constants"
@@ -77,8 +77,8 @@ Public NotInheritable Class FrmImageCapture
 #Region "Form control handlers"
     Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
-        iStartHeight = Me.Size.Height
-        iStartWidth = Me.Size.Width
+        iStartHeight = Size.Height
+        iStartWidth = Size.Width
         cropBitmap = Nothing
         lblFilename.Text = _imageFile
         TxtForename.Text = _forename
@@ -110,8 +110,8 @@ Public NotInheritable Class FrmImageCapture
     Private Sub ResetWindow()
         PicCapture.Width = STD_CAP_WIDTH
         PicCapture.Height = STD_CAP_HEIGHT
-        Me.Width = iStartWidth
-        Me.Height = iStartHeight
+        Width = iStartWidth
+        Height = iStartHeight
     End Sub
     ''' <summary>
     ''' Load an image from a file
@@ -149,7 +149,7 @@ Public NotInheritable Class FrmImageCapture
         End Try
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
+        Close()
     End Sub
     ''' <summary>
     ''' Reset the form
@@ -258,14 +258,14 @@ Public NotInheritable Class FrmImageCapture
             oImage = ShrinkImage(oImage)
             sizeMessage = IMG_SHRUNK
         End If
-        sizeMessage += CStr(oImage.Size.Width) & " x " & CStr(oImage.Size.Height)
+        sizeMessage += oImage.Size.Width & " x " & oImage.Size.Height
         If oImage.Size.Height > STD_CAP_HEIGHT Or oImage.Size.Width > STD_CAP_WIDTH Then
             Dim _newLocation As New Point(10, 10)
-            Me.Location = _newLocation
+            Location = _newLocation
             Dim newHeight As Integer = iStartHeight + oImage.Size.Height - STD_CAP_HEIGHT
             Dim newWidth As Integer = iStartWidth + oImage.Size.Width - STD_CAP_WIDTH
-            Me.Height = Math.Min(Me.MaximumSize.Height, newHeight)
-            Me.Width = Math.Min(Me.MaximumSize.Width, newWidth)
+            Height = Math.Min(MaximumSize.Height, newHeight)
+            Width = Math.Min(MaximumSize.Width, newWidth)
         End If
         PicCapture.Image = oImage.Clone
         ClearCropSelection()
@@ -349,7 +349,7 @@ Public NotInheritable Class FrmImageCapture
                 targetHeight = Int(sourceImage.Height / wratio)
                 imageShrinkRatio = wratio
             End If
-            LogUtil.Info("Shrinking ratio = " & CStr(imageShrinkRatio), MyBase.Name)
+            LogUtil.Info("Shrinking ratio = " & imageShrinkRatio, MyBase.Name)
             _newBitmap = ImageUtil.ResizeImageToBitmap(sourceImage, targetWidth, targetHeight)
         Catch exc As ArithmeticException
             ShowStatus("ShrinkImage exception", lblStatus,, MyBase.Name, exc,, True)
@@ -429,7 +429,7 @@ Public NotInheritable Class FrmImageCapture
     Private Sub ResizeCroppedImage()
         Try
             PreviewPictureBox.Size = New Size(NudSaveSize.Value, NudSaveSize.Value)
-            PreviewPictureBox.Location = New Point(lblCroppedImage.Location.X + (lblCroppedImage.Size.Width - PreviewPictureBox.Size.Width) / 2, PreviewPictureBox.Location.Y)
+            PreviewPictureBox.Location = New Point(lblCroppedImage.Location.X + ((lblCroppedImage.Size.Width - PreviewPictureBox.Size.Width) / 2), PreviewPictureBox.Location.Y)
             If cropWidth > 0 And cropHeight > 0 Then
                 CaptureCroppedArea()
             End If

@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -32,7 +32,7 @@ Public Class FrmAuditList
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub FrmAuditList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)

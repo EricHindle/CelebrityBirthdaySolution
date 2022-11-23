@@ -1,9 +1,16 @@
-﻿Imports System.Text
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
 Imports System.Globalization
-Imports System.Net
 Imports System.IO
-Imports System.Web.Script.Serialization
+Imports System.Net
 Imports System.Reflection
+Imports System.Text
+Imports System.Web.Script.Serialization
 
 Friend Module modCbday
 #Region "constants"
@@ -141,7 +148,7 @@ Friend Module modCbday
 
         ' Get the character number
         TextBoxCursorPos = NativeMethods.SendMessageLong(oBox.Handle,
-            EM_CHARFROMPOS, 0&, CLng(pt.X + pt.Y * &H10000)) _
+            EM_CHARFROMPOS, 0&, pt.X + (pt.Y * &H10000)) _
             And &HFFFF&
     End Function
     Public Function CheckForChanges(_personTable As List(Of Person)) As Boolean
@@ -159,7 +166,7 @@ Friend Module modCbday
         oForename = oForename.ToLower(myCultureInfo).Trim
         oSurname = oSurname.ToLower(myCultureInfo).Trim
         Dim sImgName As String = ToSimpleCharacters(If(String.IsNullOrEmpty(oForename), "", oForename & " ") & oSurname).Replace(" ", "-").Replace("'", "").Replace(".", "-").Replace("--", "-")
-            Return sImgName
+        Return sImgName
     End Function
     Public Function GetSourceControl(ByRef menuItem As Object) As Object
         Dim _menuItem As ToolStripMenuItem = CType(menuItem, ToolStripMenuItem)
@@ -186,7 +193,7 @@ Friend Module modCbday
             Dim buffer(4096) As Byte
             Dim bct As Integer = -1
             LogUtil.Info("Reading response", MODULE_NAME)
-            Do While (bct <> 0)
+            Do While bct <> 0
                 bct = dataStream.Read(buffer, 0, buffer.Length)
                 memorystream.Write(buffer, 0, bct)
             Loop
@@ -248,14 +255,14 @@ Friend Module modCbday
         Return My.Settings.wikiSearchUrl & oText.Replace(" ", "+")
     End Function
     Public Function GetWikiExtractString(oText As String, Optional sentences As Integer = 2) As String
-        Return My.Settings.wikiExtractSearch.Replace("#", CStr(sentences)) & oText.Replace(" ", "+")
+        Return My.Settings.wikiExtractSearch.Replace("#", sentences) & oText.Replace(" ", "+")
     End Function
     Public Function GetWikiTitleString(oSearchName As String) As String
         Dim endName As String() = Split(oSearchName, "_(", 2)
         Return My.Settings.wikiTitleSearch.Replace("#f", oSearchName).Replace("#t", endName(0) & "_(zzzzzzzz)")
     End Function
     Public Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
-        Dim _tabName As String = RTB_CONTROL_NAME & CStr(_tabPage.TabIndex)
+        Dim _tabName As String = RTB_CONTROL_NAME & _tabPage.TabIndex
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
         If _controls.Any() Then
             For _controlIndex = 0 To _controls.GetUpperBound(0)
@@ -342,7 +349,7 @@ Friend Module modCbday
         If pPath Is Nothing Then pPath = Path.GetDirectoryName(filename)
         Try
             For subs As Integer = 0 To 999
-                newfilename = Path.Combine(pPath, Path.GetFileNameWithoutExtension(filename) & "_" & CStr(subs) & Path.GetExtension(filename))
+                newfilename = Path.Combine(pPath, Path.GetFileNameWithoutExtension(filename) & "_" & subs & Path.GetExtension(filename))
                 If My.Computer.FileSystem.FileExists(newfilename) = False Then
                     Exit For
                 End If
@@ -378,8 +385,8 @@ Friend Module modCbday
         newNameNode.Nodes.Add("length", oPerson.Name.Length)
         newNameNode.Nodes.Add("year", oPerson.BirthYear)
         Dim _age As Integer = CalculateAge(oPerson)
-        Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
-        _ageNode.Checked = (_type = "Birthday")
+        Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", _age)
+        _ageNode.Checked = _type = "Birthday"
         Return newNameNode
     End Function
     Public Function CalculateAge(oPerson As Person, Optional isNextBirthday As Boolean = True) As Integer

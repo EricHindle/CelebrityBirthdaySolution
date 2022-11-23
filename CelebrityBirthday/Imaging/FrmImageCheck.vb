@@ -1,11 +1,18 @@
-﻿Imports System.IO
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.IO
 
 Public Class FrmImageCheck
 #Region "constants"
     Private Const SEP As String = "/"
 #End Region
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
+        Close()
     End Sub
 
     Private Sub FrmImageCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -94,7 +101,7 @@ Public Class FrmImageCheck
                 If oPerson.Image.Photo IsNot Nothing Then
                     PictureBox2.Image = oPerson.Image.Photo
                 Else
-  PictureBox2.ImageLocation = storedImageName
+                    PictureBox2.ImageLocation = storedImageName
                 End If
 
             Catch ex As ArgumentException
@@ -138,10 +145,10 @@ Public Class FrmImageCheck
             If _person.Image Is Nothing OrElse _person.Image.Photo Is Nothing Then
                 AddTableRow(_person, 0)
                 LoadScreenFromPerson(_person)
-                Me.Refresh()
-                ShowStatus(CStr(_person.Id) & " " & _person.Name & " Image file missing", LblStatus, True, MyBase.Name)
+                Refresh()
+                ShowStatus(_person.Id & " " & _person.Name & " Image file missing", LblStatus, True, MyBase.Name)
             Else
-                ShowStatus(CStr(_person.Id) & " " & _person.Name, LblStatus, False, MyBase.Name)
+                ShowStatus(_person.Id & " " & _person.Name, LblStatus, False, MyBase.Name)
             End If
         Next
     End Sub

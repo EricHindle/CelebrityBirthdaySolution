@@ -1,4 +1,11 @@
-﻿Imports System.Reflection
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Reflection
 Module modText
     Public Function ParseStringWithChar(last As String, _char As Char) As List(Of String)
         Return Split(last.Trim([_char]), _char).ToList()

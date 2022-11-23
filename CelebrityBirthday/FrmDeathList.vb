@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -29,7 +29,7 @@ Public NotInheritable Class FrmDeathList
         GetFormPos(Me, My.Settings.deadlistformpos)
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub FrmDeathList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
@@ -94,11 +94,11 @@ Public NotInheritable Class FrmDeathList
             tRow.Cells(tDeathMonth.Name).Value = If(oRow.IsdeathmonthNull, 0, Format(_deathdate, "MMM"))
             tRow.Cells(tDeathYear.Name).Value = oRow.deathyear
             Dim ydiff As Integer = DateDiff(DateInterval.Year, _deathdate, Today)
-            If (_deathdate > Today.AddYears(-ydiff)) Then ydiff -= 1
+            If _deathdate > Today.AddYears(-ydiff) Then ydiff -= 1
             Dim mdiff As Integer = DateDiff(DateInterval.Month, _deathdate, Today) - (ydiff * 12)
-            tRow.Cells(tYearsDead.Name).Value = CStr(ydiff) & "y " & CStr(mdiff) & "m"
+            tRow.Cells(tYearsDead.Name).Value = ydiff & "y " & mdiff & "m"
             Dim bdiff As Integer = DateDiff(DateInterval.Year, _birthDate, _deathdate)
-            If (_birthDate > _deathdate.AddYears(-bdiff)) Then bdiff -= 1
+            If _birthDate > _deathdate.AddYears(-bdiff) Then bdiff -= 1
             tRow.Cells(tAge.Name).Value = CStr(bdiff)
             tRow.Cells(tShortDesc.Name).Value = If(oRow.IsshortdescNull, "", oRow.shortdesc)
             tRow.Cells(tBirthDay.Name).Value = oRow.birthday

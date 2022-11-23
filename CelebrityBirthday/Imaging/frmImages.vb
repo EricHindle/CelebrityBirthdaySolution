@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -68,7 +68,7 @@ Public NotInheritable Class FrmImages
         ClearStatus(lblStatus)
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
             DisplayAndLog(My.Resources.LOADING_TABLE)
-            Me.Refresh()
+            Refresh()
             personTable = New ArrayList
             ListBoxPeople.Items.Clear()
             personTable = GetPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False)
@@ -154,7 +154,7 @@ Public NotInheritable Class FrmImages
             txtLoadMth.Text = TxtWpLoadMth.Text
             txtLoadYr.Text = TxtWpLoadYear.Text
         End If
-        Dim _id As Integer = CInt(txtId.Text)
+        Dim _id As Integer = txtId.Text
         If IsExistsImage(_id) Then
             UpdateImage(_id, txtImgName.Text, cbImgType.Text, txtLoadMth.Text, txtLoadYr.Text)
         Else
@@ -201,7 +201,7 @@ Public NotInheritable Class FrmImages
         End If
     End Sub
     Private Sub CloseForm()
-        Me.Close()
+        Close()
     End Sub
     Private Sub ClearDetails()
         txtId.Text = String.Empty

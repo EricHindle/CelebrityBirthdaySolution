@@ -1,4 +1,11 @@
-﻿Namespace My
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Namespace My
 
     ' The following events are available for MyApplication:
     ' 

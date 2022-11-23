@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -91,7 +91,7 @@ Public Class FrmImageStore
     Private Sub BtnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         My.Settings.imgselectpos = SetFormPos(Me)
         My.Settings.Save()
-        Me.Close()
+        Close()
     End Sub
     Private Sub BtnSelFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelFolder.Click
         FolderBrowserDialog1.SelectedPath = My.Settings.NewImagePath

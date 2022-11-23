@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -88,14 +88,13 @@ Public Class OAuth
             Throw New ArgumentNullException(NameOf(Algorithm))
         End If
 
-
     End Function
     Private Shared Function GetQueryParameters(ByVal Parameters As String) As List(Of QueryParameter)
         If Parameters.StartsWith("?", StringComparison.CurrentCultureIgnoreCase) Then
             Parameters = Parameters.Remove(0, 1)
         End If
 
-        Dim Result As List(Of QueryParameter) = New List(Of QueryParameter)
+        Dim Result As New List(Of QueryParameter)
 
         If String.IsNullOrEmpty(Parameters) = False Then
             Dim p() As String = Parameters.Split(Convert.ToChar("&", myStringFormatProvider))
@@ -251,7 +250,7 @@ Public Class OAuth
         Return Convert.ToInt64(ts.TotalSeconds).ToString(myStringFormatProvider)
     End Function
     Public Overridable Function GenerateNonce() As String
-        Return (Guid.NewGuid).ToString.Replace("-", "")
+        Return Guid.NewGuid.ToString.Replace("-", "")
     End Function
     Public Shared Function GenerateSignatureCB(ByVal URL As Uri, ByVal ConsumerKey As String, ByVal ConsumerSecret As String, ByVal Token As String, ByVal TokenSecret As String, ByVal HTTPMethod As String, ByVal TimeStamp As String, ByVal Nonce As String, ByRef NormalizedUrl As Uri, ByRef NormalizedRequestParameters As String, ByVal CallbackUrl As Uri, ByVal Verifier As String) As String
         Return GenerateSignatureCB(URL, ConsumerKey, ConsumerSecret, Token, TokenSecret, HTTPMethod, TimeStamp, Nonce, SignatureType.HMACSHA1, NormalizedUrl, NormalizedRequestParameters, CallbackUrl, Verifier)
@@ -365,11 +364,4 @@ Public Class OAuth
         Return sb.ToString
     End Function
 End Class
-
-
-
-
-
-
-
 

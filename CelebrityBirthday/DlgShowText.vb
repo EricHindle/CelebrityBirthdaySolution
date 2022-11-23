@@ -1,4 +1,9 @@
-﻿Imports System.Windows.Forms
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
 
 Public Class DlgShowText
 #Region "enums"
@@ -61,8 +66,8 @@ Public Class DlgShowText
 #End Region
 #Region "form control handlers"
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Close()
+        DialogResult = System.Windows.Forms.DialogResult.OK
+        Close()
     End Sub
 
     Private Sub DlgShowText_Load(sender As Object, e As EventArgs) Handles MyBase.Load

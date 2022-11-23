@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -7,7 +7,6 @@
 
 Imports System.Data.Common
 Imports System.IO
-Imports System.Net
 Imports System.Reflection
 
 Public Class FrmDeathCheck
@@ -42,7 +41,7 @@ Public Class FrmDeathCheck
 #End Region
 #Region "form event handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         RunDeathCheck
@@ -66,7 +65,7 @@ Public Class FrmDeathCheck
     End Sub
     Private Sub FrmDeathCheck_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         If isAutorun Then
-            Me.Refresh()
+            Refresh()
             LogUtil.Info("Auto run", MyBase.Name)
             RunDeathCheck()
             Dim outputFile As String = WriteFile()
@@ -81,7 +80,7 @@ Public Class FrmDeathCheck
             End If
             isAutorun = False
             If Not isLeaveOpen Then
-                Me.Close()
+                Close()
             End If
         End If
     End Sub
@@ -90,25 +89,25 @@ Public Class FrmDeathCheck
     End Sub
     Private Sub BtnDeathList_Click(sender As Object, e As EventArgs) Handles BtnDeathList.Click
         LogUtil.Info("List of deaths", MyBase.Name)
-        Me.Hide()
+        Hide()
         Using _list As New FrmDeathList
             _list.Year = Today.Year
             _list.ShowDialog()
         End Using
-        Me.Show()
+        Show()
     End Sub
 #End Region
 #Region "subroutines"
     Private Sub RunDeathCheck()
         DisplayMessage("Finding the living", True)
         personTable = FindLivingPeople(False)
-        DisplayMessage("Found " & CStr(personTable.Count) & " people", True)
-        Dim countText As String = "{0} of " & CStr(personTable.Count)
+        DisplayMessage("Found " & personTable.Count & " people", True)
+        Dim countText As String = "{0} of " & personTable.Count
         Dim iCt As Integer = 0
         For Each _person In personTable
             iCt += 1
             lblCount.Text = String.Format(myStringFormatProvider, countText, iCt)
-            DisplayMessage(CStr(_person.Id) & " " & _person.Name)
+            DisplayMessage(_person.Id & " " & _person.Name)
             Try
                 Dim searchString As String = ""
                 If _person.Social IsNot Nothing Then

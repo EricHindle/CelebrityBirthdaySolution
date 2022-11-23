@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -16,7 +16,7 @@ Public Class FrmTwitterOutput
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub BtnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
         BuildTrees()
@@ -57,7 +57,7 @@ Public Class FrmTwitterOutput
         Dim _tabpage As TabPage = TryCast(_button.Parent, TabPage)
         Dim _index As Integer = _tabpage.TabIndex
         Dim _filename As String = _tabpage.Text
-        Dim _rtb As RichTextBox = TryCast(_tabpage.Controls.Find(RTB_CONTROL_NAME & CStr(_index), False)(0), RichTextBox)
+        Dim _rtb As RichTextBox = TryCast(_tabpage.Controls.Find(RTB_CONTROL_NAME & _index, False)(0), RichTextBox)
         Using _output As New StreamWriter(Path.Combine(My.Settings.TwitterFilePath, _filename))
             For Each _line As String In _rtb.Lines
                 _output.WriteLine(_line)
@@ -153,8 +153,8 @@ Public Class FrmTwitterOutput
         newNameNode.Nodes.Add("length", oPerson.Name.Length)
         newNameNode.Nodes.Add("year", oPerson.BirthYear)
         Dim _age As Integer = CalculateAge(oPerson, ChkAtNextBirthday.Checked)
-        Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", CStr(_age))
-        _ageNode.Checked = (_type = "Birthday")
+        Dim _ageNode As TreeNode = newNameNode.Nodes.Add("age", _age)
+        _ageNode.Checked = _type = "Birthday"
     End Sub
     Private Sub CheckAllChildNodes(ByRef _treeNode As TreeNode, ByRef nodeChecked As Boolean)
         For Each _node As TreeNode In _treeNode.Nodes
@@ -249,7 +249,7 @@ Public Class FrmTwitterOutput
             _remainder -= 1
         End If
         For x = 1 To _numberOfLists
-            Dim _footer As String = If(_numberOfLists > 1, CStr(x) & "/" & CStr(_numberOfLists), "")
+            Dim _footer As String = If(_numberOfLists > 1, x & "/" & _numberOfLists, "")
             WriteNodesToTweet(_outfile, _date, _header, _tweetNodes, _startTweet, _endTweet, _footer)
             _startTweet = _endTweet + 1
             _endTweet = _startTweet + _tweetsinEachList - 1
@@ -283,7 +283,7 @@ Public Class FrmTwitterOutput
             _outfile.WriteLine(_footer)
         End If
         _length += _footer.Length + 1
-        _outfile.WriteLine("----------------------------------- " & CStr(_length))
+        _outfile.WriteLine("----------------------------------- " & _length)
     End Sub
     Private Function WriteTweetLine(_outfile As StreamWriter, _personNode As TreeNode) As Integer
         Dim _nextLine As String = MakeTweetLine(_personNode)
@@ -359,7 +359,7 @@ Public Class FrmTwitterOutput
             .Text = _text
             .TabIndex = _index
             .Location = New System.Drawing.Point(4, 22)
-            .Name = TABPAGE_BASENAME & CStr(_index)
+            .Name = TABPAGE_BASENAME & _index
             .Padding = New System.Windows.Forms.Padding(3)
             .Size = New System.Drawing.Size(412, 426)
             .Controls.Add(NewButton(_index))
@@ -370,8 +370,8 @@ Public Class FrmTwitterOutput
     Private Function NewButton(_index As String) As Button
         Dim _newButton As New System.Windows.Forms.Button()
         With _newButton
-            .Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            .Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .Anchor = System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right
+            .Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0)
             .ForeColor = System.Drawing.Color.RoyalBlue
             .Location = New System.Drawing.Point(287, 397)
             .Name = BUTTON_CONTROL_NAME & _index
@@ -384,10 +384,10 @@ Public Class FrmTwitterOutput
     Private Function NewRichTextBox(_index As String) As RichTextBox
         Dim _newRtb As New System.Windows.Forms.RichTextBox()
         With _newRtb
-            .Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-           Or System.Windows.Forms.AnchorStyles.Left) _
-           Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            .Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            .Anchor = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom _
+           Or System.Windows.Forms.AnchorStyles.Left _
+           Or System.Windows.Forms.AnchorStyles.Right
+            .Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0)
             .Location = New System.Drawing.Point(6, 3)
             .Name = RTB_CONTROL_NAME & _index
             .Size = New System.Drawing.Size(400, 388)

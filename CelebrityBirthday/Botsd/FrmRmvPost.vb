@@ -1,23 +1,23 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
 '
 
-Imports System.Text
 Imports System.Reflection
+Imports System.Text
 Public NotInheritable Class FrmRmvPost
 #Region "form control handlers"
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Close()
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Close()
     End Sub
     Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
         LblMessage.Text = ""
         If Not String.IsNullOrEmpty(TxtExistingNo.Text) AndAlso IsNumeric(TxtExistingNo.Text) Then
             LogUtil.Info("Removing BotSD Post", MyBase.Name)
-            Dim _postNo As Integer = CInt(TxtExistingNo.Text)
+            Dim _postNo As Integer = TxtExistingNo.Text
             Dim postRows As DataRowCollection = GetBotsdViewByPostNo(_postNo)
             Dim postRowDetails As New StringBuilder
             LogUtil.Info("Removing Id from social media records", MyBase.Name)
@@ -58,7 +58,7 @@ Public NotInheritable Class FrmRmvPost
     Private Sub BtnCheck_Click(sender As Object, e As EventArgs) Handles BtnCheck.Click
         LblMessage.Text = ""
         If Not String.IsNullOrEmpty(TxtExistingNo.Text) AndAlso IsNumeric(TxtExistingNo.Text) Then
-            Dim _postNo As Integer = CInt(TxtExistingNo.Text)
+            Dim _postNo As Integer = TxtExistingNo.Text
             Dim postRows As DataRowCollection = GetBotsdViewByPostNo(_postNo)
             If postRows.Count > 0 Then
                 For Each postRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow In postRows

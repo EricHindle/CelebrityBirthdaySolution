@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -50,7 +50,7 @@ Public NotInheritable Class FrmBotsd
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub NudPic1Horizontal_ValueChanged(sender As Object, e As EventArgs) Handles NudPic1Horizontal.ValueChanged
         If Not IsNoGenerate Then
@@ -99,10 +99,10 @@ Public NotInheritable Class FrmBotsd
     Private Sub BtnSwap_Click(sender As Object, e As EventArgs) Handles BtnSwap.Click
         If DgvPairs.SelectedRows.Count = 1 Then
             Dim selectedRow As Integer = DgvPairs.SelectedRows(0).Index
-            Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked) + CInt(ChkSel5.Checked) + CInt(ChkSel6.Checked)
+            Dim _selCount As Integer = chkSel1.Checked + CInt(ChkSel2.Checked) + ChkSel3.Checked + ChkSel4.Checked + ChkSel5.Checked + ChkSel6.Checked
             If _selCount <> -2 Then
                 chkSel1.Checked = True
-                _selCount = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked) + CInt(ChkSel5.Checked) + CInt(ChkSel6.Checked)
+                _selCount = chkSel1.Checked + CInt(ChkSel2.Checked) + ChkSel3.Checked + ChkSel4.Checked + ChkSel5.Checked + ChkSel6.Checked
                 If _selCount <> -2 Then
                     ChkSel2.Checked = True
                 End If
@@ -160,7 +160,7 @@ Public NotInheritable Class FrmBotsd
             SelectPairs()
             DgvPairs.Rows(selectedRow).Selected = True
             GeneratePair()
-            WriteTrace("Swapped " & CStr(sel1Id) & " & " & CStr(sel2Id))
+            WriteTrace("Swapped " & sel1Id & " & " & sel2Id)
         End If
     End Sub
     Private Sub BtnGenerate_Click(sender As Object, e As EventArgs) Handles BtnGenerate.Click
@@ -245,7 +245,7 @@ Public NotInheritable Class FrmBotsd
     Private Sub SelectAllToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectAllToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(sender)
 
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             If _textBox IsNot Nothing Then
                 _textBox.SelectAll()
@@ -255,7 +255,7 @@ Public NotInheritable Class FrmBotsd
     End Sub
     Private Sub PasteToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Paste()
         End If
@@ -263,7 +263,7 @@ Public NotInheritable Class FrmBotsd
     End Sub
     Private Sub ClearToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles ClearToolStripMenuItem.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Text = ""
         End If
@@ -311,7 +311,7 @@ Public NotInheritable Class FrmBotsd
     Private Sub BtnRemove_Click(sender As Object, e As EventArgs) Handles BtnRemove.Click
         If DgvPairs.SelectedRows.Count = 1 Then
             Dim _row As DataGridViewRow = DgvPairs.SelectedRows(0)
-            Dim _selCount As Integer = CInt(chkSel1.Checked) + CInt(ChkSel2.Checked) + CInt(ChkSel3.Checked) + CInt(ChkSel4.Checked) + CInt(ChkSel5.Checked) + CInt(ChkSel6.Checked)
+            Dim _selCount As Integer = chkSel1.Checked + CInt(ChkSel2.Checked) + ChkSel3.Checked + ChkSel4.Checked + ChkSel5.Checked + ChkSel6.Checked
             If _selCount < 0 Then
                 Dim _name As String = ""
                 If ChkSel6.Checked Then
@@ -398,11 +398,11 @@ Public NotInheritable Class FrmBotsd
                 If oRow.IssurnameNull() Then
                     Dim errorMsg As String
                     If oRow.IsidNull() Then
-                        errorMsg = "Missing person records " & CStr(oRow.btsdId) & " " & CStr(oRow.btsdDay) & "/" & CStr(oRow.btsdMonth) & "/" & CStr(oRow.btsdYear) & " " & oRow.btsdUrl
+                        errorMsg = "Missing person records " & oRow.btsdId & " " & oRow.btsdDay & "/" & oRow.btsdMonth & "/" & oRow.btsdYear & " " & oRow.btsdUrl
                         DisplayAndLog(errorMsg)
                         Continue For
                     Else
-                        errorMsg = "Empty surname for " & CStr(oRow.id) & " " & oRow.forename & " " & CStr(oRow.birthday) & "/" & CStr(oRow.birthmonth) & "/" & CStr(oRow.birthyear)
+                        errorMsg = "Empty surname for " & oRow.id & " " & oRow.forename & " " & oRow.birthday & "/" & oRow.birthmonth & "/" & oRow.birthyear
                         surnameInitial = "z"
                         DisplayAndLog(errorMsg)
                     End If
@@ -544,7 +544,7 @@ Public NotInheritable Class FrmBotsd
             If _twitterUplMedia IsNot Nothing Then
                 Dim _uploadedSize As Long = _twitterUplMedia.Size
                 Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-                WriteTrace("Image upload size: " & CStr(_uploadedSize), False)
+                WriteTrace("Image upload size: " & _uploadedSize, False)
                 _mediaId = _twitterUplMedia.Media_Id
             Else
                 WriteTrace("No image upload", False)
@@ -880,7 +880,7 @@ Public NotInheritable Class FrmBotsd
         If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
             sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
         End If
-        Dim sDied As String = " (d. " & CStr(Math.Abs(oPerson.DeathYear)) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+        Dim sDied As String = " (d. " & Math.Abs(oPerson.DeathYear) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
         With oPersonText
             .Append("<!-- wp:heading {""level"":1} -->").Append(vbCrLf)
             .Append("<h1 id=""firstHeading"">").Append(oPerson.Name)
@@ -1028,7 +1028,7 @@ Public NotInheritable Class FrmBotsd
                     .ShowDialog()
                     If .DialogResult = DialogResult.OK Then
                         DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value = thisWpNumber
-                        Dim botsdNo As Integer = UpdateBotsd(ThisDay, ThisMonth, DgvPairs.SelectedRows(0).Cells(pairYear.Name).Value, CInt(thisWpNumber), oTextForm.TxtUrl.Text)
+                        Dim botsdNo As Integer = UpdateBotsd(ThisDay, ThisMonth, DgvPairs.SelectedRows(0).Cells(pairYear.Name).Value, thisWpNumber, oTextForm.TxtUrl.Text)
                         If _pickPerson1 IsNot Nothing Then
                             _pickPerson1.Social.Botsd = botsdNo
                             UpdateBotsdId(_pickPerson1.Social)
@@ -1055,7 +1055,7 @@ Public NotInheritable Class FrmBotsd
                         End If
                         If CInt(thisWpNumber) = WpNumber Then
                             WpNumber += 1
-                            GlobalSettings.SetSetting(My.Resources.NEXTWPNO, "integer", CStr(WpNumber))
+                            GlobalSettings.SetSetting(My.Resources.NEXTWPNO, "integer", WpNumber)
                         End If
                     End If
                 End With
@@ -1173,7 +1173,7 @@ Public NotInheritable Class FrmBotsd
         For Each oRow As DataGridViewRow In DgvPairs.Rows
             Try
                 If oRow.Cells(pairId1.Name).Value IsNot Nothing Then
-                    Dim _personId As Integer = CInt(oRow.Cells(pairId1.Name).Value)
+                    Dim _personId As Integer = oRow.Cells(pairId1.Name).Value
                     Dim _firstPerson As Person = GetFullPersonById(_personId)
                     If _firstPerson IsNot Nothing Then
                         Dim botsdUrl As String = ""
@@ -1237,7 +1237,7 @@ Public NotInheritable Class FrmBotsd
             DgvPairs.ClearSelection()
         Catch ex As ArgumentOutOfRangeException
             MsgBox("No date selected", MsgBoxStyle.Exclamation, "Error")
-            Me.Close()
+            Close()
         End Try
         ClearStatus(LblStatus)
         isBuildingPairs = False

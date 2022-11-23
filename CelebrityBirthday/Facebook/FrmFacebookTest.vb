@@ -1,4 +1,11 @@
-﻿Imports Facebook
+﻿' Hindleware
+' Copyright (c) 2019-2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports Facebook
 Public NotInheritable Class FrmFacebookTest
     Private Const EMAIL_TO_ADDRESS As String = "SendErrorTo"
     Private Const EMAIL_FROM_ADDRESS As String = "SendEmailFrom"
@@ -48,11 +55,10 @@ Public NotInheritable Class FrmFacebookTest
             LogUtil.Exception("Exception", ex, MyBase.Name)
         End Try
 
-
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
-        Me.Close()
+        Close()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -63,7 +69,7 @@ Public NotInheritable Class FrmFacebookTest
                                 TxtBody.Text.Trim,
                                 TxtName.Text.Trim,
                                 TxtHost.Text.Trim,
-                                CInt(TxtPort.Text),
+                                TxtPort.Text,
                                 TxtUsername.Text.Trim,
                                 TxtPassword.Text.Trim,
                                 cbSSL.Checked)
@@ -94,7 +100,7 @@ Public NotInheritable Class FrmFacebookTest
             TxtPort.Text & vbCrLf &
             TxtUsername.Text & vbCrLf &
             TxtPassword.Text & vbCrLf &
-            CStr(cbSSL.Checked)
+            cbSSL.Checked
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click

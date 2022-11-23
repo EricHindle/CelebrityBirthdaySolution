@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2021-22, Eric Hindle
+' Copyright (c) 2019-2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -144,7 +144,7 @@ Public NotInheritable Class EmailUtil
             Dim strSmtpPort As Integer = GlobalSettings.GetIntegerSetting(SMTP_PORT)
             If strSmtpPort > 0 Then
                 LogUtil.Info("Setting port")
-                LogUtil.Info(CStr(strSmtpPort))
+                LogUtil.Info(strSmtpPort)
                 objEmailClient.Port = strSmtpPort
             End If
             If GlobalSettings.GetBooleanSetting(SMTP_SSL) Then
@@ -226,7 +226,7 @@ Public NotInheritable Class EmailUtil
         LogUtil.Info(strHost)
         LogUtil.Info(strUserName)
         LogUtil.Info(strPassword)
-        LogUtil.Info(CStr(strPort))
+        LogUtil.Info(strPort)
         If strSsl Then LogUtil.Info("SSL enabled")
         Try
             Using e_mail As New Mail.MailMessage()
