@@ -7,6 +7,7 @@
 
 Imports System.Data.Common
 Imports System.IO
+Imports System.Reflection
 Imports System.Text
 
 Public NotInheritable Class FrmUpdateDatabase
@@ -155,7 +156,7 @@ Public NotInheritable Class FrmUpdateDatabase
                     End If
                     ShowUpdated(newPerson, "Inserted")
                     DisplayPersonList()
-                    lbPeople.SelectedIndex = p
+                    DgvPeople.Rows(p).Selected = True
                     LblSortSeq.Text = CStr(newPerson.Sortseq)
                 Else
                     DisplayAndLog(newPerson.Name & " not inserted")
@@ -173,30 +174,35 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         Dim oPerson As Person
-        If lbPeople.SelectedIndex >= 0 Then
-            oPerson = personTable(lbPeople.SelectedIndex)
+        If DgvPeople.SelectedRows.Count > 0 Then
+            Dim _index As Integer = DgvPeople.SelectedRows(0).Index
+            oPerson = personTable(_index)
             If oPerson.Id > 0 Then
                 LogUtil.Info("Deleting person " & oPerson.Id & " " & oPerson.Name, MyBase.Name)
                 DeleteSocialMedia(oPerson.Id)
                 DeleteImage(oPerson.Id)
                 DeletePerson(oPerson.Id)
             End If
-            personTable.RemoveAt(lbPeople.SelectedIndex)
+            personTable.RemoveAt(_index)
         End If
         DisplayPersonList()
     End Sub
     Private Sub BtnUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUp.Click
-        Dim ix As Integer = lbPeople.SelectedIndex
-        Dim prevIx As Integer = ix - 1
-        If lbPeople.SelectedIndex > 0 Then
-            SwapPersons(ix, prevIx)
+        If DgvPeople.SelectedRows.Count > 0 Then
+            Dim ix As Integer = DgvPeople.SelectedRows(0).Index
+            Dim prevIx As Integer = ix - 1
+            If ix > 0 Then
+                SwapPersons(ix, prevIx)
+            End If
         End If
     End Sub
     Private Sub BtnDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDown.Click
-        Dim ix As Integer = lbPeople.SelectedIndex
-        Dim nextIx As Integer = ix + 1
-        If lbPeople.SelectedIndex >= 0 And lbPeople.SelectedIndex < lbPeople.Items.Count - 1 Then
-            SwapPersons(ix, nextIx)
+        If DgvPeople.SelectedRows.Count > 0 Then
+            Dim ix As Integer = DgvPeople.SelectedRows(0).Index
+            Dim nextIx As Integer = ix + 1
+            If ix >= 0 And ix < DgvPeople.Rows.Count - 1 Then
+                SwapPersons(ix, nextIx)
+            End If
         End If
     End Sub
     Private Sub BtnUpdateAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateAll.Click
@@ -216,7 +222,7 @@ Public NotInheritable Class FrmUpdateDatabase
             ShowProgress("Loading Table From Database", lblStatus, True, MyBase.Name)
             LogUtil.Info(cboDay.SelectedItem & " " & cboMonth.SelectedItem, MyBase.Name)
             personTable = New List(Of Person)
-            lbPeople.Items.Clear()
+            DgvPeople.Rows.Clear()
             Dim selectedIndex As Integer = -1
             personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False)
             If personTable.Count > 0 Then
@@ -230,9 +236,12 @@ Public NotInheritable Class FrmUpdateDatabase
                         lastYear = operson.BirthYear
                     End If
                     operson.Sortseq = sortSeq
-                    lbPeople.Items.Add(operson.BirthYear & " " & operson.Name)
+                    Dim _row As DataGridViewRow = DgvPeople.Rows(DgvPeople.Rows.Add())
+                    _row.Cells(personName.Name).Value = (operson.BirthYear & " " & operson.Name)
+                    _row.Cells(personName.Name).Style.ForeColor = Color.Black
+                    _row.Cells(personName.Name).Style.BackColor = SetRowColorByType(operson)
                     If findPersonInList > -1 AndAlso findPersonInList = operson.Id Then
-                        selectedIndex = lbPeople.Items.Count - 1
+                        selectedIndex = _row.Index
                     End If
                 Next
                 Dim oDrow As CelebrityBirthdayDataSet.DatesRow = GetDatesRow(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, "I")
@@ -251,32 +260,58 @@ Public NotInheritable Class FrmUpdateDatabase
             Else
                 AppendProgress(" - No data", lblStatus)
             End If
-            lbPeople.SelectedIndex = selectedIndex
+            If selectedIndex >= 0 Then
+                DgvPeople.Rows(selectedIndex).Selected = True
+            End If
             findPersonInList = -1
         End If
     End Sub
     Private Sub BtnReloadSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadSel.Click
         DisplayAndLog("Loading Item From Database")
         Refresh()
-        If lbPeople.SelectedIndex >= 0 And lbPeople.SelectedIndex < lbPeople.Items.Count Then
-            If personTable(lbPeople.SelectedIndex) IsNot Nothing Then
-                Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
-                If oPerson.Id > 0 Then
-                    Dim newPerson As Person = GetPersonById(oPerson.Id)
-                    If newPerson IsNot Nothing Then
-                        personTable(lbPeople.SelectedIndex) = newPerson
+        If DgvPeople.SelectedRows.Count > 0 Then
+            Dim _index As Integer = DgvPeople.SelectedRows(0).Index
+            If _index >= 0 And _index < DgvPeople.Rows.Count Then
+                If personTable(_index) IsNot Nothing Then
+                    Dim oPerson As Person = personTable(_index)
+                    If oPerson.Id > 0 Then
+                        Dim newPerson As Person = GetPersonById(oPerson.Id)
+                        If newPerson IsNot Nothing Then
+                            personTable(_index) = newPerson
+                        End If
+                        DgvPeople.Rows(_index).Cells(personName.Name).Value = newPerson.BirthYear & " " & newPerson.Name
+                        DgvPeople.Rows(_index).Cells(personName.Name).Style.ForeColor = Color.Black
+                        DgvPeople.Rows(_index).Cells(personName.Name).Style.BackColor = SetRowColorByType(oPerson)
                     End If
-                    lbPeople.Items(lbPeople.SelectedIndex) = newPerson.BirthYear & " " & newPerson.Name
                 End If
             End If
         End If
         AppendProgress(" - Complete", lblStatus)
     End Sub
-    Private Sub LbPeople_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbPeople.SelectedIndexChanged
+
+    Private Shared Function SetRowColorByType(oPerson As Person) As Color
+        Dim _color As Color = Color.White
+        Select Case oPerson.Social.CelebrityType
+            Case 0
+                _color = Color.White
+            Case 1
+                _color = Color.LightYellow
+            Case 2
+                _color = Color.LightPink
+            Case 3
+                _color = Color.LightBlue
+            Case 4
+                _color = Color.LightGray
+        End Select
+        Return _color
+    End Function
+
+    Private Sub DgvPeople_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DgvPeople.SelectionChanged
         ClearStatus(lblStatus)
         SwapText("Text")
-        If lbPeople.SelectedIndex >= 0 Then
-            lastSelectedPerson = personTable(lbPeople.SelectedIndex)
+        If DgvPeople.SelectedRows.Count > 0 Then
+            Dim _index As Integer = DgvPeople.SelectedRows(0).Index
+            lastSelectedPerson = personTable(_index)
             LoadScreenFromPerson(lastSelectedPerson)
             DisplayAndLog("Selected " & lastSelectedPerson.Name)
         Else
@@ -286,9 +321,10 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub BtnUpdateSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateSel.Click
         ClearStatus(lblStatus)
-        If lbPeople.SelectedIndex >= 0 Then
+        If DgvPeople.SelectedRows.Count > 0 Then
+            Dim _index As Integer = DgvPeople.SelectedRows(0).Index
             DisplayAndLog("Updating database with selected person")
-            Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
+            Dim oPerson As Person = personTable(_index)
             Dim dbAction As String
             If oPerson.Id < 0 Then
                 Dim newId As Integer = InsertPerson(oPerson)
@@ -335,9 +371,9 @@ Public NotInheritable Class FrmUpdateDatabase
                     oPerson.UnsavedChanges = True
                     oPerson.Social = New SocialMedia(id, txtTwitter.Text, cbNoTweet.Checked, TxtWikiId.Text, CurrentSocialMedia.Botsd, cbIsTwin.Checked, cbCelebType.SelectedValue)
                     ShowUpdated(oPerson, "Updated")
-                    Dim p As Integer = lbPeople.SelectedIndex
+                    Dim p As Integer = DgvPeople.SelectedRows(0).Index
                     DisplayPersonList()
-                    lbPeople.SelectedIndex = p
+                    DgvPeople.Rows(p).Selected = True
                     DisplayAndLog("Updated list")
                     Exit For
                 End If
@@ -402,7 +438,7 @@ Public NotInheritable Class FrmUpdateDatabase
             End If
         End If
         personTable = New List(Of Person)
-        lbPeople.Items.Clear()
+        DgvPeople.Rows.Clear()
         cboDay.SelectedIndex = -1
         cboMonth.SelectedIndex = -1
     End Sub
@@ -525,8 +561,8 @@ Public NotInheritable Class FrmUpdateDatabase
         Dim twitterSearchName As String = ""
         If lblID.Text = "-1" Then
             twitterSearchName = txtName.Text
-        ElseIf lbPeople.SelectedIndex >= 0 Then
-            Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
+        ElseIf DgvPeople.SelectedRows.Count > 0 Then
+            Dim oPerson As Person = personTable(DgvPeople.SelectedRows(0).Index)
             If oPerson.DeathYear > 0 Then
                 MsgBox("DEAD. Expired and gone to meet their maker. Pushing up the daisies." _
                     & vbCrLf & "Bereft of life, they rest in peace. Shuffled off this mortal coil" _
@@ -575,13 +611,13 @@ Public NotInheritable Class FrmUpdateDatabase
     Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
         Try
             Dim _id As Integer = lblID.Text
-            If lbPeople.SelectedIndex > -1 AndAlso _id > -1 Then
+            If DgvPeople.SelectedRows.Count > 0 AndAlso _id > -1 Then
                 DisplayAndLog("Images")
                 Using _update As New FrmImages
                     _update.PersonId = CInt(lblID.Text)
                     _update.ShowDialog()
                     PictureBox1.ImageLocation = _update.ImageFile
-                    personTable(lbPeople.SelectedIndex).Image = GetImageById(_id, False)
+                    personTable(DgvPeople.SelectedRows(0).Index).Image = GetImageById(_id, False)
                 End Using
                 ClearStatus(lblStatus)
             Else
@@ -641,8 +677,8 @@ Public NotInheritable Class FrmUpdateDatabase
 
     Private Function MakeDescription() As String
         Dim wpText As String = ""
-        If lbPeople.SelectedIndex >= 0 Then
-            Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
+        If DgvPeople.SelectedRows.Count > 0 Then
+            Dim oPerson As Person = personTable(DgvPeople.SelectedRows(0).Index)
             LogUtil.Info("Generating WordPress description for " & oPerson.Name, MyBase.Name)
             Dim sBorn As String = ""
             If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
@@ -695,8 +731,8 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub BtnRmvBotsd_Click(sender As Object, e As EventArgs) Handles BtnRmvBotsd.Click
         DisplayAndLog("Removing BotSD id")
-        If lbPeople.SelectedIndex >= 0 Then
-            Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
+        If DgvPeople.SelectedRows.Count >= 0 Then
+            Dim oPerson As Person = personTable(DgvPeople.SelectedRows(0).Index)
             Dim oSocial As SocialMedia = oPerson.Social
             If oSocial IsNot Nothing Then
                 If oSocial.Botsd > 0 Then
@@ -731,8 +767,8 @@ Public NotInheritable Class FrmUpdateDatabase
             _botsd.ThisDay = cboDay.SelectedIndex + 1
             _botsd.ThisMonth = cboMonth.SelectedIndex + 1
             _botsd.ShowDialog()
-            If lbPeople.SelectedIndex > -1 Then
-                Dim selectedPerson As Person = personTable(lbPeople.SelectedIndex)
+            If DgvPeople.SelectedRows.Count > 0 Then
+                Dim selectedPerson As Person = personTable(DgvPeople.SelectedRows(0).Index)
                 selectedPerson.Social = GetPersonById(selectedPerson.Id).Social
                 lblBotsdId.Text = CStr(selectedPerson.Social.Botsd)
             End If
@@ -744,8 +780,8 @@ Public NotInheritable Class FrmUpdateDatabase
         txtName.Copy()
     End Sub
     Private Sub BtnViewAudit_Click(sender As Object, e As EventArgs) Handles BtnViewAudit.Click
-        If lbPeople.SelectedIndex > -1 Then
-            Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
+        If DgvPeople.SelectedRows.Count > 0 Then
+            Dim oPerson As Person = personTable(DgvPeople.SelectedRows(0).Index)
             Using _audit As New FrmAuditList
                 _audit.DataType = "dob"
                 _audit.PersonId = oPerson.Id
@@ -812,9 +848,12 @@ Public NotInheritable Class FrmUpdateDatabase
         bLoadingPerson = False
     End Sub
     Private Sub DisplayPersonList()
-        lbPeople.Items.Clear()
+        DgvPeople.Rows.Clear()
         For Each oPerson As Person In personTable
-            lbPeople.Items.Add(oPerson.BirthYear & " " & oPerson.Name)
+            Dim _row As DataGridViewRow = DgvPeople.Rows(DgvPeople.Rows.Add())
+            _row.Cells(personName.Name).Value = (oPerson.BirthYear & " " & oPerson.Name)
+            _row.Cells(personName.Name).Style.ForeColor = Color.Black
+            _row.Cells(personName.Name).Style.BackColor = SetRowColorByType(oPerson)
         Next
     End Sub
     Private Shared Sub Splitname(ByVal sName As String, ByRef sForename As String, ByRef sSurname As String)
@@ -1189,7 +1228,7 @@ Public NotInheritable Class FrmUpdateDatabase
             personTable(toIx) = thisperson
             personTable(fromIx) = thatPerson
             DisplayPersonList()
-            lbPeople.SelectedIndex = toIx
+            DgvPeople.Rows(toIx).Selected = True
             LblSortSeq.Text = CStr(thisperson.Sortseq)
         End If
         thatPerson.Dispose()

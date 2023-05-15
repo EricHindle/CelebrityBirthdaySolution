@@ -16,3 +16,8 @@ Namespace CelebrityBirthdayDataSetTableAdapters
     Partial Public Class FullPersonTableAdapter
     End Class
 End Namespace
+
+Namespace CelebrityBirthdayDataSetTableAdapters
+    Partial Public Class FullPersonTableAdapter
+    End Class
+End Namespace

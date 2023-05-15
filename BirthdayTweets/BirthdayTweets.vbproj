@@ -7,7 +7,7 @@
     <ProjectGuid>{183E0597-882F-4863-8790-27A0754C3DBF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <StartupObject>Sub Main</StartupObject>
-    <RootNamespace>BirthdayTweets</RootNamespace>
+    <RootNamespace>BirthdayTweetsNs</RootNamespace>
     <AssemblyName>BirthdayTweets</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Console</MyType>
@@ -202,6 +202,7 @@
   <ItemGroup>
     <Content Include="bcake.ico" />
     <Content Include="cake.ico" />
+    <None Include="Resources\idtb.jpg" />
     <None Include="Resources\idfn.jpg" />
     <None Include="packages.config" />
     <None Include="Resources\NoImage.png" />

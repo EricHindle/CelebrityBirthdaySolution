@@ -89,7 +89,7 @@ Public Class BirthdayTweets
     Private Shared hburpdayUser As String = "HBurpday"
     Private Shared botsdUser As String = "NotTwins1"
     Private Shared bbreadUser As String = "WhosBrownBread"
-    Private Shared fornowUser As String = "CelebfnBirthday"
+    Private Shared fornowUser As String = "TotesBirthdays"
     Private Shared ReadOnly testUser As String = "FunsterMuddy"
     Private Shared oBirthdayList As New List(Of Person)
     Private Shared oAnniversaryList As New List(Of Person)
@@ -138,7 +138,7 @@ Public Class BirthdayTweets
             todayMonth = Format(Now, "MMMM")
             tweetHeaderDate = todayMonth & " " & todayDay
             Dim tweetTime As Date = todaysDate & " " & GlobalSettings.GetSetting(TWEET_TIME)
-            Dim networkOK As Boolean = False
+            Dim networkOK As Boolean = True
             Dim testCount As Integer = 0
             Do Until networkOK Or testCount > 10
                 Threading.Thread.Sleep(10000)
@@ -221,24 +221,24 @@ Public Class BirthdayTweets
                         End If
                     End If
                 End If
-                'If fornowLastTweetDate < Today.Date Then
-                '    If Now > tweetTime Then
-                '        LogUtil.ShowProgress("Sending fornow tweets for " & todaysDate, Psub)
-                '        LogUtil.ShowProgress("Selecting people", Psub)
-                '        If BuildForNowList Then
-                '            If SendForNowTweets(todayDay, todayMonth) Then
-                '                LogUtil.ShowProgress("ForNow tweets complete", Psub)
-                '                GlobalSettings.SetSetting(LAST_FORNOW_TWEET, "date", todaysDate, "")
-                '            Else
-                '                LogUtil.Problem("ForNow Tweets not sent - error", Psub)
-                '                SendEmail("ForNow Tweets error", "ForNow Tweets not sent - error")
-                '            End If
-                '        Else
-                '            LogUtil.Problem("ForNow Tweets not sent - selection error", Psub)
-                '            SendEmail("ForNow Tweets error", "ForNow Tweets not sent - selection error")
-                '        End If
-                '    End If
-                'End If
+                If fornowLastTweetDate < Today.Date Then
+                    If Now > tweetTime Then
+                        LogUtil.ShowProgress("Sending fornow tweets for " & todaysDate, Psub)
+                        LogUtil.ShowProgress("Selecting people", Psub)
+                        If BuildForNowList() Then
+                            If SendForNowTweets(todayDay, todayMonth) Then
+                                LogUtil.ShowProgress("ForNow tweets complete", Psub)
+                                GlobalSettings.SetSetting(LAST_FORNOW_TWEET, "date", todaysDate, "")
+                            Else
+                                LogUtil.Problem("ForNow Tweets not sent - error", Psub)
+                                SendEmail("ForNow Tweets error", "ForNow Tweets not sent - error")
+                            End If
+                        Else
+                            LogUtil.Problem("ForNow Tweets not sent - selection error", Psub)
+                            SendEmail("ForNow Tweets error", "ForNow Tweets not sent - selection error")
+                        End If
+                    End If
+                End If
             Else
                 LogUtil.ShowProgress("Test Tweet failed", Psub)
                 LogUtil.ShowProgress("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! failed", Psub)
@@ -385,7 +385,6 @@ Public Class BirthdayTweets
                 isSentOK = False
             End If
         Next
-
         Return isSentOK
     End Function
     Private Shared Function GenerateBotSDTweets(oBotSDList As List(Of List(Of Person))) As List(Of CbTweet)

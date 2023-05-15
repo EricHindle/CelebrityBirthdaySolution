@@ -128,6 +128,8 @@ Partial Class FrmUpdateDatabase
         Me.CelebrityBirthdayDataSet = New CelebrityBirthday.CelebrityBirthdayDataSet()
         Me.CelebrityTypesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CelebrityTypesTableAdapter = New CelebrityBirthday.CelebrityBirthdayDataSetTableAdapters.CelebrityTypesTableAdapter()
+        Me.DgvPeople = New System.Windows.Forms.DataGridView()
+        Me.personName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -138,6 +140,7 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox4.SuspendLayout()
         CType(Me.CelebrityBirthdayDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CelebrityTypesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'cbNoTweet
@@ -584,8 +587,9 @@ Partial Class FrmUpdateDatabase
         Me.lbPeople.Location = New System.Drawing.Point(998, 60)
         Me.lbPeople.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.lbPeople.Name = "lbPeople"
-        Me.lbPeople.Size = New System.Drawing.Size(284, 382)
+        Me.lbPeople.Size = New System.Drawing.Size(137, 382)
         Me.lbPeople.TabIndex = 24
+        Me.lbPeople.Visible = False
         '
         'cboMonth
         '
@@ -1418,12 +1422,42 @@ Partial Class FrmUpdateDatabase
         '
         Me.CelebrityTypesTableAdapter.ClearBeforeFill = True
         '
+        'DgvPeople
+        '
+        Me.DgvPeople.AllowUserToAddRows = False
+        Me.DgvPeople.AllowUserToDeleteRows = False
+        Me.DgvPeople.AllowUserToResizeColumns = False
+        Me.DgvPeople.AllowUserToResizeRows = False
+        Me.DgvPeople.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DgvPeople.BackgroundColor = System.Drawing.Color.White
+        Me.DgvPeople.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.DgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvPeople.ColumnHeadersVisible = False
+        Me.DgvPeople.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.personName})
+        Me.DgvPeople.Location = New System.Drawing.Point(998, 61)
+        Me.DgvPeople.MultiSelect = False
+        Me.DgvPeople.Name = "DgvPeople"
+        Me.DgvPeople.ReadOnly = True
+        Me.DgvPeople.RowHeadersVisible = False
+        Me.DgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvPeople.Size = New System.Drawing.Size(283, 381)
+        Me.DgvPeople.TabIndex = 151
+        '
+        'personName
+        '
+        Me.personName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.personName.HeaderText = ""
+        Me.personName.Name = "personName"
+        Me.personName.ReadOnly = True
+        '
         'FrmUpdateDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
         Me.ClientSize = New System.Drawing.Size(1293, 923)
+        Me.Controls.Add(Me.DgvPeople)
         Me.Controls.Add(Me.cbCelebType)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.GroupBox4)
@@ -1517,6 +1551,7 @@ Partial Class FrmUpdateDatabase
         Me.GroupBox4.ResumeLayout(False)
         CType(Me.CelebrityBirthdayDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CelebrityTypesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1638,4 +1673,6 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents CelebrityBirthdayDataSet As CelebrityBirthdayDataSet
     Friend WithEvents CelebrityTypesBindingSource As BindingSource
     Friend WithEvents CelebrityTypesTableAdapter As CelebrityBirthdayDataSetTableAdapters.CelebrityTypesTableAdapter
+    Friend WithEvents DgvPeople As DataGridView
+    Friend WithEvents personName As DataGridViewTextBoxColumn
 End Class
