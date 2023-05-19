@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FrmImageCapture
+Partial Class FrmImageEdit
     Inherits System.Windows.Forms.Form
 
     'Required by the Windows Form Designer
@@ -11,18 +11,20 @@ Partial Class FrmImageCapture
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmImageCapture))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmImageEdit))
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblSize = New System.Windows.Forms.ToolStripStatusLabel()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.BtnRotate = New System.Windows.Forms.Button()
+        Me.BtnClear = New System.Windows.Forms.Button()
+        Me.BtnLoadImage = New System.Windows.Forms.Button()
+        Me.BtnSave = New System.Windows.Forms.Button()
         Me.PicCapture = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PreviewPictureBox = New System.Windows.Forms.PictureBox()
-        Me.BtnClear = New System.Windows.Forms.Button()
         Me.lblCroppedImage = New System.Windows.Forms.Label()
-        Me.BtnLoadImage = New System.Windows.Forms.Button()
         Me.BtnSaveCroppedImage = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblFilename = New System.Windows.Forms.Label()
@@ -42,11 +44,9 @@ Partial Class FrmImageCapture
         Me.rbRed = New System.Windows.Forms.RadioButton()
         Me.rbWhite = New System.Windows.Forms.RadioButton()
         Me.rbBlack = New System.Windows.Forms.RadioButton()
-        Me.BtnSave = New System.Windows.Forms.Button()
         Me.TxtSurname = New System.Windows.Forms.TextBox()
         Me.TxtForename = New System.Windows.Forms.TextBox()
         Me.BtnResize = New System.Windows.Forms.Button()
-        Me.lblSize = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PicCapture, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PreviewPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,6 +79,11 @@ Partial Class FrmImageCapture
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.lblStatus.Size = New System.Drawing.Size(10, 17)
         '
+        'lblSize
+        '
+        Me.lblSize.Name = "lblSize"
+        Me.lblSize.Size = New System.Drawing.Size(0, 17)
+        '
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -103,6 +108,42 @@ Partial Class FrmImageCapture
         Me.BtnRotate.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.ToolTip1.SetToolTip(Me.BtnRotate, "Rotate image 90deg")
         Me.BtnRotate.UseVisualStyleBackColor = False
+        '
+        'BtnClear
+        '
+        Me.BtnClear.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BtnClear.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClear.Location = New System.Drawing.Point(12, 144)
+        Me.BtnClear.Name = "BtnClear"
+        Me.BtnClear.Size = New System.Drawing.Size(89, 57)
+        Me.BtnClear.TabIndex = 2
+        Me.BtnClear.Text = "Clear Image"
+        Me.ToolTip1.SetToolTip(Me.BtnClear, "Clear picture box")
+        Me.BtnClear.UseVisualStyleBackColor = True
+        '
+        'BtnLoadImage
+        '
+        Me.BtnLoadImage.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BtnLoadImage.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnLoadImage.Location = New System.Drawing.Point(12, 52)
+        Me.BtnLoadImage.Name = "BtnLoadImage"
+        Me.BtnLoadImage.Size = New System.Drawing.Size(89, 56)
+        Me.BtnLoadImage.TabIndex = 0
+        Me.BtnLoadImage.Text = "Load Image"
+        Me.ToolTip1.SetToolTip(Me.BtnLoadImage, "Load picture box from file")
+        Me.BtnLoadImage.UseVisualStyleBackColor = True
+        '
+        'BtnSave
+        '
+        Me.BtnSave.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BtnSave.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSave.Location = New System.Drawing.Point(12, 239)
+        Me.BtnSave.Name = "BtnSave"
+        Me.BtnSave.Size = New System.Drawing.Size(89, 57)
+        Me.BtnSave.TabIndex = 45
+        Me.BtnSave.Text = "Save Image"
+        Me.ToolTip1.SetToolTip(Me.BtnSave, "Save image from picture box")
+        Me.BtnSave.UseVisualStyleBackColor = True
         '
         'PicCapture
         '
@@ -136,17 +177,6 @@ Partial Class FrmImageCapture
         Me.PreviewPictureBox.TabIndex = 29
         Me.PreviewPictureBox.TabStop = False
         '
-        'BtnClear
-        '
-        Me.BtnClear.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnClear.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnClear.Location = New System.Drawing.Point(12, 144)
-        Me.BtnClear.Name = "BtnClear"
-        Me.BtnClear.Size = New System.Drawing.Size(89, 57)
-        Me.BtnClear.TabIndex = 2
-        Me.BtnClear.Text = "Clear Image"
-        Me.BtnClear.UseVisualStyleBackColor = True
-        '
         'lblCroppedImage
         '
         Me.lblCroppedImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -157,17 +187,6 @@ Partial Class FrmImageCapture
         Me.lblCroppedImage.TabIndex = 10
         Me.lblCroppedImage.Text = "Cropped Image"
         Me.lblCroppedImage.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        '
-        'BtnLoadImage
-        '
-        Me.BtnLoadImage.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnLoadImage.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnLoadImage.Location = New System.Drawing.Point(12, 52)
-        Me.BtnLoadImage.Name = "BtnLoadImage"
-        Me.BtnLoadImage.Size = New System.Drawing.Size(89, 56)
-        Me.BtnLoadImage.TabIndex = 0
-        Me.BtnLoadImage.Text = "Load Image"
-        Me.BtnLoadImage.UseVisualStyleBackColor = True
         '
         'BtnSaveCroppedImage
         '
@@ -207,7 +226,7 @@ Partial Class FrmImageCapture
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label4.Location = New System.Drawing.Point(739, 372)
+        Me.Label4.Location = New System.Drawing.Point(747, 372)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(171, 41)
         Me.Label4.TabIndex = 32
@@ -395,17 +414,6 @@ Partial Class FrmImageCapture
         Me.rbBlack.Text = "Black"
         Me.rbBlack.UseVisualStyleBackColor = True
         '
-        'BtnSave
-        '
-        Me.BtnSave.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnSave.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSave.Location = New System.Drawing.Point(12, 239)
-        Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.Size = New System.Drawing.Size(89, 57)
-        Me.BtnSave.TabIndex = 45
-        Me.BtnSave.Text = "Save Image"
-        Me.BtnSave.UseVisualStyleBackColor = True
-        '
         'TxtSurname
         '
         Me.TxtSurname.Location = New System.Drawing.Point(326, 44)
@@ -431,12 +439,7 @@ Partial Class FrmImageCapture
         Me.BtnResize.Text = "*"
         Me.BtnResize.UseVisualStyleBackColor = True
         '
-        'lblSize
-        '
-        Me.lblSize.Name = "lblSize"
-        Me.lblSize.Size = New System.Drawing.Size(0, 17)
-        '
-        'FrmImageCapture
+        'FrmImageEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -471,9 +474,9 @@ Partial Class FrmImageCapture
         Me.MaximumSize = New System.Drawing.Size(1900, 1000)
         Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(955, 543)
-        Me.Name = "FrmImageCapture"
+        Me.Name = "FrmImageEdit"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Image Capture"
+        Me.Text = "Image Editing"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         CType(Me.PicCapture, System.ComponentModel.ISupportInitialize).EndInit()

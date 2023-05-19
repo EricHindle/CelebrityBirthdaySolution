@@ -177,7 +177,7 @@ Public NotInheritable Class FrmDateCheck
         personTable.Clear()
         For Each _person In personList
             _ct += 1
-            ShowStatus(_ct & " of " & totalPeople, lblStatus, False)
+            ShowStatus(_ct & " of " & totalPeople, lblStatus, False, False)
             Try
                 Dim wikiId As String = ""
                 If _person.Social IsNot Nothing Then

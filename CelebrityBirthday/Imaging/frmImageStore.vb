@@ -126,7 +126,7 @@ Public Class FrmImageStore
     Private Sub BtnEditImage_Click(sender As Object, e As EventArgs) Handles BtnEditImage.Click
         _savedImage = Nothing
         LogUtil.Info("Editing image " & _latestSavedFile, MyBase.Name)
-        Using _editImage As New FrmImageCapture
+        Using _editImage As New FrmImageEdit
             _editImage.ImageFile = _latestSavedFile
             _editImage.Forename = TxtForename.Text
             _editImage.Surname = TxtSurname.Text

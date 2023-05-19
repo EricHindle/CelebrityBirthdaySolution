@@ -6,7 +6,9 @@
 '
 
 Imports System.IO
-Public NotInheritable Class FrmImages
+Imports System.Runtime.Remoting.Services
+
+Public NotInheritable Class FrmDatabaseImages
 #Region "constants"
     Private Const SEP As String = "/"
 #End Region
@@ -103,15 +105,20 @@ Public NotInheritable Class FrmImages
     End Sub
     Private Sub BtnSearchByName_Click(sender As Object, e As EventArgs) Handles BtnSearchByName.Click
         bLoadingPeople = True
-        DgvPeople.Rows.Clear()
-        Dim selectedPersons As ArrayList = GetPeopleLikeName(TxtForename.Text, TxtSurname.Text)
-        For Each oPerson As Person In selectedPersons
-            Dim tRow As DataGridViewRow = DgvPeople.Rows(DgvPeople.Rows.Add)
-            tRow.Cells(SelPersonId.Name).Value = oPerson.Id
-            tRow.Cells(SelPersonName.Name).Value = oPerson.Name
-            tRow.Cells(SelPersonYear.Name).Value = oPerson.BirthYear
-        Next
-        DgvPeople.ClearSelection()
+        If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
+            ClearStatus(lblStatus)
+            DgvPeople.Rows.Clear()
+            Dim selectedPersons As ArrayList = GetPeopleLikeName("%" & TxtForename.Text, "%" & TxtSurname.Text)
+            For Each oPerson As Person In selectedPersons
+                Dim tRow As DataGridViewRow = DgvPeople.Rows(DgvPeople.Rows.Add)
+                tRow.Cells(SelPersonId.Name).Value = oPerson.Id
+                tRow.Cells(SelPersonName.Name).Value = oPerson.Name
+                tRow.Cells(SelPersonYear.Name).Value = oPerson.BirthYear
+            Next
+            DgvPeople.ClearSelection()
+        Else
+            ShowStatus("Enter Name Value", lblStatus, False, True)
+        End If
         bLoadingPeople = False
     End Sub
     Private Sub LbPeople_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBoxPeople.SelectedIndexChanged
@@ -135,7 +142,11 @@ Public NotInheritable Class FrmImages
         txtImgName.Text = MakeImageName(TxtForename.Text, TxtSurname.Text)
     End Sub
     Private Sub BtnSearchById_Click(sender As Object, e As EventArgs) Handles BtnSearchById.Click
-        LoadScreenFromId(txtId.Text)
+        If Not String.IsNullOrEmpty(txtId.Text) Then
+            LoadScreenFromId(txtId.Text)
+        Else
+            ShowStatus("Enter Id value", lblStatus, False, True)
+        End If
     End Sub
     Private Sub BtnPicSave_Click(sender As Object, e As EventArgs) Handles BtnPicSave.Click
         If String.IsNullOrEmpty(TxtImageFilename.Text) Then

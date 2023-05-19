@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class FrmTweet
+Partial Class FrmDailyTweets
     Inherits System.Windows.Forms.Form
 
     'Required by the Windows Form Designer
@@ -11,7 +11,7 @@ Partial Class FrmTweet
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTweet))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDailyTweets))
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -102,9 +102,9 @@ Partial Class FrmTweet
         Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
         Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
-        Me.LblStatus.Name = "lblStatus"
+        Me.LblStatus.Name = "LblStatus"
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.LblStatus.Size = New System.Drawing.Size(9, 17)
+        Me.LblStatus.Size = New System.Drawing.Size(10, 17)
         '
         'PictureBox1
         '
@@ -743,7 +743,7 @@ Partial Class FrmTweet
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimumSize = New System.Drawing.Size(1364, 709)
         Me.Name = "FrmTweet"
-        Me.Text = "Tweet"
+        Me.Text = "Daily Tweets"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

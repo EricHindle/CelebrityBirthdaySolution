@@ -11,7 +11,7 @@ Imports System.Reflection
 Imports System.Text
 Imports TweetSharp
 
-Public NotInheritable Class FrmTweet
+Public NotInheritable Class FrmDailyTweets
 #Region "enum"
     Private Enum TweetType
         Birthday

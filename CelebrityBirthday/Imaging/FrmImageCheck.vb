@@ -148,9 +148,10 @@ Public Class FrmImageCheck
                 Refresh()
                 ShowStatus(_person.Id & " " & _person.Name & " Image file missing", LblStatus, True, MyBase.Name)
             Else
-                ShowStatus(_person.Id & " " & _person.Name, LblStatus, False, MyBase.Name)
+                ShowStatus(_person.Id & " " & _person.Name, LblStatus, False, False)
             End If
         Next
+        ShowStatus("Check complete", LblStatus, False, False)
     End Sub
     Private Sub AddTableRow(pPerson As Person, pErr As Integer)
         Dim newRow As DataGridViewRow = DgvMissingImages.Rows(DgvMissingImages.Rows.Add)

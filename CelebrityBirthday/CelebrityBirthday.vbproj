@@ -300,10 +300,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GlobalSuppressions.vb" />
-    <Compile Include="Imaging\FrmImageCapture.designer.vb">
-      <DependentUpon>FrmImageCapture.vb</DependentUpon>
+    <Compile Include="Imaging\FrmImageEdit.designer.vb">
+      <DependentUpon>FrmImageEdit.vb</DependentUpon>
     </Compile>
-    <Compile Include="Imaging\FrmImageCapture.vb">
+    <Compile Include="Imaging\FrmImageEdit.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Imaging\FrmImageCheck.Designer.vb">
@@ -312,10 +312,10 @@
     <Compile Include="Imaging\FrmImageCheck.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Imaging\FrmImages.Designer.vb">
-      <DependentUpon>FrmImages.vb</DependentUpon>
+    <Compile Include="Imaging\FrmDatabaseImages.Designer.vb">
+      <DependentUpon>FrmDatabaseImages.vb</DependentUpon>
     </Compile>
-    <Compile Include="Imaging\FrmImages.vb">
+    <Compile Include="Imaging\FrmDatabaseImages.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Menus\FrmMenu.Designer.vb">
@@ -374,11 +374,29 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Logging\LogUtil.vb" />
+    <Compile Include="Menus\FrmTwitterMenu.Designer.vb">
+      <DependentUpon>FrmTwitterMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Menus\FrmTwitterMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menus\FrmImageMenu.Designer.vb">
+      <DependentUpon>FrmImageMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Menus\FrmImageMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="modGlobalConstants.vb" />
     <Compile Include="Twitter\FrmSendBBTweet.Designer.vb">
       <DependentUpon>FrmSendBBTweet.vb</DependentUpon>
     </Compile>
     <Compile Include="Twitter\FrmSendBBTweet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Twitter\FrmTwitterMosaic.Designer.vb">
+      <DependentUpon>FrmTwitterMosaic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Twitter\FrmTwitterMosaic.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Twitter\modTwitter.vb" />
@@ -388,10 +406,10 @@
     <Compile Include="Twitter\FrmSendTwitter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Twitter\FrmTweet.Designer.vb">
-      <DependentUpon>FrmTweet.vb</DependentUpon>
+    <Compile Include="Twitter\FrmDailyTweets.Designer.vb">
+      <DependentUpon>FrmDailyTweets.vb</DependentUpon>
     </Compile>
-    <Compile Include="Twitter\FrmTweet.vb">
+    <Compile Include="Twitter\FrmDailyTweets.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Twitter\frmTwitterOutput.Designer.vb">
@@ -486,14 +504,14 @@
     <EmbeddedResource Include="FrmText.resx">
       <DependentUpon>FrmText.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Imaging\FrmImageCapture.resx">
-      <DependentUpon>FrmImageCapture.vb</DependentUpon>
+    <EmbeddedResource Include="Imaging\FrmImageEdit.resx">
+      <DependentUpon>FrmImageEdit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Imaging\FrmImageCheck.resx">
       <DependentUpon>FrmImageCheck.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Imaging\FrmImages.resx">
-      <DependentUpon>FrmImages.vb</DependentUpon>
+    <EmbeddedResource Include="Imaging\FrmDatabaseImages.resx">
+      <DependentUpon>FrmDatabaseImages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menus\FrmMenu.resx">
       <DependentUpon>FrmMenu.vb</DependentUpon>
@@ -523,14 +541,23 @@
     <EmbeddedResource Include="Logging\frmLogViewer.resx">
       <DependentUpon>frmLogViewer.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Menus\FrmTwitterMenu.resx">
+      <DependentUpon>FrmTwitterMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menus\FrmImageMenu.resx">
+      <DependentUpon>FrmImageMenu.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Twitter\FrmSendBBTweet.resx">
       <DependentUpon>FrmSendBBTweet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\FrmSendTwitter.resx">
       <DependentUpon>FrmSendTwitter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Twitter\FrmTweet.resx">
-      <DependentUpon>FrmTweet.vb</DependentUpon>
+    <EmbeddedResource Include="Twitter\FrmDailyTweets.resx">
+      <DependentUpon>FrmDailyTweets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Twitter\FrmTwitterMosaic.resx">
+      <DependentUpon>FrmTwitterMosaic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\frmTwitterOutput.resx">
       <DependentUpon>frmTwitterOutput.vb</DependentUpon>

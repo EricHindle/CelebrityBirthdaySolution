@@ -148,7 +148,7 @@ Public Class FrmSearch
         If DgvPeople.SelectedRows.Count = 1 Then
             ShowStatus("Opening images form", True)
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
-            Using _update As New FrmImages
+            Using _update As New FrmDatabaseImages
                 _update.PersonId = oRow.Cells(SelPersonId.Name).Value
                 _update.ShowDialog()
             End Using
@@ -160,7 +160,7 @@ Public Class FrmSearch
         If DgvPeople.SelectedRows.Count = 1 Then
             ShowStatus("Opening Twitter form", True)
             Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
-            Using _tweet As New FrmTweet
+            Using _tweet As New FrmDailyTweets
                 _tweet.DaySelection = oRow.Cells(selPersonDay.Name).Value
                 _tweet.MonthSelection = oRow.Cells(selPersonMonth.Name).Value
                 _tweet.ShowDialog()

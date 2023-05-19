@@ -9,7 +9,9 @@ Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Reflection
-Public NotInheritable Class FrmImageCapture
+Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
+
+Public NotInheritable Class FrmImageEdit
 #Region "Constants"
 
     Private Const SAVED_MESSAGE As String = "Image saved to "
@@ -158,7 +160,7 @@ Public NotInheritable Class FrmImageCapture
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
-        LogUtil.Info("Clearing image", MyBase.Name)
+        ShowStatus("Clearing image", lblStatus, True, MyBase.Name)
         ResetWindow()
         If PicCapture.Image IsNot Nothing Then
             PicCapture.Image.Dispose()
@@ -167,12 +169,20 @@ Public NotInheritable Class FrmImageCapture
         ClearCropSelection()
     End Sub
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        LogUtil.Info("Saving picture", MyBase.Name)
-        SaveImagePlain(PicCapture, PicCapture.Width, PicCapture.Height, False)
+        If Not String.IsNullOrWhiteSpace(TxtForename.Text) Or Not String.IsNullOrWhiteSpace(TxtSurname.Text) Then
+            ShowStatus("Saving picture", lblStatus, True, MyBase.Name)
+            SaveImagePlain(PicCapture, PicCapture.Width, PicCapture.Height, False)
+        Else
+            ShowStatus("No name supplied", lblStatus, False, True)
+        End If
     End Sub
     Private Sub BtnSaveCroppedImage_Click(sender As Object, e As EventArgs) Handles BtnSaveCroppedImage.Click
-        LogUtil.Info("Saving cropped image", MyBase.Name)
-        _savedImage = SaveImagePlain(PreviewPictureBox, NudSaveSize.Value, NudSaveSize.Value, True)
+        If Not String.IsNullOrWhiteSpace(TxtForename.Text) Or Not String.IsNullOrWhiteSpace(TxtSurname.Text) Then
+            ShowStatus("Saving cropped image", lblStatus, True, MyBase.Name)
+            _savedImage = SaveImagePlain(PreviewPictureBox, NudSaveSize.Value, NudSaveSize.Value, True)
+        Else
+            ShowStatus("No name supplied", lblStatus, False, True)
+        End If
     End Sub
     Private Sub BtnRotate_Click(sender As Object, e As EventArgs) Handles BtnRotate.Click
         If originalImage IsNot Nothing Then
@@ -228,29 +238,18 @@ Public NotInheritable Class FrmImageCapture
             Dim _filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
             Dim imageFileName As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Save, ImageUtil.ImageType.JPEG, _path, _filename)
             If Not String.IsNullOrEmpty(imageFileName) Then
-                LogUtil.Info("Saving image from picture box", MyBase.Name)
+                ShowStatus("Saving image from picture box", lblStatus, True, MyBase.Name)
                 ImageUtil.SaveImageFromPictureBox(_pictureBox, _width, _height, imageFileName, ImageUtil.ImageType.JPEG)
                 imageFile = imageFileName
-                DisplayAndLog(SAVED_MESSAGE & imageFileName)
+                ShowStatus(SAVED_MESSAGE & imageFileName, lblStatus, True, MyBase.Name)
             Else
-                DisplayAndLog(NOT_SAVED_MESSAGE)
+                ShowStatus(NOT_SAVED_MESSAGE, lblStatus, True, MyBase.Name)
             End If
         Catch ex As ArgumentException
-            ShowStatus(NOT_SAVED_MESSAGE, lblStatus,, MyBase.Name, ex)
+            ShowStatus(NOT_SAVED_MESSAGE, lblStatus, True, MyBase.Name, ex)
         End Try
         Return imageFile
     End Function
-    'Private Sub DisplayStatus(ByVal sText As String, isMessageBox As Boolean, Optional ex As Exception = Nothing, Optional _style As MsgBoxStyle = MsgBoxStyle.Exclamation, Optional isLogged As Boolean = False)
-    '    lblStatus.Text = sText
-    '    StatusStrip1.Refresh()
-    '    If isLogged Then
-    '        LogUtil.Info(sText, MyBase.Name)
-    '    End If
-    '    If isMessageBox Then
-    '        Dim _message As String = sText & If(ex Is Nothing, "", vbCrLf & ex.Message)
-    '        MsgBox(_message, _style, "Information")
-    '    End If
-    'End Sub
     Private Sub DisplayRawImage(ByRef oImage As Image)
         LogUtil.Info("Loading raw image", MyBase.Name)
         Dim sizeMessage As String = ""
@@ -400,22 +399,24 @@ Public NotInheritable Class FrmImageCapture
     ''' Store the target bitmap in the image on screen
     ''' </remarks>
     Private Sub AdjustImage()
-        Dim oPoints() As Point = {
+        If PreviewPictureBox.Image IsNot Nothing Then
+            Dim oPoints() As Point = {
             New Point(0, 0),
             New Point(PreviewPictureBox.Image.Width, 0),
             New Point(0, PreviewPictureBox.Image.Height)
-        }
-        Dim oRectangle As New Rectangle(0, 0, PreviewPictureBox.Image.Width, PreviewPictureBox.Image.Height)
-        Dim oImageAttributes As New ImageAttributes
-        Dim oColourMatrix As New ColorMatrix(GetColourMatrix)
-        oImageAttributes.SetColorMatrix(oColourMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap)
-        Dim oSourceBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
-        Dim oTargetBitmap As New Bitmap(PreviewPictureBox.Image.Width, PreviewPictureBox.Image.Height)
-        Dim oGraphics As Graphics = ImageUtil.InitialiseGraphics(oTargetBitmap)
-        oGraphics.DrawImage(oSourceBitMap, oPoints, oRectangle, GraphicsUnit.Pixel, oImageAttributes)
-        PreviewPictureBox.Image = oTargetBitmap
-        oImageAttributes.Dispose()
-        oSourceBitMap.Dispose()
+            }
+            Dim oRectangle As New Rectangle(0, 0, PreviewPictureBox.Image.Width, PreviewPictureBox.Image.Height)
+            Dim oImageAttributes As New ImageAttributes
+            Dim oColourMatrix As New ColorMatrix(GetColourMatrix)
+            oImageAttributes.SetColorMatrix(oColourMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap)
+            Dim oSourceBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
+            Dim oTargetBitmap As New Bitmap(PreviewPictureBox.Image.Width, PreviewPictureBox.Image.Height)
+            Dim oGraphics As Graphics = ImageUtil.InitialiseGraphics(oTargetBitmap)
+            oGraphics.DrawImage(oSourceBitMap, oPoints, oRectangle, GraphicsUnit.Pixel, oImageAttributes)
+            PreviewPictureBox.Image = oTargetBitmap
+            oImageAttributes.Dispose()
+            oSourceBitMap.Dispose()
+        End If
     End Sub
     Private Sub NudPenSize_ValueChanged(sender As Object, e As EventArgs) Handles nudPenSize.ValueChanged
         cropPenSize = nudPenSize.Value
@@ -452,6 +453,11 @@ Public NotInheritable Class FrmImageCapture
         Finally
             MyBase.Dispose(disposing)
         End Try
+    End Sub
+
+    Private Sub BtnResize_Click(sender As Object, e As EventArgs) Handles BtnResize.Click
+        PreviewPictureBox.Width = NudSaveSize.Value
+        PreviewPictureBox.Height = NudSaveSize.Value
     End Sub
 
 #End Region

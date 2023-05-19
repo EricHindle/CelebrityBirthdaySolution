@@ -448,10 +448,10 @@ Public NotInheritable Class FrmUpdateDatabase
             Try
                 Process.Start(My.Resources.WIKIURL & TxtWikiId.Text.Trim)
             Catch ex As InvalidOperationException
-                ShowStatus("Wikipedia failed", lblStatus, False)
+                ShowStatus("Wikipedia failed", lblStatus, False, True)
                 ShowStatus("Wikipedia failed " & TxtWikiId.Text,,, MyBase.Name, ex)
             Catch ex As ComponentModel.Win32Exception
-                ShowStatus("Wikipedia failed", lblStatus, False)
+                ShowStatus("Wikipedia failed", lblStatus, False, True)
                 ShowStatus("Wikipedia failed " & TxtWikiId.Text,,, MyBase.Name, ex)
             End Try
         End If
@@ -613,7 +613,7 @@ Public NotInheritable Class FrmUpdateDatabase
             Dim _id As Integer = lblID.Text
             If DgvPeople.SelectedRows.Count > 0 AndAlso _id > -1 Then
                 DisplayAndLog("Images")
-                Using _update As New FrmImages
+                Using _update As New FrmDatabaseImages
                     _update.PersonId = CInt(lblID.Text)
                     _update.ShowDialog()
                     PictureBox1.ImageLocation = _update.ImageFile

@@ -24,6 +24,9 @@ Partial Class FrmImageCheck
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmImageCheck))
         Me.DgvMissingImages = New System.Windows.Forms.DataGridView()
+        Me.personId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PersonName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.personError = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BtnCopyLoadDate = New System.Windows.Forms.Button()
         Me.BtnFileImgGen = New System.Windows.Forms.Button()
         Me.BtnWpImgGen = New System.Windows.Forms.Button()
@@ -60,9 +63,6 @@ Partial Class FrmImageCheck
         Me.BtnSearch = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.personId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PersonName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.personError = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvMissingImages, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,6 +82,30 @@ Partial Class FrmImageCheck
         Me.DgvMissingImages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvMissingImages.Size = New System.Drawing.Size(180, 568)
         Me.DgvMissingImages.TabIndex = 1
+        '
+        'personId
+        '
+        Me.personId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.personId.HeaderText = "Id"
+        Me.personId.Name = "personId"
+        Me.personId.ReadOnly = True
+        Me.personId.Visible = False
+        '
+        'PersonName
+        '
+        Me.PersonName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.PersonName.HeaderText = "Name"
+        Me.PersonName.Name = "PersonName"
+        Me.PersonName.ReadOnly = True
+        Me.PersonName.Visible = False
+        '
+        'personError
+        '
+        Me.personError.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.personError.HeaderText = "Err"
+        Me.personError.Name = "personError"
+        Me.personError.ReadOnly = True
+        Me.personError.Visible = False
         '
         'BtnCopyLoadDate
         '
@@ -202,7 +226,7 @@ Partial Class FrmImageCheck
         '
         Me.TxtSurname.AllowDrop = True
         Me.TxtSurname.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtSurname.Location = New System.Drawing.Point(599, 50)
+        Me.TxtSurname.Location = New System.Drawing.Point(520, 50)
         Me.TxtSurname.Name = "TxtSurname"
         Me.TxtSurname.Size = New System.Drawing.Size(238, 22)
         Me.TxtSurname.TabIndex = 151
@@ -211,9 +235,9 @@ Partial Class FrmImageCheck
         '
         Me.BtnFindImage.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnFindImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnFindImage.Location = New System.Drawing.Point(511, 512)
+        Me.BtnFindImage.Location = New System.Drawing.Point(829, 203)
         Me.BtnFindImage.Name = "BtnFindImage"
-        Me.BtnFindImage.Size = New System.Drawing.Size(108, 68)
+        Me.BtnFindImage.Size = New System.Drawing.Size(85, 79)
         Me.BtnFindImage.TabIndex = 159
         Me.BtnFindImage.Text = "Find an Image for Person"
         Me.BtnFindImage.UseVisualStyleBackColor = True
@@ -296,9 +320,9 @@ Partial Class FrmImageCheck
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(797, 535)
+        Me.BtnClose.Location = New System.Drawing.Point(817, 535)
         Me.BtnClose.Name = "BtnClose"
-        Me.BtnClose.Size = New System.Drawing.Size(117, 45)
+        Me.BtnClose.Size = New System.Drawing.Size(108, 45)
         Me.BtnClose.TabIndex = 162
         Me.BtnClose.Text = "Close"
         Me.BtnClose.UseVisualStyleBackColor = True
@@ -318,9 +342,9 @@ Partial Class FrmImageCheck
         Me.BtnLoadDateUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnLoadDateUpdate.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLoadDateUpdate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnLoadDateUpdate.Location = New System.Drawing.Point(827, 94)
+        Me.BtnLoadDateUpdate.Location = New System.Drawing.Point(829, 100)
         Me.BtnLoadDateUpdate.Name = "BtnLoadDateUpdate"
-        Me.BtnLoadDateUpdate.Size = New System.Drawing.Size(87, 56)
+        Me.BtnLoadDateUpdate.Size = New System.Drawing.Size(85, 79)
         Me.BtnLoadDateUpdate.TabIndex = 157
         Me.BtnLoadDateUpdate.Text = "Update Image Data"
         Me.BtnLoadDateUpdate.UseVisualStyleBackColor = True
@@ -359,7 +383,7 @@ Partial Class FrmImageCheck
         Me.BtnPicSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPicSave.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPicSave.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPicSave.Location = New System.Drawing.Point(829, 240)
+        Me.BtnPicSave.Location = New System.Drawing.Point(829, 306)
         Me.BtnPicSave.Name = "BtnPicSave"
         Me.BtnPicSave.Size = New System.Drawing.Size(85, 79)
         Me.BtnPicSave.TabIndex = 158
@@ -413,22 +437,24 @@ Partial Class FrmImageCheck
         Me.TxtForename.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtForename.Location = New System.Drawing.Point(282, 50)
         Me.TxtForename.Name = "TxtForename"
-        Me.TxtForename.Size = New System.Drawing.Size(310, 22)
+        Me.TxtForename.Size = New System.Drawing.Size(228, 22)
         Me.TxtForename.TabIndex = 150
         '
         'BtnSearch
         '
         Me.BtnSearch.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearch.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSearch.Location = New System.Drawing.Point(223, 512)
+        Me.BtnSearch.Location = New System.Drawing.Point(817, 430)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(108, 68)
         Me.BtnSearch.TabIndex = 186
-        Me.BtnSearch.Text = "Search"
+        Me.BtnSearch.Text = "Run Check"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
         'StatusStrip1
         '
+        Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 614)
         Me.StatusStrip1.Name = "StatusStrip1"
@@ -438,40 +464,20 @@ Partial Class FrmImageCheck
         '
         'LblStatus
         '
+        Me.LblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
         Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
+        Me.LblStatus.Margin = New System.Windows.Forms.Padding(0)
         Me.LblStatus.Name = "LblStatus"
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.LblStatus.Size = New System.Drawing.Size(7, 17)
-        '
-        'personId
-        '
-        Me.personId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.personId.HeaderText = "Id"
-        Me.personId.Name = "personId"
-        Me.personId.ReadOnly = True
-        Me.personId.Visible = False
-        '
-        'PersonName
-        '
-        Me.PersonName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.PersonName.HeaderText = "Name"
-        Me.PersonName.Name = "PersonName"
-        Me.PersonName.ReadOnly = True
-        Me.PersonName.Visible = False
-        '
-        'personError
-        '
-        Me.personError.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.personError.HeaderText = "Err"
-        Me.personError.Name = "personError"
-        Me.personError.ReadOnly = True
-        Me.personError.Visible = False
+        Me.LblStatus.Size = New System.Drawing.Size(7, 22)
         '
         'FrmImageCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(937, 636)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.BtnSearch)

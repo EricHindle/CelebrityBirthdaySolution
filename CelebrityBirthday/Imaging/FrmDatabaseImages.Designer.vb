@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class FrmImages
+Partial Class FrmDatabaseImages
     Inherits System.Windows.Forms.Form
 
     'Required by the Windows Form Designer
@@ -10,7 +10,8 @@ Partial Class FrmImages
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmImages))
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDatabaseImages))
         Me.cboDay = New System.Windows.Forms.ComboBox()
         Me.cboMonth = New System.Windows.Forms.ComboBox()
         Me.ListBoxPeople = New System.Windows.Forms.ListBox()
@@ -63,6 +64,7 @@ Partial Class FrmImages
         Me.BtnWpImgGen = New System.Windows.Forms.Button()
         Me.BtnFileImgGen = New System.Windows.Forms.Button()
         Me.BtnCopyLoadDate = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -140,11 +142,12 @@ Partial Class FrmImages
         Me.BtnPicSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPicSave.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPicSave.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPicSave.Location = New System.Drawing.Point(913, 245)
+        Me.BtnPicSave.Location = New System.Drawing.Point(913, 323)
         Me.BtnPicSave.Name = "BtnPicSave"
-        Me.BtnPicSave.Size = New System.Drawing.Size(85, 79)
+        Me.BtnPicSave.Size = New System.Drawing.Size(87, 68)
         Me.BtnPicSave.TabIndex = 13
         Me.BtnPicSave.Text = "Save Image to File"
+        Me.ToolTip1.SetToolTip(Me.BtnPicSave, "Save image from wordpress")
         Me.BtnPicSave.UseVisualStyleBackColor = True
         '
         'Label12
@@ -235,9 +238,9 @@ Partial Class FrmImages
         '
         Me.TxtForename.AllowDrop = True
         Me.TxtForename.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtForename.Location = New System.Drawing.Point(402, 55)
+        Me.TxtForename.Location = New System.Drawing.Point(490, 58)
         Me.TxtForename.Name = "TxtForename"
-        Me.TxtForename.Size = New System.Drawing.Size(310, 22)
+        Me.TxtForename.Size = New System.Drawing.Size(217, 22)
         Me.TxtForename.TabIndex = 4
         '
         'txtLoadYr
@@ -272,9 +275,9 @@ Partial Class FrmImages
         Me.BtnLoadDateUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnLoadDateUpdate.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLoadDateUpdate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnLoadDateUpdate.Location = New System.Drawing.Point(913, 99)
+        Me.BtnLoadDateUpdate.Location = New System.Drawing.Point(915, 214)
         Me.BtnLoadDateUpdate.Name = "BtnLoadDateUpdate"
-        Me.BtnLoadDateUpdate.Size = New System.Drawing.Size(87, 56)
+        Me.BtnLoadDateUpdate.Size = New System.Drawing.Size(87, 68)
         Me.BtnLoadDateUpdate.TabIndex = 12
         Me.BtnLoadDateUpdate.Text = "Update Image Data"
         Me.BtnLoadDateUpdate.UseVisualStyleBackColor = True
@@ -298,6 +301,7 @@ Partial Class FrmImages
         Me.BtnMakeImgName.Size = New System.Drawing.Size(28, 28)
         Me.BtnMakeImgName.TabIndex = 7
         Me.BtnMakeImgName.Text = "<"
+        Me.ToolTip1.SetToolTip(Me.BtnMakeImgName, "Make filename from person name")
         Me.BtnMakeImgName.UseVisualStyleBackColor = True
         '
         'txtImgName
@@ -334,11 +338,12 @@ Partial Class FrmImages
         '
         'BtnFindImage
         '
+        Me.BtnFindImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnFindImage.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnFindImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnFindImage.Location = New System.Drawing.Point(349, 538)
+        Me.BtnFindImage.Location = New System.Drawing.Point(915, 105)
         Me.BtnFindImage.Name = "BtnFindImage"
-        Me.BtnFindImage.Size = New System.Drawing.Size(108, 68)
+        Me.BtnFindImage.Size = New System.Drawing.Size(87, 68)
         Me.BtnFindImage.TabIndex = 14
         Me.BtnFindImage.Text = "Find an Image for Person"
         Me.BtnFindImage.UseVisualStyleBackColor = True
@@ -357,7 +362,7 @@ Partial Class FrmImages
         'txtId
         '
         Me.txtId.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtId.Location = New System.Drawing.Point(402, 18)
+        Me.txtId.Location = New System.Drawing.Point(490, 20)
         Me.txtId.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtId.Name = "txtId"
         Me.txtId.Size = New System.Drawing.Size(135, 22)
@@ -368,9 +373,9 @@ Partial Class FrmImages
         Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClear.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClear.Location = New System.Drawing.Point(913, 16)
+        Me.BtnClear.Location = New System.Drawing.Point(911, 432)
         Me.BtnClear.Name = "BtnClear"
-        Me.BtnClear.Size = New System.Drawing.Size(87, 33)
+        Me.BtnClear.Size = New System.Drawing.Size(87, 68)
         Me.BtnClear.TabIndex = 3
         Me.BtnClear.Text = "Clear"
         Me.BtnClear.UseVisualStyleBackColor = True
@@ -417,22 +422,22 @@ Partial Class FrmImages
         '
         Me.BtnSearchByName.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearchByName.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSearchByName.Location = New System.Drawing.Point(650, 550)
+        Me.BtnSearchByName.Location = New System.Drawing.Point(420, 56)
         Me.BtnSearchByName.Name = "BtnSearchByName"
-        Me.BtnSearchByName.Size = New System.Drawing.Size(107, 59)
+        Me.BtnSearchByName.Size = New System.Drawing.Size(64, 24)
         Me.BtnSearchByName.TabIndex = 16
-        Me.BtnSearchByName.Text = "Search by Name"
+        Me.BtnSearchByName.Text = "Search"
         Me.BtnSearchByName.UseVisualStyleBackColor = True
         '
         'BtnSearchById
         '
         Me.BtnSearchById.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearchById.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSearchById.Location = New System.Drawing.Point(512, 564)
+        Me.BtnSearchById.Location = New System.Drawing.Point(420, 20)
         Me.BtnSearchById.Name = "BtnSearchById"
-        Me.BtnSearchById.Size = New System.Drawing.Size(107, 42)
+        Me.BtnSearchById.Size = New System.Drawing.Size(64, 24)
         Me.BtnSearchById.TabIndex = 15
-        Me.BtnSearchById.Text = "Search by id"
+        Me.BtnSearchById.Text = "Search"
         Me.BtnSearchById.UseVisualStyleBackColor = True
         '
         'StatusStrip1
@@ -462,7 +467,7 @@ Partial Class FrmImages
         '
         Me.TxtSurname.AllowDrop = True
         Me.TxtSurname.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtSurname.Location = New System.Drawing.Point(719, 55)
+        Me.TxtSurname.Location = New System.Drawing.Point(714, 58)
         Me.TxtSurname.Name = "TxtSurname"
         Me.TxtSurname.Size = New System.Drawing.Size(238, 22)
         Me.TxtSurname.TabIndex = 5
@@ -501,6 +506,7 @@ Partial Class FrmImages
         Me.BtnUrlCopy.Name = "BtnUrlCopy"
         Me.BtnUrlCopy.Size = New System.Drawing.Size(33, 33)
         Me.BtnUrlCopy.TabIndex = 141
+        Me.ToolTip1.SetToolTip(Me.BtnUrlCopy, "Copy to clipboard")
         Me.BtnUrlCopy.UseVisualStyleBackColor = True
         '
         'BtnFilenameCopy
@@ -556,6 +562,7 @@ Partial Class FrmImages
         Me.BtnWpImageRefresh.Name = "BtnWpImageRefresh"
         Me.BtnWpImageRefresh.Size = New System.Drawing.Size(33, 33)
         Me.BtnWpImageRefresh.TabIndex = 143
+        Me.ToolTip1.SetToolTip(Me.BtnWpImageRefresh, "Refresh image from url")
         Me.BtnWpImageRefresh.UseVisualStyleBackColor = True
         '
         'BtnFileImageRefresh
@@ -565,6 +572,7 @@ Partial Class FrmImages
         Me.BtnFileImageRefresh.Name = "BtnFileImageRefresh"
         Me.BtnFileImageRefresh.Size = New System.Drawing.Size(33, 33)
         Me.BtnFileImageRefresh.TabIndex = 144
+        Me.ToolTip1.SetToolTip(Me.BtnFileImageRefresh, "Refresh image from file")
         Me.BtnFileImageRefresh.UseVisualStyleBackColor = True
         '
         'BtnWpImgGen
@@ -576,6 +584,7 @@ Partial Class FrmImages
         Me.BtnWpImgGen.Size = New System.Drawing.Size(28, 28)
         Me.BtnWpImgGen.TabIndex = 145
         Me.BtnWpImgGen.Text = "<"
+        Me.ToolTip1.SetToolTip(Me.BtnWpImgGen, "Generate url")
         Me.BtnWpImgGen.UseVisualStyleBackColor = True
         '
         'BtnFileImgGen
@@ -587,20 +596,21 @@ Partial Class FrmImages
         Me.BtnFileImgGen.Size = New System.Drawing.Size(28, 28)
         Me.BtnFileImgGen.TabIndex = 146
         Me.BtnFileImgGen.Text = "<"
+        Me.ToolTip1.SetToolTip(Me.BtnFileImgGen, "Generate filename")
         Me.BtnFileImgGen.UseVisualStyleBackColor = True
         '
         'BtnCopyLoadDate
         '
-        Me.BtnCopyLoadDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnCopyLoadDate.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyLoadDate.Location = New System.Drawing.Point(711, 171)
         Me.BtnCopyLoadDate.Name = "BtnCopyLoadDate"
         Me.BtnCopyLoadDate.Size = New System.Drawing.Size(28, 28)
         Me.BtnCopyLoadDate.TabIndex = 147
         Me.BtnCopyLoadDate.Text = "<"
+        Me.ToolTip1.SetToolTip(Me.BtnCopyLoadDate, "Copy WordPress date")
         Me.BtnCopyLoadDate.UseVisualStyleBackColor = True
         '
-        'FrmImages
+        'FrmDatabaseImages
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -657,7 +667,7 @@ Partial Class FrmImages
         Me.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "FrmImages"
+        Me.Name = "FrmDatabaseImages"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Images"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -724,4 +734,5 @@ Partial Class FrmImages
     Friend WithEvents BtnWpImgGen As Button
     Friend WithEvents BtnFileImgGen As Button
     Friend WithEvents BtnCopyLoadDate As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

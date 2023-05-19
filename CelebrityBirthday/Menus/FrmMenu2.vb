@@ -11,7 +11,7 @@ Public Class FrmMenu2
         LogUtil.Info("Closing", MyBase.Name)
         Close()
     End Sub
-    Private Sub BtnSendTweet_Click(sender As Object, e As EventArgs) Handles BtnSendTweet.Click
+    Private Sub BtnSendTweet_Click(sender As Object, e As EventArgs)
         Hide()
         LogUtil.Info("Single Tweet", MyBase.Name)
         Using _sendTwitter As New FrmSendTwitter
@@ -29,30 +29,16 @@ Public Class FrmMenu2
         End Using
         Show()
     End Sub
-    Private Sub BtnTwitter_Click(sender As Object, e As EventArgs) Handles BtnTwitter.Click
+    Private Sub BtnTwitter_Click(sender As Object, e As EventArgs)
         LogUtil.Info("Twitter", MyBase.Name)
         Hide()
-        Using _twitterForm As New frmTwitterOutput
+        Using _twitterForm As New FrmTwitterOutput
             _twitterForm.ShowDialog()
         End Using
         Show()
     End Sub
-    Private Sub BtnTapestry_Click(sender As Object, e As EventArgs) Handles BtnMosaic.Click
-        LogUtil.Info("Photo tapestry", MyBase.Name)
-        Hide()
-        Using _tapestryForm As New FrmMosaic
-            _tapestryForm.ShowDialog()
-        End Using
-        Show()
-    End Sub
-    Private Sub BtnImageEditing_Click(sender As Object, e As EventArgs) Handles BtnImageEditing.Click
-        LogUtil.Info("Image editing", MyBase.Name)
-        Hide()
-        Using _imgEditForm As New FrmImageCapture
-            _imgEditForm.ShowDialog()
-        End Using
-        Show()
-    End Sub
+
+
     Private Sub TxtBirthdateCheck_Click(sender As Object, e As EventArgs) Handles TxtBirthdateCheck.Click
         LogUtil.Info("Birth date check", MyBase.Name)
         Hide()
@@ -85,15 +71,24 @@ Public Class FrmMenu2
         End Using
         Show()
     End Sub
-    Private Sub BtnTest_Click_1(sender As Object, e As EventArgs) Handles BtnTest.Click
+    Private Sub BtnTest_Click_1(sender As Object, e As EventArgs)
         LogUtil.Info("Testing", MyBase.Name)
         Hide()
         Using _imgCheck As New FrmImageCheck
-            _imgCheck.showdialog
+            _imgCheck.ShowDialog()
         End Using
         'Using _fbtest As New FrmFacebookTest
         '    _fbtest.ShowDialog()
         'End Using
+        Show()
+    End Sub
+
+    Private Sub BtnOptions_Click(sender As Object, e As EventArgs) Handles BtnOptions.Click
+        Hide()
+        Using _options As New FrmOptions
+            LogUtil.Info("Options", MyBase.Name)
+            _options.ShowDialog()
+        End Using
         Show()
     End Sub
 #End Region

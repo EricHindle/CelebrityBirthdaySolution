@@ -55,12 +55,19 @@ Friend Module modCbday
             End If
         End If
     End Sub
-    Public Function ShowStatus(pText As String, ByRef Optional pStatus As ToolStripStatusLabel = Nothing, Optional isLogged As Boolean = True, Optional pSource As String = "", Optional pEx As Exception = Nothing, Optional isAppend As Boolean = False, Optional isMessageBox As Boolean = False, Optional pBoxStyle As MsgBoxStyle = MsgBoxStyle.Exclamation) As MsgBoxResult
+    Public Sub ShowStatus(pText As String, ByRef pStatus As ToolStripStatusLabel, Optional isAppend As Boolean = False, Optional IsBeep As Boolean = False)
+        ShowStatus(pText, pStatus, False, isAppend:=isAppend, IsBeep:=IsBeep)
+    End Sub
+    Public Sub ShowStatus(pText As String, Optional pSource As String = "", Optional pEx As Exception = Nothing)
+        ShowStatus(pText, Nothing, True, pSource:=pSource, pEx:=pEx)
+    End Sub
+    Public Function ShowStatus(pText As String, ByRef Optional pStatus As ToolStripStatusLabel = Nothing, Optional isLogged As Boolean = True, Optional pSource As String = "", Optional pEx As Exception = Nothing, Optional isAppend As Boolean = False, Optional isMessageBox As Boolean = False, Optional pBoxStyle As MsgBoxStyle = MsgBoxStyle.Exclamation, Optional IsBeep As Boolean = False) As MsgBoxResult
         Dim rtnResult As MsgBoxResult = MsgBoxResult.Ok
         If pStatus IsNot Nothing AndAlso pStatus.GetType Is GetType(ToolStripStatusLabel) Then
             pStatus.Text = If(isAppend, pStatus.Text, "") & pText
             pStatus.Owner.Refresh()
         End If
+        If IsBeep Then Beep()
         If isLogged Then
             If pEx Is Nothing Then
                 LogUtil.Info(pText, pSource)
@@ -81,7 +88,7 @@ Friend Module modCbday
         ShowStatus(pText, pStatus, False,,, True)
     End Sub
     Public Sub ClearStatus(ByRef pStatus As ToolStripStatusLabel)
-        ShowStatus("", pStatus, False)
+        ShowStatus("", pStatus, False, False)
     End Sub
 #End Region
 #Region "functions"

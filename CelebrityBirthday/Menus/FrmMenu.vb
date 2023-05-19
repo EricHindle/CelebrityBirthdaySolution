@@ -12,7 +12,7 @@ Public Class FrmMenu
     End Sub
     Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
         Hide()
-        Using imgForm As New FrmImages
+        Using imgForm As New FrmImageMenu
             LogUtil.Info("Images", MyBase.Name)
             imgForm.ShowDialog()
         End Using
@@ -26,7 +26,7 @@ Public Class FrmMenu
         End Using
         Show()
     End Sub
-    Private Sub BtnOptions_Click(sender As Object, e As EventArgs) Handles BtnOptions.Click
+    Private Sub BtnOptions_Click(sender As Object, e As EventArgs)
         Hide()
         Using _options As New FrmOptions
             LogUtil.Info("Options", MyBase.Name)
@@ -34,14 +34,7 @@ Public Class FrmMenu
         End Using
         Show()
     End Sub
-    Private Sub BtnPictures_Click(sender As Object, e As EventArgs) Handles BtnPictures.Click
-        Hide()
-        Using _pictures As New FrmImageStore
-            LogUtil.Info("Pictures", MyBase.Name)
-            _pictures.ShowDialog()
-        End Using
-        Show()
-    End Sub
+
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         Hide()
         Using _search As New FrmSearch
@@ -60,9 +53,9 @@ Public Class FrmMenu
     End Sub
     Private Sub BtnTweet_Click(sender As Object, e As EventArgs) Handles BtnTweet.Click
         Hide()
-        Using _tweet As New FrmTweet
-            LogUtil.Info("Tweet", MyBase.Name)
-            _tweet.ShowDialog()
+        Using _tweetMenu As New FrmTwitterMenu
+            LogUtil.Info("Twitter", MyBase.Name)
+            _tweetMenu.ShowDialog()
         End Using
         Show()
     End Sub
@@ -159,6 +152,16 @@ Public Class FrmMenu
             LogUtil.Fatal("Database not available", MyBase.Name)
             Close()
         End If
+    End Sub
+
+    Private Sub BtnDeadList_Click(sender As Object, e As EventArgs) Handles BtnDeadList.Click
+        LogUtil.Info("List of deaths", MyBase.Name)
+        Hide()
+        Using _list As New FrmDeathList
+            _list.Year = Today.Year
+            _list.ShowDialog()
+        End Using
+        Show()
     End Sub
 
 #End Region
