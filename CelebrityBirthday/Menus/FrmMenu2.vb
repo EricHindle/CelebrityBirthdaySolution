@@ -14,7 +14,7 @@ Public Class FrmMenu2
     Private Sub BtnSendTweet_Click(sender As Object, e As EventArgs)
         Hide()
         LogUtil.Info("Single Tweet", MyBase.Name)
-        Using _sendTwitter As New FrmSendTwitter
+        Using _sendTwitter As New FrmSingleTweet
             _sendTwitter.ShowDialog()
         End Using
         Show()

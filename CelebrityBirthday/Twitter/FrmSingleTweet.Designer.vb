@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class FrmSendTwitter
+Partial Class FrmSingleTweet
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,10 +24,9 @@ Partial Class FrmSendTwitter
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSendTwitter))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSingleTweet))
         Me.btnClose = New System.Windows.Forms.Button()
         Me.rtbTweetProgress = New System.Windows.Forms.RichTextBox()
-        Me.BtnAuthenticate = New System.Windows.Forms.Button()
         Me.RtbTweetText = New System.Windows.Forms.RichTextBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -54,20 +53,9 @@ Partial Class FrmSendTwitter
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.chkImages = New System.Windows.Forms.CheckBox()
         Me.LblTweetLength = New System.Windows.Forms.Label()
-        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.BtnSaveImage = New System.Windows.Forms.Button()
         Me.BtnClearImages = New System.Windows.Forms.Button()
-        Me.TxtOauthToken = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TxtOauthTokenSecret = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.TxtOauthVerifier = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtVerifiedOauthTokenSecret = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TxtVerifiedOauthToken = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -81,7 +69,7 @@ Partial Class FrmSendTwitter
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1164, 557)
+        Me.btnClose.Location = New System.Drawing.Point(683, 525)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(162, 41)
@@ -91,30 +79,18 @@ Partial Class FrmSendTwitter
         '
         'rtbTweetProgress
         '
-        Me.rtbTweetProgress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.rtbTweetProgress.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rtbTweetProgress.BackColor = System.Drawing.Color.Black
         Me.rtbTweetProgress.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbTweetProgress.ForeColor = System.Drawing.Color.White
-        Me.rtbTweetProgress.Location = New System.Drawing.Point(572, 57)
+        Me.rtbTweetProgress.Location = New System.Drawing.Point(586, 57)
         Me.rtbTweetProgress.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.rtbTweetProgress.Name = "rtbTweetProgress"
-        Me.rtbTweetProgress.Size = New System.Drawing.Size(271, 318)
+        Me.rtbTweetProgress.Size = New System.Drawing.Size(257, 398)
         Me.rtbTweetProgress.TabIndex = 23
         Me.rtbTweetProgress.Text = ""
-        '
-        'BtnAuthenticate
-        '
-        Me.BtnAuthenticate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnAuthenticate.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnAuthenticate.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAuthenticate.Location = New System.Drawing.Point(860, 509)
-        Me.BtnAuthenticate.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.BtnAuthenticate.Name = "BtnAuthenticate"
-        Me.BtnAuthenticate.Size = New System.Drawing.Size(110, 41)
-        Me.BtnAuthenticate.TabIndex = 24
-        Me.BtnAuthenticate.Text = "Authenticate"
-        Me.BtnAuthenticate.UseVisualStyleBackColor = True
         '
         'RtbTweetText
         '
@@ -125,7 +101,7 @@ Partial Class FrmSendTwitter
         Me.RtbTweetText.Location = New System.Drawing.Point(23, 383)
         Me.RtbTweetText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RtbTweetText.Name = "RtbTweetText"
-        Me.RtbTweetText.Size = New System.Drawing.Size(420, 215)
+        Me.RtbTweetText.Size = New System.Drawing.Size(420, 162)
         Me.RtbTweetText.TabIndex = 26
         Me.RtbTweetText.Text = ""
         '
@@ -170,7 +146,7 @@ Partial Class FrmSendTwitter
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSend.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(449, 490)
+        Me.BtnSend.Location = New System.Drawing.Point(449, 485)
         Me.BtnSend.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnSend.Name = "BtnSend"
         Me.BtnSend.Size = New System.Drawing.Size(96, 60)
@@ -183,10 +159,10 @@ Partial Class FrmSendTwitter
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 622)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 576)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
-        Me.StatusStrip1.Size = New System.Drawing.Size(1338, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(857, 22)
         Me.StatusStrip1.TabIndex = 28
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -198,14 +174,14 @@ Partial Class FrmSendTwitter
         Me.lblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(9, 17)
+        Me.lblStatus.Size = New System.Drawing.Size(10, 17)
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label1.Location = New System.Drawing.Point(573, 19)
+        Me.Label1.Location = New System.Drawing.Point(583, 21)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(57, 17)
         Me.Label1.TabIndex = 30
@@ -215,10 +191,10 @@ Partial Class FrmSendTwitter
         '
         Me.cmbTwitterUsers.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbTwitterUsers.FormattingEnabled = True
-        Me.cmbTwitterUsers.Location = New System.Drawing.Point(668, 17)
+        Me.cmbTwitterUsers.Location = New System.Drawing.Point(646, 18)
         Me.cmbTwitterUsers.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmbTwitterUsers.Name = "cmbTwitterUsers"
-        Me.cmbTwitterUsers.Size = New System.Drawing.Size(257, 24)
+        Me.cmbTwitterUsers.Size = New System.Drawing.Size(197, 24)
         Me.cmbTwitterUsers.TabIndex = 31
         '
         'BtnImage
@@ -258,7 +234,7 @@ Partial Class FrmSendTwitter
         'TxtSurname
         '
         Me.TxtSurname.Font = New System.Drawing.Font("Tahoma", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtSurname.Location = New System.Drawing.Point(329, 59)
+        Me.TxtSurname.Location = New System.Drawing.Point(237, 59)
         Me.TxtSurname.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TxtSurname.Name = "TxtSurname"
         Me.TxtSurname.Size = New System.Drawing.Size(174, 26)
@@ -270,7 +246,7 @@ Partial Class FrmSendTwitter
         Me.TxtForename.Location = New System.Drawing.Point(72, 59)
         Me.TxtForename.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TxtForename.Name = "TxtForename"
-        Me.TxtForename.Size = New System.Drawing.Size(249, 26)
+        Me.TxtForename.Size = New System.Drawing.Size(159, 26)
         Me.TxtForename.TabIndex = 34
         '
         'TxtName
@@ -363,29 +339,17 @@ Partial Class FrmSendTwitter
         '
         Me.LblTweetLength.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.LblTweetLength.AutoSize = True
-        Me.LblTweetLength.Location = New System.Drawing.Point(463, 437)
+        Me.LblTweetLength.Location = New System.Drawing.Point(20, 549)
         Me.LblTweetLength.Name = "LblTweetLength"
         Me.LblTweetLength.Size = New System.Drawing.Size(16, 17)
         Me.LblTweetLength.TabIndex = 137
         Me.LblTweetLength.Text = "0"
         '
-        'WebBrowser1
-        '
-        Me.WebBrowser1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.WebBrowser1.Location = New System.Drawing.Point(862, 56)
-        Me.WebBrowser1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(23, 25)
-        Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(464, 445)
-        Me.WebBrowser1.TabIndex = 139
-        '
         'BtnClear
         '
         Me.BtnClear.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClear.Location = New System.Drawing.Point(423, 12)
+        Me.BtnClear.Location = New System.Drawing.Point(484, 12)
         Me.BtnClear.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(80, 34)
@@ -416,139 +380,28 @@ Partial Class FrmSendTwitter
         Me.BtnClearImages.Text = "Clear Images"
         Me.BtnClearImages.UseVisualStyleBackColor = True
         '
-        'TxtOauthToken
-        '
-        Me.TxtOauthToken.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtOauthToken.Location = New System.Drawing.Point(575, 400)
-        Me.TxtOauthToken.Name = "TxtOauthToken"
-        Me.TxtOauthToken.Size = New System.Drawing.Size(265, 24)
-        Me.TxtOauthToken.TabIndex = 143
-        '
-        'Label2
-        '
-        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label2.Location = New System.Drawing.Point(575, 383)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(78, 14)
-        Me.Label2.TabIndex = 144
-        Me.Label2.Text = "oauth_token"
-        '
-        'Label3
-        '
-        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label3.Location = New System.Drawing.Point(575, 427)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(119, 14)
-        Me.Label3.TabIndex = 146
-        Me.Label3.Text = "oauth_token_secret"
-        '
-        'TxtOauthTokenSecret
-        '
-        Me.TxtOauthTokenSecret.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtOauthTokenSecret.Location = New System.Drawing.Point(575, 444)
-        Me.TxtOauthTokenSecret.Name = "TxtOauthTokenSecret"
-        Me.TxtOauthTokenSecret.Size = New System.Drawing.Size(265, 24)
-        Me.TxtOauthTokenSecret.TabIndex = 145
-        '
-        'Label4
-        '
-        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label4.Location = New System.Drawing.Point(575, 471)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(82, 14)
-        Me.Label4.TabIndex = 148
-        Me.Label4.Text = "oauth_verifier"
-        '
-        'TxtOauthVerifier
-        '
-        Me.TxtOauthVerifier.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtOauthVerifier.Location = New System.Drawing.Point(575, 488)
-        Me.TxtOauthVerifier.Name = "TxtOauthVerifier"
-        Me.TxtOauthVerifier.Size = New System.Drawing.Size(265, 24)
-        Me.TxtOauthVerifier.TabIndex = 147
-        '
-        'Label5
-        '
-        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label5.Location = New System.Drawing.Point(575, 559)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(162, 14)
-        Me.Label5.TabIndex = 152
-        Me.Label5.Text = "verified oauth_token_secret"
-        '
-        'TxtVerifiedOauthTokenSecret
-        '
-        Me.TxtVerifiedOauthTokenSecret.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtVerifiedOauthTokenSecret.Location = New System.Drawing.Point(575, 576)
-        Me.TxtVerifiedOauthTokenSecret.Name = "TxtVerifiedOauthTokenSecret"
-        Me.TxtVerifiedOauthTokenSecret.Size = New System.Drawing.Size(265, 24)
-        Me.TxtVerifiedOauthTokenSecret.TabIndex = 151
-        '
-        'Label6
-        '
-        Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label6.Location = New System.Drawing.Point(575, 515)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(121, 14)
-        Me.Label6.TabIndex = 150
-        Me.Label6.Text = "verified oauth_token"
-        '
-        'TxtVerifiedOauthToken
-        '
-        Me.TxtVerifiedOauthToken.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtVerifiedOauthToken.Location = New System.Drawing.Point(575, 532)
-        Me.TxtVerifiedOauthToken.Name = "TxtVerifiedOauthToken"
-        Me.TxtVerifiedOauthToken.Size = New System.Drawing.Size(265, 24)
-        Me.TxtVerifiedOauthToken.TabIndex = 149
-        '
         'Label7
         '
         Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.Label7.Location = New System.Drawing.Point(1026, 514)
+        Me.Label7.Location = New System.Drawing.Point(582, 485)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(259, 23)
         Me.Label7.TabIndex = 153
         Me.Label7.Text = "Check Twitter User Logged In"
         '
-        'FrmSendTwitter
+        'FrmSingleTweet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1338, 644)
+        Me.ClientSize = New System.Drawing.Size(857, 598)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.TxtVerifiedOauthTokenSecret)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.TxtVerifiedOauthToken)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.TxtOauthVerifier)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.TxtOauthTokenSecret)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.TxtOauthToken)
         Me.Controls.Add(Me.BtnClearImages)
         Me.Controls.Add(Me.BtnSaveImage)
         Me.Controls.Add(Me.BtnClear)
-        Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.chkImages)
         Me.Controls.Add(Me.LblTweetLength)
         Me.Controls.Add(Me.PictureBox2)
@@ -568,15 +421,14 @@ Partial Class FrmSendTwitter
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.BtnSend)
-        Me.Controls.Add(Me.BtnAuthenticate)
         Me.Controls.Add(Me.rtbTweetProgress)
         Me.Controls.Add(Me.btnClose)
         Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Name = "FrmSendTwitter"
-        Me.Text = "Send Twitter"
+        Me.Name = "FrmSingleTweet"
+        Me.Text = "Send Tweet"
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
@@ -589,7 +441,6 @@ Partial Class FrmSendTwitter
     End Sub
     Friend WithEvents btnClose As Button
     Friend WithEvents rtbTweetProgress As RichTextBox
-    Friend WithEvents BtnAuthenticate As Button
     Friend WithEvents RtbTweetText As RichTextBox
     Friend WithEvents BtnSend As Button
     Friend WithEvents StatusStrip1 As StatusStrip
@@ -610,7 +461,6 @@ Partial Class FrmSendTwitter
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents chkImages As CheckBox
     Friend WithEvents LblTweetLength As Label
-    Friend WithEvents WebBrowser1 As WebBrowser
     Friend WithEvents BtnClear As Button
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents CopyToolStripMenuItem As ToolStripMenuItem
@@ -620,15 +470,5 @@ Partial Class FrmSendTwitter
     Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BtnSaveImage As Button
     Friend WithEvents BtnClearImages As Button
-    Friend WithEvents TxtOauthToken As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents TxtOauthTokenSecret As TextBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents TxtOauthVerifier As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents TxtVerifiedOauthTokenSecret As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents TxtVerifiedOauthToken As TextBox
     Friend WithEvents Label7 As Label
 End Class

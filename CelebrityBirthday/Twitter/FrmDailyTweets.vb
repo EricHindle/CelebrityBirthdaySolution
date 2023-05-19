@@ -221,7 +221,7 @@ Public NotInheritable Class FrmDailyTweets
         If cmbTwitterUsers.SelectedIndex >= 0 Then
             SendTweet(SaveImage(TabControl1.SelectedTab))
         Else
-            Using _sendTweet As New FrmSendTwitter
+            Using _sendTweet As New FrmSingleTweet
                 _sendTweet.TweetText = GetRichTextBoxFromPage(TabControl1.SelectedTab).Text
                 _sendTweet.ShowDialog()
             End Using

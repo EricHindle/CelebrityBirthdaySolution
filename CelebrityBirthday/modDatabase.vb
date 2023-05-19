@@ -262,8 +262,8 @@ Module modDatabase
         End Try
         Return oPersonTable
     End Function
-    Public Function GetPeopleByName(oForename As String, oSurname As String) As ArrayList
-        Dim oPersonList As New ArrayList
+    Public Function GetPeopleByName(oForename As String, oSurname As String) As List(Of Person)
+        Dim oPersonList As New List(Of Person)
         Try
             oPersonTa.FillByName(oPersonTable, oForename, oSurname)
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows

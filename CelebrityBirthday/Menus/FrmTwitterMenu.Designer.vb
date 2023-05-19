@@ -37,6 +37,7 @@ Partial Class FrmTwitterMenu
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.BtnTwitterMosaic = New System.Windows.Forms.Button()
+        Me.BtnAuthenticateTwitter = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -65,7 +66,7 @@ Partial Class FrmTwitterMenu
         'BtnTwitter
         '
         Me.BtnTwitter.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTwitter.Location = New System.Drawing.Point(188, 179)
+        Me.BtnTwitter.Location = New System.Drawing.Point(14, 313)
         Me.BtnTwitter.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.BtnTwitter.Name = "BtnTwitter"
         Me.BtnTwitter.Size = New System.Drawing.Size(151, 49)
@@ -76,7 +77,7 @@ Partial Class FrmTwitterMenu
         'BtnClose
         '
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(95, 362)
+        Me.BtnClose.Location = New System.Drawing.Point(92, 406)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(151, 49)
         Me.BtnClose.TabIndex = 19
@@ -121,13 +122,25 @@ Partial Class FrmTwitterMenu
         Me.BtnTwitterMosaic.Text = "Twitter Mosaic"
         Me.BtnTwitterMosaic.UseVisualStyleBackColor = True
         '
+        'BtnAuthenticateTwitter
+        '
+        Me.BtnAuthenticateTwitter.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnAuthenticateTwitter.Location = New System.Drawing.Point(188, 179)
+        Me.BtnAuthenticateTwitter.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.BtnAuthenticateTwitter.Name = "BtnAuthenticateTwitter"
+        Me.BtnAuthenticateTwitter.Size = New System.Drawing.Size(151, 49)
+        Me.BtnAuthenticateTwitter.TabIndex = 23
+        Me.BtnAuthenticateTwitter.Text = "Authenticate"
+        Me.BtnAuthenticateTwitter.UseVisualStyleBackColor = True
+        '
         'FrmTwitterMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 19.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(352, 423)
+        Me.ClientSize = New System.Drawing.Size(352, 467)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnAuthenticateTwitter)
         Me.Controls.Add(Me.BtnTwitterMosaic)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox1)
@@ -153,4 +166,5 @@ Partial Class FrmTwitterMenu
     Friend WithEvents Label1 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents BtnTwitterMosaic As Button
+    Friend WithEvents BtnAuthenticateTwitter As Button
 End Class

@@ -393,6 +393,12 @@
     <Compile Include="Twitter\FrmSendBBTweet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Twitter\FrmTwitterAuth.Designer.vb">
+      <DependentUpon>FrmTwitterAuth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Twitter\FrmTwitterAuth.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Twitter\FrmTwitterMosaic.Designer.vb">
       <DependentUpon>FrmTwitterMosaic.vb</DependentUpon>
     </Compile>
@@ -400,10 +406,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Twitter\modTwitter.vb" />
-    <Compile Include="Twitter\FrmSendTwitter.Designer.vb">
-      <DependentUpon>FrmSendTwitter.vb</DependentUpon>
+    <Compile Include="Twitter\FrmSingleTweet.Designer.vb">
+      <DependentUpon>FrmSingleTweet.vb</DependentUpon>
     </Compile>
-    <Compile Include="Twitter\FrmSendTwitter.vb">
+    <Compile Include="Twitter\FrmSingleTweet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Twitter\FrmDailyTweets.Designer.vb">
@@ -550,11 +556,14 @@
     <EmbeddedResource Include="Twitter\FrmSendBBTweet.resx">
       <DependentUpon>FrmSendBBTweet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Twitter\FrmSendTwitter.resx">
-      <DependentUpon>FrmSendTwitter.vb</DependentUpon>
+    <EmbeddedResource Include="Twitter\FrmSingleTweet.resx">
+      <DependentUpon>FrmSingleTweet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\FrmDailyTweets.resx">
       <DependentUpon>FrmDailyTweets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Twitter\FrmTwitterAuth.resx">
+      <DependentUpon>FrmTwitterAuth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Twitter\FrmTwitterMosaic.resx">
       <DependentUpon>FrmTwitterMosaic.vb</DependentUpon>

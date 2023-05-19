@@ -27,7 +27,7 @@ Public Class FrmTwitterMenu
     Private Sub BtnSendTweet_Click(sender As Object, e As EventArgs) Handles BtnSendTweet.Click
         Hide()
         LogUtil.Info("Single Tweet", MyBase.Name)
-        Using _sendTwitter As New FrmSendTwitter
+        Using _sendTwitter As New FrmSingleTweet
             _sendTwitter.ShowDialog()
         End Using
         Show()
@@ -42,6 +42,15 @@ Public Class FrmTwitterMenu
         LogUtil.Info("Twitter mosaic", MyBase.Name)
         Hide()
         Using _twitterForm As New FrmTwitterMosaic
+            _twitterForm.ShowDialog()
+        End Using
+        Show()
+    End Sub
+
+    Private Sub BtnAuthenticateTwitter_Click(sender As Object, e As EventArgs) Handles BtnAuthenticateTwitter.Click
+        LogUtil.Info("Authenticate Twitter", MyBase.Name)
+        Hide()
+        Using _twitterForm As New FrmTwitterAuth
             _twitterForm.ShowDialog()
         End Using
         Show()
