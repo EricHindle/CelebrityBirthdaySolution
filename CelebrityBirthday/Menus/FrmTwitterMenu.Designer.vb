@@ -32,7 +32,6 @@ Partial Class FrmTwitterMenu
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTwitterMenu))
         Me.BtnTweet = New System.Windows.Forms.Button()
         Me.BtnSendTweet = New System.Windows.Forms.Button()
-        Me.BtnTwitter = New System.Windows.Forms.Button()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -62,17 +61,6 @@ Partial Class FrmTwitterMenu
         Me.BtnSendTweet.TabIndex = 18
         Me.BtnSendTweet.Text = "Single Tweet"
         Me.BtnSendTweet.UseVisualStyleBackColor = True
-        '
-        'BtnTwitter
-        '
-        Me.BtnTwitter.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTwitter.Location = New System.Drawing.Point(14, 313)
-        Me.BtnTwitter.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.BtnTwitter.Name = "BtnTwitter"
-        Me.BtnTwitter.Size = New System.Drawing.Size(151, 49)
-        Me.BtnTwitter.TabIndex = 17
-        Me.BtnTwitter.Text = "Twitter"
-        Me.BtnTwitter.UseVisualStyleBackColor = True
         '
         'BtnClose
         '
@@ -146,7 +134,6 @@ Partial Class FrmTwitterMenu
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.BtnSendTweet)
-        Me.Controls.Add(Me.BtnTwitter)
         Me.Controls.Add(Me.BtnTweet)
         Me.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
@@ -161,7 +148,6 @@ Partial Class FrmTwitterMenu
     End Sub
     Friend WithEvents BtnTweet As Button
     Friend WithEvents BtnSendTweet As Button
-    Friend WithEvents BtnTwitter As Button
     Friend WithEvents BtnClose As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents PictureBox1 As PictureBox

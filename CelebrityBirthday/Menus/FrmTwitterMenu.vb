@@ -15,7 +15,7 @@ Public Class FrmTwitterMenu
         Show()
     End Sub
 
-    Private Sub BtnTwitter_Click(sender As Object, e As EventArgs) Handles BtnTwitter.Click
+    Private Sub BtnTwitter_Click(sender As Object, e As EventArgs) 
         LogUtil.Info("Twitter", MyBase.Name)
         Hide()
         Using _twitterForm As New FrmTwitterOutput
