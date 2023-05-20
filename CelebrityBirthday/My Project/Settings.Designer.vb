@@ -236,18 +236,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property twitterimagepos() As String
-            Get
-                Return CType(Me("twitterimagepos"),String)
-            End Get
-            Set
-                Me("twitterimagepos") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=&exsentence"& _ 
             "s=#&explaintext=&redirects=&formatversion=2&format=json&titles=")>  _
         Public Property wikiExtractSearch() As String
