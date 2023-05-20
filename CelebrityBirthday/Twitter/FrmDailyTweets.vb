@@ -64,7 +64,7 @@ Public NotInheritable Class FrmDailyTweets
     End Sub
     Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
-        GetFormPos(Me, My.Settings.twitterimagepos)
+        GetFormPos(Me, My.Settings.twitterDailyFormPos)
         GetAuthData()
         FillTwitterUserList()
         If Not String.IsNullOrEmpty(_daySelection) AndAlso Not String.IsNullOrEmpty(_monthSelection) Then
@@ -74,7 +74,7 @@ Public NotInheritable Class FrmDailyTweets
     End Sub
     Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
-        My.Settings.twitterimagepos = SetFormPos(Me)
+        My.Settings.twitterDailyFormPos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
     Private Sub Btnopyselected_Click(sender As Object, e As EventArgs) Handles BtnCopyselected.Click, CopyToolStripMenuItem.Click

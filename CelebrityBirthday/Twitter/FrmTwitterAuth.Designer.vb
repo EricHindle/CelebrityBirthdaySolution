@@ -284,6 +284,7 @@ Partial Class FrmTwitterAuth
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(848, 656)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.Label7)

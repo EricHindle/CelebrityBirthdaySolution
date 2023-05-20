@@ -18,7 +18,7 @@ Public Class FrmTwitterAuth
     Private ReadOnly tw As New TwitterOAuth
     Private Sub FrmTwitterAuth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ShowStatus("Loading", MyBase.Name, Nothing)
-        GetFormPos(Me, My.Settings.authtwFormPos)
+        GetFormPos(Me, My.Settings.twitterAuthFormPos)
         WebBrowser1.Navigate(New Uri("about:blank"))
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
         tw.ConsumerKey = _auth.Token
@@ -33,7 +33,7 @@ Public Class FrmTwitterAuth
 
     Private Sub FrmTwitterAuth_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         ShowStatus("Closing", MyBase.Name, Nothing)
-        My.Settings.authtwFormPos = SetFormPos(Me)
+        My.Settings.twitterAuthFormPos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
     Private Async Sub WebBrowser1_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles WebBrowser1.DocumentCompleted

@@ -36,7 +36,7 @@ Public Class FrmSendBBTweet
     End Sub
     Private Sub FrmSendTwitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
-        GetFormPos(Me, My.Settings.sndtwformpos)
+        GetFormPos(Me, My.Settings.twitterBbFormPos)
         RtbTweetText.AllowDrop = True
         Dim _auth As TwitterOAuth = GetAuthById("Twitter")
         tw.ConsumerKey = _auth.Token
@@ -122,7 +122,7 @@ Public Class FrmSendBBTweet
     End Sub
     Private Sub FrmSendTwitter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
-        My.Settings.sndtwformpos = SetFormPos(Me)
+        My.Settings.twitterBbFormPos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
     Private Sub RtbTweetText_TextChanged(sender As Object, e As EventArgs) Handles RtbTweetText.TextChanged

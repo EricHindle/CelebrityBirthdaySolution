@@ -218,6 +218,7 @@ Partial Class FrmSendBBTweet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(725, 540)
         Me.Controls.Add(Me.TxtSuffix)
         Me.Controls.Add(Me.chkImages)

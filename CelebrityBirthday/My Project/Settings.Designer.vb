@@ -586,12 +586,60 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property authtwFormPos() As String
+        Public Property twitterAuthFormPos() As String
             Get
-                Return CType(Me("authtwFormPos"),String)
+                Return CType(Me("twitterAuthFormPos"),String)
             End Get
             Set
-                Me("authtwFormPos") = value
+                Me("twitterAuthFormPos") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property twitterDailyFormPos() As String
+            Get
+                Return CType(Me("twitterDailyFormPos"),String)
+            End Get
+            Set
+                Me("twitterDailyFormPos") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property twitterBbFormPos() As String
+            Get
+                Return CType(Me("twitterBbFormPos"),String)
+            End Get
+            Set
+                Me("twitterBbFormPos") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property twitterSingleFormPos() As String
+            Get
+                Return CType(Me("twitterSingleFormPos"),String)
+            End Get
+            Set
+                Me("twitterSingleFormPos") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property twitterMosaicFormPos() As String
+            Get
+                Return CType(Me("twitterMosaicFormPos"),String)
+            End Get
+            Set
+                Me("twitterMosaicFormPos") = value
             End Set
         End Property
     End Class

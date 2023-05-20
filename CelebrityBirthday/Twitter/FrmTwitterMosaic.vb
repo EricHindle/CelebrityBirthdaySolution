@@ -22,10 +22,14 @@ Public Class FrmTwitterMosaic
         For Each _person As Person In _imageList
             _person.Dispose()
         Next
+        My.Settings.twitterMosaicFormPos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
 
     Private Sub FrmTwitterMosaic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ShowStatus("Loading", MyBase.Name, Nothing)
+        GetFormPos(Me, My.Settings.twitterMosaicFormPos)
+
     End Sub
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         ShowStatus("Saving File", lblStatus, True, MyBase.Name)
