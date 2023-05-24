@@ -118,7 +118,7 @@ Partial Class FrmTwitterMenu
         Me.BtnAuthenticateTwitter.Name = "BtnAuthenticateTwitter"
         Me.BtnAuthenticateTwitter.Size = New System.Drawing.Size(151, 49)
         Me.BtnAuthenticateTwitter.TabIndex = 23
-        Me.BtnAuthenticateTwitter.Text = "Authenticate"
+        Me.BtnAuthenticateTwitter.Text = "Authorise"
         Me.BtnAuthenticateTwitter.UseVisualStyleBackColor = True
         '
         'FrmTwitterMenu

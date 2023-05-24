@@ -44,7 +44,7 @@ Partial Class FrmImageMenu
         'BtnClose
         '
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(100, 362)
+        Me.BtnClose.Location = New System.Drawing.Point(100, 379)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(151, 49)
         Me.BtnClose.TabIndex = 19
@@ -138,7 +138,7 @@ Partial Class FrmImageMenu
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 19.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(352, 423)
+        Me.ClientSize = New System.Drawing.Size(352, 440)
         Me.ControlBox = False
         Me.Controls.Add(Me.BtnImageCheck)
         Me.Controls.Add(Me.Label1)
