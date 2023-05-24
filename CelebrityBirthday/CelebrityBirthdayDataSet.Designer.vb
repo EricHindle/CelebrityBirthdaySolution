@@ -8940,10 +8940,11 @@ Namespace CelebrityBirthdayDataSetTableAdapters
             Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@day", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "birthday", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(9) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(9).Connection = Me.Connection
-            Me._commandCollection(9).CommandText = "SELECT birthday, birthmonth, birthname, birthplace, birthyear, dateadded, deathda"& _ 
-                "y, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, surname FR"& _ 
-                "OM Person WHERE (forename LIKE @forename + N'%') AND (surname LIKE @surname + N'"& _ 
-                "%') ORDER BY surname, forename"
+            Me._commandCollection(9).CommandText = "SELECT        birthday, birthmonth, birthname, birthplace, birthyear, dateadded, "& _ 
+                "deathday, deathmonth, deathyear, forename, id, longdesc, shortdesc, sortseq, sur"& _ 
+                "name"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Person"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (forename LIKE @forename + N'%') AND "& _ 
+                "(surname LIKE @surname + N'%') OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (forename LIKE @surn"& _ 
+                "ame + N'%') AND (surname LIKE @forename + N'%')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY surname, forename"
             Me._commandCollection(9).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@forename", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "forename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@surname", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "surname", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))

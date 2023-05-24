@@ -8,6 +8,10 @@
 Public Class FrmSearch
 #Region "variables"
     Private bLoadingPeople As Boolean
+    Private isSplit As Boolean
+    Private currentForename As String
+    Private currentSurname As String
+
 #End Region
 #Region "form control handlers"
     Private Sub DgvPeople_SelectionChanged(sender As Object, e As EventArgs) Handles DgvPeople.SelectionChanged
@@ -15,8 +19,7 @@ Public Class FrmSearch
             If DgvPeople.SelectedRows.Count = 1 Then
                 Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
                 txtId.Text = oRow.Cells(SelPersonId.Name).Value
-                TxtForename.Text = oRow.Cells(SelPersonForename.Name).Value
-                TxtSurname.Text = oRow.Cells(SelPersonSurname.Name).Value
+                TxtForename.Text = oRow.Cells(SelPersonForename.Name).Value & " " & oRow.Cells(SelPersonSurname.Name).Value
             End If
         End If
     End Sub
@@ -24,42 +27,38 @@ Public Class FrmSearch
         CloseForm()
     End Sub
     Private Sub BtnSearchByName_Click(sender As Object, e As EventArgs) Handles BtnSearchByName.Click
-        If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
-            ShowStatus("Searching for " & TxtForename.Text & " " & TxtSurname.Text, True)
-            bLoadingPeople = True
-            DgvPeople.Rows.Clear()
-            Dim selectedPersons As List(Of Person) = FindPeopleLikeName(TxtForename.Text, TxtSurname.Text)
-            For Each oPerson As Person In selectedPersons
-                AddTableRow(oPerson)
-            Next
-            DgvPeople.ClearSelection()
-            bLoadingPeople = False
-            ShowStatus("Search complete - found " & selectedPersons.Count & " records", True)
+        If Not String.IsNullOrWhiteSpace(txtId.Text) Then
+            ShowStatus("Searching for " & txtId.Text, True)
+            LoadScreenFromId(txtId.Text)
+            ShowStatus("Search complete")
         Else
-            ShowStatus("No name supplied")
+            If Not String.IsNullOrWhiteSpace(TxtForename.Text) Then
+                SplitNameText()
+                ShowStatus("Searching for " & TxtForename.Text, True)
+                bLoadingPeople = True
+                DgvPeople.Rows.Clear()
+                Dim selectedPersons As List(Of Person) = FindPeopleLikeName(currentForename, currentSurname)
+                For Each oPerson As Person In selectedPersons
+                    AddTableRow(oPerson)
+                Next
+                DgvPeople.ClearSelection()
+                bLoadingPeople = False
+                ShowStatus("Search complete - found " & selectedPersons.Count & " records", True)
+            Else
+                ShowStatus("No name supplied")
+            End If
         End If
     End Sub
 
     Private Sub SplitNameText()
         TxtForename.Text = Trim(TxtForename.Text)
-        TxtSurname.Text = Trim(TxtSurname.Text)
-        Dim fullName As String() = Split(Trim(TxtForename.Text & " " & TxtSurname.Text))
-        If fullName.Length > 1 Then
-            TxtSurname.Text = fullName.Last
-            fullName(fullName.Length - 1) = ""
-            TxtForename.Text = Join(fullName).Trim
-        End If
+        '     TxtSurname.Text = Trim(TxtSurname.Text)
+        Dim fullName As String() = Split(TxtForename.Text)
+        currentSurname = fullName.Last
+        fullName(fullName.Length - 1) = ""
+        currentForename = Join(fullName).Trim
     End Sub
 
-    Private Sub BtnSearchById_Click(sender As Object, e As EventArgs) Handles BtnSearchById.Click
-        If Not String.IsNullOrEmpty(txtId.Text) Then
-            ShowStatus("Searching for " & txtId.Text, True)
-            LoadScreenFromId(txtId.Text)
-            ShowStatus("Search complete")
-        Else
-            ShowStatus("No id supplied")
-        End If
-    End Sub
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnDbUpdate.Click
         If DgvPeople.SelectedRows.Count = 1 Then
             ShowStatus("Opening update form", True)
@@ -77,9 +76,9 @@ Public Class FrmSearch
     End Sub
 
     Private Sub BtnFindInWiki_Click(sender As Object, e As EventArgs) Handles BtnFindInWiki.Click
-        If Not String.IsNullOrEmpty(TxtForename.Text) Or Not String.IsNullOrEmpty(TxtSurname.Text) Then
+        If Not String.IsNullOrWhiteSpace(TxtForename.Text) Then
             ShowStatus("Opening Wikipedia", True)
-            Dim wikiUrl As String = GetWikiSearchString(TxtForename.Text & " " & TxtSurname.Text)
+            Dim wikiUrl As String = GetWikiSearchString(TxtForename.Text)
             Process.Start(wikiUrl)
         Else
             ShowStatus("No name supplied")
@@ -91,11 +90,18 @@ Public Class FrmSearch
         My.Settings.Save()
     End Sub
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        ClearForm()
+    End Sub
+
+    Private Sub ClearForm()
         DgvPeople.Rows.Clear()
         txtId.Text = ""
         TxtForename.Text = ""
-        TxtSurname.Text = ""
+        '       TxtSurname.Text = ""
         LblStatus.Text = ""
+        '        TxtSurname.Visible = False
+        currentForename = ""
+        currentSurname = ""
     End Sub
 #End Region
 #Region "subroutines"
@@ -117,8 +123,7 @@ Public Class FrmSearch
     Private Sub LoadScreenFromPerson(oPerson As Person)
         AddTableRow(oPerson)
         txtId.Text = oPerson.Id
-        TxtForename.Text = oPerson.ForeName
-        TxtSurname.Text = oPerson.Surname
+        TxtForename.Text = oPerson.ForeName & " " & oPerson.Surname
     End Sub
     Private Sub AddTableRow(oPerson As Person)
         Dim tRow As DataGridViewRow = DgvPeople.Rows(DgvPeople.Rows.Add)
@@ -185,9 +190,10 @@ Public Class FrmSearch
     Private Sub FrmSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.srchformpos)
+        clearform
     End Sub
 
-    Private Sub Name_DragDrop(sender As Object, e As DragEventArgs) Handles TxtSurname.DragDrop, TxtForename.DragDrop
+    Private Sub Name_DragDrop(sender As Object, e As DragEventArgs) Handles TxtForename.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             Dim item As String = e.Data.GetData(DataFormats.StringFormat)
@@ -209,14 +215,14 @@ Public Class FrmSearch
         End If
     End Sub
 
-    Private Sub Name_DragOver(sender As Object, e As DragEventArgs) Handles TxtSurname.DragOver, TxtForename.DragOver
+    Private Sub Name_DragOver(sender As Object, e As DragEventArgs) Handles TxtForename.DragOver
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             oBox.Select(TextBoxCursorPos(oBox, e.X, e.Y), 0)
         End If
     End Sub
 
-    Private Sub TxtSurname_DragEnter(sender As Object, e As DragEventArgs) Handles TxtSurname.DragEnter, TxtForename.DragEnter
+    Private Sub TxtSurname_DragEnter(sender As Object, e As DragEventArgs) Handles TxtForename.DragEnter
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             e.Effect = DragDropEffects.Copy
         Else
@@ -234,12 +240,19 @@ Public Class FrmSearch
         Next
     End Sub
     Private Sub BtnPasteName_Click(sender As Object, e As EventArgs) Handles BtnPasteName.Click
-        TxtSurname.Text = Clipboard.GetText
+        TxtForename.Text = Clipboard.GetText
     End Sub
 
-    Private Sub BtnSplitNameText_Click(sender As Object, e As EventArgs) Handles BtnSplitNameText.Click
-        SplitNameText()
-    End Sub
+    'Private Sub BtnSplitNameText_Click(sender As Object, e As EventArgs) Handles BtnSplitNameText.Click
+    '    If isSplit Then
+    '        JoinNameText
+    '        TxtSurname.Visible = False
+    '    Else
+    '        SplitNameText()
+    '        TxtSurname.Visible = True
+    '    End If
+    '    isSplit = Not isSplit
+    'End Sub
     Private Sub DisplayAndLog(pText As String)
         ShowProgress(pText, LblStatus, True, MyBase.Name)
     End Sub

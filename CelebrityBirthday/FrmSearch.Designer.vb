@@ -27,7 +27,6 @@ Partial Class FrmSearch
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtId = New System.Windows.Forms.TextBox()
-        Me.TxtSurname = New System.Windows.Forms.TextBox()
         Me.DgvPeople = New System.Windows.Forms.DataGridView()
         Me.SelPersonId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.selPersonDay = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -39,7 +38,6 @@ Partial Class FrmSearch
         Me.xImg = New System.Windows.Forms.DataGridViewImageColumn()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.BtnSearchByName = New System.Windows.Forms.Button()
-        Me.BtnSearchById = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.BtnFindInWiki = New System.Windows.Forms.Button()
@@ -52,7 +50,6 @@ Partial Class FrmSearch
         Me.BtnTweet = New System.Windows.Forms.Button()
         Me.BtnImgUpdate = New System.Windows.Forms.Button()
         Me.BtnPasteName = New System.Windows.Forms.Button()
-        Me.BtnSplitNameText = New System.Windows.Forms.Button()
         Me.ChkShowImage = New System.Windows.Forms.CheckBox()
         CType(Me.DgvPeople, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -65,48 +62,39 @@ Partial Class FrmSearch
         '
         Me.TxtForename.AllowDrop = True
         Me.TxtForename.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtForename.Location = New System.Drawing.Point(85, 55)
+        Me.TxtForename.Location = New System.Drawing.Point(82, 12)
         Me.TxtForename.Name = "TxtForename"
         Me.TxtForename.Size = New System.Drawing.Size(310, 22)
-        Me.TxtForename.TabIndex = 4
+        Me.TxtForename.TabIndex = 0
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(20, 61)
+        Me.Label1.Location = New System.Drawing.Point(17, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 14)
-        Me.Label1.TabIndex = 21
+        Me.Label1.TabIndex = 8
         Me.Label1.Text = "Name"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(20, 23)
+        Me.Label4.Location = New System.Drawing.Point(17, 54)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(18, 14)
-        Me.Label4.TabIndex = 20
+        Me.Label4.TabIndex = 9
         Me.Label4.Text = "Id"
         '
         'txtId
         '
         Me.txtId.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtId.Location = New System.Drawing.Point(85, 18)
+        Me.txtId.Location = New System.Drawing.Point(82, 49)
         Me.txtId.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtId.Name = "txtId"
         Me.txtId.Size = New System.Drawing.Size(135, 22)
         Me.txtId.TabIndex = 2
-        '
-        'TxtSurname
-        '
-        Me.TxtSurname.AllowDrop = True
-        Me.TxtSurname.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtSurname.Location = New System.Drawing.Point(402, 55)
-        Me.TxtSurname.Name = "TxtSurname"
-        Me.TxtSurname.Size = New System.Drawing.Size(238, 22)
-        Me.TxtSurname.TabIndex = 5
         '
         'DgvPeople
         '
@@ -125,7 +113,7 @@ Partial Class FrmSearch
         Me.DgvPeople.RowHeadersVisible = False
         Me.DgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvPeople.Size = New System.Drawing.Size(1030, 434)
-        Me.DgvPeople.TabIndex = 19
+        Me.DgvPeople.TabIndex = 10
         '
         'SelPersonId
         '
@@ -200,7 +188,7 @@ Partial Class FrmSearch
         Me.BtnClose.Location = New System.Drawing.Point(1081, 481)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(117, 45)
-        Me.BtnClose.TabIndex = 17
+        Me.BtnClose.TabIndex = 3
         Me.BtnClose.Text = "Close"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
@@ -208,33 +196,21 @@ Partial Class FrmSearch
         '
         Me.BtnSearchByName.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSearchByName.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSearchByName.Location = New System.Drawing.Point(15, 61)
+        Me.BtnSearchByName.Location = New System.Drawing.Point(15, 28)
         Me.BtnSearchByName.Name = "BtnSearchByName"
         Me.BtnSearchByName.Size = New System.Drawing.Size(107, 54)
-        Me.BtnSearchByName.TabIndex = 16
-        Me.BtnSearchByName.Text = "Search by name"
+        Me.BtnSearchByName.TabIndex = 0
+        Me.BtnSearchByName.Text = "SEARCH"
         Me.BtnSearchByName.UseVisualStyleBackColor = True
-        '
-        'BtnSearchById
-        '
-        Me.BtnSearchById.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSearchById.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSearchById.Location = New System.Drawing.Point(15, 19)
-        Me.BtnSearchById.Name = "BtnSearchById"
-        Me.BtnSearchById.Size = New System.Drawing.Size(107, 36)
-        Me.BtnSearchById.TabIndex = 15
-        Me.BtnSearchById.Text = "Search by id"
-        Me.BtnSearchById.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.BtnSearchById)
         Me.GroupBox1.Controls.Add(Me.BtnSearchByName)
-        Me.GroupBox1.Location = New System.Drawing.Point(1066, 81)
+        Me.GroupBox1.Location = New System.Drawing.Point(1066, 92)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(135, 127)
-        Me.GroupBox1.TabIndex = 22
+        Me.GroupBox1.Size = New System.Drawing.Size(135, 94)
+        Me.GroupBox1.TabIndex = 12
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Database Search"
         '
@@ -245,7 +221,7 @@ Partial Class FrmSearch
         Me.GroupBox2.Location = New System.Drawing.Point(1066, 214)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(135, 63)
-        Me.GroupBox2.TabIndex = 23
+        Me.GroupBox2.TabIndex = 13
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Wiki Search"
         '
@@ -256,7 +232,7 @@ Partial Class FrmSearch
         Me.BtnFindInWiki.Location = New System.Drawing.Point(15, 19)
         Me.BtnFindInWiki.Name = "BtnFindInWiki"
         Me.BtnFindInWiki.Size = New System.Drawing.Size(107, 36)
-        Me.BtnFindInWiki.TabIndex = 17
+        Me.BtnFindInWiki.TabIndex = 0
         Me.BtnFindInWiki.Text = "Search by name"
         Me.BtnFindInWiki.UseVisualStyleBackColor = True
         '
@@ -268,7 +244,7 @@ Partial Class FrmSearch
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 544)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1213, 22)
-        Me.StatusStrip1.TabIndex = 24
+        Me.StatusStrip1.TabIndex = 0
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'LblStatus
@@ -288,7 +264,7 @@ Partial Class FrmSearch
         Me.BtnDbUpdate.Location = New System.Drawing.Point(15, 19)
         Me.BtnDbUpdate.Name = "BtnDbUpdate"
         Me.BtnDbUpdate.Size = New System.Drawing.Size(107, 36)
-        Me.BtnDbUpdate.TabIndex = 25
+        Me.BtnDbUpdate.TabIndex = 0
         Me.BtnDbUpdate.Text = "Database"
         Me.BtnDbUpdate.UseVisualStyleBackColor = True
         '
@@ -300,7 +276,7 @@ Partial Class FrmSearch
         Me.BtnClear.Location = New System.Drawing.Point(1081, 12)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(107, 36)
-        Me.BtnClear.TabIndex = 17
+        Me.BtnClear.TabIndex = 4
         Me.BtnClear.Text = "Clear"
         Me.BtnClear.UseVisualStyleBackColor = True
         '
@@ -314,7 +290,7 @@ Partial Class FrmSearch
         Me.GroupBox3.Location = New System.Drawing.Point(1066, 283)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(135, 192)
-        Me.GroupBox3.TabIndex = 26
+        Me.GroupBox3.TabIndex = 14
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Open form"
         '
@@ -325,7 +301,7 @@ Partial Class FrmSearch
         Me.BtnWordPress.Location = New System.Drawing.Point(15, 145)
         Me.BtnWordPress.Name = "BtnWordPress"
         Me.BtnWordPress.Size = New System.Drawing.Size(107, 36)
-        Me.BtnWordPress.TabIndex = 28
+        Me.BtnWordPress.TabIndex = 3
         Me.BtnWordPress.Text = "WordPress"
         Me.BtnWordPress.UseVisualStyleBackColor = True
         '
@@ -336,7 +312,7 @@ Partial Class FrmSearch
         Me.BtnTweet.Location = New System.Drawing.Point(15, 103)
         Me.BtnTweet.Name = "BtnTweet"
         Me.BtnTweet.Size = New System.Drawing.Size(107, 36)
-        Me.BtnTweet.TabIndex = 27
+        Me.BtnTweet.TabIndex = 2
         Me.BtnTweet.Text = "Twitter"
         Me.BtnTweet.UseVisualStyleBackColor = True
         '
@@ -347,29 +323,21 @@ Partial Class FrmSearch
         Me.BtnImgUpdate.Location = New System.Drawing.Point(15, 61)
         Me.BtnImgUpdate.Name = "BtnImgUpdate"
         Me.BtnImgUpdate.Size = New System.Drawing.Size(107, 36)
-        Me.BtnImgUpdate.TabIndex = 26
+        Me.BtnImgUpdate.TabIndex = 1
         Me.BtnImgUpdate.Text = "Image"
         Me.BtnImgUpdate.UseVisualStyleBackColor = True
         '
         'BtnPasteName
         '
+        Me.BtnPasteName.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.paste
+        Me.BtnPasteName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnPasteName.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnPasteName.Location = New System.Drawing.Point(667, 55)
+        Me.BtnPasteName.Location = New System.Drawing.Point(398, 7)
         Me.BtnPasteName.Name = "BtnPasteName"
-        Me.BtnPasteName.Size = New System.Drawing.Size(31, 22)
-        Me.BtnPasteName.TabIndex = 40
+        Me.BtnPasteName.Size = New System.Drawing.Size(30, 30)
+        Me.BtnPasteName.TabIndex = 6
         Me.BtnPasteName.Text = "<"
         Me.BtnPasteName.UseVisualStyleBackColor = True
-        '
-        'BtnSplitNameText
-        '
-        Me.BtnSplitNameText.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSplitNameText.Location = New System.Drawing.Point(714, 55)
-        Me.BtnSplitNameText.Name = "BtnSplitNameText"
-        Me.BtnSplitNameText.Size = New System.Drawing.Size(45, 22)
-        Me.BtnSplitNameText.TabIndex = 41
-        Me.BtnSplitNameText.Text = "[]<->[]"
-        Me.BtnSplitNameText.UseVisualStyleBackColor = True
         '
         'ChkShowImage
         '
@@ -378,7 +346,7 @@ Partial Class FrmSearch
         Me.ChkShowImage.Location = New System.Drawing.Point(1098, 54)
         Me.ChkShowImage.Name = "ChkShowImage"
         Me.ChkShowImage.Size = New System.Drawing.Size(90, 17)
-        Me.ChkShowImage.TabIndex = 42
+        Me.ChkShowImage.TabIndex = 11
         Me.ChkShowImage.Text = "Show Images"
         Me.ChkShowImage.UseVisualStyleBackColor = True
         '
@@ -391,7 +359,6 @@ Partial Class FrmSearch
         Me.CancelButton = Me.BtnClose
         Me.ClientSize = New System.Drawing.Size(1213, 566)
         Me.Controls.Add(Me.ChkShowImage)
-        Me.Controls.Add(Me.BtnSplitNameText)
         Me.Controls.Add(Me.BtnPasteName)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.BtnClear)
@@ -402,7 +369,6 @@ Partial Class FrmSearch
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtId)
-        Me.Controls.Add(Me.TxtSurname)
         Me.Controls.Add(Me.DgvPeople)
         Me.Controls.Add(Me.BtnClose)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -423,11 +389,9 @@ Partial Class FrmSearch
     Friend WithEvents Label1 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents txtId As TextBox
-    Friend WithEvents TxtSurname As TextBox
     Friend WithEvents DgvPeople As DataGridView
     Friend WithEvents BtnClose As Button
     Friend WithEvents BtnSearchByName As Button
-    Friend WithEvents BtnSearchById As Button
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents BtnFindInWiki As Button
@@ -440,7 +404,6 @@ Partial Class FrmSearch
     Friend WithEvents BtnTweet As Button
     Friend WithEvents BtnWordPress As Button
     Friend WithEvents BtnPasteName As Button
-    Friend WithEvents BtnSplitNameText As Button
     Friend WithEvents ChkShowImage As CheckBox
     Friend WithEvents SelPersonId As DataGridViewTextBoxColumn
     Friend WithEvents selPersonDay As DataGridViewTextBoxColumn

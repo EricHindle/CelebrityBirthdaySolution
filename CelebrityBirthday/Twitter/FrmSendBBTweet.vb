@@ -49,6 +49,7 @@ Public Class FrmSendBBTweet
             _deathDate = _deadPerson.DateOfDeath
             TxtForename.Text = _deadPerson.ForeName
             TxtSurname.Text = _deadPerson.Surname
+            TxtName.Text = _deadPerson.Name
         End If
         LblImageName.Text = _deadPerson.Image.ImageFileName
         Dim thumbnailImage As String = Path.Combine(My.Settings.ImgPath, LblImageName.Text) & ".jpg"
@@ -84,6 +85,7 @@ Public Class FrmSendBBTweet
     End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         WriteTrace("Sending Tweet")
+        BtnSend.Enabled = False
         Dim isOkToSend As Boolean = True
         If RtbTweetText.Text.Replace(vbCr, "").Length > TWEET_MAX_LEN Then
             isOkToSend = False
@@ -119,6 +121,7 @@ Public Class FrmSendBBTweet
         Else
             WriteTrace("Tweet not sent")
         End If
+        BtnSend.Enabled = True
     End Sub
     Private Sub FrmSendTwitter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
