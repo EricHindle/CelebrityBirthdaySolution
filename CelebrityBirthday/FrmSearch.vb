@@ -4,14 +4,12 @@
 '
 ' Author Eric Hindle
 '
-
 Public Class FrmSearch
 #Region "variables"
     Private bLoadingPeople As Boolean
     Private isSplit As Boolean
     Private currentForename As String
     Private currentSurname As String
-
 #End Region
 #Region "form control handlers"
     Private Sub DgvPeople_SelectionChanged(sender As Object, e As EventArgs) Handles DgvPeople.SelectionChanged
@@ -49,16 +47,6 @@ Public Class FrmSearch
             End If
         End If
     End Sub
-
-    Private Sub SplitNameText()
-        TxtForename.Text = Trim(TxtForename.Text)
-        '     TxtSurname.Text = Trim(TxtSurname.Text)
-        Dim fullName As String() = Split(TxtForename.Text)
-        currentSurname = fullName.Last
-        fullName(fullName.Length - 1) = ""
-        currentForename = Join(fullName).Trim
-    End Sub
-
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnDbUpdate.Click
         If DgvPeople.SelectedRows.Count = 1 Then
             ShowStatus("Opening update form", True)
@@ -67,14 +55,6 @@ Public Class FrmSearch
         End If
         ShowStatus("")
     End Sub
-
-    Private Sub OpenUpdateForm(oRow As DataGridViewRow)
-        Using _update As New FrmUpdateDatabase
-            _update.PersonId = oRow.Cells(SelPersonId.Name).Value
-            _update.ShowDialog()
-        End Using
-    End Sub
-
     Private Sub BtnFindInWiki_Click(sender As Object, e As EventArgs) Handles BtnFindInWiki.Click
         If Not String.IsNullOrWhiteSpace(TxtForename.Text) Then
             ShowStatus("Opening Wikipedia", True)
@@ -92,19 +72,116 @@ Public Class FrmSearch
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
         ClearForm()
     End Sub
-
-    Private Sub ClearForm()
-        DgvPeople.Rows.Clear()
-        txtId.Text = ""
-        TxtForename.Text = ""
-        '       TxtSurname.Text = ""
-        LblStatus.Text = ""
-        '        TxtSurname.Visible = False
-        currentForename = ""
-        currentSurname = ""
+    Private Sub BtnImgUpdate_Click(sender As Object, e As EventArgs) Handles BtnImgUpdate.Click
+        If DgvPeople.SelectedRows.Count = 1 Then
+            ShowStatus("Opening images form", True)
+            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
+            Using _update As New FrmDatabaseImages
+                _update.PersonId = oRow.Cells(SelPersonId.Name).Value
+                _update.ShowDialog()
+            End Using
+        End If
+        ShowStatus("")
+    End Sub
+    Private Sub BtnTweet_Click(sender As Object, e As EventArgs) Handles BtnTweet.Click
+        If DgvPeople.SelectedRows.Count = 1 Then
+            ShowStatus("Opening Twitter form", True)
+            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
+            Using _tweet As New FrmDailyTweets
+                _tweet.DaySelection = oRow.Cells(selPersonDay.Name).Value
+                _tweet.MonthSelection = oRow.Cells(selPersonMonth.Name).Value
+                _tweet.ShowDialog()
+            End Using
+        End If
+        ShowStatus("")
+    End Sub
+    Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
+        If DgvPeople.SelectedRows.Count = 1 Then
+            ShowStatus("Opening WordPress form", True)
+            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
+            Using _wordpress As New FrmWordPress
+                _wordpress.DaySelection = oRow.Cells(selPersonDay.Name).Value
+                _wordpress.MonthSelection = oRow.Cells(selPersonMonth.Name).Value
+                _wordpress.ShowDialog()
+            End Using
+        End If
+        ShowStatus("")
+    End Sub
+    Private Sub FrmSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
+        GetFormPos(Me, My.Settings.srchformpos)
+        ChkShowImage.Checked = My.Settings.srchShowImages
+        ClearForm()
+    End Sub
+    Private Sub Name_DragDrop(sender As Object, e As DragEventArgs) Handles TxtForename.DragDrop
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim oBox As TextBox = CType(sender, TextBox)
+            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
+            Dim textlen As Integer = oBox.TextLength
+            Dim startpos As Integer = oBox.SelectionStart
+            If textlen = 0 Then
+                oBox.Text = item.Trim
+            Else
+                If startpos = 0 Then
+                    oBox.SelectedText = item.TrimStart
+                Else
+                    If oBox.Text.Substring(startpos - 1, 1) = "." Then
+                        oBox.SelectedText = " " & item.TrimStart
+                    Else
+                        oBox.SelectedText = item
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+    Private Sub Name_DragOver(sender As Object, e As DragEventArgs) Handles TxtForename.DragOver
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim oBox As TextBox = CType(sender, TextBox)
+            oBox.Select(TextBoxCursorPos(oBox, e.X, e.Y), 0)
+        End If
+    End Sub
+    Private Sub TxtSurname_DragEnter(sender As Object, e As DragEventArgs) Handles TxtForename.DragEnter
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            e.Effect = DragDropEffects.Copy
+        Else
+            If e.Data.GetDataPresent(DataFormats.Text) Then
+                e.Effect = DragDropEffects.Copy
+            Else
+                e.Effect = DragDropEffects.None
+            End If
+        End If
+    End Sub
+    Private Sub ChkShowImage_CheckedChanged(sender As Object, e As EventArgs) Handles ChkShowImage.CheckedChanged
+        DgvPeople.Columns().Item(xImg.Name).Visible = ChkShowImage.Checked
+        For Each tRow As DataGridViewRow In DgvPeople.Rows
+            tRow.Height = If(ChkShowImage.Checked, 65, DgvPeople.RowTemplate.Height)
+        Next
+    End Sub
+    Private Sub BtnPasteName_Click(sender As Object, e As EventArgs) Handles BtnPasteName.Click
+        TxtForename.Text = Clipboard.GetText
+    End Sub
+    Private Sub DgvPeople_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvPeople.CellDoubleClick
+        If e.RowIndex >= 0 And e.RowIndex < DgvPeople.Rows.Count Then
+            Dim tRow As DataGridViewRow = DgvPeople.Rows(e.RowIndex)
+            OpenUpdateForm(tRow)
+        End If
     End Sub
 #End Region
 #Region "subroutines"
+    Private Sub OpenUpdateForm(oRow As DataGridViewRow)
+        Using _update As New FrmUpdateDatabase
+            _update.PersonId = oRow.Cells(SelPersonId.Name).Value
+            _update.ShowDialog()
+        End Using
+    End Sub
+    Private Sub SplitNameText()
+        TxtForename.Text = Trim(TxtForename.Text)
+        '     TxtSurname.Text = Trim(TxtSurname.Text)
+        Dim fullName As String() = Split(TxtForename.Text)
+        currentSurname = fullName.Last
+        fullName(fullName.Length - 1) = ""
+        currentForename = Join(fullName).Trim
+    End Sub
     Private Sub CloseForm()
         Close()
     End Sub
@@ -148,123 +225,13 @@ Public Class FrmSearch
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
-
-    Private Sub BtnImgUpdate_Click(sender As Object, e As EventArgs) Handles BtnImgUpdate.Click
-        If DgvPeople.SelectedRows.Count = 1 Then
-            ShowStatus("Opening images form", True)
-            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
-            Using _update As New FrmDatabaseImages
-                _update.PersonId = oRow.Cells(SelPersonId.Name).Value
-                _update.ShowDialog()
-            End Using
-        End If
-        ShowStatus("")
-    End Sub
-
-    Private Sub BtnTweet_Click(sender As Object, e As EventArgs) Handles BtnTweet.Click
-        If DgvPeople.SelectedRows.Count = 1 Then
-            ShowStatus("Opening Twitter form", True)
-            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
-            Using _tweet As New FrmDailyTweets
-                _tweet.DaySelection = oRow.Cells(selPersonDay.Name).Value
-                _tweet.MonthSelection = oRow.Cells(selPersonMonth.Name).Value
-                _tweet.ShowDialog()
-            End Using
-        End If
-        ShowStatus("")
-    End Sub
-
-    Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
-        If DgvPeople.SelectedRows.Count = 1 Then
-            ShowStatus("Opening WordPress form", True)
-            Dim oRow As DataGridViewRow = DgvPeople.SelectedRows(0)
-            Using _wordpress As New FrmWordPress
-                _wordpress.DaySelection = oRow.Cells(selPersonDay.Name).Value
-                _wordpress.MonthSelection = oRow.Cells(selPersonMonth.Name).Value
-                _wordpress.ShowDialog()
-            End Using
-        End If
-        ShowStatus("")
-    End Sub
-
-    Private Sub FrmSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LogUtil.Info("Loading", MyBase.Name)
-        GetFormPos(Me, My.Settings.srchformpos)
-        clearform
-    End Sub
-
-    Private Sub Name_DragDrop(sender As Object, e As DragEventArgs) Handles TxtForename.DragDrop
-        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
-            Dim oBox As TextBox = CType(sender, TextBox)
-            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
-            Dim textlen As Integer = oBox.TextLength
-            Dim startpos As Integer = oBox.SelectionStart
-            If textlen = 0 Then
-                oBox.Text = item.Trim
-            Else
-                If startpos = 0 Then
-                    oBox.SelectedText = item.TrimStart
-                Else
-                    If oBox.Text.Substring(startpos - 1, 1) = "." Then
-                        oBox.SelectedText = " " & item.TrimStart
-                    Else
-                        oBox.SelectedText = item
-                    End If
-                End If
-            End If
-        End If
-    End Sub
-
-    Private Sub Name_DragOver(sender As Object, e As DragEventArgs) Handles TxtForename.DragOver
-        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
-            Dim oBox As TextBox = CType(sender, TextBox)
-            oBox.Select(TextBoxCursorPos(oBox, e.X, e.Y), 0)
-        End If
-    End Sub
-
-    Private Sub TxtSurname_DragEnter(sender As Object, e As DragEventArgs) Handles TxtForename.DragEnter
-        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
-            e.Effect = DragDropEffects.Copy
-        Else
-            If e.Data.GetDataPresent(DataFormats.Text) Then
-                e.Effect = DragDropEffects.Copy
-            Else
-                e.Effect = DragDropEffects.None
-            End If
-        End If
-    End Sub
-    Private Sub ChkShowImage_CheckedChanged(sender As Object, e As EventArgs) Handles ChkShowImage.CheckedChanged
-        DgvPeople.Columns().Item(xImg.Name).Visible = ChkShowImage.Checked
-        For Each tRow As DataGridViewRow In DgvPeople.Rows
-            tRow.Height = If(ChkShowImage.Checked, 65, DgvPeople.RowTemplate.Height)
-        Next
-    End Sub
-    Private Sub BtnPasteName_Click(sender As Object, e As EventArgs) Handles BtnPasteName.Click
-        TxtForename.Text = Clipboard.GetText
-    End Sub
-
-    'Private Sub BtnSplitNameText_Click(sender As Object, e As EventArgs) Handles BtnSplitNameText.Click
-    '    If isSplit Then
-    '        JoinNameText
-    '        TxtSurname.Visible = False
-    '    Else
-    '        SplitNameText()
-    '        TxtSurname.Visible = True
-    '    End If
-    '    isSplit = Not isSplit
-    'End Sub
-    Private Sub DisplayAndLog(pText As String)
-        ShowProgress(pText, LblStatus, True, MyBase.Name)
-    End Sub
-    Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
-        ShowProgress(pText, LblStatus, True, MyBase.Name,, isMessagebox)
-    End Sub
-
-    Private Sub DgvPeople_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvPeople.CellDoubleClick
-        If e.RowIndex >= 0 And e.RowIndex < DgvPeople.Rows.Count Then
-            Dim tRow As DataGridViewRow = DgvPeople.Rows(e.RowIndex)
-            OpenUpdateForm(tRow)
-        End If
+    Private Sub ClearForm()
+        DgvPeople.Rows.Clear()
+        txtId.Text = ""
+        TxtForename.Text = ""
+        LblStatus.Text = ""
+        currentForename = ""
+        currentSurname = ""
     End Sub
 #End Region
 End Class

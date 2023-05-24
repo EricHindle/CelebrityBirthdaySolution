@@ -65,14 +65,17 @@ Partial Class FrmOptions
         Me.BtnBackup = New System.Windows.Forms.Button()
         Me.BtnHousekeeping = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.NudRetention = New System.Windows.Forms.NumericUpDown()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.NudRetention = New System.Windows.Forms.NumericUpDown()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.ChkShowImages = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         CType(Me.NudRetention, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox5.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnCancel
@@ -518,13 +521,6 @@ Partial Class FrmOptions
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Housekeeping"
         '
-        'NudRetention
-        '
-        Me.NudRetention.Location = New System.Drawing.Point(42, 46)
-        Me.NudRetention.Name = "NudRetention"
-        Me.NudRetention.Size = New System.Drawing.Size(54, 22)
-        Me.NudRetention.TabIndex = 27
-        '
         'Label14
         '
         Me.Label14.AutoSize = True
@@ -534,12 +530,40 @@ Partial Class FrmOptions
         Me.Label14.TabIndex = 28
         Me.Label14.Text = "Retention period"
         '
+        'NudRetention
+        '
+        Me.NudRetention.Location = New System.Drawing.Point(42, 46)
+        Me.NudRetention.Name = "NudRetention"
+        Me.NudRetention.Size = New System.Drawing.Size(54, 22)
+        Me.NudRetention.TabIndex = 27
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.ChkShowImages)
+        Me.GroupBox5.Location = New System.Drawing.Point(548, 151)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(133, 59)
+        Me.GroupBox5.TabIndex = 28
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Search"
+        '
+        'ChkShowImages
+        '
+        Me.ChkShowImages.AutoSize = True
+        Me.ChkShowImages.Location = New System.Drawing.Point(24, 24)
+        Me.ChkShowImages.Name = "ChkShowImages"
+        Me.ChkShowImages.Size = New System.Drawing.Size(100, 18)
+        Me.ChkShowImages.TabIndex = 0
+        Me.ChkShowImages.Text = "Show Images"
+        Me.ChkShowImages.UseVisualStyleBackColor = True
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(693, 722)
+        Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.BtnBackup)
         Me.Controls.Add(Me.chkSqlServer)
@@ -567,6 +591,8 @@ Partial Class FrmOptions
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         CType(Me.NudRetention, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -615,4 +641,6 @@ Partial Class FrmOptions
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents Label14 As Label
     Friend WithEvents NudRetention As NumericUpDown
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents ChkShowImages As CheckBox
 End Class

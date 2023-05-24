@@ -5,8 +5,6 @@
 ' Author Eric Hindle
 '
 
-Imports System.IO
-
 Public Class FrmTwitterMosaic
     Dim isChangingSize As Boolean = False
     Private _imageList As New List(Of Person)
@@ -87,7 +85,7 @@ Public Class FrmTwitterMosaic
         For Each _personRow As CelebrityBirthdayDataSet.FullPersonRow In _PersonTable
             _imageList.Add(New Person(_personRow))
         Next
-        Dim _rowct As Integer = CInt(_imageList.Count / MOSAIC_WIDTH)
+        Dim _rowct As Integer = _imageList.Count / MOSAIC_WIDTH
         If _rowct > MOSAIC_HEIGHT Then
             If pSkipValue >= 0 Then
                 If pSkipValue > _rowct - MOSAIC_HEIGHT Then
@@ -95,7 +93,7 @@ Public Class FrmTwitterMosaic
                 End If
             Else
                 Randomize()
-                Dim value As Integer = CInt(Int((_rowct - MOSAIC_HEIGHT) * Rnd()))
+                Dim value As Integer = Int((_rowct - MOSAIC_HEIGHT) * Rnd())
                 nudSkip.Value = value
             End If
 

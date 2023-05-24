@@ -40,6 +40,7 @@ Public NotInheritable Class FrmOptions
         My.Settings.isSqlServer = chkSqlServer.Checked
         My.Settings.twitterAuthCallback = TxtCallback.Text
         My.Settings.fileRetentionPeriod = NudRetention.Value
+        My.Settings.srchShowImages = ChkShowImages.Checked
         My.Settings.Save()
     End Sub
 
@@ -68,6 +69,7 @@ Public NotInheritable Class FrmOptions
         NudSentences.Value = My.Settings.wikiSentences
         chkSqlServer.Checked = My.Settings.isSqlServer
         NudRetention.Value = My.Settings.fileRetentionPeriod
+        ChkShowImages.Checked = My.Settings.srchShowImages
     End Sub
 
     Private Sub BtnResetForms_Click(sender As Object, e As EventArgs) Handles BtnResetForms.Click

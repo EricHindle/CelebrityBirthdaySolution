@@ -38,7 +38,6 @@ Public Class FrmMenu2
         Show()
     End Sub
 
-
     Private Sub TxtBirthdateCheck_Click(sender As Object, e As EventArgs) Handles TxtBirthdateCheck.Click
         LogUtil.Info("Birth date check", MyBase.Name)
         Hide()

@@ -9,7 +9,6 @@ Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Reflection
-Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
 
 Public NotInheritable Class FrmImageEdit
 #Region "Constants"

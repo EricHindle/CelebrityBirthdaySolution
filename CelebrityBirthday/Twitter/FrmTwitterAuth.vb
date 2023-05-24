@@ -7,7 +7,6 @@
 
 Imports System.Collections.Specialized
 Imports System.Net.Http
-Imports System.Runtime.CompilerServices
 Imports System.Security.Cryptography
 Imports System.Text
 Imports System.Web
@@ -27,7 +26,7 @@ Public Class FrmTwitterAuth
     End Sub
 
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
 
     End Sub
 

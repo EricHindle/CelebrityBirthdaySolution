@@ -6,7 +6,6 @@
 '
 
 Imports System.IO
-Imports System.Runtime.Remoting.Services
 
 Public NotInheritable Class FrmDatabaseImages
 #Region "constants"

@@ -7,7 +7,6 @@
 
 Imports System.Data.Common
 Imports System.IO
-Imports System.Reflection
 Imports System.Text
 
 Public NotInheritable Class FrmUpdateDatabase
@@ -237,7 +236,7 @@ Public NotInheritable Class FrmUpdateDatabase
                     End If
                     operson.Sortseq = sortSeq
                     Dim _row As DataGridViewRow = DgvPeople.Rows(DgvPeople.Rows.Add())
-                    _row.Cells(personName.Name).Value = (operson.BirthYear & " " & operson.Name)
+                    _row.Cells(personName.Name).Value = operson.BirthYear & " " & operson.Name
                     _row.Cells(personName.Name).Style.ForeColor = Color.Black
                     _row.Cells(personName.Name).Style.BackColor = SetRowColorByType(operson)
                     If findPersonInList > -1 AndAlso findPersonInList = operson.Id Then
@@ -851,7 +850,7 @@ Public NotInheritable Class FrmUpdateDatabase
         DgvPeople.Rows.Clear()
         For Each oPerson As Person In personTable
             Dim _row As DataGridViewRow = DgvPeople.Rows(DgvPeople.Rows.Add())
-            _row.Cells(personName.Name).Value = (oPerson.BirthYear & " " & oPerson.Name)
+            _row.Cells(personName.Name).Value = oPerson.BirthYear & " " & oPerson.Name
             _row.Cells(personName.Name).Style.ForeColor = Color.Black
             _row.Cells(personName.Name).Style.BackColor = SetRowColorByType(oPerson)
         Next

@@ -619,7 +619,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bcake.ico" />
     <Content Include="cake.ico" />
     <None Include="images\copyiconpale.png" />
     <None Include="images\paste.png" />
