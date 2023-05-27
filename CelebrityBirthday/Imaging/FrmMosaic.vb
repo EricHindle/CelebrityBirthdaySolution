@@ -13,6 +13,7 @@ Public Class FrmMosaic
     Dim _height As Integer
     Dim isChangingSize As Boolean = False
     Private _imageList As New List(Of Person)
+    Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
@@ -25,7 +26,7 @@ Public Class FrmMosaic
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
         Dim _fileName As String = Path.Combine(_path, cboMonth.SelectedItem & If(CboDay.SelectedIndex > 0, CboDay.SelectedItem, "") & "_mosaic_" & If(chkBotSD.Checked, "botsd_", "") & CStr(nudSkip.Value + 1) & "-" & CStr(nudSkip.Value + NudHeight.Value) & ".jpg")
-        ImageUtil.SaveImageFromPictureBox(PictureBox1, _width * 60, _height * 60, _fileName)
+        oImageUtil.SaveImageFromPictureBox(PictureBox1, _width * 60, _height * 60, _fileName)
         DisplayAndLog("File saved : " & _fileName)
     End Sub
     Private Sub GenerateImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
@@ -45,7 +46,7 @@ Public Class FrmMosaic
                         _imgVPos += 1
                         _imgHPos = 0
                     End If
-                    Dim oBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(_image, 60, 60)
+                    Dim oBitMap As Bitmap = oImageUtil.ResizeImageToBitmap(_image, 60, 60)
                     oGraphics.DrawImage(oBitMap.Clone, New Point(60 * _imgHPos, 60 * _imgVPos))
                     oBitMap.Dispose()
                 End If

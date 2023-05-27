@@ -15,6 +15,7 @@ Public Class FrmSendBBTweet
     Private _deathDate As DateTime
     Private _longDesc As String
     Private _deadPerson As Person
+    Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
     Public Property DeadPerson() As Person
         Get
             Return _deadPerson
@@ -214,7 +215,7 @@ Public Class FrmSendBBTweet
                     My.Computer.FileSystem.CreateDirectory(_path)
                 End If
                 Dim _fileName As String = GetUniqueFname(Path.Combine(_path, My.Resources.SINGLE_TWEET) & ".jpg")
-                _imageFile = ImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
+                _imageFile = oImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
                 WriteTrace("Saved to " & _fileName)
                 WriteTrace("Posting image")
                 Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _imageFile)
@@ -257,7 +258,7 @@ Public Class FrmSendBBTweet
         Dim _imageidentity As New ImageIdentity(-1, _image, "", "", "")
         Dim _person As New Person(TxtForename.Text, TxtSurname.Text, "", "", 0, 0, 0, 0, 0, 0, "", "", _imageidentity, Nothing)
         Dim _pictureList As New List(Of Person) From {_person}
-        ImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, ImageUtil.AlignType.Centre)
+        ImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, HindlewareLib.Imaging.ImageUtil.AlignType.Centre)
         WriteTrace("Created image")
     End Sub
     Public Function CalculateAge() As Integer

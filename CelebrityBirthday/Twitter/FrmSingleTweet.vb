@@ -32,6 +32,7 @@ Public Class FrmSingleTweet
     End Property
 #End Region
 #Region "variables"
+    Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
     Private isDone As Boolean
     Private ReadOnly tw As New TwitterOAuth
     Private ReadOnly oTweetTa As New CelebrityBirthdayDataSetTableAdapters.TweetsTableAdapter
@@ -102,9 +103,7 @@ Public Class FrmSingleTweet
 
         If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
-            If _textBox IsNot Nothing Then
-                _textBox.SelectAll()
-            End If
+            _textBox?.SelectAll()
         End If
 
     End Sub
@@ -145,7 +144,7 @@ Public Class FrmSingleTweet
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
         Dim _fileName As String = GetUniqueFname(Path.Combine(_path, My.Resources.SINGLE_TWEET) & ".jpg")
-        ImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
+        oImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
     End Sub
     Private Sub BtnClearImages_Click(sender As Object, e As EventArgs) Handles BtnClearImages.Click
         If MsgBox("Confirm delete tweet images", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
@@ -298,7 +297,7 @@ Public Class FrmSingleTweet
                     My.Computer.FileSystem.CreateDirectory(_path)
                 End If
                 Dim _fileName As String = GetUniqueFname(Path.Combine(_path, My.Resources.SINGLE_TWEET) & ".jpg")
-                _imageFile = ImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
+                _imageFile = oImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
                 Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _imageFile)
                 If _twitterUplMedia IsNot Nothing Then
                     Dim _uploadedSize As Long = _twitterUplMedia.Size
@@ -338,7 +337,7 @@ Public Class FrmSingleTweet
         Dim _imageidentity As New ImageIdentity(-1, _image, "", "", "")
         Dim _person As New Person(TxtForename.Text, TxtSurname.Text, "", "", 0, 0, 0, 0, 0, 0, "", "", _imageidentity, Nothing)
         Dim _pictureList As New List(Of Person) From {_person}
-        ImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, ImageUtil.AlignType.Centre)
+        ImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, HindlewareLib.Imaging.ImageUtil.AlignType.Centre)
         WriteTrace("Generated image")
     End Sub
     Private Function GetWikiText(_sentences As Integer) As String

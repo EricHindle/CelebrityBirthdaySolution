@@ -10,7 +10,7 @@ Public Class FrmTwitterMosaic
     Private _imageList As New List(Of Person)
     Private Const MOSAIC_WIDTH As Integer = 45
     Private Const MOSAIC_HEIGHT As Integer = 15
-
+    Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Close()
     End Sub
@@ -36,7 +36,7 @@ Public Class FrmTwitterMosaic
             My.Computer.FileSystem.CreateDirectory(_path)
         End If
         Dim _fileName As String = GetUniqueFname(cboMonth.SelectedItem & "_twitter_mosaic.jpg", _path)
-        ImageUtil.SaveImageFromPictureBox(PictureBox1, MOSAIC_WIDTH * 60, MOSAIC_HEIGHT * 60, _fileName)
+        oImageUtil.SaveImageFromPictureBox(PictureBox1, MOSAIC_WIDTH * 60, MOSAIC_HEIGHT * 60, _fileName)
         ShowStatus("File saved : " & _fileName, lblStatus, True, MyBase.Name)
     End Sub
     Private Sub GenerateImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
@@ -56,7 +56,7 @@ Public Class FrmTwitterMosaic
                         _imgVPos += 1
                         _imgHPos = 0
                     End If
-                    Dim oBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(_image, 60, 60)
+                    Dim oBitMap As Bitmap = oImageUtil.ResizeImageToBitmap(_image, 60, 60)
                     oGraphics.DrawImage(oBitMap.Clone, New Point(60 * _imgHPos, 60 * _imgVPos))
                     oBitMap.Dispose()
                 End If

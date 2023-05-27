@@ -12,6 +12,7 @@ Public Class FrmImageStore
     Dim sApplicationPath As String
     Dim isSaved As Boolean = True
     Dim _latestSavedFile As String = ""
+    Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
 #End Region
 #Region "properties"
     Private _forename As String
@@ -137,7 +138,7 @@ Public Class FrmImageStore
     End Sub
     Private Sub BtnLoadImage_Click(sender As Object, e As EventArgs) Handles btnLoadImage.Click
         Try
-            Dim oImageFilename As String = ImageUtil.GetImageFileName(ImageUtil.OpenOrSave.Open, ImageUtil.ImageType.ALL)
+            Dim oImageFilename As String = oImageUtil.GetImageFileName(HindlewareLib.Imaging.ImageUtil.OpenOrSave.Open, HindlewareLib.Imaging.ImageUtil.ImageType.ALL)
             _latestSavedFile = oImageFilename
             lblImageFile.Text = _latestSavedFile
             Dim sizeMessage As String = ""

@@ -33,6 +33,7 @@ Public NotInheritable Class FrmDailyTweets
     Private IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
     Private isBuildingTrees As Boolean
+    Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
 #End Region
 #Region "properties"
     Private _daySelection As Integer
@@ -250,7 +251,7 @@ Public NotInheritable Class FrmDailyTweets
             _fileName = GetUniqueFname(_fileName)
         End If
         Dim _pictureBox As PictureBox = GetPictureBoxFromPage(_page)
-        ImageUtil.SaveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, _fileName)
+        oImageUtil.SaveImageFromPictureBox(_pictureBox, _pictureBox.Width, _pictureBox.Height, _fileName)
         DisplayAndLog("File saved")
         Return _fileName
     End Function
@@ -631,14 +632,14 @@ Public NotInheritable Class FrmDailyTweets
         End If
     End Sub
     Private Sub GenerateTweetImage(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer, _height As Integer)
-        Dim pAlignType As ImageUtil.AlignType
+        Dim pAlignType As HindlewareLib.Imaging.ImageUtil.AlignType
         Select Case True
             Case rbImageRight.Checked
-                pAlignType = ImageUtil.AlignType.Right
+                pAlignType = HindlewareLib.Imaging.ImageUtil.AlignType.Right
             Case rbImageLeft.Checked
-                pAlignType = ImageUtil.AlignType.Left
+                pAlignType = HindlewareLib.Imaging.ImageUtil.AlignType.Left
             Case rbImageCentre.Checked
-                pAlignType = ImageUtil.AlignType.Centre
+                pAlignType = HindlewareLib.Imaging.ImageUtil.AlignType.Centre
         End Select
         ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, pAlignType)
         DisplayAndLog("Image complete")

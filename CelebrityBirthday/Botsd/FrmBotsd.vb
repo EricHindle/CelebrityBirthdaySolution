@@ -16,6 +16,7 @@ Imports TweetSharp
 
 Public NotInheritable Class FrmBotsd
 #Region "variables"
+    Private _imageUtil As New HindlewareLib.Imaging.ImageUtil
     Private _imageList As New List(Of Person)
     Private IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
@@ -27,6 +28,7 @@ Public NotInheritable Class FrmBotsd
     Private WpNumber As Integer
     Private isBuildingPairs As Boolean
     Private lastSelectedDate As DateTime
+    Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
 #End Region
 #Region "properites"
     Private _day As Integer
@@ -247,9 +249,7 @@ Public NotInheritable Class FrmBotsd
 
         If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
-            If _textBox IsNot Nothing Then
-                _textBox.SelectAll()
-            End If
+            _textBox?.SelectAll()
         End If
 
     End Sub
@@ -472,7 +472,7 @@ Public NotInheritable Class FrmBotsd
         If My.Computer.FileSystem.FileExists(_fileName) Then
             _fileName = GetUniqueFname(_fileName)
         End If
-        ImageUtil.SaveImageFromPictureBox(PictureBox1, PictureBox1.Width, PictureBox1.Height, _fileName)
+        _imageUtil.SaveImageFromPictureBox(PictureBox1, PictureBox1.Width, PictureBox1.Height, _fileName)
         DisplayAndLog("File saved")
         Return _fileName
     End Function
@@ -484,14 +484,14 @@ Public NotInheritable Class FrmBotsd
         Next
     End Sub
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
-        Dim pAlignType As ImageUtil.AlignType
+        Dim pAlignType As HindlewareLib.Imaging.ImageUtil.AlignType
         Select Case True
             Case rbImageRight.Checked
-                pAlignType = ImageUtil.AlignType.Right
+                pAlignType = HindlewareLib.Imaging.ImageUtil.AlignType.Right
             Case rbImageLeft.Checked
-                pAlignType = ImageUtil.AlignType.Left
+                pAlignType = HindlewareLib.Imaging.ImageUtil.AlignType.Left
             Case rbImageCentre.Checked
-                pAlignType = ImageUtil.AlignType.Centre
+                pAlignType = HindlewareLib.Imaging.ImageUtil.AlignType.Centre
         End Select
         If _imageTable.Count > 0 Then
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
