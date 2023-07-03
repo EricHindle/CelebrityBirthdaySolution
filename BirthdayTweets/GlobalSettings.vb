@@ -76,6 +76,20 @@ Public NotInheritable Class GlobalSettings
         End If
         Return rtnIntegerValue
     End Function
+    Public Shared Function GetDateSetting(ByVal settingName As String) As Date
+        Dim rtnDateValue As Date = Date.MinValue
+        Dim rtnValue As Object = GetSetting(settingName)
+        If rtnValue Is Nothing Then
+            LogUtil.Problem("Missing Global value " & settingName, "GetIntegerSetting")
+        Else
+            If IsDate(rtnValue) Then
+                rtnDateValue = CDate(rtnValue)
+            Else
+                LogUtil.Problem("Invalid date global value " & settingName, "GetIntegerSetting")
+            End If
+        End If
+        Return rtnDateValue
+    End Function
     Public Shared Function SetSetting(ByVal settingName As String, ByVal settingType As String, ByVal settingValue As String, ByVal Optional settingGroup As String = "") As Boolean
         Dim rtnVal As Boolean = True
         Try

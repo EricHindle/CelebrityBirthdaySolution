@@ -114,7 +114,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="twitterAuthCallback" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://localhost/test/hattyburpday.php</Value>
+      <Value Profile="(Default)">http://localhost/celebbirthday/celebbirthday.php</Value>
     </Setting>
     <Setting Name="backupformpos" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

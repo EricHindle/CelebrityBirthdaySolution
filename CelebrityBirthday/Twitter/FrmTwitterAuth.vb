@@ -19,7 +19,7 @@ Public Class FrmTwitterAuth
         ShowStatus("Loading", MyBase.Name, Nothing)
         GetFormPos(Me, My.Settings.twitterAuthFormPos)
         WebBrowser1.Navigate(New Uri("about:blank"))
-        Dim _auth As TwitterOAuth = GetAuthById("Twitter")
+        Dim _auth As TwitterOAuth = GetAuthById("TwDev")
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
         FillTwitterUserList()

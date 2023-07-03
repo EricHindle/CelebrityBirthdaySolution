@@ -502,7 +502,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://localhost/test/hattyburpday.php")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://localhost/celebbirthday/celebbirthday.php")>  _
         Public Property twitterAuthCallback() As String
             Get
                 Return CType(Me("twitterAuthCallback"),String)

@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="CelebrityBirthdayConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="CelebrityBirthdayConnectionString (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.BirthdayTweetsNs.My.MySettings.GlobalReference.Default.CelebrityBirthdayConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="CelebrityBirthdayConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="CelebrityBirthdayConnectionString (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.BirthdayTweets.My.MySettings.GlobalReference.Default.CelebrityBirthdayConnectionString" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="BotSDTableAdapter" GeneratorDataComponentClassName="BotSDTableAdapter" Name="BotSD" UserDataComponentName="BotSDTableAdapter">

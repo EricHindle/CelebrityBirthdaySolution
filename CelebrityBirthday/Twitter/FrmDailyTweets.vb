@@ -7,11 +7,44 @@
 
 Imports System.Collections.ObjectModel
 Imports System.IO
+Imports System.Net.Http
 Imports System.Reflection
 Imports System.Text
-Imports TweetSharp
+Imports System.Threading.Tasks
+Imports Microsoft.CodeAnalysis
+Imports Newtonsoft.Json
+' Imports TweetSharp
+Imports Tweetinvi
+Imports Tweetinvi.Core.Web
+Imports Tweetinvi.Models
+Imports Tweetinvi.Parameters
 
 Public NotInheritable Class FrmDailyTweets
+#Region "class"
+    Public Class TweetsV2Poster
+        Private ReadOnly client As ITwitterClient
+
+        Public Sub New(ByVal client As ITwitterClient)
+            Me.client = client
+        End Sub
+
+        Public Function PostTweet(ByVal tweetParams As TweetV2PostRequest) As Task(Of ITwitterResult)
+            Return Me.client.Execute.AdvanceRequestAsync(Function(ByVal request As ITwitterRequest)
+                                                             Dim jsonBody = Me.client.Json.Serialize(tweetParams)
+                                                             Dim content = New StringContent(jsonBody, Encoding.UTF8, "application/json")
+                                                             request.Query.Url = "https://api.twitter.com/2/tweets"
+                                                             request.Query.HttpMethod = Tweetinvi.Models.HttpMethod.POST
+                                                             request.Query.HttpContent = content
+                                                             Return request
+                                                         End Function)
+        End Function
+    End Class
+
+    Public Class TweetV2PostRequest
+        <JsonProperty("text")>
+        Public Property Text As String = String.Empty
+    End Class
+#End Region
 #Region "enum"
     Private Enum TweetType
         Birthday
@@ -407,7 +440,7 @@ Public NotInheritable Class FrmDailyTweets
             DisplayAndLog("Deleting tweet images")
             Dim _imageList As ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(My.Settings.twitterImageFolder,
                                                                                               FileIO.SearchOption.SearchTopLevelOnly,
-                                                                                              {[Enum].GetName(GetType(TweetType), TweetType.Anniversary) & "*.*", [Enum].GetName(GetType(TweetType), TweetType.Birthday) & "*.*", My.Resources.TOTD & "*.*"})
+                                                                                              {TweetType.Anniversary.ToString & "*.*", TweetType.Birthday.ToString & "*.*", My.Resources.TOTD & "*.*"})
             For Each _imageFile As String In _imageList
                 My.Computer.FileSystem.DeleteFile(_imageFile)
             Next
@@ -547,15 +580,15 @@ Public NotInheritable Class FrmDailyTweets
                     Next
                 Next
                 oTweetLists.Add(_selectedPersons)
-                GenerateTweets(oTweetLists, _imageStart, TweetType.FULL)
+                GenerateTweets(oTweetLists, _imageStart, TweetType.Full)
             Else
-                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, TweetType.BIRTHDAY)
+                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, TweetType.Birthday)
                 oTweetLists.AddRange(_birthdayImageTweets)
-                GenerateTweets(oTweetLists, _imageStart, TweetType.BIRTHDAY)
+                GenerateTweets(oTweetLists, _imageStart, TweetType.Birthday)
                 _imageStart = oTweetLists.Count
-                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, TweetType.ANNIVERSARY)
+                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, TweetType.Anniversary)
                 oTweetLists.AddRange(_annivImageTweets)
-                GenerateTweets(oTweetLists, _imageStart, TweetType.ANNIVERSARY)
+                GenerateTweets(oTweetLists, _imageStart, TweetType.Anniversary)
             End If
             DisplayAndLog("Images Complete")
         Else
@@ -567,7 +600,7 @@ Public NotInheritable Class FrmDailyTweets
 
             Dim _personList As List(Of Person) = _tweetLists(_personIndex)
             DisplayAndLog(">" & _personIndex)
-            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, [Enum].GetName(GetType(TweetType), _tweetType) & "_" & (_personIndex - _listStart + 1))
+            Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, _tweetType.ToString & "_" & (_personIndex - _listStart + 1))
             Dim pbControl As PictureBox = GetPictureBoxFromPage(newTweetTabPage)
             Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
             IsNoGenerate = True
@@ -599,7 +632,7 @@ Public NotInheritable Class FrmDailyTweets
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
             If rbAges.Checked Then
-                If _type = TweetType.BIRTHDAY Then
+                If _type = TweetType.Birthday Then
                     _outString.Append(" (" & CalculateAge(_person, ChkAtNextBirthday.Checked) & ")")
                 Else
                     Dim _yr As Integer = _person.BirthYear
@@ -610,7 +643,7 @@ Public NotInheritable Class FrmDailyTweets
                     _outString.Append(" (" & _birthyear & ")")
                 End If
             End If
-            If rbHandles.Checked And _type = TweetType.BIRTHDAY Then
+            If rbHandles.Checked And _type = TweetType.Birthday Then
                 If _person.Social IsNot Nothing AndAlso Not String.IsNullOrEmpty(_person.Social.TwitterHandle) Then
                     _outString.Append(" @").Append(_person.Social.TwitterHandle)
                 End If
@@ -679,39 +712,60 @@ Public NotInheritable Class FrmDailyTweets
 
         Return isOkToSend
     End Function
-    Private Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
+    Private Async Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
         DisplayAndLog("Sending Tweet as " & cmbTwitterUsers.SelectedItem)
-        Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
-        Dim sto = New SendTweetOptions
-        Dim msg = _tweetText
-        sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
-        Dim _mediaId As String = Nothing
-        If chkImages.Checked Then
-            Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _filename)
-            If _twitterUplMedia IsNot Nothing Then
-                Dim _uploadedSize As Long = _twitterUplMedia.Size
-                Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-                WriteTrace("Image upload size: " & _uploadedSize, True)
-                _mediaId = _twitterUplMedia.Media_Id
-            Else
-                WriteTrace("No image upload", True)
+
+        Dim userClient = New TwitterClient(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
+        Dim user = Await userClient.Users.GetAuthenticatedUserAsync()
+        Try
+            Dim poster = New TweetsV2Poster(userClient)
+            Dim result As ITwitterResult = Await poster.PostTweet(New TweetV2PostRequest With {
+        .Text = _tweetText
+    })
+            If result.Response.IsSuccessStatusCode = False Then
+
             End If
-        End If
-        If Not String.IsNullOrEmpty(_mediaId) Then
-            InsertTweet(_filename, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
-            sto.MediaIds = {_mediaId}
-        End If
-        Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
-        If _twitterStatus IsNot Nothing Then
-            InsertTweet(sto.Status, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
-            WriteTrace("OK: " & _twitterStatus.Id, True)
-        Else
-            ' tweet failed
-            WriteTrace("Failed", True)
-        End If
+        Catch ex As Exception
+        End Try
+
+
+        'Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
+        'Dim sto = New SendTweetOptions
+        'Dim msg = _tweetText
+        'sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
+        'Dim _mediaId As String = Nothing
+        'If chkImages.Checked Then
+        '    Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _filename)
+        '    If _twitterUplMedia IsNot Nothing Then
+        '        Dim _uploadedSize As Long = _twitterUplMedia.Size
+        '        Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
+        '        WriteTrace("Image upload size: " & _uploadedSize, True)
+        '        _mediaId = _twitterUplMedia.Media_Id
+        '    Else
+        '        WriteTrace("No image upload", True)
+        '    End If
+        'End If
+        'If Not String.IsNullOrEmpty(_mediaId) Then
+        '    InsertTweet(_filename, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
+        '    sto.MediaIds = {_mediaId}
+        'End If
+        'Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
+
+        'If _twitterStatus IsNot Nothing Then
+        '    InsertTweet(sto.Status, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
+        '    WriteTrace("OK: " & _twitterStatus.Id, True)
+        'Else
+        '    ' tweet failed
+        '    WriteTrace("Failed", True)
+        'End If
     End Sub
+
+
+
+
+
     Private Sub GetAuthData()
-        Dim _auth As TwitterOAuth = GetAuthById("Twitter")
+        Dim _auth As TwitterOAuth = GetAuthById("TwDev")
         If _auth IsNot Nothing Then
             tw.ConsumerKey = _auth.Token
             tw.ConsumerSecret = _auth.TokenSecret
@@ -749,7 +803,7 @@ Public NotInheritable Class FrmDailyTweets
         Dim _nudValue As Integer
         Dim _numberOfPersonsPerTweet As Integer
         Try
-            If _type = TweetType.BIRTHDAY Then
+            If _type = TweetType.Birthday Then
                 _nudValue = NudBirthdaysPerTweet.Value
             Else
                 _nudValue = NudAnnivsPerTweet.Value
@@ -787,17 +841,17 @@ Public NotInheritable Class FrmDailyTweets
     Private Function GetTweetLineLength(_person As Person, _type As TweetType) As Integer
         Dim _length As Integer = _person.Name.Length _
             + If(rbHandles.Checked, _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 2, 0), 0) _
-            + If(_type = TweetType.BIRTHDAY And rbAges.Checked, 5, 0) _
-            + If(_type = TweetType.ANNIVERSARY And rbAges.Checked, 7, 0) _
++ If(_type = TweetType.Birthday And rbAges.Checked, 5, 0) _
++ If(_type = TweetType.Anniversary And rbAges.Checked, 7, 0) _
             + 1
         Return _length
     End Function
     Private Shared Function GetHeading(_type As TweetType) As String
         Dim _header As String = ""
-        If _type = TweetType.ANNIVERSARY Then
+        If _type = TweetType.Anniversary Then
             _header = ANNIV_HDR
         End If
-        If _type = TweetType.BIRTHDAY Then
+        If _type = TweetType.Birthday Then
             _header = BIRTHDAY_HDR
         End If
         Return _header

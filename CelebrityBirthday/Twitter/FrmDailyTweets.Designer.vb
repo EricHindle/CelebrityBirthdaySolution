@@ -705,7 +705,7 @@ Partial Class FrmDailyTweets
         Me.BtnTweetDeck.Text = "Open TweetDeck"
         Me.BtnTweetDeck.UseVisualStyleBackColor = True
         '
-        'FrmTweet
+        'FrmDailyTweets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -742,7 +742,7 @@ Partial Class FrmDailyTweets
         Me.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimumSize = New System.Drawing.Size(1364, 709)
-        Me.Name = "FrmTweet"
+        Me.Name = "FrmDailyTweets"
         Me.Text = "Daily Tweets"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()

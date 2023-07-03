@@ -124,7 +124,7 @@ Friend Module ImageUtil
         Const Psub As String = "GenerateImage"
         Dim mosaic As Image = New Bitmap(My.Resources.blank, Math.Max(60 * widthImageCount, 300), Math.Max((60 * pHeight) + 18, 80))
         Dim oGraphics As Graphics = Graphics.FromImage(mosaic)
-        Dim _idImage As Bitmap = If(_tweetType = BirthdayTweets.TweetType.ForNow, My.Resources.idtb, My.Resources.id)
+        Dim _idImage As Bitmap = If(_tweetType = BirthdayTweets.TweetType.ForNowBirthday, My.Resources.idtb, My.Resources.id)
         oGraphics.DrawImage(_idImage, New Point(mosaic.Width - 125, mosaic.Height - 18))
         If imageTable IsNot Nothing Then
             Dim lastWidth As Integer = imageTable.Count Mod widthImageCount

@@ -8622,7 +8622,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9028,7 +9028,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9506,7 +9506,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10024,7 +10024,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10663,7 +10663,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11222,7 +11222,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11759,7 +11759,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -12384,7 +12384,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -12779,7 +12779,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -13041,7 +13041,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -13241,7 +13241,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -13598,7 +13598,7 @@ Namespace CelebrityBirthdayDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.BirthdayTweetsNs.My.MySettings.Default.CelebrityBirthdayConnectionString
+            Me._connection.ConnectionString = Global.BirthdayTweets.My.MySettings.Default.CelebrityBirthdayConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

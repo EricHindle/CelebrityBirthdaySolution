@@ -32,7 +32,7 @@ Public NotInheritable Class LogUtil
 #End Region
 #Region "Start / stop"
     Public Shared Sub InitialiseLogging()
-        If isConfigured = False Then
+        If Not isConfigured Then
             My.Application.Log.DefaultFileLogWriter.LogFileCreationSchedule = Logging.LogFileCreationScheduleOption.Daily
             If _LogFolder IsNot Nothing Then
                 My.Application.Log.DefaultFileLogWriter.CustomLocation = _LogFolder
