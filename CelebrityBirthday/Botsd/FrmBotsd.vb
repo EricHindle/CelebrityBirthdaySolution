@@ -12,7 +12,7 @@ Imports System.IO
 Imports System.Reflection
 Imports System.Text
 Imports System.Web.UI.WebControls
-Imports TweetSharp
+Imports Tweetinvi.Core.Web
 
 Public NotInheritable Class FrmBotsd
 #Region "variables"
@@ -495,7 +495,7 @@ Public NotInheritable Class FrmBotsd
         End Select
         If _imageTable.Count > 0 Then
             Dim _height As Integer = Math.Ceiling(_imageTable.Count / _width)
-            ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, pAlignType)
+            ModCbImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, pAlignType)
         Else
             _pictureBox.Image = Nothing
         End If
@@ -526,43 +526,55 @@ Public NotInheritable Class FrmBotsd
         End If
         WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
         If isOkToSend Then
-            SendTheTweet(rtbFile1.Text, _filename)
+            SendTheTweet(_filename)
         End If
         WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
 
     End Sub
-    Private Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
-        DisplayAndLog("Sending Tweet")
-        Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
-        Dim sto = New SendTweetOptions
-        Dim msg = _tweetText
-
-        sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
-        Dim _mediaId As String = Nothing
-        If chkImages.Checked Then
-            Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _filename)
-            If _twitterUplMedia IsNot Nothing Then
-                Dim _uploadedSize As Long = _twitterUplMedia.Size
-                Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-                WriteTrace("Image upload size: " & _uploadedSize, False)
-                _mediaId = _twitterUplMedia.Media_Id
-            Else
-                WriteTrace("No image upload", False)
-            End If
-        End If
-        If Not String.IsNullOrEmpty(_mediaId) Then
-            InsertTweet(_filename, _month, ThisDay, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
-            sto.MediaIds = {_mediaId}
-        End If
-        Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
-        If _twitterStatus IsNot Nothing Then
-            InsertTweet(sto.Status, _month, ThisDay, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
-            WriteTrace("OK: " & _twitterStatus.Id, True)
+    Private Async Sub SendTheTweet(pImageFile As String)
+        Dim _tweetText As String = rtbFile1.Text
+        WriteTrace("Posting tweet")
+        Dim result As ITwitterResult = Await PostTheTweet(_tweetText, cmbTwitterUsers.SelectedItem, pImageFile)
+        If result.Response.IsSuccessStatusCode = True Then
+            WriteTrace("OK: " & CStr(result.Response.StatusCode))
         Else
-            ' tweet failed
-            WriteTrace("Failed", True)
+            WriteTrace("Tweet Failed : " & CStr(result.Response.StatusCode))
         End If
     End Sub
+
+
+    'Private Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
+    '    DisplayAndLog("Sending Tweet")
+    '    Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
+    '    Dim sto = New SendTweetOptions
+    '    Dim msg = _tweetText
+
+    '    sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
+    '    Dim _mediaId As String = Nothing
+    '    If chkImages.Checked Then
+    '        Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _filename)
+    '        If _twitterUplMedia IsNot Nothing Then
+    '            Dim _uploadedSize As Long = _twitterUplMedia.Size
+    '            Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
+    '            WriteTrace("Image upload size: " & _uploadedSize, False)
+    '            _mediaId = _twitterUplMedia.Media_Id
+    '        Else
+    '            WriteTrace("No image upload", False)
+    '        End If
+    '    End If
+    '    If Not String.IsNullOrEmpty(_mediaId) Then
+    '        InsertTweet(_filename, _month, ThisDay, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
+    '        sto.MediaIds = {_mediaId}
+    '    End If
+    '    Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
+    '    If _twitterStatus IsNot Nothing Then
+    '        InsertTweet(sto.Status, _month, ThisDay, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
+    '        WriteTrace("OK: " & _twitterStatus.Id, True)
+    '    Else
+    '        ' tweet failed
+    '        WriteTrace("Failed", True)
+    '    End If
+    'End Sub
     Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False, Optional isLogged As Boolean = True)
         rtbTweet.Text &= vbCrLf & sText
         If isStatus Then DisplayAndLog(sText)

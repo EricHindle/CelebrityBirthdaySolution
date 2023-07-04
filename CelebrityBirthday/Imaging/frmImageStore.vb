@@ -138,7 +138,7 @@ Public Class FrmImageStore
     End Sub
     Private Sub BtnLoadImage_Click(sender As Object, e As EventArgs) Handles btnLoadImage.Click
         Try
-            Dim oImageFilename As String = oImageUtil.GetImageFileName(HindlewareLib.Imaging.ImageUtil.OpenOrSave.Open, HindlewareLib.Imaging.ImageUtil.ImageType.ALL)
+            Dim oImageFilename As String = HindlewareLib.Imaging.ImageUtil.GetImageFileName(HindlewareLib.Imaging.ImageUtil.OpenOrSave.Open, HindlewareLib.Imaging.ImageUtil.ImageType.ALL)
             _latestSavedFile = oImageFilename
             lblImageFile.Text = _latestSavedFile
             Dim sizeMessage As String = ""

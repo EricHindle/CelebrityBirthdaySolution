@@ -9,7 +9,8 @@ Imports System.Collections.ObjectModel
 Imports System.IO
 Imports System.Net
 Imports System.Text
-Imports TweetSharp
+Imports Tweetinvi.Core.Web
+
 Public Class FrmSingleTweet
 #Region "properties"
     Private _sendAs As String
@@ -33,58 +34,35 @@ Public Class FrmSingleTweet
 #End Region
 #Region "variables"
     Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
-    Private isDone As Boolean
-    Private ReadOnly tw As New TwitterOAuth
     Private ReadOnly oTweetTa As New CelebrityBirthdayDataSetTableAdapters.TweetsTableAdapter
 #End Region
 #Region "form handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Close()
     End Sub
-
     Private Sub FrmSendTwitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.twitterSingleFormPos)
         NudSentences.Value = My.Settings.wikiSentences
         RtbTweetText.AllowDrop = True
-        Dim _auth As TwitterOAuth = GetAuthById("Twitter")
-        tw.ConsumerKey = _auth.Token
-        tw.ConsumerSecret = _auth.TokenSecret
         FillTwitterUserList()
         cmbTwitterUsers.SelectedIndex = cmbTwitterUsers.FindStringExact(SendAs)
         RtbTweetText.Text = TweetText
     End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
+        BtnSend.Enabled = False
         Dim isOkToSend As Boolean = True
-        If cmbTwitterUsers.SelectedIndex >= 0 Then
-            Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
-            If _auth IsNot Nothing Then
-                If String.IsNullOrEmpty(_auth.Verifier) Then
-                    isOkToSend = False
-                Else
-                    tw.Verifier = _auth.Verifier
-                End If
-                If String.IsNullOrEmpty(_auth.Token) Then
-                    isOkToSend = False
-                Else
-                    tw.Token = _auth.Token
-                End If
-                If String.IsNullOrEmpty(_auth.TokenSecret) Then
-                    isOkToSend = False
-                Else
-                    tw.TokenSecret = _auth.TokenSecret
-                End If
-            Else
-                isOkToSend = False
-            End If
+        If cmbTwitterUsers.SelectedIndex < 0 Then
+            isOkToSend = False
         End If
-        WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
-        isDone = False
         If isOkToSend Then
+            WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
             SendTheTweet()
+            WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
+        Else
+            WriteTrace("Tweet not sent")
         End If
-        WriteTrace(isDone)
-        WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
+        BtnSend.Enabled = True
     End Sub
     Private Sub FrmSendTwitter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
@@ -125,7 +103,6 @@ Public Class FrmSingleTweet
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
         ClearForm()
     End Sub
-
     Private Sub ClearForm()
         TxtForename.Text = ""
         TxtSurname.Text = ""
@@ -137,7 +114,6 @@ Public Class FrmSingleTweet
         LblImageName.Text = ""
         LblImageFile.Text = ""
     End Sub
-
     Private Sub BtnSaveImage_Click(sender As Object, e As EventArgs) Handles BtnSaveImage.Click
         Dim _path As String = My.Settings.twitterImageFolder
         If Not My.Computer.FileSystem.DirectoryExists(_path) Then
@@ -260,7 +236,6 @@ Public Class FrmSingleTweet
     End Sub
 #End Region
 #Region "subroutines"
-
     Private Shared Function GetTwitterName(_innerHtml As String) As String
         Dim _pos1 As Integer = _innerHtml.IndexOf("span class=""name""", StringComparison.CurrentCultureIgnoreCase) + 18
         Dim _pos2 As Integer = _innerHtml.IndexOf("/span", _pos1, StringComparison.CurrentCultureIgnoreCase)
@@ -281,13 +256,8 @@ Public Class FrmSingleTweet
         rtbTweetProgress.Text &= vbCrLf & sText
         LogUtil.Info(sText, MyBase.Name)
     End Sub
-    Private Sub SendTheTweet()
-        DisplayAndLog("Sending Tweet")
-        Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
-        Dim sto = New SendTweetOptions
-        Dim msg = RtbTweetText.Text
-        sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
-        Dim _mediaId As String = Nothing
+    Private Async Sub SendTheTweet()
+        Dim _tweetText As String = RtbTweetText.Text
         Dim _imageFile As String = Nothing
         If chkImages.Checked Then
             If My.Computer.FileSystem.FileExists(LblImageFile.Text) Then
@@ -298,46 +268,25 @@ Public Class FrmSingleTweet
                 End If
                 Dim _fileName As String = GetUniqueFname(Path.Combine(_path, My.Resources.SINGLE_TWEET) & ".jpg")
                 _imageFile = oImageUtil.SaveImageFromPictureBox(PictureBox2, PictureBox2.Width, PictureBox2.Height, _fileName)
-                Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _imageFile)
-                If _twitterUplMedia IsNot Nothing Then
-                    Dim _uploadedSize As Long = _twitterUplMedia.Size
-                    Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-                    WriteTrace("Image upload size: " & _uploadedSize, False)
-                    _mediaId = _twitterUplMedia.Media_Id
-                Else
-                    WriteTrace("No image upload", False)
-                End If
+                WriteTrace("Saved to " & _fileName)
+            Else
+                WriteTrace("Image not found")
             End If
         End If
-        If Not String.IsNullOrEmpty(_mediaId) Then
-            InsertTweet(_imageFile, Today.Month + 1, Today.Day + 1, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
-            sto.MediaIds = {_mediaId}
-        End If
-        Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
-        If _twitterStatus IsNot Nothing Then
-            WriteTrace("OK: " & _twitterStatus.Id, True)
-            InsertTweet(sto.Status, Today.Month + 1, Today.Day + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
-            WriteTrace("Inserted tweet database record")
+        WriteTrace("Posting tweet")
+        Dim result As ITwitterResult = Await PostTheTweet(_tweetText, cmbTwitterUsers.SelectedItem, _imageFile)
+        If result.Response.IsSuccessStatusCode = True Then
+            WriteTrace("OK: " & CStr(result.Response.StatusCode))
         Else
-            ' tweet failed
-            WriteTrace("Tweet Failed", True)
+            WriteTrace("Tweet Failed : " & CStr(result.Response.StatusCode))
         End If
     End Sub
-    Private Shared Function StatusToString(pStatus As TweetSharp.TwitterStatus) As String
-        Dim statusText As New StringBuilder()
-        statusText _
-            .Append("Id=").Append(pStatus.IdStr).Append(vbCrLf) _
-            .Append("FullText=").Append(pStatus.FullText).Append(vbCrLf) _
-            .Append("Author=").Append(pStatus.Author.ScreenName).Append(vbCrLf) _
-            .Append("User=").Append(pStatus.User.ScreenName).Append("("c).Append(pStatus.User.Name).Append(")"c).Append(vbCrLf)
-        Return statusText.ToString
-    End Function
     Private Sub CreateTwitterImage(_image As String)
         LblImageFile.Text = _image
         Dim _imageidentity As New ImageIdentity(-1, _image, "", "", "")
         Dim _person As New Person(TxtForename.Text, TxtSurname.Text, "", "", 0, 0, 0, 0, 0, 0, "", "", _imageidentity, Nothing)
         Dim _pictureList As New List(Of Person) From {_person}
-        ImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, HindlewareLib.Imaging.ImageUtil.AlignType.Centre)
+        ModCbImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, HindlewareLib.Imaging.ImageUtil.AlignType.Centre)
         WriteTrace("Generated image")
     End Sub
     Private Function GetWikiText(_sentences As Integer) As String
@@ -351,6 +300,5 @@ Public Class FrmSingleTweet
     Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
         ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
     End Sub
-
 #End Region
 End Class

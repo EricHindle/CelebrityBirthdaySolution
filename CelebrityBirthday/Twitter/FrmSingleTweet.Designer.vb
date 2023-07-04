@@ -56,7 +56,6 @@ Partial Class FrmSingleTweet
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.BtnSaveImage = New System.Windows.Forms.Button()
         Me.BtnClearImages = New System.Windows.Forms.Button()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -380,25 +379,12 @@ Partial Class FrmSingleTweet
         Me.BtnClearImages.Text = "Clear Images"
         Me.BtnClearImages.UseVisualStyleBackColor = True
         '
-        'Label7
-        '
-        Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.Label7.Location = New System.Drawing.Point(582, 485)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(259, 23)
-        Me.Label7.TabIndex = 153
-        Me.Label7.Text = "Check Twitter User Logged In"
-        '
         'FrmSingleTweet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(857, 598)
-        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.BtnClearImages)
         Me.Controls.Add(Me.BtnSaveImage)
         Me.Controls.Add(Me.BtnClear)
@@ -470,5 +456,4 @@ Partial Class FrmSingleTweet
     Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BtnSaveImage As Button
     Friend WithEvents BtnClearImages As Button
-    Friend WithEvents Label7 As Label
 End Class

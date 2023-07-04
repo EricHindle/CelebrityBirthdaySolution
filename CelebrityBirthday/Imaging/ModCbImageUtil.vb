@@ -5,11 +5,8 @@
 ' Author Eric Hindle
 '
 
-Imports System.Drawing.Drawing2D
-Imports System.Drawing.Imaging
-Imports HindlewareLib.Imaging.ImageUtil
-
-Friend Module ImageUtil
+Imports HindlewareLib.Imaging
+Friend Module ModCbImageUtil
 #Region "enums"
     'Public Enum ImageType
     '    JPEG
@@ -190,8 +187,7 @@ Friend Module ImageUtil
     '    oEncoderParameters.Param(0) = oEncoderParameter
     '    Return oEncoderParameters
     'End Function
-    Public Sub GenerateImage(oPictureBox As PictureBox, imageTable As List(Of Person), widthImageCount As Integer, pHeight As Integer, pAlignType As AlignType)
-        Dim _imageUtil As New HindlewareLib.Imaging.ImageUtil
+    Public Sub GenerateImage(oPictureBox As PictureBox, imageTable As List(Of Person), widthImageCount As Integer, pHeight As Integer, pAlignType As ImageUtil.AlignType)
         Dim mosaic As Image = New Bitmap(My.Resources.blank, Math.Max(60 * widthImageCount, 300), Math.Max((60 * pHeight) + 18, 80))
         Dim oGraphics As Graphics = Graphics.FromImage(mosaic)
         oGraphics.DrawImage(My.Resources.id, New Point(mosaic.Width - 125, mosaic.Height - 18))
@@ -214,15 +210,15 @@ Friend Module ImageUtil
                     End If
                 End If
                 Select Case pAlignType
-                    Case AlignType.Right
+                    Case ImageUtil.AlignType.Right
                         rowStartPos = mosaic.Width - (rowImageWidth * 60)
-                    Case AlignType.Left
+                    Case ImageUtil.AlignType.Left
                         rowStartPos = 0
-                    Case AlignType.Centre
+                    Case ImageUtil.AlignType.Centre
                         rowStartPos = (mosaic.Width - (rowImageWidth * 60)) / 2
                 End Select
 
-                Dim oBitMap As Bitmap = _imageUtil.ResizeImageToBitmap(_image, 60, 60)
+                Dim oBitMap As Bitmap = ImageUtil.ResizeImageToBitmap(_image, 60, 60)
                 oGraphics.DrawImage(oBitMap.Clone, New Point((60 * _imgHPos) + rowStartPos, 60 * _imgVPos))
                 oBitMap.Dispose()
             Next

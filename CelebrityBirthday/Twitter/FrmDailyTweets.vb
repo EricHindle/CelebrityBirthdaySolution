@@ -674,7 +674,7 @@ Public NotInheritable Class FrmDailyTweets
             Case rbImageCentre.Checked
                 pAlignType = HindlewareLib.Imaging.ImageUtil.AlignType.Centre
         End Select
-        ImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, pAlignType)
+        ModCbImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, pAlignType)
         DisplayAndLog("Image complete")
     End Sub
     Private Sub SendTweet(_filename As String)

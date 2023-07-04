@@ -99,9 +99,6 @@
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
       <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
     </Reference>
-    <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <HintPath>..\packages\TweetMoaSharp.6.0.2\lib\4.5\Hammock.ClientProfile.dll</HintPath>
-    </Reference>
     <Reference Include="HindlewareLib">
       <HintPath>..\..\HindlewareLib\bin\Release\HindlewareLib.dll</HintPath>
     </Reference>
@@ -260,9 +257,6 @@
     </Reference>
     <Reference Include="Tweetinvi.WebLogic, Version=5.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TweetinviAPI.5.0.4\lib\netstandard2.0\Tweetinvi.WebLogic.dll</HintPath>
-    </Reference>
-    <Reference Include="TweetSharp, Version=6.0.2.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <HintPath>..\packages\TweetMoaSharp.6.0.2\lib\4.5\TweetSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -503,7 +497,7 @@
     <Compile Include="FrmWordPress.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Imaging\ImageUtil.vb" />
+    <Compile Include="Imaging\ModCbImageUtil.vb" />
     <Compile Include="modCbday.vb" />
     <Compile Include="modDatabase.vb" />
     <Compile Include="modText.vb" />
@@ -537,6 +531,8 @@
     </Compile>
     <Compile Include="Twitter\Globals.vb" />
     <Compile Include="Twitter\OAuth.vb" />
+    <Compile Include="Twitter\TweetsV2Poster.vb" />
+    <Compile Include="Twitter\TweetV2PostTextAndMedia.vb" />
     <Compile Include="Twitter\TwitterAPIException.vb" />
     <Compile Include="Twitter\TwitterOAuth.vb" />
   </ItemGroup>

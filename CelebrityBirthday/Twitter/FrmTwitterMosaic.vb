@@ -56,7 +56,7 @@ Public Class FrmTwitterMosaic
                         _imgVPos += 1
                         _imgHPos = 0
                     End If
-                    Dim oBitMap As Bitmap = oImageUtil.ResizeImageToBitmap(_image, 60, 60)
+                    Dim oBitMap As Bitmap = HindlewareLib.Imaging.ImageUtil.ResizeImageToBitmap(_image, 60, 60)
                     oGraphics.DrawImage(oBitMap.Clone, New Point(60 * _imgHPos, 60 * _imgVPos))
                     oBitMap.Dispose()
                 End If

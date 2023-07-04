@@ -9,7 +9,7 @@ Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Reflection
-
+Imports HindlewareLib.Imaging
 Public NotInheritable Class FrmImageEdit
 #Region "Constants"
 
@@ -128,7 +128,7 @@ Public NotInheritable Class FrmImageEdit
     ''' Display the image</remarks>
     Private Sub BtnLoadImage_Click(sender As Object, e As EventArgs) Handles BtnLoadImage.Click
         Try
-            Dim oImageFilename As String = oImageUtil.GetImageFileName(HindlewareLib.Imaging.ImageUtil.OpenOrSave.Open, HindlewareLib.Imaging.ImageUtil.ImageType.ALL)
+            Dim oImageFilename As String = HindlewareLib.Imaging.ImageUtil.GetImageFileName(HindlewareLib.Imaging.ImageUtil.OpenOrSave.Open, HindlewareLib.Imaging.ImageUtil.ImageType.ALL)
             lblFilename.Text = Path.GetFileName(oImageFilename)
             Dim sizeMessage As String = ""
             imageShrinkRatio = 1
@@ -236,7 +236,7 @@ Public NotInheritable Class FrmImageEdit
         Try
             Dim _path As String = If(isCropped, My.Settings.ImgPath, My.Settings.NewImagePath)
             Dim _filename As String = MakeImageName(TxtForename.Text, TxtSurname.Text)
-            Dim imageFileName As String = oImageUtil.GetImageFileName(HindlewareLib.Imaging.ImageUtil.OpenOrSave.Save, HindlewareLib.Imaging.ImageUtil.ImageType.JPEG, _path, _filename)
+            Dim imageFileName As String = HindlewareLib.Imaging.ImageUtil.GetImageFileName(HindlewareLib.Imaging.ImageUtil.OpenOrSave.Save, HindlewareLib.Imaging.ImageUtil.ImageType.JPEG, _path, _filename)
             If Not String.IsNullOrEmpty(imageFileName) Then
                 ShowStatus("Saving image from picture box", lblStatus, True, MyBase.Name)
                 oImageUtil.SaveImageFromPictureBox(_pictureBox, _width, _height, imageFileName, HindlewareLib.Imaging.ImageUtil.ImageType.JPEG)
@@ -325,7 +325,7 @@ Public NotInheritable Class FrmImageEdit
             ' Extract cropped area from original picture into cropBitmap
             cropBitmap = oImageUtil.ExtractCroppedAreaFromImage(originalImage, cropWidth * imageShrinkRatio, cropHeight * imageShrinkRatio, cropX * imageShrinkRatio, cropY * imageShrinkRatio)
             ' Resize cropBitmap to fit preview picture box
-            PreviewPictureBox.Image = oImageUtil.ResizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
+            PreviewPictureBox.Image = HindlewareLib.Imaging.ImageUtil.ResizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
             pnlAdjustImage.Enabled = True
         Catch exc As ArgumentException
             ShowStatus("CaptureCroppedArea exception", lblStatus,, MyBase.Name, exc)
@@ -349,7 +349,7 @@ Public NotInheritable Class FrmImageEdit
                 imageShrinkRatio = wratio
             End If
             LogUtil.Info("Shrinking ratio = " & imageShrinkRatio, MyBase.Name)
-            _newBitmap = oImageUtil.ResizeImageToBitmap(sourceImage, targetWidth, targetHeight)
+            _newBitmap = HindlewareLib.Imaging.ImageUtil.ResizeImageToBitmap(sourceImage, targetWidth, targetHeight)
         Catch exc As ArithmeticException
             ShowStatus("ShrinkImage exception", lblStatus,, MyBase.Name, exc,, True)
         End Try
@@ -409,9 +409,9 @@ Public NotInheritable Class FrmImageEdit
             Dim oImageAttributes As New ImageAttributes
             Dim oColourMatrix As New ColorMatrix(GetColourMatrix)
             oImageAttributes.SetColorMatrix(oColourMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap)
-            Dim oSourceBitMap As Bitmap = oImageUtil.ResizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
+            Dim oSourceBitMap As Bitmap = HindlewareLib.Imaging.ImageUtil.ResizeImageToBitmap(cropBitmap, PreviewPictureBox.Width, PreviewPictureBox.Height)
             Dim oTargetBitmap As New Bitmap(PreviewPictureBox.Image.Width, PreviewPictureBox.Image.Height)
-            Dim oGraphics As Graphics = oImageUtil.InitialiseGraphics(oTargetBitmap)
+            Dim oGraphics As Graphics = HindlewareLib.Imaging.ImageUtil.InitialiseGraphics(oTargetBitmap)
             oGraphics.DrawImage(oSourceBitMap, oPoints, oRectangle, GraphicsUnit.Pixel, oImageAttributes)
             PreviewPictureBox.Image = oTargetBitmap
             oImageAttributes.Dispose()
