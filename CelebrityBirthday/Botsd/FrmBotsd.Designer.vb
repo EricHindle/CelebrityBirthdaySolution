@@ -128,7 +128,6 @@ Partial Class FrmBotsd
         Me.TxtSurname5 = New System.Windows.Forms.TextBox()
         Me.BtnRmvPostDetails = New System.Windows.Forms.Button()
         Me.ChkHandles = New System.Windows.Forms.CheckBox()
-        Me.BtnFb = New System.Windows.Forms.Button()
         Me.BtnNextDay = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ContextMenuStrip1.SuspendLayout()
@@ -503,7 +502,7 @@ Partial Class FrmBotsd
         Me.LblId1.AutoSize = True
         Me.LblId1.Location = New System.Drawing.Point(6, 25)
         Me.LblId1.Name = "LblId1"
-        Me.LblId1.Size = New System.Drawing.Size(45, 16)
+        Me.LblId1.Size = New System.Drawing.Size(44, 16)
         Me.LblId1.TabIndex = 41
         Me.LblId1.Text = "Label1"
         '
@@ -565,7 +564,7 @@ Partial Class FrmBotsd
         Me.LblId2.AutoSize = True
         Me.LblId2.Location = New System.Drawing.Point(6, 25)
         Me.LblId2.Name = "LblId2"
-        Me.LblId2.Size = New System.Drawing.Size(45, 16)
+        Me.LblId2.Size = New System.Drawing.Size(44, 16)
         Me.LblId2.TabIndex = 42
         Me.LblId2.Text = "Label2"
         '
@@ -642,7 +641,7 @@ Partial Class FrmBotsd
         Me.Label3.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label3.Location = New System.Drawing.Point(849, 415)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(62, 19)
+        Me.Label3.Size = New System.Drawing.Size(52, 14)
         Me.Label3.TabIndex = 44
         Me.Label3.Text = "Send As"
         '
@@ -654,10 +653,10 @@ Partial Class FrmBotsd
         Me.chkImages.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkImages.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkImages.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.chkImages.Location = New System.Drawing.Point(730, 330)
+        Me.chkImages.Location = New System.Drawing.Point(730, 335)
         Me.chkImages.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.chkImages.Name = "chkImages"
-        Me.chkImages.Size = New System.Drawing.Size(107, 23)
+        Me.chkImages.Size = New System.Drawing.Size(109, 18)
         Me.chkImages.TabIndex = 46
         Me.chkImages.Text = "Include Images"
         Me.chkImages.UseVisualStyleBackColor = True
@@ -742,7 +741,7 @@ Partial Class FrmBotsd
         Me.LblId3.AutoSize = True
         Me.LblId3.Location = New System.Drawing.Point(6, 25)
         Me.LblId3.Name = "LblId3"
-        Me.LblId3.Size = New System.Drawing.Size(45, 16)
+        Me.LblId3.Size = New System.Drawing.Size(44, 16)
         Me.LblId3.TabIndex = 42
         Me.LblId3.Text = "Label3"
         '
@@ -832,7 +831,7 @@ Partial Class FrmBotsd
         Me.LblId4.AutoSize = True
         Me.LblId4.Location = New System.Drawing.Point(6, 25)
         Me.LblId4.Name = "LblId4"
-        Me.LblId4.Size = New System.Drawing.Size(45, 16)
+        Me.LblId4.Size = New System.Drawing.Size(44, 16)
         Me.LblId4.TabIndex = 42
         Me.LblId4.Text = "Label4"
         '
@@ -887,7 +886,7 @@ Partial Class FrmBotsd
         Me.rbImageCentre.Location = New System.Drawing.Point(23, 71)
         Me.rbImageCentre.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.rbImageCentre.Name = "rbImageCentre"
-        Me.rbImageCentre.Size = New System.Drawing.Size(92, 22)
+        Me.rbImageCentre.Size = New System.Drawing.Size(88, 17)
         Me.rbImageCentre.TabIndex = 2
         Me.rbImageCentre.TabStop = True
         Me.rbImageCentre.Text = "ImageCentre"
@@ -901,7 +900,7 @@ Partial Class FrmBotsd
         Me.rbImageRight.Location = New System.Drawing.Point(23, 44)
         Me.rbImageRight.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.rbImageRight.Name = "rbImageRight"
-        Me.rbImageRight.Size = New System.Drawing.Size(84, 22)
+        Me.rbImageRight.Size = New System.Drawing.Size(83, 17)
         Me.rbImageRight.TabIndex = 1
         Me.rbImageRight.Text = "Image Right"
         Me.rbImageRight.UseVisualStyleBackColor = True
@@ -914,7 +913,7 @@ Partial Class FrmBotsd
         Me.rbImageLeft.Location = New System.Drawing.Point(23, 16)
         Me.rbImageLeft.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.rbImageLeft.Name = "rbImageLeft"
-        Me.rbImageLeft.Size = New System.Drawing.Size(77, 22)
+        Me.rbImageLeft.Size = New System.Drawing.Size(74, 17)
         Me.rbImageLeft.TabIndex = 0
         Me.rbImageLeft.Text = "ImageLeft"
         Me.rbImageLeft.UseVisualStyleBackColor = True
@@ -1127,7 +1126,7 @@ Partial Class FrmBotsd
         Me.LblId6.AutoSize = True
         Me.LblId6.Location = New System.Drawing.Point(6, 25)
         Me.LblId6.Name = "LblId6"
-        Me.LblId6.Size = New System.Drawing.Size(45, 16)
+        Me.LblId6.Size = New System.Drawing.Size(44, 16)
         Me.LblId6.TabIndex = 42
         Me.LblId6.Text = "Label6"
         '
@@ -1217,7 +1216,7 @@ Partial Class FrmBotsd
         Me.LblId5.AutoSize = True
         Me.LblId5.Location = New System.Drawing.Point(6, 25)
         Me.LblId5.Name = "LblId5"
-        Me.LblId5.Size = New System.Drawing.Size(45, 16)
+        Me.LblId5.Size = New System.Drawing.Size(44, 16)
         Me.LblId5.TabIndex = 42
         Me.LblId5.Text = "Label5"
         '
@@ -1268,25 +1267,13 @@ Partial Class FrmBotsd
         Me.ChkHandles.AutoSize = True
         Me.ChkHandles.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ChkHandles.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.ChkHandles.Location = New System.Drawing.Point(867, 330)
+        Me.ChkHandles.Location = New System.Drawing.Point(867, 335)
         Me.ChkHandles.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkHandles.Name = "ChkHandles"
-        Me.ChkHandles.Size = New System.Drawing.Size(117, 23)
+        Me.ChkHandles.Size = New System.Drawing.Size(112, 18)
         Me.ChkHandles.TabIndex = 63
         Me.ChkHandles.Text = "Include Handles"
         Me.ChkHandles.UseVisualStyleBackColor = True
-        '
-        'BtnFb
-        '
-        Me.BtnFb.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnFb.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnFb.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnFb.Location = New System.Drawing.Point(609, 407)
-        Me.BtnFb.Name = "BtnFb"
-        Me.BtnFb.Size = New System.Drawing.Size(83, 34)
-        Me.BtnFb.TabIndex = 64
-        Me.BtnFb.Text = "Facebook"
-        Me.BtnFb.UseVisualStyleBackColor = True
         '
         'BtnNextDay
         '
@@ -1308,7 +1295,6 @@ Partial Class FrmBotsd
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1392, 677)
         Me.Controls.Add(Me.BtnNextDay)
-        Me.Controls.Add(Me.BtnFb)
         Me.Controls.Add(Me.ChkHandles)
         Me.Controls.Add(Me.BtnRmvPostDetails)
         Me.Controls.Add(Me.GroupBox6)
@@ -1481,7 +1467,6 @@ Partial Class FrmBotsd
     Friend WithEvents LblSeq4 As Label
     Friend WithEvents LblSeq6 As Label
     Friend WithEvents LblSeq5 As Label
-    Friend WithEvents BtnFb As Button
     Friend WithEvents BtnNextDay As Button
     Friend WithEvents ToolTip1 As ToolTip
 End Class

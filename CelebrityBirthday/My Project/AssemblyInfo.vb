@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2019-2022 Eric Hindle
+' Copyright (c) 2019-2023 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("netWYrks")>
 <Assembly: AssemblyProduct("Celebrity Birthday Database")>
-<Assembly: AssemblyCopyright("Copyright © Eric Hindle  2013-2022")>
+<Assembly: AssemblyCopyright("Copyright © Eric Hindle  2013-2023")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -37,5 +37,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.68.0.*")>
-<Assembly: AssemblyFileVersion("1.68.0.0")>
+<Assembly: AssemblyVersion("1.68.1.*")>
+<Assembly: AssemblyFileVersion("1.68.1.0")>

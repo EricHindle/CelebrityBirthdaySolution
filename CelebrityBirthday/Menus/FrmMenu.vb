@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2019-2022 Eric Hindle
+' Copyright (c) 2019-2023 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -13,7 +13,7 @@ Public Class FrmMenu
     Private Sub BtnImages_Click(sender As Object, e As EventArgs) Handles BtnImages.Click
         Hide()
         Using imgForm As New FrmImageMenu
-            LogUtil.Info("Images", MyBase.Name)
+            LogUtil.Info("Opening Images menu", MyBase.Name)
             imgForm.ShowDialog()
         End Using
         Show()
@@ -21,7 +21,7 @@ Public Class FrmMenu
     Private Sub BtnDatabase_Click(sender As Object, e As EventArgs) Handles BtnDatabase.Click
         Hide()
         Using _database As New FrmUpdateDatabase
-            LogUtil.Info("Database", MyBase.Name)
+            LogUtil.Info("Opening update form", MyBase.Name)
             _database.ShowDialog()
         End Using
         Show()
@@ -29,7 +29,7 @@ Public Class FrmMenu
     Private Sub BtnOptions_Click(sender As Object, e As EventArgs)
         Hide()
         Using _options As New FrmOptions
-            LogUtil.Info("Options", MyBase.Name)
+            LogUtil.Info("Opening Options", MyBase.Name)
             _options.ShowDialog()
         End Using
         Show()
@@ -38,7 +38,7 @@ Public Class FrmMenu
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         Hide()
         Using _search As New FrmSearch
-            LogUtil.Info("Search", MyBase.Name)
+            LogUtil.Info("Opening Search", MyBase.Name)
             _search.ShowDialog()
         End Using
         Show()
@@ -46,7 +46,7 @@ Public Class FrmMenu
     Private Sub BtnWordPress_Click(sender As Object, e As EventArgs) Handles BtnWordPress.Click
         Hide()
         Using _wordPress As New FrmWordPress
-            LogUtil.Info("WordPress", MyBase.Name)
+            LogUtil.Info("Opening WordPress", MyBase.Name)
             _wordPress.ShowDialog()
         End Using
         Show()
@@ -54,7 +54,7 @@ Public Class FrmMenu
     Private Sub BtnTweet_Click(sender As Object, e As EventArgs) Handles BtnTweet.Click
         Hide()
         Using _tweetMenu As New FrmTwitterMenu
-            LogUtil.Info("Twitter", MyBase.Name)
+            LogUtil.Info("Opening Twitter Menu", MyBase.Name)
             _tweetMenu.ShowDialog()
         End Using
         Show()
@@ -66,6 +66,7 @@ Public Class FrmMenu
     Private Sub BtnMore_Click(sender As Object, e As EventArgs) Handles BtnMore.Click
         Hide()
         Using _menu2 As New FrmMenu2
+            LogUtil.Info("Opening menu2", MyBase.Name)
             _menu2.ShowDialog()
         End Using
         Show()
@@ -73,7 +74,7 @@ Public Class FrmMenu
     Private Sub BtnBotsdWP_Click(sender As Object, e As EventArgs) Handles BtnBotsdWP.Click
         Hide()
         Using _botsd As New FrmBotsd
-            LogUtil.Info("Born on the Same Day", MyBase.Name)
+            LogUtil.Info("Opening Born on the Same Day form", MyBase.Name)
             _botsd.ShowDialog()
         End Using
         Show()
@@ -155,7 +156,7 @@ Public Class FrmMenu
     End Sub
 
     Private Sub BtnDeadList_Click(sender As Object, e As EventArgs) Handles BtnDeadList.Click
-        LogUtil.Info("List of deaths", MyBase.Name)
+        LogUtil.Info("Showing list of deaths", MyBase.Name)
         Hide()
         Using _list As New FrmDeathList
             _list.Year = Today.Year

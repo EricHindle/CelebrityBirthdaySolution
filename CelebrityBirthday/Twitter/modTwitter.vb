@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2019-2022 Eric Hindle
+' Copyright (c) 2019-2023 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -9,7 +9,6 @@ Imports System.IO
 Imports System.Threading.Tasks
 Imports Tweetinvi
 Imports Tweetinvi.Core.Web
-Imports Tweetinvi.Models.V2
 
 Module modTwitter
     Public tw As New TwitterOAuth
@@ -27,68 +26,41 @@ Module modTwitter
         SetupOAuth(twitterUser)
         Dim userClient = New TwitterClient(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim user = Await userClient.Users.GetAuthenticatedUserAsync()
-        Dim _result As ITwitterResult = Nothing
+        Dim oResult As ITwitterResult = Nothing
+        Dim poster = New TweetsV2Poster(userClient)
         If _filename IsNot Nothing Then
-            ' Post media
-
-            Dim tweetinviLogoBinary As Byte() = File.ReadAllBytes(_filename)
-            Dim UploadedImage As Models.IMedia = Await userClient.Upload.UploadTweetImageAsync(tweetinviLogoBinary)
-
             Try
-                Dim poster = New TweetsV2Poster(userClient)
+                ' Post media
+                LogUtil.Info("Posting Image from " & _filename, Psub)
+                Dim tweetinviLogoBinary As Byte() = File.ReadAllBytes(_filename)
+                Dim UploadedImage As Models.IMedia = Await userClient.Upload.UploadTweetImageAsync(tweetinviLogoBinary)
+                Dim uploadedMediaId As String = CStr(UploadedImage.UploadedMediaInfo.MediaId)
+                LogUtil.Info("Image Id : " & uploadedMediaId, Psub)
+                ' Post Tweet with Image
+                LogUtil.Info("Posting Tweet", Psub)
                 Dim mediaList As New List(Of String) From {
-               UploadedImage.UploadedMediaInfo.MediaId
-            }
-                Dim media As New TweetV2ImageIds With {.MediaId = mediaList}
-                _result = Await poster.PostTweet(New TweetV2PostTextAndMedia With {
+                   uploadedMediaId
+                }
+                Dim _mediaIds As New TweetV2ImageIds With {.MediaId = mediaList}
+                oResult = Await poster.PostTweet(New TweetV2PostTextAndMedia With {
                                                                             .Text = _tweetText,
-                                                                            .MediaIds = media
+                                                                            .MediaIds = _mediaIds
                                                                             })
             Catch ex As Exception
+                LogUtil.Exception("Twitter post exception", ex, Psub)
             End Try
-
-
-
-            '_result = Await UploadText(userClient, _tweetText, UploadedImage.UploadedMediaInfo.MediaId).Result
         Else
             Try
-                Dim poster = New TweetsV2Poster(userClient)
-                _result = Await poster.PostTweet(New TweetV2PostText With {
+                ' Post Tweet 
+                oResult = Await poster.PostTweet(New TweetV2PostText With {
                                                                     .Text = _tweetText
                                                                     })
             Catch ex As Exception
+                LogUtil.Exception("Twitter post exception", ex, Psub)
             End Try
-            '  _result = UploadText(userClient, _tweetText).Result
         End If
-        Return _result
+        Return oResult
     End Function
-    'Private Async Function UploadText(userClient As TwitterClient, _tweettext As String, _mediaId As Long) As Task(Of ITwitterResult)
-    '    Dim _result As ITwitterResult = Nothing
-    '    Try
-    '        Dim poster = New TweetsV2Poster(userClient)
-    '        Dim mediaList As New List(Of String) From {
-    '           _mediaId
-    '        }
-    '        Dim media As New TweetV2ImageIds With {.MediaId = mediaList}
-    '        _result = Await poster.PostTweet(New TweetV2PostTextAndMedia With {
-    '                                                                        .Text = _tweettext,
-    '                                                                        .MediaIds = media
-    '                                                                        })
-    '    Catch ex As Exception
-    '    End Try
-    '    Return _result
-    'End Function
-    'Private Async Function UploadText(userClient As TwitterClient, _tweettext As String) As Task(Of ITwitterResult)
-    '    Dim _result As ITwitterResult = Nothing
-    '    Try
-    '        Dim poster = New TweetsV2Poster(userClient)
-    '        _result = Await poster.PostTweet(New TweetV2PostText With {
-    '                                                                .Text = _tweettext
-    '                                                                })
-    '    Catch ex As Exception
-    '    End Try
-    '    Return _result
-    'End Function
     Public Function SetupOAuth(twitterUser As String) As Boolean
         Dim isOKToSend As Boolean = True
         Dim _auth As TwitterOAuth = GetAuthById(twitterUser)

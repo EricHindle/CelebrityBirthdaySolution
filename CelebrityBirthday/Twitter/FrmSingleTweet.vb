@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2019-2022 Eric Hindle
+' Copyright (c) 2019-2023 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -8,13 +8,21 @@
 Imports System.Collections.ObjectModel
 Imports System.IO
 Imports System.Net
-Imports System.Text
 Imports Tweetinvi.Core.Web
 
 Public Class FrmSingleTweet
 #Region "properties"
     Private _sendAs As String
     Private _tweetText As String
+    Private _tweetImage As Image
+    Public Property TweetImage() As Image
+        Get
+            Return _tweetImage
+        End Get
+        Set(ByVal value As Image)
+            _tweetImage = value
+        End Set
+    End Property
     Public Property TweetText() As String
         Get
             Return _tweetText
@@ -48,8 +56,15 @@ Public Class FrmSingleTweet
         FillTwitterUserList()
         cmbTwitterUsers.SelectedIndex = cmbTwitterUsers.FindStringExact(SendAs)
         RtbTweetText.Text = TweetText
+        If TweetImage IsNot Nothing Then
+            PictureBox2.Image = TweetImage
+            Dim oldTop As Integer = RtbTweetText.Top
+            RtbTweetText.Top = PictureBox2.Top + PictureBox2.Height + 10
+            RtbTweetText.Height -= RtbTweetText.Top - oldTop
+        End If
     End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
+        WriteTrace("Tweeting")
         BtnSend.Enabled = False
         Dim isOkToSend As Boolean = True
         If cmbTwitterUsers.SelectedIndex < 0 Then
@@ -252,7 +267,7 @@ Public Class FrmSingleTweet
             cmbTwitterUsers.Items.Add(_user)
         Next
     End Sub
-    Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False)
+    Private Sub WriteTrace(sText As String)
         rtbTweetProgress.Text &= vbCrLf & sText
         LogUtil.Info(sText, MyBase.Name)
     End Sub
@@ -276,9 +291,9 @@ Public Class FrmSingleTweet
         WriteTrace("Posting tweet")
         Dim result As ITwitterResult = Await PostTheTweet(_tweetText, cmbTwitterUsers.SelectedItem, _imageFile)
         If result.Response.IsSuccessStatusCode = True Then
-            WriteTrace("OK: " & CStr(result.Response.StatusCode))
+            WriteTrace("OK: " & result.Response.StatusCode)
         Else
-            WriteTrace("Tweet Failed : " & CStr(result.Response.StatusCode))
+            WriteTrace("Tweet Failed : " & result.Response.StatusCode)
         End If
     End Sub
     Private Sub CreateTwitterImage(_image As String)

@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2019-2022 Eric Hindle
+' Copyright (c) 2019-2023 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -9,7 +9,6 @@ Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Reflection
-Imports HindlewareLib.Imaging
 Public NotInheritable Class FrmImageEdit
 #Region "Constants"
 

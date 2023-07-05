@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2019-2022 Eric Hindle
+' Copyright (c) 2019-2023 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -17,7 +17,6 @@ Imports Newtonsoft.Json
 Imports Tweetinvi
 Imports Tweetinvi.Core.Web
 Imports Tweetinvi.Models
-Imports Tweetinvi.Parameters
 
 Public NotInheritable Class FrmDailyTweets
 #Region "class"
@@ -29,14 +28,14 @@ Public NotInheritable Class FrmDailyTweets
         End Sub
 
         Public Function PostTweet(ByVal tweetParams As TweetV2PostRequest) As Task(Of ITwitterResult)
-            Return Me.client.Execute.AdvanceRequestAsync(Function(ByVal request As ITwitterRequest)
-                                                             Dim jsonBody = Me.client.Json.Serialize(tweetParams)
-                                                             Dim content = New StringContent(jsonBody, Encoding.UTF8, "application/json")
-                                                             request.Query.Url = "https://api.twitter.com/2/tweets"
-                                                             request.Query.HttpMethod = Tweetinvi.Models.HttpMethod.POST
-                                                             request.Query.HttpContent = content
-                                                             Return request
-                                                         End Function)
+            Return client.Execute.AdvanceRequestAsync(Function(ByVal request As ITwitterRequest)
+                                                          Dim jsonBody = client.Json.Serialize(tweetParams)
+                                                          Dim content = New StringContent(jsonBody, Encoding.UTF8, "application/json")
+                                                          request.Query.Url = "https://api.twitter.com/2/tweets"
+                                                          request.Query.HttpMethod = Tweetinvi.Models.HttpMethod.POST
+                                                          request.Query.HttpContent = content
+                                                          Return request
+                                                      End Function)
         End Function
     End Class
 
@@ -64,7 +63,6 @@ Public NotInheritable Class FrmDailyTweets
     Private oAnniversaryList As New List(Of Person)
     Private oTweetLists As New List(Of List(Of Person))
     Private IsNoGenerate As Boolean
-    Private ReadOnly tw As New TwitterOAuth
     Private isBuildingTrees As Boolean
     Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
 #End Region
@@ -99,7 +97,6 @@ Public NotInheritable Class FrmDailyTweets
     Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.twitterDailyFormPos)
-        GetAuthData()
         FillTwitterUserList()
         If Not String.IsNullOrEmpty(_daySelection) AndAlso Not String.IsNullOrEmpty(_monthSelection) Then
             cboDay.SelectedIndex = _daySelection - 1
@@ -252,14 +249,23 @@ Public NotInheritable Class FrmDailyTweets
         Next
     End Sub
     Private Sub BtnSendClick(sender As Object, e As EventArgs)
+        WriteTrace("Tweeting")
+        BtnSend.Enabled = False
+        Dim _filename As String = SaveImage(TabControl1.SelectedTab)
+        Dim _tweetText As String = GetRichTextBoxFromPage(TabControl1.SelectedTab).Text
         If cmbTwitterUsers.SelectedIndex >= 0 Then
-            SendTweet(SaveImage(TabControl1.SelectedTab))
+            WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
+            SendTheTweet(_tweetText, _filename)
+            WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
         Else
             Using _sendTweet As New FrmSingleTweet
-                _sendTweet.TweetText = GetRichTextBoxFromPage(TabControl1.SelectedTab).Text
+                _sendTweet.TweetText = _tweetText
+                _sendTweet.TweetImage = GetPictureBoxFromPage(TabControl1.SelectedTab).Image
+            _sendTweet.LblImageFile.Text = _filename
                 _sendTweet.ShowDialog()
             End Using
         End If
+        BtnSend.Enabled = True
     End Sub
     Private Sub FillTwitterUserList()
         cmbTwitterUsers.Items.Clear()
@@ -268,7 +274,7 @@ Public NotInheritable Class FrmDailyTweets
             cmbTwitterUsers.Items.Add(_user)
         Next
     End Sub
-    Private Sub WriteTrace(sText As String, Optional isLogged As Boolean = False)
+    Private Sub WriteTrace(sText As String, Optional isLogged As Boolean = True)
         rtbTweet.Text &= vbCrLf & sText
         If isLogged Then LogUtil.Info(sText, MyBase.Name)
     End Sub
@@ -677,98 +683,13 @@ Public NotInheritable Class FrmDailyTweets
         ModCbImageUtil.GenerateImage(_pictureBox, _imageTable, _width, _height, pAlignType)
         DisplayAndLog("Image complete")
     End Sub
-    Private Sub SendTweet(_filename As String)
-        Dim isOkToSend As Boolean = True
-        If cmbTwitterUsers.SelectedIndex >= 0 Then
-            isOkToSend = SetupOAuth(isOkToSend)
-        End If
-        WriteTrace("Entering SendTweet " & Format(Now, "hh:mm:ss"), True)
-        If isOkToSend Then
-            SendTheTweet(GetRichTextBoxFromPage(TabControl1.SelectedTab).Text, _filename)
-        End If
-        WriteTrace("Back from SendTweet " & Format(Now, "hh:mm:ss"), True)
-    End Sub
-    Private Function SetupOAuth(isOkToSend As Boolean) As Boolean
-        Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
-        If _auth IsNot Nothing Then
-            If String.IsNullOrEmpty(_auth.Verifier) Then
-                isOkToSend = False
-            Else
-                tw.Verifier = _auth.Verifier
-            End If
-            If String.IsNullOrEmpty(_auth.Token) Then
-                isOkToSend = False
-            Else
-                tw.Token = _auth.Token
-            End If
-            If String.IsNullOrEmpty(_auth.TokenSecret) Then
-                isOkToSend = False
-            Else
-                tw.TokenSecret = _auth.TokenSecret
-            End If
-        Else
-            isOkToSend = False
-        End If
-
-        Return isOkToSend
-    End Function
     Private Async Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
-        DisplayAndLog("Sending Tweet as " & cmbTwitterUsers.SelectedItem)
-
-        Dim userClient = New TwitterClient(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
-        Dim user = Await userClient.Users.GetAuthenticatedUserAsync()
-        Try
-            Dim poster = New TweetsV2Poster(userClient)
-            Dim result As ITwitterResult = Await poster.PostTweet(New TweetV2PostRequest With {
-        .Text = _tweetText
-    })
-            If result.Response.IsSuccessStatusCode = False Then
-
-            End If
-        Catch ex As Exception
-        End Try
-
-
-        'Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
-        'Dim sto = New SendTweetOptions
-        'Dim msg = _tweetText
-        'sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
-        'Dim _mediaId As String = Nothing
-        'If chkImages.Checked Then
-        '    Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _filename)
-        '    If _twitterUplMedia IsNot Nothing Then
-        '        Dim _uploadedSize As Long = _twitterUplMedia.Size
-        '        Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-        '        WriteTrace("Image upload size: " & _uploadedSize, True)
-        '        _mediaId = _twitterUplMedia.Media_Id
-        '    Else
-        '        WriteTrace("No image upload", True)
-        '    End If
-        'End If
-        'If Not String.IsNullOrEmpty(_mediaId) Then
-        '    InsertTweet(_filename, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
-        '    sto.MediaIds = {_mediaId}
-        'End If
-        'Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
-
-        'If _twitterStatus IsNot Nothing Then
-        '    InsertTweet(sto.Status, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
-        '    WriteTrace("OK: " & _twitterStatus.Id, True)
-        'Else
-        '    ' tweet failed
-        '    WriteTrace("Failed", True)
-        'End If
-    End Sub
-
-
-
-
-
-    Private Sub GetAuthData()
-        Dim _auth As TwitterOAuth = GetAuthById("TwDev")
-        If _auth IsNot Nothing Then
-            tw.ConsumerKey = _auth.Token
-            tw.ConsumerSecret = _auth.TokenSecret
+        WriteTrace("Posting tweet")
+        Dim result As ITwitterResult = Await PostTheTweet(_tweetText, cmbTwitterUsers.SelectedItem, _filename)
+        If result.Response.IsSuccessStatusCode = True Then
+            WriteTrace("OK: " & result.Response.StatusCode)
+        Else
+            WriteTrace("Tweet Failed : " & result.Response.StatusCode)
         End If
     End Sub
     Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As TweetType) As List(Of List(Of Person))

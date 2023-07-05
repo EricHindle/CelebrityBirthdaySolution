@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2019-2022 Eric Hindle
+' Copyright (c) 2019-2023 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -68,17 +68,6 @@ Public Class FrmMenu2
             _list.Year = Today.Year
             _list.ShowDialog()
         End Using
-        Show()
-    End Sub
-    Private Sub BtnTest_Click_1(sender As Object, e As EventArgs)
-        LogUtil.Info("Testing", MyBase.Name)
-        Hide()
-        Using _imgCheck As New FrmImageCheck
-            _imgCheck.ShowDialog()
-        End Using
-        'Using _fbtest As New FrmFacebookTest
-        '    _fbtest.ShowDialog()
-        'End Using
         Show()
     End Sub
 

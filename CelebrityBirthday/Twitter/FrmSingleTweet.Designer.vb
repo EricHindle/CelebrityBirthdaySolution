@@ -68,7 +68,7 @@ Partial Class FrmSingleTweet
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(683, 525)
+        Me.btnClose.Location = New System.Drawing.Point(683, 537)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(162, 41)
@@ -87,7 +87,7 @@ Partial Class FrmSingleTweet
         Me.rtbTweetProgress.Location = New System.Drawing.Point(586, 57)
         Me.rtbTweetProgress.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.rtbTweetProgress.Name = "rtbTweetProgress"
-        Me.rtbTweetProgress.Size = New System.Drawing.Size(257, 398)
+        Me.rtbTweetProgress.Size = New System.Drawing.Size(257, 410)
         Me.rtbTweetProgress.TabIndex = 23
         Me.rtbTweetProgress.Text = ""
         '
@@ -100,7 +100,7 @@ Partial Class FrmSingleTweet
         Me.RtbTweetText.Location = New System.Drawing.Point(23, 383)
         Me.RtbTweetText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RtbTweetText.Name = "RtbTweetText"
-        Me.RtbTweetText.Size = New System.Drawing.Size(420, 162)
+        Me.RtbTweetText.Size = New System.Drawing.Size(420, 174)
         Me.RtbTweetText.TabIndex = 26
         Me.RtbTweetText.Text = ""
         '
@@ -145,7 +145,7 @@ Partial Class FrmSingleTweet
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSend.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(449, 485)
+        Me.BtnSend.Location = New System.Drawing.Point(449, 497)
         Me.BtnSend.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnSend.Name = "BtnSend"
         Me.BtnSend.Size = New System.Drawing.Size(96, 60)
@@ -158,7 +158,7 @@ Partial Class FrmSingleTweet
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 576)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 588)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(857, 22)
@@ -338,7 +338,7 @@ Partial Class FrmSingleTweet
         '
         Me.LblTweetLength.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.LblTweetLength.AutoSize = True
-        Me.LblTweetLength.Location = New System.Drawing.Point(20, 549)
+        Me.LblTweetLength.Location = New System.Drawing.Point(20, 561)
         Me.LblTweetLength.Name = "LblTweetLength"
         Me.LblTweetLength.Size = New System.Drawing.Size(16, 17)
         Me.LblTweetLength.TabIndex = 137
@@ -384,7 +384,7 @@ Partial Class FrmSingleTweet
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(857, 598)
+        Me.ClientSize = New System.Drawing.Size(857, 610)
         Me.Controls.Add(Me.BtnClearImages)
         Me.Controls.Add(Me.BtnSaveImage)
         Me.Controls.Add(Me.BtnClear)

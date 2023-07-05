@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2019-2022 Eric Hindle
+' Copyright (c) 2019-2023 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -80,6 +80,7 @@ Public NotInheritable Class FrmBotsd
     End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         Dim _imageFilename As String = Nothing
+        WriteTrace("Tweeting", True)
         If chkImages.Checked Then
             If PictureBox1.Image IsNot Nothing Then
                 _imageFilename = SaveImage()
@@ -87,7 +88,7 @@ Public NotInheritable Class FrmBotsd
                 If MsgBox("No image to send. OK to continue?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "No image") = MsgBoxResult.Yes Then
                     chkImages.Checked = False
                 Else
-                    DisplayAndLog("Tweet not sent - no image")
+                    WriteTrace("Tweet not sent - no image", True)
                     Exit Sub
                 End If
             End If
@@ -445,24 +446,10 @@ Public NotInheritable Class FrmBotsd
     Private Sub ChkHandles_CheckedChanged(sender As Object, e As EventArgs) Handles ChkHandles.CheckedChanged
         GeneratePair()
     End Sub
-    Private Sub BtnFb_Click(sender As Object, e As EventArgs) Handles BtnFb.Click
-        If DgvPairs.SelectedRows.Count = 1 Then
-            If DgvPairs.SelectedRows(0).Index = 0 Then
-                rtbTweet.Text = ""
-                ClearImages(False)
-            End If
-            SaveImageGroup()
-            CopyAllText()
-            ShowProgress("Ready to post", LblStatus, False)
-        Else
-            ShowProgress("No row selected", LblStatus, False)
-        End If
-    End Sub
-
 #End Region
 #Region "subroutines"
     Private Function SaveImage() As String
-        DisplayAndLog("Saving File")
+        WriteTrace("Saving Image File", True)
         Dim _path As String = My.Settings.botsdFilePath
         If Not My.Computer.FileSystem.DirectoryExists(_path) Then
             My.Computer.FileSystem.CreateDirectory(_path)
@@ -473,7 +460,7 @@ Public NotInheritable Class FrmBotsd
             _fileName = GetUniqueFname(_fileName)
         End If
         _imageUtil.SaveImageFromPictureBox(PictureBox1, PictureBox1.Width, PictureBox1.Height, _fileName)
-        DisplayAndLog("File saved")
+        WriteTrace("File saved", True)
         Return _fileName
     End Function
     Private Sub FillTwitterUserList()
@@ -502,79 +489,22 @@ Public NotInheritable Class FrmBotsd
     End Sub
     Private Sub SendTweet(_filename As String)
         Dim isOkToSend As Boolean = True
-        If cmbTwitterUsers.SelectedIndex >= 0 Then
-            Dim _auth As TwitterOAuth = GetAuthById(cmbTwitterUsers.SelectedItem)
-            If _auth IsNot Nothing Then
-                If String.IsNullOrEmpty(_auth.Verifier) Then
-                    isOkToSend = False
-                Else
-                    tw.Verifier = _auth.Verifier
-                End If
-                If String.IsNullOrEmpty(_auth.Token) Then
-                    isOkToSend = False
-                Else
-                    tw.Token = _auth.Token
-                End If
-                If String.IsNullOrEmpty(_auth.TokenSecret) Then
-                    isOkToSend = False
-                Else
-                    tw.TokenSecret = _auth.TokenSecret
-                End If
-            Else
-                isOkToSend = False
-            End If
-        End If
-        WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"))
+        WriteTrace("Entering SendTweet " & Format(Now, "hh:MM:ss"), True)
         If isOkToSend Then
             SendTheTweet(_filename)
         End If
-        WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"))
-
+        WriteTrace("Back from SendTweet " & Format(Now, "hh:MM:ss"), True)
     End Sub
     Private Async Sub SendTheTweet(pImageFile As String)
         Dim _tweetText As String = rtbFile1.Text
-        WriteTrace("Posting tweet")
+        WriteTrace("Posting tweet", True)
         Dim result As ITwitterResult = Await PostTheTweet(_tweetText, cmbTwitterUsers.SelectedItem, pImageFile)
         If result.Response.IsSuccessStatusCode = True Then
-            WriteTrace("OK: " & CStr(result.Response.StatusCode))
+            WriteTrace("OK: " & result.Response.StatusCode, True)
         Else
-            WriteTrace("Tweet Failed : " & CStr(result.Response.StatusCode))
+            WriteTrace("Tweet Failed : " & result.Response.StatusCode, True)
         End If
     End Sub
-
-
-    'Private Sub SendTheTweet(_tweetText As String, Optional _filename As String = Nothing)
-    '    DisplayAndLog("Sending Tweet")
-    '    Dim twitter = New TwitterService(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
-    '    Dim sto = New SendTweetOptions
-    '    Dim msg = _tweetText
-
-    '    sto.Status = msg.Substring(0, Math.Min(msg.Length, TWEET_MAX_LEN)) ' max tweet length; tweets fail if too long...
-    '    Dim _mediaId As String = Nothing
-    '    If chkImages.Checked Then
-    '        Dim _twitterUplMedia As TwitterUploadedMedia = PostMedia(twitter, _filename)
-    '        If _twitterUplMedia IsNot Nothing Then
-    '            Dim _uploadedSize As Long = _twitterUplMedia.Size
-    '            Dim _uploadedImage As UploadedImage = _twitterUplMedia.Image
-    '            WriteTrace("Image upload size: " & _uploadedSize, False)
-    '            _mediaId = _twitterUplMedia.Media_Id
-    '        Else
-    '            WriteTrace("No image upload", False)
-    '        End If
-    '    End If
-    '    If Not String.IsNullOrEmpty(_mediaId) Then
-    '        InsertTweet(_filename, _month, ThisDay, 1, _mediaId, cmbTwitterUsers.SelectedItem, "I")
-    '        sto.MediaIds = {_mediaId}
-    '    End If
-    '    Dim _twitterStatus As TweetSharp.TwitterStatus = twitter.SendTweet(sto)
-    '    If _twitterStatus IsNot Nothing Then
-    '        InsertTweet(sto.Status, _month, ThisDay, 1, _twitterStatus.Id, _twitterStatus.User.Name, "T")
-    '        WriteTrace("OK: " & _twitterStatus.Id, True)
-    '    Else
-    '        ' tweet failed
-    '        WriteTrace("Failed", True)
-    '    End If
-    'End Sub
     Private Sub WriteTrace(sText As String, Optional isStatus As Boolean = False, Optional isLogged As Boolean = True)
         rtbTweet.Text &= vbCrLf & sText
         If isStatus Then DisplayAndLog(sText)

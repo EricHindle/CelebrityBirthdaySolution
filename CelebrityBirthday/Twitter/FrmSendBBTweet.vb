@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2019-2022 Eric Hindle
+' Copyright (c) 2019-2023 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -192,9 +192,9 @@ Public Class FrmSendBBTweet
         WriteTrace("Posting tweet")
         Dim result As ITwitterResult = Await PostTheTweet(_tweetText, oSender, _imageFile)
         If result.Response.IsSuccessStatusCode = True Then
-            WriteTrace("OK: " & CStr(result.Response.StatusCode))
+            WriteTrace("OK: " & result.Response.StatusCode)
         Else
-            WriteTrace("Tweet Failed : " & CStr(result.Response.StatusCode))
+            WriteTrace("Tweet Failed : " & result.Response.StatusCode)
         End If
     End Sub
 
