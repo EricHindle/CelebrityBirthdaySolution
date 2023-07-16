@@ -97,6 +97,7 @@ Public NotInheritable Class FrmDailyTweets
     Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.twitterDailyFormPos)
+        GetSplitterDist
         FillTwitterUserList()
         If Not String.IsNullOrEmpty(_daySelection) AndAlso Not String.IsNullOrEmpty(_monthSelection) Then
             cboDay.SelectedIndex = _daySelection - 1
@@ -106,6 +107,7 @@ Public NotInheritable Class FrmDailyTweets
     Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
         My.Settings.twitterDailyFormPos = SetFormPos(Me)
+        SaveSplitterDist()
         My.Settings.Save()
     End Sub
     Private Sub Btnopyselected_Click(sender As Object, e As EventArgs) Handles BtnCopyselected.Click, CopyToolStripMenuItem.Click
@@ -211,6 +213,12 @@ Public NotInheritable Class FrmDailyTweets
     End Sub
 #End Region
 #Region "Form subroutines"
+    Private Sub GetSplitterDist()
+        SplitContainer1.SplitterDistance = My.Settings.tweetDailySplitDist
+    End Sub
+    Private Sub SaveSplitterDist()
+        My.Settings.tweetDailySplitDist = SplitContainer1.SplitterDistance
+    End Sub
     Private Sub Horizontal_ValueChanged(sender As Object, e As System.EventArgs)
         If Not IsNoGenerate Then
             Dim _nud As NumericUpDown = TryCast(sender, NumericUpDown)
@@ -261,7 +269,7 @@ Public NotInheritable Class FrmDailyTweets
             Using _sendTweet As New FrmSingleTweet
                 _sendTweet.TweetText = _tweetText
                 _sendTweet.TweetImage = GetPictureBoxFromPage(TabControl1.SelectedTab).Image
-            _sendTweet.LblImageFile.Text = _filename
+                _sendTweet.LblImageFile.Text = _filename
                 _sendTweet.ShowDialog()
             End Using
         End If

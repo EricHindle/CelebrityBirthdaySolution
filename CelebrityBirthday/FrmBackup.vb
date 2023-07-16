@@ -26,6 +26,7 @@ Public Class FrmBackup
         PbCopyProgress.Visible = False
         InitialiseData()
         GetFormPos(Me, My.Settings.backupformpos)
+        GetSplitterDistances
         TxtBackupPath.Text = My.Settings.BackupPath
         AddProgress("Filling Table Tree")
         FillTableTree(TvDatatables)
@@ -69,7 +70,8 @@ Public Class FrmBackup
     End Sub
     Private Sub FrmBackup_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
-        My.Settings.BackupFormPos = SetFormPos(Me)
+        My.Settings.backupformpos = SetFormPos(Me)
+        SaveSplitterDistances()
         My.Settings.Save()
     End Sub
     Private Sub BtnSelectAll_Click(sender As Object, e As EventArgs) Handles BtnSelectAll.Click
@@ -78,6 +80,15 @@ Public Class FrmBackup
     End Sub
 #End Region
 #Region "subroutines"
+
+    Private Sub GetSplitterDistances()
+        SplitContainer1.SplitterDistance = My.Settings.backupSplitDist1
+        SplitContainer2.SplitterDistance = My.Settings.backupSplitDist2
+    End Sub
+    Private Sub SaveSplitterDistances()
+        My.Settings.backupSplitDist1 = SplitContainer1.SplitterDistance
+        My.Settings.backupSplitDist2 = SplitContainer2.SplitterDistance
+    End Sub
     Private Sub FillImageTree()
         TvImages.Nodes.Clear()
         TvImages.Nodes.Add("Images")

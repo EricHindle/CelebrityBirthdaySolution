@@ -28,6 +28,7 @@ Partial Class FrmBackup
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TvImages = New System.Windows.Forms.TreeView()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.PbCopyProgress = New System.Windows.Forms.ToolStripProgressBar()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TxtBackupPath = New System.Windows.Forms.TextBox()
@@ -35,12 +36,11 @@ Partial Class FrmBackup
         Me.rtbProgress = New System.Windows.Forms.RichTextBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
+        Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.BtnSavePath = New System.Windows.Forms.Button()
         Me.BtnSelectPath = New System.Windows.Forms.Button()
         Me.chkAddDate = New System.Windows.Forms.CheckBox()
         Me.BtnSelectAll = New System.Windows.Forms.Button()
-        Me.PbCopyProgress = New System.Windows.Forms.ToolStripProgressBar()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -49,10 +49,10 @@ Partial Class FrmBackup
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer3.Panel1.SuspendLayout()
-        Me.SplitContainer3.Panel2.SuspendLayout()
-        Me.SplitContainer3.SuspendLayout()
+        CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer2.Panel1.SuspendLayout()
+        Me.SplitContainer2.Panel2.SuspendLayout()
+        Me.SplitContainer2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -105,6 +105,13 @@ Partial Class FrmBackup
         Me.StatusStrip1.Size = New System.Drawing.Size(1103, 22)
         Me.StatusStrip1.TabIndex = 3
         Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'PbCopyProgress
+        '
+        Me.PbCopyProgress.Maximum = 20000
+        Me.PbCopyProgress.Name = "PbCopyProgress"
+        Me.PbCopyProgress.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.PbCopyProgress.Size = New System.Drawing.Size(306, 16)
         '
         'btnCancel
         '
@@ -187,29 +194,29 @@ Partial Class FrmBackup
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer3)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer2)
         Me.SplitContainer1.Size = New System.Drawing.Size(1074, 536)
         Me.SplitContainer1.SplitterDistance = 517
         Me.SplitContainer1.TabIndex = 10
         '
-        'SplitContainer3
+        'SplitContainer2
         '
-        Me.SplitContainer3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.SplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer3.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer3.Name = "SplitContainer3"
-        Me.SplitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal
+        Me.SplitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer2.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer2.Name = "SplitContainer2"
+        Me.SplitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
-        'SplitContainer3.Panel1
+        'SplitContainer2.Panel1
         '
-        Me.SplitContainer3.Panel1.Controls.Add(Me.GroupBox1)
+        Me.SplitContainer2.Panel1.Controls.Add(Me.GroupBox1)
         '
-        'SplitContainer3.Panel2
+        'SplitContainer2.Panel2
         '
-        Me.SplitContainer3.Panel2.Controls.Add(Me.GroupBox4)
-        Me.SplitContainer3.Size = New System.Drawing.Size(553, 536)
-        Me.SplitContainer3.SplitterDistance = 233
-        Me.SplitContainer3.TabIndex = 0
+        Me.SplitContainer2.Panel2.Controls.Add(Me.GroupBox4)
+        Me.SplitContainer2.Size = New System.Drawing.Size(553, 536)
+        Me.SplitContainer2.SplitterDistance = 233
+        Me.SplitContainer2.TabIndex = 0
         '
         'BtnSavePath
         '
@@ -261,13 +268,6 @@ Partial Class FrmBackup
         Me.BtnSelectAll.Text = "Select All"
         Me.BtnSelectAll.UseVisualStyleBackColor = True
         '
-        'PbCopyProgress
-        '
-        Me.PbCopyProgress.Maximum = 20000
-        Me.PbCopyProgress.Name = "PbCopyProgress"
-        Me.PbCopyProgress.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.PbCopyProgress.Size = New System.Drawing.Size(306, 16)
-        '
         'FrmBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
@@ -297,10 +297,10 @@ Partial Class FrmBackup
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        Me.SplitContainer3.Panel1.ResumeLayout(False)
-        Me.SplitContainer3.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainer3.ResumeLayout(False)
+        Me.SplitContainer2.Panel1.ResumeLayout(False)
+        Me.SplitContainer2.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -318,7 +318,7 @@ Partial Class FrmBackup
     Friend WithEvents rtbProgress As RichTextBox
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents SplitContainer3 As SplitContainer
+    Friend WithEvents SplitContainer2 As SplitContainer
     Friend WithEvents BtnSavePath As Button
     Friend WithEvents BtnSelectPath As Button
     Friend WithEvents chkAddDate As CheckBox

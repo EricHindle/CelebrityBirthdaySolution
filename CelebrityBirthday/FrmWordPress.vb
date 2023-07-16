@@ -98,12 +98,21 @@ Public NotInheritable Class FrmWordPress
             TxtSelectedName.Text = _selectedName
         End If
         GetFormPos(Me, My.Settings.wprformpos)
+        GetSplitDistances
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Close()
     End Sub
 #End Region
 #Region "subroutines"
+    Private Sub GetSplitDistances()
+        SplitContainer1.SplitterDistance = My.Settings.wprSplitDist1
+        SplitContainer2.SplitterDistance = My.Settings.wprSplitDist2
+    End Sub
+    Private Sub SaveSplitDistances()
+        My.Settings.wprSplitDist1 = SplitContainer1.SplitterDistance
+        My.Settings.wprSplitDist2 = SplitContainer2.SplitterDistance
+    End Sub
     Shared Function AddQuotes(pText As String) As String
         Return DOUBLE_QUOTES & pText & DOUBLE_QUOTES
     End Function
@@ -257,6 +266,7 @@ Public NotInheritable Class FrmWordPress
     Private Sub FrmWordPress_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
         My.Settings.wprformpos = SetFormPos(Me)
+        SaveSplitDistances()
         My.Settings.Save()
     End Sub
     'Form overrides dispose to clean up the component list.

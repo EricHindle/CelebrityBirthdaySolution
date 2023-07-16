@@ -393,13 +393,15 @@ Public NotInheritable Class FrmDateCheck
     End Sub
     Private Sub FrmDateCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
-        GetFormPos(Me, My.Settings.datecheckformpos)
+        GetFormPos(Me, My.Settings.dateCheckFormPos)
+        GetSplitterDist()
         CreateActionButtons()
         ResetChecklistButtons()
     End Sub
     Private Sub FrmDateCheck_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
-        My.Settings.datecheckformpos = SetFormPos(Me)
+        My.Settings.dateCheckFormPos = SetFormPos(Me)
+        SaveSplitterDist()
         My.Settings.Save()
     End Sub
     Private Sub BtnWpDesc_Click(sender As Object, e As EventArgs) Handles BtnWpDesc.Click
@@ -436,6 +438,12 @@ Public NotInheritable Class FrmDateCheck
     End Sub
 #End Region
 #Region "subroutines"
+    Private Sub GetSplitterDist()
+        SplitContainer1.SplitterDistance = My.Settings.dateCheckSplitDist
+    End Sub
+    Private Sub SaveSplitterDist()
+        My.Settings.dateCheckSplitDist = SplitContainer1.SplitterDistance
+    End Sub
     Private Function GetPictureText(oPerson As Person) As String
         Dim wpText As String
         DisplayAndLog("Generating WordPress description for " & TxtFullName.Text)

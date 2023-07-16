@@ -50,6 +50,7 @@ Public NotInheritable Class FrmBotsdPost
     Private Sub FrmText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.botsdpostpos)
+        GetSplitterDist
         Dim splitWords As String() = Split(My.Settings.SplitWords, "~")
         CbSplit.Items.Clear()
         For Each splitword As String In splitWords
@@ -62,6 +63,7 @@ Public NotInheritable Class FrmBotsdPost
     Private Sub FrmText_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
         My.Settings.botsdpostpos = SetFormPos(Me)
+        SaveSplitterDist()
         My.Settings.Save()
     End Sub
     Private Sub CopyToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles CopyToolStripMenuItem.Click
@@ -355,6 +357,12 @@ Public NotInheritable Class FrmBotsdPost
 
 #End Region
 #Region "subroutines"
+    Private Sub GetSplitterDist()
+        SplitContainer1.SplitterDistance = My.Settings.botsdPostSplitDist
+    End Sub
+    Private Sub SaveSplitterDist()
+        My.Settings.botsdPostSplitDist = SplitContainer1.SplitterDistance
+    End Sub
     Private Sub ExtractNewDescription()
         If DgvAlso.SelectedRows.Count = 1 AndAlso Not String.IsNullOrEmpty(TxtWiki.Text) Then
             ExtractAlsoValues()

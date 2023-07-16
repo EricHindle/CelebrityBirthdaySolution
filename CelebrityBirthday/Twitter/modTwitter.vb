@@ -34,7 +34,7 @@ Module modTwitter
                 LogUtil.Info("Posting Image from " & _filename, Psub)
                 Dim tweetinviLogoBinary As Byte() = File.ReadAllBytes(_filename)
                 Dim UploadedImage As Models.IMedia = Await userClient.Upload.UploadTweetImageAsync(tweetinviLogoBinary)
-                Dim uploadedMediaId As String = CStr(UploadedImage.UploadedMediaInfo.MediaId)
+                Dim uploadedMediaId As String = UploadedImage.UploadedMediaInfo.MediaId
                 LogUtil.Info("Image Id : " & uploadedMediaId, Psub)
                 ' Post Tweet with Image
                 LogUtil.Info("Posting Tweet", Psub)

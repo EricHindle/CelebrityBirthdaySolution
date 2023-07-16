@@ -467,12 +467,12 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property datecheckformpos() As String
+        Public Property dateCheckFormPos() As String
             Get
-                Return CType(Me("datecheckformpos"),String)
+                Return CType(Me("dateCheckFormPos"),String)
             End Get
             Set
-                Me("datecheckformpos") = value
+                Me("dateCheckFormPos") = value
             End Set
         End Property
         
@@ -640,6 +640,90 @@ Namespace My
             End Get
             Set
                 Me("srchShowImages") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("330")>  _
+        Public Property wprSplitDist1() As Integer
+            Get
+                Return CType(Me("wprSplitDist1"),Integer)
+            End Get
+            Set
+                Me("wprSplitDist1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("500")>  _
+        Public Property wprSplitDist2() As Integer
+            Get
+                Return CType(Me("wprSplitDist2"),Integer)
+            End Get
+            Set
+                Me("wprSplitDist2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("150")>  _
+        Public Property dateCheckSplitDist() As Integer
+            Get
+                Return CType(Me("dateCheckSplitDist"),Integer)
+            End Get
+            Set
+                Me("dateCheckSplitDist") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("520")>  _
+        Public Property backupSplitDist1() As Integer
+            Get
+                Return CType(Me("backupSplitDist1"),Integer)
+            End Get
+            Set
+                Me("backupSplitDist1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("233")>  _
+        Public Property backupSplitDist2() As Integer
+            Get
+                Return CType(Me("backupSplitDist2"),Integer)
+            End Get
+            Set
+                Me("backupSplitDist2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("370")>  _
+        Public Property tweetDailySplitDist() As Integer
+            Get
+                Return CType(Me("tweetDailySplitDist"),Integer)
+            End Get
+            Set
+                Me("tweetDailySplitDist") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("520")>  _
+        Public Property botsdPostSplitDist() As Integer
+            Get
+                Return CType(Me("botsdPostSplitDist"),Integer)
+            End Get
+            Set
+                Me("botsdPostSplitDist") = value
             End Set
         End Property
     End Class

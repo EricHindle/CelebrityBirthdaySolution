@@ -104,7 +104,7 @@
     <Setting Name="botsdWordPressUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://bornonthesameday.wordpress.com/</Value>
     </Setting>
-    <Setting Name="datecheckformpos" Type="System.String" Scope="User">
+    <Setting Name="dateCheckFormPos" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="auditformpos" Type="System.String" Scope="User">
@@ -153,6 +153,27 @@
     </Setting>
     <Setting Name="srchShowImages" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="wprSplitDist1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">330</Value>
+    </Setting>
+    <Setting Name="wprSplitDist2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="dateCheckSplitDist" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">150</Value>
+    </Setting>
+    <Setting Name="backupSplitDist1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">520</Value>
+    </Setting>
+    <Setting Name="backupSplitDist2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">233</Value>
+    </Setting>
+    <Setting Name="tweetDailySplitDist" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">370</Value>
+    </Setting>
+    <Setting Name="botsdPostSplitDist" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">520</Value>
     </Setting>
   </Settings>
 </SettingsFile>
