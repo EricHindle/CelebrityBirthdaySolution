@@ -510,7 +510,7 @@ Public NotInheritable Class FrmBotsd
         If isStatus Then DisplayAndLog(sText)
     End Sub
     Private Sub GetAuthData()
-        Dim _auth As TwitterOAuth = GetAuthById("Twitter")
+        Dim _auth As TwitterOAuth = GetAuthById("*TwitterAuth")
         tw.ConsumerKey = _auth.Token
         tw.ConsumerSecret = _auth.TokenSecret
     End Sub

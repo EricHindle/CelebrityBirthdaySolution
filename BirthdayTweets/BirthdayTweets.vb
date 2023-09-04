@@ -781,7 +781,7 @@ Public Class BirthdayTweets
     Private Shared Sub GetAuthData()
         Const Psub As String = "GetAuthData"
         Try
-            Dim _auth As TwitterOAuth = GetAuthById("TwDev")
+            Dim _auth As TwitterOAuth = GetAuthById("*TwitterAuth")
             If _auth IsNot Nothing Then
                 tw.ConsumerKey = _auth.Token
                 tw.ConsumerSecret = _auth.TokenSecret

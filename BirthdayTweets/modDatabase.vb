@@ -189,7 +189,9 @@ Module modDatabase
         Try
             oTwitterAuthTa.Fill(oTwitterAuthTable)
             For Each oRow As CelebrityBirthdayDataSet.TwitterAuthRow In oTwitterAuthTable.Rows
-                _list.Add(oRow.Id)
+                If Not oRow.Id.StartsWith("*") Then
+                    _list.Add(oRow.Id)
+                End If
             Next
         Catch dbEx As DbException
             LogUtil.Exception("Get Twitter Users DbException", dbEx, Psub)
