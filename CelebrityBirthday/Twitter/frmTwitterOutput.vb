@@ -109,8 +109,8 @@ Public Class FrmTwitterOutput
         Do Until testDate > endDate
             Dim _day As Integer = testDate.Day
             Dim _mth As Integer = testDate.Month
-            oBirthdayList = FindBirthdays(_day, _mth, False)
-            oAnniversaryList = FindAnniversaries(_day, _mth, False)
+            oBirthdayList = FindBirthdays(_day, _mth, False, False)
+            oAnniversaryList = FindAnniversaries(_day, _mth, False, False)
             Dim newDateNode As TreeNode = tvBirthday.Nodes.Add(Format(testDate, "MMMM d"))
             newDateNode.Checked = True
             AddTypeNode(oAnniversaryList, testDate, newDateNode, "Anniversary")

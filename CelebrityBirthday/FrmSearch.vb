@@ -234,5 +234,6 @@ Public Class FrmSearch
         currentForename = ""
         currentSurname = ""
     End Sub
+
 #End Region
 End Class

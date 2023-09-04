@@ -372,6 +372,7 @@ Public Class BirthdayTweets
             Dim networkOK As Boolean = False
             Dim testCount As Integer = 0
             LogUtil.ShowProgress("Testing tweet", Psub)
+            networkOK = TestTweet(FindRandomBirthday)
             Do Until networkOK Or testCount > 10
                 Threading.Thread.Sleep(10000)
                 networkOK = TestTweet(FindRandomBirthday)

@@ -301,14 +301,19 @@ Module modDatabase
         End Try
         Return oPersonList
     End Function
-    Public Function FindPeopleByDate(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean, Optional isGetPhoto As Boolean = True, Optional isNoForNow As Boolean = False) As List(Of Person)
+    Public Function FindPeopleByDate(oDay As Integer,
+                                     oMonth As Integer,
+                                     isTweetsOnly As Boolean,
+                                     Optional isGetPhoto As Boolean = True,
+                                     Optional isExcludeForNow As Boolean = True,
+                                     Optional isIncludeNoLonger As Boolean = False) As List(Of Person)
         Dim oPersonList As New List(Of Person)
         Try
             oPersonTa.FillByMonthDay(oPersonTable, oMonth, oDay)
             For Each oRow As CelebrityBirthdayDataSet.PersonRow In oPersonTable.Rows
                 Dim _socialMedia As SocialMedia = GetSocialMedia(oRow.id)
                 Dim _celebType As Integer = _socialMedia.CelebrityType
-                Dim _celebTypeOk As Boolean = (isNoForNow = False Or _celebType <> 2) And _celebType <> 4
+                Dim _celebTypeOk As Boolean = (isExcludeForNow Or _celebType <> 2) And (isIncludeNoLonger Or _celebType <> 4)
                 If _celebTypeOk And (Not isTweetsOnly Or Not _socialMedia.IsNoTweet) Then
                     oPersonList.Add(New Person(oRow, _socialMedia, GetImageById(oRow.id, isGetPhoto)))
                 End If
@@ -369,12 +374,12 @@ Module modDatabase
         End Try
         Return _List
     End Function
-    Public Function FindBirthdays(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean)
+    Public Function FindBirthdays(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean, isExcludeNoLonger As Boolean)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-                If Not isTweetsOnly Or Not oRow.noTweet Then
+                If (Not isTweetsOnly Or Not oRow.noTweet) And (oRow.celebtype <> 4 Or Not isExcludeNoLonger) Then
                     _List.Add(New Person(oRow))
                 End If
             Next
@@ -383,12 +388,12 @@ Module modDatabase
         End Try
         Return _List
     End Function
-    Public Function FindAnniversaries(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean)
+    Public Function FindAnniversaries(oDay As Integer, oMonth As Integer, isTweetsOnly As Boolean, isExcludeNoLonger As Boolean)
         Dim _List As New List(Of Person)
         Try
             oFullPersonTa.FillByAnniversary(oFullPersonTable, oDay, oMonth)
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-                If Not isTweetsOnly Or Not oRow.noTweet Then
+                If (Not isTweetsOnly Or Not oRow.noTweet) And (oRow.celebtype <> 4 Or Not isExcludeNoLonger) Then
                     _List.Add(New Person(oRow))
                 End If
             Next

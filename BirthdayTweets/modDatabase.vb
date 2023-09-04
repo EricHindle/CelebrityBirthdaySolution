@@ -80,7 +80,7 @@ Module modDatabase
         Try
             oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-                If Not oRow.noTweet Then
+                If Not oRow.noTweet And oRow.celebtype <> 4 Then
                     _List.Add(New Person(oRow))
                 End If
             Next
@@ -96,7 +96,7 @@ Module modDatabase
         Try
             oFullPersonTa.FillByAnniversary(oFullPersonTable, oDay, oMonth)
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-                If Not oRow.noTweet Then
+                If Not oRow.noTweet And oRow.celebtype <> 4 Then
                     _List.Add(New Person(oRow))
                 End If
             Next
@@ -112,7 +112,7 @@ Module modDatabase
         Try
             oFullPersonTa.FillByDeaths(oFullPersonTable, omonth, oDay)
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
-                If Not oRow.noTweet Then
+                If Not oRow.noTweet And oRow.celebtype <> 4 Then
                     _List.Add(New Person(oRow))
                 End If
             Next

@@ -988,7 +988,7 @@ Public NotInheritable Class FrmDateCheck
         Dim _list As New StringBuilder
         If DgvWarnings.SelectedRows.Count = 1 Then
             Dim _name As String = DgvWarnings.SelectedRows(0).Cells(xName.Name).Value
-            Dim personTable As List(Of Person) = FindPeopleByDate(toDate.Day, toDate.Month, False, False)
+            Dim personTable As List(Of Person) = FindPeopleByDate(toDate.Day, toDate.Month, False, False, False, True)
             Dim thisPerson As Person = GetPersonById(LblId.Text)
             Dim _index As Integer = personTable.FindIndex(Function(_person As Person) _person.Name = _name)
             If _index > 0 Then

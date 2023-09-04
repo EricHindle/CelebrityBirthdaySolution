@@ -8,6 +8,7 @@
 Imports System.Data.Common
 Imports System.IO
 Imports System.Text
+Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
 
 Public NotInheritable Class FrmUpdateDatabase
 #Region "variables"
@@ -18,6 +19,7 @@ Public NotInheritable Class FrmUpdateDatabase
     Private isGotStageName As Boolean
     Private ReadOnly trimChars As Char() = {".", ",", " "}
     Private lastSelectedPerson As Person
+    Private isPickingMissingDate As Boolean
 #End Region
 #Region "properties"
     Private _personId As Integer
@@ -112,6 +114,7 @@ Public NotInheritable Class FrmUpdateDatabase
     Private Sub BtnInsert_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInsert.Click
         DisplayAndLog("Inserting person in list")
         TidyText()
+        isPickingMissingDate = False
         If txtYear.TextLength = 0 OrElse Not IsNumeric(txtYear.TextLength) Then
             MsgBox("No birth year", MsgBoxStyle.Exclamation, "Error")
             Exit Sub
@@ -167,7 +170,9 @@ Public NotInheritable Class FrmUpdateDatabase
                 ShowStatus("Error on insert", lblStatus, True, MyBase.Name, ex, , True)
             End Try
         Else
-            MsgBox("No date selected", MsgBoxStyle.Exclamation, "Insert error")
+            If MsgBox("No date selected. Select date now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Insert error") = MsgBoxResult.Yes Then
+                isPickingMissingDate = True
+            End If
         End If
 
     End Sub
@@ -223,7 +228,7 @@ Public NotInheritable Class FrmUpdateDatabase
             personTable = New List(Of Person)
             DgvPeople.Rows.Clear()
             Dim selectedIndex As Integer = -1
-            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False)
+            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False, False, True)
             If personTable.Count > 0 Then
                 Dim lastYear As String = ""
                 Dim sortSeq As Integer = 0
@@ -239,6 +244,7 @@ Public NotInheritable Class FrmUpdateDatabase
                     _row.Cells(personName.Name).Value = operson.BirthYear & " " & operson.Name
                     _row.Cells(personName.Name).Style.ForeColor = Color.Black
                     _row.Cells(personName.Name).Style.BackColor = SetRowColorByType(operson)
+                    DgvPeople.ClearSelection()
                     If findPersonInList > -1 AndAlso findPersonInList = operson.Id Then
                         selectedIndex = _row.Index
                     End If
@@ -306,16 +312,18 @@ Public NotInheritable Class FrmUpdateDatabase
     End Function
 
     Private Sub DgvPeople_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DgvPeople.SelectionChanged
-        ClearStatus(lblStatus)
-        SwapText("Text")
-        If DgvPeople.SelectedRows.Count > 0 Then
-            Dim _index As Integer = DgvPeople.SelectedRows(0).Index
-            lastSelectedPerson = personTable(_index)
-            LoadScreenFromPerson(lastSelectedPerson)
-            DisplayAndLog("Selected " & lastSelectedPerson.Name)
-        Else
-            ClearDetails()
-            lastSelectedPerson = Nothing
+        If Not isPickingMissingDate Then
+            ClearStatus(lblStatus)
+            SwapText("Text")
+            If DgvPeople.SelectedRows.Count > 0 Then
+                Dim _index As Integer = DgvPeople.SelectedRows(0).Index
+                lastSelectedPerson = personTable(_index)
+                LoadScreenFromPerson(lastSelectedPerson)
+                DisplayAndLog("Selected " & lastSelectedPerson.Name)
+            Else
+                ClearDetails()
+                lastSelectedPerson = Nothing
+            End If
         End If
     End Sub
     Private Sub BtnUpdateSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateSel.Click
@@ -347,6 +355,7 @@ Public NotInheritable Class FrmUpdateDatabase
     Private Sub BtnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         DisplayAndLog("Updating person in list")
         TidyText()
+        isPickingMissingDate = False
         If lblID.Text.Length > 0 Then
             If String.IsNullOrEmpty(txtSurname.Text) Then
                 DisplayAndLog("No surname for " & txtForename.Text, True)
@@ -416,6 +425,9 @@ Public NotInheritable Class FrmUpdateDatabase
             TxtShortDesc.Text = txtWiki.SelectedText.Trim(trimChars)
         End If
         TxtShortDesc.Text &= "."
+        If Not String.IsNullOrEmpty(TxtShortDesc.Text) Then
+            TxtShortDesc.Text = TxtShortDesc.Text.Substring(0, 1).ToUpper & TxtShortDesc.Text.Substring(1)
+        End If
     End Sub
     Private Sub BtnSplitName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSplitName.Click
         txtName.Text = txtName.Text.Trim
@@ -823,6 +835,7 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub ClearDetails()
         bLoadingPerson = True
+        isPickingMissingDate = False
         lblID.Text = ""
         txtDesc.Text = ""
         txtWiki.Text = ""

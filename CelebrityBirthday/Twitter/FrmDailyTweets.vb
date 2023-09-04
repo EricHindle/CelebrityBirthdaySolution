@@ -514,9 +514,9 @@ Public NotInheritable Class FrmDailyTweets
                 Dim _day As Integer = cboDay.SelectedIndex + 1
                 Dim _mth As Integer = cboMonth.SelectedIndex + 1
                 Dim testDate As New Date(2000, cboMonth.SelectedIndex + 1, cboDay.SelectedIndex + 1)
-                personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, True)
-                oBirthdayList = FindBirthdays(_day, _mth, True)
-                oAnniversaryList = FindAnniversaries(_day, _mth, True)
+                personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, True, True, True, False)
+                oBirthdayList = FindBirthdays(_day, _mth, True, True)
+                oAnniversaryList = FindAnniversaries(_day, _mth, True, True)
                 LblImageCount.Text = CStr(personTable.Count) + " people selected"
                 AddTypeNode(oAnniversaryList, testDate, tvBirthday, My.Resources.ANNIVERSARY)
                 AddTypeNode(oBirthdayList, testDate, tvBirthday, My.Resources.BIRTHDAY)
