@@ -1,0 +1,178 @@
+header {
+	min-height: 10vh;
+	justify-content: space-between;
+	display: flex;
+	align-items: center;
+	vertical-align: middle;
+	padding: 1em 3em;
+	background-color: #121315;
+	font-family: "Poppins", sans-serif;
+}
+
+header .logo-image {
+	display: block;
+}
+
+.account {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.account-name {
+	display: flex;
+	text-decoration: none;
+	color: #9d9d9c;
+	font-size: 1.2em;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.account:hover .account-name, .account.active .account-name {
+	color: #ffffff;
+}
+
+.account:hover .account-icon, .account.active .account-icon {
+	filter: brightness(1500);
+}
+
+.account .account-icon {
+	margin-right: 15px;
+	width: 35px;
+	height: 35px;
+	display: inline-block;
+}
+
+.account.active .account-menu {
+	visibility: visible;
+	opacity: 1;
+}
+
+.account .account-menu {
+	position: absolute;
+	top: 90px;
+	right: 3em;
+	background: #ffffff;
+	width: 350px;
+	box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+	transition: 0.5s;
+	border-radius: 10px;
+	visibility: hidden;
+	opacity: 0;
+	box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+.account .account-menu ul li {
+	list-style: none;
+	display: flex;
+	text-align: center;
+}
+
+.account .account-menu .btn {
+	width: 100%;
+	color: #ffffff;
+	background: #0000cc;
+	font-size: 1em;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	padding: 20px;
+	border: none;
+	border-radius: 0px 0px 10px 10px;
+	text-align: center;
+}
+
+.account .account-menu .btn:hover {
+	background: #0000cc;
+}
+
+.account .account-menu .txt-btn {
+	width: 100%;
+}
+
+.account .account-menu .admin-btn {
+	width: 100%;
+	border-radius: 5px;
+	padding: 20px;
+	text-align: center;
+	color: #121315;
+	font-size: 1em;
+	font-weight: 400;
+	letter-spacing: 0.1em;
+	background-color: white;
+	cursor: pointer;
+}
+
+.account .account-menu .admin-btn:hover {
+	background-color: #F1F1F1;
+}
+
+.account .account-menu .txt-btn input[type="submit"] {
+	border-radius: 5px;
+	padding: 20px;
+	text-align: center;
+	color: #121315;
+	font-size: 1em;
+	font-weight: 400;
+	letter-spacing: 0.1em;
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.account .account-menu .txt-btn input[type="submit"]:hover {
+	background-color: #F1F1F1;
+}
+
+nav {
+	min-height: 10vh;
+	justify-content: space-around;
+	display: flex;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #121315;
+	padding: 0% 25%;
+	z-index: 99;
+}
+
+.nav-item {
+	padding: 1.4em 0;
+	border-top: solid #121315;
+	border-top-width: 0.3em;
+}
+
+a.nav-item:link, a.nav-item:visited {
+	color: #9d9d9c;
+	text-decoration: none;
+	font-size: 1em;
+	font-weight: 600;
+}
+
+a.nav-item:hover, a.nav-item.active {
+	color: #ffffff;
+}
+
+.nav-item:hover, .nav-item.active {
+	border-top: solid #0000cc;
+	border-top-width: 0.3em;
+}
+
+.nav-icon {
+	margin: auto;
+	margin-bottom: 5px;
+	display: block;
+	width: 35px;
+	height: 35px;
+}
+
+a.nav-item:hover .nav-icon {
+	filter: brightness(1000%);
+}
+
+.nav-item.active .nav-icon {
+	filter: brightness(1000%);
+}
