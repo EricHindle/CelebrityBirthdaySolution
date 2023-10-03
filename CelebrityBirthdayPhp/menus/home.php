@@ -1,7 +1,7 @@
 <?php
 /*
  * HINDLEWARE
- * Copyright (C) 2022 Eric Hindle. All rights reserved.
+ * Copyright (C) 2023 Eric Hindle. All rights reserved.
  */
 $myPath = '../';
 require $myPath . 'includes/db_connect.php';
@@ -42,7 +42,7 @@ if (login_check() == true) {
                                     </a>
                                 </div>
                                 <div class="btn bluebutton" style="padding:3px;width:100%;margin-top:15px;">
-                                    <a href="' . $myPath . 'deaths/deathsearchdates.php">
+                                    <a href="' . $myPath . 'deaths/deathsearchresults.php">
                                         <h3 style="color:white;">Deaths</h3>
                                     </a>
                                 </div>                              

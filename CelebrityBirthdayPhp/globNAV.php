@@ -1,7 +1,7 @@
 <?php
 /*
  * HINDLEWARE
- * Copyright (C) 2022 Eric Hindle. All rights reserved.
+ * Copyright (C) 2023 Eric Hindle. All rights reserved.
  */
 $currentlevel = 000;
 $adminlevelneeded = 999;
@@ -59,7 +59,7 @@ if ($currentlevel == $adminlevelneeded || $currentlevel == $devlevelneeded) {
 		href="<?php echo $myPath; ?>person/personsearch.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/people-grey.png)"></span>People</a>
 	<a
 		class="nav-item <?php echo $currentPage == 'deaths' ? 'active' : ''; ?>"
-		href="<?php echo $myPath; ?>deaths/deathselectdates.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/place-grey.png)"></span>Deaths</a>
+		href="<?php echo $myPath; ?>deaths/deathsearchdates.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/tombstone-grey.png)"></span>Deaths</a>
 </nav>
 
 <script>

@@ -10,7 +10,7 @@ require $myPath . 'includes/formkey.class.php';
 sec_session_start();
 $formKey = new formKey();
 
-$currentPage = 'people';
+$currentPage = 'deaths';
 $key = $formKey->outputKey();
 $html = '';
 if (login_check() == true) {

@@ -1,14 +1,14 @@
 <?php
 /*
  * HINDLEWARE
- * Copyright (C) 2020-23 Eric Hindle. All rights reserved.
+ * Copyright (C) 2023 Eric Hindle. All rights reserved.
  */
 $myPath = '../';
 require $myPath . 'includes/db_connect.php';
 require $myPath . 'includes/functions.php';
 require $myPath . 'includes/formkey.class.php';
 sec_session_start();
-$currentPage = 'people';
+$currentPage = 'deaths';
 $formKey = new formKey();
 $personname = '';
 if (login_check($mypdo) == true) {
@@ -34,7 +34,7 @@ if (login_check($mypdo) == true) {
             }
             $forenames = $forenames . '%';
             
-            $personsql = "SELECT birthday, birthmonth, birthyear, forename, id, longdesc, shortdesc, surname
+            $personsql = "SELECT birthday, birthmonth, birthyear, forename, id, longdesc, shortdesc, surname, deathyear
                             FROM Person
                             WHERE (forename LIKE :forename) AND (surname LIKE :surname) OR
                                     (forename LIKE :surname1) AND (surname LIKE :forename1)
@@ -97,15 +97,20 @@ if (login_check($mypdo) == true) {
 									';
     if ($persons) {
         foreach ($persons as $rs) {
-            
+            $isdead = ($rs['deathyear'] > 0);
+            if ($isdead) {
+                $color =  'steelblue';
+            } else {
+                $color = '#000080';
+            }
             $html .= '
-    									<tr>
-                                            <td><button type="submit" name="personid" value="' . $rs['id'] . '">' . $rs['id'] . '</button></td>
-    										<td>' . $rs['birthday'] . '/' . $rs['birthmonth'] . '/' .  $rs['birthyear'] . '</td>
-    										<td>' . $rs['forename'] . '</td>
-    										<td>' .  $rs['surname']  . '</td>
-    										<td>' . $rs['shortdesc'] . '</td>
-    									</tr>';
+				<tr>
+                    <td><button type="submit" name="personid" value="' . $rs['id'] . '">' . $rs['id'] . '</button></td>
+					<td>' . $rs['birthday'] . '/' . $rs['birthmonth'] . '/' .  $rs['birthyear'] . '</td>
+					<td style="color:' . $color . ';">' . $rs['forename'] . '</td>
+					<td style="color:' . $color . ';">' .  $rs['surname']  . '</td>
+					<td>' . $rs['shortdesc'] . '</td>
+				</tr>';
         }
     }
     $html .= '

@@ -8,9 +8,11 @@ require $myPath . 'includes/db_connect.php';
 require $myPath . 'includes/functions.php';
 require $myPath . 'includes/formkey.class.php';
 sec_session_start();
-$currentPage = 'people';
+$currentPage = 'deaths';
 $formKey = new formKey();
+$key = $formKey->outputKey();
 $deathyear = date('Y');
+$persons = [];
 if (login_check($mypdo) == true) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (! isset($_POST['form_key']) || ! $formKey->validate()) {
@@ -20,7 +22,7 @@ if (login_check($mypdo) == true) {
                 $deathyear = trim($_POST['deathyear']);
             }
         }
-    $key = $formKey->outputKey();
+    }
     if (isset($deathyear)) {
            
             $personsql = "SELECT birthday, birthmonth, birthyear, forename, id, longdesc, shortdesc, surname, deathday, deathmonth, deathyear
@@ -33,7 +35,6 @@ if (login_check($mypdo) == true) {
             $persons = $personquery->fetchAll(PDO::FETCH_ASSOC);
             
         }
-    }
     $html = '';
     echo '
 		<!doctype html>
@@ -60,11 +61,11 @@ if (login_check($mypdo) == true) {
     $html .= '
                 <div class="container">
                     <div class="box" style="padding:1em;margin:1em;">
-                        <h2 style="color:#000080";>Selected People</h2>
+                        <h2 style="color:#000080";>Selected Deaths</h2>
                     </div>
                        <div class="box" style="padding:1em;margin:10px;width:700px;">
-    	        		<h3  style="color:#000080";>Select person to edit</h3>
-	                	<form class="form" role="form" name ="editperson" method="post" action="edit-person.php">';
+
+	                	<form class="form" role="form" name ="editperson" method="post" action=" ' . $myPath . 'person/edit-person.php">';
     $html .= $key;
     $html .= '	
                             <div>
@@ -83,13 +84,12 @@ if (login_check($mypdo) == true) {
 									';
     if ($persons) {
         foreach ($persons as $rs) {
-            
             $html .= '
     									<tr>
                                             <td><button type="submit" name="personid" value="' . $rs['id'] . '">' . $rs['id'] . '</button></td>
     										<td>' . $rs['birthday'] . '/' . $rs['birthmonth'] . '/' .  $rs['birthyear'] . '</td>
     										<td>' . $rs['forename'] . '</td>
-    										<td>' .  $rs['surname']  . '</td>
+    										<td>' . $rs['surname']  . '</td>
     										<td>' . $rs['shortdesc'] . '</td>
                                             <td>' . $rs['deathday'] . '/' . $rs['deathmonth'] . '/' .  $rs['deathyear'] . '</td>
     									</tr>';
