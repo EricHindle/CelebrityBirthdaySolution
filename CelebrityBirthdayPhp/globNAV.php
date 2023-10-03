@@ -55,26 +55,12 @@ if ($currentlevel == $adminlevelneeded || $currentlevel == $devlevelneeded) {
 		class="nav-item <?php echo $currentPage == 'home' ? 'active' : ''; ?>"
 		href="<?php echo $myPath; ?>menus/home.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/home-grey.png)"></span>Home</a>
 	<a
-		class="nav-item <?php echo $currentPage == 'books' ? 'active' : ''; ?>"
-		href="<?php echo $myPath; ?>books/selectbook.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/book-grey.png)"></span>Books</a>
-	<a
 		class="nav-item <?php echo $currentPage == 'people' ? 'active' : ''; ?>"
-		href="<?php echo $myPath; ?>people/selectperson.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/people-grey.png)"></span>People</a>
+		href="<?php echo $myPath; ?>person/personsearch.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/people-grey.png)"></span>People</a>
 	<a
-		class="nav-item <?php echo $currentPage == 'places' ? 'active' : ''; ?>"
-		href="<?php echo $myPath; ?>places/selectplace.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/place-grey.png)"></span>Places</a>
-	<a
-		class="nav-item <?php echo $currentPage == 'events' ? 'active' : ''; ?>"
-		href="<?php echo $myPath; ?>events/selectevent.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/event-grey.png)"></span>Events</a>
-	<a
-		class="nav-item <?php echo $currentPage == 'sources' ? 'active' : ''; ?>"
-		href="<?php echo $myPath; ?>sources/selectsource.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/source-grey.png)"></span>Sources</a>
-	<a
-		class="nav-item <?php echo $currentPage == 'files' ? 'active' : ''; ?>"
-		href="<?php echo $myPath; ?>menus/textmenu.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/text-grey.png)"></span>Files</a>
+		class="nav-item <?php echo $currentPage == 'deaths' ? 'active' : ''; ?>"
+		href="<?php echo $myPath; ?>deaths/deathselectdates.php"><span class="nav-icon" style="background-image: url(<?php echo $myPath; ?>img/icons/place-grey.png)"></span>Deaths</a>
 </nav>
-
-
 
 <script>
 	function menuToggle(){

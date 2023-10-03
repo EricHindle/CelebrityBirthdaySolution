@@ -19,7 +19,7 @@ if (login_check() == true) {
 		<html>
 			<head>
                 <meta charset="UTF-8" />
-                <title>Celebrity Birthdays</title>
+                <title>Celebrity Deaths</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			    <link rel="stylesheet" href="/hindleware/css/style.css">
                 <link rel="icon" type="image/x-icon" href="/celebbirthday/favicon.ico"/>
@@ -31,13 +31,13 @@ if (login_check() == true) {
     $html .= '
                  <div class="container" style="min-height:30vh;">
                         <div class="box" style="padding:1em;padding-left:2%;padding-right:2%;margin:10px;">
-                            <h3 class="text-center">Search for Person</h3>
-                            <form class="form-horizontal" role="form" name ="searchname" method="post" action="searchresults.php">';
+                            <h3 class="text-center">Search for Deaths</h3>
+                            <form class="form-horizontal" role="form" name ="searchname" method="post" action="deathsearchresults.php">';
     $html .= $key;
     $html .= '
                                 <div class="form-group">
-                                    <label class="form-text" style="">Name:</label>
-                                    <input type="text" class="form-field-slim" id="personname" name="personname" value=""><br>
+                                    <label class="form-text" style="">Year:</label>
+                                    <input type="text" class="form-field-slim" id="deathyear" name="deathyear" value="' . date('Y')  . '"><br>
 
                                 </div>
 				                <div class="form-group">

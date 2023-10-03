@@ -10,40 +10,25 @@ require $myPath . 'includes/formkey.class.php';
 sec_session_start();
 $currentPage = 'people';
 $formKey = new formKey();
-$personname = '';
+$deathyear = date('Y');
 if (login_check($mypdo) == true) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (! isset($_POST['form_key']) || ! $formKey->validate()) {
             header('Location: ' . $myPath . 'index.php?error=1');
         } else {
-            if (isset($_POST['personname'])) {
-                $personname = trim($_POST['personname']);
+            if (isset($_POST['deathyear'])) {
+                $deathyear = trim($_POST['deathyear']);
             }
         }
-    }
     $key = $formKey->outputKey();
-    $forenames = '';
-    $surname = '';
-    if (isset($personname)) {
-        $names = explode(" ",$personname);
-        if ($names != '') {
-            $surname = end($names) . '%';
-            if (count($names) > 1) {
-                $farray = explode(" ",$personname, -1);
-                $forenames = implode(" ", $farray);
-            }
-            $forenames = $forenames . '%';
-            
-            $personsql = "SELECT birthday, birthmonth, birthyear, forename, id, longdesc, shortdesc, surname
+    if (isset($deathyear)) {
+           
+            $personsql = "SELECT birthday, birthmonth, birthyear, forename, id, longdesc, shortdesc, surname, deathday, deathmonth, deathyear
                             FROM Person
-                            WHERE (forename LIKE :forename) AND (surname LIKE :surname) OR
-                                    (forename LIKE :surname1) AND (surname LIKE :forename1)
-                            ORDER BY surname, forename";
+                            WHERE (deathyear = :deathyear)
+                            ORDER BY deathyear, deathmonth, deathday, surname, forename";
             $personquery = $mypdo->prepare($personsql);
-            $personquery->bindParam(":forename",$forenames);
-            $personquery->bindParam(":surname",$surname);
-            $personquery->bindParam(":forename1",$forenames);
-            $personquery->bindParam(":surname1",$surname);            
+            $personquery->bindParam(":deathyear",$deathyear);
             $personquery->execute();
             $persons = $personquery->fetchAll(PDO::FETCH_ASSOC);
             
@@ -58,7 +43,7 @@ if (login_check($mypdo) == true) {
 			    <title>Selected People</title>
 			    <meta name="viewport" content="width=device-width, initial-scale=1">
                 <link rel="stylesheet" href="/hindleware/css/style.css" type="text/css">
-                <link rel="icon" type="image/x-icon" href="/celebbirthday/favicon.ico"/>
+                <link rel="icon" type="image/x-icon" href="/mynovel/favicon.ico"/>
                 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 			    <script src="/hindleware/js/jquery.js"></script>
 			    <script src="/hindleware/js/jquery.tablesorter.js"></script>
@@ -77,7 +62,7 @@ if (login_check($mypdo) == true) {
                     <div class="box" style="padding:1em;margin:1em;">
                         <h2 style="color:#000080";>Selected People</h2>
                     </div>
-                       <div class="box" style="padding:1em;margin:10px">
+                       <div class="box" style="padding:1em;margin:10px;width:700px;">
     	        		<h3  style="color:#000080";>Select person to edit</h3>
 	                	<form class="form" role="form" name ="editperson" method="post" action="edit-person.php">';
     $html .= $key;
@@ -90,7 +75,8 @@ if (login_check($mypdo) == true) {
     									<th style="width:10%">Birth Date</th>
                                         <th style="width:15%">Forenames</th>
                                         <th style="width:15%">Surname</th>
-                                        <th style="width:50%">Description</th>
+                                        <th style="width:40%">Description</th>
+                                        <th style="width:10%">Death Date</th>
     								</tr>
     								</thead>
     								<tbody>
@@ -105,6 +91,7 @@ if (login_check($mypdo) == true) {
     										<td>' . $rs['forename'] . '</td>
     										<td>' .  $rs['surname']  . '</td>
     										<td>' . $rs['shortdesc'] . '</td>
+                                            <td>' . $rs['deathday'] . '/' . $rs['deathmonth'] . '/' .  $rs['deathyear'] . '</td>
     									</tr>';
         }
     }
