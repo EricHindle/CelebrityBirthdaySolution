@@ -13,12 +13,15 @@ require 'personfunctions.php';
 sec_session_start();
 $currentPage = 'people';
 $formKey = new formKey();
-
+$personname = '';
 if (login_check() == true) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (! isset($_POST['form_key']) || ! $formKey->validate()) {
             header('Location: ' . $myPath . 'index.php?error=1');
         } else {
+            if (isset($_POST['personname'])) {
+                $personname = $_POST['personname'];
+            }
             if (isset($_POST['personid'])) {
                 $personid = sanitize_int($_POST['personid']);
                 if ($personid) {
@@ -81,7 +84,7 @@ if (login_check() == true) {
                     					        </div>
                     		                </form>
                                             <div class="light-text">
-                    				            <a href="' . $myPath . 'people/selectperson.php">Back</a>
+                    				            <a href="' . $myPath . 'person/searchresults.php?personname='.  $personname  .'">Back</a>
                     				        </div>
                     		            </div>
                     		        </div>

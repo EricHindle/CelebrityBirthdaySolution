@@ -8,7 +8,7 @@ require $myPath . 'includes/db_connect.php';
 require $myPath . 'includes/functions.php';
 require $myPath . 'includes/formkey.class.php';
 sec_session_start();
-$currentPage = 'deaths';
+$currentPage = 'people';
 $formKey = new formKey();
 $personname = '';
 if (login_check($mypdo) == true) {
@@ -19,6 +19,10 @@ if (login_check($mypdo) == true) {
             if (isset($_POST['personname'])) {
                 $personname = trim($_POST['personname']);
             }
+        }
+    } else {
+        if (isset($_GET['personname'])) {
+            $personname = trim($_GET['personname']);
         }
     }
     $key = $formKey->outputKey();
@@ -81,7 +85,7 @@ if (login_check($mypdo) == true) {
     	        		<h3  style="color:#000080";>Select person to edit</h3>
 	                	<form class="form" role="form" name ="editperson" method="post" action="edit-person.php">';
     $html .= $key;
-    $html .= '	
+    $html .= '	            <input type="hidden" name="personname" value="'. $personname .'" />
                             <div>
     				        	<table class="table table-bordered" id="keywords">
     								<thead>
