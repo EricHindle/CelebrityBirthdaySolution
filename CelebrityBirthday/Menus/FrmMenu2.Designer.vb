@@ -32,6 +32,7 @@ Partial Class FrmMenu2
         Me.BtnDeadList = New System.Windows.Forms.Button()
         Me.BtnViewLog = New System.Windows.Forms.Button()
         Me.BtnOptions = New System.Windows.Forms.Button()
+        Me.BtnReminders = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -74,8 +75,9 @@ Partial Class FrmMenu2
         '
         'BtnClose
         '
+        Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(102, 412)
+        Me.BtnClose.Location = New System.Drawing.Point(102, 463)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(151, 49)
         Me.BtnClose.TabIndex = 18
@@ -137,13 +139,25 @@ Partial Class FrmMenu2
         Me.BtnOptions.Text = "Options"
         Me.BtnOptions.UseVisualStyleBackColor = True
         '
+        'BtnReminders
+        '
+        Me.BtnReminders.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReminders.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnReminders.Location = New System.Drawing.Point(15, 389)
+        Me.BtnReminders.Name = "BtnReminders"
+        Me.BtnReminders.Size = New System.Drawing.Size(151, 49)
+        Me.BtnReminders.TabIndex = 27
+        Me.BtnReminders.Text = "Reminders"
+        Me.BtnReminders.UseVisualStyleBackColor = True
+        '
         'FrmMenu2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 19.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(352, 501)
+        Me.ClientSize = New System.Drawing.Size(352, 552)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnReminders)
         Me.Controls.Add(Me.BtnDeadList)
         Me.Controls.Add(Me.BtnOptions)
         Me.Controls.Add(Me.BtnBrownBread)
@@ -174,4 +188,5 @@ Partial Class FrmMenu2
     Friend WithEvents BtnViewLog As Button
     Friend WithEvents BtnDeadList As Button
     Friend WithEvents BtnOptions As Button
+    Friend WithEvents BtnReminders As Button
 End Class

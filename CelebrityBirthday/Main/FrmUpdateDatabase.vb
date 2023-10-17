@@ -482,9 +482,7 @@ Public NotInheritable Class FrmUpdateDatabase
 
         If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
-            If _textBox IsNot Nothing Then
-                _textBox.SelectAll()
-            End If
+            _textBox?.SelectAll()
         End If
 
     End Sub

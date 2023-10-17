@@ -18,5 +18,6 @@ Partial Class CelebrityBirthdayDataSet
 End Class
 
 Namespace CelebrityBirthdayDataSetTableAdapters
-
+    Partial Public Class RemindersTableAdapter
+    End Class
 End Namespace

@@ -29,7 +29,7 @@ Partial Class FrmBackup
         Me.TvImages = New System.Windows.Forms.TreeView()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.PbCopyProgress = New System.Windows.Forms.ToolStripProgressBar()
-        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.BtnCancel = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TxtBackupPath = New System.Windows.Forms.TextBox()
         Me.BtnBackup = New System.Windows.Forms.Button()
@@ -115,15 +115,15 @@ Partial Class FrmBackup
         '
         'btnCancel
         '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnCancel.Location = New System.Drawing.Point(999, 547)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(87, 41)
-        Me.btnCancel.TabIndex = 4
-        Me.btnCancel.Text = "Close"
-        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.BtnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnCancel.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCancel.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnCancel.Location = New System.Drawing.Point(999, 547)
+        Me.BtnCancel.Name = "btnCancel"
+        Me.BtnCancel.Size = New System.Drawing.Size(87, 41)
+        Me.BtnCancel.TabIndex = 4
+        Me.BtnCancel.Text = "Close"
+        Me.BtnCancel.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -281,7 +281,7 @@ Partial Class FrmBackup
         Me.Controls.Add(Me.BtnBackup)
         Me.Controls.Add(Me.TxtBackupPath)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -310,7 +310,7 @@ Partial Class FrmBackup
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents TvDatatables As TreeView
-    Friend WithEvents btnCancel As Button
+    Friend WithEvents BtnCancel As Button
     Friend WithEvents TvImages As TreeView
     Friend WithEvents Label1 As Label
     Friend WithEvents TxtBackupPath As TextBox

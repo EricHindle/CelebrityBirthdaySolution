@@ -79,5 +79,14 @@ Public Class FrmMenu2
         End Using
         Show()
     End Sub
+
+    Private Sub BtnReminders_Click(sender As Object, e As EventArgs) Handles BtnReminders.Click
+        Hide()
+        Using _rems As New FrmReminders
+            LogUtil.Info("Reminders", MyBase.Name)
+            _rems.ShowDialog()
+        End Using
+        Show()
+    End Sub
 #End Region
 End Class

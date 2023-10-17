@@ -37,6 +37,8 @@ Module modDatabase
     Private ReadOnly oSocialMediaTa As New CelebrityBirthdayDataSetTableAdapters.SocialMediaTableAdapter
     Private ReadOnly oCelebTypeTa As New CelebrityBirthdayDataSetTableAdapters.CelebrityTypesTableAdapter
     Private ReadOnly oCelebTypeTable As New CelebrityBirthdayDataSet.CelebrityTypesDataTable
+    Private ReadOnly oReminderTa As New CelebrityBirthdayDataSetTableAdapters.RemindersTableAdapter
+    Private ReadOnly oReminderTable As New CelebrityBirthdayDataSet.RemindersDataTable
 #End Region
 #Region "backup"
     Public Function GetPersonTable() As CelebrityBirthdayDataSet.PersonDataTable
@@ -71,6 +73,12 @@ Module modDatabase
     End Function
     Public Function GetTwitterAuthTable() As CelebrityBirthdayDataSet.TwitterAuthDataTable
         Return oTwitterAuthTa.GetData
+    End Function
+    Public Function GetReminderTable() As CelebrityBirthdayDataSet.RemindersDataTable
+        Return oReminderTa.GetData
+    End Function
+    Public Function GetCelebrityTypesTable() As CelebrityBirthdayDataSet.CelebrityTypesDataTable
+        Return oCelebTypeTa.GetData
     End Function
 #End Region
 #Region "person"
@@ -519,9 +527,7 @@ Module modDatabase
         oCelebTypeTa.Fill(oCelebTypeTable)
         Return oCelebTypeTable
     End Function
-    Public Function GetCelebrityTypesTable() As CelebrityBirthdayDataSet.CelebrityTypesDataTable
-        Return oCelebTypeTa.GetData
-    End Function
+
 #End Region
 #Region "dates"
     Public Function UpdateImageDate(LoadYr As String, LoadMth As String, isDateAmend As Boolean, LoadDay As String, DayIndex As Decimal?, MonthIndex As Decimal?) As Integer

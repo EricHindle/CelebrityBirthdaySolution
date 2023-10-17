@@ -35,7 +35,7 @@ Public Class FrmBackup
         FillImageTree()
         TvImages.ExpandAll()
     End Sub
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Close()
     End Sub
     Private Sub TvDatatables_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles TvDatatables.AfterCheck, TvImages.AfterCheck
@@ -212,6 +212,8 @@ Public Class FrmBackup
                         BackupTable(GetTwitterAuthTable)
                     Case "CelebrityTypes"
                         BackupTable(GetCelebrityTypesTable)
+                    Case "Reminders"
+                        BackupTable(GetReminderTable)
                 End Select
                 oNode.Checked = False
             End If
@@ -246,6 +248,7 @@ Public Class FrmBackup
         tableList.Add("Tweets")
         tableList.Add("TwitterAuth")
         tableList.Add("CelebrityTypes")
+        tableList.Add("Reminders")
     End Sub
     Public Sub FillTableTree(ByRef tvtables As TreeView)
         tvtables.Nodes.Clear()

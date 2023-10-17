@@ -294,18 +294,18 @@
     <Compile Include="Botsd\FrmRmvPost.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CelebrityBirthdayDataSet.Designer.vb">
+    <Compile Include="Domain\CelebrityBirthdayDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="CelebrityBirthdayDataSet.vb">
+    <Compile Include="Domain\CelebrityBirthdayDataSet.vb">
       <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DlgShowText.Designer.vb">
+    <Compile Include="Utilities\DlgShowText.Designer.vb">
       <DependentUpon>DlgShowText.vb</DependentUpon>
     </Compile>
-    <Compile Include="DlgShowText.vb">
+    <Compile Include="Utilities\DlgShowText.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Domain\BornSameDay.vb" />
@@ -314,46 +314,46 @@
     <Compile Include="Domain\ImageIdentity.vb" />
     <Compile Include="Domain\SocialMedia.vb" />
     <Compile Include="Email\EmailUtil.vb" />
-    <Compile Include="FrmAddWikiIds.Designer.vb">
+    <Compile Include="Utilities\FrmAddWikiIds.Designer.vb">
       <DependentUpon>FrmAddWikiIds.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmAddWikiIds.vb">
+    <Compile Include="Utilities\FrmAddWikiIds.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmBackup.designer.vb">
+    <Compile Include="Utilities\FrmBackup.designer.vb">
       <DependentUpon>FrmBackup.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmBackup.vb">
+    <Compile Include="Utilities\FrmBackup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDateCheck.Designer.vb">
+    <Compile Include="Utilities\FrmDateCheck.Designer.vb">
       <DependentUpon>FrmDateCheck.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmDateCheck.vb">
+    <Compile Include="Utilities\FrmDateCheck.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDeathCheck.Designer.vb">
+    <Compile Include="Deaths\FrmDeathCheck.Designer.vb">
       <DependentUpon>FrmDeathCheck.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmDeathCheck.vb">
+    <Compile Include="Deaths\FrmDeathCheck.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDeathList.Designer.vb">
+    <Compile Include="Deaths\FrmDeathList.Designer.vb">
       <DependentUpon>FrmDeathList.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmDeathList.vb">
+    <Compile Include="Deaths\FrmDeathList.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmGlobalSettings.designer.vb">
+    <Compile Include="Settings\FrmGlobalSettings.designer.vb">
       <DependentUpon>FrmGlobalSettings.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmGlobalSettings.vb">
+    <Compile Include="Settings\FrmGlobalSettings.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmText.Designer.vb">
+    <Compile Include="Utilities\FrmText.Designer.vb">
       <DependentUpon>FrmText.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmText.vb">
+    <Compile Include="Utilities\FrmText.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GlobalSuppressions.vb" />
@@ -387,16 +387,16 @@
     <Compile Include="Menus\FrmMenu2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmOptions.Designer.vb">
+    <Compile Include="Settings\frmOptions.Designer.vb">
       <DependentUpon>frmOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmOptions.vb">
+    <Compile Include="Settings\frmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSearch.Designer.vb">
+    <Compile Include="Utilities\FrmSearch.Designer.vb">
       <DependentUpon>FrmSearch.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSearch.vb">
+    <Compile Include="Utilities\FrmSearch.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Imaging\FrmMosaic.Designer.vb">
@@ -405,7 +405,7 @@
     <Compile Include="Imaging\FrmMosaic.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GlobalSettings.vb" />
+    <Compile Include="Settings\GlobalSettings.vb" />
     <Compile Include="Botsd\FrmBotsd.Designer.vb">
       <DependentUpon>FrmBotsd.vb</DependentUpon>
     </Compile>
@@ -443,7 +443,7 @@
     <Compile Include="Menus\FrmImageMenu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modGlobalConstants.vb" />
+    <Compile Include="Utilities\modGlobalConstants.vb" />
     <Compile Include="Twitter\FrmSendBBTweet.Designer.vb">
       <DependentUpon>FrmSendBBTweet.vb</DependentUpon>
     </Compile>
@@ -481,22 +481,22 @@
     <Compile Include="Twitter\frmTwitterOutput.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmUpdateDatabase.Designer.vb">
+    <Compile Include="Main\FrmUpdateDatabase.Designer.vb">
       <DependentUpon>FrmUpdateDatabase.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmUpdateDatabase.vb">
+    <Compile Include="Main\FrmUpdateDatabase.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmWordPress.Designer.vb">
+    <Compile Include="Utilities\FrmWordPress.Designer.vb">
       <DependentUpon>FrmWordPress.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmWordPress.vb">
+    <Compile Include="Utilities\FrmWordPress.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Imaging\ModCbImageUtil.vb" />
-    <Compile Include="modCbday.vb" />
-    <Compile Include="modDatabase.vb" />
-    <Compile Include="modText.vb" />
+    <Compile Include="Main\modCbday.vb" />
+    <Compile Include="Domain\modDatabase.vb" />
+    <Compile Include="Utilities\modText.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -519,10 +519,10 @@
     <Compile Include="Imaging\FrmImageStore.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SplashScreen1.Designer.vb">
+    <Compile Include="Utilities\SplashScreen1.Designer.vb">
       <DependentUpon>SplashScreen1.vb</DependentUpon>
     </Compile>
-    <Compile Include="SplashScreen1.vb">
+    <Compile Include="Utilities\SplashScreen1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Twitter\Globals.vb" />
@@ -542,28 +542,28 @@
     <EmbeddedResource Include="Botsd\FrmRmvPost.resx">
       <DependentUpon>FrmRmvPost.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgShowText.resx">
+    <EmbeddedResource Include="Utilities\DlgShowText.resx">
       <DependentUpon>DlgShowText.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAddWikiIds.resx">
+    <EmbeddedResource Include="Utilities\FrmAddWikiIds.resx">
       <DependentUpon>FrmAddWikiIds.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmBackup.resx">
+    <EmbeddedResource Include="Utilities\FrmBackup.resx">
       <DependentUpon>FrmBackup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDateCheck.resx">
+    <EmbeddedResource Include="Utilities\FrmDateCheck.resx">
       <DependentUpon>FrmDateCheck.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDeathCheck.resx">
+    <EmbeddedResource Include="Deaths\FrmDeathCheck.resx">
       <DependentUpon>FrmDeathCheck.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDeathList.resx">
+    <EmbeddedResource Include="Deaths\FrmDeathList.resx">
       <DependentUpon>FrmDeathList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmGlobalSettings.resx">
+    <EmbeddedResource Include="Settings\FrmGlobalSettings.resx">
       <DependentUpon>FrmGlobalSettings.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmText.resx">
+    <EmbeddedResource Include="Utilities\FrmText.resx">
       <DependentUpon>FrmText.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Imaging\FrmImageEdit.resx">
@@ -581,11 +581,11 @@
     <EmbeddedResource Include="Menus\FrmMenu2.resx">
       <DependentUpon>FrmMenu2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOptions.resx">
+    <EmbeddedResource Include="Settings\frmOptions.resx">
       <DependentUpon>frmOptions.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSearch.resx">
+    <EmbeddedResource Include="Utilities\FrmSearch.resx">
       <DependentUpon>FrmSearch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Imaging\FrmMosaic.resx">
@@ -627,10 +627,10 @@
     <EmbeddedResource Include="Twitter\frmTwitterOutput.resx">
       <DependentUpon>frmTwitterOutput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmUpdateDatabase.resx">
+    <EmbeddedResource Include="Main\FrmUpdateDatabase.resx">
       <DependentUpon>FrmUpdateDatabase.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmWordPress.resx">
+    <EmbeddedResource Include="Utilities\FrmWordPress.resx">
       <DependentUpon>FrmWordPress.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -643,7 +643,7 @@
       <DependentUpon>FrmImageStore.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SplashScreen1.resx">
+    <EmbeddedResource Include="Utilities\SplashScreen1.resx">
       <DependentUpon>SplashScreen1.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -652,15 +652,15 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="CelebrityBirthdayDataSet.xsc">
+    <None Include="Domain\CelebrityBirthdayDataSet.xsc">
       <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
     </None>
-    <None Include="CelebrityBirthdayDataSet.xsd">
+    <None Include="Domain\CelebrityBirthdayDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>CelebrityBirthdayDataSet.Designer.vb</LastGenOutput>
     </None>
-    <None Include="CelebrityBirthdayDataSet.xss">
+    <None Include="Domain\CelebrityBirthdayDataSet.xss">
       <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
     </None>
     <None Include="My Project\Application.myapp">

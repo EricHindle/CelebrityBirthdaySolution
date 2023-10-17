@@ -228,9 +228,7 @@ Friend Module modCbday
                     MsgBox("Error writing file" & vbCrLf & ex.Message)
                     rtnval = False
                 Finally
-                    If bw IsNot Nothing Then
-                        bw.Close()
-                    End If
+                    bw?.Close()
                     bw = Nothing
                 End Try
             End If
