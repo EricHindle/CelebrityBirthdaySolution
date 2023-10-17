@@ -153,6 +153,13 @@ Public Class FrmMenu
             LogUtil.Fatal("Database not available", MyBase.Name)
             Close()
         End If
+        Using _rems As New FrmReminders
+            LogUtil.Info("Reminders", MyBase.Name)
+            If _rems.LoadReminders > 0 Then
+                _rems.TopMost = True
+                _rems.ShowDialog()
+            End If
+        End Using
     End Sub
 
     Private Sub BtnDeadList_Click(sender As Object, e As EventArgs) Handles BtnDeadList.Click

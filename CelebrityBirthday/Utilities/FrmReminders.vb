@@ -102,7 +102,7 @@ Public Class FrmReminders
     End Sub
 #End Region
 #Region "subroutines"
-    Private Sub LoadReminders()
+    Public Function LoadReminders() As Integer
         isLoadingReminders = True
         Dim _reminders As List(Of Reminder) = GetAllReminders()
         DgvReminders.Rows.Clear()
@@ -116,7 +116,8 @@ Public Class FrmReminders
         DgvReminders.ClearSelection()
         LogUtil.Info("Loaded " & _reminders.Count & " reminders", MyBase.Name)
         isLoadingReminders = False
-    End Sub
+        Return _reminders.Count
+    End Function
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
         DgvReminders.ClearSelection()
         ClearForm()
