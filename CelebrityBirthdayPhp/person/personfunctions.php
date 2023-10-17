@@ -6,7 +6,8 @@
 $myPath = '../';
 require_once $myPath . 'includes/db_connect.php';
 
-function getperson($personid){
+function getperson($personid)
+{
     global $mypdo;
     $person = '';
     $personsql = "SELECT * FROM person WHERE id = :id";
@@ -17,60 +18,99 @@ function getperson($personid){
     return $person;
 }
 
-function insertperson($forename, $surname, $sex, $age, $description, $birthname, $dob, $dod, $historical)
+function insertperson($forename, $surname, $description, $shortdesc, $birthname, $dob, $dod)
 {
     global $mypdo;
-    $name = $forename . ' ' . $surname;
-    $sqladdperson = "INSERT INTO people 
-        (name, forename, surname, sex, age, description, birthname, historical, date_of_birth, date_of_death) 
+    $birthdate = getdate(strtotime($dob));
+    $bday = $birthdate['mday'];
+    $bmonth = $birthdate['mon'];
+    $byear = $birthdate['year'];
+    $deathdate = '';
+    $dday = '';
+    $dmonth = '';
+    $dyear = '';
+    $insdod1 = '';
+    $insdod2 = '';
+    if (isset($dod) && $dod != '') {
+        $deathdate = getdate(strtotime($dod));
+        $dday = $deathdate['mday'];
+        $dmonth = $deathdate['mon'];
+        $dyear = $deathdate['year'];
+        $insdod1 = ", deathday, deathmonth, deathyear";
+        $insdod2 = ", :dday, :dmonth, :dyear";
+    }
+    
+    $sqladdperson = "INSERT INTO person 
+        (name, forename, surname, shortdesc, longdesc, birthname, birthday, birthmonth, birthyear" . $insdod1 . ") 
         VALUES 
-        (:name, :forename, :surname, :sex, :age, :description, :birthname, :historical, :dob, :dod)";
+        (:name, :forename, :surname, :shortdesc, :longdesc, :birthname" . $insdod2 . ")";
     $stmtaddperson = $mypdo->prepare($sqladdperson);
-    $stmtaddperson->bindParam(':name', $name);
     $stmtaddperson->bindParam(':forename', $forename);
     $stmtaddperson->bindParam(':surname', $surname);
-    $stmtaddperson->bindParam(':sex', $sex);
-    $stmtaddperson->bindParam(':age', $age, PDO::PARAM_INT);
+    $stmtaddperson->bindParam(':shortdesc', $shortdesc);
     $stmtaddperson->bindParam(':description', $description);
     $stmtaddperson->bindParam(':birthname', $birthname);
-    $stmtaddperson->bindParam(':dob', $dob);
-    $stmtaddperson->bindParam(':dod', $dod);
-    $stmtaddperson->bindParam(':historical', $historical, PDO::PARAM_INT);
+    if (isset($dod) && $dod != '') {
+        $stmtaddperson->bindParam(':dday', $dday, PDO::PARAM_INT);
+        $stmtaddperson->bindParam(':dmonth', $dmonth, PDO::PARAM_INT);
+        $stmtaddperson->bindParam(':dyear', $dyear, PDO::PARAM_INT);
+    }
+    $stmtaddperson->bindParam(':bday', $bday, PDO::PARAM_INT);
+    $stmtaddperson->bindParam(':bmonth', $bmonth, PDO::PARAM_INT);
+    $stmtaddperson->bindParam(':byear', $byear, PDO::PARAM_INT);
+    
     $stmtaddperson->execute();
     $added = $stmtaddperson->rowCount();
     return $added;
 }
 
-function updateperson($personid, $forename, $surname, $sex, $age, $description, $birthname, $dob, $dod, $historical, $deleted)
+function updateperson($personid, $forename, $surname, $shortdesc, $description, $birthname, $dob, $dod)
 {
     global $mypdo;
-    $name = $forename . ' ' . $surname;
-    $sqlupdperson = "UPDATE people
+    $birthdate = getdate(strtotime(str_replace('/', '-',$dob)));
+    $bday = $birthdate['mday'];
+    $bmonth = $birthdate['mon'];
+    $byear = $birthdate['year'];
+    $deathdate = '';
+    $dday = '';
+    $dmonth = '';
+    $dyear = '';
+    $upddod = '';
+    if (isset($dod) && $dod != '') {
+        $deathdate = getdate(strtotime(str_replace('/', '-',$dod)));
+        $dday = $deathdate['mday'];
+        $dmonth = $deathdate['mon'];
+        $dyear = $deathdate['year'];
+        $upddod = ", deathday = :dday,
+        deathmonth = :dmonth,
+        deathyear = :dyear";
+    }
+    $sqlupdperson = "UPDATE person
         SET
-        name = :name,
         surname = :surname,
         forename = :forename,
-        description = :description,
-        age = :age,
-        sex = :sex,
+        longdesc = :description,
+        shortdesc = :shortdesc,
         birthname = :birthname,
-        historical = :historical,
-        date_of_birth = :dob,
-        date_of_death = :dod,
-        persondeleted = :deleted
-        WHERE personId = :personid";
+        birthday = :bday,
+        birthmonth = :bmonth,
+        birthyear = :byear" . $upddod . "
+        WHERE Id = :personid";
     $stmtupdperson = $mypdo->prepare($sqlupdperson);
-    $stmtupdperson->bindParam(':name', $name);
     $stmtupdperson->bindParam(':forename', $forename);
     $stmtupdperson->bindParam(':surname', $surname);
-    $stmtupdperson->bindParam(':sex', $sex);
-    $stmtupdperson->bindParam(':age', $age, PDO::PARAM_INT);
+    $stmtupdperson->bindParam(':shortdesc', $shortdesc);
     $stmtupdperson->bindParam(':description', $description);
     $stmtupdperson->bindParam(':birthname', $birthname);
-    $stmtupdperson->bindParam(':dob', $dob);
-    $stmtupdperson->bindParam(':dod', $dod);
-    $stmtupdperson->bindParam(':historical', $historical, PDO::PARAM_INT);
-    $stmtupdperson->bindParam(':deleted', $deleted, PDO::PARAM_INT);
+    if (isset($dod) && $dod != '') {
+        $stmtupdperson->bindParam(':dday', $dday, PDO::PARAM_INT);
+        $stmtupdperson->bindParam(':dmonth', $dmonth, PDO::PARAM_INT);
+        $stmtupdperson->bindParam(':dyear', $dyear, PDO::PARAM_INT);
+    }
+    $stmtupdperson->bindParam(':bday', $bday, PDO::PARAM_INT);
+    $stmtupdperson->bindParam(':bmonth', $bmonth, PDO::PARAM_INT);
+    $stmtupdperson->bindParam(':byear', $byear, PDO::PARAM_INT);
+
     $stmtupdperson->bindParam(':personid', $personid, PDO::PARAM_INT);
     $stmtupdperson->execute();
     $updated = $stmtupdperson->rowCount();
@@ -81,27 +121,24 @@ function processperson($action)
 {
     global $mypdo;
     $html = '';
-    if (isset($_POST['forename'], $_POST['surname'], $_POST['sex'], $_POST['age'], $_POST['description'], $_SESSION['book_id'])) {
-        $personid = -1;
-        $bookid = $_SESSION['book_id'];
-        $forename = $_POST['forename'];
+    if (isset($_POST['surname'], $_POST['description'])) {
+        $personid = - 1;
+        $forename = '';
         $surname = $_POST['surname'];
-        $sex = $_POST['sex'];
-        $age = sanitize_int($_POST['age']);
         $description = $_POST['description'];
         $birthname = '';
+        $shortdesc = '';
         $dob = '';
         $dod = '';
-        $deleted = 0;
-        $myhistorical = false;
+        if (isset($_POST['forename'])) {
+            $forename = $_POST['forename'];
+        }
         if (isset($_POST['birthname'])) {
             $birthname = $_POST['birthname'];
         }
-        $historical = (isset($_POST['historical']) ? $_POST['historical'] : "false");
-        $myhistorical = ($historical == "true" ? 1 : 0);
-        
-        $deleted = (isset($_POST['deleted']) ? $_POST['deleted'] : "false");
-        $mydeleted = ($deleted == "true" ? 1 : 0);
+        if (isset($_POST['shortdesc'])) {
+            $shortdesc = $_POST['shortdesc'];
+        }
         if (isset($_POST['personid'])) {
             $personid = $_POST['personid'];
         }
@@ -112,50 +149,44 @@ function processperson($action)
             $dod = $_POST['dod'];
         }
 
-        if ($forename && $surname && $sex && $age && $description) {
+        if ($forename && $surname && $description) {
             $html = "";
 
             if ($action == 'create') {
 
-                $added = insertperson($forename, $surname, $sex, $age, $description, $birthname, $dob, $dod, $myhistorical);
+                $added = insertperson($forename, $surname, $description, $shortdesc, $birthname, $dob, $dod);
                 $name = $forename . ' ' . $surname;
-                $result = '';
                 if ($added == 1) {
                     $personid = $mypdo->lastInsertId();
-                    $linkadded = addbookpersonlink($bookid, $personid);
-                    if ($linkadded == 1) {
-                        $result = ' and BookPerson';
-                    }
                     $html .= "<script>
-            						alert('" . $name . " : Person" . $result . " added.');
-            						window.location.href='selectperson.php';
+            						alert('" . $name . " : Person added.');
+            						window.location.href='personsearch.php';
     					      </script>";
                 } else {
                     $html .= "<script>
         						alert('" . $name . " : Person NOT added.');
-        						window.location.href='selectperson.php';
+        						window.location.href='personsearch.php';
     					      </script>";
                 }
             } else {
-                $updated = updateperson($personid, $forename, $surname, $sex, $age, $description, $birthname, $dob, $dod, $myhistorical, $mydeleted);
+                $updated = updateperson($personid, $forename, $surname, $shortdesc, $description, $birthname, $dob, $dod);
                 $name = $forename . ' ' . $surname;
-                $result = '';
                 if ($updated == 1) {
                     $html .= "<script>
-            						alert('" . $name . " : Person" . $result . " updated.');
-            						window.location.href='selectperson.php';
+            						alert('" . $name . " : Person updated.');
+            						window.location.href='personsearch.php';
     					      </script>";
                 } else {
                     $html .= "<script>
         						alert('" . $name . " : Person NOT updated.');
-        						window.location.href='selectperson.php';
+        						window.location.href='personsearch.php';
     					      </script>";
                 }
             }
         } else {
             $html = "<script>
 						alert('There was a problem. Please check details and try again.');
-						window.location.href='selectperson.php';
+						window.location.href='personsearch.php';
 					  </script>";
         }
     }
