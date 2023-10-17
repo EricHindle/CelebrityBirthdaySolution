@@ -231,17 +231,31 @@ Public Class Person
     Public Sub New()
         InitialisePerson()
     End Sub
-    Public Sub New(ByVal pForename As String, ByVal pSurname As String, ByVal pDesc As String, ByVal pShortDesc As String, ByVal pDay As Integer, ByVal pMonth As Integer, ByVal pYear As String, ByVal pDeathYr As Integer, ByVal pDeathMonth As Integer, ByVal pDeathDay As Integer, ByVal pBirthName As String, ByVal pBirthPlace As String, ByVal pImage As ImageIdentity, ByVal pSocial As SocialMedia)
+    Public Sub New(ByVal pId As Integer,
+                   ByVal pForename As String,
+                   ByVal pSurname As String,
+                   ByVal pDesc As String,
+                   ByVal pShortDesc As String,
+                   ByVal pBirthDay As Integer,
+                   ByVal pBirthMonth As Integer,
+                   ByVal pBirthYear As String,
+                   ByVal pDeathYr As Integer,
+                   ByVal pDeathMonth As Integer,
+                   ByVal pDeathDay As Integer,
+                   ByVal pBirthName As String,
+                   ByVal pBirthPlace As String,
+                   ByVal pImage As ImageIdentity,
+                   ByVal pSocial As SocialMedia)
         InitialisePerson()
-        _id = -1
+        _id = pId
         _forename = If(pForename, "")
         _surname = If(pSurname, "")
         _ShortDesc = If(pShortDesc, "")
         _sortSeq = 0
         _description = If(pDesc, "")
-        _birthDay = pDay
-        _birthMonth = pMonth
-        _birthYear = If(pYear, "")
+        _birthDay = pBirthDay
+        _birthMonth = pBirthMonth
+        _birthYear = If(pBirthYear, "")
         _deathYear = pDeathYr
         _image = If(pImage, New ImageIdentity)
         _deathMonth = pDeathMonth
@@ -250,9 +264,9 @@ Public Class Person
         _birthPlace = If(pBirthPlace, "")
         _social = If(pSocial, New SocialMedia)
         _unsavedChanges = False
-        If String.IsNullOrEmpty(pForename) And String.IsNullOrEmpty(pSurname) Then
-            MsgBox("Please supply a name", MsgBoxStyle.Exclamation, "Data error")
-        End If
+        'If String.IsNullOrEmpty(pForename) And String.IsNullOrEmpty(pSurname) Then
+        '    MsgBox("Please supply a name", MsgBoxStyle.Exclamation, "Data error")
+        'End If
 
     End Sub
     Public Sub New(ByVal pPerson As Person, Optional isIncludeImage As Boolean = True)

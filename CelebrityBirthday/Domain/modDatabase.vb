@@ -7,6 +7,7 @@
 
 Imports System.Data.Common
 Imports System.Reflection
+Imports CelebrityBirthday.CelebrityBirthdayDataSetTableAdapters
 
 Module modDatabase
 #Region "constants"
@@ -149,7 +150,7 @@ Module modDatabase
 
             If iCt = 1 Then
                 Dim oRow As CelebrityBirthdayDataSet.PersonRow = oPersonTable.Rows(0)
-                newPerson = New Person(oRow, GetSocialMedia(oRow.id), GetImageById(oRow.id))
+                newPerson = PersonBuilder.APerson.StartingWith(oRow).WithSocial(GetSocialMedia(oRow.id)).WithImage(GetImageById(oRow.id)).Build
             End If
         Catch dbEx As DbException
             DisplayException(MethodBase.GetCurrentMethod(), dbEx, MODULE_TYPE)
@@ -692,6 +693,40 @@ Module modDatabase
     End Function
     Public Function DeleteBotsdByPostNo(ByVal _postNo As Integer) As Integer
         Return oBotsdTa.DeleteByPostNo(_postNo)
+    End Function
+#End Region
+#Region "reminders"
+    Public Function GetAllReminders() As List(Of Reminder)
+        Dim oRemList As New List(Of Reminder)
+        oReminderTa.Fill(oReminderTable)
+        For Each oRow As CelebrityBirthdayDataSet.RemindersRow In oReminderTable.Rows
+            oRemList.Add(ReminderBuilder.AReminder.StartingWith(oRow).Build)
+        Next
+        Return oRemList
+    End Function
+    Public Function InsertReminder(ByRef pRem As Reminder) As Integer
+        Dim rtnVal As Integer = oReminderTa.InsertReminder(pRem.Person.Id, pRem.Note)
+        Return rtnVal
+    End Function
+    Public Function DeleteReminder(ByVal pId As Integer) As Integer
+        Dim rtnVal As Integer = oReminderTa.DeleteReminder(pId)
+        Return rtnVal
+    End Function
+    Public Function GetReminderById(pId As Integer) As Reminder
+        Dim oRem As Reminder = ReminderBuilder.AReminder.StartingWithNothing.Build
+        oReminderTa.FillById(oReminderTable, pId)
+        If oReminderTable.Rows.Count = 1 Then
+            oRem = ReminderBuilder.AReminder.StartingWith(oReminderTable.Rows(0)).Build
+        End If
+        Return oRem
+    End Function
+    Public Function GetRemindersByPersonId(pId As Integer) As List(Of Reminder)
+        Dim oRemList As New List(Of Reminder)
+        oReminderTa.FillByPerson(oReminderTable, pId)
+        For Each oRow As CelebrityBirthdayDataSet.RemindersRow In oReminderTable.Rows
+            oRemList.Add(ReminderBuilder.AReminder.StartingWith(oRow).Build)
+        Next
+        Return oRemList
     End Function
 #End Region
 End Module

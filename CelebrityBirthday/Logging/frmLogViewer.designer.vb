@@ -23,7 +23,7 @@ Partial Class FrmLogViewer
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogViewer))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmLogViewer))
         Me.OK_Button = New System.Windows.Forms.Button()
         Me.rtbLog = New System.Windows.Forms.RichTextBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -171,7 +171,7 @@ Partial Class FrmLogViewer
         Me.BtnPrevFile.Location = New System.Drawing.Point(489, 536)
         Me.BtnPrevFile.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnPrevFile.Name = "BtnPrevFile"
-        Me.BtnPrevFile.Size = New System.Drawing.Size(41, 35)
+        Me.BtnPrevFile.Size = New System.Drawing.Size(43, 35)
         Me.BtnPrevFile.TabIndex = 7
         Me.BtnPrevFile.Text = "<<"
         Me.BtnPrevFile.UseVisualStyleBackColor = True
@@ -186,7 +186,7 @@ Partial Class FrmLogViewer
         Me.BtnNextFile.Location = New System.Drawing.Point(610, 537)
         Me.BtnNextFile.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnNextFile.Name = "BtnNextFile"
-        Me.BtnNextFile.Size = New System.Drawing.Size(41, 35)
+        Me.BtnNextFile.Size = New System.Drawing.Size(43, 35)
         Me.BtnNextFile.TabIndex = 8
         Me.BtnNextFile.Text = ">>"
         Me.BtnNextFile.UseVisualStyleBackColor = True
@@ -206,7 +206,7 @@ Partial Class FrmLogViewer
         Me.BtnToday.Text = "Today"
         Me.BtnToday.UseVisualStyleBackColor = True
         '
-        'frmLogViewer
+        'FrmLogViewer
         '
         Me.AcceptButton = Me.OK_Button
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
@@ -222,12 +222,12 @@ Partial Class FrmLogViewer
         Me.Controls.Add(Me.rtbLog)
         Me.Controls.Add(Me.OK_Button)
         Me.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ForeColor = System.Drawing.Color.FromArgb(CType(CType(96, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmLogViewer"
+        Me.Name = "FrmLogViewer"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Log Viewer"

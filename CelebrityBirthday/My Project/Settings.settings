@@ -175,5 +175,11 @@
     <Setting Name="botsdPostSplitDist" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">520</Value>
     </Setting>
+    <Setting Name="reminderformpos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="reminderSplitDist1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">260</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

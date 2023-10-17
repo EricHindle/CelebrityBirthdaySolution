@@ -201,7 +201,7 @@ Public Class FrmSendBBTweet
     Private Sub CreateTwitterImage(_image As String)
         LblImageFile.Text = _image
         Dim _imageidentity As New ImageIdentity(-1, _image, "", "", "")
-        Dim _person As New Person(TxtForename.Text, TxtSurname.Text, "", "", 0, 0, 0, 0, 0, 0, "", "", _imageidentity, Nothing)
+        Dim _person As New Person(-1, TxtForename.Text, TxtSurname.Text, "", "", 0, 0, 0, 0, 0, 0, "", "", _imageidentity, Nothing)
         Dim _pictureList As New List(Of Person) From {_person}
         ModCbImageUtil.GenerateImage(PictureBox2, _pictureList, 1, 1, HindlewareLib.Imaging.ImageUtil.AlignType.Centre)
         WriteTrace("Created image")

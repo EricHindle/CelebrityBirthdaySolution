@@ -121,7 +121,8 @@ Public NotInheritable Class FrmUpdateDatabase
         End If
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
             Try
-                Dim newPerson As New Person(txtForename.Text.Trim,
+                Dim newPerson As New Person(-1,
+                                            txtForename.Text.Trim,
                                                 txtSurname.Text.Trim,
                                                 txtDesc.Text.Trim,
                                                 TxtShortDesc.Text.Trim,
@@ -293,7 +294,17 @@ Public NotInheritable Class FrmUpdateDatabase
         End If
         AppendProgress(" - Complete", lblStatus)
     End Sub
-
+    Private Sub BtnReminders_Click(sender As Object, e As EventArgs) Handles BtnReminders.Click
+        Using _remForm As New FrmReminders
+            If lastSelectedPerson IsNot Nothing Then
+                _remForm.PersonId = lastSelectedPerson.Id
+            End If
+            _remForm.ShowDialog()
+            If lastSelectedPerson IsNot Nothing Then
+                SetReminderButton(lastSelectedPerson.Id)
+            End If
+        End Using
+    End Sub
     Private Shared Function SetRowColorByType(oPerson As Person) As Color
         Dim _color As Color = Color.White
         Select Case oPerson.Social.CelebrityType
@@ -310,7 +321,6 @@ Public NotInheritable Class FrmUpdateDatabase
         End Select
         Return _color
     End Function
-
     Private Sub DgvPeople_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DgvPeople.SelectionChanged
         If Not isPickingMissingDate Then
             ClearStatus(lblStatus)
@@ -390,7 +400,6 @@ Public NotInheritable Class FrmUpdateDatabase
             LogUtil.Problem("ID label is empty", MyBase.Name)
         End If
     End Sub
-
     Private Sub FrmAddCbdy_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
         My.Settings.updformpos = SetFormPos(Me)
@@ -683,7 +692,6 @@ Public NotInheritable Class FrmUpdateDatabase
         Dim wpText As String = MakeDescription()
         If Not String.IsNullOrEmpty(wpText) Then Clipboard.SetText(wpText)
     End Sub
-
     Private Function MakeDescription() As String
         Dim wpText As String = ""
         If DgvPeople.SelectedRows.Count > 0 Then
@@ -704,7 +712,6 @@ Public NotInheritable Class FrmUpdateDatabase
         End If
         Return wpText
     End Function
-
     Private Sub PasteIntoDesc_Click(MenuItem As Object, e As EventArgs) Handles PasteIntoDesc.Click
         GetSourceControl(MenuItem).Copy()
         txtDesc.Paste()
@@ -1007,8 +1014,15 @@ Public NotInheritable Class FrmUpdateDatabase
             cbCelebType.SelectedValue = oPerson.Social.CelebrityType
         End If
         txtWiki.Text = GetWikiText(NudSentences.Value, oPerson.ForeName, oPerson.Surname, TxtWikiId.Text)
+        SetReminderButton(oPerson.Id)
         bLoadingPerson = False
     End Sub
+
+    Private Sub SetReminderButton(pPersonId As Integer)
+        Dim _reminders As List(Of Reminder) = GetRemindersByPersonId(pPersonId)
+        BtnReminders.Font = New Font(BtnReminders.Font, If(_reminders.Count > 0, FontStyle.Bold, FontStyle.Regular))
+    End Sub
+
     Private Sub RemoveMiddleWordsToolStripMenuItem1_Click(sender As Object, e As EventArgs)
         If txtDesc.SelectionLength > 0 Then
             RemoveMiddleNames()

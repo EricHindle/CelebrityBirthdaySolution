@@ -294,6 +294,8 @@
     <Compile Include="Botsd\FrmRmvPost.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Domain\Builders\PersonBuilder.vb" />
+    <Compile Include="Domain\Builders\ReminderBuilder.vb" />
     <Compile Include="Domain\CelebrityBirthdayDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -302,6 +304,7 @@
     <Compile Include="Domain\CelebrityBirthdayDataSet.vb">
       <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Reminder.vb" />
     <Compile Include="Utilities\DlgShowText.Designer.vb">
       <DependentUpon>DlgShowText.vb</DependentUpon>
     </Compile>
@@ -348,6 +351,12 @@
       <DependentUpon>FrmGlobalSettings.vb</DependentUpon>
     </Compile>
     <Compile Include="Settings\FrmGlobalSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\FrmReminders.Designer.vb">
+      <DependentUpon>FrmReminders.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\FrmReminders.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utilities\FrmText.Designer.vb">
@@ -562,6 +571,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Settings\FrmGlobalSettings.resx">
       <DependentUpon>FrmGlobalSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\FrmReminders.resx">
+      <DependentUpon>FrmReminders.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utilities\FrmText.resx">
       <DependentUpon>FrmText.vb</DependentUpon>

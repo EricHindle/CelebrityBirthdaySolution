@@ -130,6 +130,7 @@ Partial Class FrmUpdateDatabase
         Me.CelebrityTypesTableAdapter = New CelebrityBirthday.CelebrityBirthdayDataSetTableAdapters.CelebrityTypesTableAdapter()
         Me.DgvPeople = New System.Windows.Forms.DataGridView()
         Me.personName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BtnReminders = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -850,6 +851,7 @@ Partial Class FrmUpdateDatabase
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnClose.Location = New System.Drawing.Point(807, 845)
@@ -1451,12 +1453,28 @@ Partial Class FrmUpdateDatabase
         Me.personName.Name = "personName"
         Me.personName.ReadOnly = True
         '
+        'BtnReminders
+        '
+        Me.BtnReminders.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnReminders.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReminders.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnReminders.Location = New System.Drawing.Point(870, 346)
+        Me.BtnReminders.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
+        Me.BtnReminders.Name = "BtnReminders"
+        Me.BtnReminders.Size = New System.Drawing.Size(87, 37)
+        Me.BtnReminders.TabIndex = 152
+        Me.BtnReminders.Text = "Reminders"
+        Me.BtnReminders.UseVisualStyleBackColor = True
+        '
         'FrmUpdateDatabase
         '
+        Me.AcceptButton = Me.BtnToday
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.GhostWhite
+        Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(1293, 923)
+        Me.Controls.Add(Me.BtnReminders)
         Me.Controls.Add(Me.DgvPeople)
         Me.Controls.Add(Me.cbCelebType)
         Me.Controls.Add(Me.Label9)
@@ -1675,4 +1693,5 @@ Partial Class FrmUpdateDatabase
     Friend WithEvents CelebrityTypesTableAdapter As CelebrityBirthdayDataSetTableAdapters.CelebrityTypesTableAdapter
     Friend WithEvents DgvPeople As DataGridView
     Friend WithEvents personName As DataGridViewTextBoxColumn
+    Friend WithEvents BtnReminders As Button
 End Class
