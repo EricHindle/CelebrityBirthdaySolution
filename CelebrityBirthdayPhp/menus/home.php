@@ -37,15 +37,20 @@ if (login_check() == true) {
 
                             <div class="box" style="width:400px;margin:10px;">
                                 <div class="btn bluebutton" style="padding:3px;width:100%;margin-top:15px;">
-                                    <a href="' . $myPath . 'person/personsearch.php">
+                                    <a href="' . $myPath . 'person/personsearch.php?u=update">
                                         <h3 style="color:white;">Search</h3>
                                     </a>
                                 </div>
                                 <div class="btn bluebutton" style="padding:3px;width:100%;margin-top:15px;">
                                     <a href="' . $myPath . 'deaths/deathsearchresults.php">
-                                        <h3 style="color:white;">Deaths</h3>
+                                        <h3 style="color:white;">Death List</h3>
                                     </a>
-                                </div>                              
+                                </div>         
+                                <div class="btn bluebutton" style="padding:3px;width:100%;margin-top:15px;">
+                                    <a href="' . $myPath . 'person/personsearch.php?u=death">
+                                        <h3 style="color:white;">Record Death</h3>
+                                    </a>
+                                </div>                        
                             </div>
 
                         </div>                              ';

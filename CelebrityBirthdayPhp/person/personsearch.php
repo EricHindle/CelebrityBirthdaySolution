@@ -13,7 +13,19 @@ $formKey = new formKey();
 $currentPage = 'people';
 $key = $formKey->outputKey();
 $html = '';
+$updtype = 'update';
+$h3 = 'Search for Person';
 if (login_check() == true) {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        if (isset($_GET['u'])) {
+            $updtype = $_GET['u'];
+        }
+    }
+
+    if ($updtype == 'death') {
+        $h3 = 'Person who died';
+        $currentPage = 'deaths';
+    }
     echo '
 		<!doctype html>
 		<html>
@@ -31,14 +43,14 @@ if (login_check() == true) {
     $html .= '
                  <div class="container" style="min-height:30vh;">
                         <div class="box" style="padding:1em;padding-left:2%;padding-right:2%;margin:10px;">
-                            <h3 class="text-center">Search for Person</h3>
+                            <h3 class="text-center">' . $h3 . '</h3>
                             <form class="form-horizontal" role="form" name ="searchname" method="post" action="searchresults.php">';
     $html .= $key;
     $html .= '
                                 <div class="form-group">
                                     <label class="form-text" style="">Name:</label>
                                     <input type="text" class="form-field-slim" id="personname" name="personname" value=""><br>
-
+                                    <input type="hidden" id="updtype" name="updtype" value="' . $updtype . '">
                                 </div>
 				                <div class="form-group">
                                     <input id="submit" name="submit" type="submit" value="Search" class="btn bluebutton" style="padding:5px;width:50%;">

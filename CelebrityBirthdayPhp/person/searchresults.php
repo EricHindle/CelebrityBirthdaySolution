@@ -11,6 +11,8 @@ sec_session_start();
 $currentPage = 'people';
 $formKey = new formKey();
 $personname = '';
+$updtype = 'update';
+$action='edit-person.php';
 if (login_check($mypdo) == true) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (! isset($_POST['form_key']) || ! $formKey->validate()) {
@@ -19,11 +21,21 @@ if (login_check($mypdo) == true) {
             if (isset($_POST['personname'])) {
                 $personname = trim($_POST['personname']);
             }
+            if (isset($_POST['updtype'])) {
+                $updtype = $_POST['updtype'];
+            }
         }
     } else {
         if (isset($_GET['personname'])) {
             $personname = trim($_GET['personname']);
         }
+        if (isset($_GET['updtype'])) {
+            $updtype = $_GET['updtype'];
+        }
+    }
+    if ($updtype == 'death') {
+        $action='../deaths/record-death.php';
+        $currentPage = 'deaths';
     }
     $key = $formKey->outputKey();
     $forenames = '';
@@ -83,7 +95,7 @@ if (login_check($mypdo) == true) {
                     </div>
                        <div class="box" style="padding:1em;margin:10px">
     	        		<h3  style="color:#000080";>Select person to edit</h3>
-	                	<form class="form" role="form" name ="editperson" method="post" action="edit-person.php">';
+	                	<form class="form" role="form" name ="editperson" method="post" action="' . $action . '">';
     $html .= $key;
     $html .= '	            <input type="hidden" name="personname" value="'. $personname .'" />
                             <div>

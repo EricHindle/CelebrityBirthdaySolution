@@ -26,8 +26,6 @@ if (login_check() == true) {
                 $personid = sanitize_int($_POST['personid']);
                 if ($personid) {
                     $html = "";
-                    $historical = '';
-                    $deleted = '';
                     $person = getperson($personid);
                     if (isset($person)){
                         $key = $formKey->outputKey();
