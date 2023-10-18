@@ -170,6 +170,7 @@ Public Class FrmReminders
 
     Private Sub BtnUpdatePerson_Click(sender As Object, e As EventArgs) Handles BtnUpdatePerson.Click
         If DgvReminders.SelectedRows.Count > 0 Then
+            Me.TopMost = False
             Using _update As New FrmUpdateDatabase
                 _update.PersonId = DgvReminders.SelectedRows(0).Cells(remPersonId.Name).Value
                 _update.ShowDialog()
