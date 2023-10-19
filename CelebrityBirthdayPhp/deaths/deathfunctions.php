@@ -20,6 +20,9 @@ function updatedeath($personid, $description, $dod)
         $dmonth = $deathdate['mon'];
         $dyear = $deathdate['year'];
 
+        $fdod =  date("j F Y", strtotime($dod));
+        $description = str_replace("- )","- " . $fdod . ")",$description);
+        
         $sqlupdperson = "UPDATE person
         SET
         longdesc = :description,

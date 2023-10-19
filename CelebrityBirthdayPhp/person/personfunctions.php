@@ -72,18 +72,16 @@ function updateperson($personid, $forename, $surname, $shortdesc, $description, 
     $bmonth = $birthdate['mon'];
     $byear = $birthdate['year'];
     $deathdate = '';
-    $dday = '';
-    $dmonth = '';
-    $dyear = '';
-    $upddod = '';
-    if (isset($dod) && $dod != '') {
+    $dday = 0;
+    $dmonth = 0;
+    $dyear = 0;
+    if (isset($dod)) {
+        if ($dod != '') {
         $deathdate = getdate(strtotime(str_replace('/', '-',$dod)));
         $dday = $deathdate['mday'];
         $dmonth = $deathdate['mon'];
         $dyear = $deathdate['year'];
-        $upddod = ", deathday = :dday,
-        deathmonth = :dmonth,
-        deathyear = :dyear";
+        }
     }
     $sqlupdperson = "UPDATE person
         SET
@@ -94,7 +92,10 @@ function updateperson($personid, $forename, $surname, $shortdesc, $description, 
         birthname = :birthname,
         birthday = :bday,
         birthmonth = :bmonth,
-        birthyear = :byear" . $upddod . "
+        birthyear = :byear,
+        deathday = :dday,
+        deathmonth = :dmonth,
+        deathyear = :dyear
         WHERE Id = :personid";
     $stmtupdperson = $mypdo->prepare($sqlupdperson);
     $stmtupdperson->bindParam(':forename', $forename);
@@ -102,11 +103,9 @@ function updateperson($personid, $forename, $surname, $shortdesc, $description, 
     $stmtupdperson->bindParam(':shortdesc', $shortdesc);
     $stmtupdperson->bindParam(':description', $description);
     $stmtupdperson->bindParam(':birthname', $birthname);
-    if (isset($dod) && $dod != '') {
-        $stmtupdperson->bindParam(':dday', $dday, PDO::PARAM_INT);
-        $stmtupdperson->bindParam(':dmonth', $dmonth, PDO::PARAM_INT);
-        $stmtupdperson->bindParam(':dyear', $dyear, PDO::PARAM_INT);
-    }
+    $stmtupdperson->bindParam(':dday', $dday, PDO::PARAM_INT);
+    $stmtupdperson->bindParam(':dmonth', $dmonth, PDO::PARAM_INT);
+    $stmtupdperson->bindParam(':dyear', $dyear, PDO::PARAM_INT);
     $stmtupdperson->bindParam(':bday', $bday, PDO::PARAM_INT);
     $stmtupdperson->bindParam(':bmonth', $bmonth, PDO::PARAM_INT);
     $stmtupdperson->bindParam(':byear', $byear, PDO::PARAM_INT);
