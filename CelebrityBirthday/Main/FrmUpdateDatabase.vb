@@ -229,7 +229,7 @@ Public NotInheritable Class FrmUpdateDatabase
             personTable = New List(Of Person)
             DgvPeople.Rows.Clear()
             Dim selectedIndex As Integer = -1
-            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False, False, True)
+            personTable = FindPeopleByDate(cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, False, False, True, True)
             If personTable.Count > 0 Then
                 Dim lastYear As String = ""
                 Dim sortSeq As Integer = 0
