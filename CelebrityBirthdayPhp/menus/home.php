@@ -4,7 +4,7 @@
  * Copyright (C) 2023 Eric Hindle. All rights reserved.
  */
 $myPath = '../';
-require $myPath . 'includes/db_connect.php';
+    require $myPath . 'includes/db_connect.php';
 require $myPath . 'includes/functions.php';
 require $myPath . 'includes/formkey.class.php';
 require 'menufunctions.php';
@@ -50,7 +50,12 @@ if (login_check() == true) {
                                     <a href="' . $myPath . 'person/personsearch.php?u=death">
                                         <h3 style="color:white;">Record Death</h3>
                                     </a>
-                                </div>                        
+                                </div>    
+                                <div class="btn bluebutton" style="padding:3px;width:100%;margin-top:15px;">
+                                    <a href="' . $myPath . 'reminder/addreminder.php">
+                                        <h3 style="color:white;">Add Reminder</h3>
+                                    </a>
+                                </div>                      
                             </div>
 
                         </div>                              ';

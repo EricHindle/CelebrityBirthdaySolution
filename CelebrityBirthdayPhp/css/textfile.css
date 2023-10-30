@@ -1,6 +1,6 @@
  /* unvisited link */
 a:link {
-  color: white;
+  color: #000080;
 }
 
 /* visited link */
@@ -10,7 +10,8 @@ a:visited {
 
 /* mouse over link */
 a:hover {
-  color: skyblue;
+  color: white;
+  background-color:#000080;
 }
 
 /* selected link */

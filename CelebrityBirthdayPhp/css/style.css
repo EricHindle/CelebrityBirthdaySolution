@@ -13,7 +13,7 @@ html {
 body {
 	min-height: 80vh;
 	margin-bottom: 12vh;
-	background: #2b2c2d;
+	background: #F0F8FF;
 	color: white;
 }
 
@@ -96,8 +96,8 @@ button {
 
 .box {
 	text-align: center;
-	color: white;
-	background-color: #121415;
+	color: steelblue;
+	background-color: #9CD6E4;
 	padding: 3em;
 	width: 550px;
 	filter: drop-shadow(10px 10px 5px #00000033);
@@ -142,7 +142,7 @@ button {
 
 .form-text {
 	font-size: 14px;
-	color: #aaa;
+	color: #000080;
 	display:inline-block;
 	text-align:left;
 	margin-left:20px;
@@ -163,7 +163,25 @@ button {
 
 .btn:hover {
 	cursor: pointer;
-	background: #000080;
+	background: steelblue;
+}
+
+.lightbtn {
+	width: 40%;
+	color: #ffffff;
+	background: steelblue;
+	font-size: 0.9em;
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	padding-left: 10px;
+	padding-right: 10px;	
+	border: none;
+}
+
+.lightbtn:hover {
+	cursor: pointer;
+	background: darkslateblue;
 }
 
 .browse {
@@ -215,6 +233,10 @@ button {
 	border-radius: 2px;
 	font-size: 18px;
 	margin-bottom: 10px;
+}
+
+.bluebutton {
+	background-color: #000080;
 }
 
 .graybutton {
@@ -292,13 +314,13 @@ button {
 }
 
 .table-bordered {
-	border: solid 1px silver;
+	border: solid 1px #000080;
 	border-collapse: collapse;
 }
 
 .table-bordered td, tr, th {
 	padding: 2px;
-	border: solid 1px silver;
+	border: solid 1px #000080;
 	border-collapse: collapse;
 }
 
@@ -306,10 +328,10 @@ button {
 	.box {
 		padding: 1em;
 		width: 90%;
-		filter: drop-shadow(0px 0px 0px #121415);
+		filter: drop-shadow(0px 0px 0px #9CD6E4);
 	}
 	body {
-		background: #121415;
+		background: #9CD6E4;
 	}
 	.btn {
 		font-size: 1em;

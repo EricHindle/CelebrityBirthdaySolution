@@ -75,12 +75,15 @@ if (login_check() == true) {
                                                     <input type="text" class="form-field-slim" id="shortdesc" name="shortdesc" value="' . $person['shortdesc'] . '"><br>
                                                     <label class="form-text" style="">Description:</label>
                                                     <textarea class="form-field-slim" id="description" name="description"  rows=2 cols=25 >'. $person['longdesc'] .' </textarea><br>
-                                                     <input type= "hidden" name= "personid" value="' . $personid . '" />
+                                                    <input type= "hidden" name= "personid" value="' . $personid . '" />
+                                                    <a class = "lightbtn" href="' . $myPath . 'reminder/addreminder.php?personid=' . $personid  . '">Add a reminder</a>
                     					        </div>
                                                 <div class="form-group" style="padding-top:25px;text-align:center">
                     					            <input id="submit" name="submit" type="submit" value="Submit" class="btn bluebutton" style="padding:5px;width:50%;">
                     					        </div>
                     		                </form>
+
+                    				          
                                             <div class="light-text">
                     				            <a href="' . $myPath . 'person/searchresults.php?personname='.  $personname  .'">Back</a>
                     				        </div>

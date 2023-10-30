@@ -5,7 +5,7 @@ header {
 	align-items: center;
 	vertical-align: middle;
 	padding: 1em 3em;
-	background-color: #121315;
+	background-color: #9CD6E4;
 	font-family: "Poppins", sans-serif;
 }
 
@@ -22,7 +22,7 @@ header .logo-image {
 .account-name {
 	display: flex;
 	text-decoration: none;
-	color: #9d9d9c;
+	color: steelblue;
 	font-size: 1.2em;
 	font-weight: 600;
 	cursor: pointer;
@@ -95,7 +95,7 @@ header .logo-image {
 	border-radius: 5px;
 	padding: 20px;
 	text-align: center;
-	color: #121315;
+	color: #9CD6E4;
 	font-size: 1em;
 	font-weight: 400;
 	letter-spacing: 0.1em;
@@ -111,7 +111,7 @@ header .logo-image {
 	border-radius: 5px;
 	padding: 20px;
 	text-align: center;
-	color: #121315;
+	color: #9CD6E4;
 	font-size: 1em;
 	font-weight: 400;
 	letter-spacing: 0.1em;
@@ -134,19 +134,21 @@ nav {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
-	background-color: #121315;
-	padding: 0% 25%;
+	background-color: #9CD6E4;
+	padding: 0% 15%;
 	z-index: 99;
 }
 
 .nav-item {
 	padding: 1.4em 0;
-	border-top: solid #121315;
+	border-top: solid #9CD6E4;
 	border-top-width: 0.3em;
+	width:70px;
+	text-align:center;
 }
 
 a.nav-item:link, a.nav-item:visited {
-	color: #9d9d9c;
+	color: steelblue;
 	text-decoration: none;
 	font-size: 1em;
 	font-weight: 600;
@@ -156,8 +158,13 @@ a.nav-item:hover, a.nav-item.active {
 	color: #ffffff;
 }
 
-.nav-item:hover, .nav-item.active {
-	border-top: solid #0000cc;
+a.nav-item.active {
+	color: #ffffff;
+	background-color:#000080;
+}
+
+.nav-item:hover {
+	border-top: solid #000080;
 	border-top-width: 0.3em;
 }
 
@@ -167,6 +174,7 @@ a.nav-item:hover, a.nav-item.active {
 	display: block;
 	width: 35px;
 	height: 35px;
+	text-align:center;
 }
 
 a.nav-item:hover .nav-icon {
