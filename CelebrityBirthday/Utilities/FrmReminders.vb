@@ -5,6 +5,8 @@
 ' Author Eric Hindle
 '
 
+Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
+
 Public Class FrmReminders
 #Region "properties"
     Private _personId As Integer
@@ -110,8 +112,13 @@ Public Class FrmReminders
             Dim orow As DataGridViewRow = DgvReminders.Rows(DgvReminders.Rows.Add())
             orow.Cells(remId.Name).Value = _rem.Id
             orow.Cells(remNote.Name).Value = _rem.Note.Substring(0, Math.Min(100, _rem.Note.Length))
-            orow.Cells(remPersonId.Name).Value = _rem.Person.Id
-            orow.Cells(remName.Name).Value = _rem.Person.Name
+            If _rem.Person.Id >= 0 Then
+                orow.Cells(remPersonId.Name).Value = _rem.Person.Id
+                orow.Cells(remName.Name).Value = _rem.Person.Name
+            Else
+                orow.Cells(remPersonId.Name).Value = ""
+                orow.Cells(remName.Name).Value = "Reminder"
+            End If
         Next
         DgvReminders.ClearSelection()
         LogUtil.Info("Loaded " & _reminders.Count & " reminders", MyBase.Name)
