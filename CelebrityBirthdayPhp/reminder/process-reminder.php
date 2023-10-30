@@ -33,8 +33,6 @@ if (login_check() == true) {
         						window.location.href='../menus/home.php';
     					      </script>";
                 }
-            } else {
-                
             }
         }
         echo $html;
