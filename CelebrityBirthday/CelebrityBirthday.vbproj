@@ -305,6 +305,12 @@
       <DependentUpon>CelebrityBirthdayDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Domain\Reminder.vb" />
+    <Compile Include="Twitter\FrmBirthdayTweets.Designer.vb">
+      <DependentUpon>FrmBirthdayTweets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Twitter\FrmBirthdayTweets.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utilities\DlgShowText.Designer.vb">
       <DependentUpon>DlgShowText.vb</DependentUpon>
     </Compile>
@@ -550,6 +556,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Botsd\FrmRmvPost.resx">
       <DependentUpon>FrmRmvPost.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Twitter\FrmBirthdayTweets.resx">
+      <DependentUpon>FrmBirthdayTweets.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utilities\DlgShowText.resx">
       <DependentUpon>DlgShowText.vb</DependentUpon>

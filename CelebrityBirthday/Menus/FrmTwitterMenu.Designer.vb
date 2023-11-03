@@ -37,6 +37,7 @@ Partial Class FrmTwitterMenu
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.BtnTwitterMosaic = New System.Windows.Forms.Button()
         Me.BtnAuthenticateTwitter = New System.Windows.Forms.Button()
+        Me.BtnRunBdayTweets = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -121,6 +122,17 @@ Partial Class FrmTwitterMenu
         Me.BtnAuthenticateTwitter.Text = "Authorise"
         Me.BtnAuthenticateTwitter.UseVisualStyleBackColor = True
         '
+        'BtnRunBdayTweets
+        '
+        Me.BtnRunBdayTweets.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnRunBdayTweets.Location = New System.Drawing.Point(14, 326)
+        Me.BtnRunBdayTweets.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.BtnRunBdayTweets.Name = "BtnRunBdayTweets"
+        Me.BtnRunBdayTweets.Size = New System.Drawing.Size(151, 49)
+        Me.BtnRunBdayTweets.TabIndex = 24
+        Me.BtnRunBdayTweets.Text = "Run Birthday Tweets"
+        Me.BtnRunBdayTweets.UseVisualStyleBackColor = True
+        '
         'FrmTwitterMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 19.0!)
@@ -128,6 +140,7 @@ Partial Class FrmTwitterMenu
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(352, 467)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnRunBdayTweets)
         Me.Controls.Add(Me.BtnAuthenticateTwitter)
         Me.Controls.Add(Me.BtnTwitterMosaic)
         Me.Controls.Add(Me.Label1)
@@ -153,4 +166,5 @@ Partial Class FrmTwitterMenu
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents BtnTwitterMosaic As Button
     Friend WithEvents BtnAuthenticateTwitter As Button
+    Friend WithEvents BtnRunBdayTweets As Button
 End Class

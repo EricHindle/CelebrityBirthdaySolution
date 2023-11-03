@@ -55,4 +55,10 @@ Public Class FrmTwitterMenu
         End Using
         Show()
     End Sub
+
+    Private Sub BtnRunBdayTweets_Click(sender As Object, e As EventArgs) Handles BtnRunBdayTweets.Click
+        Using _btweets As New FrmBirthdayTweets
+            _btweets.ShowDialog()
+        End Using
+    End Sub
 End Class

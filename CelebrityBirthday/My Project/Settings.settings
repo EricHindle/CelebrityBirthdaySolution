@@ -181,5 +181,8 @@
     <Setting Name="reminderSplitDist1" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">260</Value>
     </Setting>
+    <Setting Name="twitterBdayFormPos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

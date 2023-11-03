@@ -73,7 +73,7 @@ Module modDatabase
 
         Return oPersonList
     End Function
-    Public Function FindBirthdays(oDay As Integer, oMonth As Integer) As List(Of Person)
+    Public Function FindBirthdays(oDay As Integer, oMonth As Integer, Optional IsExcludeForNow As Boolean = False) As List(Of Person)
         Const Psub As String = "FindBirthdays"
         LogUtil.ShowProgress("Finding list of people with birthdays", Psub)
         Dim _List As New List(Of Person)
@@ -81,7 +81,9 @@ Module modDatabase
             oFullPersonTa.FillByBirthday(oFullPersonTable, oMonth, oDay)
             For Each oRow As CelebrityBirthdayDataSet.FullPersonRow In oFullPersonTable.Rows
                 If Not oRow.noTweet And oRow.celebtype <> 4 Then
-                    _List.Add(New Person(oRow))
+                    If Not (IsExcludeForNow AndAlso oRow.celebtype = 2) Then
+                        _List.Add(New Person(oRow))
+                    End If
                 End If
             Next
         Catch dbEx As DbException

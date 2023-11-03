@@ -750,6 +750,18 @@ Namespace My
                 Me("reminderSplitDist1") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property twitterBdayFormPos() As String
+            Get
+                Return CType(Me("twitterBdayFormPos"),String)
+            End Get
+            Set
+                Me("twitterBdayFormPos") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
