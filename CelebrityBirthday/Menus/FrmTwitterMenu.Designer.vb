@@ -130,7 +130,7 @@ Partial Class FrmTwitterMenu
         Me.BtnRunBdayTweets.Name = "BtnRunBdayTweets"
         Me.BtnRunBdayTweets.Size = New System.Drawing.Size(151, 49)
         Me.BtnRunBdayTweets.TabIndex = 24
-        Me.BtnRunBdayTweets.Text = "Run Birthday Tweets"
+        Me.BtnRunBdayTweets.Text = "Birthday Tweet Parameters"
         Me.BtnRunBdayTweets.UseVisualStyleBackColor = True
         '
         'FrmTwitterMenu

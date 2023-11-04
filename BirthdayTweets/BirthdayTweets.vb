@@ -9,6 +9,7 @@ Imports System.Collections.ObjectModel
 Imports System.Data.Common
 Imports System.Drawing
 Imports System.IO
+Imports System.Net.Configuration
 Imports System.Text
 Imports Tweetinvi
 Imports Tweetinvi.Core.Web
@@ -227,6 +228,7 @@ Public Class BirthdayTweets
                 _bdayCt = If(paramValues.Count > 13 AndAlso IsNumeric(paramValues(13)), CInt(paramValues(13)), 0)
                 _annivCt = If(paramValues.Count > 14 AndAlso IsNumeric(paramValues(14)), CInt(paramValues(14)), 0)
                 _isOncePerDay = paramValues.Count > 15 AndAlso paramValues(15).First = "y"c
+                LogUtil.ShowProgress(If(_isOncePerDay, "Once per day", "On demand"))
             End If
         End Sub
         Private Sub InitialiseParam()
@@ -328,8 +330,17 @@ Public Class BirthdayTweets
         InitialiseApplication()
         LogUtil.InitialiseLogging()
         LogUtil.StartLogging()
-        ReadParameters(GlobalSettings.GetSetting(PARAM_FILE))
-        SendAllTweets()
+        Dim cmdLine As ReadOnlyCollection(Of String) = My.Application.CommandLineArgs
+        If cmdLine.Count > 0 Then
+            LogUtil.ShowProgress("Command line parameter:")
+            LogUtil.ShowProgress("  " & cmdLine(0))
+            paramList.Clear()
+            paramList.Add(New RunParam(cmdLine(0)))
+            SendAllTweets(False)
+        Else
+            ReadParameters(GlobalSettings.GetSetting(PARAM_FILE))
+            SendAllTweets(True)
+        End If
         LogUtil.ShowProgress("Run Complete")
     End Sub
     Private Shared Sub InitialiseApplication()
@@ -360,7 +371,7 @@ Public Class BirthdayTweets
             LogUtil.ShowProgress("Parameter file " & _paramFile & " not found", pSub)
         End If
     End Sub
-    Public Shared Sub SendAllTweets()
+    Public Shared Sub SendAllTweets(Optional isDoTest As Boolean = True)
         Const Psub As String = "SendAllTweets"
         Try
             LogUtil.ShowProgress("----------------------------------------- start", Psub)
@@ -371,8 +382,12 @@ Public Class BirthdayTweets
             Dim tweetTime As Date = todaysDate & " " & GlobalSettings.GetSetting(TWEET_TIME)
             Dim networkOK As Boolean = False
             Dim testCount As Integer = 0
-            LogUtil.ShowProgress("Testing tweet", Psub)
-            networkOK = TestTweet(FindRandomBirthday)
+            If isDoTest Then
+                LogUtil.ShowProgress("Testing tweet", Psub)
+                networkOK = TestTweet(FindRandomBirthday)
+            Else
+                networkOK = True
+            End If
             Do Until networkOK Or testCount > 10
                 Threading.Thread.Sleep(10000)
                 networkOK = TestTweet(FindRandomBirthday)
