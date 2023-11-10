@@ -116,7 +116,7 @@ Public Class FrmReminders
                 orow.Cells(remPersonId.Name).Value = _rem.Person.Id
                 orow.Cells(remName.Name).Value = _rem.Person.Name
             Else
-                orow.Cells(remPersonId.Name).Value = ""
+                orow.Cells(remPersonId.Name).Value = "**"
                 orow.Cells(remName.Name).Value = "Reminder"
             End If
         Next
