@@ -14,6 +14,12 @@ sec_session_start();
 $currentPage = 'people';
 $formKey = new formKey();
 $personname = '';
+
+$typesql = "SELECT * FROM CelebrityTypes ORDER BY celebTypeId ASC";
+$typequery = $mypdo->prepare($typesql);
+$typequery->execute();
+$types = $typequery->fetchAll(PDO::FETCH_ASSOC);
+
 if (login_check() == true) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (! isset($_POST['form_key']) || ! $formKey->validate()) {
@@ -59,6 +65,7 @@ if (login_check() == true) {
                         if ($person['deathyear'] > 0) {
                           $dod = $person['deathday'] . '/' . $person['deathmonth'] . '/' .  $person['deathyear'];
                         }
+                        $selected = '';
                         $html .= '
                                                 <div class="form-group"  style="padding-left:10px;text-align:left;">
                                                     <label class="form-text" style="">New forename:</label>
@@ -75,6 +82,17 @@ if (login_check() == true) {
                                                     <input type="text" class="form-field-slim" id="shortdesc" name="shortdesc" value="' . $person['shortdesc'] . '"><br>
                                                     <label class="form-text" style="">Description:</label>
                                                     <textarea class="form-field-slim" id="description" name="description"  rows=2 cols=25 >'. $person['longdesc'] .' </textarea><br>
+                                                    <label class="form-text"  style="">Celeb Type: </label>
+                                                    <select class="form-field-slim" id="celebtypeid" name="celebtypeid">';
+                                                        foreach ($types as $type) {
+                                                            $selected = '';
+                                                            if ( $person['celebtype'] == $type['celebTypeId']) {
+                                                                $selected = 'selected';
+                                                            }
+                                                            $html .= '              <option value="' . $type['celebTypeId'] . '" ' . $selected . '>' . $type['celebTypeDesc'] . '</option>';
+                                                        }
+                                                        $html .= '	        
+                                                    </select><br>
                                                     <input type= "hidden" name= "personid" value="' . $personid . '" />
                                                     <a class = "lightbtn" href="' . $myPath . 'reminder/addreminder.php?personid=' . $personid  . '">Add a reminder</a>
                     					        </div>

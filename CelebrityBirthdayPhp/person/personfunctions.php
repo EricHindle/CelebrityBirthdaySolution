@@ -6,11 +6,11 @@
 $myPath = '../';
 require_once $myPath . 'includes/db_connect.php';
 
-function getperson($personid)
+function getperson($personid) 
 {
     global $mypdo;
     $person = '';
-    $personsql = "SELECT * FROM person WHERE id = :id";
+    $personsql = "SELECT * FROM fullperson WHERE id = :id";
     $personquery = $mypdo->prepare($personsql);
     $personquery->bindParam(':id', $personid, PDO::PARAM_INT);
     $personquery->execute();
@@ -64,7 +64,7 @@ function insertperson($forename, $surname, $description, $shortdesc, $birthname,
     return $added;
 }
 
-function updateperson($personid, $forename, $surname, $shortdesc, $description, $birthname, $dob, $dod)
+function updateperson($personid, $forename, $surname, $shortdesc, $description, $birthname, $dob, $dod, $celebtypeid)
 {
     global $mypdo;
     $birthdate = getdate(strtotime(str_replace('/', '-',$dob)));
@@ -113,6 +113,15 @@ function updateperson($personid, $forename, $surname, $shortdesc, $description, 
     $stmtupdperson->bindParam(':personid', $personid, PDO::PARAM_INT);
     $stmtupdperson->execute();
     $updated = $stmtupdperson->rowCount();
+    
+    $sqlsocial = "UPDATE SocialMedia 
+        SET
+        celebtype = :celebtype
+        WHERE personId = :personid";
+    $stmtsocial = $mypdo->prepare($sqlsocial);
+    $stmtsocial->bindParam(':celebtype', $celebtypeid, PDO::PARAM_INT);    
+    $stmtsocial->bindParam(':personid', $personid, PDO::PARAM_INT);    
+    $stmtsocial->execute();
     return $updated;
 }
 
@@ -129,6 +138,8 @@ function processperson($action)
         $shortdesc = '';
         $dob = '';
         $dod = '';
+        $celebtypeid = 0;
+        
         if (isset($_POST['forename'])) {
             $forename = $_POST['forename'];
         }
@@ -148,6 +159,10 @@ function processperson($action)
             $dod = $_POST['dod'];
         }
 
+        if (isset($_POST['celebtypeid'])) {
+            $celebtypeid = $_POST['celebtypeid'];
+        }
+        
         if ($forename && $surname && $description) {
             $html = "";
 
@@ -168,7 +183,7 @@ function processperson($action)
     					      </script>";
                 }
             } else {
-                $updated = updateperson($personid, $forename, $surname, $shortdesc, $description, $birthname, $dob, $dod);
+                $updated = updateperson($personid, $forename, $surname, $shortdesc, $description, $birthname, $dob, $dod, $celebtypeid);
                 $name = $forename . ' ' . $surname;
                 if ($updated == 1) {
                     $html .= "<script>
