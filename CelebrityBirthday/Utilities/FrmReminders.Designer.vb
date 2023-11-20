@@ -39,18 +39,18 @@ Partial Class FrmReminders
         Me.remName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.remNote = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.BtnUpdatePerson = New System.Windows.Forms.Button()
-        Me.LblPersonId = New System.Windows.Forms.Label()
-        Me.TxtPerson = New System.Windows.Forms.TextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cbName = New System.Windows.Forms.ComboBox()
+        Me.TxtPerson = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.LblPersonId = New System.Windows.Forms.Label()
+        Me.BtnUpdatePerson = New System.Windows.Forms.Button()
         Me.RtbNote = New System.Windows.Forms.RichTextBox()
         Me.LblId = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.BtnRemove = New System.Windows.Forms.Button()
         Me.BtnAdd = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.DgvReminders, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,6 +73,8 @@ Partial Class FrmReminders
         '
         'LblStatus
         '
+        Me.LblStatus.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
+        Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
         Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.LblStatus.Name = "LblStatus"
@@ -171,39 +173,21 @@ Partial Class FrmReminders
         Me.SplitContainer1.SplitterDistance = 302
         Me.SplitContainer1.TabIndex = 3
         '
-        'BtnUpdatePerson
+        'GroupBox1
         '
-        Me.BtnUpdatePerson.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnUpdatePerson.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnUpdatePerson.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUpdatePerson.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUpdatePerson.Location = New System.Drawing.Point(232, 7)
-        Me.BtnUpdatePerson.Margin = New System.Windows.Forms.Padding(2)
-        Me.BtnUpdatePerson.Name = "BtnUpdatePerson"
-        Me.BtnUpdatePerson.Size = New System.Drawing.Size(100, 28)
-        Me.BtnUpdatePerson.TabIndex = 12
-        Me.BtnUpdatePerson.Text = "Update Person"
-        Me.BtnUpdatePerson.UseVisualStyleBackColor = True
-        '
-        'LblPersonId
-        '
-        Me.LblPersonId.AutoSize = True
-        Me.LblPersonId.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblPersonId.Location = New System.Drawing.Point(6, 54)
-        Me.LblPersonId.Name = "LblPersonId"
-        Me.LblPersonId.Size = New System.Drawing.Size(47, 17)
-        Me.LblPersonId.TabIndex = 11
-        Me.LblPersonId.Text = "Label3"
-        '
-        'TxtPerson
-        '
-        Me.TxtPerson.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtPerson.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtPerson.Location = New System.Drawing.Point(74, 21)
-        Me.TxtPerson.Name = "TxtPerson"
-        Me.TxtPerson.Size = New System.Drawing.Size(232, 24)
-        Me.TxtPerson.TabIndex = 10
+        Me.GroupBox1.Controls.Add(Me.cbName)
+        Me.GroupBox1.Controls.Add(Me.TxtPerson)
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.LblPersonId)
+        Me.GroupBox1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(5, 193)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(326, 81)
+        Me.GroupBox1.TabIndex = 13
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Person Search"
         '
         'cbName
         '
@@ -217,6 +201,16 @@ Partial Class FrmReminders
         Me.cbName.Size = New System.Drawing.Size(218, 24)
         Me.cbName.TabIndex = 9
         '
+        'TxtPerson
+        '
+        Me.TxtPerson.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtPerson.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPerson.Location = New System.Drawing.Point(74, 21)
+        Me.TxtPerson.Name = "TxtPerson"
+        Me.TxtPerson.Size = New System.Drawing.Size(232, 24)
+        Me.TxtPerson.TabIndex = 10
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -226,6 +220,30 @@ Partial Class FrmReminders
         Me.Label2.Size = New System.Drawing.Size(55, 17)
         Me.Label2.TabIndex = 8
         Me.Label2.Text = "Person:"
+        '
+        'LblPersonId
+        '
+        Me.LblPersonId.AutoSize = True
+        Me.LblPersonId.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblPersonId.Location = New System.Drawing.Point(6, 54)
+        Me.LblPersonId.Name = "LblPersonId"
+        Me.LblPersonId.Size = New System.Drawing.Size(47, 17)
+        Me.LblPersonId.TabIndex = 11
+        Me.LblPersonId.Text = "Label3"
+        '
+        'BtnUpdatePerson
+        '
+        Me.BtnUpdatePerson.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnUpdatePerson.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BtnUpdatePerson.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdatePerson.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnUpdatePerson.Location = New System.Drawing.Point(232, 7)
+        Me.BtnUpdatePerson.Margin = New System.Windows.Forms.Padding(2)
+        Me.BtnUpdatePerson.Name = "BtnUpdatePerson"
+        Me.BtnUpdatePerson.Size = New System.Drawing.Size(100, 28)
+        Me.BtnUpdatePerson.TabIndex = 12
+        Me.BtnUpdatePerson.Text = "Update Person"
+        Me.BtnUpdatePerson.UseVisualStyleBackColor = True
         '
         'RtbNote
         '
@@ -298,22 +316,6 @@ Partial Class FrmReminders
         Me.BtnAdd.TabIndex = 2
         Me.BtnAdd.Text = "Add"
         Me.BtnAdd.UseVisualStyleBackColor = True
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.cbName)
-        Me.GroupBox1.Controls.Add(Me.TxtPerson)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.LblPersonId)
-        Me.GroupBox1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(5, 193)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(326, 81)
-        Me.GroupBox1.TabIndex = 13
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Person Search"
         '
         'FrmReminders
         '
