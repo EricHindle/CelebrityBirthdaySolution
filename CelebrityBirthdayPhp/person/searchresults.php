@@ -79,7 +79,10 @@ if (login_check($mypdo) == true) {
 			    <script src="/hindleware/js/jquery.tablesorter.js"></script>
 			    <script>
 		            $(function(){
-		            $(\'#people\').tablesorter({dateFormat : "uk"});
+		            $(\'#people\').tablesorter({
+                        dateFormat : "ddmmyyyy",
+                        emptyTo: "emptyMax"
+                        });
 		            });
 		        </script>
 			</head>
