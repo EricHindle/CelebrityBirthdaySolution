@@ -57,6 +57,22 @@ if (login_check() == true) {
  	                            </div>
                             </form>
                         </div>
+                        <div class="box" style="padding:1em;padding-left:2%;padding-right:2%;margin:10px;">
+                            <h3 class="text-center">Search for Birthday</h3>
+                            <form class="form-horizontal" role="form" name ="searchname" method="post" action="birthdaylist.php">';
+    $html .= $key;
+    $html .= '
+                                <div class="form-group">
+                                    <label class="form-text" style="">Day:</label>
+                                    <input type="text" class="form-field-slim" id="birthday" name="birthday" value="' . date('d') . '"><br>
+                                    <label class="form-text" style="">Month:</label>
+                                    <input type="text" class="form-field-slim" id="birthmonth" name="birthmonth" value="' . date('m') . '"><br>
+                                </div>
+				                <div class="form-group">
+                                    <input id="submit" name="submit" type="submit" value="Search" class="btn bluebutton" style="padding:5px;width:50%;">
+ 	                            </div>
+                            </form>
+                        </div>
                     </div>
                 </body>
             </html>';

@@ -8,33 +8,37 @@ require $myPath . 'includes/db_connect.php';
 require $myPath . 'includes/functions.php';
 require $myPath . 'includes/formkey.class.php';
 sec_session_start();
-$currentPage = 'deaths';
+$currentPage = 'people';
 $formKey = new formKey();
 $key = $formKey->outputKey();
-$deathyear = date('Y');
+$birthmonth = date('m');
+$birthday = date('d');
 $persons = [];
 if (login_check($mypdo) == true) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (! isset($_POST['form_key']) || ! $formKey->validate()) {
             header('Location: ' . $myPath . 'index.php?error=1');
         } else {
-            if (isset($_POST['deathyear'])) {
-                $deathyear = trim($_POST['deathyear']);
+            if (isset($_POST['birthmonth'])) {
+                $birthmonth = trim($_POST['birthmonth']);
+            }
+            if (isset($_POST['birthday'])) {
+                $birthday = trim($_POST['birthday']);
             }
         }
     }
-    if (isset($deathyear)) {
-           
-            $personsql = "SELECT birthday, birthmonth, birthyear, forename, id, longdesc, shortdesc, surname, deathday, deathmonth, deathyear
+    if (isset($birthmonth) && isset($birthday)) {
+
+        $personsql = "SELECT birthday, birthmonth, birthyear, forename, id, longdesc, shortdesc, surname, deathday, deathmonth, deathyear
                             FROM Person
-                            WHERE (deathyear = :deathyear)
-                            ORDER BY deathyear, deathmonth, deathday, surname, forename";
-            $personquery = $mypdo->prepare($personsql);
-            $personquery->bindParam(":deathyear",$deathyear);
-            $personquery->execute();
-            $persons = $personquery->fetchAll(PDO::FETCH_ASSOC);
-            
-        }
+                            WHERE (birthmonth = :birthmonth) AND (birthday = :birthday)
+                            ORDER BY birthyear, birthmonth, birthday, surname, forename";
+        $personquery = $mypdo->prepare($personsql);
+        $personquery->bindParam(":birthmonth", $birthmonth, PDO::PARAM_INT);
+        $personquery->bindParam(":birthday", $birthday, PDO::PARAM_INT);
+        $personquery->execute();
+        $persons = $personquery->fetchAll(PDO::FETCH_ASSOC);
+    }
     $html = '';
     echo '
 		<!doctype html>
@@ -50,18 +54,18 @@ if (login_check($mypdo) == true) {
 			    <script src="/hindleware/js/jquery.tablesorter.js"></script>
 			    <script>
 		            $(function(){
-		            $(\'#deaths\').tablesorter({dateFormat : "uk"});
+		            $(\'#birthdays\').tablesorter({dateFormat : "uk"});
 		            });
 		        </script>
 			</head>
 			        
 			<body>';
     include $myPath . 'globNAV.php';
-    
+
     $html .= '
                 <div class="container">
                     <div class="box" style="padding:1em;margin:1em;">
-                        <h2 style="color:#000080";>Selected Deaths</h2>
+                        <h2 style="color:#000080";>Selected Birthdays</h2>
                     </div>
                        <div class="box" style="padding:1em;margin:10px;width:700px;">
 
@@ -69,7 +73,7 @@ if (login_check($mypdo) == true) {
     $html .= $key;
     $html .= '	
                             <div>
-    				        	<table class="table table-bordered" id="deaths">
+    				        	<table class="table table-bordered" id="birthdays">
     								<thead>
     								<tr>
     									<th style="width:10%;text-align:center;">Id</th>
@@ -84,15 +88,26 @@ if (login_check($mypdo) == true) {
 									';
     if ($persons) {
         foreach ($persons as $rs) {
+            $isdead = ($rs['deathyear'] > 0);
+            if ($isdead) {
+                $color = 'steelblue';
+            } else {
+                $color = '#000080';
+            }
             $html .= '
     									<tr>
                                             <td><button type="submit" name="personid" value="' . $rs['id'] . '">' . $rs['id'] . '</button></td>
-    										<td>' . sprintf('%02d',$rs['birthday']) . '/' . sprintf('%02d',$rs['birthmonth']) . '/' .  $rs['birthyear'] . '</td>
-    										<td>' . $rs['forename'] . '</td>
-    										<td>' . $rs['surname']  . '</td>
-    										<td>' . $rs['shortdesc'] . '</td>
-                                            <td>' . sprintf('%02d',$rs['deathday']) . '/' . sprintf('%02d',$rs['deathmonth']) . '/' .  $rs['deathyear'] . '</td>
-    									</tr>';
+    										<td>' . sprintf('%02d', $rs['birthday']) . '/' . sprintf('%02d', $rs['birthmonth']) . '/' . $rs['birthyear'] . '</td>
+    										<td style="color:' . $color . ';">' . $rs['forename'] . '</td>
+    										<td style="color:' . $color . ';">' . $rs['surname'] . '</td>
+    										<td>' . $rs['shortdesc'] . '</td>';
+            if ($rs['deathday'] == "0") {
+                $html .= '                  <td></td>';
+            } else {
+
+                $html .= '                  <td>' . sprintf('%02d', $rs['deathday']) . '/' . sprintf('%02d', $rs['deathmonth']) . '/' . $rs['deathyear'] . '</td>';
+            }
+            $html .= '  		        </tr>';
         }
     }
     $html .= '
