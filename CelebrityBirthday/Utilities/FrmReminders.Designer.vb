@@ -34,10 +34,6 @@ Partial Class FrmReminders
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.DgvReminders = New System.Windows.Forms.DataGridView()
-        Me.remId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.remPersonId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.remName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.remNote = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cbName = New System.Windows.Forms.ComboBox()
@@ -51,6 +47,11 @@ Partial Class FrmReminders
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.BtnRemove = New System.Windows.Forms.Button()
         Me.BtnAdd = New System.Windows.Forms.Button()
+        Me.remId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remPersonId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rempid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remNote = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.DgvReminders, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -102,7 +103,7 @@ Partial Class FrmReminders
         Me.DgvReminders.BackgroundColor = System.Drawing.Color.SteelBlue
         Me.DgvReminders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvReminders.ColumnHeadersVisible = False
-        Me.DgvReminders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.remId, Me.remPersonId, Me.remName, Me.remNote})
+        Me.DgvReminders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.remId, Me.remPersonId, Me.rempid, Me.remName, Me.remNote})
         Me.DgvReminders.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DgvReminders.Location = New System.Drawing.Point(0, 0)
         Me.DgvReminders.MultiSelect = False
@@ -112,38 +113,6 @@ Partial Class FrmReminders
         Me.DgvReminders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvReminders.Size = New System.Drawing.Size(298, 328)
         Me.DgvReminders.TabIndex = 2
-        '
-        'remId
-        '
-        Me.remId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.remId.HeaderText = "Id"
-        Me.remId.Name = "remId"
-        Me.remId.ReadOnly = True
-        Me.remId.Visible = False
-        Me.remId.Width = 50
-        '
-        'remPersonId
-        '
-        Me.remPersonId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.remPersonId.HeaderText = "personId"
-        Me.remPersonId.Name = "remPersonId"
-        Me.remPersonId.ReadOnly = True
-        Me.remPersonId.Width = 60
-        '
-        'remName
-        '
-        Me.remName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.remName.HeaderText = "Name"
-        Me.remName.Name = "remName"
-        Me.remName.ReadOnly = True
-        Me.remName.Width = 150
-        '
-        'remNote
-        '
-        Me.remNote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.remNote.HeaderText = "Note"
-        Me.remNote.Name = "remNote"
-        Me.remNote.ReadOnly = True
         '
         'SplitContainer1
         '
@@ -317,6 +286,47 @@ Partial Class FrmReminders
         Me.BtnAdd.Text = "Add"
         Me.BtnAdd.UseVisualStyleBackColor = True
         '
+        'remId
+        '
+        Me.remId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.remId.HeaderText = "Id"
+        Me.remId.Name = "remId"
+        Me.remId.ReadOnly = True
+        Me.remId.Visible = False
+        Me.remId.Width = 50
+        '
+        'remPersonId
+        '
+        Me.remPersonId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.remPersonId.HeaderText = "personId"
+        Me.remPersonId.Name = "remPersonId"
+        Me.remPersonId.ReadOnly = True
+        Me.remPersonId.Width = 60
+        '
+        'rempid
+        '
+        Me.rempid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.rempid.HeaderText = "pid"
+        Me.rempid.Name = "rempid"
+        Me.rempid.ReadOnly = True
+        Me.rempid.Visible = False
+        Me.rempid.Width = 20
+        '
+        'remName
+        '
+        Me.remName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.remName.HeaderText = "Name"
+        Me.remName.Name = "remName"
+        Me.remName.ReadOnly = True
+        Me.remName.Width = 150
+        '
+        'remNote
+        '
+        Me.remNote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.remNote.HeaderText = "Note"
+        Me.remNote.Name = "remNote"
+        Me.remNote.ReadOnly = True
+        '
         'FrmReminders
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
@@ -361,10 +371,11 @@ Partial Class FrmReminders
     Friend WithEvents TxtPerson As TextBox
     Friend WithEvents LblPersonId As Label
     Friend WithEvents LblStatus As ToolStripStatusLabel
-    Friend WithEvents remId As DataGridViewTextBoxColumn
-    Friend WithEvents remPersonId As DataGridViewTextBoxColumn
-    Friend WithEvents remName As DataGridViewTextBoxColumn
-    Friend WithEvents remNote As DataGridViewTextBoxColumn
     Friend WithEvents BtnUpdatePerson As Button
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents remId As DataGridViewTextBoxColumn
+    Friend WithEvents remPersonId As DataGridViewTextBoxColumn
+    Friend WithEvents rempid As DataGridViewTextBoxColumn
+    Friend WithEvents remName As DataGridViewTextBoxColumn
+    Friend WithEvents remNote As DataGridViewTextBoxColumn
 End Class

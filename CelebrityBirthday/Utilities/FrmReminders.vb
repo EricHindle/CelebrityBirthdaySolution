@@ -96,7 +96,8 @@ Public Class FrmReminders
             LblPersonId.Text = CStr(_personId)
             RtbNote.Text = _note
             BtnUpdatePerson.Enabled = True
-            LogUtil.Info("Selected reminder for " & TxtPerson.Text, MyBase.Name)
+            Dim _person As String = If(_personId < 0, RtbNote.Text, TxtPerson.Text)
+            LogUtil.Info("Selected reminder for " & _person, MyBase.Name)
             isSelecting = False
         Else
             ClearForm()
@@ -112,6 +113,7 @@ Public Class FrmReminders
             Dim orow As DataGridViewRow = DgvReminders.Rows(DgvReminders.Rows.Add())
             orow.Cells(remId.Name).Value = _rem.Id
             orow.Cells(remNote.Name).Value = _rem.Note.Substring(0, Math.Min(100, _rem.Note.Length))
+            orow.Cells(rempid.Name).Value = _rem.Person.Id
             If _rem.Person.Id >= 0 Then
                 orow.Cells(remPersonId.Name).Value = _rem.Person.Id
                 orow.Cells(remName.Name).Value = _rem.Person.Name
@@ -133,6 +135,9 @@ Public Class FrmReminders
     Private Sub BtnRemove_Click(sender As Object, e As EventArgs) Handles BtnRemove.Click
         If DgvReminders.SelectedRows.Count = 1 Then
             Dim _name As String = DgvReminders.SelectedRows(0).Cells(remName.Name).Value
+            If DgvReminders.SelectedRows(0).Cells(rempid.Name).Value < 0 Then
+                _name = DgvReminders.SelectedRows(0).Cells(remNote.Name).Value
+            End If
             Dim _id As Integer = DgvReminders.SelectedRows(0).Cells(remId.Name).Value
             DeleteReminder(_id)
             ShowStatus("Removed reminder for " & _name, LblStatus, True, MyBase.Name)
@@ -177,16 +182,37 @@ Public Class FrmReminders
 
     Private Sub BtnUpdatePerson_Click(sender As Object, e As EventArgs) Handles BtnUpdatePerson.Click
         If DgvReminders.SelectedRows.Count > 0 Then
-            If IsNumeric(DgvReminders.SelectedRows(0).Cells(remPersonId.Name).Value) Then
+            If DgvReminders.SelectedRows(0).Cells(rempid.Name).Value >= 0 Then
                 Me.TopMost = False
                 Using _update As New FrmUpdateDatabase
-                    _update.PersonId = DgvReminders.SelectedRows(0).Cells(remPersonId.Name).Value
+                    _update.PersonId = DgvReminders.SelectedRows(0).Cells(rempid.Name).Value
                     _update.ShowDialog()
                 End Using
             Else
                 ShowStatus("Not linked to a person", LblStatus,, True)
             End If
         End If
+    End Sub
+
+    Private Sub DgvReminders_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvReminders.CellDoubleClick
+        Dim oName As String = DgvReminders.Rows(e.RowIndex).Cells(remName.Name).Value
+        Dim oPid As Integer = DgvReminders.Rows(e.RowIndex).Cells(rempid.Name).Value
+        If oPid < 0 Then
+            Dim oNote As String = DgvReminders.Rows(e.RowIndex).Cells(remNote.Name).Value
+            Dim oNotePart As String() = Split(oNote, ".", 2)
+            Dim oNamefromNote As String = StrConv(oNotePart(0).Trim, VbStrConv.ProperCase).Replace(" ", "_")
+            oName = oNamefromNote
+        End If
+        ShowProgress("Opening Wikipedia for " & oName, LblStatus, True, MyBase.Name)
+        Try
+            Process.Start(My.Resources.WIKIURL & oName)
+        Catch ex As InvalidOperationException
+            ShowStatus("Wikipedia failed", LblStatus, False, True)
+            ShowStatus("Wikipedia failed " & oName,,, MyBase.Name, ex)
+        Catch ex As ComponentModel.Win32Exception
+            ShowStatus("Wikipedia failed", LblStatus, False, True)
+            ShowStatus("Wikipedia failed " & oName,,, MyBase.Name, ex)
+        End Try
     End Sub
 #End Region
 End Class
