@@ -5,6 +5,8 @@
 ' Author Eric Hindle
 '
 
+Imports System.Web.UI
+
 Public Class Person
     Implements IDisposable
 #Region "properties"
@@ -203,7 +205,7 @@ Public Class Person
                 Try
                     _dod = New Date(_birthYear, _birthMonth, _birthDay)
                 Catch ex As ArgumentOutOfRangeException
-                    LogUtil.Problem(Name & "Invalid date of death", psub)
+                    LogUtil.Problem(Name & "Invalid date of death", Psub)
                 End Try
             End If
             Return _dod
@@ -313,25 +315,34 @@ Public Class Person
         InitialisePerson()
         If oRow IsNot Nothing Then
             _id = oRow.id
-            _forename = oRow.forename
+            _forename = If(oRow.IsforenameNull(), "", oRow.forename)
             _surname = oRow.surname
-            _description = oRow.longdesc
-            _ShortDesc = oRow.shortdesc
+            _description = If(oRow.IslongdescNull(), "", oRow.longdesc)
+            _ShortDesc = If(oRow.IsshortdescNull(), "", oRow.shortdesc)
             _birthDay = oRow.birthday
             _birthMonth = oRow.birthmonth
             _birthYear = oRow.birthyear
             _deathYear = oRow.deathyear
-            _deathMonth = oRow.deathmonth
-            _deathday = oRow.deathday
-            _birthPlace = oRow.birthplace
-            _birthName = oRow.birthname
+            _deathMonth = If(oRow.IsdeathmonthNull(), 0, oRow.deathmonth)
+            _deathday = If(oRow.IsdeathdayNull(), 0, oRow.deathday)
+            _birthPlace = If(oRow.IsbirthplaceNull(), "", oRow.birthplace)
+            _birthName = If(oRow.IsbirthnameNull(), "", oRow.birthname)
+            Dim _imgFilename As String = If(oRow.IsimgfilenameNull(), "", oRow.imgfilename)
+            Dim _imgFileType As String = If(oRow.IsimgfiletypeNull(), "", oRow.imgfiletype)
+            Dim _imgLoadMonth As String = If(oRow.IsimgloadmonthNull(), "00", oRow.imgloadmonth)
+            Dim _imgLoadYr As String = If(oRow.IsimgloadyrNull(), "00", oRow.imgloadyr)
+            Dim _twitterHandle As String = If(oRow.IstwitterHandleNull, "", oRow.twitterHandle)
+            Dim _isNoTweet As Boolean = If(oRow.IsnoTweetNull, True, oRow.noTweet)
+            Dim _wikiId As String = If(oRow.IswikiIdNull, "", oRow.wikiId)
+            Dim _botsd As Integer = If(oRow.IsbotsdNull, -1, oRow.botsd)
+            Dim _isTwin As Boolean = If(oRow.IsisTwinNull, False, oRow.isTwin)
             If isIncludeImage Then
-                _image = New ImageIdentity(oRow.id, oRow.imgfilename, oRow.imgfiletype, oRow.imgloadmonth, oRow.imgloadyr)
+                _image = New ImageIdentity(oRow.id, _imgFilename, _imgFileType, _imgLoadMonth, _imgLoadYr)
             Else
                 _image = New ImageIdentity()
             End If
             _sortSeq = oRow.sortseq
-            _social = New SocialMedia(oRow.id, oRow.twitterHandle, oRow.noTweet, oRow.wikiId, oRow.botsd, oRow.isTwin)
+            _social = New SocialMedia(oRow.id, _twitterHandle, _isNoTweet, _wikiId, _botsd, _isTwin)
         End If
         _unsavedChanges = False
     End Sub

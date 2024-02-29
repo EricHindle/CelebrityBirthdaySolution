@@ -9,7 +9,6 @@ Imports System.Collections.ObjectModel
 Imports System.Data.Common
 Imports System.Drawing
 Imports System.IO
-Imports System.Net.Configuration
 Imports System.Text
 Imports Tweetinvi
 Imports Tweetinvi.Core.Web
