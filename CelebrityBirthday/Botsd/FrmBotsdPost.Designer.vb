@@ -494,7 +494,7 @@ Partial Class FrmBotsdPost
         Me.lblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(5, 17)
+        Me.lblStatus.Size = New System.Drawing.Size(10, 17)
         '
         'BtnImportList
         '
@@ -566,7 +566,7 @@ Partial Class FrmBotsdPost
         Me.BtnClearDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClearDesc.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClearDesc.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClearDesc.Location = New System.Drawing.Point(558, 463)
+        Me.BtnClearDesc.Location = New System.Drawing.Point(562, 463)
         Me.BtnClearDesc.Name = "BtnClearDesc"
         Me.BtnClearDesc.Size = New System.Drawing.Size(58, 25)
         Me.BtnClearDesc.TabIndex = 79
@@ -633,7 +633,7 @@ Partial Class FrmBotsdPost
         Me.CbSplit.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CbSplit.FormattingEnabled = True
         Me.CbSplit.Items.AddRange(New Object() {" for ", " and ", " from ", " who", " of ", " in ", ".", ",", " best "})
-        Me.CbSplit.Location = New System.Drawing.Point(558, 436)
+        Me.CbSplit.Location = New System.Drawing.Point(562, 437)
         Me.CbSplit.Name = "CbSplit"
         Me.CbSplit.Size = New System.Drawing.Size(59, 22)
         Me.CbSplit.TabIndex = 73
@@ -747,6 +747,7 @@ Partial Class FrmBotsdPost
         '
         'BtnOpenUrl
         '
+        Me.BtnOpenUrl.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnOpenUrl.Location = New System.Drawing.Point(18, 634)
         Me.BtnOpenUrl.Name = "BtnOpenUrl"
         Me.BtnOpenUrl.Size = New System.Drawing.Size(45, 31)
