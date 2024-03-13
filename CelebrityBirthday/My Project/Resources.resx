@@ -250,4 +250,7 @@
   <data name="WPOPENERR" xml:space="preserve">
     <value>Error opening WordPress </value>
   </data>
+  <data name="BOTSD_URL" xml:space="preserve">
+    <value>https://bornonthesameday.wordpress.com/</value>
+  </data>
 </root>

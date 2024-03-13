@@ -430,6 +430,8 @@ Public NotInheritable Class FrmBotsd
                 DisplayException(MethodBase.GetCurrentMethod(), ex3, "Record value")
             End Try
         Next
+        Dim thisUrl As String = My.Resources.BOTSD_URL & "/index/"
+        OpenWpPost(thisUrl)
         Using _text As New FrmText
             _text.rtbText.Text = indexText.ToString
             _text.ShowDialog()
@@ -752,11 +754,17 @@ Public NotInheritable Class FrmBotsd
             Next
             .Append(WP_END_PARA).Append(vbCrLf)
         End With
-        Using oTextForm As New FrmText
-            oTextForm.rtbText.Text = sb.ToString
-            oTextForm.ShowDialog()
-        End Using
-        ClearStatus(LblStatus)
+        If ThisMonth = 0 Then
+            WriteTrace("No date selected", True, False)
+        Else
+            Dim thisUrl As String = My.Resources.BOTSD_URL & MonthName(ThisMonth) & "/"
+            OpenWpPost(thisUrl)
+            Using oTextForm As New FrmText
+                oTextForm.rtbText.Text = sb.ToString
+                oTextForm.ShowDialog()
+            End Using
+            ClearStatus(LblStatus)
+        End If
     End Sub
     Private Function GetImageLink(oPerson As Person) As String
         Dim oImage As ImageIdentity = oPerson.Image
@@ -861,25 +869,12 @@ Public NotInheritable Class FrmBotsd
         Dim sb As New StringBuilder
         Dim titleSb As New StringBuilder
         Dim thisWpNumber As String = DgvPairs.SelectedRows(0).Cells(pairWpNo.Name).Value
-        Dim thisUrl As String = DgvPairs.SelectedRows(0).Cells(pairUrl.Name).Value
         Dim thisYear As String = DgvPairs.SelectedRows(0).Cells(pairYear.Name).Value
         If String.IsNullOrEmpty(thisWpNumber) Then
             thisWpNumber = CStr(WpNumber)
         End If
-
-        Dim openUrl As String = My.Resources.WPPOSTURL
-
-        If Not String.IsNullOrEmpty(thisUrl) Then
-            openUrl = thisUrl
-        End If
-
-        Try
-            Process.Start(openUrl)
-        Catch ex As InvalidOperationException
-            ShowStatus(My.Resources.WPOPENERR & openUrl, LblStatus, True, MyBase.Name, ex)
-        Catch ex As ComponentModel.Win32Exception
-            ShowStatus(My.Resources.WPOPENERR & openUrl, LblStatus, True, MyBase.Name, ex)
-        End Try
+        Dim thisUrl As String = DgvPairs.SelectedRows(0).Cells(pairUrl.Name).Value
+        OpenWpPost(thisUrl)
 
         Try
             titleSb.Append("#"c).Append(thisWpNumber).Append(" "c)
@@ -1013,6 +1008,23 @@ Public NotInheritable Class FrmBotsd
             DisplayException(MethodBase.GetCurrentMethod, ex, "Db")
         End Try
     End Sub
+
+    Private Sub OpenWpPost(thisUrl As String)
+        Dim openUrl As String = My.Resources.WPPOSTURL
+
+        If Not String.IsNullOrEmpty(thisUrl) Then
+            openUrl = thisUrl
+        End If
+
+        Try
+            Process.Start(openUrl)
+        Catch ex As InvalidOperationException
+            ShowStatus(My.Resources.WPOPENERR & openUrl, LblStatus, True, MyBase.Name, ex)
+        Catch ex As ComponentModel.Win32Exception
+            ShowStatus(My.Resources.WPOPENERR & openUrl, LblStatus, True, MyBase.Name, ex)
+        End Try
+    End Sub
+
     Private Shared Function GetIndexEntry(oRow As CelebrityBirthdayDataSet.BornOnTheSameDayRow) As String
         Dim entry As New StringBuilder
         With entry

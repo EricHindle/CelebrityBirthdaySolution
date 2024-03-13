@@ -338,6 +338,10 @@ Public NotInheritable Class FrmBotsdPost
         TxtDesc.Text = ""
     End Sub
     Private Sub BtnOpenUrl_Click(sender As Object, e As EventArgs) Handles BtnOpenUrl.Click
+        OpenWpPost()
+    End Sub
+
+    Private Sub OpenWpPost()
         Dim openUrl As String = My.Resources.WPPOSTURL
 
         If Not String.IsNullOrEmpty(TxtUrl.Text) Then
@@ -587,6 +591,47 @@ Public NotInheritable Class FrmBotsdPost
     End Sub
     Private Sub DisplayAndLog(pText As String, isMessagebox As Boolean)
         ShowProgress(pText, lblStatus, True, MyBase.Name,, isMessagebox)
+    End Sub
+
+    Private Sub BtnCheckList1_Click(sender As Object, e As EventArgs) Handles BtnCheckList1.Click
+        TxtTitle.SelectAll()
+        TxtTitle.Copy()
+    End Sub
+
+    Private Sub BtnCheckList2_Click(sender As Object, e As EventArgs) Handles BtnCheckList2.Click
+        RtbText.SelectAll()
+        RtbText.Copy()
+    End Sub
+
+    Private Sub BtnCheckList3_Click(sender As Object, e As EventArgs) Handles BtnCheckList3.Click
+        TxtUrl.Text = Clipboard.GetText
+    End Sub
+
+    Private Sub BtnCheckList4_Click(sender As Object, e As EventArgs) Handles BtnCheckList4.Click
+        DialogResult = System.Windows.Forms.DialogResult.OK
+        Close()
+    End Sub
+
+    Private Sub BtnCheckList5_Click(sender As Object, e As EventArgs) Handles BtnCheckList5.Click
+        Dim sUrl As String = My.Resources.WIKI_SEARCH.Replace("~date", LblDay.Text & "+" & LblMonth.Text & "+" & LblYear.Text)
+        Process.Start(sUrl)
+    End Sub
+
+    Private Sub BtnCheckList6_Click(sender As Object, e As EventArgs) Handles BtnCheckList6.Click
+        Dim sUrl As String = My.Resources.WIKI_SEARCH.Replace("~date", LblMonth.Text & "+" & LblDay.Text & "%2C+" & LblYear.Text)
+        Process.Start(sUrl)
+    End Sub
+
+    Private Sub BtnCheckList7_Click(sender As Object, e As EventArgs) Handles BtnCheckList7.Click
+        SaveList()
+        Dim alsosText As String = GenerateAlsos()
+        RtbText.Text = oPostText & alsosText
+        RtbText.SelectAll()
+        RtbText.Copy()
+    End Sub
+
+    Private Sub BtnCheckList8_Click(sender As Object, e As EventArgs) Handles BtnCheckList8.Click
+        OpenWpPost()
     End Sub
 #End Region
 End Class

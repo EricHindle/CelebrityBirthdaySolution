@@ -923,7 +923,7 @@ Partial Class FrmBotsd
         Me.BtnGenWp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnGenWp.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnGenWp.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnGenWp.Location = New System.Drawing.Point(12, 409)
+        Me.BtnGenWp.Location = New System.Drawing.Point(16, 452)
         Me.BtnGenWp.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnGenWp.Name = "BtnGenWp"
         Me.BtnGenWp.Size = New System.Drawing.Size(138, 41)
@@ -962,7 +962,7 @@ Partial Class FrmBotsd
         Me.BtnWpPost.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnWpPost.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnWpPost.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnWpPost.Location = New System.Drawing.Point(12, 457)
+        Me.BtnWpPost.Location = New System.Drawing.Point(16, 404)
         Me.BtnWpPost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnWpPost.Name = "BtnWpPost"
         Me.BtnWpPost.Size = New System.Drawing.Size(138, 41)
