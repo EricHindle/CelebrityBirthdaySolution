@@ -88,5 +88,12 @@ Public Class FrmMenu2
         End Using
         Show()
     End Sub
+
+    Private Sub BtnBackup_Click(sender As Object, e As EventArgs) Handles BtnBackup.Click
+        Using _backup As New FrmBackup
+            LogUtil.Info("Backup", MyBase.Name)
+            _backup.ShowDialog()
+        End Using
+    End Sub
 #End Region
 End Class

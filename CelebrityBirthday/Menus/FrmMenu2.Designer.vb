@@ -33,6 +33,7 @@ Partial Class FrmMenu2
         Me.BtnViewLog = New System.Windows.Forms.Button()
         Me.BtnOptions = New System.Windows.Forms.Button()
         Me.BtnReminders = New System.Windows.Forms.Button()
+        Me.BtnBackup = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -150,6 +151,18 @@ Partial Class FrmMenu2
         Me.BtnReminders.Text = "Reminders"
         Me.BtnReminders.UseVisualStyleBackColor = True
         '
+        'BtnBackup
+        '
+        Me.BtnBackup.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnBackup.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBackup.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnBackup.Location = New System.Drawing.Point(189, 389)
+        Me.BtnBackup.Name = "BtnBackup"
+        Me.BtnBackup.Size = New System.Drawing.Size(151, 49)
+        Me.BtnBackup.TabIndex = 28
+        Me.BtnBackup.Text = "Backup"
+        Me.BtnBackup.UseVisualStyleBackColor = True
+        '
         'FrmMenu2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 19.0!)
@@ -157,6 +170,7 @@ Partial Class FrmMenu2
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(352, 552)
         Me.ControlBox = False
+        Me.Controls.Add(Me.BtnBackup)
         Me.Controls.Add(Me.BtnReminders)
         Me.Controls.Add(Me.BtnDeadList)
         Me.Controls.Add(Me.BtnOptions)
@@ -189,4 +203,5 @@ Partial Class FrmMenu2
     Friend WithEvents BtnDeadList As Button
     Friend WithEvents BtnOptions As Button
     Friend WithEvents BtnReminders As Button
+    Friend WithEvents BtnBackup As Button
 End Class
