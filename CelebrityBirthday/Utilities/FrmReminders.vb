@@ -140,6 +140,7 @@ Public Class FrmReminders
             End If
             Dim _id As Integer = DgvReminders.SelectedRows(0).Cells(remId.Name).Value
             DeleteReminder(_id)
+            ClearForm()
             ShowStatus("Removed reminder for " & _name, LblStatus, True, MyBase.Name)
             LoadReminders()
         End If
