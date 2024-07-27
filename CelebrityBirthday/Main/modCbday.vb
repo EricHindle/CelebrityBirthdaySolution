@@ -36,8 +36,9 @@ Friend Module modCbday
                                               ByVal lParam As Int32) As Long
     End Class
 #End Region
-#Region "private variables"
+#Region "Common variables"
     Dim _lookup As Dictionary(Of Char, String)
+    Public oReminders As FrmReminders
 #End Region
 #Region "subroutines"
     Public Sub GetFormPos(ByRef oForm As Form, ByVal sPos As String)
@@ -410,9 +411,11 @@ Friend Module modCbday
     Public Function GetWikiText(_sentences As Integer, _forename As String, _surname As String, Optional wikiId As String = "") As String
         Dim fullName As String = If(String.IsNullOrEmpty(_forename), "", _forename.Trim & " ") & _surname.Trim
         Dim _searchName As String = If(String.IsNullOrEmpty(wikiId), fullName, wikiId)
-        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _sentences))
-        Dim extract As String = GetExtractFromResponse(_response)
-        Return extract
+        Return GetWikiText(_sentences, _searchName)
+    End Function
+    Public Function GetWikiText(_sentences As Integer, wikiId As String) As String
+        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(wikiId, _sentences))
+        Return GetExtractFromResponse(_response)
     End Function
     Public Function GetWikiExtract(_searchName As String, sentences As Integer) As String
         Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, sentences))

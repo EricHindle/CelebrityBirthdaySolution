@@ -34,7 +34,17 @@ Partial Class FrmReminders
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.DgvReminders = New System.Windows.Forms.DataGridView()
+        Me.remId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remPersonId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rempid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remNote = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.BtnPasteDob = New System.Windows.Forms.Button()
+        Me.BtnPasteName = New System.Windows.Forms.Button()
+        Me.TxtName = New System.Windows.Forms.TextBox()
+        Me.DtpDob = New System.Windows.Forms.DateTimePicker()
+        Me.BtnAddPerson = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cbName = New System.Windows.Forms.ComboBox()
         Me.TxtPerson = New System.Windows.Forms.TextBox()
@@ -47,11 +57,7 @@ Partial Class FrmReminders
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.BtnRemove = New System.Windows.Forms.Button()
         Me.BtnAdd = New System.Windows.Forms.Button()
-        Me.remId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.remPersonId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.rempid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.remName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.remNote = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TxtWiki = New System.Windows.Forms.TextBox()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.DgvReminders, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,7 +72,7 @@ Partial Class FrmReminders
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 332)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 449)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(644, 22)
         Me.StatusStrip1.TabIndex = 0
@@ -88,7 +94,7 @@ Partial Class FrmReminders
         Me.BtnClose.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClose.Location = New System.Drawing.Point(258, 279)
+        Me.BtnClose.Location = New System.Drawing.Point(258, 396)
         Me.BtnClose.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(73, 38)
@@ -111,8 +117,49 @@ Partial Class FrmReminders
         Me.DgvReminders.ReadOnly = True
         Me.DgvReminders.RowHeadersVisible = False
         Me.DgvReminders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvReminders.Size = New System.Drawing.Size(298, 328)
+        Me.DgvReminders.Size = New System.Drawing.Size(298, 445)
         Me.DgvReminders.TabIndex = 2
+        '
+        'remId
+        '
+        Me.remId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.remId.HeaderText = "Id"
+        Me.remId.Name = "remId"
+        Me.remId.ReadOnly = True
+        Me.remId.Visible = False
+        Me.remId.Width = 50
+        '
+        'remPersonId
+        '
+        Me.remPersonId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.remPersonId.HeaderText = "personId"
+        Me.remPersonId.Name = "remPersonId"
+        Me.remPersonId.ReadOnly = True
+        Me.remPersonId.Width = 60
+        '
+        'rempid
+        '
+        Me.rempid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.rempid.HeaderText = "pid"
+        Me.rempid.Name = "rempid"
+        Me.rempid.ReadOnly = True
+        Me.rempid.Visible = False
+        Me.rempid.Width = 20
+        '
+        'remName
+        '
+        Me.remName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.remName.HeaderText = "Name"
+        Me.remName.Name = "remName"
+        Me.remName.ReadOnly = True
+        Me.remName.Width = 150
+        '
+        'remNote
+        '
+        Me.remNote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.remNote.HeaderText = "Note"
+        Me.remNote.Name = "remNote"
+        Me.remNote.ReadOnly = True
         '
         'SplitContainer1
         '
@@ -129,6 +176,12 @@ Partial Class FrmReminders
         '
         'SplitContainer1.Panel2
         '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.TxtWiki)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.BtnPasteDob)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.BtnPasteName)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.TxtName)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.DtpDob)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.BtnAddPerson)
         Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox1)
         Me.SplitContainer1.Panel2.Controls.Add(Me.BtnUpdatePerson)
         Me.SplitContainer1.Panel2.Controls.Add(Me.RtbNote)
@@ -138,9 +191,67 @@ Partial Class FrmReminders
         Me.SplitContainer1.Panel2.Controls.Add(Me.BtnRemove)
         Me.SplitContainer1.Panel2.Controls.Add(Me.BtnAdd)
         Me.SplitContainer1.Panel2.Controls.Add(Me.BtnClose)
-        Me.SplitContainer1.Size = New System.Drawing.Size(644, 332)
+        Me.SplitContainer1.Size = New System.Drawing.Size(644, 449)
         Me.SplitContainer1.SplitterDistance = 302
         Me.SplitContainer1.TabIndex = 3
+        '
+        'BtnPasteDob
+        '
+        Me.BtnPasteDob.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnPasteDob.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.paste
+        Me.BtnPasteDob.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.BtnPasteDob.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue
+        Me.BtnPasteDob.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnPasteDob.Location = New System.Drawing.Point(301, 253)
+        Me.BtnPasteDob.Name = "BtnPasteDob"
+        Me.BtnPasteDob.Size = New System.Drawing.Size(26, 23)
+        Me.BtnPasteDob.TabIndex = 18
+        Me.BtnPasteDob.UseVisualStyleBackColor = True
+        '
+        'BtnPasteName
+        '
+        Me.BtnPasteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnPasteName.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.paste
+        Me.BtnPasteName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.BtnPasteName.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue
+        Me.BtnPasteName.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnPasteName.Location = New System.Drawing.Point(301, 221)
+        Me.BtnPasteName.Name = "BtnPasteName"
+        Me.BtnPasteName.Size = New System.Drawing.Size(26, 23)
+        Me.BtnPasteName.TabIndex = 17
+        Me.BtnPasteName.UseVisualStyleBackColor = True
+        '
+        'TxtName
+        '
+        Me.TxtName.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TxtName.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtName.Location = New System.Drawing.Point(113, 222)
+        Me.TxtName.Name = "TxtName"
+        Me.TxtName.Size = New System.Drawing.Size(182, 22)
+        Me.TxtName.TabIndex = 16
+        '
+        'DtpDob
+        '
+        Me.DtpDob.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DtpDob.CalendarFont = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DtpDob.Location = New System.Drawing.Point(113, 251)
+        Me.DtpDob.Name = "DtpDob"
+        Me.DtpDob.Size = New System.Drawing.Size(168, 24)
+        Me.DtpDob.TabIndex = 15
+        '
+        'BtnAddPerson
+        '
+        Me.BtnAddPerson.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnAddPerson.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BtnAddPerson.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAddPerson.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnAddPerson.Location = New System.Drawing.Point(6, 231)
+        Me.BtnAddPerson.Margin = New System.Windows.Forms.Padding(2)
+        Me.BtnAddPerson.Name = "BtnAddPerson"
+        Me.BtnAddPerson.Size = New System.Drawing.Size(93, 38)
+        Me.BtnAddPerson.TabIndex = 14
+        Me.BtnAddPerson.Text = "Add person to database"
+        Me.BtnAddPerson.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -151,7 +262,7 @@ Partial Class FrmReminders
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.LblPersonId)
         Me.GroupBox1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(5, 193)
+        Me.GroupBox1.Location = New System.Drawing.Point(5, 310)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(326, 81)
         Me.GroupBox1.TabIndex = 13
@@ -221,7 +332,7 @@ Partial Class FrmReminders
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RtbNote.Location = New System.Drawing.Point(5, 40)
         Me.RtbNote.Name = "RtbNote"
-        Me.RtbNote.Size = New System.Drawing.Size(326, 147)
+        Me.RtbNote.Size = New System.Drawing.Size(326, 175)
         Me.RtbNote.TabIndex = 7
         Me.RtbNote.Text = ""
         '
@@ -248,91 +359,59 @@ Partial Class FrmReminders
         '
         Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClear.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnClear.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClear.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnClear.Location = New System.Drawing.Point(181, 279)
+        Me.BtnClear.Location = New System.Drawing.Point(181, 396)
         Me.BtnClear.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(73, 38)
         Me.BtnClear.TabIndex = 4
-        Me.BtnClear.Text = "Clear"
+        Me.BtnClear.Text = "Clear Form"
         Me.BtnClear.UseVisualStyleBackColor = True
         '
         'BtnRemove
         '
         Me.BtnRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnRemove.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnRemove.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRemove.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRemove.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRemove.Location = New System.Drawing.Point(82, 279)
+        Me.BtnRemove.Location = New System.Drawing.Point(82, 396)
         Me.BtnRemove.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnRemove.Name = "BtnRemove"
         Me.BtnRemove.Size = New System.Drawing.Size(73, 38)
         Me.BtnRemove.TabIndex = 3
-        Me.BtnRemove.Text = "Remove"
+        Me.BtnRemove.Text = "Remove Reminder"
         Me.BtnRemove.UseVisualStyleBackColor = True
         '
         'BtnAdd
         '
         Me.BtnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnAdd.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BtnAdd.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAdd.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAdd.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnAdd.Location = New System.Drawing.Point(5, 279)
+        Me.BtnAdd.Location = New System.Drawing.Point(5, 396)
         Me.BtnAdd.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(73, 38)
         Me.BtnAdd.TabIndex = 2
-        Me.BtnAdd.Text = "Add"
+        Me.BtnAdd.Text = "Add Reminder"
         Me.BtnAdd.UseVisualStyleBackColor = True
         '
-        'remId
+        'TxtWiki
         '
-        Me.remId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.remId.HeaderText = "Id"
-        Me.remId.Name = "remId"
-        Me.remId.ReadOnly = True
-        Me.remId.Visible = False
-        Me.remId.Width = 50
-        '
-        'remPersonId
-        '
-        Me.remPersonId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.remPersonId.HeaderText = "personId"
-        Me.remPersonId.Name = "remPersonId"
-        Me.remPersonId.ReadOnly = True
-        Me.remPersonId.Width = 60
-        '
-        'rempid
-        '
-        Me.rempid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.rempid.HeaderText = "pid"
-        Me.rempid.Name = "rempid"
-        Me.rempid.ReadOnly = True
-        Me.rempid.Visible = False
-        Me.rempid.Width = 20
-        '
-        'remName
-        '
-        Me.remName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.remName.HeaderText = "Name"
-        Me.remName.Name = "remName"
-        Me.remName.ReadOnly = True
-        Me.remName.Width = 150
-        '
-        'remNote
-        '
-        Me.remNote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.remNote.HeaderText = "Note"
-        Me.remNote.Name = "remNote"
-        Me.remNote.ReadOnly = True
+        Me.TxtWiki.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TxtWiki.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtWiki.Location = New System.Drawing.Point(113, 282)
+        Me.TxtWiki.Name = "TxtWiki"
+        Me.TxtWiki.Size = New System.Drawing.Size(182, 22)
+        Me.TxtWiki.TabIndex = 19
         '
         'FrmReminders
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(644, 354)
+        Me.ClientSize = New System.Drawing.Size(644, 471)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -378,4 +457,10 @@ Partial Class FrmReminders
     Friend WithEvents rempid As DataGridViewTextBoxColumn
     Friend WithEvents remName As DataGridViewTextBoxColumn
     Friend WithEvents remNote As DataGridViewTextBoxColumn
+    Friend WithEvents BtnPasteName As Button
+    Friend WithEvents TxtName As TextBox
+    Friend WithEvents DtpDob As DateTimePicker
+    Friend WithEvents BtnAddPerson As Button
+    Friend WithEvents BtnPasteDob As Button
+    Friend WithEvents TxtWiki As TextBox
 End Class

@@ -81,6 +81,9 @@ Public Class FrmMenu
     End Sub
     Private Sub FrmMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
+        If oReminders IsNot Nothing AndAlso Not oReminders.IsDisposed Then
+            oReminders.Close()
+        End If
     End Sub
     Private Sub FrmMenu_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Refresh()
@@ -153,13 +156,15 @@ Public Class FrmMenu
             LogUtil.Fatal("Database not available", MyBase.Name)
             Close()
         End If
-        Using _rems As New FrmReminders
+
+        If oReminders Is Nothing OrElse oReminders.IsDisposed Then
+            oReminders = New FrmReminders
+        End If
+        If oReminders.LoadReminders > 0 Then
             LogUtil.Info("Reminders", MyBase.Name)
-            If _rems.LoadReminders > 0 Then
-                _rems.TopMost = True
-                _rems.ShowDialog()
-            End If
-        End Using
+            oReminders.TopMost = True
+            oReminders.Show()
+        End If
     End Sub
 
     Private Sub BtnDeadList_Click(sender As Object, e As EventArgs) Handles BtnDeadList.Click

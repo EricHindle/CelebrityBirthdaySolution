@@ -23,6 +23,33 @@ Public NotInheritable Class FrmUpdateDatabase
 #End Region
 #Region "properties"
     Private _personId As Integer
+    Private _newPersonName As String
+    Private _newPersonDob As Date
+    Private _newPersonWiki As String
+    Public Property NewPersonWiki() As String
+        Get
+            Return _newPersonWiki
+        End Get
+        Set(ByVal value As String)
+            _newPersonWiki = value
+        End Set
+    End Property
+    Public Property NewPersonDob() As Date
+        Get
+            Return _newPersonDob
+        End Get
+        Set(ByVal value As Date)
+            _newPersonDob = value
+        End Set
+    End Property
+    Public Property NewPersonName() As String
+        Get
+            Return _newPersonName
+        End Get
+        Set(ByVal value As String)
+            _newPersonName = value
+        End Set
+    End Property
     Public Property PersonId() As Integer
         Get
             Return _personId
@@ -425,6 +452,8 @@ Public NotInheritable Class FrmUpdateDatabase
         ResetBackgroundColors()
         If _personId > 0 Then
             LoadScreenFromId(_personId)
+        ElseIf Not String.IsNullOrWhiteSpace(_newPersonName) Then
+            loadscreenfromname
         End If
     End Sub
     Private Sub BtnCreateShortDesc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateShortDesc.Click
@@ -439,14 +468,18 @@ Public NotInheritable Class FrmUpdateDatabase
         End If
     End Sub
     Private Sub BtnSplitName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSplitName.Click
+        SplitName()
+    End Sub
+
+    Private Sub SplitName()
         txtName.Text = txtName.Text.Trim
         Dim names As String() = Split(txtName.Text, " ")
         txtSurname.Text = names(UBound(names))
         If Not String.IsNullOrEmpty(txtSurname.Text) Then
             txtForename.Text = txtName.Text.Replace(txtSurname.Text, "").Trim
         End If
-
     End Sub
+
     Private Sub BtnCreateFullName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateFullName.Click
         txtName.Text = MakeFullName(txtForename.Text, txtSurname.Text)
     End Sub
@@ -983,6 +1016,21 @@ Public NotInheritable Class FrmUpdateDatabase
             DisplayAndLog("Id not found")
         End If
         oPerson.Dispose()
+    End Sub
+    Private Sub LoadScreenFromName()
+        bLoadingPerson = True
+        If _newPersonDob > Date.MinValue Then
+            cboDay.SelectedIndex = _newPersonDob.Day - 1
+            cboMonth.SelectedIndex = _newPersonDob.Month - 1
+            txtYear.Text = _newPersonDob.Year
+        Else
+            isPickingMissingDate = True
+        End If
+        txtName.Text = _newPersonName
+        SplitName()
+        TxtWikiId.Text = _newPersonWiki
+        txtDesc.Text = GetWikiText(NudSentences.Value, txtForename.Text, txtSurname.Text, _newPersonWiki)
+        bLoadingPerson = False
     End Sub
     Private Sub LoadScreenFromPerson(oPerson As Person)
         bLoadingPerson = True

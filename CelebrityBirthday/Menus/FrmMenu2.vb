@@ -81,12 +81,11 @@ Public Class FrmMenu2
     End Sub
 
     Private Sub BtnReminders_Click(sender As Object, e As EventArgs) Handles BtnReminders.Click
-        Hide()
-        Using _rems As New FrmReminders
-            LogUtil.Info("Reminders", MyBase.Name)
-            _rems.ShowDialog()
-        End Using
-        Show()
+        If oReminders Is Nothing OrElse oReminders.IsDisposed Then
+            oReminders = New FrmReminders
+        End If
+        LogUtil.Info("Reminders", MyBase.Name)
+        oReminders.Show()
     End Sub
 
     Private Sub BtnBackup_Click(sender As Object, e As EventArgs) Handles BtnBackup.Click

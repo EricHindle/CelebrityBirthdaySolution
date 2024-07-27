@@ -200,7 +200,17 @@ Public Class FrmReminders
         If oPid < 0 Then
             Dim oNote As String = DgvReminders.Rows(e.RowIndex).Cells(remNote.Name).Value
             Dim oNotePart As String() = Split(oNote, ".", 2)
-            Dim oNamefromNote As String = StrConv(oNotePart(0).Trim, VbStrConv.ProperCase).Replace(" ", "_")
+            oName = StrConv(oNotePart(0).Trim, VbStrConv.ProperCase)
+            Dim oNamefromNote As String = oName.Replace(" ", "_")
+            TxtName.Text = oName
+            TxtWiki.Text = oNamefromNote
+            If oNotePart.Length > 1 Then
+                If IsDate(oNotePart(1).Trim) Then
+                    DtpDob.Value = CDate(oNotePart(1).Trim)
+                Else
+                    DtpDob.Value = DtpDob.MinDate
+                End If
+            End If
             oName = oNamefromNote
         End If
         ShowProgress("Opening Wikipedia for " & oName, LblStatus, True, MyBase.Name)
@@ -214,5 +224,32 @@ Public Class FrmReminders
             ShowStatus("Wikipedia failed " & oName,,, MyBase.Name, ex)
         End Try
     End Sub
+
+    Private Sub BtnPasteName_Click(sender As Object, e As EventArgs) Handles BtnPasteName.Click
+        If Not String.IsNullOrWhiteSpace(RtbNote.SelectedText) Then
+            TxtName.Text = RtbNote.SelectedText
+        End If
+    End Sub
+
+    Private Sub BtnPasteDob_Click(sender As Object, e As EventArgs) Handles BtnPasteDob.Click
+        If Not String.IsNullOrWhiteSpace(RtbNote.SelectedText) Then
+            If IsDate(RtbNote.SelectedText) Then
+                DtpDob.Value = CDate(RtbNote.SelectedText)
+            End If
+        End If
+    End Sub
+
+    Private Sub BtnAddPerson_Click(sender As Object, e As EventArgs) Handles BtnAddPerson.Click
+        Hide()
+        Using _database As New FrmUpdateDatabase
+            LogUtil.Info("Opening update form", MyBase.Name)
+            _database.NewPersonName = TxtName.Text
+            _database.NewPersonDob = If(DtpDob.Value > DtpDob.MinDate, DtpDob.Value, Date.MinValue)
+            _database.NewPersonWiki = TxtWiki.Text
+            _database.ShowDialog()
+        End Using
+        Show()
+    End Sub
+
 #End Region
 End Class
