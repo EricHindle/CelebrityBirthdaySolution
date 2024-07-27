@@ -154,12 +154,15 @@ Public Class FrmReminders
         LoadReminders()
     End Sub
     Private Sub ClearForm()
-        LblId.Text = ""
+        LblId.Text = String.Empty
         cbName.Items.Clear()
-        TxtPerson.Text = ""
-        LblPersonId.Text = ""
-        RtbNote.Text = ""
-        LblStatus.Text = ""
+        TxtPerson.Text = String.Empty
+        LblPersonId.Text = String.Empty
+        RtbNote.Text = String.Empty
+        LblStatus.Text = String.Empty
+        TxtName.Text = String.Empty
+        TxtWiki.Text = String.Empty
+        DtpDob.Value = DtpDob.MinDate
         BtnUpdatePerson.Enabled = False
     End Sub
 
