@@ -158,7 +158,7 @@ Module modDatabase
         Return newPerson
     End Function
     Public Function GetFullPersonById(ByVal _id As Integer, Optional isIncludeImage As Boolean = True) As Person
-        Dim newPerson As Person = Nothing
+        Dim newPerson As New Person
         Try
             Dim iCt As Integer = oFullPersonTa.FillById(oFullPersonTable, _id)
             If iCt = 1 Then

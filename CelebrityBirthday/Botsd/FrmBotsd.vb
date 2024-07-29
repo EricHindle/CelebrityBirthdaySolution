@@ -12,6 +12,7 @@ Imports System.IO
 Imports System.Reflection
 Imports System.Text
 Imports System.Web.UI.WebControls
+Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
 Imports Tweetinvi.Core.Web
 
 Public NotInheritable Class FrmBotsd
@@ -171,66 +172,76 @@ Public NotInheritable Class FrmBotsd
     End Sub
     Private Sub BtnUpdate1_Click(sender As Object, e As EventArgs) Handles BtnUpdate1.Click
         Dim _pickPerson1 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId1.Name).Value)
-        _pickPerson1.ShortDesc = TxtShortDesc1.Text
-        If UpdateShortDesc(_pickPerson1) = 1 Then
-            WriteTrace("Updated person 1", True)
-        Else
-            WriteTrace("Update person 1 failed", True)
+        If _pickPerson1 IsNot Nothing AndAlso _pickPerson1.Id > 0 Then
+            _pickPerson1.ShortDesc = TxtShortDesc1.Text
+            If UpdateShortDesc(_pickPerson1) = 1 Then
+                WriteTrace("Updated person 1", True)
+            Else
+                WriteTrace("Update person 1 failed", True)
+            End If
         End If
         _pickPerson1.Dispose()
     End Sub
     Private Sub BtnUpdate2_Click(sender As Object, e As EventArgs) Handles BtnUpdate2.Click
         Dim _pickPerson2 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId2.Name).Value)
-        _pickPerson2.ShortDesc = TxtShortDesc2.Text
-
-        If UpdateShortDesc(_pickPerson2) = 1 Then
-            WriteTrace("Updated person 2", True)
-        Else
-            WriteTrace("Update person 2 failed", True)
+        If _pickPerson2 IsNot Nothing AndAlso _pickPerson2.Id > 0 Then
+            _pickPerson2.ShortDesc = TxtShortDesc2.Text
+            If UpdateShortDesc(_pickPerson2) = 1 Then
+                WriteTrace("Updated person 2", True)
+            Else
+                WriteTrace("Update person 2 failed", True)
+            End If
         End If
         _pickPerson2.Dispose()
     End Sub
     Private Sub BtnUpdate3_Click(sender As Object, e As EventArgs) Handles BtnUpdate3.Click
         Dim _pickPerson3 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId3.Name).Value)
-        _pickPerson3.ShortDesc = TxtShortDesc3.Text
+        If _pickPerson3 IsNot Nothing AndAlso _pickPerson3.Id > 0 Then
+            _pickPerson3.ShortDesc = TxtShortDesc3.Text
 
-        If UpdateShortDesc(_pickPerson3) = 1 Then
-            WriteTrace("Updated person 3", True)
-        Else
-            WriteTrace("Update person 3 failed", True)
+            If UpdateShortDesc(_pickPerson3) = 1 Then
+                WriteTrace("Updated person 3", True)
+            Else
+                WriteTrace("Update person 3 failed", True)
+            End If
         End If
         _pickPerson3.Dispose()
     End Sub
     Private Sub BtnUpdate4_Click(sender As Object, e As EventArgs) Handles BtnUpdate4.Click
         Dim _pickPerson4 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId4.Name).Value)
-        _pickPerson4.ShortDesc = TxtShortDesc4.Text
-
-        If UpdateShortDesc(_pickPerson4) = 1 Then
-            WriteTrace("Updated person 4", True)
-        Else
-            WriteTrace("Update person 4 failed", True)
+        If _pickPerson4 IsNot Nothing AndAlso _pickPerson4.Id > 0 Then
+            _pickPerson4.ShortDesc = TxtShortDesc4.Text
+            If UpdateShortDesc(_pickPerson4) = 1 Then
+                WriteTrace("Updated person 4", True)
+            Else
+                WriteTrace("Update person 4 failed", True)
+            End If
         End If
         _pickPerson4.Dispose()
     End Sub
     Private Sub BtnUpdate5_Click(sender As Object, e As EventArgs) Handles BtnUpdate5.Click
         Dim _pickPerson5 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId5.Name).Value)
-        _pickPerson5.ShortDesc = TxtShortDesc5.Text
+        If _pickPerson5 IsNot Nothing AndAlso _pickPerson5.Id > 0 Then
+            _pickPerson5.ShortDesc = TxtShortDesc5.Text
 
-        If UpdateShortDesc(_pickPerson5) = 1 Then
-            WriteTrace("Updated person 5", True)
-        Else
-            WriteTrace("Update person 5 failed", True)
+            If UpdateShortDesc(_pickPerson5) = 1 Then
+                WriteTrace("Updated person 5", True)
+            Else
+                WriteTrace("Update person 5 failed", True)
+            End If
         End If
         _pickPerson5.Dispose()
     End Sub
     Private Sub BtnUpdate6_Click(sender As Object, e As EventArgs) Handles BtnUpdate6.Click
         Dim _pickPerson6 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId6.Name).Value)
-        _pickPerson6.ShortDesc = TxtShortDesc6.Text
+        If _pickPerson6 IsNot Nothing AndAlso _pickPerson6.Id > 0 Then
+            _pickPerson6.ShortDesc = TxtShortDesc6.Text
 
-        If UpdateShortDesc(_pickPerson6) = 1 Then
-            WriteTrace("Updated person 6", True)
-        Else
-            WriteTrace("Update person 6 failed", True)
+            If UpdateShortDesc(_pickPerson6) = 1 Then
+                WriteTrace("Updated person 6", True)
+            Else
+                WriteTrace("Update person 6 failed", True)
+            End If
         End If
         _pickPerson6.Dispose()
     End Sub
@@ -573,7 +584,7 @@ Public NotInheritable Class FrmBotsd
                 Dim _pickPerson6 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId6.Name).Value)
                 _imageList = New List(Of Person)
 
-                If _pickPerson1 IsNot Nothing Then
+                If _pickPerson1 IsNot Nothing AndAlso _pickPerson1.Id > 0 Then
                     TxtForename1.Text = _pickPerson1.ForeName
                     TxtSurname1.Text = _pickPerson1.Surname
                     TxtShortDesc1.Text = _pickPerson1.ShortDesc
@@ -582,7 +593,7 @@ Public NotInheritable Class FrmBotsd
                     _imageList.Add(_pickPerson1)
                     GroupBox1.Enabled = True
                 End If
-                If _pickPerson2 IsNot Nothing Then
+                If _pickPerson2 IsNot Nothing AndAlso _pickPerson2.Id > 0 Then
                     TxtForename2.Text = _pickPerson2.ForeName
                     TxtSurname2.Text = _pickPerson2.Surname
                     TxtShortDesc2.Text = _pickPerson2.ShortDesc
@@ -591,7 +602,7 @@ Public NotInheritable Class FrmBotsd
                     _imageList.Add(_pickPerson2)
                     GroupBox2.Enabled = True
                 End If
-                If _pickPerson3 IsNot Nothing Then
+                If _pickPerson3 IsNot Nothing AndAlso _pickPerson3.Id > 0 Then
                     TxtForename3.Text = _pickPerson3.ForeName
                     TxtSurname3.Text = _pickPerson3.Surname
                     TxtShortDesc3.Text = _pickPerson3.ShortDesc
@@ -600,7 +611,7 @@ Public NotInheritable Class FrmBotsd
                     _imageList.Add(_pickPerson3)
                     GroupBox3.Enabled = True
                 End If
-                If _pickPerson4 IsNot Nothing Then
+                If _pickPerson4 IsNot Nothing AndAlso _pickPerson4.Id > 0 Then
                     TxtForename4.Text = _pickPerson4.ForeName
                     TxtSurname4.Text = _pickPerson4.Surname
                     TxtShortDesc4.Text = _pickPerson4.ShortDesc
@@ -609,7 +620,7 @@ Public NotInheritable Class FrmBotsd
                     _imageList.Add(_pickPerson4)
                     GroupBox4.Enabled = True
                 End If
-                If _pickPerson5 IsNot Nothing Then
+                If _pickPerson5 IsNot Nothing AndAlso _pickPerson5.Id > 0 Then
                     TxtForename5.Text = _pickPerson5.ForeName
                     TxtSurname5.Text = _pickPerson5.Surname
                     TxtShortDesc5.Text = _pickPerson5.ShortDesc
@@ -618,7 +629,7 @@ Public NotInheritable Class FrmBotsd
                     _imageList.Add(_pickPerson5)
                     GroupBox7.Enabled = True
                 End If
-                If _pickPerson6 IsNot Nothing Then
+                If _pickPerson6 IsNot Nothing AndAlso _pickPerson6.Id > 0 Then
                     TxtForename6.Text = _pickPerson6.ForeName
                     TxtSurname6.Text = _pickPerson6.Surname
                     TxtShortDesc6.Text = _pickPerson6.ShortDesc
@@ -886,35 +897,35 @@ Public NotInheritable Class FrmBotsd
             Dim _pickPerson5 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId5.Name).Value)
             Dim _pickPerson6 As Person = GetFullPersonById(DgvPairs.SelectedRows(0).Cells(pairId6.Name).Value)
             Dim _sep As String = ""
-            If _pickPerson1 IsNot Nothing Then
+            If _pickPerson1 IsNot Nothing AndAlso _pickPerson1.Id > 0 Then
                 sb.Append(GetPersonText(_pickPerson1))
                 titleSb.Append(_pickPerson1.Name)
                 _sep = " / "
                 titleDate = Format(_pickPerson1.DateOfBirth, "dd MMMM yyyy")
             End If
-            If _pickPerson2 IsNot Nothing Then
+            If _pickPerson2 IsNot Nothing AndAlso _pickPerson2.Id > 0 Then
                 sb.Append(GetPersonText(_pickPerson2))
                 titleSb.Append(_sep).Append(_pickPerson2.Name)
                 _sep = " / "
                 titleDate = Format(_pickPerson2.DateOfBirth, "dd MMMM yyyy")
             End If
-            If _pickPerson3 IsNot Nothing Then
+            If _pickPerson3 IsNot Nothing AndAlso _pickPerson3.Id > 0 Then
                 sb.Append(GetPersonText(_pickPerson3))
                 titleSb.Append(_sep).Append(_pickPerson3.Name)
                 _sep = " / "
                 titleDate = Format(_pickPerson3.DateOfBirth, "dd MMMM yyyy")
             End If
-            If _pickPerson4 IsNot Nothing Then
+            If _pickPerson4 IsNot Nothing AndAlso _pickPerson4.Id > 0 Then
                 sb.Append(GetPersonText(_pickPerson4))
                 titleSb.Append(_sep).Append(_pickPerson4.Name)
                 titleDate = Format(_pickPerson4.DateOfBirth, "dd MMMM yyyy")
             End If
-            If _pickPerson5 IsNot Nothing Then
+            If _pickPerson5 IsNot Nothing AndAlso _pickPerson5.Id > 0 Then
                 sb.Append(GetPersonText(_pickPerson5))
                 titleSb.Append(_sep).Append(_pickPerson5.Name)
                 titleDate = Format(_pickPerson5.DateOfBirth, "dd MMMM yyyy")
             End If
-            If _pickPerson6 IsNot Nothing Then
+            If _pickPerson6 IsNot Nothing AndAlso _pickPerson6.Id > 0 Then
                 sb.Append(GetPersonText(_pickPerson6))
                 titleSb.Append(_sep).Append(_pickPerson6.Name)
                 titleDate = Format(_pickPerson6.DateOfBirth, "dd MMMM yyyy")
@@ -1129,7 +1140,7 @@ Public NotInheritable Class FrmBotsd
                 If oRow.Cells(pairId1.Name).Value IsNot Nothing Then
                     Dim _personId As Integer = oRow.Cells(pairId1.Name).Value
                     Dim _firstPerson As Person = GetFullPersonById(_personId)
-                    If _firstPerson IsNot Nothing Then
+                    If _firstPerson IsNot Nothing AndAlso _firstPerson.Id > 0 Then
                         Dim botsdUrl As String = ""
                         If _firstPerson.Social IsNot Nothing AndAlso _firstPerson.Social.Botsd > 0 Then
                             Dim postNo As Integer = GetBotsdPostNo(_firstPerson.Social.Botsd, botsdUrl)

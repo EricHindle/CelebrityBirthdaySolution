@@ -1008,7 +1008,7 @@ Public NotInheritable Class FrmUpdateDatabase
     End Sub
     Private Sub LoadScreenFromId(ByVal oId As Integer)
         Dim oPerson As Person = GetFullPersonById(oId)
-        If oPerson IsNot Nothing Then
+        If oPerson IsNot Nothing AndAlso oPerson.Id > 0 Then
             findPersonInList = oPerson.Id
             cboDay.SelectedIndex = oPerson.BirthDay - 1
             cboMonth.SelectedIndex = oPerson.BirthMonth - 1

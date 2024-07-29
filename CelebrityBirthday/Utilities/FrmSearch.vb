@@ -5,6 +5,8 @@
 ' Author Eric Hindle
 '
 
+Imports Autofac.Features.ResolveAnything
+
 Public Class FrmSearch
 #Region "variables"
     Private bLoadingPeople As Boolean
@@ -26,9 +28,9 @@ Public Class FrmSearch
         CloseForm()
     End Sub
     Private Sub BtnSearchByName_Click(sender As Object, e As EventArgs) Handles BtnSearchByName.Click
-        If Not String.IsNullOrWhiteSpace(txtId.Text) Then
+        If Not String.IsNullOrWhiteSpace(txtId.Text) AndAlso IsNumeric(txtId.Text) Then
             ShowStatus("Searching for " & txtId.Text, True)
-            LoadScreenFromId(txtId.Text)
+            LoadScreenFromId(CInt(txtId.Text))
             ShowStatus("Search complete")
         Else
             If Not String.IsNullOrWhiteSpace(TxtForename.Text) Then
@@ -189,7 +191,7 @@ Public Class FrmSearch
     Private Sub LoadScreenFromId(ByVal oId As Integer)
         Dim oPerson As Person
         oPerson = GetFullPersonById(oId)
-        If oPerson IsNot Nothing Then
+        If oPerson IsNot Nothing AndAlso oPerson.Id > 0 Then
             DgvPeople.Rows.Clear()
             LoadScreenFromPerson(oPerson)
         Else

@@ -227,7 +227,7 @@ Public NotInheritable Class FrmDatabaseImages
     End Sub
     Private Sub LoadScreenFromId(ByVal oId As Integer)
         Dim oPerson As Person = GetFullPersonById(oId)
-        If oPerson IsNot Nothing Then
+        If oPerson IsNot Nothing AndAlso oPerson.Id > 0 Then
             LoadScreenFromPerson(oPerson)
             Dim _dob As New Date(oPerson.BirthYear, oPerson.BirthMonth, oPerson.BirthDay)
             cboDay.SelectedIndex = CStr(_dob.Day) - 1
