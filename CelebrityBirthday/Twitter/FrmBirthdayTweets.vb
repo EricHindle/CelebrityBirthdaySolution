@@ -24,6 +24,7 @@ Public Class FrmBirthdayTweets
         BotSD
         ForNowBirthday
         Test
+        Bluesky
     End Enum
     Public Enum TwitterUserType
         CelebBirthday
@@ -32,6 +33,7 @@ Public Class FrmBirthdayTweets
         BotSD
         ForNowCeleb
         Test
+        Bluesky
     End Enum
 #End Region
 #Region "variables"

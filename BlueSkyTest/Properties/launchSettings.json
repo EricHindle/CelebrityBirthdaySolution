@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BlueSkyPosts": {
+      "commandName": "Project",
+      "commandLineArgs": "\"This is an experiment\""
+    }
+  }
+}

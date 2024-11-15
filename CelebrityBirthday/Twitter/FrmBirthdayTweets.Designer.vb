@@ -85,7 +85,7 @@ Partial Class FrmBirthdayTweets
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 425)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 21, 0)
-        Me.StatusStrip1.Size = New System.Drawing.Size(645, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(725, 22)
         Me.StatusStrip1.TabIndex = 17
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -104,7 +104,7 @@ Partial Class FrmBirthdayTweets
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(530, 383)
+        Me.btnClose.Location = New System.Drawing.Point(610, 383)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(4)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(102, 38)
@@ -229,7 +229,7 @@ Partial Class FrmBirthdayTweets
         Me.CbTwitterUsers.FormattingEnabled = True
         Me.CbTwitterUsers.Location = New System.Drawing.Point(485, 84)
         Me.CbTwitterUsers.Name = "CbTwitterUsers"
-        Me.CbTwitterUsers.Size = New System.Drawing.Size(141, 26)
+        Me.CbTwitterUsers.Size = New System.Drawing.Size(225, 26)
         Me.CbTwitterUsers.TabIndex = 3
         '
         'ChkCurrentDay
@@ -435,7 +435,7 @@ Partial Class FrmBirthdayTweets
         '
         Me.BtnRun.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRun.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnRun.Location = New System.Drawing.Point(554, 313)
+        Me.BtnRun.Location = New System.Drawing.Point(644, 311)
         Me.BtnRun.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnRun.Name = "BtnRun"
         Me.BtnRun.Size = New System.Drawing.Size(66, 66)
@@ -488,7 +488,7 @@ Partial Class FrmBirthdayTweets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(645, 447)
+        Me.ClientSize = New System.Drawing.Size(725, 447)
         Me.Controls.Add(Me.GrpManual)
         Me.Controls.Add(Me.ChkAuto)
         Me.Controls.Add(Me.BtnStore)

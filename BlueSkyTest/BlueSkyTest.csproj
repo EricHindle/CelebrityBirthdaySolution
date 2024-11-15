@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <StartupObject>BlueSkyPost</StartupObject>
+    <Copyright>Copyright (c) 2024 Eric Hindle</Copyright>
+    <PackageIcon>cake-with-candle.jpg</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\CelebrityBirthday\images\cake-with-candle.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bluesky.Net" Version="0.3.0-alpha" />
+    <PackageReference Include="X.Bluesky" Version="1.1.0" />
+  </ItemGroup>
+
+</Project>

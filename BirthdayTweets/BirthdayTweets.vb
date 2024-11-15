@@ -22,6 +22,7 @@ Public Class BirthdayTweets
         BotSD
         ForNowBirthday
         Test
+        Bluesky
     End Enum
     Public Enum TwitterUserType
         CelebBirthday
@@ -30,6 +31,7 @@ Public Class BirthdayTweets
         BotSD
         ForNowCeleb
         Test
+        Bluesky
     End Enum
 #End Region
 #Region "classes"
@@ -291,6 +293,7 @@ Public Class BirthdayTweets
     Private Const TEST_HDR As String = "Born on this day:"
     Private Shared ReadOnly LINEFEED As String = Convert.ToChar(vbLf, myStringFormatProvider)
     Private Const CELEB_USER_KEY As String = "CELEB_USER"
+    Private Const BSKY_CELEB_USER_KEY As String = "BSKY_CELEB_USER"
     Private Const HBURPDAY_USER_KEY As String = "HBURPDAY_USER"
     Private Const BOTSD_USER_KEY As String = "BOTSD_USER"
     Private Const BBREAD_USER_KEY As String = "BBREAD_USER"
@@ -308,6 +311,7 @@ Public Class BirthdayTweets
     Private Shared botsdUser As String = "NotTwins1"
     Private Shared bbreadUser As String = "WhosBrownBread"
     Private Shared fornowUser As String = "TotesBirthdays"
+    Private Shared bskycelebUser As String = "celebbirthdayuk.bsky.social"
     Private Shared ReadOnly testUser As String = "FunsterMuddy"
     Private Shared oBirthdayList As New List(Of Person)
     Private Shared oAnniversaryList As New List(Of Person)
@@ -338,13 +342,14 @@ Public Class BirthdayTweets
             SendAllTweets(False)
         Else
             ReadParameters(GlobalSettings.GetSetting(PARAM_FILE))
-            SendAllTweets(True)
+            SendAllTweets(False)
         End If
         LogUtil.ShowProgress("Run Complete")
     End Sub
     Private Shared Sub InitialiseApplication()
         LogUtil.LogFolder = My.Settings.LogFolder
         celebUser = GlobalSettings.GetSetting(CELEB_USER_KEY)
+        bskycelebUser = GlobalSettings.GetSetting(BSKY_CELEB_USER_KEY)
         hburpdayUser = GlobalSettings.GetSetting(HBURPDAY_USER_KEY)
         bbreadUser = GlobalSettings.GetSetting(BBREAD_USER_KEY)
         botsdUser = GlobalSettings.GetSetting(BOTSD_USER_KEY)
@@ -420,6 +425,8 @@ Public Class BirthdayTweets
                                 isRanOk = SendBotsdTweets(_param)
                             Case TweetType.ForNowBirthday
                                 isRanOk = SendForNowTweets(_param)
+                            Case TweetType.Bluesky
+                                isRanOk = SendBlueskyTweets(_param)
                         End Select
                         If isRanOk Then SetLastRunDate(_param.TweetType, _param.TwitterUser)
                     End If
@@ -469,7 +476,55 @@ Public Class BirthdayTweets
                     isSentOk = False
                 End If
             Next
+
             If isSentOk Then
+                LogUtil.ShowProgress(_runDesc & " complete", pSub)
+            Else
+                LogUtil.Problem(_runDesc & " not sent - error", pSub)
+                SendEmail("CelebBirthday Tweets error", "CelebBirthday Tweets not sent - error")
+            End If
+        Else
+            LogUtil.Problem(_runDesc & " not sent - selection error", pSub)
+            SendEmail("CelebBirthday Tweets error", "CelebBirthday Tweets not sent - selection error")
+        End If
+        Return isSentOk
+    End Function
+    Private Shared Function SendBlueskyTweets(_param As RunParam) As Boolean
+        Dim pSub As String = "SendBlueskyTweets"
+        Dim _runDesc As String = _param.TwitterUser & _param.TweetType.ToString
+        Dim isSentOk As Boolean = True
+        LogUtil.ShowProgress("Sending " & _runDesc & " tweets for " & tweetHeaderDate, pSub)
+        LogUtil.ShowProgress("Selecting people", pSub)
+        _param.TweetType = TweetType.Birthday
+        Dim oPersonList As List(Of Person) = BuildPersonList(_param)
+        Dim cbTweets As New List(Of CbTweet)
+        If oPersonList.Count > 0 Then
+            LogUtil.ShowProgress("Generating " & _runDesc & " tweets", pSub)
+            cbTweets = GenerateTweets(oPersonList, _param)
+        End If
+        _param.TweetType = TweetType.Anniversary
+        oPersonList = BuildPersonList(_param)
+        If oPersonList.Count > 0 Then
+            cbTweets.AddRange(GenerateTweets(oPersonList, _param))
+        End If
+        If cbTweets.Count > 0 Then
+            LogUtil.ShowProgress("Sending " & _runDesc & " tweets", pSub)
+            Dim _bskyPath As String = "D:\hindleware\CelebrityBirthdaySolution\BlueSkyTest\bin\Debug\net8.0\BlueSkyTest.exe"
+            For Each tweetToSend As CbTweet In cbTweets
+                Dim imageFilename As String = SaveImage(tweetToSend, _runDesc & "_")
+                Try
+                    Dim bskyPost As String = """" & tweetToSend.TweetText.Replace(vbLf, "~") & """"
+                    LogUtil.ShowProgress("Running " & _bskyPath, pSub)
+                    Process.Start(_bskyPath, bskyPost)
+                    Threading.Thread.Sleep(1000)
+                    isSentOk = True
+                Catch ex As Exception
+                    LogUtil.ShowProgress("Exception running " & _bskyPath, pSub)
+                End Try
+            Next
+
+            If isSentOk Then
+                _param.TweetType = TweetType.Bluesky
                 LogUtil.ShowProgress(_runDesc & " complete", pSub)
             Else
                 LogUtil.Problem(_runDesc & " not sent - error", pSub)
@@ -778,6 +833,8 @@ Public Class BirthdayTweets
                         _header = HBURPDAY_HDR
                     Case TwitterUserType.Test
                         _header = TEST_HDR
+                    Case TwitterUserType.Bluesky
+                        _header = HBURPDAY_HDR
                 End Select
             Case TweetType.Anniversary
                 _header = ANNIV_HDR
@@ -906,6 +963,8 @@ Public Class BirthdayTweets
                     oPersonList = FindDeaths(_day, _mth)
                 Case TweetType.ForNowBirthday
                     oPersonList = FindForNowBirthdays(_day, _mth)
+                Case TweetType.Bluesky
+                    oPersonList = FindBirthdays(_day, _mth)
             End Select
             LogUtil.ShowProgress("Selection Complete", Psub)
         Catch ex As ArgumentOutOfRangeException

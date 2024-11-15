@@ -51,7 +51,7 @@ function sec_session_start()
 function check_password($username, $password)
 {
     global $mypdo;
-    $sql = "SELECT user_id, user_login, user_password, user_forename, user_surname  FROM users WHERE user_login = :username LIMIT 1";
+    $sql = "SELECT TOP 1 user_id, user_login, user_password, user_forename, user_surname  FROM users WHERE user_login = :username";
     $query = $mypdo->prepare($sql);
     $query->execute(array(
         ':username' => $username
@@ -74,7 +74,7 @@ function check_password($username, $password)
 function gettemppassword($playerid)
 {
     global $mypdo;
-    $temppwdsql = "SELECT * FROM user_temp_password WHERE user_id = :id LIMIT 1";
+    $temppwdsql = "SELECT TOP 1 * FROM user_temp_password WHERE user_id = :id";
     $temppwdquery = $mypdo->prepare($temppwdsql);
     $temppwdquery->execute(array(
         ':id' => $playerid
