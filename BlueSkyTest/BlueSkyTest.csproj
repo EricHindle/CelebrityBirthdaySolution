@@ -8,6 +8,8 @@
     <StartupObject>BlueSkyPost</StartupObject>
     <Copyright>Copyright (c) 2024 Eric Hindle</Copyright>
     <PackageIcon>cake-with-candle.jpg</PackageIcon>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

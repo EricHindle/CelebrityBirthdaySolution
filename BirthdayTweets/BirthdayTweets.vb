@@ -497,6 +497,7 @@ Public Class BirthdayTweets
         LogUtil.ShowProgress("Sending " & _runDesc & " tweets for " & tweetHeaderDate, pSub)
         LogUtil.ShowProgress("Selecting people", pSub)
         _param.TweetType = TweetType.Birthday
+        Dim bskypassword As String = GlobalSettings.GetSetting(bskycelebUser)
         Dim oPersonList As List(Of Person) = BuildPersonList(_param)
         Dim cbTweets As New List(Of CbTweet)
         If oPersonList.Count > 0 Then
@@ -511,14 +512,22 @@ Public Class BirthdayTweets
         If cbTweets.Count > 0 Then
             LogUtil.ShowProgress("Sending " & _runDesc & " tweets", pSub)
             Dim _bskyPath As String = "D:\hindleware\CelebrityBirthdaySolution\BlueSkyTest\bin\Debug\net8.0\BlueSkyTest.exe"
+            Dim isUseMethod1 As Boolean = _rnd.Next(1, 10) < 6
             For Each tweetToSend As CbTweet In cbTweets
                 Dim imageFilename As String = SaveImage(tweetToSend, _runDesc & "_")
                 Try
-                    Dim bskyPost As String = """" & tweetToSend.TweetText.Replace(vbLf, "~") & """"
+                    Dim postText As String = tweetToSend.TweetText.Replace(vbLf, "~")
+                    Dim method As String = If(isUseMethod1, "1", "2")
+                    Dim bskyPost As String = """" & postText & """ """ & bskycelebUser & """ """ & bskypassword & """ " & method
                     LogUtil.ShowProgress("Running " & _bskyPath, pSub)
+                    LogUtil.Info("Sending post :", pSub)
+                    LogUtil.Info(postText)
+                    LogUtil.Info(" using username " & bskycelebUser)
+                    LogUtil.Info("      by method " & method)
                     Process.Start(_bskyPath, bskyPost)
                     Threading.Thread.Sleep(_rnd.Next(10, 20) * 1000)
                     isSentOk = True
+                    isUseMethod1 = Not isUseMethod1
                 Catch ex As Exception
                     LogUtil.ShowProgress("Exception running " & _bskyPath, pSub)
                 End Try
