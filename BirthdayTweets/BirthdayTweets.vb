@@ -490,6 +490,7 @@ Public Class BirthdayTweets
         Return isSentOk
     End Function
     Private Shared Function SendBlueskyTweets(_param As RunParam) As Boolean
+        Dim _rnd As New Random
         Dim pSub As String = "SendBlueskyTweets"
         Dim _runDesc As String = _param.TwitterUser & _param.TweetType.ToString
         Dim isSentOk As Boolean = True
@@ -516,7 +517,7 @@ Public Class BirthdayTweets
                     Dim bskyPost As String = """" & tweetToSend.TweetText.Replace(vbLf, "~") & """"
                     LogUtil.ShowProgress("Running " & _bskyPath, pSub)
                     Process.Start(_bskyPath, bskyPost)
-                    Threading.Thread.Sleep(1000)
+                    Threading.Thread.Sleep(_rnd.Next(10, 20) * 1000)
                     isSentOk = True
                 Catch ex As Exception
                     LogUtil.ShowProgress("Exception running " & _bskyPath, pSub)
