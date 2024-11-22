@@ -12,6 +12,7 @@ Imports System.Reflection
 Imports System.Text
 Imports System.Threading.Tasks
 Imports Microsoft.CodeAnalysis
+Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
 Imports Newtonsoft.Json
 ' Imports TweetSharp
 Imports Tweetinvi
@@ -65,6 +66,7 @@ Public NotInheritable Class FrmDailyTweets
     Private IsNoGenerate As Boolean
     Private isBuildingTrees As Boolean
     Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
+    Private isInitialSelectDone As Boolean = False
 #End Region
 #Region "properties"
     Private _daySelection As Integer
@@ -97,12 +99,13 @@ Public NotInheritable Class FrmDailyTweets
     Private Sub FrmTwitterImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.twitterDailyFormPos)
-        GetSplitterDist
+        GetSplitterDist()
         FillTwitterUserList()
         If Not String.IsNullOrEmpty(_daySelection) AndAlso Not String.IsNullOrEmpty(_monthSelection) Then
             cboDay.SelectedIndex = _daySelection - 1
             cboMonth.SelectedIndex = _monthSelection - 1
         End If
+        BtnReGen.Enabled = isInitialSelectDone
     End Sub
     Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
@@ -181,6 +184,8 @@ Public NotInheritable Class FrmDailyTweets
     Private Sub DateSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged, cboMonth.SelectedIndexChanged
         NudBirthdaysPerTweet.Value = 0
         NudAnnivsPerTweet.Value = 0
+        isInitialSelectDone = False
+        BtnReGen.Enabled = isInitialSelectDone
     End Sub
     Private Sub BtnDeleteImages_Click(sender As Object, e As EventArgs) Handles BtnDeleteImages.Click
         ClearImages()
@@ -245,6 +250,8 @@ Public NotInheritable Class FrmDailyTweets
     End Sub
     Private Sub SelectPeople()
         If BuildTrees() Then
+            isInitialSelectDone = True
+            BtnReGen.Enabled = isInitialSelectDone
             GenerateAllTweets()
         Else
             DisplayAndLog("No people selected")
@@ -596,15 +603,24 @@ Public NotInheritable Class FrmDailyTweets
                 oTweetLists.Add(_selectedPersons)
                 GenerateTweets(oTweetLists, _imageStart, TweetType.Full)
             Else
-                Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, TweetType.Birthday)
-                oTweetLists.AddRange(_birthdayImageTweets)
-                GenerateTweets(oTweetLists, _imageStart, TweetType.Birthday)
+                If oBirthdayList.Count > 0 Then
+                    Dim _birthdayImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oBirthdayList, _dateLength + BIRTHDAY_HDR.Length + 3, TweetType.Birthday)
+                    oTweetLists.AddRange(_birthdayImageTweets)
+                    GenerateTweets(oTweetLists, _imageStart, TweetType.Birthday)
+                Else
+                    MsgBox("No birthdays selected", MsgBoxStyle.Information, "Warning")
+                End If
+
                 _imageStart = oTweetLists.Count
-                Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, TweetType.Anniversary)
-                oTweetLists.AddRange(_annivImageTweets)
-                GenerateTweets(oTweetLists, _imageStart, TweetType.Anniversary)
+                If oAnniversaryList.Count > 0 Then
+                    Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, TweetType.Anniversary)
+                    oTweetLists.AddRange(_annivImageTweets)
+                    GenerateTweets(oTweetLists, _imageStart, TweetType.Anniversary)
+                Else
+                    MsgBox("No anniversaries selected", MsgBoxStyle.Information, "Warning")
+                End If
             End If
-            DisplayAndLog("Images Complete")
+                DisplayAndLog("Images Complete")
         Else
             MsgBox("Select some people", MsgBoxStyle.Exclamation, "Error")
         End If
