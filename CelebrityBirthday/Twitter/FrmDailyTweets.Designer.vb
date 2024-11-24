@@ -14,12 +14,12 @@ Partial Class FrmDailyTweets
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDailyTweets))
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox0 = New System.Windows.Forms.PictureBox()
         Me.cboDay = New System.Windows.Forms.ComboBox()
         Me.cboMonth = New System.Windows.Forms.ComboBox()
         Me.BtnSaveImage = New System.Windows.Forms.Button()
         Me.LblImageCount = New System.Windows.Forms.Label()
-        Me.NudPic1Horizontal = New System.Windows.Forms.NumericUpDown()
+        Me.NudHorizontal0 = New System.Windows.Forms.NumericUpDown()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -27,9 +27,10 @@ Partial Class FrmDailyTweets
         Me.RbSingleImage = New System.Windows.Forms.RadioButton()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.BtnSend = New System.Windows.Forms.Button()
-        Me.rtbFile1 = New System.Windows.Forms.RichTextBox()
+        Me.SplitContainer0 = New System.Windows.Forms.SplitContainer()
+        Me.BtnSend0 = New System.Windows.Forms.Button()
+        Me.TxtBlueSky0 = New System.Windows.Forms.TextBox()
+        Me.rtbFile0 = New System.Windows.Forms.RichTextBox()
         Me.BtnCopyselected = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -66,16 +67,18 @@ Partial Class FrmDailyTweets
         Me.BtnNext = New System.Windows.Forms.Button()
         Me.BtnExplorer = New System.Windows.Forms.Button()
         Me.BtnTweetDeck = New System.Windows.Forms.Button()
+        Me.CbBlueSky = New System.Windows.Forms.CheckBox()
+        Me.BtnCopyAlt = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox0, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NudHorizontal0, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer1.Panel1.SuspendLayout()
-        Me.SplitContainer1.Panel2.SuspendLayout()
-        Me.SplitContainer1.SuspendLayout()
+        CType(Me.SplitContainer0, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer0.Panel1.SuspendLayout()
+        Me.SplitContainer0.Panel2.SuspendLayout()
+        Me.SplitContainer0.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.NudBirthdaysPerTweet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -89,7 +92,7 @@ Partial Class FrmDailyTweets
         Me.StatusStrip1.BackgroundImage = Global.CelebrityBirthday.My.Resources.Resources.StatusBar
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 765)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 798)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(1348, 22)
@@ -106,15 +109,15 @@ Partial Class FrmDailyTweets
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.LblStatus.Size = New System.Drawing.Size(10, 17)
         '
-        'PictureBox1
+        'PictureBox0
         '
-        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(360, 360)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
+        Me.PictureBox0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PictureBox0.Location = New System.Drawing.Point(3, 3)
+        Me.PictureBox0.Name = "PictureBox0"
+        Me.PictureBox0.Size = New System.Drawing.Size(360, 360)
+        Me.PictureBox0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox0.TabIndex = 1
+        Me.PictureBox0.TabStop = False
         '
         'cboDay
         '
@@ -141,7 +144,7 @@ Partial Class FrmDailyTweets
         Me.BtnSaveImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnSaveImage.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSaveImage.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSaveImage.Location = New System.Drawing.Point(1189, 140)
+        Me.BtnSaveImage.Location = New System.Drawing.Point(1188, 129)
         Me.BtnSaveImage.Name = "BtnSaveImage"
         Me.BtnSaveImage.Size = New System.Drawing.Size(139, 33)
         Me.BtnSaveImage.TabIndex = 5
@@ -159,22 +162,22 @@ Partial Class FrmDailyTweets
         Me.LblImageCount.TabIndex = 6
         Me.LblImageCount.Text = "0 Images"
         '
-        'NudPic1Horizontal
+        'NudHorizontal0
         '
-        Me.NudPic1Horizontal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.NudPic1Horizontal.Location = New System.Drawing.Point(58, 587)
-        Me.NudPic1Horizontal.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.NudPic1Horizontal.Name = "NudPic1Horizontal"
-        Me.NudPic1Horizontal.Size = New System.Drawing.Size(53, 22)
-        Me.NudPic1Horizontal.TabIndex = 7
-        Me.NudPic1Horizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.NudPic1Horizontal.Value = New Decimal(New Integer() {6, 0, 0, 0})
+        Me.NudHorizontal0.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.NudHorizontal0.Location = New System.Drawing.Point(58, 620)
+        Me.NudHorizontal0.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NudHorizontal0.Name = "NudHorizontal0"
+        Me.NudHorizontal0.Size = New System.Drawing.Size(53, 22)
+        Me.NudHorizontal0.TabIndex = 7
+        Me.NudHorizontal0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.NudHorizontal0.Value = New Decimal(New Integer() {6, 0, 0, 0})
         '
         'Label2
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 591)
+        Me.Label2.Location = New System.Drawing.Point(12, 624)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 14)
         Me.Label2.TabIndex = 10
@@ -185,7 +188,7 @@ Partial Class FrmDailyTweets
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.btnClose.Location = New System.Drawing.Point(1189, 716)
+        Me.btnClose.Location = New System.Drawing.Point(1189, 749)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(139, 33)
         Me.btnClose.TabIndex = 12
@@ -238,73 +241,84 @@ Partial Class FrmDailyTweets
         Me.TabControl1.Location = New System.Drawing.Point(471, 46)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(706, 659)
+        Me.TabControl1.Size = New System.Drawing.Size(706, 692)
         Me.TabControl1.TabIndex = 19
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.SplitContainer1)
+        Me.TabPage1.Controls.Add(Me.SplitContainer0)
         Me.TabPage1.Location = New System.Drawing.Point(4, 23)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(698, 632)
+        Me.TabPage1.Size = New System.Drawing.Size(698, 665)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Born On This Day"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'SplitContainer1
+        'SplitContainer0
         '
-        Me.SplitContainer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.SplitContainer0.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.SplitContainer1.Location = New System.Drawing.Point(9, 6)
-        Me.SplitContainer1.Name = "SplitContainer1"
+        Me.SplitContainer0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.SplitContainer0.Location = New System.Drawing.Point(9, 6)
+        Me.SplitContainer0.Name = "SplitContainer0"
         '
-        'SplitContainer1.Panel1
+        'SplitContainer0.Panel1
         '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.BtnSend)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.NudPic1Horizontal)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.Label2)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.PictureBox1)
+        Me.SplitContainer0.Panel1.Controls.Add(Me.BtnSend0)
+        Me.SplitContainer0.Panel1.Controls.Add(Me.NudHorizontal0)
+        Me.SplitContainer0.Panel1.Controls.Add(Me.Label2)
+        Me.SplitContainer0.Panel1.Controls.Add(Me.PictureBox0)
         '
-        'SplitContainer1.Panel2
+        'SplitContainer0.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.rtbFile1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(683, 620)
-        Me.SplitContainer1.SplitterDistance = 369
-        Me.SplitContainer1.TabIndex = 23
+        Me.SplitContainer0.Panel2.Controls.Add(Me.TxtBlueSky0)
+        Me.SplitContainer0.Panel2.Controls.Add(Me.rtbFile0)
+        Me.SplitContainer0.Size = New System.Drawing.Size(683, 653)
+        Me.SplitContainer0.SplitterDistance = 369
+        Me.SplitContainer0.TabIndex = 23
         '
-        'BtnSend
+        'BtnSend0
         '
-        Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnSend.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSend.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend.Location = New System.Drawing.Point(206, 576)
-        Me.BtnSend.Name = "BtnSend"
-        Me.BtnSend.Size = New System.Drawing.Size(139, 33)
-        Me.BtnSend.TabIndex = 34
-        Me.BtnSend.Text = "Send"
-        Me.BtnSend.UseVisualStyleBackColor = True
+        Me.BtnSend0.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSend0.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSend0.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnSend0.Location = New System.Drawing.Point(206, 609)
+        Me.BtnSend0.Name = "BtnSend0"
+        Me.BtnSend0.Size = New System.Drawing.Size(139, 33)
+        Me.BtnSend0.TabIndex = 34
+        Me.BtnSend0.Text = "Send"
+        Me.BtnSend0.UseVisualStyleBackColor = True
         '
-        'rtbFile1
+        'TxtBlueSky0
         '
-        Me.rtbFile1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.TxtBlueSky0.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtBlueSky0.Location = New System.Drawing.Point(3, 500)
+        Me.TxtBlueSky0.Multiline = True
+        Me.TxtBlueSky0.Name = "TxtBlueSky0"
+        Me.TxtBlueSky0.Size = New System.Drawing.Size(297, 142)
+        Me.TxtBlueSky0.TabIndex = 15
+        '
+        'rtbFile0
+        '
+        Me.rtbFile0.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rtbFile1.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rtbFile1.Location = New System.Drawing.Point(3, 3)
-        Me.rtbFile1.Name = "rtbFile1"
-        Me.rtbFile1.Size = New System.Drawing.Size(297, 607)
-        Me.rtbFile1.TabIndex = 14
-        Me.rtbFile1.Text = ""
+        Me.rtbFile0.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rtbFile0.Location = New System.Drawing.Point(3, 3)
+        Me.rtbFile0.Name = "rtbFile0"
+        Me.rtbFile0.Size = New System.Drawing.Size(297, 491)
+        Me.rtbFile0.TabIndex = 14
+        Me.rtbFile0.Text = ""
         '
         'BtnCopyselected
         '
         Me.BtnCopyselected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnCopyselected.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyselected.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnCopyselected.Location = New System.Drawing.Point(1189, 220)
+        Me.BtnCopyselected.Location = New System.Drawing.Point(1188, 207)
         Me.BtnCopyselected.Name = "BtnCopyselected"
         Me.BtnCopyselected.Size = New System.Drawing.Size(139, 33)
         Me.BtnCopyselected.TabIndex = 21
@@ -334,7 +348,7 @@ Partial Class FrmDailyTweets
         Me.BtnCopyAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnCopyAll.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnCopyAll.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnCopyAll.Location = New System.Drawing.Point(1189, 181)
+        Me.BtnCopyAll.Location = New System.Drawing.Point(1188, 168)
         Me.BtnCopyAll.Name = "BtnCopyAll"
         Me.BtnCopyAll.Size = New System.Drawing.Size(139, 33)
         Me.BtnCopyAll.TabIndex = 22
@@ -390,7 +404,7 @@ Partial Class FrmDailyTweets
         Me.tvBirthday.CheckBoxes = True
         Me.tvBirthday.Location = New System.Drawing.Point(14, 49)
         Me.tvBirthday.Name = "tvBirthday"
-        Me.tvBirthday.Size = New System.Drawing.Size(223, 664)
+        Me.tvBirthday.Size = New System.Drawing.Size(223, 685)
         Me.tvBirthday.TabIndex = 28
         '
         'btnSelect
@@ -413,7 +427,7 @@ Partial Class FrmDailyTweets
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.chkImages)
         Me.GroupBox2.Controls.Add(Me.GroupBox1)
-        Me.GroupBox2.Location = New System.Drawing.Point(1183, 269)
+        Me.GroupBox2.Location = New System.Drawing.Point(1189, 305)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(153, 437)
         Me.GroupBox2.TabIndex = 30
@@ -485,8 +499,6 @@ Partial Class FrmDailyTweets
         'ChkAtNextBirthday
         '
         Me.ChkAtNextBirthday.AutoSize = True
-        Me.ChkAtNextBirthday.Checked = True
-        Me.ChkAtNextBirthday.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ChkAtNextBirthday.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ChkAtNextBirthday.ForeColor = System.Drawing.Color.RoyalBlue
         Me.ChkAtNextBirthday.Location = New System.Drawing.Point(28, 72)
@@ -511,26 +523,26 @@ Partial Class FrmDailyTweets
         'rbHandles
         '
         Me.rbHandles.AutoSize = True
-        Me.rbHandles.Checked = True
         Me.rbHandles.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbHandles.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbHandles.Location = New System.Drawing.Point(16, 14)
         Me.rbHandles.Name = "rbHandles"
         Me.rbHandles.Size = New System.Drawing.Size(112, 18)
         Me.rbHandles.TabIndex = 34
-        Me.rbHandles.TabStop = True
         Me.rbHandles.Text = "Twitter Handles"
         Me.rbHandles.UseVisualStyleBackColor = True
         '
         'rbAges
         '
         Me.rbAges.AutoSize = True
+        Me.rbAges.Checked = True
         Me.rbAges.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbAges.ForeColor = System.Drawing.Color.RoyalBlue
         Me.rbAges.Location = New System.Drawing.Point(16, 44)
         Me.rbAges.Name = "rbAges"
         Me.rbAges.Size = New System.Drawing.Size(77, 18)
         Me.rbAges.TabIndex = 35
+        Me.rbAges.TabStop = True
         Me.rbAges.Text = "Age/Year"
         Me.rbAges.UseVisualStyleBackColor = True
         '
@@ -577,7 +589,7 @@ Partial Class FrmDailyTweets
         Me.rtbTweet.ForeColor = System.Drawing.Color.White
         Me.rtbTweet.Location = New System.Drawing.Point(243, 305)
         Me.rtbTweet.Name = "rtbTweet"
-        Me.rtbTweet.Size = New System.Drawing.Size(222, 447)
+        Me.rtbTweet.Size = New System.Drawing.Size(222, 429)
         Me.rtbTweet.TabIndex = 31
         Me.rtbTweet.Text = ""
         '
@@ -651,7 +663,7 @@ Partial Class FrmDailyTweets
         Me.BtnUncheck.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnUncheck.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUncheck.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUncheck.Location = New System.Drawing.Point(14, 719)
+        Me.BtnUncheck.Location = New System.Drawing.Point(14, 752)
         Me.BtnUncheck.Name = "BtnUncheck"
         Me.BtnUncheck.Size = New System.Drawing.Size(95, 29)
         Me.BtnUncheck.TabIndex = 39
@@ -663,7 +675,7 @@ Partial Class FrmDailyTweets
         Me.BtnDeleteImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnDeleteImages.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDeleteImages.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnDeleteImages.Location = New System.Drawing.Point(951, 716)
+        Me.BtnDeleteImages.Location = New System.Drawing.Point(951, 749)
         Me.BtnDeleteImages.Name = "BtnDeleteImages"
         Me.BtnDeleteImages.Size = New System.Drawing.Size(139, 33)
         Me.BtnDeleteImages.TabIndex = 40
@@ -686,7 +698,7 @@ Partial Class FrmDailyTweets
         Me.BtnExplorer.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnExplorer.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnExplorer.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnExplorer.Location = New System.Drawing.Point(501, 716)
+        Me.BtnExplorer.Location = New System.Drawing.Point(501, 749)
         Me.BtnExplorer.Name = "BtnExplorer"
         Me.BtnExplorer.Size = New System.Drawing.Size(139, 33)
         Me.BtnExplorer.TabIndex = 42
@@ -698,19 +710,48 @@ Partial Class FrmDailyTweets
         Me.BtnTweetDeck.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnTweetDeck.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnTweetDeck.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTweetDeck.Location = New System.Drawing.Point(656, 716)
+        Me.BtnTweetDeck.Location = New System.Drawing.Point(656, 749)
         Me.BtnTweetDeck.Name = "BtnTweetDeck"
         Me.BtnTweetDeck.Size = New System.Drawing.Size(155, 33)
         Me.BtnTweetDeck.TabIndex = 43
         Me.BtnTweetDeck.Text = "Open TweetDeck"
         Me.BtnTweetDeck.UseVisualStyleBackColor = True
         '
+        'CbBlueSky
+        '
+        Me.CbBlueSky.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CbBlueSky.AutoSize = True
+        Me.CbBlueSky.Checked = True
+        Me.CbBlueSky.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CbBlueSky.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CbBlueSky.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.CbBlueSky.Location = New System.Drawing.Point(1218, 245)
+        Me.CbBlueSky.Name = "CbBlueSky"
+        Me.CbBlueSky.Size = New System.Drawing.Size(68, 18)
+        Me.CbBlueSky.TabIndex = 44
+        Me.CbBlueSky.Text = "BlueSky"
+        Me.CbBlueSky.UseVisualStyleBackColor = True
+        '
+        'BtnCopyAlt
+        '
+        Me.BtnCopyAlt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnCopyAlt.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCopyAlt.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnCopyAlt.Location = New System.Drawing.Point(1188, 269)
+        Me.BtnCopyAlt.Name = "BtnCopyAlt"
+        Me.BtnCopyAlt.Size = New System.Drawing.Size(139, 33)
+        Me.BtnCopyAlt.TabIndex = 45
+        Me.BtnCopyAlt.Text = "Copy alt"
+        Me.BtnCopyAlt.UseVisualStyleBackColor = True
+        '
         'FrmDailyTweets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1348, 787)
+        Me.ClientSize = New System.Drawing.Size(1348, 820)
+        Me.Controls.Add(Me.BtnCopyAlt)
+        Me.Controls.Add(Me.CbBlueSky)
         Me.Controls.Add(Me.BtnTweetDeck)
         Me.Controls.Add(Me.BtnExplorer)
         Me.Controls.Add(Me.BtnNext)
@@ -746,17 +787,18 @@ Partial Class FrmDailyTweets
         Me.Text = "Daily Tweets"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NudPic1Horizontal, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox0, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NudHorizontal0, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        Me.SplitContainer1.Panel1.ResumeLayout(False)
-        Me.SplitContainer1.Panel1.PerformLayout()
-        Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainer1.ResumeLayout(False)
+        Me.SplitContainer0.Panel1.ResumeLayout(False)
+        Me.SplitContainer0.Panel1.PerformLayout()
+        Me.SplitContainer0.Panel2.ResumeLayout(False)
+        Me.SplitContainer0.Panel2.PerformLayout()
+        CType(Me.SplitContainer0, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer0.ResumeLayout(False)
         Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.NudBirthdaysPerTweet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
@@ -772,12 +814,12 @@ Partial Class FrmDailyTweets
     End Sub
 
     Friend WithEvents StatusStrip1 As StatusStrip
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PictureBox0 As PictureBox
     Friend WithEvents cboDay As ComboBox
     Friend WithEvents cboMonth As ComboBox
     Friend WithEvents BtnSaveImage As Button
     Friend WithEvents LblImageCount As Label
-    Friend WithEvents NudPic1Horizontal As NumericUpDown
+    Friend WithEvents NudHorizontal0 As NumericUpDown
     Friend WithEvents Label2 As Label
     Friend WithEvents LblStatus As ToolStripStatusLabel
     Friend WithEvents btnClose As Button
@@ -786,9 +828,9 @@ Partial Class FrmDailyTweets
     Friend WithEvents RbSingleImage As RadioButton
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents rtbFile1 As RichTextBox
+    Friend WithEvents rtbFile0 As RichTextBox
     Friend WithEvents BtnCopyselected As Button
-    Friend WithEvents SplitContainer1 As SplitContainer
+    Friend WithEvents SplitContainer0 As SplitContainer
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents CopyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BtnCopyAll As Button
@@ -803,7 +845,7 @@ Partial Class FrmDailyTweets
     Friend WithEvents chkImages As CheckBox
     Friend WithEvents cmbTwitterUsers As ComboBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents BtnSend As Button
+    Friend WithEvents BtnSend0 As Button
     Friend WithEvents rtbTweet As RichTextBox
     Friend WithEvents rbAges As RadioButton
     Friend WithEvents rbHandles As RadioButton
@@ -825,4 +867,7 @@ Partial Class FrmDailyTweets
     Friend WithEvents BtnExplorer As Button
     Friend WithEvents BtnTweetDeck As Button
     Friend WithEvents ChkAtNextBirthday As CheckBox
+    Friend WithEvents TxtBlueSky0 As TextBox
+    Friend WithEvents CbBlueSky As CheckBox
+    Friend WithEvents BtnCopyAlt As Button
 End Class

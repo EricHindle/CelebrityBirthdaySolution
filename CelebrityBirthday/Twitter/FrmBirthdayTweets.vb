@@ -454,10 +454,11 @@ Public Class FrmBirthdayTweets
         Return _runParam
     End Function
     Private Function GenerateTextParameterList() As List(Of String)
-        Dim TextParameterList As New List(Of String)
-        TextParameterList.Add(PARAM_EX1)
-        TextParameterList.Add(PARAM_EX2)
-        TextParameterList.Add("")
+        Dim TextParameterList As New List(Of String) From {
+            PARAM_EX1,
+            PARAM_EX2,
+            ""
+        }
         For Each _runParam As RunParam In paramList
             TextParameterList.Add(GenerateTextParameter(_runParam))
         Next

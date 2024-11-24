@@ -19,6 +19,7 @@ Friend Module modCbday
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Public Const TWEET_MAX_LEN As Integer = 280
     Public Const RTB_CONTROL_NAME As String = "RtbFile"
+    Public Const BSKY_CONTROL_NAME As String = "TxtBlueSky"
     Public Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
     Public Const TABPAGE_BASENAME As String = "TabPage_"
     Private Const EM_CHARFROMPOS As Int32 = &HD7
@@ -267,7 +268,7 @@ Friend Module modCbday
         Dim endName As String() = Split(oSearchName, "_(", 2)
         Return My.Settings.wikiTitleSearch.Replace("#f", oSearchName).Replace("#t", endName(0) & "_(zzzzzzzz)")
     End Function
-    Public Function GetTextBoxFromPage(_tabPage As TabPage) As RichTextBox
+    Public Function GetRichTextBoxFromPage(_tabPage As TabPage) As RichTextBox
         Dim _tabName As String = RTB_CONTROL_NAME & _tabPage.TabIndex
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
         If _controls.Any() Then

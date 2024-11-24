@@ -11,8 +11,6 @@ Imports System.Net.Http
 Imports System.Reflection
 Imports System.Text
 Imports System.Threading.Tasks
-Imports Microsoft.CodeAnalysis
-Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
 Imports Newtonsoft.Json
 ' Imports TweetSharp
 Imports Tweetinvi
@@ -55,8 +53,11 @@ Public NotInheritable Class FrmDailyTweets
 #Region "constants"
     Private Const NUD_BASENAME As String = "NudHorizontal"
     Private Const PICBOX_BASENAME As String = "pictureBox"
+    Private Const BUTTON_BASENAME As String = "BtnSend"
     Private Const SC_BASENAME As String = "SplitContainer"
     Private ReadOnly LINE_FEED As Char = Convert.ToChar(vbLf, myStringFormatProvider)
+    Private ReadOnly bits As Integer() = New Integer() {1, 0, 0, 0}
+    Private Shared ReadOnly bskyTrimChars As Char() = {","c, " "c}
 #End Region
 #Region "variables"
     Private personTable As New List(Of Person)
@@ -67,6 +68,13 @@ Public NotInheritable Class FrmDailyTweets
     Private isBuildingTrees As Boolean
     Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
     Private isInitialSelectDone As Boolean = False
+    Private scTemplate As New SplitContainer
+    Private rtbTemplate As New RichTextBox
+    Private txtTemplate As New TextBox
+    Private pbTemplate As New PictureBox
+    Private tpTemplate As New TabPage
+    Private nudTemplate As New NumericUpDown
+    Private btnTemplate As New Button
 #End Region
 #Region "properties"
     Private _daySelection As Integer
@@ -105,6 +113,7 @@ Public NotInheritable Class FrmDailyTweets
             cboDay.SelectedIndex = _daySelection - 1
             cboMonth.SelectedIndex = _monthSelection - 1
         End If
+        GetTabPageControls(TabPage1)
         BtnReGen.Enabled = isInitialSelectDone
     End Sub
     Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -113,7 +122,7 @@ Public NotInheritable Class FrmDailyTweets
         SaveSplitterDist()
         My.Settings.Save()
     End Sub
-    Private Sub Btnopyselected_Click(sender As Object, e As EventArgs) Handles BtnCopyselected.Click, CopyToolStripMenuItem.Click
+    Private Sub BtnCopyselected_Click(sender As Object, e As EventArgs) Handles BtnCopyselected.Click, CopyToolStripMenuItem.Click
         DisplayAndLog("Copy selected text")
         Dim _rtb As RichTextBox = GetRichTextBoxFromPage(TabControl1.SelectedTab)
         My.Computer.Clipboard.Clear()
@@ -219,10 +228,10 @@ Public NotInheritable Class FrmDailyTweets
 #End Region
 #Region "Form subroutines"
     Private Sub GetSplitterDist()
-        SplitContainer1.SplitterDistance = My.Settings.tweetDailySplitDist
+        SplitContainer0.SplitterDistance = My.Settings.tweetDailySplitDist
     End Sub
     Private Sub SaveSplitterDist()
-        My.Settings.tweetDailySplitDist = SplitContainer1.SplitterDistance
+        My.Settings.tweetDailySplitDist = SplitContainer0.SplitterDistance
     End Sub
     Private Sub Horizontal_ValueChanged(sender As Object, e As System.EventArgs)
         If Not IsNoGenerate Then
@@ -265,7 +274,7 @@ Public NotInheritable Class FrmDailyTweets
     End Sub
     Private Sub BtnSendClick(sender As Object, e As EventArgs)
         WriteTrace("Tweeting")
-        BtnSend.Enabled = False
+        BtnSend0.Enabled = False
         Dim _filename As String = SaveImage(TabControl1.SelectedTab)
         Dim _tweetText As String = GetRichTextBoxFromPage(TabControl1.SelectedTab).Text
         If cmbTwitterUsers.SelectedIndex >= 0 Then
@@ -280,7 +289,7 @@ Public NotInheritable Class FrmDailyTweets
                 _sendTweet.ShowDialog()
             End Using
         End If
-        BtnSend.Enabled = True
+        BtnSend0.Enabled = True
     End Sub
     Private Sub FillTwitterUserList()
         cmbTwitterUsers.Items.Clear()
@@ -309,31 +318,54 @@ Public NotInheritable Class FrmDailyTweets
         DisplayAndLog("File saved")
         Return _fileName
     End Function
-    Private Function NewSplitContainer(_index As Integer, _width As Integer, _height As Integer) As SplitContainer
+    Private Function NewSplitContainer(_index As Integer) As SplitContainer
+        Dim scTemplate As SplitContainer = GetSplitContainerFromPage(tpTemplate)
         Dim _splitContainer As New SplitContainer With {
-        .Location = New System.Drawing.Point(9, 6),
-            .Size = New System.Drawing.Size(_width, _height),
-            .SplitterDistance = 384
+            .Location = scTemplate.Location,
+            .Size = scTemplate.Size,
+            .SplitterDistance = scTemplate.SplitterDistance
         }
+        Dim _newRtb As RichTextBox = NewRichTextBox(_index, rtbTemplate)
+        Dim _newTb As TextBox = NewTextBox(_index, txtTemplate)
+        Dim _newSendButton As Button = NewButton(_index, btnTemplate, "Send", "BtnSend")
+        Dim _newNudControl As NumericUpDown = NewNumericUpDown(_index, nudTemplate)
         With _splitContainer
-            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            .Location = New System.Drawing.Point(9, 6)
+            .BorderStyle = scTemplate.BorderStyle
             .Name = "SplitContainer" & _index
-            .Anchor = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom _
-                Or System.Windows.Forms.AnchorStyles.Left _
-                Or System.Windows.Forms.AnchorStyles.Right
-            .Panel1.BackColor = Color.AliceBlue
-            .Panel1.Controls.Add(NewNumericUpDown(_index, 47, 521))
-            .Panel1.Controls.Add(NewLabel(_index, 3, 522, "Width", "Label1"))
-            .Panel1.Controls.Add(NewPictureBox(_index))
-            Dim _newSendButton As Button = NewButton(_index, 213, 518, "Send", "BtnSend")
+            .Anchor = scTemplate.Anchor
+            .Panel1.BackColor = scTemplate.Panel1.BackColor
+            '        Dim _newNudControl As NumericUpDown = GetNudFromPage(tpTemplate)
+            ' .Panel1.Controls.Add(NewNumericUpDown(_index, 47, 521))
+            .Panel1.Controls.Add(_newNudControl)
+
+
+            .Panel1.Controls.Add(NewPictureBox(_index, pbTemplate))
+            .Panel1.Controls.Add(NewLabel(_index, pbTemplate.Location.X, nudTemplate.Location.Y, "Width", "Label1"))
+            '       Dim _newSendButton As Button = NewButton(_index, 213, 518, "Send", "BtnSend")
+            '      Dim _newSendButton As Button = GetButtonFromPage(tpTemplate)
             .Panel1.Controls.Add(_newSendButton)
             AddHandler _newSendButton.Click, AddressOf BtnSendClick
-            .Panel2.BackColor = Color.AliceBlue
-            .Panel2.Controls.Add(NewRichTextBox(_index, _splitContainer.Panel2.Size.Width - 6, _splitContainer.Panel2.Size.Height - 6))
+            .Panel2.BackColor = scTemplate.Panel2.BackColor
+            .Panel2.Controls.Add(_newTb)
+            .Panel2.Controls.Add(_newRtb)
         End With
         Return _splitContainer
     End Function
+    Private Shared Function NewButton(_index As String, pTemplate As Button, _text As String, _buttonNameBase As String) As Button
+        Dim _button As New Button
+        With _button
+            .Anchor = pTemplate.Anchor
+            .Font = pTemplate.Font
+            .ForeColor = pTemplate.ForeColor
+            .Location = pTemplate.Location
+            .Name = _buttonNameBase & _index
+            .Size = pTemplate.Size
+            .Text = _text
+            .UseVisualStyleBackColor = True
+        End With
+        Return _button
+    End Function
+
     Private Shared Function NewButton(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _buttonNameBase As String) As Button
         Dim _button As New Button
         With _button
@@ -360,54 +392,94 @@ Public NotInheritable Class FrmDailyTweets
         End With
         Return _label1
     End Function
-    Private Shared Function NewPictureBox(_index As String) As PictureBox
+    Private Shared Function NewPictureBox(_index As String, pTemplate As PictureBox) As PictureBox
         Dim _picBox As New PictureBox
         With _picBox
-            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            .Location = New System.Drawing.Point(3, 3)
+            .BorderStyle = pTemplate.BorderStyle
+            .Location = pTemplate.Location
             .Name = "PictureBox" & _index
-            .Size = New System.Drawing.Size(360, 360)
-            .SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+            .Size = pTemplate.Size
+            .SizeMode = pTemplate.SizeMode
         End With
         Return _picBox
+    End Function
+    Private Function NewNumericUpDown(_index As String, pTemplate As NumericUpDown) As NumericUpDown
+        Dim _nud As New NumericUpDown
+        With _nud
+            .Anchor = pTemplate.Anchor
+            .Location = pTemplate.Location
+            .Minimum = pTemplate.Minimum
+            .Name = NUD_BASENAME & _index
+            .Size = pTemplate.Size
+            .TextAlign = pTemplate.TextAlign
+            .Value = pTemplate.Value
+        End With
+        AddHandler _nud.ValueChanged, AddressOf Horizontal_ValueChanged
+        Return _nud
     End Function
     Private Function NewNumericUpDown(_index As String, _locationX As Integer, _locationY As Integer) As NumericUpDown
         Dim _nud As New NumericUpDown
         With _nud
             .Anchor = System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left
             .Location = New System.Drawing.Point(_locationX, _locationY)
-            .Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+            .Minimum = New Decimal(bits)
             .Name = NUD_BASENAME & _index
             .Size = New System.Drawing.Size(53, 22)
             .TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-            .Value = New Decimal(New Integer() {1, 0, 0, 0})
+            .Value = New Decimal(bits)
         End With
         AddHandler _nud.ValueChanged, AddressOf Horizontal_ValueChanged
         Return _nud
     End Function
-    Private Function NewRichTextBox(_index As String, _width As Integer, _height As Integer) As RichTextBox
+    Private Function NewRichTextBox(_index As String, pTemplate As RichTextBox) As RichTextBox
         Dim _newRtb As New System.Windows.Forms.RichTextBox()
         With _newRtb
-            .Anchor = System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom _
-           Or System.Windows.Forms.AnchorStyles.Left _
-           Or System.Windows.Forms.AnchorStyles.Right
-            .Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0)
-            .Location = New System.Drawing.Point(3, 3)
+            .Anchor = pTemplate.Anchor
+            .Font = pTemplate.Font
+            .Location = pTemplate.Location
             .Name = RTB_CONTROL_NAME & _index
-            .Size = New System.Drawing.Size(_width, _height)
+            .Size = pTemplate.Size
             .Text = ""
             .ContextMenuStrip = ContextMenuStrip1
         End With
         AddHandler _newRtb.TextChanged, AddressOf RtbTextChanged
         Return _newRtb
     End Function
+    Private Function NewTextBox(_index As String, ptemplate As TextBox) As TextBox
+        Dim _newTextBox As New System.Windows.Forms.TextBox()
+        With _newTextBox
+            .Anchor = ptemplate.Anchor
+            .Font = ptemplate.Font
+            .Location = ptemplate.Location
+            .Name = BSKY_CONTROL_NAME & _index
+            .Size = ptemplate.Size
+            .Text = ""
+            .Multiline = ptemplate.Multiline
+            .ContextMenuStrip = ContextMenuStrip1
+        End With
+        Return _newTextBox
+    End Function
     Private Shared Function GetPictureBoxFromPage(_tabpage As TabPage) As PictureBox
         Dim _index As Integer = _tabpage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
         Dim _controls As Control() = _sc.Panel1.Controls.Find(PICBOX_BASENAME & _index, False)
-        If _controls.Any() Then
+        If _controls.Length > 0 Then
             For _controlIndex = 0 To _controls.GetUpperBound(0)
                 If TryCast(_controls(_controlIndex), PictureBox) IsNot Nothing Then
+                    Return _controls(_controlIndex)
+                    Exit For
+                End If
+            Next
+        End If
+        Return Nothing
+    End Function
+    Private Shared Function GetButtonFromPage(_tabpage As TabPage) As Button
+        Dim _index As Integer = _tabpage.TabIndex
+        Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
+        Dim _controls As Control() = _sc.Panel1.Controls.Find(BUTTON_BASENAME & _index, False)
+        If _controls.Length > 0 Then
+            For _controlIndex = 0 To _controls.GetUpperBound(0)
+                If TryCast(_controls(_controlIndex), Button) IsNot Nothing Then
                     Return _controls(_controlIndex)
                     Exit For
                 End If
@@ -419,7 +491,7 @@ Public NotInheritable Class FrmDailyTweets
         Dim _index As Integer = _tabpage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabpage)
         Dim _controls As Control() = _sc.Panel1.Controls.Find(NUD_BASENAME & _index, False)
-        If _controls.Any() Then
+        If _controls.Length > 0 Then
             For _controlIndex = 0 To _controls.GetUpperBound(0)
                 If TryCast(_controls(0), NumericUpDown) IsNot Nothing Then
                     Return _controls(_controlIndex)
@@ -430,12 +502,26 @@ Public NotInheritable Class FrmDailyTweets
         Return Nothing
     End Function
     Private Shared Function GetRichTextBoxFromPage(_tabPage As TabPage) As RichTextBox
-        Dim _tabName As String = RTB_CONTROL_NAME & _tabPage.TabIndex
+        Dim _rtbName As String = RTB_CONTROL_NAME & _tabPage.TabIndex
         Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabPage)
-        Dim _controls As Control() = _sc.Panel2.Controls.Find(_tabName, False)
-        If _controls.Any() Then
+        Dim _controls As Control() = _sc.Panel2.Controls.Find(_rtbName, False)
+        If _controls.Length > 0 Then
             For _controlIndex = 0 To _controls.GetUpperBound(0)
                 If TryCast(_controls(_controlIndex), RichTextBox) IsNot Nothing Then
+                    Return _controls(_controlIndex)
+                    Exit For
+                End If
+            Next
+        End If
+        Return Nothing
+    End Function
+    Private Shared Function GetTextBoxFromPage(_tabPage As TabPage) As TextBox
+        Dim _tbName As String = BSKY_CONTROL_NAME & _tabPage.TabIndex
+        Dim _sc As SplitContainer = GetSplitContainerFromPage(_tabPage)
+        Dim _controls As Control() = _sc.Panel2.Controls.Find(_tbName, False)
+        If _controls.Length > 0 Then
+            For _controlIndex = 0 To _controls.GetUpperBound(0)
+                If TryCast(_controls(_controlIndex), TextBox) IsNot Nothing Then
                     Return _controls(_controlIndex)
                     Exit For
                 End If
@@ -446,7 +532,7 @@ Public NotInheritable Class FrmDailyTweets
     Private Shared Function GetSplitContainerFromPage(_tabPage As TabPage) As SplitContainer
         Dim _tabName As String = SC_BASENAME & _tabPage.TabIndex
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
-        If _controls.Any() Then
+        If _controls.Length > 0 Then
             For _controlIndex = 0 To _controls.GetUpperBound(0)
                 If TryCast(_controls(_controlIndex), SplitContainer) IsNot Nothing Then
                     Return _controls(_controlIndex)
@@ -610,7 +696,6 @@ Public NotInheritable Class FrmDailyTweets
                 Else
                     MsgBox("No birthdays selected", MsgBoxStyle.Information, "Warning")
                 End If
-
                 _imageStart = oTweetLists.Count
                 If oAnniversaryList.Count > 0 Then
                     Dim _annivImageTweets As List(Of List(Of Person)) = SplitIntoTweets(oAnniversaryList, _dateLength + ANNIV_HDR.Length + 3, TweetType.Anniversary)
@@ -620,11 +705,22 @@ Public NotInheritable Class FrmDailyTweets
                     MsgBox("No anniversaries selected", MsgBoxStyle.Information, "Warning")
                 End If
             End If
-                DisplayAndLog("Images Complete")
+            DisplayAndLog("Images Complete")
         Else
             MsgBox("Select some people", MsgBoxStyle.Exclamation, "Error")
         End If
     End Sub
+
+    Private Sub GetTabPageControls(tabPage As TabPage)
+        tpTemplate = tabPage
+        scTemplate = GetSplitContainerFromPage(tabPage)
+        rtbTemplate = GetRichTextBoxFromPage(tabPage)
+        pbTemplate = GetPictureBoxFromPage(tabPage)
+        txtTemplate = GetTextBoxFromPage(tabPage)
+        btnTemplate = GetButtonFromPage(tabPage)
+        nudTemplate = GetNudFromPage(tabPage)
+    End Sub
+
     Private Sub GenerateTweets(_tweetLists As List(Of List(Of Person)), _listStart As Integer, _tweetType As TweetType)
         For _personIndex As Integer = _listStart To _tweetLists.Count - 1
 
@@ -633,6 +729,7 @@ Public NotInheritable Class FrmDailyTweets
             Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, _tweetType.ToString & "_" & (_personIndex - _listStart + 1))
             Dim pbControl As PictureBox = GetPictureBoxFromPage(newTweetTabPage)
             Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
+            Dim txtControl As TextBox = GetTextBoxFromPage(newTweetTabPage)
             IsNoGenerate = True
             TabControl1.TabPages.Add(newTweetTabPage)
             Dim personCt As Integer = _personList.Count
@@ -649,18 +746,29 @@ Public NotInheritable Class FrmDailyTweets
             GetNudFromPage(newTweetTabPage).Value = colCt
             Dim _width As Integer = colCt
             GeneratePicture(pbControl, _personList, _width)
-            GenerateText(rtbControl, _personList, _tweetType, _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
+            GenerateText(rtbControl, txtControl, _personList, _tweetType, _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
             IsNoGenerate = False
         Next
     End Sub
-    Private Sub GenerateText(_textBox As RichTextBox, _imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer)
+
+
+    Private Sub GenerateText(pRichTextBox As RichTextBox, pTextBox As TextBox, _imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer)
         DisplayAndLog("Generating text")
+        Dim _linefeed As String = LINE_FEED
+        If CbBlueSky.Checked = True Then
+            _linefeed = vbCrLf
+            ChkAtNextBirthday.Checked = False
+            rbAges.Checked = True
+        End If
         Dim _outString As New StringBuilder
-        _outString.Append(cboMonth.SelectedItem).Append(" "c).Append(cboDay.SelectedItem).Append(LINE_FEED).Append(LINE_FEED)
-        _outString.Append(GetHeading(_type)).Append(LINE_FEED)
+        _outString.Append(cboMonth.SelectedItem).Append(" "c).Append(cboDay.SelectedItem).Append(_linefeed).Append(_linefeed)
+        _outString.Append(GetHeading(_type)).Append(_linefeed)
+        Dim _altString As New StringBuilder
+        _altString.Append("Thumbnail pictures of ")
         Dim _footer As String = If(_numberOfLists > 1, _index & "/" & _numberOfLists, "")
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
+            _altString.Append(_person.Name).Append(", ")
             If rbAges.Checked Then
                 If _type = TweetType.Birthday Then
                     _outString.Append(" (" & CalculateAge(_person, ChkAtNextBirthday.Checked) & ")")
@@ -678,12 +786,14 @@ Public NotInheritable Class FrmDailyTweets
                     _outString.Append(" @").Append(_person.Social.TwitterHandle)
                 End If
             End If
-            _outString.Append(LINE_FEED)
+            _outString.Append(_linefeed)
         Next
         If Not String.IsNullOrEmpty(_footer) Then
-            _outString.Append(LINE_FEED).Append(_footer)
+            _outString.Append(_linefeed).Append(_footer)
         End If
-        _textBox.Text = _outString.ToString.Trim(LINE_FEED)
+        pRichTextBox.Text = _outString.ToString.Trim(_linefeed)
+        pTextBox.Text = _altString.ToString
+        pTextBox.Text = pTextBox.Text.Trim(bskyTrimChars)
     End Sub
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
         DisplayAndLog("Generating picture")
@@ -811,12 +921,21 @@ Public NotInheritable Class FrmDailyTweets
             '   .Location = New System.Drawing.Point(4, 22)
             .Name = "ImageTabPage_" & _index
             .Padding = New System.Windows.Forms.Padding(3)
-            .Size = New System.Drawing.Size(698, 574)
-            .BackColor = Color.AliceBlue
-            .Controls.Add(NewSplitContainer(newTabpage.TabIndex, newTabpage.Size.Width - 10, newTabpage.Size.Height - 10))
+            .Size = tpTemplate.Size
+            .BackColor = tpTemplate.BackColor
+            .Controls.Add(NewSplitContainer(newTabpage.TabIndex))
         End With
         Return newTabpage
     End Function
+
+    Private Sub BtnCopyAlt_Click(sender As Object, e As EventArgs) Handles BtnCopyAlt.Click
+        DisplayAndLog("Copy alt text")
+        Dim _tb As TextBox = GetTextBoxFromPage(TabControl1.SelectedTab)
+        My.Computer.Clipboard.Clear()
+        If _tb IsNot Nothing Then
+            My.Computer.Clipboard.SetText(_tb.Text.Trim(vbCrLf))
+        End If
+    End Sub
 
 #End Region
 End Class
