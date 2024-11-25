@@ -89,6 +89,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to https://bsky.app/.
+        '''</summary>
+        Friend ReadOnly Property BLUESKYURL() As String
+            Get
+                Return ResourceManager.GetString("BLUESKYURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to BOTSD_.
         '''</summary>
         Friend ReadOnly Property BOTSD() As String
@@ -392,15 +401,6 @@ Namespace My.Resources
         Friend ReadOnly Property TOTD() As String
             Get
                 Return ResourceManager.GetString("TOTD", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to https://tweetdeck.twitter.com/.
-        '''</summary>
-        Friend ReadOnly Property TWEETDECKURL() As String
-            Get
-                Return ResourceManager.GetString("TWEETDECKURL", resourceCulture)
             End Get
         End Property
         

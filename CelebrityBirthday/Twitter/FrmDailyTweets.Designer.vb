@@ -68,6 +68,7 @@ Partial Class FrmDailyTweets
         Me.BtnExplorer = New System.Windows.Forms.Button()
         Me.CbBlueSky = New System.Windows.Forms.CheckBox()
         Me.BtnCopyAlt = New System.Windows.Forms.Button()
+        Me.BtnBsky = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudHorizontal0, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -662,7 +663,7 @@ Partial Class FrmDailyTweets
         Me.BtnUncheck.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnUncheck.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUncheck.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnUncheck.Location = New System.Drawing.Point(14, 752)
+        Me.BtnUncheck.Location = New System.Drawing.Point(14, 751)
         Me.BtnUncheck.Name = "BtnUncheck"
         Me.BtnUncheck.Size = New System.Drawing.Size(95, 29)
         Me.BtnUncheck.TabIndex = 39
@@ -731,12 +732,25 @@ Partial Class FrmDailyTweets
         Me.BtnCopyAlt.Text = "Copy alt"
         Me.BtnCopyAlt.UseVisualStyleBackColor = True
         '
+        'BtnBsky
+        '
+        Me.BtnBsky.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnBsky.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBsky.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.BtnBsky.Location = New System.Drawing.Point(684, 749)
+        Me.BtnBsky.Name = "BtnBsky"
+        Me.BtnBsky.Size = New System.Drawing.Size(139, 33)
+        Me.BtnBsky.TabIndex = 46
+        Me.BtnBsky.Text = "Open Bluesky"
+        Me.BtnBsky.UseVisualStyleBackColor = True
+        '
         'FrmDailyTweets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1348, 820)
+        Me.Controls.Add(Me.BtnBsky)
         Me.Controls.Add(Me.BtnCopyAlt)
         Me.Controls.Add(Me.CbBlueSky)
         Me.Controls.Add(Me.BtnExplorer)
@@ -855,4 +869,5 @@ Partial Class FrmDailyTweets
     Friend WithEvents TxtBlueSky0 As TextBox
     Friend WithEvents CbBlueSky As CheckBox
     Friend WithEvents BtnCopyAlt As Button
+    Friend WithEvents BtnBsky As Button
 End Class

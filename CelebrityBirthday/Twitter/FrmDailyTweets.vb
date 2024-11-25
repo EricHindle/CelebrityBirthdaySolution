@@ -226,6 +226,17 @@ Public NotInheritable Class FrmDailyTweets
             My.Computer.Clipboard.SetText(_tb.Text.Trim(LINE_FEED))
         End If
     End Sub
+    Private Sub BtnBsky_Click(sender As Object, e As EventArgs) Handles BtnBsky.Click
+        DisplayAndLog("Opening Bluesky")
+        Try
+            Process.Start(My.Resources.BLUESKYURL)
+        Catch ex As InvalidOperationException
+            ShowStatus("Error opening Bluesky", LblStatus, True, MyBase.Name, ex)
+        Catch ex As ComponentModel.Win32Exception
+            ShowStatus("Error opening Bluesky", LblStatus, True, MyBase.Name, ex)
+        End Try
+    End Sub
+
 #End Region
 #Region "Form subroutines"
     Private Sub GetSplitterDist()
