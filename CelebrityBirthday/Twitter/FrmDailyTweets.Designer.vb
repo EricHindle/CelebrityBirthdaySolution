@@ -66,7 +66,6 @@ Partial Class FrmDailyTweets
         Me.BtnDeleteImages = New System.Windows.Forms.Button()
         Me.BtnNext = New System.Windows.Forms.Button()
         Me.BtnExplorer = New System.Windows.Forms.Button()
-        Me.BtnTweetDeck = New System.Windows.Forms.Button()
         Me.CbBlueSky = New System.Windows.Forms.CheckBox()
         Me.BtnCopyAlt = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
@@ -702,20 +701,8 @@ Partial Class FrmDailyTweets
         Me.BtnExplorer.Name = "BtnExplorer"
         Me.BtnExplorer.Size = New System.Drawing.Size(139, 33)
         Me.BtnExplorer.TabIndex = 42
-        Me.BtnExplorer.Text = "Open Explorer"
+        Me.BtnExplorer.Text = "Open File Explorer"
         Me.BtnExplorer.UseVisualStyleBackColor = True
-        '
-        'BtnTweetDeck
-        '
-        Me.BtnTweetDeck.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnTweetDeck.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnTweetDeck.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnTweetDeck.Location = New System.Drawing.Point(656, 749)
-        Me.BtnTweetDeck.Name = "BtnTweetDeck"
-        Me.BtnTweetDeck.Size = New System.Drawing.Size(155, 33)
-        Me.BtnTweetDeck.TabIndex = 43
-        Me.BtnTweetDeck.Text = "Open TweetDeck"
-        Me.BtnTweetDeck.UseVisualStyleBackColor = True
         '
         'CbBlueSky
         '
@@ -752,7 +739,6 @@ Partial Class FrmDailyTweets
         Me.ClientSize = New System.Drawing.Size(1348, 820)
         Me.Controls.Add(Me.BtnCopyAlt)
         Me.Controls.Add(Me.CbBlueSky)
-        Me.Controls.Add(Me.BtnTweetDeck)
         Me.Controls.Add(Me.BtnExplorer)
         Me.Controls.Add(Me.BtnNext)
         Me.Controls.Add(Me.BtnDeleteImages)
@@ -865,7 +851,6 @@ Partial Class FrmDailyTweets
     Friend WithEvents BtnDeleteImages As Button
     Friend WithEvents BtnNext As Button
     Friend WithEvents BtnExplorer As Button
-    Friend WithEvents BtnTweetDeck As Button
     Friend WithEvents ChkAtNextBirthday As CheckBox
     Friend WithEvents TxtBlueSky0 As TextBox
     Friend WithEvents CbBlueSky As CheckBox

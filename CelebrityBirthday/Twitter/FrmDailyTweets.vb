@@ -12,7 +12,6 @@ Imports System.Reflection
 Imports System.Text
 Imports System.Threading.Tasks
 Imports Newtonsoft.Json
-' Imports TweetSharp
 Imports Tweetinvi
 Imports Tweetinvi.Core.Web
 Imports Tweetinvi.Models
@@ -154,10 +153,12 @@ Public NotInheritable Class FrmDailyTweets
         SelectPeople()
     End Sub
     Private Sub BtnReGen_Click(sender As Object, e As EventArgs) Handles BtnReGen.Click
+        DisplayAndLog("ReGenerating Tweets for selected date")
         GenerateAllTweets()
     End Sub
     Private Sub BtnTotd_Click(sender As Object, e As EventArgs) Handles BtnTotd.Click
         If CountOfCheckedNames() = 1 Then
+            DisplayAndLog("Generating Tweet of the Day")
             Dim newPageIndex As Integer = TabControl1.TabCount
             Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(newPageIndex, My.Resources.TOTD)
             Dim rtbControl As RichTextBox = GetRichTextBoxFromPage(newTweetTabPage)
@@ -178,6 +179,8 @@ Public NotInheritable Class FrmDailyTweets
             Next
             TabControl1.TabPages.Add(newTweetTabPage)
             RtbTextChanged(Nothing, Nothing)
+        Else
+            ShowStatus("Select a single person", LblStatus,, True)
         End If
     End Sub
     Private Sub BtnUncheck_Click(sender As Object, e As EventArgs) Handles BtnUncheck.Click
@@ -215,15 +218,13 @@ Public NotInheritable Class FrmDailyTweets
         }
         Process.Start(p)
     End Sub
-    Private Sub BtnTweetDeck_Click(sender As Object, e As EventArgs) Handles BtnTweetDeck.Click
-        DisplayAndLog("Opening tweetdeck")
-        Try
-            Process.Start(My.Resources.TWEETDECKURL)
-        Catch ex As InvalidOperationException
-            ShowStatus("Error opening tweetdeck", LblStatus, True, MyBase.Name, ex)
-        Catch ex As ComponentModel.Win32Exception
-            ShowStatus("Error opening tweetdeck", LblStatus, True, MyBase.Name, ex)
-        End Try
+    Private Sub BtnCopyAlt_Click(sender As Object, e As EventArgs) Handles BtnCopyAlt.Click
+        DisplayAndLog("Copy alt text")
+        Dim _tb As TextBox = GetTextBoxFromPage(TabControl1.SelectedTab)
+        My.Computer.Clipboard.Clear()
+        If _tb IsNot Nothing Then
+            My.Computer.Clipboard.SetText(_tb.Text.Trim(LINE_FEED))
+        End If
     End Sub
 #End Region
 #Region "Form subroutines"
@@ -337,8 +338,6 @@ Public NotInheritable Class FrmDailyTweets
             '        Dim _newNudControl As NumericUpDown = GetNudFromPage(tpTemplate)
             ' .Panel1.Controls.Add(NewNumericUpDown(_index, 47, 521))
             .Panel1.Controls.Add(_newNudControl)
-
-
             .Panel1.Controls.Add(NewPictureBox(_index, pbTemplate))
             .Panel1.Controls.Add(NewLabel(_index, pbTemplate.Location.X, nudTemplate.Location.Y, "Width", "Label1"))
             '       Dim _newSendButton As Button = NewButton(_index, 213, 518, "Send", "BtnSend")
@@ -365,7 +364,6 @@ Public NotInheritable Class FrmDailyTweets
         End With
         Return _button
     End Function
-
     Private Shared Function NewButton(_index As String, _locationX As Integer, _locationY As Integer, _text As String, _buttonNameBase As String) As Button
         Dim _button As New Button
         With _button
@@ -710,7 +708,6 @@ Public NotInheritable Class FrmDailyTweets
             MsgBox("Select some people", MsgBoxStyle.Exclamation, "Error")
         End If
     End Sub
-
     Private Sub GetTabPageControls(tabPage As TabPage)
         tpTemplate = tabPage
         scTemplate = GetSplitContainerFromPage(tabPage)
@@ -720,10 +717,8 @@ Public NotInheritable Class FrmDailyTweets
         btnTemplate = GetButtonFromPage(tabPage)
         nudTemplate = GetNudFromPage(tabPage)
     End Sub
-
     Private Sub GenerateTweets(_tweetLists As List(Of List(Of Person)), _listStart As Integer, _tweetType As TweetType)
         For _personIndex As Integer = _listStart To _tweetLists.Count - 1
-
             Dim _personList As List(Of Person) = _tweetLists(_personIndex)
             DisplayAndLog(">" & _personIndex)
             Dim newTweetTabPage As TabPage = CreateNewTweetTabPage(_personIndex, _tweetType.ToString & "_" & (_personIndex - _listStart + 1))
@@ -750,19 +745,15 @@ Public NotInheritable Class FrmDailyTweets
             IsNoGenerate = False
         Next
     End Sub
-
-
     Private Sub GenerateText(pRichTextBox As RichTextBox, pTextBox As TextBox, _imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer)
         DisplayAndLog("Generating text")
-        Dim _linefeed As String = LINE_FEED
         If CbBlueSky.Checked = True Then
-            _linefeed = vbCrLf
             ChkAtNextBirthday.Checked = False
             rbAges.Checked = True
         End If
         Dim _outString As New StringBuilder
-        _outString.Append(cboMonth.SelectedItem).Append(" "c).Append(cboDay.SelectedItem).Append(_linefeed).Append(_linefeed)
-        _outString.Append(GetHeading(_type)).Append(_linefeed)
+        _outString.Append(cboMonth.SelectedItem).Append(" "c).Append(cboDay.SelectedItem).Append(LINE_FEED).Append(LINE_FEED)
+        _outString.Append(GetHeading(_type)).Append(LINE_FEED)
         Dim _altString As New StringBuilder
         _altString.Append("Thumbnail pictures of ")
         Dim _footer As String = If(_numberOfLists > 1, _index & "/" & _numberOfLists, "")
@@ -786,12 +777,12 @@ Public NotInheritable Class FrmDailyTweets
                     _outString.Append(" @").Append(_person.Social.TwitterHandle)
                 End If
             End If
-            _outString.Append(_linefeed)
+            _outString.Append(LINE_FEED)
         Next
         If Not String.IsNullOrEmpty(_footer) Then
-            _outString.Append(_linefeed).Append(_footer)
+            _outString.Append(LINE_FEED).Append(_footer)
         End If
-        pRichTextBox.Text = _outString.ToString.Trim(_linefeed)
+        pRichTextBox.Text = _outString.ToString.Trim(LINE_FEED)
         pTextBox.Text = _altString.ToString
         pTextBox.Text = pTextBox.Text.Trim(bskyTrimChars)
     End Sub
@@ -833,9 +824,7 @@ Public NotInheritable Class FrmDailyTweets
         Dim _numberOfTweets As Integer = GetExpectedNumberOfTweets(oPersonlist, _type, availableLength, _totalLengthOfTweet)
         Dim _startIndex As Integer = 0
         Dim _endIndex As Integer = oPersonlist.Count - 1
-
         Dim _numberOfNamesPerTweet As Integer = GetNumberOfPersonsPerTweet(oPersonlist.Count, _type, _numberOfTweets)
-
         Dim ListOfLists As New List(Of List(Of Person))
         Do Until _startIndex > _endIndex
             Dim _rangeCount As Integer = Math.Min(_numberOfNamesPerTweet, _endIndex + 1)
@@ -871,7 +860,6 @@ Public NotInheritable Class FrmDailyTweets
         Catch ex As OverflowException
             DisplayException(MethodBase.GetCurrentMethod, ex, "Overflow")
         End Try
-
         Return _numberOfPersonsPerTweet
     End Function
     Private Shared Function BuildList(oPersonList As List(Of Person)) As List(Of Person)
@@ -895,9 +883,10 @@ Public NotInheritable Class FrmDailyTweets
     End Function
     Private Function GetTweetLineLength(_person As Person, _type As TweetType) As Integer
         Dim _length As Integer = _person.Name.Length _
-            + If(rbHandles.Checked, _person.Social.TwitterHandle.Length + If(_person.Social.TwitterHandle.Length > 0, 2, 0), 0) _
-+ If(_type = TweetType.Birthday And rbAges.Checked, 5, 0) _
-+ If(_type = TweetType.Anniversary And rbAges.Checked, 7, 0) _
+            + If(rbHandles.Checked, _person.Social.TwitterHandle.Length _
+            + If(_person.Social.TwitterHandle.Length > 0, 2, 0), 0) _
+            + If(_type = TweetType.Birthday And rbAges.Checked, 5, 0) _
+            + If(_type = TweetType.Anniversary And rbAges.Checked, 7, 0) _
             + 1
         Return _length
     End Function
@@ -927,15 +916,5 @@ Public NotInheritable Class FrmDailyTweets
         End With
         Return newTabpage
     End Function
-
-    Private Sub BtnCopyAlt_Click(sender As Object, e As EventArgs) Handles BtnCopyAlt.Click
-        DisplayAndLog("Copy alt text")
-        Dim _tb As TextBox = GetTextBoxFromPage(TabControl1.SelectedTab)
-        My.Computer.Clipboard.Clear()
-        If _tb IsNot Nothing Then
-            My.Computer.Clipboard.SetText(_tb.Text.Trim(vbCrLf))
-        End If
-    End Sub
-
 #End Region
 End Class
