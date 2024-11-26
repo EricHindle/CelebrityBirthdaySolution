@@ -18,6 +18,7 @@ Friend Module modCbday
     Public Const ANNIV_HDR As String = "Today is the anniversary of the birth of"
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Public Const TWEET_MAX_LEN As Integer = 280
+    Public Const BSKY_MAX_LEN As Integer = 300
     Public Const RTB_CONTROL_NAME As String = "RtbFile"
     Public Const BSKY_CONTROL_NAME As String = "TxtBlueSky"
     Public Const BUTTON_CONTROL_NAME As String = "BtnRewrite"
@@ -271,7 +272,7 @@ Friend Module modCbday
     Public Function GetRichTextBoxFromPage(_tabPage As TabPage) As RichTextBox
         Dim _tabName As String = RTB_CONTROL_NAME & _tabPage.TabIndex
         Dim _controls As Control() = _tabPage.Controls.Find(_tabName, False)
-        If _controls.Any() Then
+        If _controls.Length > 0 Then
             For _controlIndex = 0 To _controls.GetUpperBound(0)
                 If TryCast(_controls(_controlIndex), RichTextBox) IsNot Nothing Then
                     Return _controls(_controlIndex)
@@ -314,18 +315,20 @@ Friend Module modCbday
             wikipage = sr.ReadToEnd
             Dim jss As New JavaScriptSerializer()
             Dim extractDictionary As Dictionary(Of String, Object) = jss.Deserialize(Of Dictionary(Of String, Object))(wikipage)
-            If extractDictionary.ContainsKey("query") Then
-                Dim queryDictionary As Dictionary(Of String, Object) = extractDictionary("query")
-                If queryDictionary.ContainsKey("pages") Then
-                    Dim _pagesList As ArrayList = TryCast(queryDictionary("pages"), ArrayList)
+            Dim queryDictionary As New Dictionary(Of String, Object)
+            If extractDictionary.TryGetValue("query", queryDictionary) Then
+                Dim _pages As New Object
+                If queryDictionary.TryGetValue("pages", _pages) Then
+                    Dim _pagesList As ArrayList = TryCast(_pages, ArrayList)
                     If _pagesList IsNot Nothing Then
                         Dim pageDictionary As Dictionary(Of String, Object) = _pagesList(0)
-                        If pageDictionary.ContainsKey("extract") Then
-                            _extract = TryCast(pageDictionary("extract"), String)
+                        Dim _extractString As String = String.Empty
+                        If pageDictionary.TryGetValue("extract", _extractString) Then
+                            _extract = TryCast(_extract, String)
                             _extract = _extract.Replace(vbLf, " ").Replace(".", ". ").Replace("  ", " ")
                         End If
                     End If
-                End If
+                    End If
             End If
 
             sr.Dispose()

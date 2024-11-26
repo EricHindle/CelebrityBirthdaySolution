@@ -12,7 +12,7 @@ Public Class FrmTwitterOutput
 #Region "variables"
 #End Region
 #Region "constants"
-
+    Private Shared ReadOnly unicode As Integer() = {8207, 32}
 #End Region
 #Region "form control handlers"
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -192,7 +192,7 @@ Public Class FrmTwitterOutput
                         WriteTypes(_datenode, _outfile)
                     End Using
                     DisplayAndLog("Written file " & _filename)
-                    If _controls.Any() Then
+                    If _controls.Length > 0 Then
                         LoadRtb(TryCast(_controls(0), RichTextBox), _filename)
                     End If
                     fileCount += 1
@@ -297,7 +297,7 @@ Public Class FrmTwitterOutput
             If rbTwitter.Checked Then
                 If _node.Name = "twitter" Then
                     If _node.Checked Then
-                        _additionalText = " @" & RemoveBadCharacters(_node.Text, {8207, 32})
+                        _additionalText = " @" & RemoveBadCharacters(_node.Text, unicode)
                     End If
                 End If
             ElseIf rbAge.Checked Then

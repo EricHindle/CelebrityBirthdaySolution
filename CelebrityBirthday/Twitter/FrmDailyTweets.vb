@@ -59,6 +59,7 @@ Public NotInheritable Class FrmDailyTweets
     Private Shared ReadOnly bskyTrimChars As Char() = {","c, " "c}
 #End Region
 #Region "variables"
+    Private POST_MAX_LEN As Integer
     Private personTable As New List(Of Person)
     Private oBirthdayList As New List(Of Person)
     Private oAnniversaryList As New List(Of Person)
@@ -113,6 +114,7 @@ Public NotInheritable Class FrmDailyTweets
             cboMonth.SelectedIndex = _monthSelection - 1
         End If
         GetTabPageControls(TabPage1)
+        POST_MAX_LEN = TWEET_MAX_LEN
         BtnReGen.Enabled = isInitialSelectDone
     End Sub
     Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -266,7 +268,7 @@ Public NotInheritable Class FrmDailyTweets
         TxtStats.Text = ""
         For Each _page As TabPage In TabControl1.TabPages
             Dim _rtb As RichTextBox = GetRichTextBoxFromPage(_page)
-            TxtStats.Text &= If(_rtb.TextLength >= TWEET_MAX_LEN, "** ", "") & _rtb.TextLength & vbCrLf
+            TxtStats.Text &= If(_rtb.TextLength >= POST_MAX_LEN, "** ", "") & _rtb.TextLength & vbCrLf
         Next
     End Sub
     Private Sub SelectPeople()
@@ -676,6 +678,11 @@ Public NotInheritable Class FrmDailyTweets
     Private Sub GenerateAllTweets()
         DisplayAndLog("Generating all tweets")
         TxtStats.Text = ""
+        If CbBlueSky.Checked Then
+            POST_MAX_LEN = BSKY_MAX_LEN
+        Else
+            POST_MAX_LEN = TWEET_MAX_LEN
+        End If
         If cboDay.SelectedIndex > -1 AndAlso cboMonth.SelectedIndex > -1 Then
             TabControl1.TabPages.Clear()
             TabControl1.Refresh()
@@ -829,7 +836,7 @@ Public NotInheritable Class FrmDailyTweets
         End If
     End Sub
     Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As TweetType) As List(Of List(Of Person))
-        Dim availableLength As Integer = TWEET_MAX_LEN - _headerLength
+        Dim availableLength As Integer = POST_MAX_LEN - _headerLength
         Dim _totalLengthOfTweet As Integer = 0
         Dim _lengthsText As String = ""
         Dim _numberOfTweets As Integer = GetExpectedNumberOfTweets(oPersonlist, _type, availableLength, _totalLengthOfTweet)
