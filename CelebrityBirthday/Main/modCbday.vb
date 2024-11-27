@@ -324,7 +324,7 @@ Friend Module modCbday
                         Dim pageDictionary As Dictionary(Of String, Object) = _pagesList(0)
                         Dim _extractString As String = String.Empty
                         If pageDictionary.TryGetValue("extract", _extractString) Then
-                            _extract = TryCast(_extract, String)
+                            _extract = TryCast(_extractString, String)
                             _extract = _extract.Replace(vbLf, " ").Replace(".", ". ").Replace("  ", " ")
                         End If
                     End If
