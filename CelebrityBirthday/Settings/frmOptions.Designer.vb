@@ -69,6 +69,8 @@ Partial Class FrmOptions
         Me.NudRetention = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.ChkShowImages = New System.Windows.Forms.CheckBox()
+        Me.ChkBluesky = New System.Windows.Forms.CheckBox()
+        Me.ChkBskyDesc = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.NudSentences, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -557,12 +559,36 @@ Partial Class FrmOptions
         Me.ChkShowImages.Text = "Show Images"
         Me.ChkShowImages.UseVisualStyleBackColor = True
         '
+        'ChkBluesky
+        '
+        Me.ChkBluesky.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChkBluesky.AutoSize = True
+        Me.ChkBluesky.Location = New System.Drawing.Point(698, 22)
+        Me.ChkBluesky.Name = "ChkBluesky"
+        Me.ChkBluesky.Size = New System.Drawing.Size(155, 18)
+        Me.ChkBluesky.TabIndex = 29
+        Me.ChkBluesky.Text = "BlueSky post by default"
+        Me.ChkBluesky.UseVisualStyleBackColor = True
+        '
+        'ChkBskyDesc
+        '
+        Me.ChkBskyDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChkBskyDesc.AutoSize = True
+        Me.ChkBskyDesc.Location = New System.Drawing.Point(698, 46)
+        Me.ChkBskyDesc.Name = "ChkBskyDesc"
+        Me.ChkBskyDesc.Size = New System.Drawing.Size(153, 18)
+        Me.ChkBskyDesc.TabIndex = 30
+        Me.ChkBskyDesc.Text = "BlueSky alt descriptions"
+        Me.ChkBskyDesc.UseVisualStyleBackColor = True
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(693, 722)
+        Me.ClientSize = New System.Drawing.Size(865, 722)
+        Me.Controls.Add(Me.ChkBskyDesc)
+        Me.Controls.Add(Me.ChkBluesky)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.BtnBackup)
@@ -643,4 +669,6 @@ Partial Class FrmOptions
     Friend WithEvents NudRetention As NumericUpDown
     Friend WithEvents GroupBox5 As GroupBox
     Friend WithEvents ChkShowImages As CheckBox
+    Friend WithEvents ChkBluesky As CheckBox
+    Friend WithEvents ChkBskyDesc As CheckBox
 End Class

@@ -19,6 +19,7 @@ Friend Module modCbday
     Public Const BIRTHDAY_HDR As String = "Happy birthday today to"
     Public Const TWEET_MAX_LEN As Integer = 280
     Public Const BSKY_MAX_LEN As Integer = 300
+    Public Const BSKY_ALT_MAX_LEN As Integer = 2000
     Public Const RTB_CONTROL_NAME As String = "RtbFile"
     Public Const BSKY_CONTROL_NAME As String = "TxtBlueSky"
     Public Const BUTTON_CONTROL_NAME As String = "BtnRewrite"

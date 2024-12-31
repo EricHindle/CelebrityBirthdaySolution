@@ -66,9 +66,11 @@ Partial Class FrmDailyTweets
         Me.BtnDeleteImages = New System.Windows.Forms.Button()
         Me.BtnNext = New System.Windows.Forms.Button()
         Me.BtnExplorer = New System.Windows.Forms.Button()
-        Me.CbBlueSky = New System.Windows.Forms.CheckBox()
+        Me.ChkBlueSky = New System.Windows.Forms.CheckBox()
         Me.BtnCopyAlt = New System.Windows.Forms.Button()
         Me.BtnBsky = New System.Windows.Forms.Button()
+        Me.ChkIncDesc = New System.Windows.Forms.CheckBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudHorizontal0, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -281,12 +283,12 @@ Partial Class FrmDailyTweets
         '
         'BtnSend0
         '
-        Me.BtnSend0.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSend0.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSend0.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSend0.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.BtnSend0.Location = New System.Drawing.Point(206, 609)
+        Me.BtnSend0.Location = New System.Drawing.Point(130, 614)
         Me.BtnSend0.Name = "BtnSend0"
-        Me.BtnSend0.Size = New System.Drawing.Size(139, 33)
+        Me.BtnSend0.Size = New System.Drawing.Size(94, 33)
         Me.BtnSend0.TabIndex = 34
         Me.BtnSend0.Text = "Send"
         Me.BtnSend0.UseVisualStyleBackColor = True
@@ -295,10 +297,10 @@ Partial Class FrmDailyTweets
         '
         Me.TxtBlueSky0.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtBlueSky0.Location = New System.Drawing.Point(3, 500)
+        Me.TxtBlueSky0.Location = New System.Drawing.Point(6, 443)
         Me.TxtBlueSky0.Multiline = True
         Me.TxtBlueSky0.Name = "TxtBlueSky0"
-        Me.TxtBlueSky0.Size = New System.Drawing.Size(297, 142)
+        Me.TxtBlueSky0.Size = New System.Drawing.Size(297, 200)
         Me.TxtBlueSky0.TabIndex = 15
         '
         'rtbFile0
@@ -309,7 +311,7 @@ Partial Class FrmDailyTweets
         Me.rtbFile0.Font = New System.Drawing.Font("Consolas", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbFile0.Location = New System.Drawing.Point(3, 3)
         Me.rtbFile0.Name = "rtbFile0"
-        Me.rtbFile0.Size = New System.Drawing.Size(297, 491)
+        Me.rtbFile0.Size = New System.Drawing.Size(297, 434)
         Me.rtbFile0.TabIndex = 14
         Me.rtbFile0.Text = ""
         '
@@ -323,6 +325,7 @@ Partial Class FrmDailyTweets
         Me.BtnCopyselected.Size = New System.Drawing.Size(139, 33)
         Me.BtnCopyselected.TabIndex = 21
         Me.BtnCopyselected.Text = "Copy Selected"
+        Me.ToolTip1.SetToolTip(Me.BtnCopyselected, "copy selected text to clipboard")
         Me.BtnCopyselected.UseVisualStyleBackColor = True
         '
         'ContextMenuStrip1
@@ -353,6 +356,7 @@ Partial Class FrmDailyTweets
         Me.BtnCopyAll.Size = New System.Drawing.Size(139, 33)
         Me.BtnCopyAll.TabIndex = 22
         Me.BtnCopyAll.Text = "Copy All"
+        Me.ToolTip1.SetToolTip(Me.BtnCopyAll, "copy all text to clipboard")
         Me.BtnCopyAll.UseVisualStyleBackColor = True
         '
         'NudBirthdaysPerTweet
@@ -506,6 +510,7 @@ Partial Class FrmDailyTweets
         Me.ChkAtNextBirthday.Size = New System.Drawing.Size(104, 17)
         Me.ChkAtNextBirthday.TabIndex = 37
         Me.ChkAtNextBirthday.Text = "at next birthday"
+        Me.ToolTip1.SetToolTip(Me.ChkAtNextBirthday, "calculate age at next birthday")
         Me.ChkAtNextBirthday.UseVisualStyleBackColor = True
         '
         'RadioButton1
@@ -530,6 +535,7 @@ Partial Class FrmDailyTweets
         Me.rbHandles.Size = New System.Drawing.Size(112, 18)
         Me.rbHandles.TabIndex = 34
         Me.rbHandles.Text = "Twitter Handles"
+        Me.ToolTip1.SetToolTip(Me.rbHandles, "Include Twitter handles")
         Me.rbHandles.UseVisualStyleBackColor = True
         '
         'rbAges
@@ -544,6 +550,7 @@ Partial Class FrmDailyTweets
         Me.rbAges.TabIndex = 35
         Me.rbAges.TabStop = True
         Me.rbAges.Text = "Age/Year"
+        Me.ToolTip1.SetToolTip(Me.rbAges, "Include age/year of birth")
         Me.rbAges.UseVisualStyleBackColor = True
         '
         'cmbTwitterUsers
@@ -705,20 +712,21 @@ Partial Class FrmDailyTweets
         Me.BtnExplorer.Text = "Open File Explorer"
         Me.BtnExplorer.UseVisualStyleBackColor = True
         '
-        'CbBlueSky
+        'ChkBlueSky
         '
-        Me.CbBlueSky.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CbBlueSky.AutoSize = True
-        Me.CbBlueSky.Checked = True
-        Me.CbBlueSky.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbBlueSky.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CbBlueSky.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.CbBlueSky.Location = New System.Drawing.Point(1218, 245)
-        Me.CbBlueSky.Name = "CbBlueSky"
-        Me.CbBlueSky.Size = New System.Drawing.Size(68, 18)
-        Me.CbBlueSky.TabIndex = 44
-        Me.CbBlueSky.Text = "BlueSky"
-        Me.CbBlueSky.UseVisualStyleBackColor = True
+        Me.ChkBlueSky.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChkBlueSky.AutoSize = True
+        Me.ChkBlueSky.Checked = True
+        Me.ChkBlueSky.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ChkBlueSky.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkBlueSky.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.ChkBlueSky.Location = New System.Drawing.Point(1189, 245)
+        Me.ChkBlueSky.Name = "ChkBlueSky"
+        Me.ChkBlueSky.Size = New System.Drawing.Size(68, 18)
+        Me.ChkBlueSky.TabIndex = 44
+        Me.ChkBlueSky.Text = "BlueSky"
+        Me.ToolTip1.SetToolTip(Me.ChkBlueSky, "Format for BlueSky")
+        Me.ChkBlueSky.UseVisualStyleBackColor = True
         '
         'BtnCopyAlt
         '
@@ -744,15 +752,32 @@ Partial Class FrmDailyTweets
         Me.BtnBsky.Text = "Open Bluesky"
         Me.BtnBsky.UseVisualStyleBackColor = True
         '
+        'ChkIncDesc
+        '
+        Me.ChkIncDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChkIncDesc.AutoSize = True
+        Me.ChkIncDesc.Checked = True
+        Me.ChkIncDesc.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ChkIncDesc.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkIncDesc.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.ChkIncDesc.Location = New System.Drawing.Point(1256, 245)
+        Me.ChkIncDesc.Name = "ChkIncDesc"
+        Me.ChkIncDesc.Size = New System.Drawing.Size(73, 18)
+        Me.ChkIncDesc.TabIndex = 47
+        Me.ChkIncDesc.Text = "incl.Desc"
+        Me.ToolTip1.SetToolTip(Me.ChkIncDesc, "Include descriptions in alt text")
+        Me.ChkIncDesc.UseVisualStyleBackColor = True
+        '
         'FrmDailyTweets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1348, 820)
+        Me.Controls.Add(Me.ChkIncDesc)
         Me.Controls.Add(Me.BtnBsky)
         Me.Controls.Add(Me.BtnCopyAlt)
-        Me.Controls.Add(Me.CbBlueSky)
+        Me.Controls.Add(Me.ChkBlueSky)
         Me.Controls.Add(Me.BtnExplorer)
         Me.Controls.Add(Me.BtnNext)
         Me.Controls.Add(Me.BtnDeleteImages)
@@ -867,7 +892,9 @@ Partial Class FrmDailyTweets
     Friend WithEvents BtnExplorer As Button
     Friend WithEvents ChkAtNextBirthday As CheckBox
     Friend WithEvents TxtBlueSky0 As TextBox
-    Friend WithEvents CbBlueSky As CheckBox
+    Friend WithEvents ChkBlueSky As CheckBox
     Friend WithEvents BtnCopyAlt As Button
     Friend WithEvents BtnBsky As Button
+    Friend WithEvents ChkIncDesc As CheckBox
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

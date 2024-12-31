@@ -41,6 +41,8 @@ Public NotInheritable Class FrmOptions
         My.Settings.twitterAuthCallback = TxtCallback.Text
         My.Settings.fileRetentionPeriod = NudRetention.Value
         My.Settings.srchShowImages = ChkShowImages.Checked
+        My.Settings.bskypostbydefault = ChkBluesky.Checked
+        My.Settings.bskyincldesc = ChkBskyDesc.Checked
         My.Settings.Save()
     End Sub
 
@@ -70,6 +72,8 @@ Public NotInheritable Class FrmOptions
         chkSqlServer.Checked = My.Settings.isSqlServer
         NudRetention.Value = My.Settings.fileRetentionPeriod
         ChkShowImages.Checked = My.Settings.srchShowImages
+        ChkBskyDesc.Checked = My.Settings.bskyincldesc
+        ChkBluesky.Checked = My.Settings.bskypostbydefault
     End Sub
 
     Private Sub BtnResetForms_Click(sender As Object, e As EventArgs) Handles BtnResetForms.Click

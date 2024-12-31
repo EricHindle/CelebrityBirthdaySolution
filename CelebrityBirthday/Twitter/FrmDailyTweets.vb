@@ -115,6 +115,8 @@ Public NotInheritable Class FrmDailyTweets
         End If
         GetTabPageControls(TabPage1)
         POST_MAX_LEN = TWEET_MAX_LEN
+        ChkBlueSky.Checked = My.Settings.bskypostbydefault
+        ChkIncDesc.Checked = My.Settings.bskyincldesc
         BtnReGen.Enabled = isInitialSelectDone
     End Sub
     Private Sub FrmTwitterImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -265,11 +267,11 @@ Public NotInheritable Class FrmDailyTweets
         End If
     End Sub
     Private Sub RtbTextChanged(sender As Object, e As EventArgs)
-        TxtStats.Text = ""
-        For Each _page As TabPage In TabControl1.TabPages
-            Dim _rtb As RichTextBox = GetRichTextBoxFromPage(_page)
-            TxtStats.Text &= If(_rtb.TextLength >= POST_MAX_LEN, "** ", "") & _rtb.TextLength & vbCrLf
-        Next
+        'TxtStats.Text = ""
+        'For Each _page As TabPage In TabControl1.TabPages
+        '    Dim _rtb As RichTextBox = GetRichTextBoxFromPage(_page)
+        '    TxtStats.Text &= If(_rtb.TextLength >= POST_MAX_LEN, "** ", "") & _rtb.TextLength & vbCrLf
+        'Next
     End Sub
     Private Sub SelectPeople()
         If BuildTrees() Then
@@ -678,7 +680,7 @@ Public NotInheritable Class FrmDailyTweets
     Private Sub GenerateAllTweets()
         DisplayAndLog("Generating all tweets")
         TxtStats.Text = ""
-        If CbBlueSky.Checked Then
+        If ChkBlueSky.Checked Then
             POST_MAX_LEN = BSKY_MAX_LEN
         Else
             POST_MAX_LEN = TWEET_MAX_LEN
@@ -736,6 +738,7 @@ Public NotInheritable Class FrmDailyTweets
         nudTemplate = GetNudFromPage(tabPage)
     End Sub
     Private Sub GenerateTweets(_tweetLists As List(Of List(Of Person)), _listStart As Integer, _tweetType As TweetType)
+        Dim _lengthsText As String = ""
         For _personIndex As Integer = _listStart To _tweetLists.Count - 1
             Dim _personList As List(Of Person) = _tweetLists(_personIndex)
             DisplayAndLog(">" & _personIndex)
@@ -759,25 +762,30 @@ Public NotInheritable Class FrmDailyTweets
             GetNudFromPage(newTweetTabPage).Value = colCt
             Dim _width As Integer = colCt
             GeneratePicture(pbControl, _personList, _width)
-            GenerateText(rtbControl, txtControl, _personList, _tweetType, _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
+            Dim _postLengthText As String = GenerateText(rtbControl, txtControl, _personList, _tweetType, _personIndex - _listStart + 1, _tweetLists.Count - _listStart)
+            _lengthsText &= vbCrLf & _postLengthText
             IsNoGenerate = False
         Next
+        TxtStats.Text &= _lengthsText
     End Sub
-    Private Sub GenerateText(pRichTextBox As RichTextBox, pTextBox As TextBox, _imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer)
+    Private Function GenerateText(pRichTextBox As RichTextBox, pTextBox As TextBox, _imageTable As List(Of Person), _type As TweetType, _index As Integer, _numberOfLists As Integer) As String
         DisplayAndLog("Generating text")
-        If CbBlueSky.Checked = True Then
+        If ChkBlueSky.Checked = True Then
             ChkAtNextBirthday.Checked = False
             rbAges.Checked = True
         End If
         Dim _outString As New StringBuilder
         _outString.Append(cboMonth.SelectedItem).Append(" "c).Append(cboDay.SelectedItem).Append(LINE_FEED).Append(LINE_FEED)
         _outString.Append(GetHeading(_type)).Append(LINE_FEED)
-        Dim _altString As New StringBuilder
-        _altString.Append("Thumbnail pictures of ")
         Dim _footer As String = If(_numberOfLists > 1, _index & "/" & _numberOfLists, "")
+        Dim isIncludeDescriptions As Boolean = ChkIncDesc.Checked
+        Dim _altString As String = BuildAltText(_imageTable, isIncludeDescriptions)
+        If _altString.Length > BSKY_ALT_MAX_LEN Then
+            isIncludeDescriptions = False
+            _altString = BuildAltText(_imageTable, isIncludeDescriptions)
+        End If
         For Each _person As Person In _imageTable
             _outString.Append(_person.Name)
-            _altString.Append(_person.Name).Append(", ")
             If rbAges.Checked Then
                 If _type = TweetType.Birthday Then
                     _outString.Append(" (" & CalculateAge(_person, ChkAtNextBirthday.Checked) & ")")
@@ -801,9 +809,25 @@ Public NotInheritable Class FrmDailyTweets
             _outString.Append(LINE_FEED).Append(_footer)
         End If
         pRichTextBox.Text = _outString.ToString.Trim(LINE_FEED)
-        pTextBox.Text = _altString.ToString
+        pTextBox.Text = _altString
         pTextBox.Text = pTextBox.Text.Trim(bskyTrimChars)
-    End Sub
+        'LblAltLen.Text = CStr(pTextBox.TextLength)
+        'LblPostLen.Text = CStr(pRichTextBox.TextLength)
+        Return CStr(pRichTextBox.TextLength) & "/" & CStr(pTextBox.TextLength)
+    End Function
+
+    Private Shared Function BuildAltText(_imageTable As List(Of Person), isIncludeDescriptions As Boolean) As String
+        Dim _altText As New StringBuilder
+        _altText.Append("Thumbnail pictures of ")
+        For Each _person As Person In _imageTable
+            _altText.Append(vbCrLf).Append(_person.Name)
+            If isIncludeDescriptions Then
+                _altText.Append(" - ").Append(_person.ShortDesc)
+            End If
+        Next
+        Return _altText.ToString
+    End Function
+
     Private Sub GeneratePicture(_pictureBox As PictureBox, _imageTable As List(Of Person), _width As Integer)
         DisplayAndLog("Generating picture")
         If _imageTable.Count > 0 Then
@@ -838,7 +862,7 @@ Public NotInheritable Class FrmDailyTweets
     Private Function SplitIntoTweets(oPersonlist As List(Of Person), _headerLength As Integer, _type As TweetType) As List(Of List(Of Person))
         Dim availableLength As Integer = POST_MAX_LEN - _headerLength
         Dim _totalLengthOfTweet As Integer = 0
-        Dim _lengthsText As String = ""
+        'Dim _lengthsText As String = ""
         Dim _numberOfTweets As Integer = GetExpectedNumberOfTweets(oPersonlist, _type, availableLength, _totalLengthOfTweet)
         Dim _startIndex As Integer = 0
         Dim _endIndex As Integer = oPersonlist.Count - 1
@@ -853,11 +877,11 @@ Public NotInheritable Class FrmDailyTweets
                 _rangeCount = Math.Min(_numberOfNamesThisTweet, _endIndex + 1)
                 _range = oPersonlist.GetRange(_endIndex - _rangeCount + 1, _rangeCount)
             Loop
-            _lengthsText = _totalLengthOfTweet & vbCrLf & _lengthsText
+            '_lengthsText = _totalLengthOfTweet & vbCrLf & _lengthsText
             ListOfLists.Add(BuildList(_range))
             _endIndex -= _rangeCount
         Loop
-        TxtStats.Text &= _lengthsText
+        'TxtStats.Text &= _lengthsText
         ListOfLists.Reverse()
         Return ListOfLists
     End Function
