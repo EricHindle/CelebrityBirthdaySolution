@@ -44,7 +44,7 @@ if (login_check() == true) {
                     </div>
                     <br/>
                     <div class="light-text">
-                        <a href="struct/player/new-player.php" role="button">Create Account</a>
+                        <a href="struct/player/new-member.php" role="button">Create Account</a>
                     </div>
                 </div>
                                 ';

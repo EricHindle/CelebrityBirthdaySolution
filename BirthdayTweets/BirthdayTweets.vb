@@ -10,8 +10,10 @@ Imports System.Data.Common
 Imports System.Drawing
 Imports System.IO
 Imports System.Text
+Imports System.Threading
 Imports Tweetinvi
 Imports Tweetinvi.Core.Web
+Imports Tweetinvi.Logic.QueryParameters
 
 Public Class BirthdayTweets
 #Region "enum"
@@ -181,6 +183,24 @@ Public Class BirthdayTweets
             End Set
         End Property
         Public Sub New(pLine As String)
+            '
+            '   0:TweetType
+            '   1:UserType
+            '   2:User
+            '   3:today(y/n)
+            '   4:day
+            '   5:month
+            '   6:images(y/n)
+            '   7:handles(y/n)
+            '   8:age(y/n)
+            '   9:next birthday(y/n)
+            '   10:multi_image(y/n)
+            '   11:left/right/centre
+            '   12:image_width
+            '   13:bday_per_tweet
+            '   14:anniv_per_tweet
+            '   15:once per day
+            '
             InitialiseParam()
             Dim paramValues As String() = Split(pLine, ",")
             If Not String.IsNullOrWhiteSpace(pLine) AndAlso Not pLine.StartsWith("#") AndAlso paramValues.Count > 2 Then
@@ -253,6 +273,15 @@ Public Class BirthdayTweets
     Private Class CbTweet
         Private _tweetText As String
         Private _tweetImage As Image
+        Private _tweetAltText As String
+        Public Property TweetAltText() As String
+            Get
+                Return _tweetAltText
+            End Get
+            Set(ByVal value As String)
+                _tweetAltText = value
+            End Set
+        End Property
         Public Property TweetImage() As Image
             Get
                 Return _tweetImage
@@ -326,6 +355,7 @@ Public Class BirthdayTweets
     Private Shared fromAddr As String
     Private Shared fromName As String
     Private Shared paramList As New List(Of RunParam)
+    Private Shared LogMessages As New List(Of String)
 #End Region
 #Region "main"
     '    The main entry point For the process
@@ -342,7 +372,8 @@ Public Class BirthdayTweets
             SendAllTweets(False)
         Else
             ReadParameters(GlobalSettings.GetSetting(PARAM_FILE))
-            SendAllTweets(False)
+            Dim isSendTestTweet As Boolean = GlobalSettings.GetBooleanSetting("SendTestTweet")
+            SendAllTweets(isSendTestTweet)
         End If
         LogUtil.ShowProgress("Run Complete")
     End Sub
@@ -359,11 +390,13 @@ Public Class BirthdayTweets
         Dim pSub As String = "ReadParameters"
         LogUtil.ShowProgress("Reading parameters", pSub)
         Dim _paramFile As String = pFilename.Replace("%applicationpath%", My.Application.Info.DirectoryPath)
+        LogUtil.ShowProgress("Parameter file : " & _paramFile, pSub)
         If My.Computer.FileSystem.FileExists(_paramFile) Then
             Using _paramFileReader As New StreamReader(_paramFile)
                 Dim line As String
                 line = _paramFileReader.ReadLine
                 Do While line IsNot Nothing
+                    LogUtil.ShowProgress(line, pSub)
                     Dim _param As New RunParam(line.Trim)
                     If Not String.IsNullOrWhiteSpace(_param.TwitterUser) Then
                         paramList.Add(_param)
@@ -411,7 +444,6 @@ Public Class BirthdayTweets
                         LogUtil.ShowProgress("** Not due to be run", Psub)
                         isOkToRun = False
                     End If
-
                     If isOkToRun Then
                         Dim isRanOk As Boolean = False
                         Select Case _param.TweetType
@@ -470,13 +502,7 @@ Public Class BirthdayTweets
             LogUtil.ShowProgress("Generating " & _runDesc & " tweets", pSub)
             Dim cbTweets As List(Of CbTweet) = GenerateTweets(oPersonList, _param)
             LogUtil.ShowProgress("Sending " & _runDesc & " tweets", pSub)
-            For Each tweetToSend As CbTweet In cbTweets
-                Dim imageFilename As String = SaveImage(tweetToSend, _runDesc & "_")
-                If Not SendTheTweet(tweetToSend, _param.TwitterUser, imageFilename).Result Then
-                    isSentOk = False
-                End If
-            Next
-
+            isSentOk = PostTweetsInList(_param, isSentOk, cbTweets, _runDesc & "_")
             If isSentOk Then
                 LogUtil.ShowProgress(_runDesc & " complete", pSub)
             Else
@@ -532,7 +558,6 @@ Public Class BirthdayTweets
                     LogUtil.ShowProgress("Exception running " & _bskyPath, pSub)
                 End Try
             Next
-
             If isSentOk Then
                 _param.TweetType = TweetType.Bluesky
                 LogUtil.ShowProgress(_runDesc & " complete", pSub)
@@ -556,14 +581,14 @@ Public Class BirthdayTweets
         Dim _testParam As New RunParam("5,5,FunsterMuddy,y,,,y,n,n,n,n,c,6,0,0,y")
         Dim cbTweets As List(Of CbTweet) = GenerateTweets(_list, _testParam)
         LogUtil.ShowProgress("Sending test birthday tweet", Psub)
-        For Each tweetToSend As CbTweet In cbTweets
-            Dim imageFilename As String = SaveImage(tweetToSend, BIRTHDAY_FNAME)
-            If Not SendTheTweet(tweetToSend, testUser, imageFilename).Result Then
-                isSentOK = False
-            End If
-        Next
+        PostTweetsInList(_testParam, isSentOK, cbTweets, BIRTHDAY_FNAME)
         Return isSentOK
     End Function
+    Private Shared Sub WriteLogMessages()
+        For Each sText As String In LogMessages
+            LogUtil.ShowProgress(sText, "SendTheTweet")
+        Next
+    End Sub
 #End Region
 #Region "email"
     Private Shared Sub GetEmailSettings()
@@ -584,12 +609,7 @@ Public Class BirthdayTweets
         LogUtil.ShowProgress("Generating BotSD tweets", Psub)
         Dim cbTweets As List(Of CbTweet) = GenerateBotSDTweets(oListOfLists, pParam)
         LogUtil.ShowProgress("Sending BotSDtweets", Psub)
-        For Each tweetToSend As CbTweet In cbTweets
-            Dim imageFilename As String = SaveImage(tweetToSend, BOTSD_FNAME)
-            If Not SendTheTweet(tweetToSend, pParam.TwitterUser, imageFilename).Result Then
-                isSentOK = False
-            End If
-        Next
+        PostTweetsInList(pParam, isSentOK, cbTweets, BOTSD_FNAME)
         Return isSentOK
     End Function
     Private Shared Function SendForNowTweets(pParam As RunParam) As Boolean
@@ -605,12 +625,30 @@ Public Class BirthdayTweets
             cbTweets.AddRange(GenerateTweets(_fnList, pParam))
         Next
         LogUtil.ShowProgress("Sending For Now tweets", Psub)
+        isSentOK = PostTweetsInList(pParam, isSentOK, cbTweets, FORNOW_FNAME)
+        Return isSentOK
+    End Function
+    Private Shared Function BuildAltText(_imageTable As List(Of Person), isIncludeDescriptions As Boolean) As String
+        Dim _altText As New StringBuilder
+        _altText.Append("Thumbnail pictures of ")
+        For Each _person As Person In _imageTable
+            _altText.Append(vbCrLf).Append(_person.Name)
+            If isIncludeDescriptions Then
+                _altText.Append(" - ").Append(_person.ShortDesc)
+            End If
+        Next
+        Return _altText.ToString
+    End Function
+    Private Shared Function PostTweetsInList(pParam As RunParam, isSentOK As Boolean, cbTweets As List(Of CbTweet), pTypeText As String) As Boolean
+        LogMessages.Clear()
         For Each tweetToSend As CbTweet In cbTweets
-            Dim imageFilename As String = SaveImage(tweetToSend, FORNOW_FNAME)
+            Thread.Sleep(1000)
+            Dim imageFilename As String = SaveImage(tweetToSend, pTypeText)
             If Not SendTheTweet(tweetToSend, pParam.TwitterUser, imageFilename).Result Then
                 isSentOK = False
             End If
         Next
+        WriteLogMessages()
         Return isSentOK
     End Function
     Private Shared Function GenerateBotSDTweets(oBotSDList As List(Of List(Of Person)), pParam As RunParam) As List(Of CbTweet)
@@ -651,7 +689,8 @@ Public Class BirthdayTweets
             Dim _width As Integer = colCt
             Dim _cbTweet As New CbTweet With {
                 .TweetImage = GeneratePicture(_personlist, _width, _tweetType),
-                .TweetText = GenerateText(_personlist, pParam, tweetIndex, tweetLists.Count)
+                .TweetText = GenerateText(_personlist, pParam, tweetIndex, tweetLists.Count),
+                .TweetAltText = BuildAltText(_personlist, True)
             }
             cbTweets.Add(_cbTweet)
         Next
@@ -771,17 +810,26 @@ Public Class BirthdayTweets
         Return _image
     End Function
     Private Shared Async Function SendTheTweet(_cbTweet As CbTweet, twitterUser As String, Optional _filename As String = Nothing) As Task(Of Boolean)
-        Const Psub As String = "SendTheTweet"
-        LogUtil.ShowProgress("Sending Tweet as " & twitterUser, Psub)
-        Dim isTweetSentOk As Boolean = True
-        Dim isImageSentOk As Boolean = True
+        LogMessages.Add("Sending Tweet as " & twitterUser)
+        Dim isTweetSentOk As Boolean = False
+        Dim isImageSentOk As Boolean = False
         SetupOAuth(twitterUser)
         Dim userClient = New TwitterClient(tw.ConsumerKey, tw.ConsumerSecret, tw.Token, tw.TokenSecret)
         Dim user = Await userClient.Users.GetAuthenticatedUserAsync()
         Dim tweetinviLogoBinary As Byte() = File.ReadAllBytes(_filename)
+        LogMessages.Add("Uploading image")
         Dim UploadedImage As Models.IMedia = Await userClient.Upload.UploadTweetImageAsync(tweetinviLogoBinary)
+        'If _cbTweet.TweetAltText.Length < ALT_MAX_LEN Then
+        '    Dim metaData As New MediaMetadata(UploadedImage) With {
+        '    .AltText = _cbTweet.TweetAltText
+        '    }
+        '    Await userClient.Upload.AddMediaMetadataAsync(metaData)
+        'End If
+        LogMessages.Add("Image Id : " & CStr(UploadedImage.UploadedMediaInfo.MediaId))
         If UploadedImage.UploadedMediaInfo.MediaId = 0 Then
-            isImageSentOk = False
+            LogMessages.Add("Image upload failed")
+        Else
+            isImageSentOk = True
         End If
         Try
             Dim poster = New TweetsV2Poster(userClient)
@@ -789,14 +837,19 @@ Public Class BirthdayTweets
                 UploadedImage.UploadedMediaInfo.MediaId
             }
             Dim media As New TweetV2ImageIds With {.MediaId = mediaList}
+            LogMessages.Add("Posting tweet")
             Dim result As ITwitterResult = Await poster.PostTweet(New TweetV2PostContent With {
                                                                                                .Text = _cbTweet.TweetText,
                                                                                                .MediaIds = media
                                                                                               })
-            If result.Response.IsSuccessStatusCode = False Then
-                isTweetSentOk = False
+            LogMessages.Add("Response code : " & CStr(result.Response.StatusCode))
+            If result.Response.IsSuccessStatusCode = True Then
+                isTweetSentOk = True
+            Else
+                LogMessages.Add("Posting tweet failed")
             End If
         Catch ex As Exception
+            LogMessages.Add("Exeption posting tweet. " & ex.Message)
         End Try
         Return isTweetSentOk And isImageSentOk
     End Function

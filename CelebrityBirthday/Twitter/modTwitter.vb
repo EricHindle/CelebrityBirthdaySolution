@@ -9,6 +9,7 @@ Imports System.IO
 Imports System.Threading.Tasks
 Imports Tweetinvi
 Imports Tweetinvi.Core.Web
+Imports Tweetinvi.WebLogic
 
 Module modTwitter
     Public tw As New TwitterOAuth
@@ -48,6 +49,10 @@ Module modTwitter
                                                                             })
             Catch ex As Exception
                 LogUtil.Exception("Twitter post exception", ex, Psub)
+                oResult = New TwitterResult With {
+                    .Response = New TwitterResponse With {
+                    .StatusCode = 999}
+                }
             End Try
         Else
             Try
@@ -57,6 +62,10 @@ Module modTwitter
                                                                     })
             Catch ex As Exception
                 LogUtil.Exception("Twitter post exception", ex, Psub)
+                oResult = New TwitterResult With {
+                    .Response = New TwitterResponse With {
+                    .StatusCode = 999}
+                }
             End Try
         End If
         Return oResult

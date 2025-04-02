@@ -9,6 +9,7 @@ Imports System.Globalization
 
 Module modBtweets
     Public Const TWEET_MAX_LEN As Integer = 280
+    Public Const ALT_MAX_LEN As Integer = 1000
     Public myCultureInfo As CultureInfo = CultureInfo.CurrentUICulture
     Public myStringFormatProvider As IFormatProvider = myCultureInfo.GetFormat(GetType(String))
     Public Function CalculateAge(oPerson As Person, Optional isNextBirthday As Boolean = True) As Integer
