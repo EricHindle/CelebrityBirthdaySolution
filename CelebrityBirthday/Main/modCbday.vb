@@ -264,7 +264,8 @@ Friend Module modCbday
         Return My.Settings.wikiSearchUrl & oText.Replace(" ", "+")
     End Function
     Public Function GetWikiExtractString(oText As String, Optional sentences As Integer = 2) As String
-        Return My.Settings.wikiExtractSearch.Replace("#", sentences) & oText.Replace(" ", "+")
+        Dim _searchString As String = My.Settings.wikiExtractSearch.Replace("#", sentences) & oText.Replace(" ", "+")
+        Return _searchString
     End Function
     Public Function GetWikiTitleString(oSearchName As String) As String
         Dim endName As String() = Split(oSearchName, "_(", 2)
@@ -292,58 +293,65 @@ Friend Module modCbday
         Loop
         Return newText
     End Function
-    Public Function NavigateToUrl(pSearchString As String) As WebResponse
-        Dim response As WebResponse = Nothing
+    Public Function NavigateToUrl(pSearchString As String) As HttpWebResponse
+        Dim _response As HttpWebResponse = Nothing
         Try
-            Dim request As WebRequest
-            Dim _uri As New Uri(pSearchString)
-            ' Create a request for the URL. 
-            request = WebRequest.Create(_uri)
-            ' If required by the server, set the credentials.
-            request.Credentials = CredentialCache.DefaultCredentials
-            response = request.GetResponse()
-        Catch ex As UriFormatException
-        Catch ex As ArgumentException
-        Catch ex As WebException
+            Dim _request As HttpWebRequest = WebRequest.Create(pSearchString)
+            _request.UserAgent = ".NET Framework Client"
+            _response = _request.GetResponse
+        Catch ex As Exception When (TypeOf ex Is UriFormatException) _
+            OrElse (TypeOf ex Is ArgumentException) _
+            OrElse (TypeOf ex Is WebException)
+            LogUtil.Problem(ex.Message, MethodBase.GetCurrentMethod.Name)
         End Try
-        Return response
+        Return _response
     End Function
     Public Function GetExtractFromResponse(pResponse As WebResponse) As String
         Dim _extract As String = ""
         Dim wikipage As String
-        Try
-            Dim sr As New System.IO.StreamReader(pResponse.GetResponseStream())
-            wikipage = sr.ReadToEnd
-            Dim jss As New JavaScriptSerializer()
-            Dim extractDictionary As Dictionary(Of String, Object) = jss.Deserialize(Of Dictionary(Of String, Object))(wikipage)
-            Dim queryDictionary As New Dictionary(Of String, Object)
-            If extractDictionary.TryGetValue("query", queryDictionary) Then
-                Dim _pages As New Object
-                If queryDictionary.TryGetValue("pages", _pages) Then
-                    Dim _pagesList As ArrayList = TryCast(_pages, ArrayList)
-                    If _pagesList IsNot Nothing Then
-                        Dim pageDictionary As Dictionary(Of String, Object) = _pagesList(0)
-                        Dim _extractString As String = String.Empty
-                        If pageDictionary.TryGetValue("extract", _extractString) Then
-                            _extract = TryCast(_extractString, String)
-                            _extract = _extract.Replace(vbLf, " ").Replace(".", ". ").Replace("  ", " ")
+        If pResponse IsNot Nothing Then
+            Try
+                Dim sr As New System.IO.StreamReader(pResponse.GetResponseStream())
+                wikipage = sr.ReadToEnd
+                Dim jss As New JavaScriptSerializer()
+                Dim extractDictionary As Dictionary(Of String, Object) = jss.Deserialize(Of Dictionary(Of String, Object))(wikipage)
+                Dim queryDictionary As New Dictionary(Of String, Object)
+                If extractDictionary.TryGetValue("query", queryDictionary) Then
+                    Dim _pages As New Object
+                    If queryDictionary.TryGetValue("pages", _pages) Then
+                        Dim _pagesList As ArrayList = TryCast(_pages, ArrayList)
+                        If _pagesList IsNot Nothing Then
+                            Dim pageDictionary As Dictionary(Of String, Object) = _pagesList(0)
+                            Dim _extractString As String = String.Empty
+                            If pageDictionary.TryGetValue("extract", _extractString) Then
+                                _extract = TryCast(_extractString, String)
+                                _extract = _extract.Replace(vbLf, " ").Replace(".", ". ").Replace("  ", " ")
+                            End If
                         End If
                     End If
-                    End If
-            End If
+                End If
 
-            sr.Dispose()
-        Catch ex As ArgumentException
-            DisplayException(MethodBase.GetCurrentMethod, ex, "Argument")
-        Catch ex As InvalidOperationException
-            DisplayException(MethodBase.GetCurrentMethod, ex, "Invalid Operation")
-        Catch ex As OutOfMemoryException
-            DisplayException(MethodBase.GetCurrentMethod, ex, "Out Of Memory")
-        Catch ex As IOException
-            DisplayException(MethodBase.GetCurrentMethod, ex, "IO")
-        Catch ex As NullReferenceException
-            DisplayException(MethodBase.GetCurrentMethod, ex, "NullReference")
-        End Try
+                sr.Dispose()
+            Catch ex As ArgumentException
+                DisplayException(MethodBase.GetCurrentMethod, ex, "Argument")
+                _extract = ex.Message
+            Catch ex As InvalidOperationException
+                DisplayException(MethodBase.GetCurrentMethod, ex, "Invalid Operation")
+                _extract = ex.Message
+            Catch ex As OutOfMemoryException
+                DisplayException(MethodBase.GetCurrentMethod, ex, "Out Of Memory")
+                _extract = ex.Message
+            Catch ex As IOException
+                DisplayException(MethodBase.GetCurrentMethod, ex, "IO")
+                _extract = ex.Message
+            Catch ex As NullReferenceException
+                DisplayException(MethodBase.GetCurrentMethod, ex, "NullReference")
+                _extract = ex.Message
+            End Try
+        Else
+            _extract = "No response from Wikipedia"
+        End If
+
         Return _extract
     End Function
     Public Function DisplayException(pMethodBase As MethodBase, pException As Exception, pExceptionType As String, Optional isAsk As Boolean = False) As MsgBoxResult
@@ -419,12 +427,16 @@ Friend Module modCbday
         Return GetWikiText(_sentences, _searchName)
     End Function
     Public Function GetWikiText(_sentences As Integer, wikiId As String) As String
-        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(wikiId, _sentences))
-        Return GetExtractFromResponse(_response)
+        Dim _response As HttpWebResponse = NavigateToUrl(GetWikiExtractString(wikiId, _sentences))
+        Dim _extract = String.Empty
+        If _response IsNot Nothing Then
+            _extract = GetExtractFromResponse(_response)
+        End If
+        Return _extract
     End Function
     Public Function GetWikiExtract(_searchName As String, sentences As Integer) As String
-        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, sentences))
-        Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
+        Dim _response As HttpWebResponse = NavigateToUrl(GetWikiExtractString(_searchName, sentences))
+        Dim extract As String = String.Empty ' If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
         Return RemoveSquareBrackets(FixQuotesAndHyphens(extract, True))
     End Function
     Public Function ExtractCbdatesFromWikiExtract(wikiExtract As String) As List(Of CbDates)

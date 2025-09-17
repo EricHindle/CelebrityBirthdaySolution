@@ -78,21 +78,34 @@ Friend Module modCbday
         Loop
         Return newText
     End Function
-    Public Function NavigateToUrl(pSearchString As String) As WebResponse
-        Dim response As WebResponse = Nothing
+    'Public Function NavigateToUrl(pSearchString As String) As WebResponse
+    '    Dim response As WebResponse = Nothing
+    '    Try
+    '        Dim request As WebRequest
+    '        Dim _uri As New Uri(pSearchString)
+    '        ' Create a request for the URL. 
+    '        request = WebRequest.Create(_uri)
+    '        ' If required by the server, set the credentials.
+    '        request.Credentials = CredentialCache.DefaultCredentials
+    '        response = request.GetResponse()
+    '    Catch ex As UriFormatException
+    '    Catch ex As ArgumentException
+    '    Catch ex As WebException
+    '    End Try
+    '    Return response
+    'End Function
+    Public Function NavigateToUrl(pSearchString As String) As HttpWebResponse
+        Dim _response As HttpWebResponse = Nothing
         Try
-            Dim request As WebRequest
-            Dim _uri As New Uri(pSearchString)
-            ' Create a request for the URL. 
-            request = WebRequest.Create(_uri)
-            ' If required by the server, set the credentials.
-            request.Credentials = CredentialCache.DefaultCredentials
-            response = request.GetResponse()
-        Catch ex As UriFormatException
-        Catch ex As ArgumentException
-        Catch ex As WebException
+            Dim _request As HttpWebRequest = WebRequest.Create(pSearchString)
+            _request.UserAgent = ".NET Framework Client"
+            _response = _request.GetResponse
+        Catch ex As Exception When (TypeOf ex Is UriFormatException) _
+            OrElse (TypeOf ex Is ArgumentException) _
+            OrElse (TypeOf ex Is WebException)
+            LogUtil.Problem(ex.Message, MethodBase.GetCurrentMethod.Name)
         End Try
-        Return response
+        Return _response
     End Function
     Public Function GetExtractFromResponse(pResponse As WebResponse) As String
         Dim _extract As String = ""
@@ -140,7 +153,7 @@ Friend Module modCbday
                       pExceptionType)
     End Function
     Public Function GetWikiExtract(_searchName As String, sentences As Integer) As String
-        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, sentences))
+        Dim _response As HttpWebResponse = NavigateToUrl(GetWikiExtractString(_searchName, sentences))
         Dim extract As String = If(_response IsNot Nothing, GetExtractFromResponse(_response), "")
         Return RemoveSquareBrackets(FixQuotesAndHyphens(extract, True))
     End Function

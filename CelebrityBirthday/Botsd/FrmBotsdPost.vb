@@ -6,6 +6,7 @@
 '
 
 Imports System.IO
+Imports System.Net
 Imports System.Text
 
 Public NotInheritable Class FrmBotsdPost
@@ -50,7 +51,7 @@ Public NotInheritable Class FrmBotsdPost
     Private Sub FrmText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.botsdpostpos)
-        GetSplitterDist
+        GetSplitterDist()
         Dim splitWords As String() = Split(My.Settings.SplitWords, "~")
         CbSplit.Items.Clear()
         For Each splitword As String In splitWords
@@ -525,9 +526,12 @@ Public NotInheritable Class FrmBotsdPost
         Return oRow
     End Function
     Private Shared Function RetrieveWikiDesc(_searchName As String, _count As Integer) As String
-        Dim _response As System.Net.WebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _count))
-        Dim extract As String = GetExtractFromResponse(_response)
-        Return extract
+        Dim _response As HttpWebResponse = NavigateToUrl(GetWikiExtractString(_searchName, _count))
+        Dim _extract As String = String.Empty
+        If _response IsNot Nothing Then
+            _extract = GetExtractFromResponse(_response)
+        End If
+        Return _extract
     End Function
     Private Sub GetSplitPart(partNumber As Integer)
         Dim splitOn As String

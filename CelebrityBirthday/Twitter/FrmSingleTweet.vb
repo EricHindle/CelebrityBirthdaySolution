@@ -305,9 +305,12 @@ Public Class FrmSingleTweet
         WriteTrace("Generated image")
     End Sub
     Private Function GetWikiText(_sentences As Integer) As String
-        Dim _response As WebResponse = NavigateToUrl(GetWikiExtractString(TxtName.Text, _sentences))
-        Dim extract As String = GetExtractFromResponse(_response)
-        Return extract
+        Dim _response As HttpWebResponse = NavigateToUrl(GetWikiExtractString(TxtName.Text, _sentences))
+        Dim _extract As String = String.Empty
+        If _response IsNot Nothing Then
+            _extract = GetExtractFromResponse(_response)
+        End If
+        Return _extract
     End Function
     Private Sub DisplayAndLog(pText As String)
         ShowProgress(pText, lblStatus, True, MyBase.Name)

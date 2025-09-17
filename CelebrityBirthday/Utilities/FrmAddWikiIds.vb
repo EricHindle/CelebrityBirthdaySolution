@@ -66,11 +66,14 @@ Public Class FrmAddWikiIds
     Private Sub FindPossibleWikiIds(ByRef _addedCt As Integer, _person As Person, ByRef searchName As String)
         Dim pageTitle As New List(Of String)
         Dim allDone As Boolean = False
+        Dim addList As New List(Of String)
         Do Until allDone
             Dim searchstring As String = GetWikiTitleString(searchName)
-            Dim _response As WebResponse = NavigateToUrl(searchstring)
+            Dim _response As HttpWebResponse = NavigateToUrl(searchstring)
             Dim _continue As String = ""
-            Dim addList As List(Of String) = GetDataFromResponse(_response, _continue)
+            If _response IsNot Nothing Then
+                addList = GetDataFromResponse(_response, _continue)
+            End If
             pageTitle.AddRange(addList)
             If String.IsNullOrEmpty(_continue) Then
                 allDone = True
