@@ -12,7 +12,6 @@ using Bluesky.Net.Models;
 using Bluesky.Net.Multiples;
 using Microsoft.Extensions.DependencyInjection;
 
-
 class BlueSkyPost
 {
     static async Task Main(string[] args)

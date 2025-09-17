@@ -5,8 +5,6 @@
 ' Author Eric Hindle
 '
 
-Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
-
 Public Class FrmReminders
 #Region "properties"
     Private _personId As Integer

@@ -5,8 +5,6 @@
 ' Author Eric Hindle
 '
 
-Imports System.Threading.Tasks
-
 Public Class PersonBuilder
     Private _id As Integer
     Private _forename As String

@@ -1,11 +1,9 @@
 ﻿' Hindleware
-' Copyright (c) 2020-2022 Eric Hindle
+' Copyright (c) 2020-2023 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
 '
-
-Imports System.Web.UI
 
 Public Class Person
     Implements IDisposable
@@ -332,10 +330,10 @@ Public Class Person
             Dim _imgLoadMonth As String = If(oRow.IsimgloadmonthNull(), "00", oRow.imgloadmonth)
             Dim _imgLoadYr As String = If(oRow.IsimgloadyrNull(), "00", oRow.imgloadyr)
             Dim _twitterHandle As String = If(oRow.IstwitterHandleNull, "", oRow.twitterHandle)
-            Dim _isNoTweet As Boolean = If(oRow.IsnoTweetNull, True, oRow.noTweet)
+            Dim _isNoTweet As Boolean = oRow.IsnoTweetNull OrElse oRow.noTweet
             Dim _wikiId As String = If(oRow.IswikiIdNull, "", oRow.wikiId)
             Dim _botsd As Integer = If(oRow.IsbotsdNull, -1, oRow.botsd)
-            Dim _isTwin As Boolean = If(oRow.IsisTwinNull, False, oRow.isTwin)
+            Dim _isTwin As Boolean = Not oRow.IsisTwinNull AndAlso oRow.isTwin
             If isIncludeImage Then
                 _image = New ImageIdentity(oRow.id, _imgFilename, _imgFileType, _imgLoadMonth, _imgLoadYr)
             Else

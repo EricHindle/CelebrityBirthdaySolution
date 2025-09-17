@@ -13,7 +13,6 @@ Imports System.Text
 Imports System.Threading
 Imports Tweetinvi
 Imports Tweetinvi.Core.Web
-Imports Tweetinvi.Logic.QueryParameters
 
 Public Class BirthdayTweets
 #Region "enum"

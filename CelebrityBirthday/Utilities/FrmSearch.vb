@@ -5,8 +5,6 @@
 ' Author Eric Hindle
 '
 
-Imports Autofac.Features.ResolveAnything
-
 Public Class FrmSearch
 #Region "variables"
     Private bLoadingPeople As Boolean

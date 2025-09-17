@@ -8,7 +8,6 @@
 Imports System.Data.Common
 Imports System.IO
 Imports System.Text
-Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
 
 Public NotInheritable Class FrmUpdateDatabase
 #Region "variables"

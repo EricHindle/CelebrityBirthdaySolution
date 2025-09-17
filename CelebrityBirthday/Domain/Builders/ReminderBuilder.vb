@@ -5,9 +5,6 @@
 ' Author Eric Hindle
 '
 
-Imports System.Security.Policy
-Imports Microsoft.CodeAnalysis
-
 Public Class ReminderBuilder
     Private _remId As Integer
     Private _personId As Integer
@@ -40,8 +37,8 @@ Public Class ReminderBuilder
             _person = pRem.Person
             _personId = If(pRem.Person Is Nothing, -1, pRem.Person.Id)
             _note = pRem.Note
-            End If
-            Return Me
+        End If
+        Return Me
     End Function
     Public Function WithReminderId(ByVal pId As Integer) As ReminderBuilder
         _remId = pId

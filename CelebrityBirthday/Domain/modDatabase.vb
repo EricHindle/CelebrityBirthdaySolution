@@ -7,7 +7,6 @@
 
 Imports System.Data.Common
 Imports System.Reflection
-Imports CelebrityBirthday.CelebrityBirthdayDataSetTableAdapters
 
 Module modDatabase
 #Region "constants"
