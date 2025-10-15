@@ -4,11 +4,11 @@
 '
 ' Author Eric Hindle
 '
-
 Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Reflection
+Imports HindlewareLib
 Public NotInheritable Class FrmImageEdit
 #Region "Constants"
 
@@ -35,7 +35,7 @@ Public NotInheritable Class FrmImageEdit
     Private iStartHeight As Integer
     Private imageShrinkRatio As Decimal = 1
     Private originalImage As Image
-    Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
+    Private oImageUtil As New Imaging.ImageUtil
 #End Region
 #Region "properties"
     Private _imageFile As String

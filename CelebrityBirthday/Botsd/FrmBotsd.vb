@@ -4,7 +4,6 @@
 '
 ' Author Eric Hindle
 '
-
 Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 Imports System.Data.Common
@@ -12,11 +11,11 @@ Imports System.IO
 Imports System.Reflection
 Imports System.Text
 Imports System.Web.UI.WebControls
+Imports HindlewareLib
 Imports Tweetinvi.Core.Web
-
 Public NotInheritable Class FrmBotsd
 #Region "variables"
-    Private _imageUtil As New HindlewareLib.Imaging.ImageUtil
+    Private _imageUtil As New Imaging.ImageUtil
     Private _imageList As New List(Of Person)
     Private IsNoGenerate As Boolean
     Private ReadOnly tw As New TwitterOAuth
@@ -28,7 +27,7 @@ Public NotInheritable Class FrmBotsd
     Private WpNumber As Integer
     Private isBuildingPairs As Boolean
     Private lastSelectedDate As DateTime
-    Private oImageUtil As New HindlewareLib.Imaging.ImageUtil
+    Private oImageUtil As New Imaging.ImageUtil
 #End Region
 #Region "properites"
     Private _day As Integer

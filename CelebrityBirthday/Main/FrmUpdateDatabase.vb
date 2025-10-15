@@ -734,11 +734,14 @@ Public NotInheritable Class FrmUpdateDatabase
                 sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
             End If
             Dim sDied As String = " (d. " & Math.Abs(oPerson.DeathYear) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+            Dim oWikiLink As String = My.Resources.WIKIURL & TxtWikiId.Text.Trim
             Dim sText As New StringBuilder
             With sText
                 .Append(oPerson.Description)
                 .Append(sBorn)
                 .Append(If(oPerson.DeathYear = 0, "", sDied))
+                .Append(vbCrLf).Append(vbCrLf)
+                .Append("<a href=""" & oWikiLink & """>" & oWikiLink & "</a>")
             End With
             wpText = sText.ToString
         End If

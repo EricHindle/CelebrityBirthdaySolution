@@ -135,6 +135,8 @@ Public NotInheritable Class FrmWordPress
                 sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
             End If
             Dim sDied As String = " (d. " & Math.Abs(oPerson.DeathYear) & If(oPerson.DeathYear < 0, " BCE", "") & ")"
+            Dim oWikiLink As String = My.Resources.WIKIURL & oPerson.Social.WikiId
+
             With newText
                 .Append(A_TAG_START)
                 .Append(urlYear)
@@ -165,6 +167,9 @@ Public NotInheritable Class FrmWordPress
                 .Append(oPerson.Description)
                 .Append(sBorn)
                 .Append(If(oPerson.DeathYear = 0, "", sDied))
+                .Append(vbCrLf)
+                .Append(My.Resources.BREAK)
+                .Append("<a title=""" & oPerson.Name & """  href=""" & oWikiLink & """ target=""_blank"">" & "Wikipedia:" & oPerson.Name & "</a>")
                 .Append(vbCrLf)
                 .Append(My.Resources.BREAK)
                 .Append(vbCrLf)

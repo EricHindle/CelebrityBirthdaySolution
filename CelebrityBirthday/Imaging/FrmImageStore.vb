@@ -6,6 +6,7 @@
 '
 
 Imports System.IO
+
 Public Class FrmImageStore
 #Region "variables"
     Dim sImagePath As String
